@@ -3,171 +3,296 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Bridge Home | Servicios Internacionales</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>Your-bridge-home-Daynel2026</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root { --primary: #0b2b4f; --accent: #d97706; --bg: #f8fafc; --text: #1e293b; --card-bg: #ffffff; }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+    :root { --primary: #0f172a; --accent: #f59e0b; --bg: #f8fafc; --card: #ffffff; }
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background: var(--bg); color: #334155; line-height: 1.6; }
     
-    header { background: var(--primary); color: white; padding: 20px 0; text-align: center; border-bottom: 5px solid var(--accent); }
-    .logo { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
-    .admin-info { background: rgba(255,255,255,0.1); display: inline-block; padding: 8px 20px; border-radius: 30px; font-size: 0.9rem; margin-bottom: 12px; }
-    .btn-wa { background: #25D366; color: white; text-decoration: none; padding: 10px 24px; border-radius: 30px; font-weight: 600; display: inline-block; margin-top: 10px; transition: 0.2s; }
-    .btn-wa:hover { background: #128C7E; transform: scale(1.05); }
+    /* HEADER CON LOGO DE FONDO */
+    header { background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80') center/cover; color: white; padding: 40px 16px; text-align: center; border-bottom: 4px solid var(--accent); }
+    .logo { font-size: 2.2rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+    .logo span { color: var(--accent); }
+    .admin-info { background: rgba(255,255,255,0.1); padding: 8px 20px; border-radius: 50px; display: inline-block; backdrop-filter: blur(5px); margin-bottom: 15px; font-size: 0.9rem; }
+    .btn-wa { background: #25D366; color: white; text-decoration: none; padding: 12px 28px; border-radius: 50px; font-weight: 600; display: inline-block; transition: 0.3s; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
+    .btn-wa:hover { transform: translateY(-3px); background: #128C7E; }
     
-    .hero { background: linear-gradient(rgba(11, 43, 79, 0.8), rgba(11, 43, 79, 0.8)), url('https://picsum.photos/id/1015/1200/400') center/cover; color: white; padding: 60px 20px; text-align: center; }
-    .hero h1 { font-size: 2.2rem; margin-bottom: 10px; }
-    .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
+    /* BANNER SUPERIOR (MARQUESINA) */
+    .top-banner { background: var(--accent); color: var(--primary); padding: 10px 0; overflow: hidden; white-space: nowrap; font-weight: 600; font-size: 0.9rem; }
+    .marquee { display: inline-block; animation: scroll 25s linear infinite; padding-left: 100%; }
+    @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 30px 0; }
-    .card { background: var(--card-bg); border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; transition: 0.2s; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-    .card i { font-size: 2rem; color: var(--accent); margin-bottom: 16px; }
-    .card h3 { font-size: 1.3rem; margin-bottom: 10px; color: var(--primary); }
-    .card p { font-size: 0.95rem; color: #64748b; margin-bottom: 16px; }
-    .btn-link { color: var(--accent); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
-    .btn-link:hover { text-decoration: underline; }
+    /* CONTENEDOR PRINCIPAL */
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px 16px; }
+    .section-title { font-size: 1.6rem; color: var(--primary); margin: 30px 0 20px; display: flex; align-items: center; gap: 10px; }
+    .section-title i { color: var(--accent); }
 
-    .section-title { font-size: 1.8rem; color: var(--primary); margin: 40px 0 20px; border-left: 5px solid var(--accent); padding-left: 12px; }
-    .price { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin: 10px 0; }
-    .badge { background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-block; margin-bottom: 10px; }
-    
-    .calc-box { background: white; border-radius: 20px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-top: 20px; }
-    .input-group { margin-bottom: 16px; }
-    .input-group label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; }
-    .input-group input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 1rem; }
-    .result { font-size: 1.4rem; font-weight: 700; color: var(--primary); background: #f1f5f9; padding: 16px; border-radius: 12px; text-align: center; margin-top: 16px; }
+    /* SELECTOR DE IDIOMA Y RELOJ */
+    .tools-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; background: var(--card); padding: 15px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .lang-switch { display: flex; gap: 10px; }
+    .lang-btn { background: #e2e8f0; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+    .lang-btn.active { background: var(--primary); color: white; }
+    .clock { font-weight: 600; color: var(--primary); font-size: 1.1rem; background: #f1f5f9; padding: 8px 16px; border-radius: 8px; }
 
-    footer { text-align: center; padding: 40px 20px; background: #0f172a; color: #94a3b8; margin-top: 60px; }
+    /* SLIDER DE FOTOS */
+    .slider-container { position: relative; border-radius: 20px; overflow: hidden; height: 300px; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .slider-container img { width: 100%; height: 100%; object-fit: cover; transition: opacity 1s; }
+    .slider-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 30px 20px 20px; font-size: 1.2rem; font-weight: 600; }
+
+    /* GRID DE TARJETAS (SERVICIOS Y OFERTAS) */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .card { background: var(--card); border-radius: 16px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #e2e8f0; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+    .card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 15px; }
+    .card h3 { font-size: 1.2rem; color: var(--primary); margin-bottom: 10px; }
+    .card .price { font-size: 1.8rem; font-weight: 700; color: var(--primary); margin: 10px 0; }
+    .card .badge { background: #fef3c7; color: #92400e; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-block; margin-bottom: 10px; }
+
+    /* CALCULADORAS */
+    .calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .calc-box { background: var(--card); padding: 24px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .input-group { margin-bottom: 15px; }
+    .input-group label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; color: var(--primary); }
+    .input-group input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; }
+    .result { background: #f1f5f9; padding: 15px; border-radius: 8px; font-weight: 700; font-size: 1.2rem; text-align: center; color: var(--primary); margin-top: 15px; }
+
+    /* VIDEO EXTERNO */
+    .video-container { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 16px; overflow: hidden; margin: 30px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+    /* JUEGO */
+    .game-box { background: var(--primary); color: white; text-align: center; padding: 40px 20px; border-radius: 20px; margin: 30px 0; }
+    .game-btn { background: var(--accent); color: var(--primary); border: none; padding: 12px 30px; border-radius: 50px; font-weight: 700; font-size: 1.1rem; cursor: pointer; margin-top: 20px; transition: 0.2s; }
+    .game-btn:hover { transform: scale(1.05); }
+
+    /* ACCESOS DIRECTOS */
+    .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
+    .link-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: white; border: 2px solid #e2e8f0; padding: 15px; border-radius: 12px; text-decoration: none; color: var(--primary); font-weight: 600; transition: 0.2s; }
+    .link-btn:hover { border-color: var(--accent); background: #fffbeb; }
+
+    /* FOOTER */
+    footer { background: var(--primary); color: #94a3b8; text-align: center; padding: 30px 16px; margin-top: 50px; }
     footer p { margin-bottom: 8px; }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="container">
-      <div class="logo">Your Bridge Home</div>
-      <div class="admin-info">
-        <i class="fas fa-user-shield"></i> Admin: Daynel Caminero | <i class="fas fa-phone"></i> +7 904 631-95-65
-      </div><br>
-      <a href="https://wa.me/79046319565" class="btn-wa" target="_blank">
-        <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
-      </a>
+  <!-- BANNER SUPERIOR -->
+  <div class="top-banner">
+    <div class="marquee">
+      <i class="fas fa-bolt"></i> ¡OFERTAS MÁS ECONÓMICAS! Vuelo La Habana-Madrid $389 | Remesa a Cuba 1.5% comisión | Bus Habana-Varadero $12 | ¡Aprovecha! <i class="fas fa-bolt"></i>
     </div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">Your-bridge-home<span>-Daynel2026</span></div>
+    <div class="admin-info">
+      <i class="fas fa-user-shield"></i> Administrador: Daynel Caminero | <i class="fas fa-phone"></i> +7 904 631-95-65
+    </div><br>
+    <a href="https://wa.me/79046319565" class="btn-wa" target="_blank"><i class="fab fa-whatsapp"></i> Contactar por WhatsApp</a>
   </header>
 
-  <section class="hero">
-    <h1>Conectamos familias y destinos.</h1>
-    <p>Recargas telefónicas, remesas desde Europa y Estados Unidos, y pasajes hacia América Latina y Europa. Atención cercana y confirmación antes de cada operación.</p>
-  </section>
+  <div class="container">
 
-  <main class="container">
-    
-    <h2 class="section-title">Nuestros Servicios</h2>
-    <div class="grid">
-      <div class="card">
-        <i class="fas fa-mobile-alt"></i>
-        <h3>Recargas Cubacel</h3>
-        <p>Ofertas de minutos, saldo y paquetes para móviles en Cuba. Desde 150 ₽.</p>
-        <a href="https://wa.me/79046319565?text=Hola,%20quiero%20consultar%20por%20una%20recarga%20a%20Cuba" class="btn-link" target="_blank">Solicitar recarga <i class="fas fa-arrow-right"></i></a>
+    <!-- HERRAMIENTAS (IDIOMAS Y RELOJ) -->
+    <div class="tools-row">
+      <div class="lang-switch">
+        <button class="lang-btn active" onclick="setLang('es')">🇪🇸 Español</button>
+        <button class="lang-btn" onclick="setLang('en')">🇬🇧 English</button>
+        <button class="lang-btn" onclick="setLang('ru')">🇷🇺 Русский</button>
       </div>
-      <div class="card">
-        <i class="fas fa-paper-plane"></i>
-        <h3>Remesas a Cuba</h3>
-        <p>Envíos desde Europa y Rusia. Consulta tasa, comisión y forma de entrega actual.</p>
-        <a href="https://wa.me/79046319565?text=Hola,%20quiero%20consultar%20por%20una%20remesa" class="btn-link" target="_blank">Consultar remesa <i class="fas fa-arrow-right"></i></a>
-      </div>
-      <div class="card">
-        <i class="fas fa-plane"></i>
-        <h3>Pasajes Internacionales</h3>
-        <p>Ofertas de Rusia a Cuba, Cuba a Rusia y Rusia a Guyana. Desde 99.800 ₽.</p>
-        <a href="https://wa.me/79046319565?text=Hola,%20quiero%20consultar%20por%20pasajes" class="btn-link" target="_blank">Ver rutas y precios <i class="fas fa-arrow-right"></i></a>
-      </div>
+      <div class="clock" id="clockDisplay">🕒 --:--:--</div>
     </div>
 
-    <!-- SECCIÓN DE PRECIOS DINÁMICOS DESDE SUPABASE -->
-    <h2 class="section-title">Ofertas Actualizadas</h2>
+    <!-- SLIDER DE FOTOS -->
+    <div class="slider-container">
+      <img id="sliderImg" src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80" alt="Ofertas">
+      <div class="slider-caption" id="sliderCaption">Cargando ofertas...</div>
+    </div>
+
+    <!-- OFERTAS DINÁMICAS (DESDE SUPABASE) -->
+    <h2 class="section-title"><i class="fas fa-fire"></i> Ofertas Más Económicas</h2>
     <div class="grid" id="ofertas-container">
       <p style="text-align: center; width: 100%;">Cargando ofertas desde la base de datos...</p>
     </div>
 
-    <h2 class="section-title">Calculadora de Remesas</h2>
-    <div class="calc-box">
-      <p style="margin-bottom: 20px; color: #64748b;">Simula cuánto podría recibir tu familiar. La tasa final debe confirmarse por WhatsApp antes del envío.</p>
-      <div class="input-group">
-        <label>Monto a enviar (RUB o USD)</label>
-        <input type="number" id="montoEnvio" value="0" min="0" step="100" oninput="calcular()">
+    <!-- CALCULADORAS -->
+    <h2 class="section-title"><i class="fas fa-calculator"></i> Calculadoras</h2>
+    <div class="calc-grid">
+      <!-- Calculadora Remesa -->
+      <div class="calc-box">
+        <h3><i class="fas fa-paper-plane" style="color:var(--accent)"></i> Remesa</h3>
+        <div class="input-group">
+          <label>Monto a enviar (USD/RUB)</label>
+          <input type="number" id="remesaMonto" value="0" min="0" step="10" oninput="calcularRemesa()">
+        </div>
+        <div class="input-group">
+          <label>Tasa de cambio (CUP)</label>
+          <input type="number" id="remesaTasa" value="0" min="0" step="1" oninput="calcularRemesa()">
+        </div>
+        <div class="result" id="remesaResultado">0.00 CUP</div>
       </div>
-      <div class="input-group">
-        <label>Tasa de cambio (ej. 1 RUB = 1.5 CUP) *</label>
-        <input type="number" id="tasaCambio" value="0" min="0" step="0.1" oninput="calcular()">
+
+      <!-- Calculadora Pasaje -->
+      <div class="calc-box">
+        <h3><i class="fas fa-ticket-alt" style="color:var(--accent)"></i> Pasajes</h3>
+        <div class="input-group">
+          <label>Precio del pasaje (USD)</label>
+          <input type="number" id="pasajeMonto" value="0" min="0" step="5" oninput="calcularPasaje()">
+        </div>
+        <div class="input-group">
+          <label>Tasa de cambio (CUP)</label>
+          <input type="number" id="pasajeTasa" value="0" min="0" step="1" oninput="calcularPasaje()">
+        </div>
+        <div class="result" id="pasajeResultado">0.00 CUP</div>
       </div>
-      <div class="result" id="resultadoCalc">Tu familiar recibiría: 0 CUP (estimado)</div>
     </div>
 
-  </main>
+    <!-- DESTINOS Y HOTELES (FOTOS) -->
+    <h2 class="section-title"><i class="fas fa-hotel"></i> Destinos, Hoteles y Restaurantes</h2>
+    <div class="grid" id="destinos-container">
+       <!-- Ejemplo estático, se puede conectar a Supabase después -->
+       <div class="card">
+         <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=400&q=80" style="width:100%; height:150px; object-fit:cover; border-radius:12px; margin-bottom:15px;">
+         <h3>Varadero, Cuba</h3>
+         <p><i class="fas fa-bed"></i> Hotel Sol y Mar: $45/noche</p>
+         <p><i class="fas fa-utensils"></i> Rest. El Caribe: $7</p>
+       </div>
+       <div class="card">
+         <img src="https://images.unsplash.com/photo-1552074284-5e88ef1aef18?auto=format&fit=crop&w=400&q=80" style="width:100%; height:150px; object-fit:cover; border-radius:12px; margin-bottom:15px;">
+         <h3>La Habana, Cuba</h3>
+         <p><i class="fas fa-bed"></i> Hostal Casa Daynel: $30/noche</p>
+         <p><i class="fas fa-utensils"></i> Paladar La Moneda: $8</p>
+       </div>
+    </div>
+
+    <!-- VIDEO EXTERNO -->
+    <h2 class="section-title"><i class="fas fa-video"></i> Video Promocional</h2>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <!-- JUEGO GRATUITO -->
+    <div class="game-box">
+      <h2><i class="fas fa-gamepad"></i> Juego Gratuito</h2>
+      <p style="margin: 15px 0;">Adivina el número secreto (1 al 10) y gana puntos.</p>
+      <button class="game-btn" onclick="jugar()">Jugar Ahora</button>
+      <p id="juegoResultado" style="margin-top: 20px; font-size: 1.2rem; font-weight: 700; color: var(--accent);"></p>
+    </div>
+
+    <!-- ACCESOS DIRECTOS -->
+    <h2 class="section-title"><i class="fas fa-link"></i> Enlaces Útiles</h2>
+    <div class="links-grid">
+      <a href="https://www.visaindex.com" target="_blank" class="link-btn"><i class="fas fa-passport"></i> Visa Index</a>
+      <a href="https://www.bc.gob.cu" target="_blank" class="link-btn"><i class="fas fa-university"></i> Banco de Cuba</a>
+      <a href="#" class="link-btn"><i class="fas fa-store"></i> Tienda Online</a>
+      <a href="#" class="link-btn"><i class="fas fa-briefcase"></i> Añadir Negocio</a>
+    </div>
+
+  </div>
 
   <footer>
-    <p><strong>YOUR BRIDGE HOME</strong> &copy; 2026</p>
-    <p>Administrador: Daynel Caminero</p>
-    <p>WhatsApp: +7 904 631-95-65</p>
+    <p><strong>Your-bridge-home-Daynel2026</strong></p>
+    <p>Administrador: Daynel Caminero | Teléfono: +7 904 631-95-65</p>
+    <p style="font-size: 0.8rem; margin-top: 10px;">Servicios internacionales, recargas, remesas y pasajes.</p>
   </footer>
 
-  <!-- CONEXIÓN A SUPABASE -->
+  <!-- LÓGICA Y CONEXIÓN A SUPABASE -->
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-    // TUS DATOS REALES DE SUPABASE YA CONFIGURADOS
+    // Configuración de Supabase
     const SUPABASE_URL = 'https://wvhptkcmlyifnieqbgnq.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7';
-
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    // Cargar ofertas dinámicas
+    // 1. RELOJ EN TIEMPO REAL
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('clockDisplay').innerHTML = `🕒 ${now.toLocaleTimeString()}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 2. CAMBIO DE IDIOMA (Simulado)
+    function setLang(lang) {
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      alert(`Idioma cambiado a: ${lang.toUpperCase()}. (En producción se traduciría todo el texto)`);
+    }
+    window.setLang = setLang;
+
+    // 3. CALCULADORAS
+    window.calcularRemesa = function() {
+      const monto = parseFloat(document.getElementById('remesaMonto').value) || 0;
+      const tasa = parseFloat(document.getElementById('remesaTasa').value) || 0;
+      document.getElementById('remesaResultado').innerText = `${(monto * tasa).toFixed(2)} CUP`;
+    }
+
+    window.calcularPasaje = function() {
+      const monto = parseFloat(document.getElementById('pasajeMonto').value) || 0;
+      const tasa = parseFloat(document.getElementById('pasajeTasa').value) || 0;
+      document.getElementById('pasajeResultado').innerText = `${(monto * tasa).toFixed(2)} CUP`;
+    }
+
+    // 4. JUEGO
+    window.jugar = function() {
+      const num = Math.floor(Math.random() * 10) + 1;
+      document.getElementById('juegoResultado').innerText = `¡El número ganador es ${num}! ¿Acertaste?`;
+    }
+
+    // 5. SLIDER DE FOTOS CADA 20 SEGUNDOS
+    const sliderImages = [
+      { url: 'https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80', caption: 'Varadero - Oferta Hotel $45/noche' },
+      { url: 'https://images.unsplash.com/photo-1552074284-5e88ef1aef18?auto=format&fit=crop&w=1200&q=80', caption: 'La Habana - Vuelo + Hotel $499' },
+      { url: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80', caption: 'Bus Habana - Varadero $12' }
+    ];
+    let currentImgIndex = 0;
+
+    function nextImage() {
+      currentImgIndex = (currentImgIndex + 1) % sliderImages.length;
+      const imgEl = document.getElementById('sliderImg');
+      const capEl = document.getElementById('sliderCaption');
+      
+      imgEl.style.opacity = 0;
+      setTimeout(() => {
+        imgEl.src = sliderImages[currentImgIndex].url;
+        capEl.innerText = sliderImages[currentImgIndex].caption;
+        imgEl.style.opacity = 1;
+      }, 500);
+    }
+    setInterval(nextImage, 20000); // Cambia cada 20 segundos
+
+    // 6. CARGAR OFERTAS DESDE SUPABASE
     async function cargarOfertas() {
       const container = document.getElementById('ofertas-container');
-      
       try {
-        const { data: ofertas, error } = await supabase
-          .from('ofertas')
-          .select('*');
-
+        const { data, error } = await supabase.from('ofertas').select('*');
         if (error) throw error;
 
-        if (ofertas.length === 0) {
-          container.innerHTML = '<p style="text-align: center; width: 100%;">No hay ofertas cargadas aún. Añade una en Supabase.</p>';
+        if (data.length === 0) {
+          container.innerHTML = '<p style="text-align: center; width: 100%;">No hay ofertas disponibles aún. Ve a Supabase y añade una.</p>';
           return;
         }
 
-        container.innerHTML = ofertas.map(oferta => `
-          <div class="card" style="border-top: 4px solid var(--accent);">
+        container.innerHTML = data.map(oferta => `
+          <div class="card">
             <span class="badge">${oferta.categoria || 'Oferta'}</span>
             <h3>${oferta.titulo}</h3>
             <p>${oferta.descripcion}</p>
             <div class="price">${oferta.precio}</div>
-            <a href="https://wa.me/79046319565?text=Hola,%20quiero%20consultar%20por%20la%20oferta:%20${oferta.titulo}" class="btn-link" target="_blank">Consultar <i class="fas fa-arrow-right"></i></a>
+            <a href="https://wa.me/79046319565?text=Hola, quiero la oferta: ${oferta.titulo}" class="btn-wa" style="padding: 8px 16px; font-size: 0.9rem; margin-top: 10px; width: 100%; text-align: center;" target="_blank">Pedir por WhatsApp</a>
           </div>
         `).join('');
-
-      } catch (error) {
-        console.error('Error cargando ofertas:', error);
-        container.innerHTML = '<p style="text-align: center; width: 100%; color: red;">Error de conexión. Revisa que la tabla "ofertas" exista en Supabase.</p>';
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = '<p style="color:red; text-align:center; width:100%;">Error al conectar con la base de datos.</p>';
       }
     }
-
     cargarOfertas();
-
-    // Calculadora
-    window.calcular = function() {
-      const monto = parseFloat(document.getElementById('montoEnvio').value) || 0;
-      const tasa = parseFloat(document.getElementById('tasaCambio').value) || 0;
-      const total = monto * tasa;
-      document.getElementById('resultadoCalc').innerText = `Tu familiar recibiría: ${total.toFixed(2)} CUP (estimado)`;
-    }
   </script>
-
 </body>
 </html>
