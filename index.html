@@ -204,20 +204,20 @@
         <label>Descripción Promo 2:</label>
         <textarea id="adminPromo2Desc" class="admin-input" rows="2"></textarea>
         
-        <button class="btn-save" onclick="guardarPromos()"><i class="fas fa-save"></i> Guardar Promociones</button>
+        <button class="btn-save" onclick="guardarPromosSupabase()"><i class="fas fa-save"></i> Guardar Promociones</button>
       </div>
 
       <div class="admin-section">
         <h4>2. Editar Notas Importantes</h4>
         <textarea id="adminNota" class="admin-input" rows="3"></textarea>
-        <button class="btn-save" onclick="guardarNota()"><i class="fas fa-save"></i> Guardar Nota</button>
+        <button class="btn-save" onclick="guardarNotaSupabase()"><i class="fas fa-save"></i> Guardar Nota</button>
       </div>
 
       <div class="admin-section">
         <h4>3. Subir Fotos de Ofertas Especiales</h4>
-        <input type="file" id="fotoInput" accept="image/*" class="admin-input" onchange="subirFotos(event)">
+        <input type="file" id="fotoInput" accept="image/*" class="admin-input" onchange="subirFotoSupabase(event)">
         <div class="galeria-fotos" id="galeriaFotos"></div>
-        <button class="btn-save" onclick="guardarFotos()"><i class="fas fa-save"></i> Guardar Fotos</button>
+        <p style="font-size:0.8rem; color:#64748b; margin-top:10px;">* Las fotos subidas aquí se guardarán en Supabase y todos las verán.</p>
       </div>
 
       <div class="admin-section">
@@ -228,7 +228,7 @@
           <div><label>COMBITO</label><input type="text" id="adminPrecio4" class="admin-input"></div>
           <div><label>COMBO 3</label><input type="text" id="adminPrecio14" class="admin-input"></div>
         </div>
-        <button class="btn-save" onclick="guardarPrecios()"><i class="fas fa-save"></i> Guardar Precios</button>
+        <button class="btn-save" onclick="guardarPreciosSupabase()"><i class="fas fa-save"></i> Guardar Precios</button>
       </div>
 
       <button class="btn-save" style="background:#64748b;" onclick="toggleAdmin()">Cerrar Panel</button>
@@ -308,7 +308,20 @@
     <p>Teléfono/WhatsApp: +7 904 631-95-65</p>
   </footer>
 
-  <script>
+  <!-- IMPORTAR SUPABASE -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    const SUPABASE_URL = 'https://wvhptkcmlyifnieqbgnq.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7';
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // Variables globales
+    let promos = [];
+    let recargas = [];
+    let fotosGuardadas = [];
+    let notaGuardada = '';
+
     // 1. RELOJ Y CLIMA
     setInterval(() => {
       document.getElementById('clockDisplay').innerHTML = `<i class="fas fa-clock"></i> ${new Date().toLocaleTimeString()}`;
@@ -319,30 +332,65 @@
       .then(d => document.getElementById('weatherDisplay').innerHTML = `<i class="fas fa-temperature-high"></i> La Habana: ${d.current_weather.temperature}°C`)
       .catch(() => document.getElementById('weatherDisplay').innerHTML = `<i class="fas fa-cloud-sun"></i> La Habana: N/D`);
 
-    // 2. CARGAR DATOS GUARDADOS
-    let promos = JSON.parse(localStorage.getItem('promosYB')) || [
-      { id: 1, badge: '¡Vuelve la Promo!', title: 'Promo Recarga', price: '2800', currency: 'Rublos', desc: 'Multiplicarás por 6 el monto recargado en tu saldo y recibirás DATOS ILIMITADOS.' },
-      { id: 2, badge: '¡Recarga y Gana!', title: 'Descuento Especial', price: '50', currency: 'Rublos de Descuento', desc: 'Haz 5 recargas y recibe 50 rublos de descuento en tu próxima recarga.' }
-    ];
-    let notaGuardada = localStorage.getItem('notaYB') || '';
-    let fotosGuardadas = JSON.parse(localStorage.getItem('fotosYB')) || [];
-    
-    let recargas = [
-      { id: 1, tipo: 'voz', tag: 'mas-vendido', tagTexto: '⭐ Más vendido', titulo: 'VOZ', precio: '200₽', detalles: '80 MIN' },
-      { id: 2, tipo: 'voz', tag: 'especial', tagTexto: '✨ Especial', titulo: 'SALDO', precio: '250₽', detalles: '350 CUP de SALDO LIMITADO' },
-      { id: 3, tipo: 'voz', tag: 'oferta', tagTexto: '🔥 Oferta', titulo: 'VOZ +', precio: '270₽', detalles: '200 MIN' },
-      { id: 4, tipo: 'combo', tag: 'vip', tagTexto: '👑 VIP', titulo: 'COMBITO', precio: '300₽', detalles: '120 SALDO, 15 MIN + 20 SMS' },
-      { id: 5, tipo: 'internet', tag: 'internet', tagTexto: '🌐 Internet', titulo: 'INTERNET +', precio: '350₽', detalles: '2GB LTE + 300MB.cu' },
-      { id: 6, tipo: 'combo', tag: 'oferta', tagTexto: '🔥 Oferta', titulo: 'COMBO +', precio: '400₽', detalles: '2GB + 300MB, 15 MIN + 20 SMS' },
-      { id: 7, tipo: 'combo', tag: 'especial', tagTexto: '✨ Especial', titulo: 'COMBITO +', precio: '550₽', detalles: '240 SALDO, 15 MIN + 20 SMS' },
-      { id: 8, tipo: 'internet', tag: 'especial', tagTexto: '✨ Especial', titulo: 'INTERNET 1', precio: '650₽', detalles: '3GB + 300MB.cu' },
-      { id: 9, tipo: 'combo', tag: 'mas-vendido', tagTexto: '⭐ Más vendido', titulo: 'COMBO 1', precio: '750₽', detalles: '3GB + 300MB, 25 MIN + 20 SMS' },
-      { id: 10, tipo: 'combo', tag: 'premium', tagTexto: '👑 Premium', titulo: 'COMBITO MEJOR', precio: '750₽', detalles: '360 SALDO, 15 MIN + 20 SMS' },
-      { id: 11, tipo: 'internet', tag: 'premium', tagTexto: '👑 Premium', titulo: 'INTERNET 2 😎', precio: '1250₽', detalles: '7GB + 300MB' },
-      { id: 12, tipo: 'combo', tag: 'especial', tagTexto: '✨ Especial', titulo: 'COMBO 2 🤩', precio: '1300₽', detalles: '7GB + 300MB, 40 MIN + 20 SMS' },
-      { id: 13, tipo: 'internet', tag: 'mas-vendido', tagTexto: '⭐ Más vendido', titulo: 'INTERNET 3 🥳', precio: '2500₽', detalles: '15GB + 300MB' },
-      { id: 14, tipo: 'combo', tag: 'especial', tagTexto: '✨ Especial', titulo: 'COMBO 3 🎉', precio: '2700₽', detalles: '15GB + 300MB, 80 MIN + 20 SMS' }
-    ];
+    // 2. CARGAR DATOS DESDE SUPABASE
+    async function cargarDatosNube() {
+      try {
+        // Cargar Configuración (Promos y Notas)
+        const { data: config, error: errConfig } = await supabase.from('configuracion').select('*').eq('id', 1).single();
+        if (config) {
+          promos = [
+            { id: 1, badge: '¡Oferta!', title: config.promo1_title || 'Promo 1', desc: config.promo1_desc || '', price: '2800', currency: 'Rublos' },
+            { id: 2, badge: '¡Descuento!', title: config.promo2_title || 'Promo 2', desc: config.promo2_desc || '', price: '50', currency: 'Rublos' }
+          ];
+          notaGuardada = config.nota || '';
+        } else {
+          // Si no hay datos, usar los de por defecto
+          promos = [
+            { id: 1, badge: '¡Vuelve la Promo!', title: 'Promo Recarga', price: '2800', currency: 'Rublos', desc: 'Multiplicarás por 6 el monto recargado.' },
+            { id: 2, badge: '¡Recarga y Gana!', title: 'Descuento Especial', price: '50', currency: 'Rublos de Descuento', desc: 'Haz 5 recargas y recibe 50 rublos.' }
+          ];
+        }
+
+        // Cargar Galería
+        const { data: galeria } = await supabase.from('galeria').select('url_imagen');
+        if (galeria) fotosGuardadas = galeria.map(g => g.url_imagen);
+
+        // Cargar Recargas
+        const { data: dbRecargas } = await supabase.from('recargas').select('*');
+        const recargasBase = [
+          { id: 1, tipo: 'voz', tag: 'mas-vendido', tagTexto: '⭐ Más vendido', titulo: 'VOZ', precio: '200₽', detalles: '80 MIN' },
+          { id: 2, tipo: 'voz', tag: 'especial', tagTexto: '✨ Especial', titulo: 'SALDO', precio: '250₽', detalles: '350 CUP de SALDO LIMITADO' },
+          { id: 3, tipo: 'voz', tag: 'oferta', tagTexto: '🔥 Oferta', titulo: 'VOZ +', precio: '270₽', detalles: '200 MIN' },
+          { id: 4, tipo: 'combo', tag: 'vip', tagTexto: '👑 VIP', titulo: 'COMBITO', precio: '300₽', detalles: '120 SALDO, 15 MIN + 20 SMS' },
+          { id: 5, tipo: 'internet', tag: 'internet', tagTexto: '🌐 Internet', titulo: 'INTERNET +', precio: '350₽', detalles: '2GB LTE + 300MB.cu' },
+          { id: 6, tipo: 'combo', tag: 'oferta', tagTexto: '🔥 Oferta', titulo: 'COMBO +', precio: '400₽', detalles: '2GB + 300MB, 15 MIN + 20 SMS' },
+          { id: 7, tipo: 'combo', tag: 'especial', tagTexto: '✨ Especial', titulo: 'COMBITO +', precio: '550₽', detalles: '240 SALDO, 15 MIN + 20 SMS' },
+          { id: 8, tipo: 'internet', tag: 'especial', tagTexto: '✨ Especial', titulo: 'INTERNET 1', precio: '650₽', detalles: '3GB + 300MB.cu' },
+          { id: 9, tipo: 'combo', tag: 'mas-vendido', tagTexto: '⭐ Más vendido', titulo: 'COMBO 1', precio: '750₽', detalles: '3GB + 300MB, 25 MIN + 20 SMS' },
+          { id: 10, tipo: 'combo', tag: 'premium', tagTexto: '👑 Premium', titulo: 'COMBITO MEJOR', precio: '750₽', detalles: '360 SALDO, 15 MIN + 20 SMS' },
+          { id: 11, tipo: 'internet', tag: 'premium', tagTexto: '👑 Premium', titulo: 'INTERNET 2 😎', precio: '1250₽', detalles: '7GB + 300MB' },
+          { id: 12, tipo: 'combo', tag: 'especial', tagTexto: '✨ Especial', titulo: 'COMBO 2 🤩', precio: '1300₽', detalles: '7GB + 300MB, 40 MIN + 20 SMS' },
+          { id: 13, tipo: 'internet', tag: 'mas-vendido', tagTexto: '⭐ Más vendido', titulo: 'INTERNET 3 🥳', precio: '2500₽', detalles: '15GB + 300MB' },
+          { id: 14, tipo: 'combo', tag: 'especial', tagTexto: '✨ Especial', titulo: 'COMBO 3 🎉', precio: '2700₽', detalles: '15GB + 300MB, 80 MIN + 20 SMS' }
+        ];
+        
+        // Combinar precios de la base de datos con la info base
+        recargas = recargasBase.map(base => {
+          const dbMatch = dbRecargas?.find(r => r.id === base.id);
+          if (dbMatch) return { ...base, precio: dbMatch.precio };
+          return base;
+        });
+
+        renderizarTodo();
+      } catch (error) {
+        console.error("Error cargando de Supabase:", error);
+        // Fallback en caso de error
+        recargas = [
+          { id: 1, tipo: 'voz', tag: 'mas-vendido', tagTexto: '⭐ Más vendido', titulo: 'VOZ', precio: '200₽', detalles: '80 MIN' }
+        ];
+        renderizarTodo();
+      }
+    }
 
     // 3. RENDERIZAR EN PANTALLA
     function renderizarTodo() {
@@ -365,6 +413,8 @@
       if(notaGuardada) {
         document.getElementById('notas-container').style.display = 'block';
         document.getElementById('notas-texto').innerText = notaGuardada;
+      } else {
+        document.getElementById('notas-container').style.display = 'none';
       }
 
       // Fotos
@@ -401,64 +451,104 @@
       panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
       
       if(panel.style.display === 'block') {
-        document.getElementById('adminPromo1Title').value = promos[0].title;
-        document.getElementById('adminPromo1Desc').value = promos[0].desc;
-        document.getElementById('adminPromo2Title').value = promos[1].title;
-        document.getElementById('adminPromo2Desc').value = promos[1].desc;
+        document.getElementById('adminPromo1Title').value = promos[0]?.title || '';
+        document.getElementById('adminPromo1Desc').value = promos[0]?.desc || '';
+        document.getElementById('adminPromo2Title').value = promos[1]?.title || '';
+        document.getElementById('adminPromo2Desc').value = promos[1]?.desc || '';
         document.getElementById('adminNota').value = notaGuardada;
-        document.getElementById('adminPrecio1').value = recargas[0].precio;
-        document.getElementById('adminPrecio5').value = recargas[4].precio;
-        document.getElementById('adminPrecio4').value = recargas[3].precio;
-        document.getElementById('adminPrecio14').value = recargas[13].precio;
+        
+        if (recargas.length >= 14) {
+          document.getElementById('adminPrecio1').value = recargas[0].precio;
+          document.getElementById('adminPrecio5').value = recargas[4].precio;
+          document.getElementById('adminPrecio4').value = recargas[3].precio;
+          document.getElementById('adminPrecio14').value = recargas[13].precio;
+        }
       }
     }
 
-    window.guardarPromos = function() {
-      promos[0].title = document.getElementById('adminPromo1Title').value;
-      promos[0].desc = document.getElementById('adminPromo1Desc').value;
-      promos[1].title = document.getElementById('adminPromo2Title').value;
-      promos[1].desc = document.getElementById('adminPromo2Desc').value;
+    // 5. GUARDAR EN SUPABASE
+    window.guardarPromosSupabase = async function() {
+      const p1Title = document.getElementById('adminPromo1Title').value;
+      const p1Desc = document.getElementById('adminPromo1Desc').value;
+      const p2Title = document.getElementById('adminPromo2Title').value;
+      const p2Desc = document.getElementById('adminPromo2Desc').value;
+
+      const { error } = await supabase.from('configuracion').upsert({
+        id: 1,
+        promo1_title: p1Title,
+        promo1_desc: p1Desc,
+        promo2_title: p2Title,
+        promo2_desc: p2Desc
+      });
+
+      if (error) { alert('Error al guardar: ' + error.message); return; }
       
-      localStorage.setItem('promosYB', JSON.stringify(promos));
+      promos[0].title = p1Title; promos[0].desc = p1Desc;
+      promos[1].title = p2Title; promos[1].desc = p2Desc;
       renderizarTodo();
-      alert('¡Promociones guardadas y banner actualizado!');
+      alert('¡Promociones guardadas en la nube y banner actualizado!');
     }
 
-    window.guardarNota = function() {
-      notaGuardada = document.getElementById('adminNota').value;
-      localStorage.setItem('notaYB', notaGuardada);
+    window.guardarNotaSupabase = async function() {
+      const nota = document.getElementById('adminNota').value;
+      const { error } = await supabase.from('configuracion').upsert({ id: 1, nota: nota });
+
+      if (error) { alert('Error al guardar: ' + error.message); return; }
+      
+      notaGuardada = nota;
       renderizarTodo();
-      alert('¡Nota guardada con éxito!');
+      alert('¡Nota guardada en la nube con éxito!');
     }
 
-    window.subirFotos = function(event) {
+    window.subirFotoSupabase = async function(event) {
       const file = event.target.files[0];
       if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        fotosGuardadas.push(e.target.result);
-        renderizarTodo();
-      };
-      reader.readAsDataURL(file);
-    }
 
-    window.guardarFotos = function() {
-      localStorage.setItem('fotosYB', JSON.stringify(fotosGuardadas));
-      alert('¡Galería de fotos guardada!');
-    }
+      // 1. Subir archivo a Storage
+      const fileName = `foto_${Date.now()}.${file.name.split('.').pop()}`;
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('fotos')
+        .upload(fileName, file);
 
-    window.guardarPrecios = function() {
-      recargas[0].precio = document.getElementById('adminPrecio1').value;
-      recargas[4].precio = document.getElementById('adminPrecio5').value;
-      recargas[3].precio = document.getElementById('adminPrecio4').value;
-      recargas[13].precio = document.getElementById('adminPrecio14').value;
-      
-      localStorage.setItem('recargasYB', JSON.stringify(recargas));
+      if (uploadError) { alert('Error al subir foto: ' + uploadError.message); return; }
+
+      // 2. Obtener URL pública
+      const { data: urlData } = supabase.storage.from('fotos').getPublicUrl(fileName);
+
+      // 3. Guardar en la tabla galeria
+      const { error: dbError } = await supabase.from('galeria').insert([{ url_imagen: urlData.publicUrl }]);
+
+      if (dbError) { alert('Error al guardar foto en base de datos: ' + dbError.message); return; }
+
+      fotosGuardadas.push(urlData.publicUrl);
       renderizarTodo();
-      alert('¡Precios actualizados!');
+      alert('¡Foto subida a la nube exitosamente!');
     }
 
-    // 5. CALCULADORAS Y EXTRAS
+    window.guardarPreciosSupabase = async function() {
+      const precios = {
+        1: document.getElementById('adminPrecio1').value,
+        4: document.getElementById('adminPrecio4').value,
+        5: document.getElementById('adminPrecio5').value,
+        14: document.getElementById('adminPrecio14').value
+      };
+
+      for (const [id, precio] of Object.entries(precios)) {
+        const { error } = await supabase.from('recargas').upsert({ id: parseInt(id), precio: precio });
+        if (error) { alert('Error al guardar precio: ' + error.message); return; }
+      }
+
+      // Actualizar visualmente
+      recargas[0].precio = precios[1];
+      recargas[3].precio = precios[4];
+      recargas[4].precio = precios[5];
+      recargas[13].precio = precios[14];
+      
+      renderizarTodo();
+      alert('¡Precios actualizados en la nube!');
+    }
+
+    // 6. CALCULADORAS Y EXTRAS
     window.calcularRemesa = function() {
       const m = parseFloat(document.getElementById('remesaMonto').value) || 0;
       const t = parseFloat(document.getElementById('remesaTasa').value) || 0;
@@ -476,7 +566,8 @@
     }
 
     // INICIAR
-    renderizarTodo();
+    cargarDatosNube();
+
   </script>
 </body>
 </html>
