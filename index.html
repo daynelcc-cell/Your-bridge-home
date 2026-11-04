@@ -332,4 +332,151 @@
       { id: 2, tipo: 'voz', tag: 'especial', tagTexto: '✨ Especial', titulo: 'SALDO', precio: '250₽', detalles: '350 CUP de SALDO LIMITADO' },
       { id: 3, tipo: 'voz', tag: 'oferta', tagTexto: '🔥 Oferta', titulo: 'VOZ +', precio: '270₽', detalles: '200 MIN' },
       { id: 4, tipo: 'combo', tag: 'vip', tagTexto: '👑 VIP', titulo: 'COMBITO', precio: '300₽', detalles: '120 SALDO, 15 MIN + 20 SMS' },
-      { id: 5, tipo: 'internet', tag: 'internet',
+      { id: 5, tipo: 'internet', tag: 'internet', tagTexto: '🌐 Internet', titulo: 'INTERNET +', precio: '350₽', detalles: '2GB LTE + 300MB.cu' },
+      { id: 6, tipo: 'combo', tag: 'oferta', tagTexto: '🔥 Oferta', titulo: 'COMBO +', precio: '400₽', detalles: '2GB + 300MB, 15 MIN + 20 SMS' },
+      { id: 7, tipo: 'combo', tag: 'especial', tagTexto: '✨ Especial', titulo: 'COMBITO +', precio: '550₽', detalles: '240 SALDO, 15 MIN + 20 SMS' },
+      { id: 8, tipo: 'internet', tag: 'especial', tagTexto: '✨ Especial', titulo: 'INTERNET 1', precio: '650₽', detalles: '3GB + 300MB.cu' },
+      { id: 9, tipo: 'combo', tag: 'mas-vendido', tagTexto: '⭐ Más vendido', titulo: 'COMBO 1', precio: '750₽', detalles: '3GB + 300MB, 25 MIN + 20 SMS' },
+      { id: 10, tipo: 'combo', tag: 'premium', tagTexto: '👑 Premium', titulo: 'COMBITO MEJOR', precio: '750₽', detalles: '360 SALDO, 15 MIN + 20 SMS' },
+      { id: 11, tipo: 'internet', tag: 'premium', tagTexto: '👑 Premium', titulo: 'INTERNET 2 😎', precio: '1250₽', detalles: '7GB + 300MB' },
+      { id: 12, tipo: 'combo', tag: 'especial', tagTexto: '✨ Especial', titulo: 'COMBO 2 🤩', precio: '1300₽', detalles: '7GB + 300MB, 40 MIN + 20 SMS' },
+      { id: 13, tipo: 'internet', tag: 'mas-vendido', tagTexto: '⭐ Más vendido', titulo: 'INTERNET 3 🥳', precio: '2500₽', detalles: '15GB + 300MB' },
+      { id: 14, tipo: 'combo', tag: 'especial', tagTexto: '✨ Especial', titulo: 'COMBO 3 🎉', precio: '2700₽', detalles: '15GB + 300MB, 80 MIN + 20 SMS' }
+    ];
+
+    // 3. RENDERIZAR EN PANTALLA
+    function renderizarTodo() {
+      // Promos
+      const promoContainer = document.getElementById('promo-container');
+      promoContainer.innerHTML = promos.map(p => `
+        <div class="promo-card">
+          <div class="promo-badge">${p.badge}</div>
+          <h3>${p.title}</h3>
+          <div class="big-price">${p.price} <span style="font-size:1.5rem;color:var(--accent)">${p.currency}</span></div>
+          <p class="promo-desc">${p.desc}</p>
+          <a href="https://wa.me/79046319565?text=Hola,%20quiero%20la%20promoción:%20${p.title}" class="btn-wa" target="_blank" style="background: var(--red); width: 100%;"><i class="fab fa-whatsapp"></i> Más información</a>
+        </div>
+      `).join('');
+
+      const bannerText = promos.map(p => `<i class="fas fa-bullhorn"></i> ${p.title} (${p.price} ${p.currency})`).join(' | ');
+      document.getElementById('top-marquee').innerHTML = `${bannerText} | ¡No dejes pasar esta oportunidad! <i class="fas fa-bullhorn"></i>`;
+
+      // Notas
+      if(notaGuardada) {
+        document.getElementById('notas-container').style.display = 'block';
+        document.getElementById('notas-texto').innerText = notaGuardada;
+      }
+
+      // Fotos
+      const galeria = document.getElementById('galeriaFotos');
+      galeria.innerHTML = fotosGuardadas.map(src => `<img src="${src}">`).join('');
+
+      // Recargas
+      renderizarRecargas('todas');
+    }
+
+    function renderizarRecargas(filtro) {
+      const container = document.getElementById('recargas-container');
+      const filtradas = filtro === 'todas' ? recargas : recargas.filter(r => r.tipo === filtro);
+      container.innerHTML = filtradas.map(r => `
+        <div class="card">
+          <div class="tag ${r.tag}">${r.tagTexto}</div>
+          <h3>${r.titulo}</h3>
+          <div class="details">${r.detalles}</div>
+          <div class="price">${r.precio}</div>
+          <a href="https://wa.me/79046319565?text=Hola,%20quiero%20la%20recarga%20${r.titulo}%20por%20${r.precio}" class="btn-wa" target="_blank" style="text-align:center; padding: 10px; font-size: 0.9rem; background: #0b2b4f;">Solicitar</a>
+        </div>
+      `).join('');
+    }
+
+    window.filtrarRecargas = function(tipo, event) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderizarRecargas(tipo);
+    }
+
+    // 4. LÓGICA DEL PANEL DE ADMINISTRACIÓN
+    window.toggleAdmin = function() {
+      const panel = document.getElementById('adminPanel');
+      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+      
+      if(panel.style.display === 'block') {
+        document.getElementById('adminPromo1Title').value = promos[0].title;
+        document.getElementById('adminPromo1Desc').value = promos[0].desc;
+        document.getElementById('adminPromo2Title').value = promos[1].title;
+        document.getElementById('adminPromo2Desc').value = promos[1].desc;
+        document.getElementById('adminNota').value = notaGuardada;
+        document.getElementById('adminPrecio1').value = recargas[0].precio;
+        document.getElementById('adminPrecio5').value = recargas[4].precio;
+        document.getElementById('adminPrecio4').value = recargas[3].precio;
+        document.getElementById('adminPrecio14').value = recargas[13].precio;
+      }
+    }
+
+    window.guardarPromos = function() {
+      promos[0].title = document.getElementById('adminPromo1Title').value;
+      promos[0].desc = document.getElementById('adminPromo1Desc').value;
+      promos[1].title = document.getElementById('adminPromo2Title').value;
+      promos[1].desc = document.getElementById('adminPromo2Desc').value;
+      
+      localStorage.setItem('promosYB', JSON.stringify(promos));
+      renderizarTodo();
+      alert('¡Promociones guardadas y banner actualizado!');
+    }
+
+    window.guardarNota = function() {
+      notaGuardada = document.getElementById('adminNota').value;
+      localStorage.setItem('notaYB', notaGuardada);
+      renderizarTodo();
+      alert('¡Nota guardada con éxito!');
+    }
+
+    window.subirFotos = function(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        fotosGuardadas.push(e.target.result);
+        renderizarTodo();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    window.guardarFotos = function() {
+      localStorage.setItem('fotosYB', JSON.stringify(fotosGuardadas));
+      alert('¡Galería de fotos guardada!');
+    }
+
+    window.guardarPrecios = function() {
+      recargas[0].precio = document.getElementById('adminPrecio1').value;
+      recargas[4].precio = document.getElementById('adminPrecio5').value;
+      recargas[3].precio = document.getElementById('adminPrecio4').value;
+      recargas[13].precio = document.getElementById('adminPrecio14').value;
+      
+      localStorage.setItem('recargasYB', JSON.stringify(recargas));
+      renderizarTodo();
+      alert('¡Precios actualizados!');
+    }
+
+    // 5. CALCULADORAS Y EXTRAS
+    window.calcularRemesa = function() {
+      const m = parseFloat(document.getElementById('remesaMonto').value) || 0;
+      const t = parseFloat(document.getElementById('remesaTasa').value) || 0;
+      document.getElementById('remesaResultado').innerText = `${(m * t).toFixed(2)} CUP`;
+    }
+    window.calcularPasaje = function() {
+      const m = parseFloat(document.getElementById('pasajeMonto').value) || 0;
+      const t = parseFloat(document.getElementById('pasajeTasa').value) || 0;
+      document.getElementById('pasajeResultado').innerText = `${(m * t).toFixed(2)} CUP`;
+    }
+    window.toggleDarkMode = function() { document.body.classList.toggle('dark-mode'); }
+    window.setLang = function(lang) {
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    // INICIAR
+    renderizarTodo();
+  </script>
+</body>
+</html>
