@@ -188,7 +188,6 @@
       <div class="slider-caption" id="sliderCaption">¡Bienvenido a Your Bridge Home!</div>
     </div>
 
-    <!-- SÚPER PANEL DE ADMINISTRACIÓN -->
     <div class="admin-panel" id="adminPanel">
       <h3><i class="fas fa-cog"></i> Súper Panel de Administración</h3>
       
@@ -217,7 +216,6 @@
         <h4>3. Subir Fotos de Ofertas Especiales</h4>
         <input type="file" id="fotoInput" accept="image/*" class="admin-input" onchange="subirFotoSupabase(event)">
         <div class="galeria-fotos" id="galeriaFotos"></div>
-        <p style="font-size:0.8rem; color:#64748b; margin-top:10px;">* Las fotos subidas aquí se guardarán en Supabase y todos las verán.</p>
       </div>
 
       <div class="admin-section">
@@ -308,7 +306,6 @@
     <p>Teléfono/WhatsApp: +7 904 631-95-65</p>
   </footer>
 
-  <!-- IMPORTAR SUPABASE -->
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
@@ -316,13 +313,11 @@
     const SUPABASE_KEY = 'sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7';
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    // Variables globales
     let promos = [];
     let recargas = [];
     let fotosGuardadas = [];
     let notaGuardada = '';
 
-    // 1. RELOJ Y CLIMA
     setInterval(() => {
       document.getElementById('clockDisplay').innerHTML = `<i class="fas fa-clock"></i> ${new Date().toLocaleTimeString()}`;
     }, 1000);
@@ -332,11 +327,9 @@
       .then(d => document.getElementById('weatherDisplay').innerHTML = `<i class="fas fa-temperature-high"></i> La Habana: ${d.current_weather.temperature}°C`)
       .catch(() => document.getElementById('weatherDisplay').innerHTML = `<i class="fas fa-cloud-sun"></i> La Habana: N/D`);
 
-    // 2. CARGAR DATOS DESDE SUPABASE
     async function cargarDatosNube() {
       try {
-        // Cargar Configuración (Promos y Notas)
-        const { data: config, error: errConfig } = await supabase.from('configuracion').select('*').eq('id', 1).single();
+        const { data: config } = await supabase.from('configuracion').select('*').eq('id', 1).single();
         if (config) {
           promos = [
             { id: 1, badge: '¡Oferta!', title: config.promo1_title || 'Promo 1', desc: config.promo1_desc || '', price: '2800', currency: 'Rublos' },
@@ -344,18 +337,15 @@
           ];
           notaGuardada = config.nota || '';
         } else {
-          // Si no hay datos, usar los de por defecto
           promos = [
             { id: 1, badge: '¡Vuelve la Promo!', title: 'Promo Recarga', price: '2800', currency: 'Rublos', desc: 'Multiplicarás por 6 el monto recargado.' },
             { id: 2, badge: '¡Recarga y Gana!', title: 'Descuento Especial', price: '50', currency: 'Rublos de Descuento', desc: 'Haz 5 recargas y recibe 50 rublos.' }
           ];
         }
 
-        // Cargar Galería
         const { data: galeria } = await supabase.from('galeria').select('url_imagen');
         if (galeria) fotosGuardadas = galeria.map(g => g.url_imagen);
 
-        // Cargar Recargas
         const { data: dbRecargas } = await supabase.from('recargas').select('*');
         const recargasBase = [
           { id: 1, tipo: 'voz', tag: 'mas-vendido', tagTexto: '⭐ Más vendido', titulo: 'VOZ', precio: '200₽', detalles: '80 MIN' },
@@ -374,7 +364,6 @@
           { id: 14, tipo: 'combo', tag: 'especial', tagTexto: '✨ Especial', titulo: 'COMBO 3 🎉', precio: '2700₽', detalles: '15GB + 300MB, 80 MIN + 20 SMS' }
         ];
         
-        // Combinar precios de la base de datos con la info base
         recargas = recargasBase.map(base => {
           const dbMatch = dbRecargas?.find(r => r.id === base.id);
           if (dbMatch) return { ...base, precio: dbMatch.precio };
@@ -384,7 +373,6 @@
         renderizarTodo();
       } catch (error) {
         console.error("Error cargando de Supabase:", error);
-        // Fallback en caso de error
         recargas = [
           { id: 1, tipo: 'voz', tag: 'mas-vendido', tagTexto: '⭐ Más vendido', titulo: 'VOZ', precio: '200₽', detalles: '80 MIN' }
         ];
@@ -392,9 +380,7 @@
       }
     }
 
-    // 3. RENDERIZAR EN PANTALLA
     function renderizarTodo() {
-      // Promos
       const promoContainer = document.getElementById('promo-container');
       promoContainer.innerHTML = promos.map(p => `
         <div class="promo-card">
@@ -409,7 +395,6 @@
       const bannerText = promos.map(p => `<i class="fas fa-bullhorn"></i> ${p.title} (${p.price} ${p.currency})`).join(' | ');
       document.getElementById('top-marquee').innerHTML = `${bannerText} | ¡No dejes pasar esta oportunidad! <i class="fas fa-bullhorn"></i>`;
 
-      // Notas
       if(notaGuardada) {
         document.getElementById('notas-container').style.display = 'block';
         document.getElementById('notas-texto').innerText = notaGuardada;
@@ -417,11 +402,9 @@
         document.getElementById('notas-container').style.display = 'none';
       }
 
-      // Fotos
       const galeria = document.getElementById('galeriaFotos');
       galeria.innerHTML = fotosGuardadas.map(src => `<img src="${src}">`).join('');
 
-      // Recargas
       renderizarRecargas('todas');
     }
 
@@ -445,7 +428,6 @@
       renderizarRecargas(tipo);
     }
 
-    // 4. LÓGICA DEL PANEL DE ADMINISTRACIÓN
     window.toggleAdmin = function() {
       const panel = document.getElementById('adminPanel');
       panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
@@ -466,7 +448,6 @@
       }
     }
 
-    // 5. GUARDAR EN SUPABASE
     window.guardarPromosSupabase = async function() {
       const p1Title = document.getElementById('adminPromo1Title').value;
       const p1Desc = document.getElementById('adminPromo1Desc').value;
@@ -504,7 +485,6 @@
       const file = event.target.files[0];
       if (!file) return;
 
-      // 1. Subir archivo a Storage
       const fileName = `foto_${Date.now()}.${file.name.split('.').pop()}`;
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from('fotos')
@@ -512,10 +492,7 @@
 
       if (uploadError) { alert('Error al subir foto: ' + uploadError.message); return; }
 
-      // 2. Obtener URL pública
       const { data: urlData } = supabase.storage.from('fotos').getPublicUrl(fileName);
-
-      // 3. Guardar en la tabla galeria
       const { error: dbError } = await supabase.from('galeria').insert([{ url_imagen: urlData.publicUrl }]);
 
       if (dbError) { alert('Error al guardar foto en base de datos: ' + dbError.message); return; }
@@ -538,7 +515,6 @@
         if (error) { alert('Error al guardar precio: ' + error.message); return; }
       }
 
-      // Actualizar visualmente
       recargas[0].precio = precios[1];
       recargas[3].precio = precios[4];
       recargas[4].precio = precios[5];
@@ -548,7 +524,6 @@
       alert('¡Precios actualizados en la nube!');
     }
 
-    // 6. CALCULADORAS Y EXTRAS
     window.calcularRemesa = function() {
       const m = parseFloat(document.getElementById('remesaMonto').value) || 0;
       const t = parseFloat(document.getElementById('remesaTasa').value) || 0;
@@ -565,7 +540,6 @@
       event.target.classList.add('active');
     }
 
-    // INICIAR
     cargarDatosNube();
 
   </script>
