@@ -49,7 +49,7 @@
     .container { max-width: 1200px; margin: 0 auto; padding: 20px 16px; }
     .section-title { font-size: 1.6rem; color: var(--primary); margin: 40px 0 20px; display: flex; align-items: center; gap: 10px; border-left: 5px solid var(--accent); padding-left: 12px; font-weight: 800; }
     
-    /* NOTAS IMPORTANTES */
+    /* NOTAS */
     .notes-box { background: #fffbeb; border-left: 4px solid var(--accent); padding: 20px; border-radius: 12px; margin-bottom: 20px; display: none; }
     body.dark-mode .notes-box { background: #334155; color: #f8fafc; }
     .notes-box h3 { color: var(--primary); margin-bottom: 10px; }
@@ -87,7 +87,7 @@
     body.dark-mode .beneficios-list li { background: #0f172a; color: #f8fafc; }
     .beneficios-list li i { color: #22c55e; font-size: 1.3rem; }
 
-    /* PROMOCIONES Y CATÁLOGO */
+    /* PROMOCIONES */
     .promo-section { background: linear-gradient(135deg, #0b2b4f 0%, #1e3a8a 100%); border-radius: 24px; padding: 30px 20px; color: white; margin-bottom: 30px; box-shadow: 0 15px 30px rgba(11, 43, 79, 0.3); }
     .promo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
     .promo-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border: 2px solid rgba(245, 158, 11, 0.5); border-radius: 20px; padding: 24px; text-align: center; position: relative; overflow: hidden; }
@@ -96,6 +96,7 @@
     .promo-card .promo-desc { font-size: 1rem; color: #e2e8f0; margin-bottom: 20px; line-height: 1.4; }
     .promo-badge { position: absolute; top: 15px; right: -30px; background: var(--red); color: white; padding: 5px 40px; font-weight: 700; font-size: 0.8rem; transform: rotate(45deg); }
 
+    /* CATÁLOGO */
     .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
     .filter-btn { background: var(--card); border: 1px solid var(--border); padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 600; color: var(--text); }
     .filter-btn.active { background: var(--primary); color: var(--bg); border-color: var(--primary); }
@@ -119,7 +120,7 @@
     .link-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: var(--card); border: 2px solid var(--border); padding: 15px; border-radius: 12px; text-decoration: none; color: var(--primary); font-weight: 600; transition: 0.2s; }
     .link-btn:hover { border-color: var(--accent); }
 
-    /* PANEL DE ADMINISTRACIÓN (SÚPER COMPLETO) */
+    /* PANEL DE ADMINISTRACIÓN */
     .admin-panel { background: #fef3c7; border: 3px dashed var(--accent); border-radius: 16px; padding: 20px; margin: 30px 0; display: none; }
     body.dark-mode .admin-panel { background: #334155; border-color: var(--accent); }
     .admin-panel h3 { color: var(--primary); margin-bottom: 15px; font-size: 1.4rem; }
@@ -137,17 +138,14 @@
 </head>
 <body>
 
-  <!-- BOTÓN WHATSAPP FLOTANTE -->
   <a href="https://wa.me/79046319565" class="float-wa" target="_blank"><i class="fab fa-whatsapp"></i></a>
 
-  <!-- BANNER -->
   <div class="top-banner">
     <div class="marquee" id="top-marquee">
       <i class="fas fa-bullhorn"></i> Cargando promociones... <i class="fas fa-bullhorn"></i>
     </div>
   </div>
 
-  <!-- HEADER -->
   <header>
     <button class="dark-toggle" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
     <img src="logo.png" alt="Logo" class="logo-img" onerror="this.src='https://ui-avatars.com/api/?name=YB&background=f59e0b&color=0b2b4f&size=100&bold=true'">
@@ -168,13 +166,11 @@
 
   <div class="container">
 
-    <!-- NOTAS IMPORTANTES (Se muestran si hay texto guardado) -->
     <div id="notas-container" class="notes-box">
       <h3><i class="fas fa-info-circle"></i> Aviso Importante</h3>
       <p id="notas-texto"></p>
     </div>
 
-    <!-- HERRAMIENTAS -->
     <div class="tools-bar">
       <div class="lang-switch">
         <button class="lang-btn active" onclick="setLang('es')">🇪🇸 ES</button>
@@ -187,7 +183,6 @@
       </div>
     </div>
 
-    <!-- SLIDER -->
     <div class="slider-container">
       <img id="sliderImg" src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80" alt="Ofertas">
       <div class="slider-caption" id="sliderCaption">¡Bienvenido a Your Bridge Home!</div>
@@ -197,80 +192,59 @@
     <div class="admin-panel" id="adminPanel">
       <h3><i class="fas fa-cog"></i> Súper Panel de Administración</h3>
       
-      <!-- Sección 1: Promociones -->
       <div class="admin-section">
-        <h4>1. Editar Promociones (Afecta el Banner)</h4>
-        <label>Texto Banner Promo 1:</label>
-        <input type="text" id="adminPromo1Title" class="admin-input" placeholder="Ej: ¡Vuelve la Promo!">
+        <h4>1. Editar Promociones y Banner</h4>
+        <label>Texto Promo 1:</label>
+        <input type="text" id="adminPromo1Title" class="admin-input">
         <label>Descripción Promo 1:</label>
-        <textarea id="adminPromo1Desc" class="admin-input" rows="2" placeholder="Detalles de la oferta..."></textarea>
+        <textarea id="adminPromo1Desc" class="admin-input" rows="2"></textarea>
         
-        <label>Texto Banner Promo 2:</label>
-        <input type="text" id="adminPromo2Title" class="admin-input" placeholder="Ej: ¡Recarga y Gana!">
+        <label>Texto Promo 2:</label>
+        <input type="text" id="adminPromo2Title" class="admin-input">
         <label>Descripción Promo 2:</label>
-        <textarea id="adminPromo2Desc" class="admin-input" rows="2" placeholder="Detalles de la oferta..."></textarea>
+        <textarea id="adminPromo2Desc" class="admin-input" rows="2"></textarea>
         
         <button class="btn-save" onclick="guardarPromos()"><i class="fas fa-save"></i> Guardar Promociones</button>
       </div>
 
-      <!-- Sección 2: Notas -->
       <div class="admin-section">
         <h4>2. Editar Notas Importantes</h4>
-        <textarea id="adminNota" class="admin-input" rows="3" placeholder="Escribe aquí un aviso para los clientes..."></textarea>
+        <textarea id="adminNota" class="admin-input" rows="3"></textarea>
         <button class="btn-save" onclick="guardarNota()"><i class="fas fa-save"></i> Guardar Nota</button>
       </div>
 
-      <!-- Sección 3: Fotos -->
       <div class="admin-section">
         <h4>3. Subir Fotos de Ofertas Especiales</h4>
         <input type="file" id="fotoInput" accept="image/*" class="admin-input" onchange="subirFotos(event)">
         <div class="galeria-fotos" id="galeriaFotos"></div>
-        <button class="btn-save" onclick="guardarFotos()"><i class="fas fa-save"></i> Guardar Galería</button>
+        <button class="btn-save" onclick="guardarFotos()"><i class="fas fa-save"></i> Guardar Fotos</button>
       </div>
 
-      <!-- Sección 4: Precios de Recargas -->
       <div class="admin-section">
-        <h4>4. Editar Precios de Recargas (Ej: si sube el Rublo)</h4>
+        <h4>4. Editar Precios de Recargas</h4>
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-          <div>
-            <label>VOZ (Actual: 200₽)</label>
-            <input type="text" id="adminPrecio1" class="admin-input" placeholder="200₽">
-          </div>
-          <div>
-            <label>INTERNET + (Actual: 350₽)</label>
-            <input type="text" id="adminPrecio5" class="admin-input" placeholder="350₽">
-          </div>
+          <div><label>VOZ</label><input type="text" id="adminPrecio1" class="admin-input"></div>
+          <div><label>INTERNET +</label><input type="text" id="adminPrecio5" class="admin-input"></div>
+          <div><label>COMBITO</label><input type="text" id="adminPrecio4" class="admin-input"></div>
+          <div><label>COMBO 3</label><input type="text" id="adminPrecio14" class="admin-input"></div>
         </div>
-        <p style="font-size:0.8rem; color:#64748b; margin-bottom:10px;">* Para cambiar todos los precios, edita el código o conecta Supabase.</p>
         <button class="btn-save" onclick="guardarPrecios()"><i class="fas fa-save"></i> Guardar Precios</button>
       </div>
 
       <button class="btn-save" style="background:#64748b;" onclick="toggleAdmin()">Cerrar Panel</button>
     </div>
 
-    <!-- SECCIÓN DE PASAJES -->
     <div id="pasajes" class="pasajes-section">
       <div class="pasajes-header">
         <h2>Pasajes</h2>
         <h3>Bus, Tren, Avión</h3>
         <p>Viaja tranquilo, nosotros te ayudamos</p>
       </div>
-      
       <div class="transporte-grid">
-        <a href="https://wa.me/79046319565?text=Hola,%20quiero%20cotizar%20un%20pasaje%20de%20AVIÓN" target="_blank" class="transporte-card">
-          <i class="fas fa-plane-departure"></i>
-          <h4>Avión</h4>
-        </a>
-        <a href="https://wa.me/79046319565?text=Hola,%20quiero%20cotizar%20un%20pasaje%20de%20TREN" target="_blank" class="transporte-card">
-          <i class="fas fa-train"></i>
-          <h4>Tren</h4>
-        </a>
-        <a href="https://wa.me/79046319565?text=Hola,%20quiero%20cotizar%20un%20pasaje%20de%20BUS" target="_blank" class="transporte-card">
-          <i class="fas fa-bus"></i>
-          <h4>Bus</h4>
-        </a>
+        <a href="https://wa.me/79046319565?text=Hola,%20quiero%20cotizar%20un%20pasaje%20de%20AVIÓN" target="_blank" class="transporte-card"><i class="fas fa-plane-departure"></i><h4>Avión</h4></a>
+        <a href="https://wa.me/79046319565?text=Hola,%20quiero%20cotizar%20un%20pasaje%20de%20TREN" target="_blank" class="transporte-card"><i class="fas fa-train"></i><h4>Tren</h4></a>
+        <a href="https://wa.me/79046319565?text=Hola,%20quiero%20cotizar%20un%20pasaje%20de%20BUS" target="_blank" class="transporte-card"><i class="fas fa-bus"></i><h4>Bus</h4></a>
       </div>
-
       <ul class="beneficios-list">
         <li><i class="fas fa-check-circle"></i> Nacionales e Internacionales</li>
         <li><i class="fas fa-check-circle"></i> Rutas confiables</li>
@@ -278,7 +252,6 @@
       </ul>
     </div>
 
-    <!-- SECCIÓN DE PROMOCIONES -->
     <div id="promociones">
       <h2 class="section-title"><i class="fas fa-bullhorn" style="color:var(--red)"></i> Promociones Especiales</h2>
       <div class="promo-section">
@@ -286,7 +259,6 @@
       </div>
     </div>
 
-    <!-- CATÁLOGO DE RECARGAS -->
     <div id="recargas">
       <h2 class="section-title"><i class="fas fa-mobile-alt"></i> Catálogo de Recargas</h2>
       <div class="filters">
@@ -298,38 +270,24 @@
       <div class="grid" id="recargas-container"></div>
     </div>
 
-    <!-- CALCULADORAS -->
     <div id="calculadoras">
       <h2 class="section-title"><i class="fas fa-calculator"></i> Calculadoras de Cambio</h2>
       <div class="calc-grid">
         <div class="calc-box">
           <h3><i class="fas fa-paper-plane" style="color:var(--accent)"></i> Remesas</h3>
-          <div class="input-group">
-            <label>Monto a enviar</label>
-            <input type="number" id="remesaMonto" value="0" min="0" step="10" oninput="calcularRemesa()">
-          </div>
-          <div class="input-group">
-            <label>Tasa de cambio (a CUP)</label>
-            <input type="number" id="remesaTasa" value="0" min="0" step="1" oninput="calcularRemesa()">
-          </div>
+          <div class="input-group"><label>Monto a enviar</label><input type="number" id="remesaMonto" value="0" min="0" step="10" oninput="calcularRemesa()"></div>
+          <div class="input-group"><label>Tasa de cambio (a CUP)</label><input type="number" id="remesaTasa" value="0" min="0" step="1" oninput="calcularRemesa()"></div>
           <div class="result" id="remesaResultado">0.00 CUP</div>
         </div>
         <div class="calc-box">
           <h3><i class="fas fa-ticket-alt" style="color:var(--accent)"></i> Pasajes</h3>
-          <div class="input-group">
-            <label>Precio del pasaje</label>
-            <input type="number" id="pasajeMonto" value="0" min="0" step="5" oninput="calcularPasaje()">
-          </div>
-          <div class="input-group">
-            <label>Tasa de cambio (a CUP)</label>
-            <input type="number" id="pasajeTasa" value="0" min="0" step="1" oninput="calcularPasaje()">
-          </div>
+          <div class="input-group"><label>Precio del pasaje</label><input type="number" id="pasajeMonto" value="0" min="0" step="5" oninput="calcularPasaje()"></div>
+          <div class="input-group"><label>Tasa de cambio (a CUP)</label><input type="number" id="pasajeTasa" value="0" min="0" step="1" oninput="calcularPasaje()"></div>
           <div class="result" id="pasajeResultado">0.00 CUP</div>
         </div>
       </div>
     </div>
 
-    <!-- ACCESOS DIRECTOS -->
     <h2 class="section-title"><i class="fas fa-link"></i> Enlaces y Servicios</h2>
     <div class="links-grid">
       <a href="https://www.visaindex.com" target="_blank" class="link-btn"><i class="fas fa-passport"></i> Visa Index</a>
@@ -338,7 +296,6 @@
       <a href="https://wa.me/79046319565?text=Hola,%20quiero%20añadir%20mi%20negocio" target="_blank" class="link-btn"><i class="fas fa-briefcase"></i> Añadir mi Negocio</a>
     </div>
 
-    <!-- BOTÓN SECRETO PARA ABRIR EL PANEL -->
     <div style="text-align: center; margin-top: 40px; opacity: 0.3;">
       <button onclick="toggleAdmin()" style="background: none; border: none; cursor: pointer; color: var(--text);"><i class="fas fa-lock"></i> Admin</button>
     </div>
@@ -362,5 +319,17 @@
       .then(d => document.getElementById('weatherDisplay').innerHTML = `<i class="fas fa-temperature-high"></i> La Habana: ${d.current_weather.temperature}°C`)
       .catch(() => document.getElementById('weatherDisplay').innerHTML = `<i class="fas fa-cloud-sun"></i> La Habana: N/D`);
 
-    // 2. CARGAR DATOS GUARDADOS (Al abrir la página)
-    let
+    // 2. CARGAR DATOS GUARDADOS
+    let promos = JSON.parse(localStorage.getItem('promosYB')) || [
+      { id: 1, badge: '¡Vuelve la Promo!', title: 'Promo Recarga', price: '2800', currency: 'Rublos', desc: 'Multiplicarás por 6 el monto recargado en tu saldo y recibirás DATOS ILIMITADOS.' },
+      { id: 2, badge: '¡Recarga y Gana!', title: 'Descuento Especial', price: '50', currency: 'Rublos de Descuento', desc: 'Haz 5 recargas y recibe 50 rublos de descuento en tu próxima recarga.' }
+    ];
+    let notaGuardada = localStorage.getItem('notaYB') || '';
+    let fotosGuardadas = JSON.parse(localStorage.getItem('fotosYB')) || [];
+    
+    let recargas = [
+      { id: 1, tipo: 'voz', tag: 'mas-vendido', tagTexto: '⭐ Más vendido', titulo: 'VOZ', precio: '200₽', detalles: '80 MIN' },
+      { id: 2, tipo: 'voz', tag: 'especial', tagTexto: '✨ Especial', titulo: 'SALDO', precio: '250₽', detalles: '350 CUP de SALDO LIMITADO' },
+      { id: 3, tipo: 'voz', tag: 'oferta', tagTexto: '🔥 Oferta', titulo: 'VOZ +', precio: '270₽', detalles: '200 MIN' },
+      { id: 4, tipo: 'combo', tag: 'vip', tagTexto: '👑 VIP', titulo: 'COMBITO', precio: '300₽', detalles: '120 SALDO, 15 MIN + 20 SMS' },
+      { id: 5, tipo: 'internet', tag: 'internet',
