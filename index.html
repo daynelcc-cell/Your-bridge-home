@@ -1,573 +1,190 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#123b5d">
-<title>Your Bridge Home | Servicios internacionales</title>
-<meta name="description" content="YOUR BRIDGE HOME: remesas, recargas, pasajes, hoteles y servicios internacionales. Administrador: Daynel Caminero. WhatsApp +7904-631-95-65.">
-<link rel="canonical" href="https://your-bridge-home-dcc-1.netlify.app/">
-<meta property="og:url" content="https://your-bridge-home-dcc-1.netlify.app/">
-<style>
-:root{--navy:#123b5d;--blue:#176b87;--gold:#e5b84b;--cream:#f7f5ef;--ink:#172b3a;--muted:#60717d;--white:#fff}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--cream);line-height:1.55}
-a{color:inherit}.wrap{width:min(1120px,92%);margin:auto}
-header{background:var(--navy);color:white;position:sticky;top:0;z-index:5;box-shadow:0 3px 15px #0002}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:13px 0}.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.2px}.mark{width:42px;height:42px;border:2px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:22px}.brand small{display:block;font-weight:400;color:#d6e2e8;font-size:11px;letter-spacing:1px}
-nav{display:flex;gap:20px;align-items:center}nav a{text-decoration:none;font-size:14px;color:#f2f6f8}.navbtn,.btn{display:inline-block;text-decoration:none;border:0;border-radius:999px;padding:12px 19px;font-weight:700;background:var(--gold);color:#1d2d37;cursor:pointer}
-.hero{background:linear-gradient(115deg,#0e314e 0%,#176b87 100%);color:white;padding:74px 0 68px;position:relative;overflow:hidden}
-.hero:after{content:"";position:absolute;width:360px;height:360px;border:1px solid #ffffff28;border-radius:50%;right:-80px;top:-130px;box-shadow:0 0 0 35px #ffffff0c,0 0 0 75px #ffffff09}
-.hero-grid{display:grid;grid-template-columns:1.35fr .8fr;gap:35px;align-items:center;position:relative;z-index:1}
-.eyebrow{color:var(--gold);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:12px}
-h1{font-size:clamp(38px,6vw,64px);line-height:1.05;margin:14px 0 18px;max-width:720px}
-.hero p{font-size:18px;color:#e3edf1;max-width:620px}.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}.btn.outline{background:transparent;color:white;border:1px solid #ffffff8a}
-.hero-card{background:#ffffff12;border:1px solid #ffffff35;border-radius:22px;padding:24px;backdrop-filter:blur(5px)}.hero-card strong{font-size:20px}.route{display:flex;align-items:center;justify-content:space-between;margin:22px 0;color:#fff}.route span{font-size:31px}.route b{font-size:12px;color:#dbe9ee}
-section{padding:65px 0}.section-head{text-align:center;max-width:700px;margin:0 auto 32px}.section-head h2{font-size:34px;margin:0 0 8px;color:var(--navy)}.section-head p{color:var(--muted);margin:0}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:white;border-radius:18px;padding:25px;box-shadow:0 8px 28px #15344b0c;border:1px solid #e9e6dd}.icon{width:48px;height:48px;border-radius:14px;background:#eaf2f4;display:grid;place-items:center;font-size:24px}.card h3{color:var(--navy);font-size:21px;margin:17px 0 8px}.card p{color:var(--muted);min-height:72px}.card a{font-weight:700;color:var(--blue);text-decoration:none}
-.steps{background:#edf2f2}.step-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.step{padding:20px;background:white;border-radius:16px}.num{color:var(--gold);font-size:28px;font-weight:800}
-.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:30px;align-items:start}.contact-panel{background:var(--navy);color:white;padding:28px;border-radius:20px}.contact-panel h2{font-size:29px;margin:0 0 12px}.contact-panel p{color:#d8e5eb}.contact-panel a{color:var(--gold)}
-form{background:white;padding:26px;border-radius:20px;box-shadow:0 8px 28px #15344b0c}label{display:block;font-weight:700;font-size:13px;margin:13px 0 6px}input,select,textarea{width:100%;padding:13px;border:1px solid #d7dfe2;border-radius:10px;font:inherit;background:#fff;color:var(--ink)}textarea{min-height:90px;resize:vertical}form button{margin-top:16px;width:100%;font-size:15px}
-.note{font-size:12px;color:var(--muted);margin-top:12px}
-footer{background:#0b263d;color:#d6e2e8;padding:28px 0;text-align:center;font-size:13px}footer strong{color:white}
-@media(max-width:760px){nav{display:none}.hero{padding:55px 0}.hero-grid,.contact-grid{grid-template-columns:1fr}.cards,.step-grid{grid-template-columns:1fr}.card p{min-height:0}.hero-card{max-width:420px}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Bridge Home | Servicios Internacionales</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0b2b4f;
+      --accent: #d97706;
+      --bg: #f8fafc;
+      --text: #1e293b;
+      --card-bg: #ffffff;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
+    
+    /* Header */
+    header { background: var(--primary); color: white; padding: 20px 0; text-align: center; border-bottom: 5px solid var(--accent); }
+    .logo { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
+    .admin-info { background: rgba(255,255,255,0.1); display: inline-block; padding: 8px 20px; border-radius: 30px; font-size: 0.9rem; margin-bottom: 12px; }
+    .btn-wa { background: #25D366; color: white; text-decoration: none; padding: 10px 24px; border-radius: 30px; font-weight: 600; display: inline-block; margin-top: 10px; transition: 0.2s; }
+    .btn-wa:hover { background: #128C7E; transform: scale(1.05); }
+    
+    /* Hero Section */
+    .hero { background: linear-gradient(rgba(11, 43, 79, 0.8), rgba(11, 43, 79, 0.8)), url('https://picsum.photos/id/1015/1200/400') center/cover; color: white; padding: 60px 20px; text-align: center; }
+    .hero h1 { font-size: 2.2rem; margin-bottom: 10px; }
+    .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
 
-.offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
-.offer{background:#fff;border:1px solid #e7e2d8;border-radius:17px;padding:20px;box-shadow:0 8px 25px #15344b0a}
-.offer .tag{font-size:11px;font-weight:800;letter-spacing:1px;color:#176b87;text-transform:uppercase}
-.offer .price{font-size:34px;font-weight:800;color:#123b5d;margin:8px 0}
-.offer p{color:#60717d;min-height:42px;margin:6px 0 16px}
-.offer button{width:100%;border:0;border-radius:999px;padding:11px;background:#e5b84b;font-weight:700;cursor:pointer}
-.admin{margin-top:28px;background:#fff;border:1px dashed #aab9bf;border-radius:16px;padding:20px}
-.admin summary{font-weight:800;color:#123b5d;cursor:pointer}
-.admin-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:15px}
-.admin-grid label{margin:0}
-.admin-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
-.admin-actions button{border:0;border-radius:999px;padding:11px 17px;font-weight:700;cursor:pointer}
-.admin-actions .save{background:#123b5d;color:white}.admin-actions .reset{background:#edf2f2;color:#123b5d}
-@media(max-width:600px){.admin-grid{grid-template-columns:1fr}}
+    /* Grids y Tarjetas */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 30px 0; }
+    .card { background: var(--card-bg); border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; transition: 0.2s; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+    .card i { font-size: 2rem; color: var(--accent); margin-bottom: 16px; }
+    .card h3 { font-size: 1.3rem; margin-bottom: 10px; color: var(--primary); }
+    .card p { font-size: 0.95rem; color: #64748b; margin-bottom: 16px; }
+    .btn-link { color: var(--accent); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+    .btn-link:hover { text-decoration: underline; }
 
-.flight-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
-.flight-card{background:#fff;border:1px solid #e7e2d8;border-radius:18px;padding:23px;box-shadow:0 8px 25px #15344b0a}
-.flight-card h3{margin:8px 0;color:#123b5d;font-size:19px}
-.flight-card .flight-price{font-size:32px;font-weight:800;color:#123b5d;margin:10px 0}
-.flight-card p{color:#60717d;margin:7px 0}
-.flight-card a{display:inline-block;margin-top:12px;background:#e5b84b;color:#1d2d37;text-decoration:none;font-weight:700;padding:11px 17px;border-radius:999px}
-.promo-image{display:block;width:100%;max-width:760px;height:auto;margin:0 auto 25px;border-radius:18px;box-shadow:0 8px 28px #15344b18}
+    /* Secciones específicas */
+    .section-title { font-size: 1.8rem; color: var(--primary); margin: 40px 0 20px; border-left: 5px solid var(--accent); padding-left: 12px; }
+    
+    /* Ofertas */
+    .offer-card { border-top: 4px solid var(--accent); }
+    .price { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin: 10px 0; }
+    .badge { background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-block; margin-bottom: 10px; }
+    
+    /* Calculadora */
+    .calc-box { background: white; border-radius: 20px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-top: 20px; }
+    .input-group { margin-bottom: 16px; }
+    .input-group label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; }
+    .input-group input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 1rem; }
+    .result { font-size: 1.4rem; font-weight: 700; color: var(--primary); background: #f1f5f9; padding: 16px; border-radius: 12px; text-align: center; margin-top: 16px; }
 
-
-.ticker{overflow:hidden;white-space:nowrap;background:#e5b84b;color:#142f47;padding:11px 0;font-weight:800}.ticker span{display:inline-block;padding-left:100%;animation:ticker 32s linear infinite}@keyframes ticker{to{transform:translateX(-100%)}}
-.economic{background:#fff8e9;border:1px solid #f0dfb5;border-radius:18px;padding:22px;margin-top:26px}.economic-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}.deal{background:white;border:1px solid #eadfc9;border-radius:14px;overflow:hidden}.deal img{width:100%;height:120px;object-fit:cover}.deal .dealbody{padding:13px}.deal .dealprice{font-size:23px;font-weight:800;color:#123b5d}.deal a{display:block;text-align:center;text-decoration:none;background:#123b5d;color:white;border-radius:20px;padding:9px;margin-top:9px}
-.admin{scroll-margin-top:80px}.weather-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.info-panel{background:white;border:1px solid #dce5e9;border-radius:16px;padding:20px}.weather-days{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px}.weather-day{background:#edf3f7;border-radius:12px;padding:12px;text-align:center}.weather-day b{display:block;color:#123b5d;font-size:20px}.weather-city{border:1px solid #d7dfe2;background:#f4f7f8;color:#123b5d;border-radius:18px;padding:7px 11px;font-weight:700;cursor:pointer}.info-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.admin input,.admin textarea{margin-bottom:8px}@media(max-width:760px){.weather-grid,.info-columns{grid-template-columns:1fr}.ticker span{animation-duration:24s}}
-
-
-/* Catálogo general y actividades participativas */
-.catalog-section{background:#fff}
-.catalog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-.catalog-card{background:#fff;border:1px solid #e4e8e8;border-radius:16px;padding:19px;box-shadow:0 5px 18px #123b5d0b}
-.catalog-card .bigicon{font-size:28px}.catalog-card h3{margin:7px 0;color:var(--navy)}.catalog-card p{margin:6px 0 12px;color:var(--muted);font-size:14px}.catalog-card a{color:var(--blue);font-weight:700;text-decoration:none}
-.leisure-section{background:#f1f4f3}
-.leisure-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:16px}
-.leisure-card{background:#fff;border:1px solid #e1e7e6;border-radius:16px;padding:20px;box-shadow:0 5px 18px #123b5d0a}
-.leisure-card h3{color:var(--navy);margin:0 0 8px}.leisure-card p{color:var(--muted);font-size:14px}
-.leisure-card button,.leisure-card select{border:0;border-radius:9px;padding:10px 13px;background:var(--navy);color:white;font-weight:700;cursor:pointer}
-.leisure-card button.secondary{background:#e9eff1;color:var(--navy)}
-.leisure-card button:disabled{opacity:.6;cursor:default}
-.poll-options{display:grid;gap:8px;margin:12px 0}.poll-option{display:flex;align-items:center;gap:8px;border:1px solid #dce4e5;border-radius:10px;padding:9px;cursor:pointer}.poll-option input{width:auto}
-.poll-result{height:9px;background:#e8edef;border-radius:9px;overflow:hidden;margin-top:5px}.poll-result span{display:block;height:100%;background:var(--gold);width:0}
-.activity-result{margin-top:12px;padding:11px;background:#f7f5ef;border-radius:10px;font-size:14px;min-height:40px}
-.world-clock{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}.clock-item{background:#f6f8f8;border-radius:10px;padding:10px}.clock-item b{display:block;color:var(--navy);font-size:19px}.clock-item small{color:var(--muted)}
-@media(max-width:700px){.nav{flex-wrap:wrap}.nav nav{order:3;width:100%;overflow-x:auto;white-space:nowrap;padding-bottom:5px}.world-clock{grid-template-columns:1fr 1fr}}
-
-
-/* Maquetación visual inspirada en la imagen de referencia del cliente */
-:root{--ybh-navy:#062b49;--ybh-blue:#07547f;--ybh-gold:#ffc247;--ybh-pale:#eaf5fb}
-body{background:#f2f6f8!important;color:#12334d;font-family:Arial,Helvetica,sans-serif}
-.wrap{width:min(1400px,96%)}
-header{background:linear-gradient(100deg,#052743,#06486d)!important;border-bottom:3px solid #d6a536!important;color:#fff}
-.nav{min-height:66px;gap:14px;padding:8px 0}.brand{font-size:clamp(16px,2vw,23px);white-space:nowrap}.mark{background:linear-gradient(145deg,#ffcf58,#ad710c)!important;color:#082b47!important;border:2px solid #ffdc7b}
-.brand small{color:#ffcf58!important}nav{gap:clamp(8px,1.4vw,22px);justify-content:center;flex-wrap:wrap}nav a{color:#fff!important;font-weight:700;font-size:13px;text-decoration:none;padding:9px 2px;border-bottom:2px solid transparent}nav a:hover{color:#ffcf58!important;border-color:#ffcf58}
-#announcement{background:linear-gradient(90deg,#ffbd3f,#ffda78)!important;color:#12334d!important;padding:12px 5%!important;margin:12px auto!important;width:min(1400px,96%);border-radius:10px;box-shadow:0 4px 14px #12334d16}
-main{position:relative}.hero{padding:50px 0 46px!important;background:linear-gradient(100deg,rgba(3,39,68,.96),rgba(6,99,143,.72)),url('assets/ofertas-pasajes.png') center/cover no-repeat!important}.hero h1{font-size:clamp(34px,4.2vw,56px)!important;max-width:690px}.hero p{font-size:17px;max-width:650px}.hero .btn{background:#ffc247!important;color:#082c49!important}
-section{padding:34px 0!important}.section-head{text-align:left!important;margin:0 0 18px!important;max-width:none!important}.section-head h2{font-size:clamp(23px,2.8vw,30px)!important;color:#092f4f}
-.cards{gap:14px!important}.card,.offer,.flight-card,.catalog-item,.leisure-card{border-radius:14px!important;box-shadow:0 5px 18px #0c385018!important;border:1px solid #dce7ee!important}.card{padding:17px!important}.economic{background:#eaf5fb!important}
-#tu-espacio{background:linear-gradient(120deg,#052b49,#064e78)!important;color:#fff!important;border-radius:16px;margin:12px auto;padding:24px 0!important}#tu-espacio .section-head h2,#tu-espacio .section-head p{color:#fff!important}.leisure-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:12px!important}.leisure-card{background:linear-gradient(160deg,#fff,#f1f9fd)!important;color:#15364e!important;padding:15px!important}#tu-espacio button{background:#0876ad;color:white;border:0;border-radius:30px;padding:10px 15px;font-weight:700;cursor:pointer}
-.reference-sidebar{position:absolute;right:2%;top:0;width:278px;z-index:4;display:flex;flex-direction:column;gap:12px}.side-panel,.side-weather,.side-whatsapp,.side-safety{background:#fff;border:1px solid #d7e5ee;border-radius:15px;padding:13px;box-shadow:0 4px 16px #0c385012}.side-panel h3,.side-weather h3{font-size:16px;color:#092f4f;margin:2px 0 4px}.side-panel>p,.side-weather p{font-size:11px;color:#587185;margin:0 0 8px}.side-panel>a{display:grid;grid-template-columns:38px 1fr 12px;align-items:center;gap:7px;padding:8px 0;border-top:1px solid #eaf0f4;text-decoration:none;color:#12334d}.side-panel>a i{font-style:normal;width:34px;height:34px;border-radius:10px;background:#eaf5fb;display:grid;place-items:center;font-size:20px}.side-panel>a b,.side-panel>a small{display:block}.side-panel>a b{font-size:11px}.side-panel>a small{font-size:10px;color:#637b8e}.side-panel>a em{font-size:22px;font-style:normal;color:#07547f}.side-weather{background:#eef8fd}.side-weather>a{font-size:12px;font-weight:700;color:#07547f;text-decoration:none}.side-whatsapp{background:#052d4d;color:#fff;text-decoration:none;display:flex;flex-direction:column;gap:4px}.side-whatsapp b{font-size:17px}.side-whatsapp span,.side-whatsapp small{font-size:11px}.side-whatsapp strong{font-size:15px;margin-top:8px}.side-safety{background:#ffc247;color:#14334c;font-size:12px}.side-safety small{display:block;margin:5px 0 0 25px;font-size:11px}
-footer{background:linear-gradient(90deg,#052944,#0a4b70)!important;border-top:4px solid #dcae39}
-@media(min-width:1150px){main>section,main>#announcement{margin-right:305px!important}main>.reference-sidebar{right:2%;top:0}.hero .wrap{width:94%}}
-@media(max-width:1149px){.reference-sidebar{position:static;width:min(96%,900px);margin:12px auto;display:grid;grid-template-columns:1fr 1fr}.side-panel{grid-row:span 2}}
-@media(max-width:720px){.reference-sidebar{display:flex;width:94%}.nav{flex-wrap:wrap;justify-content:center}nav{order:3;width:100%;overflow-x:auto;flex-wrap:nowrap;justify-content:flex-start;padding:3px 0 8px}nav a{white-space:nowrap}.hero{padding:34px 0!important}.hero h1{font-size:34px!important}.leisure-grid{grid-template-columns:1fr 1fr!important}}
-@media(max-width:480px){.leisure-grid{grid-template-columns:1fr!important}.side-panel>a b{font-size:12px}}
-/* Ajustes de presentación: catálogo claro, tarjetas táctiles y navegación móvil. */
-.reference-sidebar{width: min(360px, 30%);}
-.side-panel{padding:18px 17px;border-radius:18px}
-.side-panel h3{font-size:19px!important;letter-spacing:.2px}
-.side-panel>p{font-size:13px!important;margin-bottom:12px!important}
-.side-panel>a{grid-template-columns:48px 1fr 18px;padding:11px 0;gap:10px}
-.side-panel>a i{width:44px;height:44px;font-size:23px}
-.side-panel>a b{font-size:14px!important}.side-panel>a small{font-size:12px!important}
-@media(min-width:1150px){main>section,main>#announcement{margin-right:390px!important}.reference-sidebar{width:340px;right:2%;top:8px}.hero .wrap{width:94%}}
-@media(max-width:1149px){.reference-sidebar{position:static;width:min(96%,900px);margin:14px auto;display:block}.reference-sidebar .side-panel{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.reference-sidebar .side-panel h3,.reference-sidebar .side-panel>p{grid-column:1/-1}.side-panel>a{min-width:0}.side-weather,.side-whatsapp,.side-safety{display:none}}
-@media(max-width:650px){.reference-sidebar .side-panel{display:block;padding:16px}.side-panel>a{padding:10px 0}.side-panel>a i{width:42px;height:42px}.navbtn{padding:10px 13px;font-size:13px}.brand{font-size:16px}.brand small{font-size:9px}.mark{width:39px;height:39px}.section-head h2{font-size:23px!important}.hero{border-radius:0}.hero-grid{gap:18px}.hero-card{padding:18px}.catalog-grid{grid-template-columns:1fr 1fr}.catalog-card{padding:14px}.catalog-card h3{font-size:16px}.catalog-card p{font-size:13px}}
-@media(max-width:390px){.catalog-grid{grid-template-columns:1fr}.navbtn{font-size:12px}}
-
-
-
-.dynamic-promo{position:relative;overflow:hidden;border-radius:20px;margin:18px 0 26px;min-height:190px;background:#102f49}.dynamic-promo .promo-image{width:100%;height:220px;object-fit:cover;display:block;opacity:.72;margin:0}.dynamic-promo>div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:24px 7%;color:#fff;background:linear-gradient(90deg,rgba(5,28,48,.78),rgba(5,28,48,.12))}.dynamic-promo b{font-size:clamp(14px,2vw,20px);letter-spacing:2px}.dynamic-promo strong{font-size:clamp(27px,5vw,44px);color:#f5cb63;margin:8px 0}.dynamic-promo span{font-size:15px}.flight-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}.flight-card{background:#fff;border:1px solid #e0e7eb;border-radius:18px;padding:20px;box-shadow:0 8px 24px rgba(10,38,58,.07)}.flight-card .tag{font-weight:800;color:#a77a19}.flight-card h3{color:#123b5d}.flight-card .flight-price{font-size:25px;font-weight:900;color:#123b5d;margin:12px 0}.flight-card a{display:inline-block;margin-top:10px;background:#123b5d;color:#fff;padding:10px 15px;border-radius:24px;text-decoration:none}.flight-editor-item{border:1px solid #dce5e9;border-radius:14px;padding:14px;margin:12px 0;background:#f8fafb}.flight-editor-item .admin-grid{margin-top:10px}.flight-editor-item button{margin-top:8px;border:0;background:#fce8e8;color:#9a2424;padding:8px 12px;border-radius:20px}.
-
-/* Carrusel de promociones administrado desde el teléfono */
-.user-promo-carousel{background:#082f50;padding:12px 0 18px;border-bottom:3px solid #e5b84b}
-.user-promo-frame{position:relative;max-width:1200px;margin:auto;border-radius:18px;overflow:hidden;background:#102f49;min-height:180px}
-.user-promo-frame img{display:block;width:100%;height:clamp(190px,32vw,390px);object-fit:cover;transition:opacity .35s}
-.user-promo-overlay{position:absolute;inset:auto 0 0;padding:22px 5%;color:#fff;background:linear-gradient(transparent,rgba(3,25,43,.88));font-weight:800;font-size:clamp(17px,3vw,27px)}
-.user-promo-controls{display:flex;justify-content:center;align-items:center;gap:14px;color:#fff;padding-top:10px;font-size:13px}
-.user-promo-controls button,.promo-admin button{border:0;border-radius:24px;padding:10px 16px;background:#e5b84b;color:#092d4b;font-weight:800;cursor:pointer}
-.promo-admin{margin:24px auto;background:#fff;border:1px solid #d8e2e8;border-radius:18px;padding:18px;box-shadow:0 8px 24px #123b5d12}
-.promo-admin h3{color:#123b5d;margin:0 0 8px}.promo-admin p{color:#60717d;font-size:13px}
-.promo-upload{display:block;border:2px dashed #b9c8d1;border-radius:15px;padding:22px;text-align:center;background:#f5f9fb;color:#123b5d;cursor:pointer;margin:14px 0}
-.promo-upload input{display:block;max-width:100%;margin:10px auto}
-.promo-thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:10px;margin:14px 0}
-.promo-thumb{position:relative;border:1px solid #dce5e9;border-radius:12px;overflow:hidden;background:#f4f7f8}.promo-thumb img{width:100%;height:90px;object-fit:cover;display:block}.promo-thumb button{position:absolute;right:4px;top:4px;padding:5px 8px;background:#a52c35;color:#fff}
-.promo-admin .note-local{background:#fff7df;border-radius:12px;padding:12px;color:#69521d}
-@media(max-width:650px){.promo-admin{padding:13px}.user-promo-frame{border-radius:12px}}
-
-</style>
-
-<!-- CONFIGURACIÓN DE MEDICIÓN Y PUBLICIDAD
-     Antes de activar: sustituye G-REEMPLAZAR por tu ID real de Google Analytics 4.
-     La publicidad AdSense solo se activa después de que Google apruebe el sitio y entregue los IDs.
--->
-<script>
-  window.YBH_CONFIG = {
-    ga4MeasurementId: "",
-    adsenseClientId: ""
-  };
-  (function () {
-    var id = window.YBH_CONFIG.ga4MeasurementId;
-    if (!id || !/^G-[A-Z0-9]+$/.test(id)) return;
-    var s = document.createElement('script');
-    s.async = true;
-    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(id);
-    document.head.appendChild(s);
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    window.gtag = gtag;
-    gtag('js', new Date());
-    gtag('config', id);
-  })();
-
-
-// TU ESPACIO: reloj mundial, encuesta local, trivia, refrán y destinos rotativos.
-const clockZones=[['La Habana','America/Havana'],['Moscú','Europe/Moscow'],['Madrid','Europe/Madrid'],['Miami','America/New_York'],['Berlín','Europe/Berlin'],['Georgetown','America/Guyana']];
-function updateWorldClock(){const root=document.getElementById('worldClock');if(!root)return;root.innerHTML=clockZones.map(([name,zone])=>{let t='--:--';try{t=new Intl.DateTimeFormat('es-ES',{timeZone:zone,hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date())}catch(e){}return `<div class="clock-item"><small>${name}</small><b>${t}</b></div>`}).join('')}
-updateWorldClock();setInterval(updateWorldClock,30000);
-const pollKey='ybh_daily_poll_'+new Date().toISOString().slice(0,10);
-document.getElementById('votePoll').addEventListener('click',()=>{const chosen=document.querySelector('input[name="poll"]:checked'),box=document.getElementById('pollResult');if(!chosen){box.textContent='Selecciona una opción antes de votar.';return;}if(localStorage.getItem(pollKey)){box.textContent='Ya has participado en la encuesta de hoy desde este dispositivo. ¡Gracias!';return;}localStorage.setItem(pollKey,chosen.value);box.textContent='¡Gracias por participar! Tu respuesta: '+chosen.value+'. Comparte YOUR BRIDGE HOME para invitar a más personas.';document.getElementById('votePoll').disabled=true;});
-const quizBank=[
- {q:'¿Cuál es la capital de Guyana?',a:['Georgetown','Paramaribo','Kingston'],correct:'Georgetown',why:'Georgetown es la capital de Guyana.'},
- {q:'¿En qué país se encuentra la ciudad de Kazán?',a:['Rusia','Cuba','Guyana'],correct:'Rusia',why:'Kazán es una ciudad de la Federación de Rusia.'},
- {q:'¿Cuál es la moneda oficial de Cuba?',a:['Peso cubano','Euro','Rublo'],correct:'Peso cubano',why:'La moneda oficial de Cuba es el peso cubano (CUP).'},
- {q:'¿Qué océano baña la costa norte de Cuba?',a:['Atlántico','Índico','Ártico'],correct:'Atlántico',why:'Cuba está situada en el mar Caribe, conectado con el océano Atlántico.'},
- {q:'¿Cuál es la capital de Rusia?',a:['Moscú','Sochi','San Petersburgo'],correct:'Moscú',why:'Moscú es la capital de Rusia.'}
-];
-const todayIndex=Math.floor(Date.now()/86400000)%quizBank.length,quiz=quizBank[todayIndex];
-document.getElementById('quizQuestion').textContent=quiz.q;document.getElementById('quizOptions').innerHTML=quiz.a.map(a=>`<label class="poll-option"><input type="radio" name="quiz" value="${a}"> ${a}</label>`).join('');
-document.getElementById('answerQuiz').addEventListener('click',()=>{const v=document.querySelector('input[name="quiz"]:checked'),r=document.getElementById('quizResult');if(!v){r.textContent='Elige una respuesta.';return;}r.textContent=(v.value===quiz.correct?'¡Correcto! ':'Esta vez no. ')+quiz.why;});
-document.getElementById('answerProverb').addEventListener('click',()=>{const v=document.querySelector('input[name="proverb"]:checked'),r=document.getElementById('proverbResult');if(!v){r.textContent='Selecciona una respuesta.';return;}r.textContent=v.value==='cara'?'¡Muy bien! El refrán es: «Al mal tiempo, buena cara».':'No exactamente. La respuesta correcta es «cara».';});
-const destinations=[
- ['🇨🇺','Santiago de Cuba','Conoce su música, historia, arquitectura y la tradición del carnaval.'],
- ['🇨🇺','La Habana','Pasea virtualmente por el Malecón, La Habana Vieja y sus plazas históricas.'],
- ['🇷🇺','Moscú','Descubre la Plaza Roja, el Kremlin y sus estaciones de metro monumentales.'],
- ['🇬🇾','Georgetown','Explora su arquitectura colonial, mercados y jardines tropicales.'],
- ['🇪🇸','Madrid','Disfruta de sus museos, parques, plazas y gastronomía.'],
- ['🇩🇪','Berlín','Conoce su historia, sus museos y sus barrios culturales.']
-];let destIndex=Math.floor(Date.now()/86400000)%destinations.length;
-function showDestination(){const d=destinations[destIndex];document.getElementById('destinationEmoji').textContent=d[0];document.getElementById('destinationName').textContent=d[1];document.getElementById('destinationDescription').textContent=d[2];}
-showDestination();document.getElementById('nextDestination').addEventListener('click',()=>{destIndex=(destIndex+1)%destinations.length;showDestination();});
-
-</script>
-
-
-<style>
-#calculadora-remesas .info-panel,#hoteles .info-panel,#notas-importantes .info-panel{box-shadow:0 8px 24px rgba(10,38,58,.07)}
-#destSlideImg,#hotelSlideImg{transition:opacity .6s ease}#hotelSearch,#calcWhatsApp,#saveImportantNote{background:#123b5d;color:#fff;border:0;border-radius:22px;padding:11px 18px;font-weight:700;cursor:pointer}
-#businessProposal{display:grid;gap:8px;max-width:600px}#businessProposal button{background:#123b5d;color:#fff;border:0;border-radius:22px;padding:12px;font-weight:700}
-@media(max-width:650px){header .nav{flex-wrap:wrap}header nav{overflow-x:auto;white-space:nowrap;max-width:100%;gap:12px}.admin-grid{grid-template-columns:1fr}}
-</style>
-<style>
-header .nav{gap:14px;flex-wrap:nowrap}header nav{display:flex;flex:1;min-width:0;gap:clamp(9px,1.35vw,20px);overflow-x:auto;white-space:nowrap;scrollbar-width:thin}header nav a{font-size:13px;white-space:nowrap}.reference-sidebar{display:none!important}
-#catalogo{padding:18px 0 22px;background:#f5f8fa}#catalogo .section-head{margin-bottom:12px}#catalogo .section-head h2{font-size:24px}#catalogo .catalog-grid{display:flex;gap:12px;overflow-x:auto;padding:4px 2px 14px;scroll-snap-type:x mandatory}#catalogo .catalog-card{flex:0 0 205px;scroll-snap-align:start;padding:15px}#catalogo .catalog-card p{min-height:64px}
-.top-showcase{background:#eaf1f5;padding:13px 0 16px;border-bottom:3px solid var(--gold)}.top-showcase .showcase-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.showcase-card{position:relative;overflow:hidden;border-radius:16px;background:#0d3453;min-height:180px;box-shadow:0 6px 20px #123b5d18}.showcase-card img{display:block;width:100%;height:200px;object-fit:cover;opacity:.92;transition:opacity .6s}.showcase-caption{position:absolute;left:0;right:0;bottom:0;padding:24px 15px 12px;background:linear-gradient(transparent,#082b49ef);color:#fff}.showcase-caption b{display:block;font-size:18px}.showcase-caption span{font-size:12px;color:#f4e4b6}.owner-strip{background:#092d4b;color:#fff;padding:8px 4%;display:flex;justify-content:center;gap:20px;flex-wrap:wrap;font-size:13px}.owner-strip a{color:#f2ca67;text-decoration:none;font-weight:700}
-@media(max-width:760px){header .nav{flex-wrap:wrap;justify-content:space-between;padding:9px 0}header nav{order:3;flex-basis:100%;width:100%;padding:5px 0 7px;gap:17px}header nav a{font-size:13px}.navbtn{padding:9px 12px;font-size:12px}.top-showcase .showcase-grid{gap:8px}.showcase-card{min-height:135px}.showcase-card img{height:145px}.showcase-caption b{font-size:14px}.showcase-caption span{font-size:10px}.owner-strip{gap:8px;font-size:11px}.hero{padding:30px 0!important}}
-@media(max-width:390px){.top-showcase .showcase-grid{grid-template-columns:1fr}.showcase-card img{height:170px}}
-</style>
+    /* Footer */
+    footer { text-align: center; padding: 40px 20px; background: #0f172a; color: #94a3b8; margin-top: 60px; }
+    footer p { margin-bottom: 8px; }
+  </style>
 </head>
 <body>
-<header><div class="wrap nav">
-  <div class="brand"><div class="mark">Y</div><div>YOUR BRIDGE HOME<small>SERVICIOS INTERNACIONALES</small></div></div>
-  <nav aria-label="Navegación principal"><a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#catalogo">Catálogo</a><a href="#pasajes">Vuelos / Trenes / Buses</a><a href="#tu-espacio">Tu Espacio</a><a href="#info-viaje">Noticias</a><a href="#contacto">Contacto</a></nav>
-  <div style="display:flex;gap:8px;align-items:center"><select id="language" aria-label="Language" style="width:auto;padding:8px;border-radius:20px"><option value="es">ES</option><option value="en">EN</option><option value="ru">RU</option><option value="pt">PT</option></select><a class="navbtn" href="#contacto">Solicitar servicio</a></div>
-</div></header>
-<main>
 
-<aside class="reference-sidebar" aria-label="Acceso rápido y ayuda">
- <div class="side-panel"><h3>CATÁLOGO DE SERVICIOS</h3><p>Todo lo que necesitas, en un solo lugar.</p>
- <a href="#recargas"><i>📱</i><span><b>Recargas Cubacel</b><small id="sideTopupMin">Desde 150 ₽</small></span><em>›</em></a>
- <a href="#remesas"><i>💸</i><span><b>Remesas</b><small>Consulta la tasa actual</small></span><em>›</em></a>
- <a href="#pasajes"><i>✈️</i><span><b>Pasajes</b><small>Precios y fechas disponibles</small></span><em>›</em></a>
- <a href="#info-viaje"><i>🌤️</i><span><b>Pronóstico del tiempo</b><small>Tu clima en cualquier ciudad</small></span><em>›</em></a>
- <a href="#info-viaje"><i>🛂</i><span><b>Visados</b><small>Requisitos y documentación</small></span><em>›</em></a>
- <a href="#tasas"><i>💱</i><span><b>Referencias de cambio</b><small>Monedas y tasas actualizadas</small></span><em>›</em></a>
- <a href="#como-funciona"><i>🧳</i><span><b>Consejos para viajeros</b><small>Documentación y equipaje</small></span><em>›</em></a>
- <a href="#contacto"><i>🟢</i><span><b>Atención por WhatsApp</b><small>Resolvemos tus dudas</small></span><em>›</em></a></div>
- <div class="side-weather"><h3>🌤️ Pronóstico del tiempo</h3><p>Consulta el clima de tu destino desde la sección de información útil.</p><a href="#info-viaje">Consultar pronóstico →</a></div>
- <a class="side-whatsapp" href="https://wa.me/79046319565"><b>¿Necesitas ayuda?</b><span>Estamos para ti.</span><strong>🟢 +7904-631-95-65</strong><small>Atención por WhatsApp</small></a>
- <div class="side-safety">🛡️ <b>Tu seguridad es nuestra prioridad</b><small>Información clara, confiable y sin sorpresas.</small></div>
-</aside>
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <div class="logo">Your Bridge Home</div>
+      <div class="admin-info">
+        <i class="fas fa-user-shield"></i> Admin: Daynel Caminero | <i class="fas fa-phone"></i> +7 904 631-95-65
+      </div><br>
+      <a href="https://wa.me/79046319565" class="btn-wa" target="_blank">
+        <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+      </a>
+    </div>
+  </header>
 
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Conectamos familias y destinos.</h1>
+    <p>Recargas telefónicas, remesas desde Europa y Estados Unidos, y pasajes hacia América Latina y Europa. Atención cercana y confirmación antes de cada operación.</p>
+  </section>
 
-<div id="announcement" style="background:#fff4cf;color:#17344a;text-align:center;padding:12px 5%;font-weight:700">
-  📢 YOUR BRIDGE HOME · Recargas · Pasajes internacionales · Remesas desde 200 ₽ · WhatsApp +7904-631-95-65
-</div>
-<div class="owner-strip"><span>👤 Administrador: <b>Daynel Caminero</b></span><span>☎️ <a href="https://wa.me/79046319565">+7904-631-95-65</a></span><span>🌐 Servicios internacionales</span></div>
+  <main class="container">
+    
+    <!-- CATÁLOGO -->
+    <h2 class="section-title">Nuestros Servicios</h2>
+    <div class="grid">
+      <div class="card">
+        <i class="fas fa-mobile-alt"></i>
+        <h3>Recargas Cubacel</h3>
+        <p>Ofertas de minutos, saldo y paquetes para móviles en Cuba. Desde 150 ₽.</p>
+        <a href="https://wa.me/79046319565?text=Hola,%20quiero%20consultar%20por%20una%20recarga%20a%20Cuba" class="btn-link" target="_blank">Solicitar recarga <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="card">
+        <i class="fas fa-paper-plane"></i>
+        <h3>Remesas a Cuba</h3>
+        <p>Envíos desde Europa y Rusia. Consulta tasa, comisión y forma de entrega actual.</p>
+        <a href="https://wa.me/79046319565?text=Hola,%20quiero%20consultar%20por%20una%20remesa" class="btn-link" target="_blank">Consultar remesa <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="card">
+        <i class="fas fa-plane"></i>
+        <h3>Pasajes Internacionales</h3>
+        <p>Ofertas de Rusia a Cuba, Cuba a Rusia y Rusia a Guyana. Desde 99.800 ₽.</p>
+        <a href="https://wa.me/79046319565?text=Hola,%20quiero%20consultar%20por%20pasajes" class="btn-link" target="_blank">Ver rutas y precios <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="card">
+        <i class="fas fa-hotel"></i>
+        <h3>Hoteles y Alojamiento</h3>
+        <p>Solicita opciones económicas por ciudad y presupuesto. Confirmamos disponibilidad.</p>
+        <a href="https://wa.me/79046319565?text=Hola,%20busco%20alojamiento" class="btn-link" target="_blank">Buscar alojamiento <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
 
-<section class="user-promo-carousel" id="userPromoCarousel" aria-label="Promociones destacadas">
- <div class="wrap">
-  <div class="user-promo-frame"><img id="userPromoImage" alt="Promoción destacada" src="https://images.unsplash.com/photo-1500759285222-a95626b146d7?auto=format&fit=crop&w=1400&q=85"><div class="user-promo-overlay" id="userPromoCaption">YOUR BRIDGE HOME · Promociones y destinos</div></div>
-  <div class="user-promo-controls"><button type="button" id="userPromoPrev" aria-label="Imagen anterior">‹</button><span id="userPromoCounter">Promociones destacadas</span><button type="button" id="userPromoNext" aria-label="Imagen siguiente">›</button></div>
- </div>
-</section>
+    <!-- CALCULADORA -->
+    <h2 class="section-title">Calculadora de Remesas</h2>
+    <div class="calc-box">
+      <p style="margin-bottom: 20px; color: #64748b;">Simula cuánto podría recibir tu familiar. La tasa final debe confirmarse por WhatsApp antes del envío.</p>
+      <div class="input-group">
+        <label>Monto a enviar (RUB o USD)</label>
+        <input type="number" id="montoEnvio" value="0" min="0" step="100" oninput="calcular()">
+      </div>
+      <div class="input-group">
+        <label>Tasa de cambio (ej. 1 RUB = 1.5 CUP) *</label>
+        <input type="number" id="tasaCambio" value="0" min="0" step="0.1" oninput="calcular()">
+      </div>
+      <div class="result" id="resultadoCalc">Tu familiar recibiría: 0 CUP (estimado)</div>
+      <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 12px; text-align: center;">* Ejemplo demostrativo. La tasa real y comisiones se confirman al contactar.</p>
+    </div>
 
-<section class="top-showcase" aria-label="Galería automática de países y hoteles"><div class="wrap showcase-grid">
- <article class="showcase-card"><img id="topCountryImage" src="https://images.unsplash.com/photo-1500759285222-a95626b146d7?auto=format&fit=crop&w=1000&q=85" alt="Destino turístico"><div class="showcase-caption"><b id="topCountryTitle">La Habana · Cuba</b><span id="topCountryText">Descubre nuevos destinos</span></div></article>
- <article class="showcase-card"><img id="topHotelImage" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=85" alt="Hotel"><div class="showcase-caption"><b id="topHotelTitle">Hoteles y alojamientos</b><span id="topHotelText">Encuentra inspiración para tu estancia</span></div></article>
-</div></section>
+    <!-- INFO EXTRA -->
+    <h2 class="section-title">Información Útil</h2>
+    <div class="grid">
+      <div class="card">
+        <i class="fas fa-passport"></i>
+        <h3>Visados y Requisitos</h3>
+        <p>Consulta información orientativa sobre requisitos de entrada. Confirma siempre con fuentes oficiales.</p>
+        <a href="https://www.visaindex.com" class="btn-link" target="_blank">Consultar VisaIndex <i class="fas fa-external-link-alt"></i></a>
+      </div>
+      <div class="card">
+        <i class="fas fa-university"></i>
+        <h3>Tasa Oficial (Banco Cuba)</h3>
+        <p>Enlaces a las tasas oficiales del Banco Central de Cuba y referencias del mercado.</p>
+        <a href="https://www.bc.gob.cu" class="btn-link" target="_blank">Ver Banco de Cuba <i class="fas fa-external-link-alt"></i></a>
+      </div>
+      <div class="card">
+        <i class="fas fa-clock"></i>
+        <h3>Horario de Atención</h3>
+        <p>Lunes a Sábado de 9:00 a 19:00 (Hora de Moscú). Fuera de horario, deja tu mensaje por WhatsApp.</p>
+      </div>
+    </div>
 
-<section class="hero" id="inicio"><div class="wrap hero-grid">
-  <div><div class="eyebrow">Conectamos a los tuyos</div><h1>Conectamos familias y destinos.</h1>
-  <p>Recargas telefónicas, remesas desde Europa y Estados Unidos, y pasajes hacia América Latina y Europa.</p>
-  <div class="hero-actions"><a class="btn" href="#servicios">Ver servicios</a><a class="btn outline" href="#contacto">Escribir por WhatsApp</a></div></div>
-  <div class="hero-card"><strong>YOUR BRIDGE HOME</strong><div class="route" style="justify-content:center;gap:22px"><div style="text-align:center"><span>🌐</span><br><b>INTERNACIONAL</b></div><div style="font-size:27px;color:#e5b84b">↔</div><div style="text-align:center"><span>✈️</span><br><b>MÚLTIPLES DESTINOS</b></div></div><p style="font-size:14px;margin:0;color:#e3edf1">Servicios internacionales con atención cercana, información clara y confirmación antes de cada operación.</p></div>
-</div></section>
+    <!-- JUEGOS Y ENTRETENIMIENTO -->
+    <h2 class="section-title">Tu Espacio (Juegos Gratis)</h2>
+    <div class="card" style="text-align: center; padding: 40px;">
+      <i class="fas fa-gamepad" style="font-size: 3rem; color: var(--accent); margin-bottom: 16px;"></i>
+      <h3>Adivina el número</h3>
+      <p style="margin-bottom: 20px;">Piensa en un número del 1 al 10. ¡Haz clic para ver si la suerte te acompaña!</p>
+      <button onclick="jugar()" style="background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 30px; font-size: 1rem; cursor: pointer; font-weight: 600;">Jugar ahora</button>
+      <p id="juegoResultado" style="margin-top: 20px; font-weight: 700; color: var(--accent); font-size: 1.2rem;"></p>
+    </div>
 
-<section id="recargas"><div class="wrap"><div class="dynamic-promo"><img class="promo-image" src="assets/oferta-recarga-cubacel.png" alt="Promoción de recargas Cubacel"><div><b>RECARGAS CUBACEL</b><strong id="topupBannerPrice">Desde 150 ₽</strong><span id="topupBannerDetail">Ofertas actualizadas</span></div></div></div><div class="wrap">
- <div class="section-head"><h2>Ofertas de recargas Cubacel</h2><p>Precios en rublos (₽). Selecciona una oferta y solicita tu recarga por WhatsApp.</p></div>
- <div class="offers" id="offersList" aria-live="polite"></div>
- <details class="admin"><summary>Actualizar ofertas (panel de administración)</summary>
- <p class="note">Edita precios y descripciones y pulsa «Guardar ofertas». Los cambios se guardan en este navegador y dispositivo. Para que todos los visitantes vean los cambios desde cualquier teléfono, será necesario conectar la web a una base de datos.</p>
- <div id="offerEditor" class="admin-grid"></div>
- <div class="admin-actions"><button class="save" id="saveOffers" type="button">Guardar ofertas</button><button class="reset" id="resetOffers" type="button">Restablecer ofertas iniciales</button></div>
- </details>
-</div></section>
+  </main>
 
+  <footer>
+    <p><strong>YOUR BRIDGE HOME</strong> &copy; 2026</p>
+    <p>Administrador: Daynel Caminero</p>
+    <p>WhatsApp: +7 904 631-95-65</p>
+    <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">Servicios internacionales con atención cercana y transparente.</p>
+  </footer>
 
-<section id="pasajes"><div class="wrap">
- <div class="section-head"><h2>Ofertas de pasajes disponibles</h2><p>Precios y fechas según las ofertas compartidas. Confirma disponibilidad, requisitos y precio final por WhatsApp antes de reservar.</p></div>
- <div class="dynamic-promo"><img class="promo-image" src="assets/ofertas-pasajes.png" alt="Ofertas de pasajes internacionales"><div><b>PASAJES INTERNACIONALES</b><strong id="flightBannerPrice">Consultar destinos</strong><span>Varias rutas · Fechas flexibles</span></div></div>
- <div class="flight-grid" id="flightList"></div>
- <details class="admin"><summary>Administrar destinos y ofertas de pasajes</summary><p class="note">Añade todas las rutas que necesites. Cada destino tiene precio, fechas, descripción y requisitos propios. Los cambios se guardan en este navegador.</p><div id="flightEditor"></div><div class="admin-actions"><button class="save" id="addFlight" type="button">＋ Añadir destino</button><button class="save" id="saveFlights" type="button">Guardar pasajes</button><button class="reset" id="resetFlights" type="button">Restablecer pasajes</button></div></details><p class="note" style="text-align:center;margin-top:18px">Las tarifas, fechas, rutas, equipaje y condiciones pueden cambiar. La reserva solo se confirma después de verificar los datos por WhatsApp.</p>
-</div></section>
+  <script>
+    // Calculadora
+    function calcular() {
+      const monto = parseFloat(document.getElementById('montoEnvio').value) || 0;
+      const tasa = parseFloat(document.getElementById('tasaCambio').value) || 0;
+      const total = monto * tasa;
+      document.getElementById('resultadoCalc').innerText = `Tu familiar recibiría: ${total.toFixed(2)} CUP (estimado)`;
+    }
 
-<section id="servicios"><div class="wrap"><div class="section-head"><h2>Nuestros servicios</h2><p>Cuéntanos qué necesitas. Confirmaremos disponibilidad, precio, condiciones y plazo antes de procesar cualquier solicitud.</p></div>
-<div class="cards">
- <article class="card"><div class="icon">📱</div><h3>Recargas Cubacel</h3><p>Consulta recargas para líneas móviles en Cuba. Indica el número y el importe que deseas enviar.</p><a href="#contacto" data-service="Recarga Cubacel">Solicitar recarga →</a></article>
- <article class="card"><div class="icon">💸</div><h3>Remesas internacionales</h3><p>Gestionamos consultas de envíos de dinero a Cuba desde Europa y Estados Unidos. Confirmamos disponibilidad, moneda de entrega, comisiones y plazos.</p><a href="#contacto" data-service="Consulta de remesa">Consultar remesa →</a></article>
- <article class="card"><div class="icon">✈️</div><h3>Vuelos internacionales</h3><p>Consulta rutas, fechas, escalas, equipaje y precios de vuelos entre distintos países.</p><a href="#pasajes" data-service="Pasaje de avión">Consultar vuelos →</a></article>
- <article class="card"><div class="icon">🚆</div><h3>Pasajes de tren</h3><p>Solicita información de rutas ferroviarias, horarios y tarifas según el destino.</p><a href="#pasajes" data-service="Pasaje de tren">Consultar trenes →</a></article>
- <article class="card"><div class="icon">🚌</div><h3>Pasajes de autobús</h3><p>Consulta opciones de transporte terrestre y disponibilidad para tu viaje.</p><a href="#pasajes" data-service="Pasaje de bus">Consultar autobuses →</a></article>
- <article class="card"><div class="icon">🏨</div><h3>Hoteles y alojamiento</h3><p>Solicita opciones económicas por ciudad y presupuesto. Confirmamos disponibilidad con el proveedor.</p><a href="#hoteles" data-service="Hoteles y hospedajes">Buscar alojamiento →</a></article>
- <article class="card"><div class="icon">🛂</div><h3>Visados y documentación</h3><p>Orientación para preparar documentos y consultar requisitos de viaje con fuentes oficiales.</p><a href="#contacto" data-service="Trámites y visas">Solicitar orientación →</a></article>
- <article class="card"><div class="icon">🤝</div><h3>Consulta personalizada</h3><p>Cuéntanos tu necesidad y te ayudaremos a encontrar el servicio adecuado.</p><a href="#contacto" data-service="Consulta personalizada">Hablar con nosotros →</a></article>
-</div></div></section>
+    // Juego
+    function jugar() {
+      const numRandom = Math.floor(Math.random() * 10) + 1;
+      const resultado = document.getElementById('juegoResultado');
+      resultado.innerText = `¡El número ganador era el ${numRandom}! ¿Acertaste?`;
+    }
+  </script>
 
-<section id="ofertas-economicas"><div class="wrap economic">
- <div class="section-head"><h2>⭐ Ofertas más económicas</h2><p>Una selección visual de los mejores precios disponibles en recargas, remesas y pasajes.</p></div>
- <div class="economic-grid">
-  <article class="deal"><img src="assets/oferta-recarga-cubacel.png" alt="Promoción de recarga Cubacel"><div class="dealbody"><b>📱 Recarga Cubacel</b><div class="dealprice" id="dealTopupPrice">Desde 150 ₽</div><p>Consulta las ofertas de recarga.</p><a href="#recargas">Ver recargas</a></div></article>
-  <article class="deal"><img src="assets/remesas.jpg" alt="Servicio de remesas"><div class="dealbody"><b>💸 Remesas a Cuba</b><div class="dealprice" id="dealRemitPrice">Consultar tasa</div><p id="dealRemitDesc">Consulta importe, tasa y comisión.</p><a href="#remesas">Consultar remesa</a></div></article>
-  <article class="deal"><img src="assets/ofertas-pasajes.png" alt="Ofertas de pasajes"><div class="dealbody"><b>✈️ Rusia → Cuba</b><div class="dealprice" id="dealFlightPrice">Consultar</div><p id="dealFlightRoute">Mejores precios entre destinos.</p><a href="#pasajes">Ver fechas</a></div></article>
-  <article class="deal"><img src="assets/guyana.jpg" alt="Vuelo a Guyana"><div class="dealbody"><b>✈️ Rusia → Guyana</b><div class="dealprice" id="dealFlight2Price">Consultar</div><p id="dealFlight2Route">Consulta destinos y fechas.</p><a href="#pasajes">Ver fechas</a></div></article>
- </div></div></section>
-
-
-<section id="catalogo" class="catalog-section"><div class="wrap">
- <div class="section-head"><h2>📚 Catálogo de YOUR BRIDGE HOME</h2><p>Todo lo que puedes consultar y solicitar en un mismo lugar. Puedes visitarnos aunque hoy no necesites comprar nada.</p></div>
- <div class="catalog-grid">
-  <article class="catalog-card"><div class="bigicon">📱</div><h3>Recargas Cubacel</h3><p>Ofertas de minutos, saldo y paquetes para móviles en Cuba. Consulta precios y condiciones vigentes.</p><a href="#recargas">Ver ofertas de recarga →</a></article>
-  <article class="catalog-card"><div class="bigicon">💸</div><h3>Remesas a Cuba</h3><p>Consulta envíos desde Europa y Estados Unidos, tasa de cambio, comisión, moneda y forma de entrega.</p><a href="#remesas">Consultar remesas →</a></article>
-  <article class="catalog-card"><div class="bigicon">✈️</div><h3>Pasajes internacionales</h3><p>Consulta ofertas de Rusia a Cuba, Cuba a Rusia y Rusia a Guyana. Pregunta por otras rutas y fechas.</p><a href="#pasajes">Ver rutas y precios →</a></article>
-  <article class="catalog-card"><div class="bigicon">🌤️</div><h3>Pronóstico del tiempo</h3><p>Consulta previsiones de tres días para La Habana, Santiago, Moscú o cualquier ciudad que busques.</p><a href="#info-viaje">Consultar el clima →</a></article>
-  <article class="catalog-card"><div class="bigicon">🛂</div><h3>Visados y requisitos</h3><p>Acceso a información orientativa sobre requisitos de entrada. Confirma siempre con fuentes oficiales.</p><a href="https://visaindex.com/" target="_blank" rel="noopener">Consultar VisaIndex →</a></article>
-  <article class="catalog-card"><div class="bigicon">💱</div><h3>Referencias de cambio</h3><p>Enlaces a tasas oficiales de Cuba, referencias del mercado informal y cotización de Bitcoin.</p><a href="#tasas">Ver referencias →</a></article>
-  <article class="catalog-card"><div class="bigicon">🧳</div><h3>Consejos para viajeros</h3><p>Información útil para preparar viajes, revisar documentos y conocer condiciones antes de salir.</p><a href="#info-viaje">Ver información útil →</a></article>
-  <article class="catalog-card"><div class="bigicon">🤝</div><h3>Atención por WhatsApp</h3><p>Solicita cotizaciones, consulta disponibilidad o pregunta por un servicio personalizado.</p><a href="https://wa.me/79046319565" target="_blank" rel="noopener">Hablar con nosotros →</a></article>
- </div>
- </div></section>
-
-<section id="tu-espacio" class="leisure-section"><div class="wrap">
- <div class="section-head"><h2>🎉 TU ESPACIO · Aprende, juega y participa</h2><p>Un lugar para entretenerte y descubrir algo nuevo cada día. No necesitas comprar ni registrarte para participar.</p></div>
- <div class="leisure-grid">
-  <article class="leisure-card"><h3>🌍 Reloj mundial</h3><p>Consulta la hora en distintos lugares donde vive nuestra comunidad.</p><div class="world-clock" id="worldClock"><div class="clock-item"><small>La Habana</small><b>--:--</b></div><div class="clock-item"><small>Moscú</small><b>--:--</b></div><div class="clock-item"><small>Madrid</small><b>--:--</b></div><div class="clock-item"><small>Miami</small><b>--:--</b></div><div class="clock-item"><small>Berlín</small><b>--:--</b></div><div class="clock-item"><small>Georgetown</small><b>--:--</b></div></div></article>
-  <article class="leisure-card"><h3>🗳️ La encuesta del día</h3><p id="pollQuestion">¿Qué es lo que más extrañas de tu país?</p><form id="dailyPoll" class="poll-options"><label class="poll-option"><input type="radio" name="poll" value="La familia"> La familia</label><label class="poll-option"><input type="radio" name="poll" value="La comida"> La comida</label><label class="poll-option"><input type="radio" name="poll" value="La música"> La música</label><label class="poll-option"><input type="radio" name="poll" value="Las playas y paisajes"> Las playas y paisajes</label></form><button id="votePoll" type="button">Votar</button><div id="pollResult" class="activity-result" aria-live="polite">¡Tu opinión cuenta! Elige una respuesta.</div><small>Nota: por ahora el voto se guarda en este dispositivo; los resultados no representan todavía a todos los visitantes.</small></article>
-  <article class="leisure-card"><h3>🧠 Pregunta del día</h3><p id="quizQuestion">¿Cuál es la capital de Guyana?</p><div id="quizOptions" class="poll-options"><label class="poll-option"><input type="radio" name="quiz" value="Georgetown"> Georgetown</label><label class="poll-option"><input type="radio" name="quiz" value="Paramaribo"> Paramaribo</label><label class="poll-option"><input type="radio" name="quiz" value="Kingston"> Kingston</label></div><button id="answerQuiz" type="button">Comprobar respuesta</button><div id="quizResult" class="activity-result" aria-live="polite">Responde y descubre si acertaste.</div></article>
-  <article class="leisure-card"><h3>🎲 Completa el refrán</h3><p id="proverbPrompt">Al mal tiempo, buena…</p><div class="poll-options"><label class="poll-option"><input type="radio" name="proverb" value="cara"> cara</label><label class="poll-option"><input type="radio" name="proverb" value="suerte"> suerte</label><label class="poll-option"><input type="radio" name="proverb" value="vida"> vida</label></div><button id="answerProverb" type="button">Comprobar</button><div id="proverbResult" class="activity-result" aria-live="polite">¿Te sabes el refrán?</div></article>
-  <article class="leisure-card"><h3>🧭 Destino destacado</h3><div style="font-size:42px" id="destinationEmoji">🏝️</div><h3 id="destinationName">Santiago de Cuba</h3><p id="destinationDescription">Descubre su historia, cultura y rincones especiales.</p><button class="secondary" id="nextDestination" type="button">Descubrir otro destino</button></article>
- </div>
-
- <div class="promo-admin" id="promoAdmin">
-  <h3>🛡️ Panel de administración · Imágenes promocionales</h3>
-  <p>Sube desde tu teléfono las imágenes que quieras promocionar. Puedes añadir varias, eliminarlas y cambiar el orden. El carrusel superior cambia automáticamente cada 20 segundos.</p>
-  <label class="promo-upload" for="promoImageFiles">📷 <b>Seleccionar imágenes desde mi teléfono</b><br><small>JPG, PNG o WEBP · Puedes seleccionar varias imágenes</small><input id="promoImageFiles" type="file" accept="image/jpeg,image/png,image/webp" multiple></label>
-  <div class="admin-actions"><button type="button" id="promoSaveBtn">Guardar imágenes</button><button type="button" id="promoClearBtn">Eliminar todas</button></div>
-  <h4 style="color:#123b5d">Mis imágenes actuales</h4><div class="promo-thumbs" id="promoThumbs"><p>Aún no has añadido imágenes.</p></div>
-  <p class="note-local"><b>Importante:</b> esta primera versión guarda las imágenes en el navegador de este teléfono. Para que las imágenes subidas aquí aparezcan también a todos los visitantes desde otros dispositivos, hay que conectar un almacenamiento en la nube y proteger el panel con autenticación real. No publiques datos sensibles en las imágenes.</p>
- </div>
-
- <p class="note" style="text-align:center;margin-top:18px">Las actividades son gratuitas y recreativas. Comparte la página con familiares y amigos para que también participen.</p>
- </div></section>
-
-
-<section id="calculadora-remesas"><div class="wrap"><div class="section-head"><h2>🧮 Calculadora de remesas</h2><p>Simula cuánto podría recibir tu familiar. La tasa y comisión son configurables y deben confirmarse antes del envío.</p></div>
-<div class="info-panel"><div class="admin-grid"><div><label for="calcSend">Importe que envías (RUB)</label><input id="calcSend" type="number" min="0" value="5000"></div><div><label for="calcRate">Tasa (CUP por RUB)</label><input id="calcRate" type="number" min="0" step="0.0001" value="1"></div><div><label for="calcFee">Comisión (RUB)</label><input id="calcFee" type="number" min="0" value="0"></div></div><h3 id="calcResult">Tu familiar recibiría: 5.000 CUP (estimado)</h3><p class="note">Ejemplo demostrativo. No es una cotización ni una tasa en tiempo real.</p><button type="button" id="calcWhatsApp">Consultar esta remesa por WhatsApp</button></div></div></section>
-<section id="hoteles"><div class="wrap"><div class="section-head"><h2>🏨 Hoteles y destinos</h2><p>Explora imágenes de destinos y alojamientos. Los precios y la disponibilidad deben verificarse en el proveedor.</p></div>
-<div class="weather-grid"><article class="info-panel"><h3 id="destSlideTitle">Destino destacado · La Habana</h3><img id="destSlideImg" src="https://images.unsplash.com/photo-1500759285222-a95626b146d7?auto=format&fit=crop&w=1000&q=80" alt="Destino turístico" style="width:100%;height:230px;object-fit:cover;border-radius:14px"><p id="destSlideCaption">Descubre nuevos lugares cada 20 segundos.</p><div class="admin-actions"><button type="button" id="destPrev">Anterior</button><button type="button" id="destNext">Siguiente</button></div></article>
-<article class="info-panel"><h3 id="hotelSlideTitle">Alojamientos · inspiración</h3><img id="hotelSlideImg" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80" alt="Hotel" style="width:100%;height:230px;object-fit:cover;border-radius:14px"><p id="hotelSlideCaption">Busca opciones por destino y presupuesto.</p><label for="hotelDestination">Destino</label><input id="hotelDestination" placeholder="Ej.: Madrid, La Habana, Moscú"><label for="hotelBudget">Presupuesto por noche</label><input id="hotelBudget" type="number" min="0" placeholder="Importe máximo"><button type="button" id="hotelSearch">Preparar búsqueda de hoteles</button><p id="hotelSearchStatus" class="note">La búsqueda real requiere conexión con proveedores de hoteles.</p></article></div></div></section>
-<section id="notas-importantes"><div class="wrap"><div class="section-head"><h2>📌 Notas importantes y propuestas de negocios</h2><p>Publica avisos y recibe propuestas de negocios que quieran aparecer en YOUR BRIDGE HOME.</p></div><div class="info-panel"><details class="admin"><summary>Editar nota importante (administración local)</summary><label for="importantNote">Nota visible</label><textarea id="importantNote" placeholder="Escribe aquí avisos, cambios de horario o información importante"></textarea><button type="button" id="saveImportantNote">Guardar nota</button></details><p id="importantNoteDisplay">Aquí aparecerán los avisos importantes.</p><h3>¿Quieres incluir tu negocio?</h3><form id="businessProposal"><label>Nombre del negocio</label><input id="businessName" required><label>Servicio y ciudad</label><input id="businessType" required><label>Contacto</label><input id="businessContact" required><button type="submit">Enviar propuesta por WhatsApp</button></form></div></div></section>
-
-<section id="remesas"><div class="wrap"><div class="section-head"><h2>💸 Remesas a Cuba</h2><p>Consulta la tasa, la comisión y las condiciones antes de realizar cualquier envío.</p></div>
- <div class="dynamic-promo"><img class="promo-image" src="assets/remesas.jpg" alt="Servicio de remesas"><div><b>REMESAS</b><strong id="remitBannerPrice">Desde 200 ₽</strong><span id="remitBannerDetail">Consulta condiciones y tasa</span></div></div><div class="cards"><article class="card"><div class="icon">💱</div><h3>Tasa de cambio vigente</h3><p id="remitRateDisplay">Consultar tasa actual por WhatsApp.</p></article><article class="card"><div class="icon">🧾</div><h3>Comisión / servicio</h3><p id="remitFeeDisplay">Comisión y condiciones: consultar antes de confirmar.</p></article><article class="card"><div class="icon">📲</div><h3>Solicitar remesa</h3><p>Indica el importe, moneda y ciudad de entrega para recibir una cotización.</p><a href="https://wa.me/79046319565?text=Hola%2C%20quiero%20consultar%20una%20remesa%20a%20Cuba" target="_blank" rel="noopener">Consultar por WhatsApp →</a></article></div>
- <details class="admin"><summary>Administrar información de remesas</summary><p class="note">Puedes cambiar la tasa, comisión y descripción. Estos cambios se guardan en este navegador; para que todos los visitantes los vean hay que publicar la web con los datos actualizados o conectar un sistema compartido.</p>
- <div class="admin-grid"><div><label for="remitMin">Precio mínimo desde (RUB)</label><input id="remitMin" type="number" min="200" value="200"></div><div><label for="remitRate">Tasa de cambio (texto)</label><input id="remitRate" placeholder="Ej.: 1 EUR = ... CUP"></div><div><label for="remitFee">Comisión / precio del servicio</label><input id="remitFee" placeholder="Ej.: comisión según importe"></div><div><label for="remitSend">Importe que envía el cliente</label><input id="remitSend" placeholder="Ej.: 5.000 RUB"></div><div><label for="remitReceive">Importe que recibe en Cuba</label><input id="remitReceive" placeholder="Ej.: según tasa vigente"></div><div style="grid-column:1/-1"><label for="remitDesc">Condiciones / información</label><textarea id="remitDesc" placeholder="Monedas, ciudad de entrega, plazos, condiciones..."></textarea></div></div><div class="admin-actions"><button class="save" id="saveRemit" type="button">Guardar remesas</button><button class="reset" id="resetRemit" type="button">Restablecer</button></div></details>
-</div></section>
-
-<section id="info-viaje" style="background:#edf2f2"><div class="wrap"><div class="section-head"><h2>Información útil para tu viaje</h2><p>Consulta requisitos de entrada, clima y consejos antes de salir.</p></div><div class="info-columns">
- <article class="info-panel"><h3>🛂 Visados y requisitos</h3><p>Consulta requisitos de entrada según tu nacionalidad y destino. Verifica siempre con la embajada o autoridad migratoria correspondiente.</p><p><a href="https://visaindex.com/" target="_blank" rel="noopener">🌐 Consultar VisaIndex →</a></p><p class="note">VisaIndex es una fuente informativa externa; los requisitos pueden cambiar.</p></article>
- <article class="info-panel"><h3>🌤️ Pronóstico del tiempo</h3><label for="weatherCity">Ciudad o destino</label><input id="weatherCity" value="La Habana" placeholder="Ej.: Santiago de Cuba, Moscú">
- <div style="display:flex;gap:8px;flex-wrap:wrap;margin:10px 0">
- <button class="weather-city" type="button" data-city="La Habana">La Habana</button>
- <button class="weather-city" type="button" data-city="Santiago de Cuba">Santiago</button>
- <button class="weather-city" type="button" data-city="Moscú">Moscú</button>
- <button class="weather-city" type="button" data-city="Georgetown">Georgetown</button>
- </div>
- <button class="btn" id="weatherSearch" type="button">Actualizar pronóstico</button><p id="weatherStatus" class="note" role="status" aria-live="polite">El pronóstico se cargará automáticamente. También puedes elegir una ciudad y actualizarlo.</p><div class="weather-days" id="weatherDays"></div><p class="note">Datos meteorológicos de Open-Meteo. Requiere conexión a internet.</p></article>
- <article class="info-panel"><h3>🧳 Consejos para viajeros</h3><ul><li>Revisa la vigencia de tu pasaporte.</li><li>Confirma visado y requisitos de tránsito.</li><li>Verifica equipaje y escalas.</li><li>Comprueba horarios y terminales.</li><li>Guarda tus documentos y reservas.</li></ul><b>¡Buen viaje!</b></article>
- </div></div></section>
-
-<section id="tasas" style="background:#edf2f2"><div class="wrap">
- <div class="section-head"><h2>Tasas de cambio de Cuba</h2><p>Consulta por separado las referencias oficiales y las del mercado informal. Los valores cambian y deben verificarse en la fuente antes de cualquier operación.</p></div>
- <div class="cards">
-  <article class="card"><div class="icon">🏦</div><h3>Tasa oficial · Banco Central</h3><p>Consulta las tasas oficiales por segmento, moneda y fecha. No todas las tasas oficiales aplican a las mismas operaciones.</p><a href="https://www.bc.gob.cu/" target="_blank" rel="noopener">Consultar Banco Central de Cuba →</a></article>
-  <article class="card"><div class="icon">📊</div><h3>Mercado informal · elTOQUE</h3><p>Referencia informativa para USD, EUR y MLC frente al CUP. No es una tasa oficial ni una oferta de compraventa de Your Bridge Home.</p><a href="https://eltoque.com/" target="_blank" rel="noopener">Consultar elTOQUE →</a></article>
-  <article class="card"><div class="icon">₿</div><h3>Bitcoin · referencia cripto</h3><p>Bitcoin no tiene una tasa oficial cubana del Banco Central. Consulta su precio de mercado y ten en cuenta la volatilidad y las comisiones.</p><a href="https://www.coingecko.com/" target="_blank" rel="noopener">Consultar precio de Bitcoin →</a></article>
- </div>
- <p class="note" style="text-align:center;margin-top:18px">Aviso: mostramos enlaces a fuentes externas; esta versión todavía no descarga automáticamente sus cotizaciones. Fecha y hora de consulta deben comprobarse en cada fuente.</p>
-</div></section>
-
-<section class="steps" id="como-funciona"><div class="wrap"><div class="section-head"><h2>¿Cómo funciona?</h2><p>Un proceso sencillo y transparente.</p></div><div class="step-grid">
-<div class="step"><div class="num">01</div><h3>Envía tu solicitud</h3><p>Completa el formulario o escríbenos por WhatsApp con los detalles.</p></div>
-<div class="step"><div class="num">02</div><h3>Recibe confirmación</h3><p>Te informamos precio final, disponibilidad, forma de pago y condiciones.</p></div>
-<div class="step"><div class="num">03</div><h3>Confirma el servicio</h3><p>Solo después de aceptar los detalles se coordina la operación y su comprobante.</p></div>
-</div></div></section>
-<section id="contacto"><div class="wrap contact-grid">
-<div class="contact-panel"><div class="eyebrow">Estamos para ayudarte</div><h2>Hablemos de tu solicitud</h2><p>Escríbenos y dinos si necesitas una recarga, una remesa o información sobre pasajes.</p><p><strong>WhatsApp:</strong><br><a href="https://wa.me/79046319565" target="_blank" rel="noopener">+7 904 631-95-65</a></p><p style="font-size:13px">Horario y disponibilidad: consultar por WhatsApp.</p></div>
-<form id="requestForm"><h2 style="margin:0;color:#123b5d">Solicitar información</h2>
-<label for="service">Servicio</label><select id="service" required><option value="">Selecciona un servicio</option><option>Recarga Cubacel</option><option>Consulta de remesa</option><option>Pasaje de avión</option><option>Pasaje de tren</option><option>Pasaje de bus</option><option>Hoteles y hospedajes</option><option>Trámites y visas</option><option>Otro</option></select>
-<label for="name">Tu nombre</label><input id="name" placeholder="Nombre" required>
-<label for="details">Detalles de la solicitud</label><textarea id="details" placeholder="Ej.: importe de recarga, destino, fecha de viaje..."></textarea>
-<button class="btn" type="submit">Enviar solicitud por WhatsApp</button>
-<div class="note">Este formulario prepara un mensaje de WhatsApp. No realiza pagos ni confirma automáticamente una operación.</div>
-</form>
-</div></section>
-</main>
-<footer><div class="wrap"><p><strong>Administrador: Daynel Caminero</strong> · WhatsApp <a href="https://wa.me/79046319565">+7904-631-95-65</a></p><p><a href="https://your-bridge-home-dcc-1.netlify.app/">your-bridge-home-dcc-1.netlify.app</a></p><strong>YOUR BRIDGE HOME</strong><br>Servicios internacionales · Cuba · Europa · Estados Unidos · América Latina<br>Precios, disponibilidad y condiciones sujetos a confirmación. Verifica siempre los datos antes de pagar.<br><a href="privacidad.html" style="color:#e5b84b">Política de privacidad</a></div></footer>
-<script>
-const serviceSelect=document.getElementById('service');
-document.querySelectorAll('[data-service]').forEach(a=>a.addEventListener('click',()=>serviceSelect.value=a.dataset.service));
-document.getElementById('requestForm').addEventListener('submit',e=>{
- e.preventDefault();
- const service=document.getElementById('service').value;
- const name=document.getElementById('name').value.trim();
- const details=document.getElementById('details').value.trim();
- const msg=`Hola, Your Bridge Home. Quiero solicitar información.\\nServicio: ${service}\\nNombre: ${name}\\nDetalles: ${details}`;
- window.open('https://wa.me/79046319565?text='+encodeURIComponent(msg),'_blank','noopener');
-});
-
-const defaultOffers=[
-{name:"VOZ",price:"150",description:"80 minutos",tag:"⭐ Oferta más económica"},
-{name:"SALDO",price:"250",description:"350 CUP de saldo · Limitado",tag:"✨ Especial"},
-{name:"VOZ +",price:"270",description:"200 minutos",tag:"🔥 Oferta"},
-{name:"COMBITO",price:"300",description:"120 de saldo · 15 min + 20 SMS",tag:"VIP"},
-{name:"INTERNET +",price:"350",description:"2 GB LTE + 300 MB.cu",tag:"Internet"},
-{name:"COMBO +",price:"400",description:"2 GB + 300 MB · 15 min + 20 SMS",tag:"🔥 Oferta"},
-{name:"COMBITO +",price:"550",description:"240 de saldo · 15 min + 20 SMS",tag:"✨ Especial"},
-{name:"INTERNET 1",price:"650",description:"3 GB + 300 MB.cu",tag:"✨ Especial"},
-{name:"COMBO 1",price:"750",description:"3 GB + 300 MB.cu · 25 min + 20 SMS",tag:"⭐ Más vendido"},
-{name:"COMBITO MEJOR",price:"750",description:"360 de saldo · 15 min + 20 SMS",tag:"👑 Premium"},
-{name:"INTERNET 2",price:"1250",description:"7 GB + 300 MB",tag:"👑 Premium"},
-{name:"COMBO 2",price:"1300",description:"7 GB + 300 MB · 40 min + 20 SMS",tag:"✨ Especial"},
-{name:"INTERNET 3",price:"2500",description:"15 GB + 300 MB",tag:"⭐ Más vendido"},
-{name:"COMBO 3",price:"2700",description:"15 GB + 300 MB · 80 min + 20 SMS",tag:"✨ Especial"}
-];
-let offers=(()=>{try{return JSON.parse(localStorage.getItem("ybh_cubacel_offers"))||defaultOffers.map(x=>({...x}))}catch(e){return defaultOffers.map(x=>({...x}))}})();
-function renderOffers(){
- const list=document.getElementById("offersList");list.innerHTML="";
- offers.forEach(o=>{
-  const card=document.createElement("article");card.className="offer";
-  const tag=document.createElement("div");tag.className="tag";tag.textContent=o.tag||"Recarga";
-  const name=document.createElement("h3");name.textContent=o.name;
-  const price=document.createElement("div");price.className="price";price.textContent=o.price+" ₽";
-  const desc=document.createElement("p");desc.textContent=o.description;
-  const btn=document.createElement("button");btn.textContent="Solicitar esta recarga";
-  btn.onclick=()=>{const msg=`Hola, quiero solicitar esta recarga Cubacel:\\n${o.name}\\nPrecio: ${o.price} RUB\\nIncluye: ${o.description}`;window.open("https://wa.me/79046319565?text="+encodeURIComponent(msg),"_blank","noopener")};
-  card.append(tag,name,price,desc,btn);list.append(card);
- });
-}
-function renderEditor(){
- const editor=document.getElementById("offerEditor");editor.innerHTML="";
- offers.forEach((o,i)=>[["Nombre","name"],["Precio en rublos","price"],["Descripción","description"],["Etiqueta","tag"]].forEach(([label,key])=>{
-  const box=document.createElement("div"),lab=document.createElement("label"),input=document.createElement("input");
-  lab.textContent=`Oferta ${i+1} · ${label}`;input.value=o[key]||"";input.addEventListener("input",()=>offers[i][key]=input.value);
-  box.append(lab,input);editor.append(box);
- }));
-}
-document.getElementById("saveOffers").onclick=()=>{localStorage.setItem("ybh_cubacel_offers",JSON.stringify(offers));renderOffers();updateTicker();alert("Ofertas guardadas en este navegador.")};
-document.getElementById("resetOffers").onclick=()=>{offers=defaultOffers.map(x=>({...x}));localStorage.removeItem("ybh_cubacel_offers");renderOffers();renderEditor()};
-renderOffers();renderEditor();
-
-
-function updateTicker(){
- const validTopups=offers.filter(o=>Number(o.price)>0);const cheapestTopup=validTopups.length?Math.min(...validTopups.map(o=>Number(o.price))):Infinity;
- const validFlights=flights.filter(f=>Number(f.price)>0);const cheapestFlight=validFlights.length?Math.min(...validFlights.map(f=>Number(f.price))):Infinity;
- const minRemit=Math.max(200,Number(remitData.minAmount)||200);const rate=remitData.rate||"consultar tasa";
- const money=n=>Number(n).toLocaleString("es-ES")+" ₽";
- document.getElementById("announcement").innerHTML='<div class="ticker"><span>📢 YOUR BRIDGE HOME　·　📱 Recargas desde '+(isFinite(cheapestTopup)?money(cheapestTopup):"consultar")+'　·　✈️ Pasajes desde '+(isFinite(cheapestFlight)?money(cheapestFlight):"consultar")+'　·　💸 Remesas desde '+money(minRemit)+'　·　'+rate+'　·　☎️ WhatsApp +7904-631-95-65</span></div>';
- document.getElementById("dealTopupPrice").textContent="Desde "+(isFinite(cheapestTopup)?money(cheapestTopup):"consultar");
- document.getElementById("sideTopupMin").textContent="Desde "+(isFinite(cheapestTopup)?money(cheapestTopup):"consultar");
- document.getElementById("topupBannerPrice").textContent="Desde "+(isFinite(cheapestTopup)?money(cheapestTopup):"consultar");
- const first=validTopups.sort((a,b)=>Number(a.price)-Number(b.price))[0];document.getElementById("topupBannerDetail").textContent=first?first.name+" · "+first.description:"Ofertas actualizadas";
- document.getElementById("dealRemitPrice").textContent="Desde "+money(minRemit);document.getElementById("remitBannerPrice").textContent="Desde "+money(minRemit);
- document.getElementById("dealRemitDesc").textContent=remitData.description||remitData.rate||"Consulta importe, tasa y comisión.";
- document.getElementById("remitBannerDetail").textContent=remitData.rate||remitData.fee||"Consulta condiciones por WhatsApp";
- const cheapest=validFlights.sort((a,b)=>Number(a.price)-Number(b.price))[0];
- document.getElementById("flightBannerPrice").textContent=cheapest?"Desde "+money(cheapest.price):"Consultar destinos";
- document.getElementById("dealFlightPrice").textContent=cheapest?"Desde "+money(cheapest.price):"Consultar";
- document.getElementById("dealFlightRoute").textContent=cheapest?cheapest.route+" · "+(cheapest.november||cheapest.december||"Fechas a consultar"):"Mejores precios entre destinos";
- const second=validFlights.find(f=>f!==cheapest);document.getElementById("dealFlight2Price").textContent=second?money(second.price):"Consultar";document.getElementById("dealFlight2Route").textContent=second?second.route:"Consulta otros destinos";
-}
-
-const defaultFlights = [
- {mode:"avión",route:"RUSIA → CUBA", title:"Vuelo Rusia a Cuba", price:"99800", decemberPrice:"", november:"Del 17 al 30 de noviembre", december:"Del 1 al 9 de diciembre", requirements:""},
- {mode:"avión",route:"CUBA → RUSIA", title:"Vuelo Cuba a Rusia", price:"118700", decemberPrice:"118500", november:"9, 11, 13, 14 y 16–30 de noviembre", december:"Todo diciembre", requirements:"Libre de visado para ciudadanos cubanos; verificar condiciones de entrada vigentes."},
- {mode:"avión",route:"RUSIA → GUYANA", title:"Vuelo Rusia a Guyana", price:"152400", decemberPrice:"", november:"14, 16–21 y 23–30 de noviembre", december:"1–5, 7–11 y 24 de diciembre", requirements:""}
-];
-let flights=(()=>{try{return JSON.parse(localStorage.getItem("ybh_flight_offers"))||defaultFlights.map(x=>({...x}))}catch(e){return defaultFlights.map(x=>({...x}))}})();
-function renderFlights(){
- const list=document.getElementById("flightList");list.innerHTML="";
- flights.forEach(f=>{const card=document.createElement("article");card.className="flight-card";
- const tag=document.createElement("div");tag.className="tag";tag.textContent=(f.mode==="tren"?"🚆 ":f.mode==="bus"?"🚌 ":"✈️ ")+f.route;
- const title=document.createElement("h3");title.textContent=f.title||f.route;
- const price=document.createElement("div");price.className="flight-price";price.textContent=Number(f.price||0).toLocaleString("es-ES")+" ₽"+(f.decemberPrice?" · Diciembre: "+Number(f.decemberPrice).toLocaleString("es-ES")+" ₽":"");
- const nov=document.createElement("p");nov.innerHTML="<strong>Fechas:</strong> "+(f.november||"Consultar");
- const dec=document.createElement("p");dec.innerHTML="<strong>Otras fechas:</strong> "+(f.december||"Consultar");
- const req=document.createElement("p");req.className="note";req.textContent=f.requirements||"";
- const btn=document.createElement("a");btn.href="https://wa.me/79046319565?text="+encodeURIComponent("Hola, quiero consultar el pasaje "+f.route+" por "+f.price+" rublos. Fechas: "+(f.november||"")+". "+(f.december||""));btn.target="_blank";btn.rel="noopener";btn.textContent="Consultar por WhatsApp";
- card.append(tag,title,price,nov,dec);if(f.requirements)card.append(req);card.append(btn);list.append(card);
- });
-}
-function renderFlightEditor(){const editor=document.getElementById("flightEditor");editor.innerHTML="";flights.forEach((f,i)=>{const item=document.createElement("div");item.className="flight-editor-item";const heading=document.createElement("b");heading.textContent="Destino "+(i+1);item.append(heading);const grid=document.createElement("div");grid.className="admin-grid";
- [["Medio (avión, tren o bus)","mode"],["Ruta (origen → destino)","route"],["Nombre del servicio", "title"],["Precio en rublos", "price"],["Precio alternativo / diciembre", "decemberPrice"],["Fechas principales", "november"],["Otras fechas", "december"],["Requisitos y condiciones", "requirements"]].forEach(([label,key])=>{const box=document.createElement("div"),lab=document.createElement("label"),input=key==="mode"?document.createElement("select"):document.createElement("input");lab.textContent=label;if(key==="mode"){["avión","tren","bus"].forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;input.append(o)});input.value=f[key]||"avión";}else input.value=f[key]||"";input.addEventListener("input",()=>{flights[i][key]=input.value;renderFlights()});box.append(lab,input);grid.append(box)});
- const del=document.createElement("button");del.type="button";del.textContent="Eliminar este destino";del.onclick=()=>{flights.splice(i,1);renderFlightEditor();renderFlights()};item.append(grid,del);editor.append(item);
- });}
-document.getElementById("addFlight").onclick=()=>{flights.push({mode:"avión",route:"NUEVO ORIGEN → NUEVO DESTINO",title:"Nuevo destino",price:"",decemberPrice:"",november:"",december:"",requirements:""});renderFlightEditor()};
-document.getElementById("saveFlights").onclick=()=>{localStorage.setItem("ybh_flight_offers",JSON.stringify(flights));renderFlights();updateTicker();alert("Destinos y precios guardados en este navegador.")};
-document.getElementById("resetFlights").onclick=()=>{flights=defaultFlights.map(x=>({...x}));localStorage.removeItem("ybh_flight_offers");renderFlightEditor();renderFlights()};
-renderFlights();renderFlightEditor();
-
-const remitDefaults={minAmount:200,rate:"",fee:"",send:"",receive:"",description:""};
-let remitData=(()=>{try{return {...remitDefaults,...JSON.parse(localStorage.getItem("ybh_remittance")||"{}")}}catch(e){return {...remitDefaults}}})();
-function renderRemit(){document.getElementById("remitMin").value=Math.max(200,Number(remitData.minAmount)||200);document.getElementById("remitRate").value=remitData.rate;document.getElementById("remitFee").value=remitData.fee;document.getElementById("remitSend").value=remitData.send;document.getElementById("remitReceive").value=remitData.receive;document.getElementById("remitDesc").value=remitData.description;document.getElementById("remitRateDisplay").textContent=remitData.rate||"Consultar tasa actual por WhatsApp.";document.getElementById("remitFeeDisplay").textContent=[remitData.fee,remitData.send?"Envías: "+remitData.send:"",remitData.receive?"Reciben: "+remitData.receive:""].filter(Boolean).join(" · ")||"Comisión y condiciones: consultar antes de confirmar.";updateTicker()}
-document.getElementById("saveRemit").onclick=()=>{remitData={minAmount:Math.max(200,Number(document.getElementById("remitMin").value)||200),rate:document.getElementById("remitRate").value.trim(),fee:document.getElementById("remitFee").value.trim(),send:document.getElementById("remitSend").value.trim(),receive:document.getElementById("remitReceive").value.trim(),description:document.getElementById("remitDesc").value.trim()};localStorage.setItem("ybh_remittance",JSON.stringify(remitData));renderRemit();alert("Remesas guardadas en este navegador.")};
-document.getElementById("resetRemit").onclick=()=>{remitData={...remitDefaults};localStorage.removeItem("ybh_remittance");renderRemit()};
-renderRemit();
-
-// Pronóstico dinámico real mediante Open-Meteo: geocodificación + previsión diaria.
-const weatherText={0:"Despejado",1:"Mayormente despejado",2:"Parcialmente nublado",3:"Nublado",45:"Niebla",48:"Niebla",51:"Llovizna ligera",53:"Llovizna",55:"Llovizna intensa",61:"Lluvia ligera",63:"Lluvia",65:"Lluvia intensa",71:"Nieve ligera",73:"Nieve",75:"Nieve intensa",80:"Chubascos ligeros",81:"Chubascos",82:"Chubascos fuertes",95:"Tormenta"};
-const weatherIcons={0:"☀️",1:"🌤️",2:"⛅",3:"☁️",45:"🌫️",48:"🌫️",51:"🌦️",53:"🌦️",55:"🌧️",61:"🌧️",63:"🌧️",65:"🌧️",71:"🌨️",73:"🌨️",75:"❄️",80:"🌦️",81:"🌧️",82:"⛈️",95:"⛈️"};
-async function loadWeather(){
- const city=document.getElementById("weatherCity").value.trim();
- const status=document.getElementById("weatherStatus"),days=document.getElementById("weatherDays");
- if(!city){status.textContent="Escribe el nombre de una ciudad.";return;}
- status.textContent="Consultando el pronóstico actualizado de "+city+"…";days.innerHTML="";
- try{
-  const g=await fetch("https://geocoding-api.open-meteo.com/v1/search?name="+encodeURIComponent(city)+"&count=5&language=es&format=json");
-  if(!g.ok) throw new Error("El servicio meteorológico no respondió. Inténtalo de nuevo.");
-  const gj=await g.json();if(!gj.results?.length)throw new Error("No encontramos esa ciudad. Prueba con La Habana, Santiago de Cuba, Moscú o Georgetown.");
-  const place=gj.results.find(x=>x.name.toLowerCase()===city.toLowerCase())||gj.results[0];
-  const f=await fetch("https://api.open-meteo.com/v1/forecast?latitude="+place.latitude+"&longitude="+place.longitude+"&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=3&timezone=auto");
-  if(!f.ok)throw new Error("No se pudo obtener el pronóstico. Inténtalo nuevamente.");
-  const fj=await f.json();if(!fj.daily||!fj.daily.time?.length)throw new Error("El pronóstico no está disponible para esta ciudad.");
-  const labels=["Hoy","Mañana","Próximo día"];
-  for(let i=0;i<Math.min(3,fj.daily.time.length);i++){
-   const code=fj.daily.weather_code[i],d=document.createElement("div");d.className="weather-day";
-   const date=new Date(fj.daily.time[i]+"T12:00:00").toLocaleDateString("es-ES",{day:"numeric",month:"short"});
-   d.innerHTML="<small>"+labels[i]+" · "+date+"</small><div style='font-size:27px;margin:5px'>"+(weatherIcons[code]||"🌡️")+"</div><b>"+Math.round(fj.daily.temperature_2m_max[i])+"° / "+Math.round(fj.daily.temperature_2m_min[i])+"°</b><small>"+(weatherText[code]||"Condición variable")+"</small>";
-   days.append(d);
-  }
-  status.textContent="Pronóstico actualizado para "+place.name+(place.country?", "+place.country:"")+". Máxima / mínima en °C.";
- }catch(e){status.textContent=e.message||"No se pudo cargar el pronóstico. Comprueba tu conexión y vuelve a intentarlo.";}
-}
-document.getElementById("weatherSearch").addEventListener("click",loadWeather);
-document.getElementById("weatherCity").addEventListener("keydown",e=>{if(e.key==="Enter")loadWeather()});
-document.querySelectorAll(".weather-city").forEach(b=>b.addEventListener("click",()=>{document.getElementById("weatherCity").value=b.dataset.city;loadWeather()}));
-loadWeather();
-
-
-// Calculadora estimativa de remesas
-function updateRemitCalc(){const amount=Math.max(0,Number(document.getElementById('calcSend').value)||0),rate=Math.max(0,Number(document.getElementById('calcRate').value)||0),fee=Math.max(0,Number(document.getElementById('calcFee').value)||0),received=Math.max(0,amount-fee)*rate;document.getElementById('calcResult').textContent='Tu familiar recibiría: '+received.toLocaleString('es-ES',{maximumFractionDigits:2})+' CUP (estimado)';}
-['calcSend','calcRate','calcFee'].forEach(id=>document.getElementById(id).addEventListener('input',updateRemitCalc));updateRemitCalc();
-document.getElementById('calcWhatsApp').addEventListener('click',()=>{const a=document.getElementById('calcSend').value,r=document.getElementById('calcRate').value,f=document.getElementById('calcFee').value;const msg=`Hola, quiero confirmar una remesa. Envío: ${a} RUB. Tasa estimada: ${r} CUP/RUB. Comisión: ${f} RUB.`;window.open('https://wa.me/79046319565?text='+encodeURIComponent(msg),'_blank','noopener')});
-// Galerías automáticas: cambian cada 20 segundos y permiten control manual.
-const destSlides=[['La Habana','Cuba · cultura, historia y playas','https://images.unsplash.com/photo-1500759285222-a95626b146d7?auto=format&fit=crop&w=1000&q=80'],['Moscú','Rusia · arquitectura y vida urbana','https://images.unsplash.com/photo-1513326738677-b964603b136d?auto=format&fit=crop&w=1000&q=80'],['Madrid','España · plazas, museos y gastronomía','https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1000&q=80'],['Estambul','Turquía · historia entre continentes','https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=1000&q=80']];
-const hotelSlides=[['Hoteles en destinos de playa','Imagen ilustrativa de alojamiento','https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=80'],['Alojamientos urbanos','Compara ubicación, servicios y presupuesto','https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=80'],['Escapadas y vacaciones','Consulta disponibilidad antes de reservar','https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=80']];
-let di=0,hi=0;function paintSlide(prefix,arr,i){const x=arr[i],img=document.getElementById(prefix+'Img');img.style.opacity='0';setTimeout(()=>{img.src=x[2];img.alt=x[0];document.getElementById(prefix+'Title').textContent=x[0];document.getElementById(prefix+'Caption').textContent=x[1];img.style.opacity='1'},250)}
-function nextDest(){di=(di+1)%destSlides.length;paintSlide('destSlide',destSlides,di)}function prevDest(){di=(di+destSlides.length-1)%destSlides.length;paintSlide('destSlide',destSlides,di)}function nextHotel(){hi=(hi+1)%hotelSlides.length;paintSlide('hotelSlide',hotelSlides,hi)}
-document.getElementById('destNext').addEventListener('click',nextDest);document.getElementById('destPrev').addEventListener('click',prevDest);setInterval(()=>{nextDest();nextHotel()},20000);
-document.getElementById('hotelSearch').addEventListener('click',()=>{const d=document.getElementById('hotelDestination').value.trim(),b=document.getElementById('hotelBudget').value;const status=document.getElementById('hotelSearchStatus');if(!d){status.textContent='Escribe primero el destino que deseas visitar.';return;}status.textContent='Prepararemos una consulta para hoteles en '+d+(b?' con presupuesto máximo de '+b:'')+'. Las tarifas reales y la disponibilidad se confirman con el proveedor.';const msg='Hola, busco hoteles en '+d+(b?' con presupuesto máximo de '+b:'')+'. ¿Me pueden enviar opciones económicas disponibles?';window.open('https://wa.me/79046319565?text='+encodeURIComponent(msg),'_blank','noopener')});
-// Avisos editables localmente en este navegador
-const noteEl=document.getElementById('importantNote'),noteDisplay=document.getElementById('importantNoteDisplay');noteEl.value=localStorage.getItem('ybh_important_note')||'';if(noteEl.value)noteDisplay.textContent=noteEl.value;document.getElementById('saveImportantNote').addEventListener('click',()=>{localStorage.setItem('ybh_important_note',noteEl.value);noteDisplay.textContent=noteEl.value||'Aquí aparecerán los avisos importantes.';alert('Nota guardada en este navegador.')});
-document.getElementById('businessProposal').addEventListener('submit',e=>{e.preventDefault();const msg='Solicitud para incluir negocio en YOUR BRIDGE HOME\nNegocio: '+document.getElementById('businessName').value+'\nServicio/ciudad: '+document.getElementById('businessType').value+'\nContacto: '+document.getElementById('businessContact').value;window.open('https://wa.me/79046319565?text='+encodeURIComponent(msg),'_blank','noopener')});
-
-// Selector de idioma: traduce navegación, llamadas principales y encabezados clave.
-const ybhTranslations={en:{'Inicio':'Home','Servicios':'Services','Catálogo':'Catalog','Tu Espacio':'Your Space','Noticias':'News','Contacto':'Contact','Solicitar servicio':'Request a service','Remesas a Cuba':'Remittances to Cuba','Ofertas de recargas Cubacel':'Cubacel top-up offers','Ofertas de pasajes disponibles':'Available tickets','Hablemos de tu solicitud':'Let us help with your request'},ru:{'Inicio':'Главная','Servicios':'Услуги','Catálogo':'Каталог','Tu Espacio':'Ваше пространство','Noticias':'Новости','Contacto':'Контакты','Solicitar servicio':'Заказать услугу','Remesas a Cuba':'Денежные переводы на Кубу','Ofertas de recargas Cubacel':'Пополнение Cubacel','Ofertas de pasajes disponibles':'Билеты и маршруты','Hablemos de tu solicitud':'Свяжитесь с нами'}};
-const languageSelect=document.getElementById('language');const originalLabels=[];document.querySelectorAll('header nav a,header .navbtn,#recargas h2,#pasajes h2,#remesas h2,#contacto h2').forEach((el,i)=>originalLabels[i]=el.textContent.trim());
-languageSelect.addEventListener('change',()=>{const lang=languageSelect.value,dict=ybhTranslations[lang]||{};document.querySelectorAll('header nav a,header .navbtn,#recargas h2,#pasajes h2,#remesas h2,#contacto h2').forEach((el,i)=>{const base=originalLabels[i];el.textContent=dict[base]||base;});});
-</script>
-<script>
-(function(){
- const catalog=document.getElementById('catalogo'),hero=document.getElementById('inicio');
- if(catalog&&hero)hero.parentNode.insertBefore(catalog,hero);
- const countries=[['La Habana · Cuba','Historia, cultura y mar Caribe','https://images.unsplash.com/photo-1500759285222-a95626b146d7?auto=format&fit=crop&w=1000&q=85'],['Moscú · Rusia','Arquitectura, plazas y experiencias','https://images.unsplash.com/photo-1513326738677-b964603b136d?auto=format&fit=crop&w=1000&q=85'],['Madrid · España','Una ciudad para descubrir','https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=1000&q=85'],['París · Francia','Un destino inolvidable','https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=1000&q=85']];
- const hotels=[['Hoteles y resorts','Opciones para diferentes presupuestos','https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1000&q=85'],['Estancias junto al mar','Busca alojamiento para tus vacaciones','https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1000&q=85'],['Hoteles urbanos','Comodidad cerca de tu destino','https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=85'],['Escapadas y descanso','Inspírate para tu próximo viaje','https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1000&q=85']];let i=0;
- function rotate(){const c=countries[i%countries.length],h=hotels[i%hotels.length];const ci=document.getElementById('topCountryImage'),hi=document.getElementById('topHotelImage');if(ci){ci.style.opacity='.2';setTimeout(()=>{ci.src=c[2];ci.alt=c[0];ci.style.opacity='.92'},250)}if(hi){hi.style.opacity='.2';setTimeout(()=>{hi.src=h[2];hi.alt=h[0];hi.style.opacity='.92'},250)}document.getElementById('topCountryTitle').textContent=c[0];document.getElementById('topCountryText').textContent=c[1];document.getElementById('topHotelTitle').textContent=h[0];document.getElementById('topHotelText').textContent=h[1];i++}
- setInterval(rotate,20000);
-})();
-
-// Gestor de imágenes promocionales. Persistencia local en IndexedDB (este navegador/dispositivo).
-(()=>{
- const DB='ybh_promo_gallery_v1',STORE='images';let db,items=[],selected=[] ,idx=0;
- const $=id=>document.getElementById(id);
- function openDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB,1);req.onupgradeneeded=()=>{const d=req.result;if(!d.objectStoreNames.contains(STORE))d.createObjectStore(STORE,{keyPath:'id',autoIncrement:true});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});}
- function all(){return new Promise((resolve,reject)=>{const r=db.transaction(STORE).objectStore(STORE).getAll();r.onsuccess=()=>resolve(r.result||[]);r.onerror=()=>reject(r.error);});}
- function saveOne(item){return new Promise((resolve,reject)=>{const r=db.transaction(STORE,'readwrite').objectStore(STORE).add(item);r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});}
- function removeOne(id){return new Promise((resolve,reject)=>{const r=db.transaction(STORE,'readwrite').objectStore(STORE).delete(id);r.onsuccess=resolve;r.onerror=()=>reject(r.error);});}
- function clearAll(){return new Promise((resolve,reject)=>{const r=db.transaction(STORE,'readwrite').objectStore(STORE).clear();r.onsuccess=resolve;r.onerror=()=>reject(r.error);});}
- function render(){const box=$('promoThumbs');box.innerHTML='';if(!items.length){box.innerHTML='<p>Aún no has añadido imágenes.</p>';return;}items.forEach((it,n)=>{const card=document.createElement('div');card.className='promo-thumb';const im=document.createElement('img');im.src=it.data;im.alt=it.name||'Promoción';const del=document.createElement('button');del.type='button';del.textContent='×';del.title='Eliminar imagen';del.onclick=async()=>{await removeOne(it.id);items=await all();idx=0;render();paint();};card.append(im,del);box.append(card);});}
- function paint(){const im=$('userPromoImage'),cap=$('userPromoCaption'),counter=$('userPromoCounter');if(!items.length){im.src='https://images.unsplash.com/photo-1500759285222-a95626b146d7?auto=format&fit=crop&w=1400&q=85';cap.textContent='YOUR BRIDGE HOME · Promociones y destinos';counter.textContent='Añade tus propias promociones desde el panel';return;}idx=((idx%items.length)+items.length)%items.length;const it=items[idx];im.style.opacity='.25';setTimeout(()=>{im.src=it.data;im.alt=it.name||'Promoción YOUR BRIDGE HOME';cap.textContent=it.caption||it.name||'YOUR BRIDGE HOME · Tu puente, más cerca de casa';im.style.opacity='1';},180);counter.textContent=(idx+1)+' / '+items.length+' · Cambio automático cada 20 segundos';}
- $('promoImageFiles').addEventListener('change',e=>{selected=Array.from(e.target.files||[]).filter(f=>/^image\/(jpeg|png|webp)$/.test(f.type));if(selected.length) $('promoThumbs').innerHTML='<p>'+selected.length+' imagen(es) listas. Pulsa «Guardar imágenes».</p>';});
- $('promoSaveBtn').addEventListener('click',async()=>{if(!selected.length){alert('Primero selecciona una o varias imágenes de tu teléfono.');return;}try{for(const file of selected){if(file.size>8*1024*1024){alert('La imagen '+file.name+' supera 8 MB y se omitió.');continue;}const data=await new Promise((res,rej)=>{const rd=new FileReader();rd.onload=()=>res(rd.result);rd.onerror=rej;rd.readAsDataURL(file);});await saveOne({name:file.name,caption:file.name.replace(/\.[^.]+$/,''),data,created:Date.now()});}selected=[];$('promoImageFiles').value='';items=await all();idx=0;render();paint();alert('Tus imágenes se guardaron en este teléfono.');}catch(err){alert('No se pudieron guardar las imágenes. Prueba con archivos más pequeños.');}});
- $('promoClearBtn').addEventListener('click',async()=>{if(!confirm('¿Eliminar todas las imágenes promocionales guardadas en este teléfono?'))return;await clearAll();items=[];idx=0;render();paint();});
- $('userPromoNext').addEventListener('click',()=>{idx++;paint();});$('userPromoPrev').addEventListener('click',()=>{idx--;paint();});
- openDB().then(async d=>{db=d;items=await all();render();paint();setInterval(()=>{if(items.length>1){idx++;paint();}},20000);}).catch(()=>{ $('userPromoCounter')?.replaceChildren(document.createTextNode('No se pudo iniciar la galería en este navegador.')); });
-})();
-
-</script>
-</body></html>
+</body>
+</html>
