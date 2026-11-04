@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b2b4f">
+<title>Your Bridge Home | Daynel Caminero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{--primary:#0b2b4f;--accent:#f59e0b;--bg:#f8fafc;--card:#fff;--text:#334155;--muted:#64748b;--border:#e2e8f0;--red:#dc2626}
+body.dark-mode{--primary:#f8fafc;--bg:#0f172a;--card:#1e293b;--text:#cbd5e1;--muted:#94a3b8;--border:#475569}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Poppins,Arial,sans-serif}
+html{scroll-behavior:smooth;scroll-padding-top:15px}
+body{background:var(--bg);color:var(--text);line-height:1.6;transition:background .25s,color .25s}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.top-banner{background:var(--red);color:#fff;overflow:hidden;white-space:nowrap;padding:9px 0;font-weight:700}
+.marquee{display:inline-block;min-width:100%;padding-left:100%;animation:scroll 28s linear infinite}
+@keyframes scroll{to{transform:translateX(-100%)}}
+header{position:relative;text-align:center;color:white;padding:28px 16px 0;background:linear-gradient(#0b2b4fe8,#0b2b4fe8),url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80') center/cover;border-bottom:4px solid var(--accent)}
+.dark-toggle{position:absolute;right:15px;top:15px;border:0;border-radius:9px;padding:9px 12px;background:#ffffff30;color:white}
+.logo-img{width:105px;height:105px;border-radius:50%;object-fit:contain;background:white;padding:5px;border:3px solid var(--accent);margin-bottom:8px}
+.logo-text{font-size:clamp(1.5rem,5vw,2.2rem);font-weight:800}
+.logo-text span{color:var(--accent)}
+.slogan{color:#cbd5e1;font-style:italic;margin:4px 0 12px}
+.admin-badge{display:inline-block;background:#ffffff20;border-radius:30px;padding:6px 16px;margin-bottom:18px;font-size:.9rem}
+.nav-menu{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;background:#0005;padding:12px 8px;margin:0 -16px}
+.nav-menu a{color:white;text-decoration:none;font-weight:600;padding:8px 13px;border-radius:25px;font-size:.9rem}
+.nav-menu a:hover{background:var(--accent);color:var(--primary)}
+.float-wa{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:#25d366;color:white;display:grid;place-items:center;font-size:29px;z-index:50;text-decoration:none;box-shadow:0 3px 12px #0004}
+.container{max-width:1200px;margin:auto;padding:20px 16px}
+.section-title{font-size:1.55rem;color:var(--primary);margin:35px 0 18px;border-left:5px solid var(--accent);padding-left:12px;font-weight:800}
+.notes-box{display:none;background:#fffbeb;color:#78350f;border-left:4px solid var(--accent);padding:18px;border-radius:12px;margin:12px 0 20px}
+body.dark-mode .notes-box{background:#334155;color:#f8fafc}
+.tools-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--card);padding:14px;border:1px solid var(--border);border-radius:15px;margin:18px 0}
+.lang-switch,.info-widget{display:flex;gap:8px;flex-wrap:wrap}
+.lang-btn,.filter-btn{background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px 13px;border-radius:9px;font-weight:600}
+.lang-btn.active,.filter-btn.active{background:var(--primary);color:var(--bg)}
+.info-widget span{background:var(--bg);border:1px solid var(--border);padding:7px 11px;border-radius:8px;font-weight:600;color:var(--primary)}
+body.dark-mode .info-widget span{color:#f8fafc}
+.slider-container{height:clamp(210px,36vw,350px);position:relative;overflow:hidden;border-radius:18px;margin:20px 0 28px;box-shadow:0 8px 20px #0002}
+.slider-container img{width:100%;height:100%;object-fit:cover}
+.slider-caption{position:absolute;inset:auto 0 0;padding:42px 15px 17px;text-align:center;color:white;font-size:clamp(1.1rem,3vw,1.6rem);font-weight:800;background:linear-gradient(transparent,#000c)}
+.pasajes-section{background:#f1f5f9;color:#0b2b4f;border:1px solid #cbd5e1;border-radius:22px;padding:28px 18px;margin-bottom:25px}
+body.dark-mode .pasajes-section{background:#1e293b;color:#f8fafc;border-color:#334155}
+.pasajes-header{text-align:center;margin-bottom:25px}
+.pasajes-header h2{font-size:2.5rem;font-weight:800;line-height:1.2}
+.pasajes-header h3{font-size:1.45rem}
+.pasajes-header p{color:var(--muted);font-style:italic}
+.transporte-grid,.promo-grid,.grid,.calc-grid,.links-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:17px}
+.transporte-card{background:white;color:#0b2b4f;text-decoration:none;border-radius:14px;padding:20px;display:flex;flex-direction:column;align-items:center;box-shadow:0 3px 9px #0001}
+.transporte-card i{font-size:2.5rem;margin-bottom:8px}
+.transporte-card h4{font-size:1.2rem}
+.beneficios-list{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;list-style:none;margin-top:22px}
+.beneficios-list li{background:white;color:#0b2b4f;padding:9px 15px;border-radius:25px;font-weight:600}
+.beneficios-list i{color:#16a34a}
+.promo-section{background:linear-gradient(135deg,#0b2b4f,#1e3a8a);padding:22px;border-radius:20px}
+.promo-card{position:relative;overflow:hidden;text-align:center;padding:22px 18px;border:1px solid #f59e0b99;border-radius:17px;background:#ffffff18;color:white}
+.promo-card h3{color:var(--accent);font-size:1.4rem;margin:12px 0}
+.big-price{font-size:2.1rem;font-weight:800;margin:10px 0}
+.promo-desc{color:#e2e8f0;margin-bottom:15px}
+.promo-badge{display:inline-block;background:var(--red);color:white;padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:700}
+.action-link{display:inline-block;background:#16a34a;color:white;text-decoration:none;padding:10px 15px;border-radius:9px;font-weight:700}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.card,.calc-box{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:19px;box-shadow:0 3px 9px #0000000b}
+.card{position:relative;display:flex;flex-direction:column;min-height:205px}
+.tag{align-self:flex-start;padding:4px 10px;border-radius:20px;font-size:.75rem;font-weight:700;background:#fde68a;color:#0b2b4f}
+.tag.oferta{background:#f97316;color:white}.tag.vip,.tag.premium{background:#0f172a;color:#fcd34d}.tag.internet{background:#2563eb;color:white}
+.card h3{color:var(--primary);font-size:1.25rem;margin:12px 0 4px}
+.details{color:var(--muted);font-size:.92rem;flex:1}
+.price{color:var(--red);font-size:2rem;font-weight:800;margin:9px 0}
+.request-btn{display:block;text-align:center;text-decoration:none;background:#0b2b4f;color:white;padding:10px;border-radius:9px;font-weight:700}
+.input-group{margin:12px 0}
+.input-group label{display:block;font-size:.9rem;font-weight:600;margin-bottom:5px;color:var(--primary)}
+.input-group input,.input-group select,.admin-input{width:100%;padding:11px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text)}
+.result{background:var(--bg);border:1px solid var(--border);padding:13px;border-radius:9px;text-align:center;font-weight:800;color:var(--primary);margin-top:12px}
+.links-grid{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.link-btn{display:flex;justify-content:center;align-items:center;gap:9px;background:var(--card);border:1px solid var(--border);padding:14px;border-radius:11px;text-decoration:none;color:var(--primary);font-weight:700}
+.admin-launch{text-align:center;margin:30px 0 5px}
+.admin-launch button{background:transparent;border:0;color:var(--muted);padding:8px}
+.admin-panel{display:none;background:#fef3c7;color:#334155;border:2px dashed var(--accent);border-radius:16px;padding:18px;margin:25px 0}
+body.dark-mode .admin-panel{background:#334155;color:#f8fafc}
+.admin-panel h3{margin-bottom:14px;color:var(--primary)}
+.admin-section{background:white;color:#334155;padding:15px;border-radius:12px;margin:14px 0}
+.admin-section h4{margin-bottom:12px;color:#0b2b4f}
+.admin-section label{display:block;font-size:.85rem;font-weight:600;margin:8px 0 4px}
+.admin-input{margin-bottom:8px;color:#334155;background:white}
+.btn-save{width:100%;background:#0b2b4f;color:white;border:0;padding:12px;border-radius:9px;font-weight:700;margin-top:8px}
+.btn-secondary{background:#64748b}
+.admin-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.galeria-fotos{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+.galeria-fotos img{width:78px;height:78px;object-fit:cover;border-radius:8px;border:2px solid var(--accent)}
+.status{font-size:.88rem;margin-top:8px}
+footer{background:#0b2b4f;color:#cbd5e1;text-align:center;padding:28px 15px;margin-top:45px}
+@media(max-width:600px){.nav-menu{gap:4px}.nav-menu a{font-size:.8rem;padding:7px 9px}.tools-bar{align-items:flex-start}.promo-section{padding:13px}.pasajes-header h2{font-size:2rem}}
+</style>
+</head>
+<body>
+<a class="float-wa" href="https://wa.me/79046319565" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+<div class="top-banner"><div class="marquee" id="top-marquee">YOUR BRIDGE HOME · Promociones y servicios</div></div>
+<header>
+<button class="dark-toggle" id="darkToggle" aria-label="Cambiar tema"><i class="fa-solid fa-moon"></i></button>
+<img src="logo.png" alt="Logo Your Bridge Home" class="logo-img" onerror="this.style.display='none'">
+<div class="logo-text">Your Bridge Home <span>Daynel2026</span></div>
+<div class="slogan">“Tu puente, más cerca de casa”</div>
+<div class="admin-badge"><i class="fa-solid fa-user-shield"></i> Daynel Caminero · <i class="fa-solid fa-phone"></i> +7 904 631-95-65</div>
+<nav class="nav-menu">
+<a href="#pasajes"><i class="fa-solid fa-plane"></i> Pasajes</a><a href="#promociones"><i class="fa-solid fa-bullhorn"></i> Promociones</a><a href="#recargas"><i class="fa-solid fa-mobile-screen"></i> Recargas</a><a href="#calculadoras"><i class="fa-solid fa-calculator"></i> Calculadoras</a><a href="#enlaces"><i class="fa-solid fa-link"></i> Explora</a><a href="#contacto"><i class="fa-solid fa-address-book"></i> Contacto</a>
+</nav>
+</header>
+<main class="container">
+<div class="notes-box" id="notas-container"><h3><i class="fa-solid fa-circle-info"></i> Aviso importante</h3><p id="notas-texto"></p></div>
+<div class="tools-bar">
+<div class="lang-switch"><button class="lang-btn active" data-lang="es">🇪🇸 ES</button><button class="lang-btn" data-lang="en">🇬🇧 EN</button><button class="lang-btn" data-lang="ru">🇷🇺 RU</button></div>
+<div class="info-widget"><span id="clockDisplay"><i class="fa-regular fa-clock"></i> --:--:--</span><span id="weatherDisplay"><i class="fa-solid fa-cloud-sun"></i> La Habana: --°C</span></div>
+</div>
+<div class="slider-container"><img id="sliderImg" src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80" alt="Destinos y ofertas"><div class="slider-caption" id="sliderCaption">¡Bienvenido a Your Bridge Home!</div></div>
+
+<section id="adminPanel" class="admin-panel">
+<h3><i class="fa-solid fa-gears"></i> Panel de administración</h3>
+<div id="loginBox" class="admin-section">
+<h4>Acceso del administrador</h4>
+<p>Inicia sesión con el usuario administrador creado en Supabase.</p>
+<label for="adminEmail">Correo</label><input id="adminEmail" class="admin-input" type="email" autocomplete="username" placeholder="Tu correo de administrador">
+<label for="adminPassword">Contraseña</label><input id="adminPassword" class="admin-input" type="password" autocomplete="current-password" placeholder="Contraseña">
+<button class="btn-save" id="loginBtn">Iniciar sesión</button><p id="loginStatus" class="status" role="status"></p>
+</div>
+<div id="adminTools" hidden>
+<div class="admin-section"><h4>1. Promociones y banner</h4>
+<div class="admin-grid">
+<div><label>Título promoción 1</label><input id="adminPromo1Title" class="admin-input"><label>Descripción</label><textarea id="adminPromo1Desc" class="admin-input" rows="2"></textarea><label>Precio</label><input id="adminPromo1Price" class="admin-input"><label>Moneda</label><input id="adminPromo1Currency" class="admin-input"></div>
+<div><label>Título promoción 2</label><input id="adminPromo2Title" class="admin-input"><label>Descripción</label><textarea id="adminPromo2Desc" class="admin-input" rows="2"></textarea><label>Precio</label><input id="adminPromo2Price" class="admin-input"><label>Moneda</label><input id="adminPromo2Currency" class="admin-input"></div>
+</div><button class="btn-save" id="savePromosBtn">Guardar promociones</button>
+</div>
+<div class="admin-section"><h4>2. Aviso importante</h4><textarea id="adminNota" class="admin-input" rows="3" placeholder="Escribe aquí el aviso para tus clientes"></textarea><button class="btn-save" id="saveNoteBtn">Guardar aviso</button></div>
+<div class="admin-section"><h4>3. Precios de recargas</h4><div id="adminPrices" class="admin-grid"></div><button class="btn-save" id="savePricesBtn">Guardar todos los precios</button></div>
+<div class="admin-section"><h4>4. Subir fotos</h4><input type="file" id="fotoInput" class="admin-input" accept="image/jpeg,image/png,image/webp"><small>Imágenes JPG, PNG o WEBP. Se guardan en el bucket público “fotos”.</small><div id="galeriaFotos" class="galeria-fotos"></div><p id="photoStatus" class="status"></p></div>
+<button class="btn-save btn-secondary" id="logoutBtn">Cerrar sesión de administrador</button>
+</div>
+</section>
+
+<section id="pasajes" class="pasajes-section">
+<div class="pasajes-header"><h2>Pasajes</h2><h3>Bus · Tren · Avión</h3><p>Viaja tranquilo, nosotros te ayudamos</p></div>
+<div class="transporte-grid">
+<a class="transporte-card" href="https://wa.me/79046319565?text=Hola%2C%20quiero%20cotizar%20un%20pasaje%20de%20avion" target="_blank" rel="noopener"><i class="fa-solid fa-plane-departure"></i><h4>Avión</h4></a>
+<a class="transporte-card" href="https://wa.me/79046319565?text=Hola%2C%20quiero%20cotizar%20un%20pasaje%20de%20tren" target="_blank" rel="noopener"><i class="fa-solid fa-train"></i><h4>Tren</h4></a>
+<a class="transporte-card" href="https://wa.me/79046319565?text=Hola%2C%20quiero%20cotizar%20un%20pasaje%20de%20bus" target="_blank" rel="noopener"><i class="fa-solid fa-bus"></i><h4>Bus</h4></a>
+</div>
+<ul class="beneficios-list"><li><i class="fa-solid fa-circle-check"></i> Nacionales e internacionales</li><li><i class="fa-solid fa-circle-check"></i> Rutas confiables</li><li><i class="fa-solid fa-circle-check"></i> Atención personalizada</li></ul>
+</section>
+
+<section id="promociones"><h2 class="section-title"><i class="fa-solid fa-bullhorn"></i> Promociones especiales</h2><div class="promo-section"><div class="promo-grid" id="promo-container"></div></div></section>
+<section id="recargas"><h2 class="section-title"><i class="fa-solid fa-mobile-screen"></i> Catálogo de recargas</h2>
+<div class="filters"><button class="filter-btn active" data-filter="todas">Todas</button><button class="filter-btn" data-filter="voz">Voz y saldo</button><button class="filter-btn" data-filter="internet">Internet</button><button class="filter-btn" data-filter="combo">Combos</button></div>
+<div class="grid" id="recargas-container"></div></section>
+<section id="calculadoras"><h2 class="section-title"><i class="fa-solid fa-calculator"></i> Calculadoras de cambio</h2><div class="calc-grid">
+<div class="calc-box"><h3><i class="fa-solid fa-paper-plane"></i> Remesas</h3><div class="input-group"><label for="remesaMonto">Monto a enviar (RUB)</label><input type="number" id="remesaMonto" value="0" min="0" step="1"></div><div class="input-group"><label for="remesaTasa">Tasa (CUP por RUB)</label><input type="number" id="remesaTasa" value="0" min="0" step="0.01"></div><div class="result" id="remesaResultado">0,00 CUP</div></div>
+<div class="calc-box"><h3><i class="fa-solid fa-ticket"></i> Pasajes</h3><div class="input-group"><label for="pasajeMonto">Precio del pasaje</label><input type="number" id="pasajeMonto" value="0" min="0" step="1"></div><div class="input-group"><label for="pasajeTasa">Tasa de cambio (CUP)</label><input type="number" id="pasajeTasa" value="0" min="0" step="0.01"></div><div class="result" id="pasajeResultado">0,00 CUP</div></div>
+</div></section>
+<section id="enlaces"><h2 class="section-title"><i class="fa-solid fa-compass"></i> Enlaces y servicios</h2><div class="links-grid">
+<a class="link-btn" href="https://www.visaindex.com" target="_blank" rel="noopener"><i class="fa-solid fa-passport"></i> Visa Index</a>
+<a class="link-btn" href="https://www.bc.gob.cu" target="_blank" rel="noopener"><i class="fa-solid fa-building-columns"></i> Banco Central de Cuba</a>
+<a class="link-btn" href="https://wa.me/79046319565?text=Hola%2C%20quiero%20informacion%20sobre%20la%20tienda" target="_blank" rel="noopener"><i class="fa-solid fa-store"></i> Tienda en línea</a>
+<a class="link-btn" href="https://wa.me/79046319565?text=Hola%2C%20quiero%20anadir%20mi%20negocio" target="_blank" rel="noopener"><i class="fa-solid fa-briefcase"></i> Añadir mi negocio</a>
+</div></section>
+<div class="admin-launch"><button id="adminOpenBtn"><i class="fa-solid fa-lock"></i> Administración</button></div>
+</main>
+<footer id="contacto"><p><strong>Your Bridge Home · Daynel Caminero</strong></p><p>“Tu puente, más cerca de casa”</p><p>Teléfono / WhatsApp: +7 904 631-95-65</p></footer>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+/* Configuración pública de Supabase. La clave publishable/anon puede estar en el navegador.
+   NUNCA coloques aquí una service_role key. */
+const SUPABASE_URL = 'https://wvhptkcmlyifnieqbgnq.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7';
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+const WHATSAPP = '79046319565';
+const $ = id => document.getElementById(id);
+const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+const defaults = [
+{id:1,tipo:'voz',tag:'mas-vendido',tagTexto:'⭐ Más vendido',titulo:'VOZ',precio:'200₽',detalles:'80 MIN'},
+{id:2,tipo:'voz',tag:'especial',tagTexto:'✨ Especial',titulo:'SALDO',precio:'250₽',detalles:'350 CUP de saldo · limitado'},
+{id:3,tipo:'voz',tag:'oferta',tagTexto:'🔥 Oferta',titulo:'VOZ +',precio:'270₽',detalles:'200 MIN'},
+{id:4,tipo:'combo',tag:'vip',tagTexto:'👑 VIP',titulo:'COMBITO',precio:'300₽',detalles:'120 saldo · 15 MIN + 20 SMS'},
+{id:5,tipo:'internet',tag:'internet',tagTexto:'🌐 Internet',titulo:'INTERNET +',precio:'350₽',detalles:'2GB LTE + 300MB.cu'},
+{id:6,tipo:'combo',tag:'oferta',tagTexto:'🔥 Oferta',titulo:'COMBO +',precio:'400₽',detalles:'2GB + 300MB · 15 MIN + 20 SMS'},
+{id:7,tipo:'combo',tag:'especial',tagTexto:'✨ Especial',titulo:'COMBITO +',precio:'550₽',detalles:'240 saldo · 15 MIN + 20 SMS'},
+{id:8,tipo:'internet',tag:'especial',tagTexto:'✨ Especial',titulo:'INTERNET 1',precio:'650₽',detalles:'3GB + 300MB.cu'},
+{id:9,tipo:'combo',tag:'mas-vendido',tagTexto:'⭐ Más vendido',titulo:'COMBO 1',precio:'750₽',detalles:'3GB + 300MB · 25 MIN + 20 SMS'},
+{id:10,tipo:'combo',tag:'premium',tagTexto:'👑 Premium',titulo:'COMBITO MEJOR',precio:'750₽',detalles:'360 saldo · 15 MIN + 20 SMS'},
+{id:11,tipo:'internet',tag:'premium',tagTexto:'👑 Premium',titulo:'INTERNET 2 😎',precio:'1250₽',detalles:'7GB + 300MB'},
+{id:12,tipo:'combo',tag:'especial',tagTexto:'✨ Especial',titulo:'COMBO 2 🤩',precio:'1300₽',detalles:'7GB + 300MB · 40 MIN + 20 SMS'},
+{id:13,tipo:'internet',tag:'mas-vendido',tagTexto:'⭐ Más vendido',titulo:'INTERNET 3 🥳',precio:'2500₽',detalles:'15GB + 300MB'},
+{id:14,tipo:'combo',tag:'especial',tagTexto:'✨ Especial',titulo:'COMBO 3 🎉',precio:'2700₽',detalles:'15GB + 300MB · 80 MIN + 20 SMS'}
+];
+let recargas = structuredClone(defaults);
+let promos = [
+{id:1,badge:'Oferta',title:'Pasajes internacionales',desc:'Consulta disponibilidad y rutas por WhatsApp.',price:'99800',currency:'Rublos'},
+{id:2,badge:'Información',title:'Remesas a Cuba',desc:'Consulta la tasa vigente antes de enviar.',price:'1000',currency:'Rublos'}
+];
+let notaGuardada = '';
+let currentFilter = 'todas';
+let fotosGuardadas = [];
+
+function waLink(message){return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(message)}`;}
+function renderPromos(){
+ $('promo-container').innerHTML = promos.map(p=>`<article class="promo-card"><span class="promo-badge">${escapeHTML(p.badge || 'Oferta')}</span><h3>${escapeHTML(p.title)}</h3><div class="big-price">${escapeHTML(p.price)} <small>${escapeHTML(p.currency)}</small></div><p class="promo-desc">${escapeHTML(p.desc)}</p><a class="action-link" href="${waLink('Hola, quiero información sobre: '+p.title)}" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Más información</a></article>`).join('');
+ const text = promos.map(p=>`${p.title} (${p.price} ${p.currency})`).join('  •  ');
+ $('top-marquee').textContent = text ? `📢 ${text}  •  ¡Escríbenos por WhatsApp!` : 'YOUR BRIDGE HOME · Contáctanos';
+}
+function renderRecargas(){
+ const list = currentFilter==='todas'?recargas:recargas.filter(x=>x.tipo===currentFilter);
+ $('recargas-container').innerHTML = list.map(r=>`<article class="card"><span class="tag ${escapeHTML(r.tag)}">${escapeHTML(r.tagTexto)}</span><h3>${escapeHTML(r.titulo)}</h3><p class="details">${escapeHTML(r.detalles)}</p><div class="price">${escapeHTML(r.precio)}</div><a class="request-btn" href="${waLink(`Hola, quiero la recarga ${r.titulo} por ${r.precio}`)}" target="_blank" rel="noopener">Solicitar por WhatsApp</a></article>`).join('');
+}
+function renderNote(){ $('notas-container').style.display=notaGuardada.trim()?'block':'none'; $('notas-texto').textContent=notaGuardada; }
+function renderAll(){renderPromos();renderRecargas();renderNote();}
+function showStatus(id,message,isError=false){$(id).textContent=message;$(id).style.color=isError?'#b91c1c':'#166534';}
+async function loadData(){
+ try{
+  const [configRes,recargasRes,galeriaRes]=await Promise.all([
+   supabase.from('configuracion').select('*').eq('id',1).maybeSingle(),
+   supabase.from('recargas').select('*').order('id'),
+   supabase.from('galeria').select('url_imagen').order('id',{ascending:false})
+  ]);
+  if(configRes.error) throw configRes.error;
+  if(recargasRes.error) throw recargasRes.error;
+  if(galeriaRes.error) throw galeriaRes.error;
+  const c=configRes.data;
+  if(c){
+   promos=[
+    {id:1,badge:'Oferta',title:c.promo1_title||'Pasajes internacionales',desc:c.promo1_desc||'',price:c.promo1_price||'99800',currency:c.promo1_currency||'Rublos'},
+    {id:2,badge:'Información',title:c.promo2_title||'Remesas a Cuba',desc:c.promo2_desc||'',price:c.promo2_price||'1000',currency:c.promo2_currency||'Rublos'}
+   ];
+   notaGuardada=c.nota||'';
+  }
+  const dbRows=recargasRes.data||[];
+  recargas=defaults.map(base=>{const row=dbRows.find(x=>Number(x.id)===base.id);return row?{...base,precio:row.precio??base.precio}:base;});
+  fotosGuardadas=(galeriaRes.data||[]).map(x=>x.url_imagen).filter(Boolean);
+  renderAll();
+  renderPhotoGallery();
+  if($('adminTools').hidden===false) fillAdminFields();
+ }catch(error){
+  console.error('Error cargando Supabase:',error);
+  renderAll();
+  showStatus('loginStatus','No se pudieron cargar algunos datos: '+(error.message||error),true);
+ }
+}
+function fillAdminFields(){
+ promos.forEach((p,i)=>{
+  const n=i+1;
+  $('adminPromo'+n+'Title').value=p.title||'';
+  $('adminPromo'+n+'Desc').value=p.desc||'';
+  $('adminPromo'+n+'Price').value=p.price||'';
+  $('adminPromo'+n+'Currency').value=p.currency||'';
+ });
+ $('adminNota').value=notaGuardada;
+ $('adminPrices').innerHTML=recargas.map(r=>`<div><label for="price-${r.id}">${escapeHTML(r.titulo)}</label><input class="admin-input price-edit" id="price-${r.id}" data-id="${r.id}" value="${escapeHTML(r.precio)}"></div>`).join('');
+}
+function renderPhotoGallery(){
+ $('galeriaFotos').innerHTML=fotosGuardadas.map(url=>`<img src="${escapeHTML(url)}" alt="Foto de oferta" loading="lazy">`).join('');
+}
+async function isAdminSession(){
+ const {data:{user}}=await supabase.auth.getUser();
+ return Boolean(user && user.email?.toLowerCase()==='daynelcc@gmail.com');
+}
+async function updateAdminView(){
+ const admin=await isAdminSession();
+ $('loginBox').hidden=admin;
+ $('adminTools').hidden=!admin;
+ if(admin) fillAdminFields();
+}
+async function savePromos(){
+ const values={id:1};
+ for(let i=1;i<=2;i++){
+  values[`promo${i}_title`] = $(`adminPromo${i}Title`).value.trim();
+  values[`promo${i}_desc`] = $(`adminPromo${i}Desc`).value.trim();
+  values[`promo${i}_price`] = $(`adminPromo${i}Price`).value.trim();
+  values[`promo${i}_currency`] = $(`adminPromo${i}Currency`).value.trim();
+ }
+ const {error}=await supabase.from('configuracion').upsert(values,{onConflict:'id'});
+ if(error){alert('No se pudieron guardar las promociones: '+error.message);return;}
+ await loadData();alert('Promociones guardadas y banner actualizado.');
+}
+async function saveNote(){
+ const note=$('adminNota').value.trim();
+ const {error}=await supabase.from('configuracion').upsert({id:1,nota:note},{onConflict:'id'});
+ if(error){alert('No se pudo guardar el aviso: '+error.message);return;}
+ notaGuardada=note;renderNote();alert('Aviso actualizado.');
+}
+async function savePrices(){
+ const inputs=[...document.querySelectorAll('.price-edit')];
+ for(const input of inputs){
+  const id=Number(input.dataset.id),precio=input.value.trim();
+  if(!precio){alert('El precio del producto '+id+' está vacío.');return;}
+  const {error}=await supabase.from('recargas').upsert({id,precio},{onConflict:'id'});
+  if(error){alert('Error guardando el precio '+id+': '+error.message);return;}
+ }
+ await loadData();alert('Todos los precios fueron actualizados.');
+}
+async function uploadPhoto(file){
+ if(!file)return;
+ if(!file.type.startsWith('image/')){showStatus('photoStatus','Selecciona un archivo de imagen.',true);return;}
+ if(file.size>5*1024*1024){showStatus('photoStatus','La imagen supera 5 MB. Reduce su tamaño.',true);return;}
+ showStatus('photoStatus','Subiendo imagen…');
+ const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'');
+ const fileName=`oferta_${Date.now()}_${crypto.randomUUID()}.${ext}`;
+ const {error:uploadError}=await supabase.storage.from('fotos').upload(fileName,file,{contentType:file.type,upsert:false});
+ if(uploadError){showStatus('photoStatus','Error al subir: '+uploadError.message,true);return;}
+ const {data}=supabase.storage.from('fotos').getPublicUrl(fileName);
+ const {error:dbError}=await supabase.from('galeria').insert({url_imagen:data.publicUrl});
+ if(dbError){showStatus('photoStatus','La foto se subió, pero no se pudo registrar: '+dbError.message,true);return;}
+ fotosGuardadas.unshift(data.publicUrl);renderPhotoGallery();showStatus('photoStatus','Foto publicada correctamente.');
+ $('fotoInput').value='';
+}
+function calc(amountId,rateId,resultId){
+ const amount=Number($(amountId).value)||0,rate=Number($(rateId).value)||0;
+ $(resultId).textContent=(amount*rate).toLocaleString('es-ES',{minimumFractionDigits:2,maximumFractionDigits:2})+' CUP';
+}
+function setLanguage(lang){
+ document.documentElement.lang=lang;
+ document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+ // El selector conserva la selección. La traducción completa de todos los textos
+ // requiere preparar los textos equivalentes en cada idioma.
+ localStorage.setItem('ybh-lang',lang);
+}
+function startClock(){
+ const update=()=>{$('clockDisplay').innerHTML='<i class="fa-regular fa-clock"></i> '+new Date().toLocaleTimeString();};
+ update();setInterval(update,1000);
+}
+async function loadWeather(){
+ try{
+  const response=await fetch('https://api.open-meteo.com/v1/forecast?latitude=23.1136&longitude=-82.3662&current=temperature_2m');
+  if(!response.ok)throw new Error('Clima no disponible');
+  const data=await response.json();
+  $('weatherDisplay').innerHTML='<i class="fa-solid fa-temperature-half"></i> La Habana: '+data.current.temperature+'°C';
+ }catch{$('weatherDisplay').innerHTML='<i class="fa-solid fa-cloud-sun"></i> La Habana: N/D';}
+}
+function setupSlider(){
+ const slides=[
+ ['https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80','Descubre nuevos destinos'],
+ ['https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80','Viaja con Your Bridge Home'],
+ ['https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1200&q=80','Tu puente, más cerca de casa']
+ ];
+ let index=0;
+ setInterval(()=>{index=(index+1)%slides.length;$('sliderImg').src=slides[index][0];$('sliderCaption').textContent=slides[index][1];},20000);
+}
+$('darkToggle').addEventListener('click',()=>{document.body.classList.toggle('dark-mode');localStorage.setItem('ybh-dark',document.body.classList.contains('dark-mode')?'1':'0');});
+if(localStorage.getItem('ybh-dark')==='1')document.body.classList.add('dark-mode');
+$('adminOpenBtn').addEventListener('click',()=>{$('adminPanel').style.display=$('adminPanel').style.display==='block'?'none':'block';});
+document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click',()=>{currentFilter=btn.dataset.filter;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b===btn));renderRecargas();}));
+document.querySelectorAll('.lang-btn').forEach(btn=>btn.addEventListener('click',()=>setLanguage(btn.dataset.lang)));
+$('remesaMonto').addEventListener('input',()=>calc('remesaMonto','remesaTasa','remesaResultado'));
+$('remesaTasa').addEventListener('input',()=>calc('remesaMonto','remesaTasa','remesaResultado'));
+$('pasajeMonto').addEventListener('input',()=>calc('pasajeMonto','pasajeTasa','pasajeResultado'));
+$('pasajeTasa').addEventListener('input',()=>calc('pasajeMonto','pasajeTasa','pasajeResultado'));
+$('loginBtn').addEventListener('click',async()=>{
+ const email=$('adminEmail').value.trim(),password=$('adminPassword').value;
+ if(!email||!password){showStatus('loginStatus','Escribe tu correo y contraseña.',true);return;}
+ const {error}=await supabase.auth.signInWithPassword({email,password});
+ if(error){showStatus('loginStatus','No se pudo iniciar sesión: '+error.message,true);return;}
+ if(!(await isAdminSession())){await supabase.auth.signOut();showStatus('loginStatus','Esta cuenta no está autorizada como administradora.',true);return;}
+ showStatus('loginStatus','Sesión iniciada.');await updateAdminView();await loadData();
+});
+$('logoutBtn').addEventListener('click',async()=>{await supabase.auth.signOut();await updateAdminView();});
+$('savePromosBtn').addEventListener('click',savePromos);
+$('saveNoteBtn').addEventListener('click',saveNote);
+$('savePricesBtn').addEventListener('click',savePrices);
+$('fotoInput').addEventListener('change',e=>uploadPhoto(e.target.files?.[0]));
+supabase.auth.onAuthStateChange(()=>{setTimeout(updateAdminView,0);});
+startClock();loadWeather();setupSlider();setLanguage(localStorage.getItem('ybh-lang')||'es');
+renderAll();loadData();updateAdminView();
+// Consulta periódica para que los clientes reciban cambios aunque no tengan Realtime activado.
+setInterval(loadData,30000);
+</script>
+</body>
+</html>
