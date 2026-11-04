@@ -11,7 +11,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     body { background: var(--bg); color: #334155; line-height: 1.6; }
     
-    /* HEADER CON LOGO DE FONDO */
+    /* HEADER */
     header { background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1920&q=80') center/cover; color: white; padding: 40px 16px; text-align: center; border-bottom: 4px solid var(--accent); }
     .logo { font-size: 2.2rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
     .logo span { color: var(--accent); }
@@ -19,29 +19,29 @@
     .btn-wa { background: #25D366; color: white; text-decoration: none; padding: 12px 28px; border-radius: 50px; font-weight: 600; display: inline-block; transition: 0.3s; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
     .btn-wa:hover { transform: translateY(-3px); background: #128C7E; }
     
-    /* BANNER SUPERIOR (MARQUESINA) */
+    /* BANNER SUPERIOR DINÁMICO */
     .top-banner { background: var(--accent); color: var(--primary); padding: 10px 0; overflow: hidden; white-space: nowrap; font-weight: 600; font-size: 0.9rem; }
     .marquee { display: inline-block; animation: scroll 25s linear infinite; padding-left: 100%; }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-    /* CONTENEDOR PRINCIPAL */
+    /* CONTENEDOR */
     .container { max-width: 1200px; margin: 0 auto; padding: 20px 16px; }
     .section-title { font-size: 1.6rem; color: var(--primary); margin: 30px 0 20px; display: flex; align-items: center; gap: 10px; }
     .section-title i { color: var(--accent); }
 
-    /* SELECTOR DE IDIOMA Y RELOJ */
+    /* HERRAMIENTAS */
     .tools-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; background: var(--card); padding: 15px; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
     .lang-switch { display: flex; gap: 10px; }
     .lang-btn { background: #e2e8f0; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.2s; }
     .lang-btn.active { background: var(--primary); color: white; }
     .clock { font-weight: 600; color: var(--primary); font-size: 1.1rem; background: #f1f5f9; padding: 8px 16px; border-radius: 8px; }
 
-    /* SLIDER DE FOTOS */
+    /* SLIDER */
     .slider-container { position: relative; border-radius: 20px; overflow: hidden; height: 300px; margin-bottom: 30px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
     .slider-container img { width: 100%; height: 100%; object-fit: cover; transition: opacity 1s; }
     .slider-caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: white; padding: 30px 20px 20px; font-size: 1.2rem; font-weight: 600; }
 
-    /* GRID DE TARJETAS (SERVICIOS Y OFERTAS) */
+    /* GRID Y TARJETAS */
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
     .card { background: var(--card); border-radius: 16px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); transition: 0.3s; border: 1px solid #e2e8f0; }
     .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
@@ -58,7 +58,7 @@
     .input-group input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; }
     .result { background: #f1f5f9; padding: 15px; border-radius: 8px; font-weight: 700; font-size: 1.2rem; text-align: center; color: var(--primary); margin-top: 15px; }
 
-    /* VIDEO EXTERNO */
+    /* VIDEO CORREGIDO */
     .video-container { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 16px; overflow: hidden; margin: 30px 0; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
     .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
@@ -67,22 +67,21 @@
     .game-btn { background: var(--accent); color: var(--primary); border: none; padding: 12px 30px; border-radius: 50px; font-weight: 700; font-size: 1.1rem; cursor: pointer; margin-top: 20px; transition: 0.2s; }
     .game-btn:hover { transform: scale(1.05); }
 
-    /* ACCESOS DIRECTOS */
+    /* LINKS */
     .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin: 20px 0; }
     .link-btn { display: flex; align-items: center; justify-content: center; gap: 10px; background: white; border: 2px solid #e2e8f0; padding: 15px; border-radius: 12px; text-decoration: none; color: var(--primary); font-weight: 600; transition: 0.2s; }
     .link-btn:hover { border-color: var(--accent); background: #fffbeb; }
 
-    /* FOOTER */
     footer { background: var(--primary); color: #94a3b8; text-align: center; padding: 30px 16px; margin-top: 50px; }
     footer p { margin-bottom: 8px; }
   </style>
 </head>
 <body>
 
-  <!-- BANNER SUPERIOR -->
+  <!-- BANNER SUPERIOR DINÁMICO (Se llena desde Supabase) -->
   <div class="top-banner">
-    <div class="marquee">
-      <i class="fas fa-bolt"></i> ¡OFERTAS MÁS ECONÓMICAS! Vuelo La Habana-Madrid $389 | Remesa a Cuba 1.5% comisión | Bus Habana-Varadero $12 | ¡Aprovecha! <i class="fas fa-bolt"></i>
+    <div class="marquee" id="top-marquee">
+      <i class="fas fa-bolt"></i> Cargando las mejores ofertas... <i class="fas fa-bolt"></i>
     </div>
   </div>
 
@@ -97,7 +96,7 @@
 
   <div class="container">
 
-    <!-- HERRAMIENTAS (IDIOMAS Y RELOJ) -->
+    <!-- HERRAMIENTAS -->
     <div class="tools-row">
       <div class="lang-switch">
         <button class="lang-btn active" onclick="setLang('es')">🇪🇸 Español</button>
@@ -107,22 +106,21 @@
       <div class="clock" id="clockDisplay">🕒 --:--:--</div>
     </div>
 
-    <!-- SLIDER DE FOTOS -->
+    <!-- SLIDER -->
     <div class="slider-container">
       <img id="sliderImg" src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80" alt="Ofertas">
       <div class="slider-caption" id="sliderCaption">Cargando ofertas...</div>
     </div>
 
-    <!-- OFERTAS DINÁMICAS (DESDE SUPABASE) -->
+    <!-- OFERTAS DINÁMICAS -->
     <h2 class="section-title"><i class="fas fa-fire"></i> Ofertas Más Económicas</h2>
     <div class="grid" id="ofertas-container">
-      <p style="text-align: center; width: 100%;">Cargando ofertas desde la base de datos...</p>
+      <p style="text-align: center; width: 100%;">Cargando ofertas...</p>
     </div>
 
     <!-- CALCULADORAS -->
     <h2 class="section-title"><i class="fas fa-calculator"></i> Calculadoras</h2>
     <div class="calc-grid">
-      <!-- Calculadora Remesa -->
       <div class="calc-box">
         <h3><i class="fas fa-paper-plane" style="color:var(--accent)"></i> Remesa</h3>
         <div class="input-group">
@@ -136,7 +134,6 @@
         <div class="result" id="remesaResultado">0.00 CUP</div>
       </div>
 
-      <!-- Calculadora Pasaje -->
       <div class="calc-box">
         <h3><i class="fas fa-ticket-alt" style="color:var(--accent)"></i> Pasajes</h3>
         <div class="input-group">
@@ -151,10 +148,9 @@
       </div>
     </div>
 
-    <!-- DESTINOS Y HOTELES (FOTOS) -->
+    <!-- DESTINOS -->
     <h2 class="section-title"><i class="fas fa-hotel"></i> Destinos, Hoteles y Restaurantes</h2>
-    <div class="grid" id="destinos-container">
-       <!-- Ejemplo estático, se puede conectar a Supabase después -->
+    <div class="grid">
        <div class="card">
          <img src="https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?auto=format&fit=crop&w=400&q=80" style="width:100%; height:150px; object-fit:cover; border-radius:12px; margin-bottom:15px;">
          <h3>Varadero, Cuba</h3>
@@ -169,13 +165,14 @@
        </div>
     </div>
 
-    <!-- VIDEO EXTERNO -->
+    <!-- VIDEO PROMOCIONAL CORREGIDO -->
     <h2 class="section-title"><i class="fas fa-video"></i> Video Promocional</h2>
     <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video" frameborder="0" allowfullscreen></iframe>
+      <!-- Enlace a un video real de viajes (puedes cambiarlo por el tuyo de YouTube) -->
+      <iframe src="https://www.youtube.com/embed/9Dk1gF6q1hM?rel=0" title="Video Promocional" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
 
-    <!-- JUEGO GRATUITO -->
+    <!-- JUEGO -->
     <div class="game-box">
       <h2><i class="fas fa-gamepad"></i> Juego Gratuito</h2>
       <p style="margin: 15px 0;">Adivina el número secreto (1 al 10) y gana puntos.</p>
@@ -197,54 +194,40 @@
   <footer>
     <p><strong>Your-bridge-home-Daynel2026</strong></p>
     <p>Administrador: Daynel Caminero | Teléfono: +7 904 631-95-65</p>
-    <p style="font-size: 0.8rem; margin-top: 10px;">Servicios internacionales, recargas, remesas y pasajes.</p>
   </footer>
 
   <!-- LÓGICA Y CONEXIÓN A SUPABASE -->
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 
-    // Configuración de Supabase
     const SUPABASE_URL = 'https://wvhptkcmlyifnieqbgnq.supabase.co';
     const SUPABASE_KEY = 'sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7';
     const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    // 1. RELOJ EN TIEMPO REAL
-    function updateClock() {
-      const now = new Date();
-      document.getElementById('clockDisplay').innerHTML = `🕒 ${now.toLocaleTimeString()}`;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
+    // RELOJ
+    setInterval(() => {
+      document.getElementById('clockDisplay').innerHTML = `🕒 ${new Date().toLocaleTimeString()}`;
+    }, 1000);
 
-    // 2. CAMBIO DE IDIOMA (Simulado)
-    function setLang(lang) {
-      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      alert(`Idioma cambiado a: ${lang.toUpperCase()}. (En producción se traduciría todo el texto)`);
-    }
-    window.setLang = setLang;
-
-    // 3. CALCULADORAS
+    // CALCULADORAS
     window.calcularRemesa = function() {
-      const monto = parseFloat(document.getElementById('remesaMonto').value) || 0;
-      const tasa = parseFloat(document.getElementById('remesaTasa').value) || 0;
-      document.getElementById('remesaResultado').innerText = `${(monto * tasa).toFixed(2)} CUP`;
+      const m = parseFloat(document.getElementById('remesaMonto').value) || 0;
+      const t = parseFloat(document.getElementById('remesaTasa').value) || 0;
+      document.getElementById('remesaResultado').innerText = `${(m * t).toFixed(2)} CUP`;
     }
 
     window.calcularPasaje = function() {
-      const monto = parseFloat(document.getElementById('pasajeMonto').value) || 0;
-      const tasa = parseFloat(document.getElementById('pasajeTasa').value) || 0;
-      document.getElementById('pasajeResultado').innerText = `${(monto * tasa).toFixed(2)} CUP`;
+      const m = parseFloat(document.getElementById('pasajeMonto').value) || 0;
+      const t = parseFloat(document.getElementById('pasajeTasa').value) || 0;
+      document.getElementById('pasajeResultado').innerText = `${(m * t).toFixed(2)} CUP`;
     }
 
-    // 4. JUEGO
+    // JUEGO
     window.jugar = function() {
-      const num = Math.floor(Math.random() * 10) + 1;
-      document.getElementById('juegoResultado').innerText = `¡El número ganador es ${num}! ¿Acertaste?`;
+      document.getElementById('juegoResultado').innerText = `¡El número ganador es ${Math.floor(Math.random() * 10) + 1}!`;
     }
 
-    // 5. SLIDER DE FOTOS CADA 20 SEGUNDOS
+    // SLIDER
     const sliderImages = [
       { url: 'https://images.unsplash.com/photo-1506929562872-bb421503ef21?auto=format&fit=crop&w=1200&q=80', caption: 'Varadero - Oferta Hotel $45/noche' },
       { url: 'https://images.unsplash.com/photo-1552074284-5e88ef1aef18?auto=format&fit=crop&w=1200&q=80', caption: 'La Habana - Vuelo + Hotel $499' },
@@ -252,32 +235,33 @@
     ];
     let currentImgIndex = 0;
 
-    function nextImage() {
+    setInterval(() => {
       currentImgIndex = (currentImgIndex + 1) % sliderImages.length;
       const imgEl = document.getElementById('sliderImg');
       const capEl = document.getElementById('sliderCaption');
-      
       imgEl.style.opacity = 0;
       setTimeout(() => {
         imgEl.src = sliderImages[currentImgIndex].url;
         capEl.innerText = sliderImages[currentImgIndex].caption;
         imgEl.style.opacity = 1;
       }, 500);
-    }
-    setInterval(nextImage, 20000); // Cambia cada 20 segundos
+    }, 20000);
 
-    // 6. CARGAR OFERTAS DESDE SUPABASE
+    // CARGAR OFERTAS Y ACTUALIZAR BANNER
     async function cargarOfertas() {
       const container = document.getElementById('ofertas-container');
+      const marquee = document.getElementById('top-marquee');
+      
       try {
         const { data, error } = await supabase.from('ofertas').select('*');
         if (error) throw error;
 
         if (data.length === 0) {
-          container.innerHTML = '<p style="text-align: center; width: 100%;">No hay ofertas disponibles aún. Ve a Supabase y añade una.</p>';
+          container.innerHTML = '<p style="text-align: center; width: 100%;">No hay ofertas disponibles. Añade una en Supabase.</p>';
           return;
         }
 
+        // 1. Llenar las tarjetas
         container.innerHTML = data.map(oferta => `
           <div class="card">
             <span class="badge">${oferta.categoria || 'Oferta'}</span>
@@ -287,11 +271,18 @@
             <a href="https://wa.me/79046319565?text=Hola, quiero la oferta: ${oferta.titulo}" class="btn-wa" style="padding: 8px 16px; font-size: 0.9rem; margin-top: 10px; width: 100%; text-align: center;" target="_blank">Pedir por WhatsApp</a>
           </div>
         `).join('');
+
+        // 2. Llenar el banner superior (Marquesina) con las ofertas
+        const textoMarquesina = data.map(o => `<i class="fas fa-bolt"></i> ${o.titulo}: ${o.precio}`).join(' | ');
+        marquee.innerHTML = `¡OFERTAS DESTACADAS! | ${textoMarquesina} | ¡Aprovecha! <i class="fas fa-bolt"></i>`;
+
       } catch (err) {
         console.error(err);
         container.innerHTML = '<p style="color:red; text-align:center; width:100%;">Error al conectar con la base de datos.</p>';
       }
     }
+    
+    // Iniciar carga
     cargarOfertas();
   </script>
 </body>
