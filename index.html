@@ -7,30 +7,21 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #0b2b4f;
-      --accent: #d97706;
-      --bg: #f8fafc;
-      --text: #1e293b;
-      --card-bg: #ffffff;
-    }
+    :root { --primary: #0b2b4f; --accent: #d97706; --bg: #f8fafc; --text: #1e293b; --card-bg: #ffffff; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.5; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
     
-    /* Header */
     header { background: var(--primary); color: white; padding: 20px 0; text-align: center; border-bottom: 5px solid var(--accent); }
     .logo { font-size: 2rem; font-weight: 800; margin-bottom: 8px; }
     .admin-info { background: rgba(255,255,255,0.1); display: inline-block; padding: 8px 20px; border-radius: 30px; font-size: 0.9rem; margin-bottom: 12px; }
     .btn-wa { background: #25D366; color: white; text-decoration: none; padding: 10px 24px; border-radius: 30px; font-weight: 600; display: inline-block; margin-top: 10px; transition: 0.2s; }
     .btn-wa:hover { background: #128C7E; transform: scale(1.05); }
     
-    /* Hero Section */
     .hero { background: linear-gradient(rgba(11, 43, 79, 0.8), rgba(11, 43, 79, 0.8)), url('https://picsum.photos/id/1015/1200/400') center/cover; color: white; padding: 60px 20px; text-align: center; }
     .hero h1 { font-size: 2.2rem; margin-bottom: 10px; }
     .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 700px; margin: 0 auto; }
 
-    /* Grids y Tarjetas */
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 30px 0; }
     .card { background: var(--card-bg); border-radius: 16px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; transition: 0.2s; }
     .card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
@@ -40,29 +31,22 @@
     .btn-link { color: var(--accent); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
     .btn-link:hover { text-decoration: underline; }
 
-    /* Secciones específicas */
     .section-title { font-size: 1.8rem; color: var(--primary); margin: 40px 0 20px; border-left: 5px solid var(--accent); padding-left: 12px; }
-    
-    /* Ofertas */
-    .offer-card { border-top: 4px solid var(--accent); }
     .price { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin: 10px 0; }
     .badge { background: #fef3c7; color: #92400e; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-block; margin-bottom: 10px; }
     
-    /* Calculadora */
     .calc-box { background: white; border-radius: 20px; padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin-top: 20px; }
     .input-group { margin-bottom: 16px; }
     .input-group label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; }
     .input-group input { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 1rem; }
     .result { font-size: 1.4rem; font-weight: 700; color: var(--primary); background: #f1f5f9; padding: 16px; border-radius: 12px; text-align: center; margin-top: 16px; }
 
-    /* Footer */
     footer { text-align: center; padding: 40px 20px; background: #0f172a; color: #94a3b8; margin-top: 60px; }
     footer p { margin-bottom: 8px; }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <div class="container">
       <div class="logo">Your Bridge Home</div>
@@ -75,7 +59,6 @@
     </div>
   </header>
 
-  <!-- HERO -->
   <section class="hero">
     <h1>Conectamos familias y destinos.</h1>
     <p>Recargas telefónicas, remesas desde Europa y Estados Unidos, y pasajes hacia América Latina y Europa. Atención cercana y confirmación antes de cada operación.</p>
@@ -83,7 +66,6 @@
 
   <main class="container">
     
-    <!-- CATÁLOGO -->
     <h2 class="section-title">Nuestros Servicios</h2>
     <div class="grid">
       <div class="card">
@@ -104,15 +86,14 @@
         <p>Ofertas de Rusia a Cuba, Cuba a Rusia y Rusia a Guyana. Desde 99.800 ₽.</p>
         <a href="https://wa.me/79046319565?text=Hola,%20quiero%20consultar%20por%20pasajes" class="btn-link" target="_blank">Ver rutas y precios <i class="fas fa-arrow-right"></i></a>
       </div>
-      <div class="card">
-        <i class="fas fa-hotel"></i>
-        <h3>Hoteles y Alojamiento</h3>
-        <p>Solicita opciones económicas por ciudad y presupuesto. Confirmamos disponibilidad.</p>
-        <a href="https://wa.me/79046319565?text=Hola,%20busco%20alojamiento" class="btn-link" target="_blank">Buscar alojamiento <i class="fas fa-arrow-right"></i></a>
-      </div>
     </div>
 
-    <!-- CALCULADORA -->
+    <!-- SECCIÓN DE PRECIOS DINÁMICOS DESDE SUPABASE -->
+    <h2 class="section-title">Ofertas Actualizadas</h2>
+    <div class="grid" id="ofertas-container">
+      <p style="text-align: center; width: 100%;">Cargando ofertas desde la base de datos...</p>
+    </div>
+
     <h2 class="section-title">Calculadora de Remesas</h2>
     <div class="calc-box">
       <p style="margin-bottom: 20px; color: #64748b;">Simula cuánto podría recibir tu familiar. La tasa final debe confirmarse por WhatsApp antes del envío.</p>
@@ -125,39 +106,6 @@
         <input type="number" id="tasaCambio" value="0" min="0" step="0.1" oninput="calcular()">
       </div>
       <div class="result" id="resultadoCalc">Tu familiar recibiría: 0 CUP (estimado)</div>
-      <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 12px; text-align: center;">* Ejemplo demostrativo. La tasa real y comisiones se confirman al contactar.</p>
-    </div>
-
-    <!-- INFO EXTRA -->
-    <h2 class="section-title">Información Útil</h2>
-    <div class="grid">
-      <div class="card">
-        <i class="fas fa-passport"></i>
-        <h3>Visados y Requisitos</h3>
-        <p>Consulta información orientativa sobre requisitos de entrada. Confirma siempre con fuentes oficiales.</p>
-        <a href="https://www.visaindex.com" class="btn-link" target="_blank">Consultar VisaIndex <i class="fas fa-external-link-alt"></i></a>
-      </div>
-      <div class="card">
-        <i class="fas fa-university"></i>
-        <h3>Tasa Oficial (Banco Cuba)</h3>
-        <p>Enlaces a las tasas oficiales del Banco Central de Cuba y referencias del mercado.</p>
-        <a href="https://www.bc.gob.cu" class="btn-link" target="_blank">Ver Banco de Cuba <i class="fas fa-external-link-alt"></i></a>
-      </div>
-      <div class="card">
-        <i class="fas fa-clock"></i>
-        <h3>Horario de Atención</h3>
-        <p>Lunes a Sábado de 9:00 a 19:00 (Hora de Moscú). Fuera de horario, deja tu mensaje por WhatsApp.</p>
-      </div>
-    </div>
-
-    <!-- JUEGOS Y ENTRETENIMIENTO -->
-    <h2 class="section-title">Tu Espacio (Juegos Gratis)</h2>
-    <div class="card" style="text-align: center; padding: 40px;">
-      <i class="fas fa-gamepad" style="font-size: 3rem; color: var(--accent); margin-bottom: 16px;"></i>
-      <h3>Adivina el número</h3>
-      <p style="margin-bottom: 20px;">Piensa en un número del 1 al 10. ¡Haz clic para ver si la suerte te acompaña!</p>
-      <button onclick="jugar()" style="background: var(--primary); color: white; border: none; padding: 12px 30px; border-radius: 30px; font-size: 1rem; cursor: pointer; font-weight: 600;">Jugar ahora</button>
-      <p id="juegoResultado" style="margin-top: 20px; font-weight: 700; color: var(--accent); font-size: 1.2rem;"></p>
     </div>
 
   </main>
@@ -166,23 +114,58 @@
     <p><strong>YOUR BRIDGE HOME</strong> &copy; 2026</p>
     <p>Administrador: Daynel Caminero</p>
     <p>WhatsApp: +7 904 631-95-65</p>
-    <p style="margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">Servicios internacionales con atención cercana y transparente.</p>
   </footer>
 
-  <script>
+  <!-- CONEXIÓN A SUPABASE -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+    // TUS DATOS REALES DE SUPABASE YA CONFIGURADOS
+    const SUPABASE_URL = 'https://wvhptkcmlyifnieqbgnq.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // Cargar ofertas dinámicas
+    async function cargarOfertas() {
+      const container = document.getElementById('ofertas-container');
+      
+      try {
+        const { data: ofertas, error } = await supabase
+          .from('ofertas')
+          .select('*');
+
+        if (error) throw error;
+
+        if (ofertas.length === 0) {
+          container.innerHTML = '<p style="text-align: center; width: 100%;">No hay ofertas cargadas aún. Añade una en Supabase.</p>';
+          return;
+        }
+
+        container.innerHTML = ofertas.map(oferta => `
+          <div class="card" style="border-top: 4px solid var(--accent);">
+            <span class="badge">${oferta.categoria || 'Oferta'}</span>
+            <h3>${oferta.titulo}</h3>
+            <p>${oferta.descripcion}</p>
+            <div class="price">${oferta.precio}</div>
+            <a href="https://wa.me/79046319565?text=Hola,%20quiero%20consultar%20por%20la%20oferta:%20${oferta.titulo}" class="btn-link" target="_blank">Consultar <i class="fas fa-arrow-right"></i></a>
+          </div>
+        `).join('');
+
+      } catch (error) {
+        console.error('Error cargando ofertas:', error);
+        container.innerHTML = '<p style="text-align: center; width: 100%; color: red;">Error de conexión. Revisa que la tabla "ofertas" exista en Supabase.</p>';
+      }
+    }
+
+    cargarOfertas();
+
     // Calculadora
-    function calcular() {
+    window.calcular = function() {
       const monto = parseFloat(document.getElementById('montoEnvio').value) || 0;
       const tasa = parseFloat(document.getElementById('tasaCambio').value) || 0;
       const total = monto * tasa;
       document.getElementById('resultadoCalc').innerText = `Tu familiar recibiría: ${total.toFixed(2)} CUP (estimado)`;
-    }
-
-    // Juego
-    function jugar() {
-      const numRandom = Math.floor(Math.random() * 10) + 1;
-      const resultado = document.getElementById('juegoResultado');
-      resultado.innerText = `¡El número ganador era el ${numRandom}! ¿Acertaste?`;
     }
   </script>
 
