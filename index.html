@@ -67,13 +67,14 @@
     .section-head{margin-bottom:20px}
     .section-head h2{font-size:clamp(23px,4vw,32px);margin:0 0 8px}
 
-    /* TARJETAS */
-    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    /* TARJETAS DE SERVICIOS */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:16px}
     .card{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:21px;display:flex;flex-direction:column;min-height:220px}
-    .tag{color:var(--gold);background:#e8bd621c;padding:7px 9px;border-radius:20px;font-size:10px;font-weight:bold}
+    .card-img{width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:15px;border:1px solid var(--line)}
+    .tag{color:var(--gold);background:#e8bd621c;padding:7px 9px;border-radius:20px;font-size:10px;font-weight:bold;align-self:flex-start}
     .card h3{font-size:20px;margin:18px 0 8px}
     .card p{color:var(--muted);line-height:1.55}
-    .card-price{font-size:27px;color:var(--gold);font-weight:900;margin-top:auto}
+    .card-price{font-size:27px;color:var(--gold);font-weight:900;margin-top:auto;padding-top:15px}
     .card .btn{margin-top:16px;width:100%}
     .empty{color:var(--muted);padding:22px;border:1px dashed var(--line);border-radius:14px;grid-column:1/-1}
 
@@ -112,12 +113,11 @@
 
     /* RESPONSIVE */
     @media(max-width:800px){
-      .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .rate-grid{grid-template-columns:repeat(2,1fr)}
       .link-grid{grid-template-columns:repeat(2,1fr)}
     }
     @media(max-width:560px){
-      .grid,.two-col,.link-grid{grid-template-columns:1fr}
+      .two-col,.link-grid{grid-template-columns:1fr}
       .header-top{align-items:flex-start}
       nav a{padding:9px 11px}
       .clock{font-size:12px;padding:8px 10px}
@@ -292,6 +292,8 @@
                   <option>Recargas</option>
                   <option>Remesas</option>
                   <option>Ticket de avión</option>
+                  <option>Bus</option>
+                  <option>Tren</option>
                   <option>Otra consulta</option>
                 </select>
               </div>
@@ -318,9 +320,6 @@
           Esta versión permite que los clientes consulten la información y reciban los cambios de Supabase.
           Para editar precios, ofertas y avisos, entra en Supabase → Table Editor →
           <strong>ybh_contenido</strong> y modifica los registros.
-          <br><br>
-          No se permite editar públicamente desde esta página. Para añadir esa función se necesita configurar
-          un acceso administrativo seguro en el servidor.
         </div>
       </div>
     </section>
@@ -348,19 +347,76 @@
   <script>
     /* =============================================
        1. CONFIGURACIÓN SUPABASE
+       (Si dejas el "use_supabase" en false, 
+       usará los precios manuales de abajo)
     ============================================= */
+    const use_supabase = false; // 👈 Cambia a true si quieres usar la base de datos
+    
     const SUPABASE_URL = "https://wvhptkcmlyifnieqbgnq.supabase.co";
     const SUPABASE_KEY = "sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7";
     const TABLE = "ybh_contenido";
     const PHONE = "79046319565";
 
     /* =============================================
-       2. DATOS POR DEFECTO
+       2. PRECIOS EDITABLES MANUALMENTE
+       Cambia los números y textos aquí abajo.
     ============================================= */
     const defaultOffers = [
-      { id:"default-1", tipo:"recarga", titulo:"INTERNET +", descripcion:"2 GB LTE + 300 MB.cu", precio:350, moneda:"₽", etiqueta:"OFERTA", activo:true, orden:1 },
-      { id:"default-2", tipo:"remesa", titulo:"Remesas a Cuba", descripcion:"1.000 rublos = 9.80 CUP en Cuba", precio:1000, moneda:"₽", etiqueta:"REMESAS", activo:true, orden:2 },
-      { id:"default-3", tipo:"vuelo", titulo:"Ticket de avión", descripcion:"Precio de referencia. Consulta fechas y disponibilidad.", precio:99800, moneda:"₽", etiqueta:"VUELOS", activo:true, orden:3 }
+      { 
+        id: "1", 
+        tipo: "avion", 
+        titulo: "Vuelo a La Habana", 
+        descripcion: "Equipaje de 23kg incluido. Salidas desde Moscú.", 
+        precio: 85000, 
+        moneda: "₽", 
+        etiqueta: "AVIÓN", 
+        activo: true, 
+        orden: 1 
+      },
+      { 
+        id: "2", 
+        tipo: "bus", 
+        titulo: "Bus Moscú - San Petersburgo", 
+        descripcion: "Salidas diarias. Asientos reclinables y WiFi.", 
+        precio: 2500, 
+        moneda: "₽", 
+        etiqueta: "BUS", 
+        activo: true, 
+        orden: 2 
+      },
+      { 
+        id: "3", 
+        tipo: "tren", 
+        titulo: "Tren Sapsan (Rápido)", 
+        descripcion: "Tren de alta velocidad. 4 horas de viaje.", 
+        precio: 4500, 
+        moneda: "₽", 
+        etiqueta: "TREN", 
+        activo: true, 
+        orden: 3 
+      },
+      { 
+        id: "4", 
+        tipo: "recarga", 
+        titulo: "INTERNET +", 
+        descripcion: "2 GB LTE + 300 MB.cu", 
+        precio: 350, 
+        moneda: "₽", 
+        etiqueta: "OFERTA", 
+        activo: true, 
+        orden: 4 
+      },
+      { 
+        id: "5", 
+        tipo: "remesa", 
+        titulo: "Remesas a Cuba", 
+        descripcion: "1.000 rublos = 9.80 CUP en Cuba", 
+        precio: 1000, 
+        moneda: "₽", 
+        etiqueta: "REMESAS", 
+        activo: true, 
+        orden: 5 
+      }
     ];
 
     /* =============================================
@@ -369,7 +425,6 @@
     let db = null;
     let offers = [...defaultOffers];
     let bannerIndex = 0;
-    let realtimeChannel = null;
 
     /* =============================================
        4. UTILIDADES
@@ -401,13 +456,15 @@
        5. RENDERIZADO
     ============================================= */
     function offerCard(item){
-      const title = esc(item.titulo || item.title || "Servicio");
-      const description = esc(item.descripcion || item.description || "");
-      const price = priceText(item.precio ?? item.price, item.moneda || item.currency);
-      const tag = esc(item.etiqueta || item.tipo || "SERVICIO");
+      const title = esc(item.titulo);
+      const description = esc(item.descripcion);
+      const price = priceText(item.precio, item.moneda);
+      const tag = esc(item.etiqueta);
+      const imgUrl = item.imagen_url ? esc(item.imagen_url) : null;
 
       return `
         <article class="card">
+          ${imgUrl ? `<img src="${imgUrl}" class="card-img" alt="${title}">` : ''}
           <div><span class="tag">${tag}</span></div>
           <h3>${title}</h3>
           <p>${description}</p>
@@ -423,14 +480,11 @@
       if(!active.length) return;
       bannerIndex = bannerIndex % active.length;
       const item = active[bannerIndex];
-      const title = item.titulo || item.title || "Oferta";
-      const description = item.descripcion || item.description || "";
-      const price = priceText(item.precio ?? item.price, item.moneda || item.currency);
 
-      document.getElementById("bannerTitle").textContent = title;
-      document.getElementById("bannerDescription").textContent = description;
-      document.getElementById("bannerPrice").textContent = price;
-      document.getElementById("bannerContact").href = wa("Hola, quiero información sobre " + title + ". Precio: " + price);
+      document.getElementById("bannerTitle").textContent = item.titulo;
+      document.getElementById("bannerDescription").textContent = item.descripcion;
+      document.getElementById("bannerPrice").textContent = priceText(item.precio, item.moneda);
+      document.getElementById("bannerContact").href = wa("Hola, quiero información sobre " + item.titulo + ". Precio: " + priceText(item.precio, item.moneda));
     }
 
     function renderOffers(){
@@ -448,49 +502,44 @@
     }
 
     /* =============================================
-       6. SUPABASE: CARGA Y TIEMPO REAL
+       6. CONEXIÓN SUPABASE (Solo si use_supabase = true)
     ============================================= */
     async function loadOffers(){
       if(!db) return;
       try{
-        const { data, error } = await db
-          .from(TABLE)
-          .select("*")
-          .order("orden", { ascending: true });
-
+        const { data, error } = await db.from(TABLE).select("*").order("orden", { ascending: true });
         if(error) throw error;
-
         offers = (data && data.length) ? data : [...defaultOffers];
         renderOffers();
-        connectionMessage("Conectado. Información sincronizada con Supabase.", "online");
+        connectionMessage("Conectado. Sincronizado con Supabase.", "online");
       }catch(error){
         console.error("Supabase:", error);
-        connectionMessage("No se pudo cargar Supabase. Comprueba tabla, clave y permisos.", "error");
+        connectionMessage("Error al cargar Supabase. Usando datos locales.", "error");
       }
     }
 
-    function enableRealtime(){
-      if(!db) return;
-      realtimeChannel = db
-        .channel("ybh-public-updates")
-        .on(
-          "postgres_changes",
-          { event: "*", schema: "public", table: TABLE },
-          function(){ loadOffers(); }
-        )
-        .subscribe(function(status){
-          if(status === "SUBSCRIBED"){
-            connectionMessage("En directo: recibirás las modificaciones automáticamente.", "online");
-          }
-        });
-    }
-
     function connectSupabase(){
+      if(!use_supabase){
+        offers = [...defaultOffers];
+        renderOffers();
+        connectionMessage("Modo local. Mostrando precios del código HTML.", "online");
+        return;
+      }
+
       if(!window.supabase) return;
       try{
         db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
         loadOffers();
-        enableRealtime();
+        
+        db.channel("ybh-public-updates").on(
+          "postgres_changes", 
+          { event: "*", schema: "public", table: TABLE },
+          function(){ loadOffers(); }
+        ).subscribe(function(status){
+          if(status === "SUBSCRIBED"){
+            connectionMessage("En directo: Supabase activo.", "online");
+          }
+        });
       }catch(error){
         console.error(error);
         connectionMessage("No se pudo iniciar Supabase.", "error");
@@ -533,8 +582,6 @@
       ["USD", "MLC", "EUR", "BTC"].forEach(code => {
         document.getElementById("rate" + code).textContent = "Consultar";
       });
-      document.getElementById("publicNotice").textContent =
-        "Bienvenido a YOUR BRIDGE HOME. Consulta nuestras novedades y ofertas.";
     }
 
     /* =============================================
@@ -592,7 +639,7 @@
     setupRates();
     calculateRemittance();
     changeLanguage("es");
-    connectSupabase();
+    connectSupabase(); // Inicia la carga de ofertas
 
     setInterval(function(){
       const active = offers.filter(x => x.activo !== false);
@@ -601,8 +648,6 @@
         renderBanner();
       }
     }, 20000);
-
-    setInterval(function(){ if(db) loadOffers(); }, 60000);
   </script>
 </body>
 </html>
