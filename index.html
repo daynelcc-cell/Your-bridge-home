@@ -425,11 +425,8 @@
   ============================================ -->
   <script>
     /* =============================================
-       1. CONFIGURACIÓN SUPABASE
+       1. CONFIGURACIÓN
     ============================================= */
-    const SUPABASE_URL = "https://wvhptkcmlyifnieqbgnq.supabase.co";
-    const SUPABASE_PUBLISHABLE_KEY = "PEGA_AQUI_TU_CLAVE_PUBLICABLE";
-
     const TABLE = "ybh_contenido";
     const PHONE = "79046319565";
 
@@ -475,10 +472,8 @@
     /* =============================================
        3. ESTADO GLOBAL
     ============================================= */
-    let db = null;
     let offers = [...defaultOffers];
     let bannerIndex = 0;
-    let realtimeChannel = null;
 
     /* =============================================
        4. UTILIDADES
@@ -567,69 +562,12 @@
     }
 
     /* =============================================
-       6. SUPABASE: CARGA Y TIEMPO REAL
+       6. CARGA DE DATOS (SIN CONTRASEÑA)
     ============================================= */
-    async function loadOffers(){
-      if(!db) return;
-
-      try{
-        const { data, error } = await db
-          .from(TABLE)
-          .select("*")
-          .order("orden", { ascending: true });
-
-        if(error) throw error;
-
-        offers = (data && data.length) ? data : [...defaultOffers];
-        renderOffers();
-        connectionMessage("Conectado. Información sincronizada con Supabase.", "online");
-      }catch(error){
-        console.error("Supabase:", error);
-        connectionMessage("No se pudo cargar Supabase. Comprueba tabla, clave y permisos.", "error");
-      }
-    }
-
-    function enableRealtime(){
-      if(!db) return;
-
-      realtimeChannel = db
-        .channel("ybh-public-updates")
-        .on(
-          "postgres_changes",
-          {
-            event: "*",
-            schema: "public",
-            table: TABLE
-          },
-          function(){
-            loadOffers();
-          }
-        )
-        .subscribe(function(status){
-          if(status === "SUBSCRIBED"){
-            connectionMessage("En directo: recibirás las modificaciones automáticamente.", "online");
-          }
-        });
-    }
-
-    function connectSupabase(){
-      const key = SUPABASE_PUBLISHABLE_KEY.trim();
-
-      if(!window.supabase || !key || key === "PEGA_AQUI_TU_CLAVE_PUBLICABLE"){
-        offers = [...defaultOffers];
-        renderOffers();
-        connectionMessage("Falta colocar la clave publicable de Supabase.", "error");
-        return;
-      }
-
-      try{
-        db = window.supabase.createClient(SUPABASE_URL, key);
-        loadOffers();
-        enableRealtime();
-      }catch(error){
-        console.error(error);
-        connectionMessage("No se pudo iniciar Supabase.", "error");
-      }
+    function loadOffers(){
+      offers = [...defaultOffers];
+      renderOffers();
+      connectionMessage("Información cargada correctamente.", "online");
     }
 
     /* =============================================
@@ -728,7 +666,7 @@
     setupRates();
     calculateRemittance();
     changeLanguage("es");
-    connectSupabase();
+    loadOffers();
 
     /* Banner rotativo cada 20 segundos */
     setInterval(function(){
@@ -738,11 +676,6 @@
         renderBanner();
       }
     }, 20000);
-
-    /* Reintento de consulta cada 60 segundos */
-    setInterval(function(){
-      if(db) loadOffers();
-    }, 60000);
   </script>
 </body>
 </html>
