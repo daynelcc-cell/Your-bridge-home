@@ -20,19 +20,14 @@
   --red:#ff6464;
 }
 
-* {
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+* { box-sizing:border-box; margin:0; padding:0; }
 
-body {
-  background:var(--bg);
-  color:var(--white);
-  font-family:Arial,sans-serif;
-}
+body { background:var(--bg); color:var(--white); font-family:Arial,sans-serif; }
 
-/* NUEVO: logo de fondo en header */
+/* Barra de Oferta Relámpago */
+.promo-bar { background: linear-gradient(90deg, #d32f2f, #e8b94f); color: #071629; text-align: center; padding: 8px; font-weight: bold; font-size: 14px; position: relative; z-index: 1000; }
+.promo-bar span { background: rgba(0,0,0,0.8); color: white; padding: 2px 8px; border-radius: 5px; margin-left: 5px; }
+
 header {
   padding:22px 6%;
   display:flex;
@@ -47,437 +42,122 @@ header {
   background-position:center;
 }
 
-.logo {
-  color:var(--gold);
-  font-size:25px;
-  font-weight:900;
-}
+.logo { color:var(--gold); font-size:25px; font-weight:900; }
+.logo small { display:block; font-size:10px; letter-spacing:3px; color:white; margin-top:5px; }
 
-.logo small {
-  display:block;
-  font-size:10px;
-  letter-spacing:3px;
-  color:white;
-  margin-top:5px;
-}
+nav { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+nav a { text-decoration:none; color:white; padding:10px 15px; border-radius:20px; font-size:14px; }
+nav a:hover { background:var(--gold); color:#071629; }
 
-nav {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  align-items:center;
-}
+.lang-btn { background:#17395d; color:white; border:1px solid #29415d; padding:8px 12px; border-radius:20px; font-size:12px; }
+.lang-btn.active { background:var(--gold); color:#071629; border-color:var(--gold); }
 
-nav a {
-  text-decoration:none;
-  color:white;
-  padding:10px 15px;
-  border-radius:20px;
-  font-size:14px;
-}
+.hero { padding:55px 6% 20px; text-align:center; }
+.hero h1 { font-size:clamp(30px,5vw,48px); margin-bottom:12px; }
+.hero h1 span { color:var(--gold); }
+.hero p { color:var(--muted); line-height:1.6; }
 
-nav a:hover {
-  background:var(--gold);
-  color:#071629;
-}
+.weather-widget { display: flex; justify-content: center; gap: 15px; margin: 0 auto 20px auto; flex-wrap: wrap; width: 88%; }
+.weather-box { background: var(--panel); border: 1px solid #29415d; border-radius: 15px; padding: 12px 25px; display: flex; align-items: center; gap: 15px; color: var(--white); font-size: 16px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+.weather-box strong { color: var(--gold); font-size: 20px; }
+.weather-box img { width: 40px; height: 40px; }
 
-/* NUEVO: botones de idioma */
-.lang-btn {
-  background:#17395d;
-  color:white;
-  border:1px solid #29415d;
-  padding:8px 12px;
-  border-radius:20px;
-  font-size:12px;
-}
-.lang-btn.active {
-  background:var(--gold);
-  color:#071629;
-  border-color:var(--gold);
-}
+.banner { margin:20px auto; width:88%; padding:25px; border-radius:18px; background:linear-gradient(120deg,#17395d,#78531d); border:1px solid var(--gold); text-align:center; min-height:145px; }
+.banner h2 { color:var(--gold); margin-bottom:10px; }
+.banner h3 { font-size:24px; margin-bottom:8px; }
+.banner p { color:#eee; }
 
-.hero {
-  padding:55px 6% 35px;
-  text-align:center;
-}
+section { padding:35px 6%; }
+.section-title { text-align:center; margin-bottom:28px; }
+.section-title h2 { font-size:27px; color:var(--gold); margin-bottom:8px; }
 
-.hero h1 {
-  font-size:clamp(30px,5vw,48px);
-  margin-bottom:12px;
-}
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:20px; }
 
-.hero h1 span {
-  color:var(--gold);
-}
+.card { background:var(--panel); border:1px solid #29415d; padding:25px; border-radius:17px; transition:.25s; position:relative; }
+.card:hover { transform:translateY(-5px); border-color:var(--gold); }
+.card h3 { color:var(--gold); margin-bottom:13px; }
+.price { font-size:27px; font-weight:bold; margin:15px 0; }
+.card p { color:var(--muted); line-height:1.6; }
+.category-label { font-size:11px; color:var(--green); text-transform:uppercase; letter-spacing:2px; }
 
-.hero p {
-  color:var(--muted);
-  line-height:1.6;
-}
+.btn-share { position:absolute; top:15px; right:15px; background:#25d366; color:white; width:30px; height:30px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; text-decoration:none; opacity:0.8; transition:0.2s; }
+.btn-share:hover { opacity:1; transform:scale(1.1); }
 
-.banner {
-  margin:20px auto;
-  width:88%;
-  padding:25px;
-  border-radius:18px;
-  background:linear-gradient(120deg,#17395d,#78531d);
-  border:1px solid var(--gold);
-  text-align:center;
-  min-height:145px;
-}
+button { cursor:pointer; border:0; padding:12px 18px; border-radius:9px; font-weight:bold; }
+.gold-btn { background:var(--gold); color:#071629; }
+.green-btn { background:var(--green); color:#071629; }
+.red-btn { background:var(--red); color:white; }
+.blue-btn { background:#2a6fd6; color:white; }
 
-.banner h2 {
-  color:var(--gold);
-  margin-bottom:10px;
-}
+input,select,textarea { width:100%; padding:13px; border-radius:8px; border:1px solid #40536b; background:#091a2d; color:white; margin:7px 0 15px; font-family:inherit; }
+label { color:var(--muted); font-size:13px; }
 
-.banner h3 {
-  font-size:24px;
-  margin-bottom:8px;
-}
+.admin { background:#10243c; border:1px solid var(--gold); padding:25px; border-radius:17px; max-width:800px; margin:auto; }
+.admin h2 { color:var(--gold); margin-bottom:20px; }
+.admin-actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+.admin-item { background:#091a2d; padding:15px; margin-top:12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; }
 
-.banner p {
-  color:#eee;
-}
+.hidden { display:none!important; }
+.status { color:var(--green); margin:12px 0; font-size:14px; font-weight:bold; }
 
-section {
-  padding:35px 6%;
-}
-
-.section-title {
-  text-align:center;
-  margin-bottom:28px;
-}
-
-.section-title h2 {
-  font-size:27px;
-  color:var(--gold);
-  margin-bottom:8px;
-}
-
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-  gap:20px;
-}
-
-.card {
-  background:var(--panel);
-  border:1px solid #29415d;
-  padding:25px;
-  border-radius:17px;
-  transition:.25s;
-}
-
-.card:hover {
-  transform:translateY(-5px);
-  border-color:var(--gold);
-}
-
-.card h3 {
-  color:var(--gold);
-  margin-bottom:13px;
-}
-
-.price {
-  font-size:27px;
-  font-weight:bold;
-  margin:15px 0;
-}
-
-.card p {
-  color:var(--muted);
-  line-height:1.6;
-}
-
-.category-label {
-  font-size:11px;
-  color:var(--green);
-  text-transform:uppercase;
-  letter-spacing:2px;
-}
-
-button {
-  cursor:pointer;
-  border:0;
-  padding:12px 18px;
-  border-radius:9px;
-  font-weight:bold;
-}
-
-.gold-btn {
-  background:var(--gold);
-  color:#071629;
-}
-
-.green-btn {
-  background:var(--green);
-  color:#071629;
-}
-
-.red-btn {
-  background:var(--red);
-  color:white;
-}
-
-.blue-btn {
-  background:#2a6fd6;
-  color:white;
-}
-
-input,select,textarea {
-  width:100%;
-  padding:13px;
-  border-radius:8px;
-  border:1px solid #40536b;
-  background:#091a2d;
-  color:white;
-  margin:7px 0 15px;
-  font-family:inherit;
-}
-
-label {
-  color:var(--muted);
-  font-size:13px;
-}
-
-.admin {
-  background:#10243c;
-  border:1px solid var(--gold);
-  padding:25px;
-  border-radius:17px;
-  max-width:800px;
-  margin:auto;
-}
-
-.admin h2 {
-  color:var(--gold);
-  margin-bottom:20px;
-}
-
-.admin-actions {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:10px;
-}
-
-.admin-item {
-  background:#091a2d;
-  padding:15px;
-  margin-top:12px;
-  border-radius:10px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.hidden {
-  display:none!important;
-}
-
-.status {
-  color:var(--green);
-  margin:12px 0;
-  font-size:13px;
-}
-
-/* NUEVO: tabs de admin */
-.tab-bar {
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-bottom:18px;
-}
-.tab-bar button {
-  background:#091a2d;
-  color:white;
-  border:1px solid #29415d;
-  padding:9px 14px;
-  font-size:13px;
-  border-radius:9px;
-}
-.tab-bar button.active {
-  background:var(--gold);
-  color:#071629;
-}
+.tab-bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
+.tab-bar button { background:#091a2d; color:white; border:1px solid #29415d; padding:9px 14px; font-size:13px; border-radius:9px; }
+.tab-bar button.active { background:var(--gold); color:#071629; }
 .tab-panel { display:none; }
 .tab-panel.active { display:block; }
 
-/* NUEVO: galería rotativa */
-.gallery {
-  margin:0 auto;
-  max-width:900px;
-  height:280px;
-  border-radius:18px;
-  overflow:hidden;
-  border:1px solid #29415d;
-  background:#091a2d;
-  position:relative;
-}
-.gallery img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  position:absolute;
-  inset:0;
-  opacity:0;
-  transition:opacity .8s;
-}
+.gallery { margin:0 auto; max-width:900px; height:280px; border-radius:18px; overflow:hidden; border:1px solid #29415d; background:#091a2d; position:relative; }
+.gallery img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; opacity:0; transition:opacity .8s; }
 .gallery img.show { opacity:1; }
-.gallery .caption {
-  position:absolute;
-  bottom:0; left:0; right:0;
-  padding:14px 18px;
-  background:linear-gradient(transparent,rgba(0,0,0,.85));
-  color:#fff;
-  font-weight:bold;
-  z-index:2;
-}
+.gallery .caption { position:absolute; bottom:0; left:0; right:0; padding:14px 18px; background:linear-gradient(transparent,rgba(0,0,0,.85)); color:#fff; font-weight:bold; z-index:2; }
 
-/* NUEVO: calculadora */
-.calc-box {
-  background:var(--panel);
-  border:1px solid #29415d;
-  border-radius:17px;
-  padding:25px;
-  max-width:520px;
-  margin:auto;
-}
-.calc-result {
-  background:#091a2d;
-  border:1px solid var(--gold);
-  padding:14px;
-  border-radius:10px;
-  text-align:center;
-  font-size:20px;
-  font-weight:bold;
-  color:var(--gold);
-  margin-top:8px;
-}
+.calc-box { background:var(--panel); border:1px solid #29415d; border-radius:17px; padding:25px; max-width:520px; margin:auto; }
+.calc-result { background:#091a2d; border:1px solid var(--gold); padding:14px; border-radius:10px; text-align:center; font-size:20px; font-weight:bold; color:var(--gold); margin-top:8px; }
 
-/* NUEVO: video */
-.video-wrap {
-  max-width:800px;
-  margin:auto;
-  aspect-ratio:16/9;
-  border-radius:17px;
-  overflow:hidden;
-  border:1px solid #29415d;
-}
+.video-wrap { max-width:800px; margin:auto; aspect-ratio:16/9; border-radius:17px; overflow:hidden; border:1px solid #29415d; }
 .video-wrap iframe { width:100%; height:100%; border:0; }
 
-/* NUEVO: juegos */
-.games-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:18px;
-}
-.game-frame {
-  background:#091a2d;
-  border:1px solid #29415d;
-  border-radius:17px;
-  overflow:hidden;
-}
+.games-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
+.game-frame { background:#091a2d; border:1px solid #29415d; border-radius:17px; overflow:hidden; }
 .game-frame iframe { width:100%; height:320px; border:0; display:block; }
-.game-title {
-  padding:10px 14px;
-  background:#10243c;
-  color:var(--gold);
-  font-weight:bold;
-  font-size:14px;
-}
+.game-title { padding:10px 14px; background:#10243c; color:var(--gold); font-weight:bold; font-size:14px; }
 
-/* NUEVO: tienda */
-.shop-item {
-  background:var(--panel);
-  border:1px solid #29415d;
-  border-radius:17px;
-  overflow:hidden;
-  transition:.25s;
-}
+.shop-item { background:var(--panel); border:1px solid #29415d; border-radius:17px; overflow:hidden; transition:.25s; }
 .shop-item:hover { transform:translateY(-5px); border-color:var(--gold); }
-.shop-item img {
-  width:100%;
-  height:160px;
-  object-fit:cover;
-  background:#091a2d;
-  display:block;
-}
+.shop-item img { width:100%; height:160px; object-fit:cover; background:#091a2d; display:block; }
 .shop-info { padding:16px; }
 .shop-info h4 { color:var(--gold); margin-bottom:6px; }
 
-/* NUEVO: notas públicas */
-.notes-public {
-  background:#10243c;
-  border:1px dashed var(--gold);
-  border-radius:14px;
-  padding:18px;
-  max-width:900px;
-  margin:auto;
-  white-space:pre-wrap;
-  line-height:1.6;
-  color:#e8e8e8;
-  font-size:14px;
-}
+.notes-public { background:#10243c; border:1px dashed var(--gold); border-radius:14px; padding:18px; max-width:900px; margin:auto; white-space:pre-wrap; line-height:1.6; color:#e8e8e8; font-size:14px; }
 
-/* NUEVO: botón flotante WhatsApp */
-.float-wa {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:#25d366;
-  color:#fff;
-  width:56px;
-  height:56px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:26px;
-  text-decoration:none;
-  z-index:999;
-  box-shadow:0 4px 14px rgba(0,0,0,.4);
-}
+.float-wa { position:fixed; bottom:20px; right:20px; background:#25d366; color:#fff; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:26px; text-decoration:none; z-index:999; box-shadow:0 4px 14px rgba(0,0,0,.4); }
 
-footer {
-  background:#091c32;
-  padding:30px;
-  text-align:center;
-  color:var(--muted);
-  line-height:2;
-}
+.modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; z-index:2000; opacity:0; pointer-events:none; transition:0.3s; }
+.modal-overlay.active { opacity:1; pointer-events:auto; }
+.modal-box { background:var(--panel); border:2px solid var(--gold); padding:30px; border-radius:17px; text-align:center; max-width:400px; width:90%; position:relative; transform:scale(0.8); transition:0.3s; }
+.modal-overlay.active .modal-box { transform:scale(1); }
+.modal-box h2 { color:var(--gold); margin-bottom:15px; font-size:24px; }
+.modal-box p { margin-bottom:20px; line-height:1.5; }
+.modal-close { position:absolute; top:10px; right:15px; background:none; color:var(--muted); font-size:20px; }
 
-.whatsapp {
-  display:inline-block;
-  margin-top:15px;
-  background:#20c76c;
-  color:white;
-  padding:13px 20px;
-  text-decoration:none;
-  border-radius:30px;
-  font-weight:bold;
-}
+footer { background:#091c32; padding:30px; text-align:center; color:var(--muted); line-height:2; }
+.whatsapp { display:inline-block; margin-top:15px; background:#20c76c; color:white; padding:13px 20px; text-decoration:none; border-radius:30px; font-weight:bold; }
 
 @media(max-width:600px) {
-  header {
-    justify-content:center;
-    text-align:center;
-  }
-  nav {
-    justify-content:center;
-  }
-  .banner {
-    width:92%;
-  }
+  header { justify-content:center; text-align:center; }
+  nav { justify-content:center; }
+  .banner { width:92%; }
   .gallery { height:200px; }
+  .weather-widget { flex-direction: column; align-items: center; }
 }
 </style>
 </head>
 
 <body>
+
+<div class="promo-bar">
+  🔥 Oferta Relámpago: Recarga de 500 CUP con 10% de descuento. Termina en: <span id="countdown">02:00:00</span>
+</div>
 
 <header>
   <div class="logo">
@@ -492,7 +172,6 @@ footer {
     <a href="#tickets">Tickets</a>
     <a href="#administracion">Administración</a>
 
-    <!-- NUEVO: idiomas -->
     <button class="lang-btn active" onclick="setLang('es',this)">ES</button>
     <button class="lang-btn" onclick="setLang('en',this)">EN</button>
     <button class="lang-btn" onclick="setLang('ru',this)">RU</button>
@@ -504,7 +183,19 @@ footer {
   <p>Servicios, conexiones y oportunidades en diferentes países.</p>
 </div>
 
-<!-- BANNER AUTOMÁTICO (ya existía) -->
+<div class="weather-widget">
+  <div class="weather-box">
+    <span>🕒</span>
+    <span id="reloj-digital">--:--:--</span>
+  </div>
+  <div class="weather-box" id="clima-box" style="display:none;">
+    <img id="clima-icono" src="" alt="Clima">
+    <div>
+      <strong id="clima-temp">--°C</strong>
+      <span id="clima-ciudad" style="font-size:12px; display:block; color:var(--muted);">La Habana</span>
+    </div>
+  </div>
+</div>
 
 <div class="banner">
   <h2>⭐ OFERTAS MÁS ECONÓMICAS ⭐</h2>
@@ -513,19 +204,15 @@ footer {
   <p id="banner-details"></p>
 </div>
 
-<!-- NUEVO: GALERÍA ROTATIVA 20s -->
-
 <section id="galeria">
   <div class="section-title">
     <h2>🖼️ DESTINOS DESTACADOS</h2>
     <p>Hoteles y restaurantes más económicos por zona.</p>
   </div>
   <div class="gallery" id="gallery">
-    <div class="caption" id="gal-caption"></div>
+    <div class="caption" id="gal-caption">Cargando galería...</div>
   </div>
 </section>
-
-<!-- RECARGAS (ya existía) -->
 
 <section id="recargas">
   <div class="section-title">
@@ -535,8 +222,6 @@ footer {
   <div class="grid" id="grid-recargas"></div>
 </section>
 
-<!-- REMESAS (ya existía) -->
-
 <section id="remesas">
   <div class="section-title">
     <h2>💰 REMESAS</h2>
@@ -544,8 +229,6 @@ footer {
   </div>
   <div class="grid" id="grid-remesas"></div>
 </section>
-
-<!-- TICKETS (ya existía) -->
 
 <section id="tickets">
   <div class="section-title">
@@ -555,8 +238,6 @@ footer {
   <div class="grid" id="grid-tickets"></div>
 </section>
 
-<!-- NUEVO: TRANSPORTE (Bus/Tren/Avión) -->
-
 <section id="transporte">
   <div class="section-title">
     <h2>🚌 TRANSPORTE</h2>
@@ -564,8 +245,6 @@ footer {
   </div>
   <div class="grid" id="grid-transporte"></div>
 </section>
-
-<!-- NUEVO: CALCULADORA REMESA + PASAJES -->
 
 <section id="calculadora">
   <div class="section-title">
@@ -591,7 +270,25 @@ footer {
   </div>
 </section>
 
-<!-- NUEVO: VIDEO EMBEBIDO (externo) -->
+<section id="recomienda">
+  <div class="section-title">
+    <h2>🎁 RECOMIENDA Y GANA</h2>
+    <p>Invita a tus amigos y ambos ganan un descuento.</p>
+  </div>
+  <div class="card" style="max-width:600px; margin:auto; text-align:center;">
+    <h3>¡Gana un 5% de descuento!</h3>
+    <p style="margin-bottom:15px;">Pásale el enlace de nuestra página a un amigo. Cuando haga su primera compra, tú y él obtendrán un descuento en su próximo pedido.</p>
+    <button class="gold-btn" onclick="compartirPagina()">COMPARTIR MI ENLACE</button>
+  </div>
+</section>
+
+<section id="pruebas">
+  <div class="section-title">
+    <h2>🤝 PRUEBAS DE ENTREGA</h2>
+    <p>Clientes satisfechos con nuestro servicio.</p>
+  </div>
+  <div class="grid" id="grid-pruebas"></div>
+</section>
 
 <section id="video">
   <div class="section-title">
@@ -606,8 +303,6 @@ footer {
       allowfullscreen></iframe>
   </div>
 </section>
-
-<!-- NUEVO: JUEGOS GRATIS (iframe externo) -->
 
 <section id="juegos">
   <div class="section-title">
@@ -625,8 +320,6 @@ footer {
     </div>
   </div>
 </section>
-
-<!-- NUEVO: ENLACES VISA + BCC -->
 
 <section id="enlaces">
   <div class="section-title">
@@ -652,8 +345,6 @@ footer {
   </div>
 </section>
 
-<!-- NUEVO: TIENDA EN LÍNEA -->
-
 <section id="tienda">
   <div class="section-title">
     <h2>🛒 TIENDA EN LÍNEA</h2>
@@ -662,16 +353,12 @@ footer {
   <div class="grid" id="grid-tienda"></div>
 </section>
 
-<!-- NUEVO: NOTAS PÚBLICAS -->
-
 <section id="notas">
   <div class="section-title">
     <h2>📝 NOTAS IMPORTANTES</h2>
   </div>
   <div class="notes-public" id="notes-public">Cargando...</div>
 </section>
-
-<!-- ADMINISTRACIÓN (misma estructura, ampliada con tabs) -->
 
 <section id="administracion">
   <div class="section-title">
@@ -680,26 +367,21 @@ footer {
   </div>
 
   <div class="admin">
-
     <div id="admin-panel">
-
-      <!-- NUEVO: tabs -->
       <div class="tab-bar">
         <button class="active" onclick="showTab('ofertas',this)">Ofertas</button>
         <button onclick="showTab('fotos',this)">Fotos</button>
+        <button onclick="showTab('pruebas-admin',this)">Pruebas</button>
         <button onclick="showTab('notas-admin',this)">Notas</button>
         <button onclick="showTab('tienda-admin',this)">Tienda</button>
         <button onclick="showTab('ajustes',this)">Ajustes</button>
       </div>
 
-      <!-- OFERTAS (existente) -->
       <div class="tab-panel active" id="tab-ofertas">
         <h2>Gestionar ofertas</h2>
 
         <form id="offer-form">
-
           <input type="hidden" id="offer-id">
-
           <label>Categoría</label>
           <select id="category" required>
             <option value="Recargas">Recargas</option>
@@ -728,57 +410,54 @@ footer {
           <input id="details" placeholder="Descripción de la oferta">
 
           <label>
-            <input type="checkbox" id="active" checked
-            style="width:auto;margin-right:8px">
+            <input type="checkbox" id="active" checked style="width:auto;margin-right:8px">
             Oferta visible para clientes
           </label>
 
           <div class="admin-actions">
-            <button type="submit" class="green-btn">
-              GUARDAR OFERTA
-            </button>
-
-            <button type="button" class="gold-btn"
-            onclick="resetForm()">
-              NUEVA OFERTA
-            </button>
+            <button type="submit" class="green-btn">GUARDAR OFERTA</button>
+            <button type="button" class="gold-btn" onclick="resetForm()">NUEVA OFERTA</button>
           </div>
         </form>
 
         <h2 style="margin-top:30px">Ofertas registradas</h2>
-
         <div id="admin-list"></div>
       </div>
 
-      <!-- NUEVO: FOTOS -->
       <div class="tab-panel" id="tab-fotos">
-        <h2>Subir fotos manualmente</h2>
-        <p style="color:#aabbd0;font-size:13px;margin-bottom:12px">
-          Se guardan en Supabase Storage y rotan cada 20 s.
-        </p>
-
+        <h2>Subir fotos de destinos</h2>
+        <p style="color:#aabbd0;font-size:13px;margin-bottom:12px">Las fotos subidas aquí aparecerán en la galería de arriba.</p>
         <label>Archivo de imagen</label>
         <input type="file" id="photo-file" accept="image/*">
-
         <label>Título / destino</label>
         <input id="photo-caption" placeholder="Ej: La Habana — Hotel económico">
-
         <label>Categoría</label>
         <select id="photo-category">
           <option value="Hoteles">Hoteles</option>
           <option value="Restaurantes">Restaurantes</option>
           <option value="Destinos">Destinos</option>
         </select>
-
         <div class="admin-actions">
           <button class="green-btn" onclick="uploadPhoto()">SUBIR FOTO</button>
         </div>
-
         <h2 style="margin-top:24px">Fotos registradas</h2>
         <div id="photo-list"></div>
       </div>
 
-      <!-- NUEVO: NOTAS ADMIN -->
+      <div class="tab-panel" id="tab-pruebas-admin">
+        <h2>Subir capturas de entrega (Pruebas)</h2>
+        <p style="color:#aabbd0;font-size:13px;margin-bottom:12px">Sube capturas de WhatsApp de clientes contentos.</p>
+        <label>Archivo de imagen</label>
+        <input type="file" id="proof-file" accept="image/*">
+        <label>Título / Cliente</label>
+        <input id="proof-caption" placeholder="Ej: Remesa entregada a María">
+        <div class="admin-actions">
+          <button class="green-btn" onclick="uploadProof()">SUBIR PRUEBA</button>
+        </div>
+        <h2 style="margin-top:24px">Pruebas registradas</h2>
+        <div id="proof-list"></div>
+      </div>
+
       <div class="tab-panel" id="tab-notas-admin">
         <h2>Mis notas / información importante</h2>
         <textarea id="notes-input" rows="8" placeholder="Escribe aquí tus notas..."></textarea>
@@ -787,17 +466,14 @@ footer {
         </div>
       </div>
 
-      <!-- NUEVO: TIENDA ADMIN -->
       <div class="tab-panel" id="tab-tienda-admin">
         <h2>Agregar producto a la tienda</h2>
         <form id="shop-form">
           <input type="hidden" id="shop-id">
           <label>Nombre del producto</label>
           <input id="shop-name" required>
-
           <label>Precio</label>
           <input id="shop-price" type="number" min="0" step="0.01" required>
-
           <label>Moneda</label>
           <select id="shop-currency">
             <option value="USD">USD</option>
@@ -805,41 +481,31 @@ footer {
             <option value="EUR">EUR</option>
             <option value="CUP">CUP</option>
           </select>
-
           <label>URL de imagen (opcional)</label>
           <input id="shop-image" placeholder="https://...">
-
           <label>Descripción</label>
           <input id="shop-desc">
-
           <div class="admin-actions">
             <button type="submit" class="green-btn">GUARDAR</button>
           </div>
         </form>
-
         <h2 style="margin-top:24px">Productos registrados</h2>
         <div id="shop-admin-list"></div>
       </div>
 
-      <!-- NUEVO: AJUSTES -->
       <div class="tab-panel" id="tab-ajustes">
         <h2>Ajustes generales</h2>
-
         <label>Tasa de cambio (1 USD = ?)</label>
         <input type="number" id="settings-tasa" value="0" step="0.01" min="0">
-
         <label>URL del video (YouTube embed)</label>
         <input id="settings-video" placeholder="https://www.youtube.com/embed/...">
-
         <div class="admin-actions">
           <button class="green-btn" onclick="saveSettings()">GUARDAR AJUSTES</button>
         </div>
       </div>
 
     </div>
-
     <div id="status" class="status"></div>
-
   </div>
 </section>
 
@@ -847,307 +513,320 @@ footer {
   <h3 style="color:#e8b94f">YOUR BRIDGE HOME</h3>
   Daynel Caminero Administrador<br>
   Servicios y conexiones internacionales<br>
-  <a class="whatsapp"
-  href="https://wa.me/79046319565"
-  target="_blank">
-    CONTACTAR POR WHATSAPP
-  </a>
+  <a class="whatsapp" href="https://wa.me/79046319565" target="_blank">CONTACTAR POR WHATSAPP</a>
   <p>© 2026 YOUR BRIDGE HOME. Todos los derechos reservados.</p>
 </footer>
 
-<!-- NUEVO: botón flotante WhatsApp -->
 <a class="float-wa" href="https://wa.me/79046319565" target="_blank" title="WhatsApp">💬</a>
+
+<div class="modal-overlay" id="welcome-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="cerrarModal()">✕</button>
+    <h2>¡Bienvenido!</h2>
+    <p>Escríbenos ahora por WhatsApp y obtén un <strong>5% de descuento</strong> en tu primera recarga o remesa.</p>
+    <a href="https://wa.me/79046319565" target="_blank" class="green-btn" style="display:inline-block; text-decoration:none; padding:12px 25px;">
+      RECLAMAR DESCUENTO
+    </a>
+  </div>
+</div>
 
 <script type="module">
 
 // ==================================
+// LÓGICA DE LA GALERÍA AUTOMÁTICA DESDE GITHUB
+// ==================================
+function cargarGaleriaGitHub() {
+  const container = document.getElementById('gallery');
+  if(!container) return;
+  
+  let imagenesEncontradas = 0;
+  let totalFotos = 20; // Buscará hasta 20 fotos (foto1.jpg hasta foto20.jpg)
+
+  for (let i = 1; i <= totalFotos; i++) {
+    // URL exacta de tu repositorio en GitHub
+    const urlImagen = `https://daynelcc-cell.github.io/Your-bridge-home/galeria/foto${i}.jpg`;
+    
+    const img = document.createElement('img');
+    img.src = urlImagen;
+    
+    img.onload = function() {
+      if(imagenesEncontradas === 0) img.classList.add('show');
+      container.appendChild(img);
+      imagenesEncontradas++;
+      
+      if(imagenesEncontradas === 1) {
+        document.getElementById('gal-caption').textContent = 'Destinos destacados';
+      }
+    };
+    
+    img.onerror = function() {
+      img.remove(); // Si no existe la foto, la ignora
+    };
+  }
+
+  setTimeout(() => {
+    if(imagenesEncontradas === 0) {
+      document.getElementById('gal-caption').textContent = 'Aún no hay fotos en la carpeta galeria.';
+    }
+  }, 3000);
+}
+
+// Rotar las fotos cada 20 segundos
+let galleryIndex = 0;
+setInterval(() => {
+  const imgs = document.querySelectorAll('#gallery img');
+  if(imgs.length <= 1) return;
+  imgs.forEach(i => i.classList.remove('show'));
+  galleryIndex = (galleryIndex + 1) % imgs.length;
+  imgs[galleryIndex].classList.add('show');
+}, 20000);
+
+cargarGaleriaGitHub();
+
+// ==================================
+// FUNCIONES DE MARKETING Y TIEMPO
+// ==================================
+setTimeout(() => { document.getElementById('welcome-modal').classList.add('active'); }, 3000);
+window.cerrarModal = function() { document.getElementById('welcome-modal').classList.remove('active'); };
+
+let timeLeft = 2 * 60 * 60;
+setInterval(() => {
+  if(timeLeft <= 0) return;
+  timeLeft--;
+  const h = Math.floor(timeLeft / 3600);
+  const m = Math.floor((timeLeft % 3600) / 60);
+  const s = timeLeft % 60;
+  document.getElementById('countdown').textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}, 1000);
+
+window.compartirPagina = function() {
+  const url = window.location.href;
+  const texto = "¡Mira esta página! Hacen recargas y remesas a Cuba al mejor precio: " + url;
+  window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank');
+};
+
+function actualizarReloj() {
+  const ahora = new Date();
+  document.getElementById('reloj-digital').textContent = `${String(ahora.getHours()).padStart(2,'0')}:${String(ahora.getMinutes()).padStart(2,'0')}:${String(ahora.getSeconds()).padStart(2,'0')}`;
+}
+setInterval(actualizarReloj, 1000);
+actualizarReloj();
+
+async function obtenerClima() {
+  try {
+    const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=23.11&longitude=-82.36&current_weather=true');
+    const data = await res.json();
+    const temp = Math.round(data.current_weather.temperature);
+    const codigoClima = data.current_weather.weathercode;
+    let iconoUrl = 'https://openweathermap.org/img/wn/01d@2x.png';
+    if (codigoClima >= 1 && codigoClima <= 3) iconoUrl = 'https://openweathermap.org/img/wn/02d@2x.png';
+    if (codigoClima >= 45 && codigoClima <= 48) iconoUrl = 'https://openweathermap.org/img/wn/50d@2x.png';
+    if (codigoClima >= 51 && codigoClima <= 67) iconoUrl = 'https://openweathermap.org/img/wn/10d@2x.png';
+    if (codigoClima >= 71 && codigoClima <= 77) iconoUrl = 'https://openweathermap.org/img/wn/13d@2x.png';
+    if (codigoClima >= 80 && codigoClima <= 82) iconoUrl = 'https://openweathermap.org/img/wn/09d@2x.png';
+    if (codigoClima >= 95) iconoUrl = 'https://openweathermap.org/img/wn/11d@2x.png';
+    document.getElementById('clima-temp').textContent = `${temp}°C`;
+    document.getElementById('clima-icono').src = iconoUrl;
+    document.getElementById('clima-box').style.display = 'flex';
+  } catch (error) {}
+}
+obtenerClima();
+
+// ==================================
 // CONEXIÓN SUPABASE
 // ==================================
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-import { createClient }
-from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-
-const SUPABASE_URL =
-'https://wvhptkcmlyifnieqbgnq.supabase.co';
-
-const SUPABASE_KEY =
-'sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7';
-
-const supabase = createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+const SUPABASE_URL = 'https://wvhptkcmlyifnieqbgnq.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7';
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let offers = [];
-let photos = [];
+let proofs = []; 
 let shopItems = [];
 let settings = {};
 let bannerIndex = 0;
-let galleryIndex = 0;
-let currentLang = 'es';
+
+function message(text) { document.getElementById('status').textContent = text; }
 
 // ==================================
-// MENSAJES
+// OFERTAS Y BANNER
 // ==================================
-
-function message(text) {
-  document.getElementById('status').textContent = text;
-}
-
-// ==================================
-// CARGAR OFERTAS
-// ==================================
-
 async function loadOffers() {
-
-  const { data, error } = await supabase
-    .from('offers')
-    .select('*')
-    .order('price', { ascending:true });
-
-  if(error) {
-    message('Error cargando ofertas: ' + error.message);
-    return;
-  }
-
+  const { data, error } = await supabase.from('offers').select('*').order('price', { ascending:true });
+  if(error) { message('Error cargando ofertas: ' + error.message); return; }
   offers = data || [];
-
   renderOffers();
   renderAdminList();
   renderBanner();
   renderTransporte();
 }
 
-// ==================================
-// MOSTRAR TARJETAS
-// ==================================
-
 function renderOffers() {
-
-  const categories = {
-    Recargas:'grid-recargas',
-    Remesas:'grid-remesas',
-    Tickets:'grid-tickets'
-  };
-
+  const categories = { Recargas:'grid-recargas', Remesas:'grid-remesas', Tickets:'grid-tickets' };
   Object.entries(categories).forEach(([category,id]) => {
-
     const container = document.getElementById(id);
     if(!container) return;
-
-    const items = offers.filter(item =>
-      item.category === category && item.active
-    );
-
+    const items = offers.filter(item => item.category === category && item.active);
     if(items.length === 0) {
-      container.innerHTML =
-      '<p style="color:#aabbd0">Próximamente nuevas ofertas.</p>';
+      container.innerHTML = '<p style="color:#aabbd0">Próximamente nuevas ofertas.</p>';
       return;
     }
-
-    container.innerHTML = items.map(item => `
+    container.innerHTML = items.map(item => {
+      const textoCompartir = `¡Mira esta oferta! ${item.title} por solo ${item.price} ${item.currency}. Página: ${window.location.href}`;
+      return `
       <article class="card">
+        <a href="https://wa.me/?text=${encodeURIComponent(textoCompartir)}" target="_blank" class="btn-share" title="Compartir oferta">📤</a>
         <div class="category-label">${escapeHTML(item.category)}</div>
         <h3>${escapeHTML(item.title)}</h3>
-        <div class="price">
-          ${formatPrice(item.price)} ${escapeHTML(item.currency)}
-        </div>
+        <div class="price">${formatPrice(item.price)} ${escapeHTML(item.currency)}</div>
         <p>${escapeHTML(item.details || '')}</p>
       </article>
-    `).join('');
+      `;
+    }).join('');
   });
 }
-
-// ==================================
-// NUEVO: RENDER TRANSPORTE
-// ==================================
 
 function renderTransporte() {
   const container = document.getElementById('grid-transporte');
   if(!container) return;
-
-  const items = offers.filter(item =>
-    ['Bus','Tren','Avion'].includes(item.category) && item.active
-  );
-
+  const items = offers.filter(item => ['Bus','Tren','Avion'].includes(item.category) && item.active);
   if(items.length === 0) {
-    container.innerHTML =
-    '<p style="color:#aabbd0">Próximamente nuevas ofertas.</p>';
+    container.innerHTML = '<p style="color:#aabbd0">Próximamente nuevas ofertas.</p>';
     return;
   }
-
-  container.innerHTML = items.map(item => `
+  container.innerHTML = items.map(item => {
+    const textoCompartir = `¡Mira esta oferta! ${item.title} por solo ${item.price} ${item.currency}. Página: ${window.location.href}`;
+    return `
     <article class="card">
+      <a href="https://wa.me/?text=${encodeURIComponent(textoCompartir)}" target="_blank" class="btn-share" title="Compartir oferta">📤</a>
       <div class="category-label">${escapeHTML(item.category)}</div>
       <h3>${escapeHTML(item.title)}</h3>
-      <div class="price">
-        ${formatPrice(item.price)} ${escapeHTML(item.currency)}
-      </div>
+      <div class="price">${formatPrice(item.price)} ${escapeHTML(item.currency)}</div>
       <p>${escapeHTML(item.details || '')}</p>
     </article>
+    `;
+  }).join('');
+}
+
+function escapeHTML(value) {
+  return String(value ?? '').replace(/[&<>"']/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' })[char]);
+}
+
+function formatPrice(value) {
+  return Number(value).toLocaleString('es-ES', { maximumFractionDigits:2 });
+}
+
+function renderBanner() {
+  const categories = ['Recargas','Remesas','Tickets','Bus','Tren','Avion'];
+  const cheapest = categories.map(category => 
+    offers.filter(item => item.category === category && item.active).sort((a,b) => Number(a.price) - Number(b.price))[0]
+  ).filter(Boolean);
+  if(cheapest.length === 0) return;
+  if(bannerIndex >= cheapest.length) bannerIndex = 0;
+  const item = cheapest[bannerIndex];
+  document.getElementById('banner-title').textContent = `[${item.category}] ${item.title}`;
+  document.getElementById('banner-price').textContent = formatPrice(item.price) + ' ' + item.currency;
+  document.getElementById('banner-details').textContent = item.details || '';
+}
+setInterval(() => { bannerIndex++; renderBanner(); }, 5000);
+
+// ==================================
+// CALCULADORA
+// ==================================
+function calcRemesa() {
+  const tasa = Number(document.getElementById('tasa').value) || 0;
+  const monto = Number(document.getElementById('monto-envio').value) || 0;
+  document.getElementById('res-remesa').textContent = (tasa * monto).toFixed(2);
+}
+function calcPasaje() {
+  const tasa = Number(document.getElementById('tasa').value) || 0;
+  const monto = Number(document.getElementById('monto-pasaje').value) || 0;
+  document.getElementById('res-pasaje').textContent = (tasa * monto).toFixed(2);
+}
+['tasa','monto-envio','monto-pasaje'].forEach(id => {
+  const el = document.getElementById(id);
+  if(el) el.addEventListener('input', () => { calcRemesa(); calcPasaje(); });
+});
+
+// ==================================
+// PRUEBAS DE ENTREGA (SUPABASE)
+// ==================================
+async function loadProofs() {
+  const { data, error } = await supabase.from('proofs').select('*').order('created_at', { ascending:false });
+  if(error) { console.warn(error); return; }
+  proofs = data || [];
+  renderProofs();
+  renderProofList();
+}
+
+function renderProofs() {
+  const container = document.getElementById('grid-pruebas');
+  if(!container) return;
+  const activeProofs = proofs.filter(p => p.active !== false);
+  if(activeProofs.length === 0) {
+    container.innerHTML = '<p style="color:#aabbd0; text-align:center; grid-column: 1/-1;">Próximamente más pruebas.</p>';
+    return;
+  }
+  container.innerHTML = activeProofs.map(p => `
+    <div class="shop-item">
+      <img src="${escapeHTML(p.url)}" alt="${escapeHTML(p.caption)}" onerror="this.style.display='none'">
+      <div class="shop-info" style="text-align:center;">
+        <p>${escapeHTML(p.caption || '')}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function uploadProof() {
+  const fileInput = document.getElementById('proof-file');
+  const file = fileInput.files[0];
+  const caption = document.getElementById('proof-caption').value.trim();
+  if(!file) { message('Selecciona una captura primero.'); return; }
+  message('Subiendo prueba... espera.');
+  const fileName = 'proof_' + Date.now() + '_' + file.name;
+  try {
+    const { error: uploadError } = await supabase.storage.from('photos').upload(fileName, file, { upsert:false });
+    if(uploadError) { message('Error Storage: ' + uploadError.message); return; }
+    const { data: urlData } = supabase.storage.from('photos').getPublicUrl(fileName);
+    const { error: insertError } = await supabase.from('proofs').insert({ url: urlData.publicUrl, caption, active: true });
+    if(insertError) { message('Error BD: ' + insertError.message); return; }
+    message('¡Prueba subida correctamente!');
+    fileInput.value = ''; document.getElementById('proof-caption').value = '';
+    await loadProofs();
+  } catch (error) { message('Error inesperado: ' + error.message); }
+}
+window.uploadProof = uploadProof;
+
+async function deleteProof(id) {
+  if(!confirm('¿Eliminar esta prueba?')) return;
+  const { error } = await supabase.from('proofs').delete().eq('id', id);
+  if(error) { message('Error: ' + error.message); return; }
+  message('Prueba eliminada.'); await loadProofs();
+}
+window.deleteProof = deleteProof;
+
+function renderProofList() {
+  const container = document.getElementById('proof-list');
+  if(!container) return;
+  container.innerHTML = proofs.map(p => `
+    <div class="admin-item">
+      <div>
+        <strong>${escapeHTML(p.caption || '(sin título)')}</strong>
+      </div>
+      <div class="admin-actions">
+        <button class="red-btn" onclick="deleteProof('${p.id}')">ELIMINAR</button>
+      </div>
+    </div>
   `).join('');
 }
 
 // ==================================
-// PROTECCIÓN HTML
+// TIENDA (SUPABASE)
 // ==================================
-
-function escapeHTML(value) {
-  return String(value ?? '').replace(/[&<>"']/g, char => ({
-    '&':'&amp;',
-    '<':'&lt;',
-    '>':'&gt;',
-    '"':'&quot;',
-    "'":'&#39;'
-  })[char]);
-}
-
-function formatPrice(value) {
-  return Number(value).toLocaleString('es-ES', {
-    maximumFractionDigits:2
-  });
-}
-
-// ==================================
-// BANNER
-// ==================================
-
-function renderBanner() {
-
-  const categories = ['Recargas','Remesas','Tickets','Bus','Tren','Avion'];
-
-  const cheapest = categories
-    .map(category => offers
-      .filter(item =>
-        item.category === category && item.active
-      )
-      .sort((a,b) => Number(a.price) - Number(b.price))[0]
-    )
-    .filter(Boolean);
-
-  if(cheapest.length === 0) return;
-
-  if(bannerIndex >= cheapest.length) bannerIndex = 0;
-
-  const item = cheapest[bannerIndex];
-
-  document.getElementById('banner-title').textContent = item.title;
-  document.getElementById('banner-price').textContent =
-    formatPrice(item.price) + ' ' + item.currency;
-  document.getElementById('banner-details').textContent =
-    item.details || '';
-}
-
-setInterval(() => {
-  bannerIndex++;
-  renderBanner();
-}, 5000);
-
-// ==================================
-// NUEVO: CARGAR FOTOS
-// ==================================
-
-async function loadPhotos() {
-
-  const { data, error } = await supabase
-    .from('photos')
-    .select('*')
-    .order('created_at', { ascending:false });
-
-  if(error) { console.warn(error); return; }
-
-  photos = data || [];
-  renderGallery();
-  renderPhotoList();
-}
-
-// ==================================
-// NUEVO: GALERÍA ROTATIVA 20s
-// ==================================
-
-function renderGallery() {
-  const container = document.getElementById('gallery');
-  if(!container) return;
-
-  const activePhotos = photos.filter(p => p.active !== false);
-
-  // Limpiar imágenes previas pero conservar caption
-  container.querySelectorAll('img').forEach(img => img.remove());
-
-  if(activePhotos.length === 0) {
-    document.getElementById('gal-caption').textContent =
-      'Aún no hay fotos subidas.';
-    return;
-  }
-
-  activePhotos.forEach((p, i) => {
-    const img = document.createElement('img');
-    img.src = p.url;
-    img.alt = p.caption || '';
-    if(i === 0) img.classList.add('show');
-    container.appendChild(img);
-  });
-
-  galleryIndex = 0;
-  updateGalleryCaption(activePhotos);
-}
-
-function updateGalleryCaption(list) {
-  if(!list || list.length === 0) return;
-  const p = list[galleryIndex % list.length];
-  document.getElementById('gal-caption').textContent =
-    p.caption || p.category || '';
-}
-
-setInterval(() => {
-  const imgs = document.querySelectorAll('#gallery img');
-  if(imgs.length <= 1) return;
-
-  imgs.forEach(i => i.classList.remove('show'));
-  galleryIndex = (galleryIndex + 1) % imgs.length;
-  imgs[galleryIndex].classList.add('show');
-
-  const activePhotos = photos.filter(p => p.active !== false);
-  updateGalleryCaption(activePhotos);
-}, 20000);
-
-// ==================================
-// NUEVO: CALCULADORA
-// ==================================
-
-function calcRemesa() {
-  const tasa = Number(document.getElementById('tasa').value) || 0;
-  const monto = Number(document.getElementById('monto-envio').value) || 0;
-  document.getElementById('res-remesa').textContent =
-    (tasa * monto).toFixed(2);
-}
-
-function calcPasaje() {
-  const tasa = Number(document.getElementById('tasa').value) || 0;
-  const monto = Number(document.getElementById('monto-pasaje').value) || 0;
-  document.getElementById('res-pasaje').textContent =
-    (tasa * monto).toFixed(2);
-}
-
-['tasa','monto-envio','monto-pasaje'].forEach(id => {
-  const el = document.getElementById(id);
-  if(el) el.addEventListener('input', () => {
-    calcRemesa(); calcPasaje();
-  });
-});
-
-// ==================================
-// NUEVO: CARGAR TIENDA
-// ==================================
-
 async function loadShop() {
-  const { data, error } = await supabase
-    .from('shop')
-    .select('*')
-    .order('created_at', { ascending:false });
-
+  const { data, error } = await supabase.from('shop').select('*').order('created_at', { ascending:false });
   if(error) { console.warn(error); return; }
-
   shopItems = data || [];
   renderShop();
   renderShopAdmin();
@@ -1156,19 +835,14 @@ async function loadShop() {
 function renderShop() {
   const container = document.getElementById('grid-tienda');
   if(!container) return;
-
   const items = shopItems.filter(i => i.active !== false);
-
   if(items.length === 0) {
-    container.innerHTML =
-    '<p style="color:#aabbd0">Próximamente productos.</p>';
+    container.innerHTML = '<p style="color:#aabbd0">Próximamente productos.</p>';
     return;
   }
-
   container.innerHTML = items.map(i => `
     <div class="shop-item">
-      <img src="${escapeHTML(i.image_url || '')}" alt="${escapeHTML(i.name)}"
-           onerror="this.style.display='none'">
+      <img src="${escapeHTML(i.image_url || '')}" alt="${escapeHTML(i.name)}" onerror="this.style.display='none'">
       <div class="shop-info">
         <h4>${escapeHTML(i.name)}</h4>
         <div class="price">${formatPrice(i.price)} ${escapeHTML(i.currency)}</div>
@@ -1179,128 +853,41 @@ function renderShop() {
 }
 
 // ==================================
-// NUEVO: NOTAS
+// NOTAS Y AJUSTES
 // ==================================
-
 async function loadNotes() {
-  const { data, error } = await supabase
-    .from('settings')
-    .select('*')
-    .eq('id', 1)
-    .maybeSingle();
-
+  const { data, error } = await supabase.from('settings').select('*').eq('id', 1).maybeSingle();
   if(error) { console.warn(error); return; }
-
   settings = data || {};
-  document.getElementById('notes-public').textContent =
-    settings.notes || 'Sin notas por ahora.';
+  document.getElementById('notes-public').textContent = settings.notes || 'Sin notas por ahora.';
   document.getElementById('notes-input').value = settings.notes || '';
   document.getElementById('settings-tasa').value = settings.tasa || 0;
   document.getElementById('settings-video').value = settings.video_url || '';
   document.getElementById('tasa').value = settings.tasa || 0;
-
-  if(settings.video_url) {
-    document.getElementById('video-frame').src = settings.video_url;
-  }
+  if(settings.video_url) document.getElementById('video-frame').src = settings.video_url;
 }
 
 async function saveNotes() {
   const notes = document.getElementById('notes-input').value;
-  const { error } = await supabase
-    .from('settings')
-    .upsert({ id: 1, notes });
-
+  const { error } = await supabase.from('settings').upsert({ id: 1, notes });
   if(error) { message('Error: ' + error.message); return; }
-  message('Notas guardadas.');
-  await loadNotes();
+  message('Notas guardadas.'); await loadNotes();
 }
+window.saveNotes = saveNotes;
 
 async function saveSettings() {
   const tasa = Number(document.getElementById('settings-tasa').value) || 0;
   const video_url = document.getElementById('settings-video').value;
-  const { error } = await supabase
-    .from('settings')
-    .upsert({ id: 1, tasa, video_url });
-
+  const { error } = await supabase.from('settings').upsert({ id: 1, tasa, video_url });
   if(error) { message('Error: ' + error.message); return; }
-  message('Ajustes guardados.');
-  await loadNotes();
+  message('Ajustes guardados.'); await loadNotes();
 }
+window.saveSettings = saveSettings;
 
 // ==================================
-// NUEVO: SUBIR FOTO
+// TIENDA ADMIN
 // ==================================
-
-async function uploadPhoto() {
-  const file = document.getElementById('photo-file').files[0];
-  const caption = document.getElementById('photo-caption').value.trim();
-  const category = document.getElementById('photo-category').value;
-
-  if(!file) { message('Selecciona una imagen.'); return; }
-
-  const fileName = Date.now() + '_' + file.name;
-  const { error: uploadError } = await supabase
-    .storage
-    .from('photos')
-    .upload(fileName, file, { upsert:false });
-
-  if(uploadError) { message('Error subiendo: ' + uploadError.message); return; }
-
-  const { data: urlData } = supabase
-    .storage
-    .from('photos')
-    .getPublicUrl(fileName);
-
-  const { error: insertError } = await supabase
-    .from('photos')
-    .insert({
-      url: urlData.publicUrl,
-      caption,
-      category,
-      active: true
-    });
-
-  if(insertError) { message('Error guardando: ' + insertError.message); return; }
-
-  message('Foto subida correctamente.');
-  document.getElementById('photo-file').value = '';
-  document.getElementById('photo-caption').value = '';
-  await loadPhotos();
-}
-
-async function deletePhoto(id) {
-  if(!confirm('¿Eliminar esta foto?')) return;
-  const { error } = await supabase.from('photos').delete().eq('id', id);
-  if(error) { message('Error: ' + error.message); return; }
-  message('Foto eliminada.');
-  await loadPhotos();
-}
-
-function renderPhotoList() {
-  const container = document.getElementById('photo-list');
-  if(!container) return;
-
-  container.innerHTML = photos.map(p => `
-    <div class="admin-item">
-      <div>
-        <strong>${escapeHTML(p.caption || '(sin título)')}</strong><br>
-        <small>${escapeHTML(p.category || '')} · ${p.active ? 'Visible' : 'Oculta'}</small>
-      </div>
-      <div class="admin-actions">
-        <button class="red-btn" onclick="deletePhoto('${p.id}')">ELIMINAR</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-window.deletePhoto = deletePhoto;
-
-// ==================================
-// NUEVO: TIENDA ADMIN
-// ==================================
-
-document.getElementById('shop-form')
-.addEventListener('submit', async e => {
+document.getElementById('shop-form').addEventListener('submit', async e => {
   e.preventDefault();
   const item = {
     name: document.getElementById('shop-name').value.trim(),
@@ -1310,10 +897,8 @@ document.getElementById('shop-form')
     description: document.getElementById('shop-desc').value.trim(),
     active: true
   };
-
   const { error } = await supabase.from('shop').insert(item);
   if(error) { message('Error: ' + error.message); return; }
-
   message('Producto guardado.');
   document.getElementById('shop-form').reset();
   await loadShop();
@@ -1323,15 +908,13 @@ async function deleteShopItem(id) {
   if(!confirm('¿Eliminar este producto?')) return;
   const { error } = await supabase.from('shop').delete().eq('id', id);
   if(error) { message('Error: ' + error.message); return; }
-  message('Producto eliminado.');
-  await loadShop();
+  message('Producto eliminado.'); await loadShop();
 }
 window.deleteShopItem = deleteShopItem;
 
 function renderShopAdmin() {
   const container = document.getElementById('shop-admin-list');
   if(!container) return;
-
   container.innerHTML = shopItems.map(i => `
     <div class="admin-item">
       <div>
@@ -1346,9 +929,8 @@ function renderShopAdmin() {
 }
 
 // ==================================
-// TABS ADMIN
+// TABS Y OFERTAS
 // ==================================
-
 function showTab(name, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-bar button').forEach(b => b.classList.remove('active'));
@@ -1357,107 +939,9 @@ function showTab(name, btn) {
 }
 window.showTab = showTab;
 
-// ==================================
-// IDIOMAS (básico)
-// ==================================
-
-const translations = {
-  es: {
-    nav_inicio: 'Inicio',
-    nav_recargas: 'Recargas',
-    nav_remesas: 'Remesas',
-    nav_tickets: 'Tickets',
-    nav_admin: 'Administración',
-    hero_title: 'Tu puente hacia casa',
-    hero_sub: 'Servicios, conexiones y oportunidades en diferentes países.',
-    banner_title: 'OFERTAS MÁS ECONÓMICAS',
-    gal_title: 'DESTINOS DESTACADOS',
-    gal_sub: 'Hoteles y restaurantes más económicos por zona.',
-    recargas: 'RECARGAS',
-    remesas: 'REMESAS',
-    tickets: 'TICKETS DE AVIÓN',
-    transporte: 'TRANSPORTE',
-    calc: 'CALCULADORA',
-    video: 'VIDEO',
-    juegos: 'JUEGOS GRATIS',
-    enlaces: 'ACCESOS ÚTILES',
-    tienda: 'TIENDA EN LÍNEA',
-    notas: 'NOTAS IMPORTANTES',
-    admin: 'ADMINISTRACIÓN'
-  },
-  en: {
-    nav_inicio: 'Home',
-    nav_recargas: 'Top-ups',
-    nav_remesas: 'Remittances',
-    nav_tickets: 'Tickets',
-    nav_admin: 'Admin',
-    hero_title: 'Your bridge home',
-    hero_sub: 'Services, connections and opportunities in different countries.',
-    banner_title: 'CHEAPEST OFFERS',
-    gal_title: 'FEATURED DESTINATIONS',
-    gal_sub: 'Cheapest hotels and restaurants by area.',
-    recargas: 'TOP-UPS',
-    remesas: 'REMITTANCES',
-    tickets: 'FLIGHT TICKETS',
-    transporte: 'TRANSPORT',
-    calc: 'CALCULATOR',
-    video: 'VIDEO',
-    juegos: 'FREE GAMES',
-    enlaces: 'USEFUL LINKS',
-    tienda: 'ONLINE STORE',
-    notas: 'IMPORTANT NOTES',
-    admin: 'ADMIN'
-  },
-  ru: {
-    nav_inicio: 'Главная',
-    nav_recargas: 'Пополнение',
-    nav_remesas: 'Денежные переводы',
-    nav_tickets: 'Билеты',
-    nav_admin: 'Админ',
-    hero_title: 'Ваш мост домой',
-    hero_sub: 'Услуги, связи и возможности в разных странах.',
-    banner_title: 'САМЫЕ ДЕШЁВЫЕ ПРЕДЛОЖЕНИЯ',
-    gal_title: 'ИЗБРАННЫЕ НАПРАВЛЕНИЯ',
-    gal_sub: 'Самые дешёвые отели и рестораны по районам.',
-    recargas: 'ПОПОЛНЕНИЕ',
-    remesas: 'ПЕРЕВОДЫ',
-    tickets: 'АВИАБИЛЕТЫ',
-    transporte: 'ТРАНСПОРТ',
-    calc: 'КАЛЬКУЛЯТОР',
-    video: 'ВИДЕО',
-    juegos: 'БЕСПЛАТНЫЕ ИГРЫ',
-    enlaces: 'ПОЛЕЗНЫЕ ССЫЛКИ',
-    tienda: 'ИНТЕРНЕТ-МАГАЗИН',
-    notas: 'ВАЖНЫЕ ЗАМЕТКИ',
-    admin: 'АДМИН'
-  }
-};
-
-function setLang(lang, btn) {
-  currentLang = lang;
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if(translations[lang] && translations[lang][key]) {
-      el.textContent = translations[lang][key];
-    }
-  });
-}
-window.setLang = setLang;
-
-// ==================================
-// GUARDAR OFERTA (existente)
-// ==================================
-
-document.getElementById('offer-form')
-.addEventListener('submit', async event => {
-
+document.getElementById('offer-form').addEventListener('submit', async event => {
   event.preventDefault();
-
   const id = document.getElementById('offer-id').value;
-
   const item = {
     category:document.getElementById('category').value,
     title:document.getElementById('title').value.trim(),
@@ -1466,32 +950,17 @@ document.getElementById('offer-form')
     details:document.getElementById('details').value.trim(),
     active:document.getElementById('active').checked
   };
-
   if(id) item.id = id;
 
-  const { error } = await supabase
-    .from('offers')
-    .upsert(item)
-    .select();
-
-  if(error) {
-    message('No se pudo guardar: ' + error.message);
-    return;
-  }
-
-  message('¡Oferta guardada correctamente!');
-  resetForm();
-  await loadOffers();
+  const { error } = await supabase.from('offers').upsert(item).select();
+  if(error) { message('No se pudo guardar: ' + error.message); return; }
+  message('¡Oferta guardada!');
+  resetForm(); await loadOffers();
 });
-
-// ==================================
-// EDITAR / ELIMINAR OFERTA
-// ==================================
 
 window.editOffer = function(id) {
   const item = offers.find(o => o.id === id);
   if(!item) return;
-
   document.getElementById('offer-id').value = item.id;
   document.getElementById('category').value = item.category;
   document.getElementById('title').value = item.title;
@@ -1499,27 +968,15 @@ window.editOffer = function(id) {
   document.getElementById('currency').value = item.currency;
   document.getElementById('details').value = item.details || '';
   document.getElementById('active').checked = item.active;
-
-  document.getElementById('offer-form')
-    .scrollIntoView({behavior:'smooth'});
+  document.getElementById('offer-form').scrollIntoView({behavior:'smooth'});
   message('Editando: ' + item.title);
 };
 
 window.deleteOffer = async function(id) {
   if(!confirm('¿Seguro que deseas eliminar esta oferta?')) return;
-
-  const { error } = await supabase
-    .from('offers')
-    .delete()
-    .eq('id',id);
-
-  if(error) {
-    message('Error eliminando oferta: ' + error.message);
-    return;
-  }
-
-  message('Oferta eliminada.');
-  await loadOffers();
+  const { error } = await supabase.from('offers').delete().eq('id',id);
+  if(error) { message('Error eliminando oferta: ' + error.message); return; }
+  message('Oferta eliminada.'); await loadOffers();
 };
 
 window.resetForm = function() {
@@ -1534,13 +991,8 @@ function renderAdminList() {
     <div class="admin-item">
       <div>
         <strong>${escapeHTML(item.title)}</strong><br>
-        <small>
-          ${escapeHTML(item.category)} ·
-          ${formatPrice(item.price)} ${escapeHTML(item.currency)}
-          · ${item.active ? 'Visible' : 'Oculta'}
-        </small>
+        <small>${escapeHTML(item.category)} · ${formatPrice(item.price)} ${escapeHTML(item.currency)} · ${item.active ? 'Visible' : 'Oculta'}</small>
       </div>
-
       <div class="admin-actions">
         <button class="gold-btn" onclick="editOffer('${item.id}')">EDITAR</button>
         <button class="red-btn" onclick="deleteOffer('${item.id}')">ELIMINAR</button>
@@ -1550,51 +1002,17 @@ function renderAdminList() {
 }
 
 // ==================================
-// TIEMPO REAL
+// INICIALIZACIÓN
 // ==================================
-
-supabase
-  .channel('your-bridge-home-offers')
-  .on('postgres_changes',
-    { event:'*', schema:'public', table:'offers' },
-    () => loadOffers())
-  .subscribe();
-
-supabase
-  .channel('your-bridge-home-photos')
-  .on('postgres_changes',
-    { event:'*', schema:'public', table:'photos' },
-    () => loadPhotos())
-  .subscribe();
-
-supabase
-  .channel('your-bridge-home-shop')
-  .on('postgres_changes',
-    { event:'*', schema:'public', table:'shop' },
-    () => loadShop())
-  .subscribe();
-
-supabase
-  .channel('your-bridge-home-settings')
-  .on('postgres_changes',
-    { event:'*', schema:'public', table:'settings' },
-    () => loadNotes())
-  .subscribe();
-
-// ==================================
-// INICIO
-// ==================================
-
 await loadOffers();
-await loadPhotos();
+await loadProofs();
 await loadShop();
 await loadNotes();
 
-// Añadir data-i18n a los títulos existentes sin romper nada
-document.querySelectorAll('.section-title h2').forEach((el, i) => {
-  const keys = ['', 'recargas', 'remesas', 'tickets'];
-  // no forzamos, es solo mejora progresiva
-});
+supabase.channel('changes-offers').on('postgres_changes', { event:'*', schema:'public', table:'offers' }, () => loadOffers()).subscribe();
+supabase.channel('changes-proofs').on('postgres_changes', { event:'*', schema:'public', table:'proofs' }, () => loadProofs()).subscribe();
+supabase.channel('changes-shop').on('postgres_changes', { event:'*', schema:'public', table:'shop' }, () => loadShop()).subscribe();
+supabase.channel('changes-settings').on('postgres_changes', { event:'*', schema:'public', table:'settings' }, () => loadNotes()).subscribe();
 
 </script>
 
