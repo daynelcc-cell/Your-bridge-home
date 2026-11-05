@@ -9,9 +9,6 @@
   <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <!-- ============================================
-       ESTILOS
-  ============================================ -->
   <style>
     :root{
       --bg:#071629;--panel:#10243c;--panel2:#142d49;
@@ -20,73 +17,46 @@
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{
-      margin:0;background:var(--bg);color:var(--white);
-      font-family:Arial,Helvetica,sans-serif
-    }
+    body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,Helvetica,sans-serif}
     a{text-decoration:none;color:inherit}
     button,input,select,textarea{font:inherit}
     .container{width:min(1160px,92%);margin:auto}
 
     /* HEADER */
-    header{
-      position:sticky;top:0;z-index:50;
-      background:rgba(7,22,41,.97);
-      border-bottom:1px solid var(--line);
-      backdrop-filter:blur(12px)
-    }
-    .header-top{
-      min-height:75px;display:flex;justify-content:space-between;
-      align-items:center;gap:15px;flex-wrap:wrap;padding:12px 0
-    }
+    header{position:sticky;top:0;z-index:50;background:rgba(7,22,41,.97);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+    .header-top{min-height:75px;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;padding:12px 0}
     .logo{display:flex;align-items:center;gap:12px}
-    .logo-mark{
-      width:46px;height:46px;border-radius:14px;
-      display:grid;place-items:center;background:var(--gold);
-      color:var(--bg);font-weight:900;font-size:20px
-    }
+    .logo-mark{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--gold);color:var(--bg);font-weight:900;font-size:20px}
     .logo strong{display:block;letter-spacing:1px}
     .logo small{color:var(--muted);font-size:11px}
-    .lang,.field input,.field select,.field textarea{
-      background:#071629;color:white;border:1px solid var(--line);
-      border-radius:10px;padding:12px;width:100%
-    }
+    .lang,.field input,.field select,.field textarea{background:#071629;color:white;border:1px solid var(--line);border-radius:10px;padding:12px;width:100%}
     .lang{width:auto}
     nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:12px}
-    nav a{
-      white-space:nowrap;padding:10px 13px;border-radius:9px;
-      color:var(--muted);font-size:13px;font-weight:bold
-    }
+    nav a{white-space:nowrap;padding:10px 13px;border-radius:9px;color:var(--muted);font-size:13px;font-weight:bold}
     nav a:hover{background:var(--panel);color:var(--gold)}
 
     /* BOTONES */
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      border:0;border-radius:11px;padding:12px 17px;
-      background:var(--gold);color:#172338;font-weight:bold
-    }
+    .btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:11px;padding:12px 17px;background:var(--gold);color:#172338;font-weight:bold}
     .btn-whatsapp{background:#20bd75;color:#062719}
     .btn-outline{background:transparent;color:white;border:1px solid var(--line)}
 
+    /* RELOJ */
+    .clock{
+      background:#071629;color:var(--gold);border:1px solid var(--line);
+      border-radius:10px;padding:10px 14px;font-size:13px;font-weight:bold;
+      letter-spacing:0.5px;white-space:nowrap;font-variant-numeric:tabular-nums;
+      display:inline-flex;align-items:center;gap:6px;
+    }
+    .clock::before{content:"🕒";font-size:14px}
+    .footer-clock{color:var(--gold);font-weight:bold;font-variant-numeric:tabular-nums}
+
     /* HERO */
     .hero{padding:38px 0 25px}
-    .hero-box{
-      border:1px solid #35506b;border-radius:25px;
-      padding:clamp(24px,5vw,55px);
-      background:
-        radial-gradient(circle at 90% 10%,#46d6df25,transparent 32%),
-        radial-gradient(circle at 10% 100%,#e8bd6225,transparent 35%),
-        linear-gradient(120deg,#10243c,#0b1b30)
-    }
+    .hero-box{border:1px solid #35506b;border-radius:25px;padding:clamp(24px,5vw,55px);background:radial-gradient(circle at 90% 10%,#46d6df25,transparent 32%),radial-gradient(circle at 10% 100%,#e8bd6225,transparent 35%),linear-gradient(120deg,#10243c,#0b1b30)}
     .eyebrow{color:var(--gold);font-size:12px;font-weight:bold;letter-spacing:2px}
     h1{font-size:clamp(32px,6vw,58px);line-height:1.05;margin:14px 0}
     .hero p,.section-head p{color:var(--muted);line-height:1.7}
-    .hero-offer{
-      margin-top:25px;padding:19px;border-radius:16px;
-      border:1px solid #e8bd6260;background:#050f1c70;
-      display:flex;justify-content:space-between;align-items:center;
-      gap:15px;flex-wrap:wrap
-    }
+    .hero-offer{margin-top:25px;padding:19px;border-radius:16px;border:1px solid #e8bd6260;background:#050f1c70;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
     .hero-offer small{color:var(--gold);font-weight:bold}
     .hero-offer h2{margin:7px 0;font-size:25px}
     .hero-offer p{margin:0}
@@ -97,35 +67,25 @@
     .section-head{margin-bottom:20px}
     .section-head h2{font-size:clamp(23px,4vw,32px);margin:0 0 8px}
 
-    /* TARJETAS DE SERVICIOS */
+    /* TARJETAS */
     .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-    .card{
-      background:linear-gradient(160deg,var(--panel2),var(--panel));
-      border:1px solid var(--line);border-radius:18px;padding:21px;
-      display:flex;flex-direction:column;min-height:220px
-    }
-    .tag{
-      color:var(--gold);background:#e8bd621c;
-      padding:7px 9px;border-radius:20px;font-size:10px;font-weight:bold
-    }
+    .card{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:21px;display:flex;flex-direction:column;min-height:220px}
+    .tag{color:var(--gold);background:#e8bd621c;padding:7px 9px;border-radius:20px;font-size:10px;font-weight:bold}
     .card h3{font-size:20px;margin:18px 0 8px}
     .card p{color:var(--muted);line-height:1.55}
     .card-price{font-size:27px;color:var(--gold);font-weight:900;margin-top:auto}
     .card .btn{margin-top:16px;width:100%}
     .empty{color:var(--muted);padding:22px;border:1px dashed var(--line);border-radius:14px;grid-column:1/-1}
 
-    /* EXPLORA */
+    /* EXPLORA Y PANELES */
     .two-col{display:grid;grid-template-columns:1fr 1fr;gap:17px}
-    .panel,.rate,.link-card{
-      background:var(--panel);border:1px solid var(--line);
-      border-radius:17px;padding:20px
-    }
+    .panel,.rate,.link-card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:20px}
     .link-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
     .link-card{display:block}
     .link-card strong{display:block;color:var(--gold);margin-bottom:7px}
     .link-card span{font-size:13px;color:var(--muted);line-height:1.5}
 
-    /* CALCULADORA */
+    /* FORMULARIOS */
     .field{display:flex;flex-direction:column;gap:7px;margin:12px 0}
     .field label{font-size:13px;color:var(--muted)}
     .result{padding:15px;background:#071629;border:1px solid var(--line);border-radius:12px}
@@ -136,37 +96,19 @@
     .rate small{color:var(--muted)}
     .rate strong{display:block;font-size:22px;color:var(--gold);margin-top:9px}
 
-    /* INFORMACIÓN */
-    .notice{
-      padding:18px;background:var(--panel);
-      border-left:4px solid var(--gold);border-radius:10px;line-height:1.7
-    }
-
-    /* ESTADOS */
+    /* ESTADOS Y AVISOS */
+    .notice{padding:18px;background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;line-height:1.7}
     .status{font-size:12px;color:var(--muted);margin-top:12px}
     .online{color:var(--green)}
     .error{color:#ff9a9a}
-
-    /* ADMIN */
-    .admin-info{
-      background:#e8bd6210;border:1px solid #e8bd6250;
-      padding:16px;border-radius:13px;line-height:1.7
-    }
+    .admin-info{background:#e8bd6210;border:1px solid #e8bd6250;padding:16px;border-radius:13px;line-height:1.7}
 
     /* FOOTER */
-    footer{
-      margin-top:35px;padding:30px 0;background:#050f1c;
-      border-top:1px solid var(--line);color:var(--muted);
-      font-size:13px;line-height:1.8
-    }
+    footer{margin-top:35px;padding:30px 0;background:#050f1c;border-top:1px solid var(--line);color:var(--muted);font-size:13px;line-height:1.8}
     .footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 
-    /* BOTÓN FLOTANTE */
-    .whatsapp-float{
-      position:fixed;right:18px;bottom:18px;z-index:40;
-      border-radius:50px;padding:14px 19px;
-      background:#20bd75;color:#062719;font-weight:bold
-    }
+    /* FLOTANTE */
+    .whatsapp-float{position:fixed;right:18px;bottom:18px;z-index:40;border-radius:50px;padding:14px 19px;background:#20bd75;color:#062719;font-weight:bold}
 
     /* RESPONSIVE */
     @media(max-width:800px){
@@ -178,15 +120,14 @@
       .grid,.two-col,.link-grid{grid-template-columns:1fr}
       .header-top{align-items:flex-start}
       nav a{padding:9px 11px}
+      .clock{font-size:12px;padding:8px 10px}
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ============================================
-       HEADER
-  ============================================ -->
+  <!-- HEADER -->
   <header>
     <div class="container">
       <div class="header-top">
@@ -197,7 +138,8 @@
             <small>Tu puente hacia nuevas oportunidades</small>
           </div>
         </a>
-        <div style="display:flex;gap:9px;align-items:center">
+        <div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap">
+          <span class="clock" id="liveClock">--:--:--</span>
           <select class="lang" id="language">
             <option value="es">ES</option>
             <option value="ru">RU</option>
@@ -218,11 +160,7 @@
     </div>
   </header>
 
-  <!-- ============================================
-       MAIN
-  ============================================ -->
   <main>
-
     <!-- HERO -->
     <section class="hero" id="inicio">
       <div class="container">
@@ -230,7 +168,7 @@
           <div class="eyebrow">YOUR BRIDGE HOME · 2026</div>
           <h1 id="heroTitle">Tu conexión con el mundo.</h1>
           <p id="heroText">Recargas, remesas, vuelos y servicios para acercarte a lo que más importa. Atención directa y ofertas actualizadas.</p>
-
+          
           <div class="hero-offer">
             <div>
               <small>OFERTA DESTACADA</small>
@@ -269,24 +207,12 @@
           <p>Encuentra ideas para tus próximos viajes y experiencias.</p>
         </div>
         <div class="link-grid">
-          <a class="link-card" href="https://www.google.com/travel/" target="_blank" rel="noopener">
-            <strong>✈️ Viajes y destinos</strong><span>Explora destinos y vuelos.</span>
-          </a>
-          <a class="link-card" href="https://www.booking.com/" target="_blank" rel="noopener">
-            <strong>🏨 Hoteles</strong><span>Consulta alojamientos.</span>
-          </a>
-          <a class="link-card" href="https://www.google.com/maps" target="_blank" rel="noopener">
-            <strong>🍽️ Restaurantes y ocio</strong><span>Descubre lugares y actividades.</span>
-          </a>
-          <a class="link-card" href="https://www.visaindex.com/" target="_blank" rel="noopener">
-            <strong>🌍 Visa Index</strong><span>Consulta requisitos de viaje.</span>
-          </a>
-          <a class="link-card" href="https://www.meteoblue.com/" target="_blank" rel="noopener">
-            <strong>🌤️ Pronóstico del tiempo</strong><span>Consulta el clima en tu destino.</span>
-          </a>
-          <a class="link-card" href="https://www.skyscanner.net/" target="_blank" rel="noopener">
-            <strong>🧳 Comparar viajes</strong><span>Compara opciones de vuelos.</span>
-          </a>
+          <a class="link-card" href="https://www.google.com/travel/" target="_blank" rel="noopener"><strong>✈️ Viajes y destinos</strong><span>Explora destinos y vuelos.</span></a>
+          <a class="link-card" href="https://www.booking.com/" target="_blank" rel="noopener"><strong>🏨 Hoteles</strong><span>Consulta alojamientos.</span></a>
+          <a class="link-card" href="https://www.google.com/maps" target="_blank" rel="noopener"><strong>🍽️ Restaurantes y ocio</strong><span>Descubre lugares y actividades.</span></a>
+          <a class="link-card" href="https://www.visaindex.com/" target="_blank" rel="noopener"><strong>🌍 Visa Index</strong><span>Consulta requisitos de viaje.</span></a>
+          <a class="link-card" href="https://www.meteoblue.com/" target="_blank" rel="noopener"><strong>🌤️ Pronóstico del tiempo</strong><span>Consulta el clima en tu destino.</span></a>
+          <a class="link-card" href="https://www.skyscanner.net/" target="_blank" rel="noopener"><strong>🧳 Comparar viajes</strong><span>Compara opciones de vuelos.</span></a>
         </div>
       </div>
     </section>
@@ -334,9 +260,7 @@
           <h2>Información importante</h2>
           <p>Avisos y novedades de YOUR BRIDGE HOME.</p>
         </div>
-        <div class="notice" id="publicNotice">
-          Bienvenido a YOUR BRIDGE HOME. Consulta nuestras novedades.
-        </div>
+        <div class="notice" id="publicNotice">Bienvenido a YOUR BRIDGE HOME. Consulta nuestras novedades.</div>
       </div>
     </section>
 
@@ -400,12 +324,9 @@
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- ============================================
-       FOOTER
-  ============================================ -->
+  <!-- FOOTER -->
   <footer>
     <div class="container footer-row">
       <div>
@@ -413,20 +334,23 @@
         Daynel Caminero · Administrador<br>
         +7904-631-95-65<br>daynelcc@gmail.com
       </div>
-      <div>© 2026 YOUR BRIDGE HOME<br>Todos los derechos reservados.</div>
+      <div>
+        © 2026 YOUR BRIDGE HOME<br>
+        Todos los derechos reservados.<br>
+        <span class="footer-clock" id="footerClock">--</span>
+      </div>
     </div>
   </footer>
 
-  <!-- BOTÓN FLOTANTE WHATSAPP -->
   <a class="whatsapp-float" id="floatingWhatsApp" target="_blank" rel="noopener">WhatsApp</a>
 
-  <!-- ============================================
-       JAVASCRIPT
-  ============================================ -->
+  <!-- JAVASCRIPT -->
   <script>
     /* =============================================
-       1. CONFIGURACIÓN
+       1. CONFIGURACIÓN SUPABASE
     ============================================= */
+    const SUPABASE_URL = "https://wvhptkcmlyifnieqbgnq.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7";
     const TABLE = "ybh_contenido";
     const PHONE = "79046319565";
 
@@ -434,46 +358,18 @@
        2. DATOS POR DEFECTO
     ============================================= */
     const defaultOffers = [
-      {
-        id: "default-1",
-        tipo: "recarga",
-        titulo: "INTERNET +",
-        descripcion: "2 GB LTE + 300 MB.cu",
-        precio: 350,
-        moneda: "₽",
-        etiqueta: "OFERTA",
-        activo: true,
-        orden: 1
-      },
-      {
-        id: "default-2",
-        tipo: "remesa",
-        titulo: "Remesas a Cuba",
-        descripcion: "1.000 rublos = 9.80 CUP en Cuba",
-        precio: 1000,
-        moneda: "₽",
-        etiqueta: "REMESAS",
-        activo: true,
-        orden: 2
-      },
-      {
-        id: "default-3",
-        tipo: "vuelo",
-        titulo: "Ticket de avión",
-        descripcion: "Precio de referencia. Consulta fechas y disponibilidad.",
-        precio: 99800,
-        moneda: "₽",
-        etiqueta: "VUELOS",
-        activo: true,
-        orden: 3
-      }
+      { id:"default-1", tipo:"recarga", titulo:"INTERNET +", descripcion:"2 GB LTE + 300 MB.cu", precio:350, moneda:"₽", etiqueta:"OFERTA", activo:true, orden:1 },
+      { id:"default-2", tipo:"remesa", titulo:"Remesas a Cuba", descripcion:"1.000 rublos = 9.80 CUP en Cuba", precio:1000, moneda:"₽", etiqueta:"REMESAS", activo:true, orden:2 },
+      { id:"default-3", tipo:"vuelo", titulo:"Ticket de avión", descripcion:"Precio de referencia. Consulta fechas y disponibilidad.", precio:99800, moneda:"₽", etiqueta:"VUELOS", activo:true, orden:3 }
     ];
 
     /* =============================================
        3. ESTADO GLOBAL
     ============================================= */
+    let db = null;
     let offers = [...defaultOffers];
     let bannerIndex = 0;
+    let realtimeChannel = null;
 
     /* =============================================
        4. UTILIDADES
@@ -484,13 +380,7 @@
 
     function esc(value){
       return String(value ?? "").replace(/[&<>"']/g, function(c){
-        return {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#039;"
-        }[c];
+        return { "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[c];
       });
     }
 
@@ -508,7 +398,7 @@
     }
 
     /* =============================================
-       5. RENDERIZADO DE OFERTAS
+       5. RENDERIZADO
     ============================================= */
     function offerCard(item){
       const title = esc(item.titulo || item.title || "Servicio");
@@ -531,7 +421,6 @@
     function renderBanner(){
       const active = offers.filter(x => x.activo !== false);
       if(!active.length) return;
-
       bannerIndex = bannerIndex % active.length;
       const item = active[bannerIndex];
       const title = item.titulo || item.title || "Oferta";
@@ -541,9 +430,7 @@
       document.getElementById("bannerTitle").textContent = title;
       document.getElementById("bannerDescription").textContent = description;
       document.getElementById("bannerPrice").textContent = price;
-      document.getElementById("bannerContact").href = wa(
-        "Hola, quiero información sobre " + title + ". Precio: " + price
-      );
+      document.getElementById("bannerContact").href = wa("Hola, quiero información sobre " + title + ". Precio: " + price);
     }
 
     function renderOffers(){
@@ -556,18 +443,58 @@
         grid.innerHTML = '<div class="empty">No hay ofertas publicadas actualmente.</div>';
         return;
       }
-
       grid.innerHTML = active.map(offerCard).join("");
       renderBanner();
     }
 
     /* =============================================
-       6. CARGA DE DATOS (SIN CONTRASEÑA)
+       6. SUPABASE: CARGA Y TIEMPO REAL
     ============================================= */
-    function loadOffers(){
-      offers = [...defaultOffers];
-      renderOffers();
-      connectionMessage("Información cargada correctamente.", "online");
+    async function loadOffers(){
+      if(!db) return;
+      try{
+        const { data, error } = await db
+          .from(TABLE)
+          .select("*")
+          .order("orden", { ascending: true });
+
+        if(error) throw error;
+
+        offers = (data && data.length) ? data : [...defaultOffers];
+        renderOffers();
+        connectionMessage("Conectado. Información sincronizada con Supabase.", "online");
+      }catch(error){
+        console.error("Supabase:", error);
+        connectionMessage("No se pudo cargar Supabase. Comprueba tabla, clave y permisos.", "error");
+      }
+    }
+
+    function enableRealtime(){
+      if(!db) return;
+      realtimeChannel = db
+        .channel("ybh-public-updates")
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: TABLE },
+          function(){ loadOffers(); }
+        )
+        .subscribe(function(status){
+          if(status === "SUBSCRIBED"){
+            connectionMessage("En directo: recibirás las modificaciones automáticamente.", "online");
+          }
+        });
+    }
+
+    function connectSupabase(){
+      if(!window.supabase) return;
+      try{
+        db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        loadOffers();
+        enableRealtime();
+      }catch(error){
+        console.error(error);
+        connectionMessage("No se pudo iniciar Supabase.", "error");
+      }
     }
 
     /* =============================================
@@ -594,11 +521,7 @@
         const name = document.getElementById("clientName").value.trim();
         const service = document.getElementById("clientService").value;
         const message = document.getElementById("clientMessage").value.trim();
-
-        const text = "Hola, soy " + name +
-          ". Servicio: " + service +
-          ". Consulta: " + message;
-
+        const text = "Hola, soy " + name + ". Servicio: " + service + ". Consulta: " + message;
         window.open(wa(text), "_blank", "noopener");
       });
     }
@@ -610,7 +533,6 @@
       ["USD", "MLC", "EUR", "BTC"].forEach(code => {
         document.getElementById("rate" + code).textContent = "Consultar";
       });
-
       document.getElementById("publicNotice").textContent =
         "Bienvenido a YOUR BRIDGE HOME. Consulta nuestras novedades y ofertas.";
     }
@@ -619,56 +541,59 @@
        10. IDIOMAS
     ============================================= */
     const translations = {
-      es: {
-        home: "Inicio", services: "Servicios", explore: "Explora",
-        calculator: "Calculadora", rates: "Tasas", info: "Información", contact: "Contacto",
-        title: "Tu conexión con el mundo.",
-        description: "Recargas, remesas, vuelos y servicios para acercarte a lo que más importa."
-      },
-      ru: {
-        home: "Главная", services: "Услуги", explore: "Откройте мир",
-        calculator: "Калькулятор", rates: "Курсы", info: "Информация", contact: "Контакты",
-        title: "Ваша связь с миром.",
-        description: "Пополнение, переводы, авиабилеты и услуги."
-      },
-      en: {
-        home: "Home", services: "Services", explore: "Explore",
-        calculator: "Calculator", rates: "Rates", info: "Information", contact: "Contact",
-        title: "Your connection to the world.",
-        description: "Mobile top-ups, remittances, flights and services."
-      }
+      es: { home:"Inicio", services:"Servicios", explore:"Explora", calculator:"Calculadora", rates:"Tasas", info:"Información", contact:"Contacto", title:"Tu conexión con el mundo.", description:"Recargas, remesas, vuelos y servicios para acercarte a lo que más importa." },
+      ru: { home:"Главная", services:"Услуги", explore:"Откройте мир", calculator:"Калькулятор", rates:"Курсы", info:"Информация", contact:"Контакты", title:"Ваша связь с миром.", description:"Пополнение, переводы, авиабилеты и услуги." },
+      en: { home:"Home", services:"Services", explore:"Explore", calculator:"Calculator", rates:"Rates", info:"Information", contact:"Contact", title:"Your connection to the world.", description:"Mobile top-ups, remittances, flights and services." }
     };
 
     function changeLanguage(code){
       const t = translations[code] || translations.es;
       const nav = document.querySelectorAll("nav a");
       const keys = ["home", "services", "explore", "calculator", "rates", "info", "contact"];
-
-      nav.forEach((item, index) => {
-        if(t[keys[index]]) item.textContent = t[keys[index]];
-      });
-
+      nav.forEach((item, index) => { if(t[keys[index]]) item.textContent = t[keys[index]]; });
       document.getElementById("heroTitle").textContent = t.title;
       document.getElementById("heroText").textContent = t.description;
       document.documentElement.lang = code;
     }
 
     /* =============================================
-       11. EVENTOS E INICIALIZACIÓN
+       11. RELOJ EN VIVO
     ============================================= */
-    document.getElementById("language").addEventListener("change", function(){
-      changeLanguage(this.value);
-    });
+    function updateClock(){
+      const now = new Date();
+      const clockEl = document.getElementById("liveClock");
+      const footerEl = document.getElementById("footerClock");
 
+      const hh = String(now.getHours()).padStart(2, "0");
+      const mm = String(now.getMinutes()).padStart(2, "0");
+      const ss = String(now.getSeconds()).padStart(2, "0");
+
+      const days = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
+      const months = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
+
+      if(clockEl) clockEl.textContent = hh + ":" + mm + ":" + ss;
+      if(footerEl){
+        footerEl.textContent =
+          days[now.getDay()] + " " + now.getDate() + " " + months[now.getMonth()] +
+          " " + now.getFullYear() + " · " + hh + ":" + mm + ":" + ss;
+      }
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    /* =============================================
+       12. INICIALIZACIÓN
+    ============================================= */
+    document.getElementById("language").addEventListener("change", function(){ changeLanguage(this.value); });
     document.getElementById("rubles").addEventListener("input", calculateRemittance);
 
     setupContact();
     setupRates();
     calculateRemittance();
     changeLanguage("es");
-    loadOffers();
+    connectSupabase();
 
-    /* Banner rotativo cada 20 segundos */
     setInterval(function(){
       const active = offers.filter(x => x.activo !== false);
       if(active.length > 1){
@@ -676,6 +601,8 @@
         renderBanner();
       }
     }, 20000);
+
+    setInterval(function(){ if(db) loadOffers(); }, 60000);
   </script>
 </body>
 </html>
