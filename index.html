@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -364,21 +363,7 @@ footer {
 
   <div class="admin">
 
-    <div id="login-panel">
-      <h2>Acceso administrador</h2>
-
-      <label>Correo electrónico</label>
-      <input type="email" id="email" placeholder="Tu correo">
-
-      <label>Contraseña</label>
-      <input type="password" id="password" placeholder="Tu contraseña">
-
-      <button class="gold-btn" onclick="login()">
-        INICIAR SESIÓN
-      </button>
-    </div>
-
-    <div id="admin-panel" class="hidden">
+    <div id="admin-panel">
 
       <h2>Gestionar ofertas</h2>
 
@@ -431,11 +416,6 @@ footer {
       <h2 style="margin-top:30px">Ofertas registradas</h2>
 
       <div id="admin-list"></div>
-
-      <button class="red-btn" onclick="logout()"
-      style="margin-top:20px">
-        CERRAR SESIÓN
-      </button>
     </div>
 
     <div id="status" class="status"></div>
@@ -611,81 +591,6 @@ setInterval(() => {
 }, 5000);
 
 // ==================================
-// INICIAR SESIÓN
-// ==================================
-
-window.login = async function() {
-
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
-
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password
-  });
-
-  if(error) {
-    message('Acceso incorrecto: ' + error.message);
-    return;
-  }
-
-  await checkSession();
-};
-
-// ==================================
-// COMPROBAR ADMINISTRADOR
-// ==================================
-
-async function checkSession() {
-
-  const { data: { user } } =
-    await supabase.auth.getUser();
-
-  if(!user) {
-    showLoggedOut();
-    return;
-  }
-
-  const { data: isAdmin, error } = await supabase
-    .rpc('is_app_admin');
-
-  if(error || !isAdmin) {
-    await supabase.auth.signOut();
-    showLoggedOut();
-    message('Este usuario no tiene permisos de administrador.');
-    return;
-  }
-
-  document.getElementById('login-panel')
-    .classList.add('hidden');
-
-  document.getElementById('admin-panel')
-    .classList.remove('hidden');
-
-  message('Sesión de administrador activa.');
-
-  renderAdminList();
-}
-
-function showLoggedOut() {
-  document.getElementById('login-panel')
-    .classList.remove('hidden');
-
-  document.getElementById('admin-panel')
-    .classList.add('hidden');
-}
-
-// ==================================
-// CERRAR SESIÓN
-// ==================================
-
-window.logout = async function() {
-  await supabase.auth.signOut();
-  showLoggedOut();
-  message('Sesión cerrada.');
-};
-
-// ==================================
 // GUARDAR OFERTA
 // ==================================
 
@@ -693,14 +598,6 @@ document.getElementById('offer-form')
 .addEventListener('submit', async event => {
 
   event.preventDefault();
-
-  const { data: { user } } =
-    await supabase.auth.getUser();
-
-  if(!user) {
-    message('Debes iniciar sesión.');
-    return;
-  }
 
   const id = document.getElementById('offer-id').value;
 
@@ -845,11 +742,6 @@ supabase
 // ==================================
 
 await loadOffers();
-await checkSession();
-
-supabase.auth.onAuthStateChange(() => {
-  setTimeout(checkSession, 0);
-});
 
 </script>
 
