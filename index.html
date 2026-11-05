@@ -1,4962 +1,625 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#071629">
-
 <title>YOUR BRIDGE HOME</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 <style>
-
 :root{
-    --bg:#071629;
-    --panel:#10243c;
-    --gold:#e8b94f;
-    --white:#ffffff;
-    --muted:#aabbd0;
-    --green:#19c58a;
-    --red:#ff6464;
-    --blue:#2a6fd6;
+ --bg:#071629;--panel:#10243c;--panel2:#142e49;
+ --gold:#f3bd55;--cyan:#35d5d0;--white:#f5f8fc;
+ --muted:#a9bbce;--line:#28415c;--red:#ff7777;
 }
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-    background:var(--bg);
-    color:var(--white);
-    font-family:Arial,sans-serif;
-    line-height:1.5;
+ margin:0;background:radial-gradient(circle at top right,#183b58 0,#071629 48%);
+ color:var(--white);font-family:Arial,Helvetica,sans-serif;
 }
-
-a{
-    color:inherit;
-}
-
-button{
-    cursor:pointer;
-    border:0;
-    font-family:inherit;
-}
-
-img{
-    max-width:100%;
-}
-
-/* =========================
-   PROMO
-========================= */
-
-.promo-bar{
-    background:linear-gradient(90deg,#d32f2f,#e8b94f);
-    color:#071629;
-    text-align:center;
-    padding:9px;
-    font-weight:bold;
-    font-size:14px;
-    position:relative;
-    z-index:1000;
-}
-
-.promo-bar span{
-    background:rgba(0,0,0,.8);
-    color:#fff;
-    padding:3px 8px;
-    border-radius:5px;
-    margin-left:5px;
-}
-
-/* =========================
-   HEADER
-========================= */
-
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
 header{
-    padding:22px 6%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:15px;
-    background:#091c32;
-    border-bottom:1px solid #263d56;
+ position:sticky;top:0;z-index:50;background:#071629ed;
+ backdrop-filter:blur(14px);border-bottom:1px solid var(--line);
 }
-
-.logo{
-    color:var(--gold);
-    font-size:25px;
-    font-weight:900;
+.top{
+ max-width:1200px;margin:auto;padding:14px 18px;
+ display:flex;align-items:center;justify-content:space-between;gap:14px;
 }
-
-.logo small{
-    display:block;
-    font-size:10px;
-    letter-spacing:3px;
-    color:#fff;
-    margin-top:5px;
+.logo{font-size:20px;font-weight:900;letter-spacing:1px}
+.logo span{color:var(--gold)}
+.nav{display:flex;gap:8px;overflow-x:auto;padding:5px}
+.nav a{
+ white-space:nowrap;padding:10px 13px;border-radius:20px;
+ color:var(--muted);font-size:13px
 }
-
-nav{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    align-items:center;
-}
-
-nav a{
-    text-decoration:none;
-    color:#fff;
-    padding:10px 14px;
-    border-radius:20px;
-    font-size:14px;
-}
-
-nav a:hover{
-    background:var(--gold);
-    color:#071629;
-}
-
-.lang-btn{
-    background:#17395d;
-    color:#fff;
-    border:1px solid #29415d;
-    padding:8px 12px;
-    border-radius:20px;
-    font-size:12px;
-}
-
-.lang-btn.active{
-    background:var(--gold);
-    color:#071629;
-}
-
-/* =========================
-   HERO
-========================= */
-
+.nav a:hover{background:var(--panel2);color:white}
+.lang{background:var(--panel);color:white;border:1px solid var(--line);padding:9px;border-radius:12px}
+main{max-width:1200px;margin:auto;padding:20px 16px 60px}
 .hero{
-    padding:55px 6% 20px;
-    text-align:center;
+ border:1px solid #42617c;border-radius:26px;padding:30px 24px;
+ background:linear-gradient(125deg,#173b59,#10243c 55%,#263d55);
+ position:relative;overflow:hidden;
 }
-
-.hero h1{
-    font-size:clamp(30px,5vw,48px);
-    margin-bottom:12px;
+.hero:after{
+ content:"";position:absolute;width:220px;height:220px;border-radius:50%;
+ background:#35d5d018;right:-60px;top:-80px;
 }
-
-.hero h1 span{
-    color:var(--gold);
+.eyebrow{color:var(--cyan);font-weight:bold;letter-spacing:2px;font-size:11px}
+h1{font-size:clamp(30px,6vw,54px);margin:12px 0}
+.hero p{color:var(--muted);max-width:650px;line-height:1.6}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.btn{
+ border:0;border-radius:13px;padding:12px 17px;font-weight:bold;
+ background:var(--gold);color:#172334;display:inline-flex;gap:8px;
+ align-items:center;justify-content:center
 }
-
-.hero p{
-    color:var(--muted);
-}
-
-/* =========================
-   WEATHER
-========================= */
-
-.weather-widget{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    margin:0 auto 20px;
-    flex-wrap:wrap;
-    width:88%;
-}
-
-.weather-box{
-    background:var(--panel);
-    border:1px solid #29415d;
-    border-radius:15px;
-    padding:12px 25px;
-    display:flex;
-    align-items:center;
-    gap:15px;
-    color:#fff;
-    font-size:16px;
-    box-shadow:0 4px 10px rgba(0,0,0,.3);
-}
-
-.weather-box strong{
-    color:var(--gold);
-    font-size:20px;
-}
-
-.weather-box img{
-    width:40px;
-    height:40px;
-}
-
-/* =========================
-   BANNER
-========================= */
-
-.banner{
-    margin:20px auto;
-    width:88%;
-    padding:25px;
-    border-radius:18px;
-    background:linear-gradient(120deg,#17395d,#78531d);
-    border:1px solid var(--gold);
-    text-align:center;
-    min-height:145px;
-}
-
-.banner h2{
-    color:var(--gold);
-    margin-bottom:10px;
-}
-
-.banner h3{
-    font-size:24px;
-    margin-bottom:8px;
-}
-
-.banner p{
-    color:#eee;
-}
-
-/* =========================
-   SECTIONS
-========================= */
-
-section{
-    padding:35px 6%;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:28px;
-}
-
-.section-title h2{
-    font-size:27px;
-    color:var(--gold);
-    margin-bottom:8px;
-}
-
-.section-title p{
-    color:var(--muted);
-}
-
-.grid{
-    display:grid;
-    grid-template-columns:
-        repeat(auto-fit,minmax(230px,1fr));
-    gap:20px;
-}
-
-/* =========================
-   CARDS
-========================= */
-
+.btn.secondary{background:var(--panel2);color:white;border:1px solid var(--line)}
+.btn.danger{background:#5a2832;color:white}
+.section{margin-top:35px;scroll-margin-top:95px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:15px}
+h2{font-size:24px;margin:0 0 6px}
+.sub{color:var(--muted);font-size:13px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
 .card{
-    background:var(--panel);
-    border:1px solid #29415d;
-    padding:25px;
-    border-radius:17px;
-    transition:.25s;
-    position:relative;
+ background:linear-gradient(145deg,var(--panel),#0c1d31);
+ border:1px solid var(--line);border-radius:19px;padding:19px;
+ box-shadow:0 10px 28px #0002;min-width:0
 }
-
-.card:hover{
-    transform:translateY(-5px);
-    border-color:var(--gold);
+.card .symbol{
+ width:44px;height:44px;border-radius:14px;background:#35d5d01a;
+ display:grid;place-items:center;color:var(--cyan);font-size:20px;margin-bottom:14px
 }
-
-.card h3{
-    color:var(--gold);
-    margin-bottom:13px;
+.card h3{margin:5px 0 9px;font-size:18px}
+.card p{color:var(--muted);line-height:1.5;font-size:13px}
+.price{font-size:25px;color:var(--gold);font-weight:900;margin:12px 0}
+.tag{display:inline-block;background:#35d5d01c;color:var(--cyan);padding:6px 9px;border-radius:20px;font-size:10px;font-weight:bold}
+.banner{
+ margin-top:17px;padding:16px 18px;border-radius:16px;
+ background:linear-gradient(90deg,#4a3820,#203d50);
+ border:1px solid #80643b;display:flex;align-items:center;gap:12px
 }
-
-.price{
-    font-size:27px;
-    font-weight:bold;
-    margin:15px 0;
+.banner i{font-size:24px;color:var(--gold)}
+.banner strong{color:var(--gold)}
+.panel{
+ background:var(--panel);border:1px solid var(--line);
+ border-radius:19px;padding:20px
 }
-
-.card p{
-    color:var(--muted);
+input,textarea,select{
+ width:100%;padding:12px;border:1px solid var(--line);
+ border-radius:11px;background:#081a2d;color:white;margin:6px 0 12px
 }
-
-.category-label{
-    font-size:11px;
-    color:var(--green);
-    text-transform:uppercase;
-    letter-spacing:2px;
+textarea{min-height:95px;resize:vertical}
+label{font-size:12px;color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.result{color:var(--cyan);font-weight:bold;margin-top:10px;line-height:1.5}
+.notice{border-left:3px solid var(--gold);padding:12px 14px;background:#ffffff08;border-radius:8px;margin:10px 0}
+footer{border-top:1px solid var(--line);padding:25px 15px;text-align:center;color:var(--muted);font-size:12px}
+.hidden{display:none!important}
+.admin-box{border:1px solid var(--gold);background:#172b40}
+.admin-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.admin-row small{color:var(--muted)}
+.pulse{animation:pulse 2.8s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px #35d5d00b}}
+@media(max-width:700px){
+ .top{flex-wrap:wrap}
+ .nav{order:3;width:100%}
+ .hero{padding:25px 19px}
+ .section-head{align-items:start;flex-direction:column}
 }
-
-.btn-share{
-    position:absolute;
-    top:15px;
-    right:15px;
-    background:#25d366;
-    color:#fff;
-    width:30px;
-    height:30px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-decoration:none;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-button{
-    padding:12px 18px;
-    border-radius:9px;
-    font-weight:bold;
-}
-
-.gold-btn{
-    background:var(--gold);
-    color:#071629;
-}
-
-.green-btn{
-    background:var(--green);
-    color:#071629;
-}
-
-.red-btn{
-    background:var(--red);
-    color:#fff;
-}
-
-.blue-btn{
-    background:var(--blue);
-    color:#fff;
-}
-
-/* =========================
-   INPUTS
-========================= */
-
-input,
-select,
-textarea{
-    width:100%;
-    padding:13px;
-    border-radius:8px;
-    border:1px solid #40536b;
-    background:#091a2d;
-    color:#fff;
-    margin:7px 0 15px;
-    font-family:inherit;
-}
-
-input[type="checkbox"]{
-    width:auto;
-}
-
-label{
-    color:var(--muted);
-    font-size:13px;
-}
-
-/* =========================
-   ADMIN
-========================= */
-
-.admin{
-    background:var(--panel);
-    border:1px solid var(--gold);
-    padding:25px;
-    border-radius:17px;
-    max-width:900px;
-    margin:auto;
-}
-
-.admin h2{
-    color:var(--gold);
-    margin-bottom:20px;
-}
-
-.admin-actions{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-top:10px;
-}
-
-.admin-item{
-    background:#091a2d;
-    padding:15px;
-    margin-top:12px;
-    border-radius:10px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
-.status{
-    color:var(--green);
-    margin:12px 0;
-    font-size:14px;
-    font-weight:bold;
-    min-height:20px;
-}
-
-/* =========================
-   TABS
-========================= */
-
-.tab-bar{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-bottom:18px;
-}
-
-.tab-bar button{
-    background:#091a2d;
-    color:#fff;
-    border:1px solid #29415d;
-    padding:9px 14px;
-    font-size:13px;
-}
-
-.tab-bar button.active{
-    background:var(--gold);
-    color:#071629;
-}
-
-.tab-panel{
-    display:none;
-}
-
-.tab-panel.active{
-    display:block;
-}
-
-/* =========================
-   GALLERY
-========================= */
-
-.gallery{
-    margin:auto;
-    max-width:900px;
-    height:280px;
-    border-radius:18px;
-    overflow:hidden;
-    border:1px solid #29415d;
-    background:#091a2d;
-    position:relative;
-}
-
-.gallery img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    position:absolute;
-    inset:0;
-    opacity:0;
-    transition:opacity .8s;
-}
-
-.gallery img.show{
-    opacity:1;
-}
-
-.gallery .caption{
-    position:absolute;
-    bottom:0;
-    left:0;
-    right:0;
-    padding:14px 18px;
-    background:linear-gradient(
-        transparent,
-        rgba(0,0,0,.85)
-    );
-    color:#fff;
-    font-weight:bold;
-    z-index:2;
-}
-
-/* =========================
-   CALCULATOR
-========================= */
-
-.calc-box{
-    background:var(--panel);
-    border:1px solid #29415d;
-    border-radius:17px;
-    padding:25px;
-    max-width:520px;
-    margin:auto;
-}
-
-.calc-result{
-    background:#091a2d;
-    border:1px solid var(--gold);
-    padding:14px;
-    border-radius:10px;
-    text-align:center;
-    font-size:20px;
-    font-weight:bold;
-    color:var(--gold);
-    margin-top:8px;
-}
-
-/* =========================
-   VIDEO
-========================= */
-
-.video-wrap{
-    max-width:800px;
-    margin:auto;
-    aspect-ratio:16/9;
-    border-radius:17px;
-    overflow:hidden;
-    border:1px solid #29415d;
-}
-
-.video-wrap iframe{
-    width:100%;
-    height:100%;
-    border:0;
-}
-
-/* =========================
-   GAMES
-========================= */
-
-.games-grid{
-    display:grid;
-    grid-template-columns:
-        repeat(auto-fit,minmax(260px,1fr));
-    gap:18px;
-}
-
-.game-frame{
-    background:#091a2d;
-    border:1px solid #29415d;
-    border-radius:17px;
-    overflow:hidden;
-}
-
-.game-frame iframe{
-    width:100%;
-    height:320px;
-    border:0;
-}
-
-.game-title{
-    padding:10px 14px;
-    background:#10243c;
-    color:var(--gold);
-    font-weight:bold;
-}
-
-/* =========================
-   SHOP / PROOFS
-========================= */
-
-.shop-item{
-    background:var(--panel);
-    border:1px solid #29415d;
-    border-radius:17px;
-    overflow:hidden;
-}
-
-.shop-item:hover{
-    border-color:var(--gold);
-}
-
-.shop-item img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
-    background:#091a2d;
-    display:block;
-}
-
-.shop-info{
-    padding:16px;
-}
-
-.shop-info h4{
-    color:var(--gold);
-    margin-bottom:6px;
-}
-
-/* =========================
-   NOTES
-========================= */
-
-.notes-public{
-    background:#10243c;
-    border:1px dashed var(--gold);
-    border-radius:14px;
-    padding:18px;
-    max-width:900px;
-    margin:auto;
-    white-space:pre-wrap;
-    line-height:1.6;
-    color:#e8e8e8;
-}
-
-/* =========================
-   WHATSAPP
-========================= */
-
-.float-wa{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:#25d366;
-    color:#fff;
-    width:56px;
-    height:56px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:26px;
-    text-decoration:none;
-    z-index:999;
-    box-shadow:0 4px 14px rgba(0,0,0,.4);
-}
-
-.whatsapp{
-    display:inline-block;
-    margin-top:15px;
-    background:#20c76c;
-    color:#fff;
-    padding:13px 20px;
-    text-decoration:none;
-    border-radius:30px;
-    font-weight:bold;
-}
-
-/* =========================
-   MODAL
-========================= */
-
-.modal-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.8);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:2000;
-    opacity:0;
-    pointer-events:none;
-    transition:.3s;
-}
-
-.modal-overlay.active{
-    opacity:1;
-    pointer-events:auto;
-}
-
-.modal-box{
-    background:var(--panel);
-    border:2px solid var(--gold);
-    padding:30px;
-    border-radius:17px;
-    text-align:center;
-    max-width:400px;
-    width:90%;
-    position:relative;
-}
-
-.modal-box h2{
-    color:var(--gold);
-    margin-bottom:15px;
-}
-
-.modal-box p{
-    margin-bottom:20px;
-}
-
-.modal-close{
-    position:absolute;
-    top:10px;
-    right:15px;
-    background:none;
-    color:var(--muted);
-    font-size:20px;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    background:#091c32;
-    padding:30px;
-    text-align:center;
-    color:var(--muted);
-    line-height:2;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:600px){
-
-    header{
-        justify-content:center;
-        text-align:center;
-    }
-
-    nav{
-        justify-content:center;
-    }
-
-    nav a{
-        font-size:12px;
-        padding:8px 10px;
-    }
-
-    .banner{
-        width:92%;
-    }
-
-    .gallery{
-        height:200px;
-    }
-
-    .weather-widget{
-        flex-direction:column;
-        align-items:center;
-    }
-
-}
-
 </style>
 </head>
 
-
 <body>
-
-
-<!-- =====================================================
-     PROMO
-===================================================== -->
-
-<div class="promo-bar">
-
-🔥 Oferta Relámpago:
-Recarga de 500 CUP con 10% de descuento.
-Termina en:
-
-<span id="countdown">02:00:00</span>
-
-</div>
-
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
 <header>
-
-<div class="logo">
-
-YOUR BRIDGE HOME
-
-<small>
-CONEXIONES SIN FRONTERAS
-</small>
-
-</div>
-
-
-<nav>
-
-<a href="#inicio">Inicio</a>
-
-<a href="#recargas">Recargas</a>
-
-<a href="#remesas">Remesas</a>
-
-<a href="#tickets">Tickets</a>
-
-<a href="#transporte">Transporte</a>
-
-<a href="#calculadora">Calculadora</a>
-
-<a href="#administracion">Administración</a>
-
-
-<button
-class="lang-btn active"
-onclick="setLang('es',this)">
-ES
-</button>
-
-<button
-class="lang-btn"
-onclick="setLang('en',this)">
-EN
-</button>
-
-<button
-class="lang-btn"
-onclick="setLang('ru',this)">
-RU
-</button>
-
-</nav>
-
+ <div class="top">
+  <div class="logo">YOUR <span>BRIDGE</span> HOME</div>
+  <nav class="nav">
+   <a href="#inicio" data-t="home">Inicio</a>
+   <a href="#servicios" data-t="services">Servicios</a>
+   <a href="#catalogo" data-t="catalog">Catálogo</a>
+   <a href="#explora" data-t="explore">Explora</a>
+   <a href="#informacion" data-t="info">Información</a>
+   <a href="#contacto" data-t="contact">Contacto</a>
+  </nav>
+  <select class="lang" id="language" aria-label="Idioma">
+   <option value="es">ES</option>
+   <option value="ru">RU</option>
+   <option value="en">EN</option>
+  </select>
+ </div>
 </header>
 
-
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<div class="hero" id="inicio">
-
-<h1>
-Tu puente hacia
-<span>casa</span>
-</h1>
-
-<p>
-Servicios, conexiones y oportunidades en diferentes países.
-</p>
-
-</div>
-
-
-<!-- =====================================================
-     WEATHER / CLOCK
-===================================================== -->
-
-<div class="weather-widget">
-
-<div class="weather-box">
-
-<span>🕒</span>
-
-<span id="reloj-digital">
---:--:--
-</span>
-
-</div>
-
-
-<div
-class="weather-box"
-id="clima-box"
-style="display:none;">
-
-<img
-id="clima-icono"
-src=""
-alt="Clima">
-
-<div>
-
-<strong id="clima-temp">
---°C
-</strong>
-
-<span
-id="clima-ciudad"
-style="
-font-size:12px;
-display:block;
-color:var(--muted);">
-
-La Habana
-
-</span>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     BANNER
-===================================================== -->
-
-<div class="banner">
-
-<h2>
-⭐ OFERTAS MÁS ECONÓMICAS ⭐
-</h2>
-
-<h3 id="banner-title">
-Cargando ofertas...
-</h3>
-
-<p id="banner-price"></p>
-
-<p id="banner-details"></p>
-
-</div>
-
-
-<!-- =====================================================
-     GALERÍA
-===================================================== -->
-
-<section id="galeria">
-
-<div class="section-title">
-
-<h2>
-🖼️ DESTINOS DESTACADOS
-</h2>
-
-<p>
-Hoteles, restaurantes y destinos.
-</p>
-
-</div>
-
-
-<div
-class="gallery"
-id="gallery">
-
-<div
-class="caption"
-id="gal-caption">
-
-Cargando galería...
-
-</div>
-
-</div>
-
+<main>
+<section class="hero" id="inicio">
+ <div class="eyebrow">CONECTAMOS PERSONAS Y OPORTUNIDADES</div>
+ <h1>Tu puente hacia nuevas oportunidades.</h1>
+ <p>Servicios, recargas, remesas, viajes y soluciones para conectar destinos. Información clara y atención directa.</p>
+ <div class="hero-actions">
+  <a class="btn" href="#servicios"><i class="fa-solid fa-compass"></i> Ver servicios</a>
+  <a class="btn secondary" id="whatsappHero" href="#" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+ </div>
 </section>
 
-
-<!-- =====================================================
-     RECARGAS
-===================================================== -->
-
-<section id="recargas">
-
-<div class="section-title">
-
-<h2>
-📱 RECARGAS
-</h2>
-
-<p>
-Conecta con Cuba desde cualquier lugar.
-</p>
-
+<div class="banner pulse" id="offerBanner">
+ <i class="fa-solid fa-bolt"></i>
+ <div><strong>OFERTA DESTACADA</strong><div id="bannerText">Cargando las mejores ofertas...</div></div>
 </div>
 
-<div
-class="grid"
-id="grid-recargas">
-
-</div>
-
+<section class="section" id="servicios">
+ <div class="section-head">
+  <div><h2>Servicios principales</h2><div class="sub">Consulta nuestras opciones y precios.</div></div>
+ </div>
+ <div class="grid" id="servicesGrid">
+  <div class="card">Cargando servicios...</div>
+ </div>
 </section>
 
-
-<!-- =====================================================
-     REMESAS
-===================================================== -->
-
-<section id="remesas">
-
-<div class="section-title">
-
-<h2>
-💰 REMESAS
-</h2>
-
-<p>
-Envía ayuda a tus familiares.
-</p>
-
-</div>
-
-<div
-class="grid"
-id="grid-remesas">
-
-</div>
-
+<section class="section" id="catalogo">
+ <h2>Catálogo de ofertas</h2>
+ <p class="sub">Precios y promociones publicados por administración.</p>
+ <div class="grid" id="catalogGrid"></div>
 </section>
 
-
-<!-- =====================================================
-     TICKETS
-===================================================== -->
-
-<section id="tickets">
-
-<div class="section-title">
-
-<h2>
-✈️ TICKETS DE AVIÓN
-</h2>
-
-<p>
-Ofertas para tus próximos viajes.
-</p>
-
-</div>
-
-<div
-class="grid"
-id="grid-tickets">
-
-</div>
-
+<section class="section" id="calculadoras">
+ <h2>Calculadoras útiles</h2>
+ <div class="grid">
+  <div class="card">
+   <div class="symbol"><i class="fa-solid fa-calculator"></i></div>
+   <h3>Calculadora de remesas</h3>
+   <p>Calcula una cantidad de rublos utilizando la tasa informativa publicada.</p>
+   <label>Rublos</label>
+   <input type="number" id="rubAmount" min="0" placeholder="Ej. 1000">
+   <div class="result" id="remitResult">Introduce una cantidad.</div>
+   <small class="sub">El resultado es orientativo y depende de la tasa publicada.</small>
+  </div>
+  <div class="card">
+   <div class="symbol"><i class="fa-solid fa-plane"></i></div>
+   <h3>Consulta de vuelos</h3>
+   <p>Solicita una cotización indicando origen, destino y fecha.</p>
+   <a class="btn secondary" href="#contacto">Solicitar precio</a>
+  </div>
+ </div>
 </section>
 
-
-<!-- =====================================================
-     TRANSPORTE
-===================================================== -->
-
-<section id="transporte">
-
-<div class="section-title">
-
-<h2>
-🚌 TRANSPORTE
-</h2>
-
-<p>
-Bus, tren y avión.
-</p>
-
-</div>
-
-<div
-class="grid"
-id="grid-transporte">
-
-</div>
-
+<section class="section" id="explora">
+ <h2>Explora destinos</h2>
+ <p class="sub">Ideas para descubrir gastronomía, hoteles, cultura y ocio.</p>
+ <div class="grid">
+  <div class="card"><div class="symbol"><i class="fa-solid fa-umbrella-beach"></i></div><h3>Cuba</h3><p>Descubre gastronomía, playas, hoteles y experiencias.</p><a target="_blank" rel="noopener" href="https://www.google.com/travel/">Explorar opciones ↗</a></div>
+  <div class="card"><div class="symbol"><i class="fa-solid fa-earth-americas"></i></div><h3>América Latina</h3><p>Consulta destinos, alojamientos y actividades.</p><a target="_blank" rel="noopener" href="https://www.google.com/travel/">Explorar opciones ↗</a></div>
+  <div class="card"><div class="symbol"><i class="fa-solid fa-city"></i></div><h3>Europa</h3><p>Ideas para viajes, gastronomía y entretenimiento.</p><a target="_blank" rel="noopener" href="https://www.google.com/travel/">Explorar opciones ↗</a></div>
+ </div>
 </section>
 
-
-<!-- =====================================================
-     CALCULADORA
-===================================================== -->
-
-<section id="calculadora">
-
-<div class="section-title">
-
-<h2>
-🧮 CALCULADORA
-</h2>
-
-<p>
-Calcula según la tasa configurada.
-</p>
-
-</div>
-
-
-<div class="calc-box">
-
-<label>
-Tasa de cambio
-</label>
-
-<input
-type="number"
-id="tasa"
-value="0"
-min="0"
-step="0.01">
-
-
-<label>
-Monto a enviar
-</label>
-
-<input
-type="number"
-id="monto-envio"
-value="0"
-min="0"
-step="0.01">
-
-
-<div
-class="calc-result"
-id="res-remesa">
-
-0.00
-
-</div>
-
-
-<hr
-style="
-border-color:#29415d;
-margin:18px 0;">
-
-
-<label>
-Precio del pasaje
-</label>
-
-<input
-type="number"
-id="monto-pasaje"
-value="0"
-min="0"
-step="0.01">
-
-
-<div
-class="calc-result"
-id="res-pasaje">
-
-0.00
-
-</div>
-
-</div>
-
+<section class="section" id="tasas">
+ <h2>Información de cambio</h2>
+ <p class="sub">Los valores se actualizan desde administración. Comprueba siempre la fuente y fecha antes de operar.</p>
+ <div class="grid" id="ratesGrid"></div>
 </section>
 
-
-<!-- =====================================================
-     RECOMIENDA
-===================================================== -->
-
-<section id="recomienda">
-
-<div class="section-title">
-
-<h2>
-🎁 RECOMIENDA Y GANA
-</h2>
-
-<p>
-Invita a tus amigos.
-</p>
-
-</div>
-
-
-<div
-class="card"
-style="
-max-width:600px;
-margin:auto;
-text-align:center;">
-
-<h3>
-¡Gana un 5% de descuento!
-</h3>
-
-<p style="margin-bottom:15px;">
-
-Comparte nuestra página con un amigo.
-
-</p>
-
-<button
-class="gold-btn"
-onclick="compartirPagina()">
-
-COMPARTIR MI ENLACE
-
-</button>
-
-</div>
-
+<section class="section" id="informacion">
+ <h2>Notas e información importante</h2>
+ <div id="notices"><div class="notice">Consulta aquí los avisos y novedades del negocio.</div></div>
+ <div class="panel" style="margin-top:14px">
+  <h3>Requisitos de viaje</h3>
+  <p class="sub">Consulta información de visados y requisitos según tu nacionalidad y destino.</p>
+  <a class="btn secondary" href="https://www.visaindex.com/" target="_blank" rel="noopener">Consultar Visa Index ↗</a>
+ </div>
 </section>
 
-
-<!-- =====================================================
-     PRUEBAS
-===================================================== -->
-
-<section id="pruebas">
-
-<div class="section-title">
-
-<h2>
-🤝 PRUEBAS DE ENTREGA
-</h2>
-
-<p>
-Clientes satisfechos.
-</p>
-
-</div>
-
-<div
-class="grid"
-id="grid-pruebas">
-
-</div>
-
+<section class="section" id="contacto">
+ <h2>Contacta con nosotros</h2>
+ <div class="grid">
+  <div class="panel">
+   <h3>Enviar una solicitud</h3>
+   <form id="requestForm">
+    <label>Nombre</label><input name="customer_name" required maxlength="100">
+    <label>WhatsApp o contacto</label><input name="contact" required maxlength="100">
+    <label>Tipo de servicio</label>
+    <select name="message_type">
+     <option value="solicitud">Consulta general</option>
+     <option value="solicitud">Recarga</option>
+     <option value="solicitud">Remesa</option>
+     <option value="solicitud">Ticket de avión</option>
+    </select>
+    <label>Detalles</label><textarea name="message" required maxlength="1500"></textarea>
+    <button class="btn" type="submit">Enviar solicitud</button>
+    <div class="result" id="requestStatus" aria-live="polite"></div>
+   </form>
+  </div>
+  <div class="panel">
+   <h3>Tu opinión importa</h3>
+   <form id="opinionForm">
+    <label>Nombre (opcional)</label><input name="customer_name" maxlength="100">
+    <label>Contacto (opcional)</label><input name="contact" maxlength="100">
+    <label>Opinión o sugerencia</label><textarea name="message" required maxlength="1500"></textarea>
+    <button class="btn secondary" type="submit">Enviar opinión</button>
+    <div class="result" id="opinionStatus" aria-live="polite"></div>
+   </form>
+   <hr style="border-color:var(--line);margin:20px 0">
+   <h3>¿Qué negocio te gustaría encontrar?</h3>
+   <form id="suggestForm">
+    <label>Nombre del negocio o servicio</label><input name="customer_name" required maxlength="100">
+    <label>Información o ubicación</label><textarea name="message" required maxlength="1500"></textarea>
+    <label>Tu contacto (opcional)</label><input name="contact" maxlength="100">
+    <button class="btn secondary" type="submit">Enviar propuesta</button>
+    <div class="result" id="suggestStatus" aria-live="polite"></div>
+   </form>
+  </div>
+ </div>
 </section>
 
+<section class="section" id="administracion">
+ <div class="panel admin-box">
+  <h2><i class="fa-solid fa-shield-halved"></i> Administración</h2>
+  <p class="sub">Acceso privado para gestionar precios, ofertas y mensajes.</p>
+  <div id="loginArea">
+   <label>Correo de administrador</label>
+   <input id="adminEmail" type="email" autocomplete="username" value="daynelcc@gmail.com">
+   <label>Contraseña de Supabase</label>
+   <input id="adminPassword" type="password" autocomplete="current-password" placeholder="Tu contraseña">
+   <button class="btn" id="loginBtn">Entrar al panel</button>
+   <div id="loginStatus" class="result" aria-live="polite"></div>
+  </div>
 
-<!-- =====================================================
-     VIDEO
-===================================================== -->
+  <div id="adminArea" class="hidden">
+   <div class="admin-row">
+    <div><strong>Panel activo</strong><br><small id="adminIdentity"></small></div>
+    <button class="btn danger" id="logoutBtn">Cerrar sesión</button>
+   </div>
 
-<section id="video">
+   <h3 style="margin-top:22px">Crear o actualizar una oferta</h3>
+   <form id="contentForm">
+    <input type="hidden" name="id">
+    <div class="form-grid">
+     <div><label>Sección</label>
+      <select name="section">
+       <option value="recargas">Recargas</option>
+       <option value="remesas">Remesas</option>
+       <option value="vuelos">Vuelos</option>
+       <option value="catalogo">Catálogo</option>
+       <option value="avisos">Avisos</option>
+      </select>
+     </div>
+     <div><label>Identificador único (slug)</label><input name="slug" required placeholder="ejemplo-oferta"></div>
+     <div><label>Precio</label><input name="price" type="number" step="0.01"></div>
+     <div><label>Moneda</label><input name="currency" value="₽"></div>
+     <div><label>Etiqueta</label><input name="badge" placeholder="OFERTA"></div>
+     <div><label>Orden</label><input name="sort_order" type="number" value="0"></div>
+    </div>
+    <label>Título español</label><input name="title_es" required>
+    <label>Título ruso</label><input name="title_ru">
+    <label>Título inglés</label><input name="title_en">
+    <label>Descripción español</label><textarea name="description_es"></textarea>
+    <label>Descripción ruso</label><textarea name="description_ru"></textarea>
+    <label>Descripción inglés</label><textarea name="description_en"></textarea>
+    <label>Enlace opcional</label><input name="link" type="url" placeholder="https://...">
+    <label><input type="checkbox" name="active" checked style="width:auto"> Publicar esta oferta</label>
+    <div class="hero-actions">
+     <button class="btn" type="submit">Guardar publicación</button>
+     <button class="btn secondary" type="button" id="clearContent">Limpiar</button>
+    </div>
+    <div id="contentStatus" class="result" aria-live="polite"></div>
+   </form>
 
-<div class="section-title">
+   <h3 style="margin-top:28px">Publicaciones existentes</h3>
+   <div id="adminContentList"></div>
 
-<h2>
-🎬 VIDEO
-</h2>
+   <h3 style="margin-top:28px">Ajustes de remesas</h3>
+   <form id="remittanceForm">
+    <label>Rublos de referencia</label><input name="rubles" type="number" value="1000" required>
+    <label>CUP correspondiente</label><input name="cup" type="number" step="0.01" value="9.8" required>
+    <button class="btn" type="submit">Guardar tasa</button>
+    <div id="rateStatus" class="result"></div>
+   </form>
 
-<p>
-Contenido externo.
-</p>
-
-</div>
-
-
-<div class="video-wrap">
-
-<iframe
-id="video-frame"
-src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-title="Video"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-allowfullscreen>
-</iframe>
-
-</div>
-
+   <h3 style="margin-top:28px">Solicitudes recibidas</h3>
+   <div id="adminMessages"></div>
+  </div>
+ </div>
 </section>
-
-
-<!-- =====================================================
-     JUEGOS
-===================================================== -->
-
-<section id="juegos">
-
-<div class="section-title">
-
-<h2>
-🎮 JUEGOS GRATIS
-</h2>
-
-<p>
-Juega sin almacenar los juegos en tu servidor.
-</p>
-
-</div>
-
-
-<div class="games-grid">
-
-
-<div class="game-frame">
-
-<div class="game-title">
-2048
-</div>
-
-<iframe
-src="https://play2048.co/"
-loading="lazy">
-</iframe>
-
-</div>
-
-
-<div class="game-frame">
-
-<div class="game-title">
-Tetris
-</div>
-
-<iframe
-src="https://tetris.com/play-tetris"
-loading="lazy">
-</iframe>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     ENLACES
-===================================================== -->
-
-<section id="enlaces">
-
-<div class="section-title">
-
-<h2>
-🔗 ACCESOS ÚTILES
-</h2>
-
-</div>
-
-
-<div class="grid">
-
-
-<div class="card">
-
-<h3>
-VISA
-</h3>
-
-<p>
-Consulta información de visados.
-</p>
-
-<a
-class="blue-btn"
-href="https://www.visa.com"
-target="_blank"
-rel="noopener"
-style="
-display:inline-block;
-margin-top:12px;
-text-decoration:none;
-padding:11px 16px;
-border-radius:9px;
-font-weight:bold;">
-
-ABRIR VISA
-
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Banco Central de Cuba
-</h3>
-
-<p>
-Información oficial.
-</p>
-
-<a
-class="blue-btn"
-href="https://www.bc.gov.cu"
-target="_blank"
-rel="noopener"
-style="
-display:inline-block;
-margin-top:12px;
-text-decoration:none;
-padding:11px 16px;
-border-radius:9px;
-font-weight:bold;">
-
-ABRIR BCC
-
-</a>
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     TIENDA
-===================================================== -->
-
-<section id="tienda">
-
-<div class="section-title">
-
-<h2>
-🛒 TIENDA EN LÍNEA
-</h2>
-
-<p>
-Productos y otros negocios.
-</p>
-
-</div>
-
-
-<div
-class="grid"
-id="grid-tienda">
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     NOTAS
-===================================================== -->
-
-<section id="notas">
-
-<div class="section-title">
-
-<h2>
-📝 NOTAS IMPORTANTES
-</h2>
-
-</div>
-
-
-<div
-class="notes-public"
-id="notes-public">
-
-Cargando...
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     ADMINISTRACIÓN
-===================================================== -->
-
-<section id="administracion">
-
-<div class="section-title">
-
-<h2>
-🔐 ADMINISTRACIÓN
-</h2>
-
-<p>
-Panel YOUR BRIDGE HOME
-</p>
-
-</div>
-
-
-<div class="admin">
-
-
-<div id="admin-panel">
-
-
-<div class="tab-bar">
-
-<button
-class="active"
-onclick="showTab('ofertas',this)">
-Ofertas
-</button>
-
-<button
-onclick="showTab('fotos',this)">
-Fotos
-</button>
-
-<button
-onclick="showTab('pruebas-admin',this)">
-Pruebas
-</button>
-
-<button
-onclick="showTab('notas-admin',this)">
-Notas
-</button>
-
-<button
-onclick="showTab('tienda-admin',this)">
-Tienda
-</button>
-
-<button
-onclick="showTab('ajustes',this)">
-Ajustes
-</button>
-
-</div>
-
-
-<!-- =========================
-     OFERTAS
-========================= -->
-
-<div
-class="tab-panel active"
-id="tab-ofertas">
-
-<h2>
-Gestionar ofertas
-</h2>
-
-
-<form id="offer-form">
-
-<input
-type="hidden"
-id="offer-id">
-
-
-<label>
-Categoría
-</label>
-
-<select
-id="category"
-required>
-
-<option value="Recargas">
-Recargas
-</option>
-
-<option value="Remesas">
-Remesas
-</option>
-
-<option value="Tickets">
-Tickets
-</option>
-
-<option value="Bus">
-Bus
-</option>
-
-<option value="Tren">
-Tren
-</option>
-
-<option value="Avion">
-Avión
-</option>
-
-</select>
-
-
-<label>
-Nombre de la oferta
-</label>
-
-<input
-id="title"
-required
-placeholder="Ejemplo: INTERNET +">
-
-
-<label>
-Precio
-</label>
-
-<input
-id="price"
-type="number"
-min="0"
-step="0.01"
-required>
-
-
-<label>
-Moneda
-</label>
-
-<select id="currency">
-
-<option value="RUB">
-RUB
-</option>
-
-<option value="USD">
-USD
-</option>
-
-<option value="EUR">
-EUR
-</option>
-
-<option value="CUP">
-CUP
-</option>
-
-</select>
-
-
-<label>
-Detalles
-</label>
-
-<input
-id="details"
-placeholder="Descripción de la oferta">
-
-
-<label>
-
-<input
-type="checkbox"
-id="active"
-checked>
-
-Oferta visible para clientes
-
-</label>
-
-
-<div class="admin-actions">
-
-<button
-type="submit"
-class="green-btn">
-
-GUARDAR OFERTA
-
-</button>
-
-
-<button
-type="button"
-class="gold-btn"
-onclick="resetForm()">
-
-NUEVA OFERTA
-
-</button>
-
-</div>
-
-</form>
-
-
-<h2 style="margin-top:30px">
-Ofertas registradas
-</h2>
-
-<div id="admin-list">
-</div>
-
-</div>
-
-
-<!-- =========================
-     FOTOS
-========================= -->
-
-<div
-class="tab-panel"
-id="tab-fotos">
-
-<h2>
-Subir fotos
-</h2>
-
-<p style="
-color:#aabbd0;
-font-size:13px;
-margin-bottom:12px;">
-
-Las fotos aparecerán en la galería.
-
-</p>
-
-
-<label>
-Archivo de imagen
-</label>
-
-<input
-type="file"
-id="photo-file"
-accept="image/*">
-
-
-<label>
-Título / destino
-</label>
-
-<input
-id="photo-caption"
-placeholder="La Habana — Hotel económico">
-
-
-<label>
-Categoría
-</label>
-
-<select
-id="photo-category">
-
-<option value="Hoteles">
-Hoteles
-</option>
-
-<option value="Restaurantes">
-Restaurantes
-</option>
-
-<option value="Destinos">
-Destinos
-</option>
-
-</select>
-
-
-<div class="admin-actions">
-
-<button
-class="green-btn"
-onclick="uploadPhoto()">
-
-SUBIR FOTO
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-     PRUEBAS
-========================= -->
-
-<div
-class="tab-panel"
-id="tab-pruebas-admin">
-
-<h2>
-Subir pruebas de entrega
-</h2>
-
-<p style="
-color:#aabbd0;
-font-size:13px;">
-
-Sube capturas de clientes.
-
-</p>
-
-
-<label>
-Archivo
-</label>
-
-<input
-type="file"
-id="proof-file"
-accept="image/*">
-
-
-<label>
-Título / Cliente
-</label>
-
-<input
-id="proof-caption"
-placeholder="Remesa entregada a María">
-
-
-<div class="admin-actions">
-
-<button
-class="green-btn"
-onclick="uploadProof()">
-
-SUBIR PRUEBA
-
-</button>
-
-</div>
-
-
-<h2 style="margin-top:24px">
-Pruebas registradas
-</h2>
-
-<div id="proof-list">
-</div>
-
-</div>
-
-
-<!-- =========================
-     NOTAS
-========================= -->
-
-<div
-class="tab-panel"
-id="tab-notas-admin">
-
-<h2>
-Información importante
-</h2>
-
-
-<textarea
-id="notes-input"
-rows="8"
-placeholder="Escribe aquí tus notas...">
-</textarea>
-
-
-<div class="admin-actions">
-
-<button
-class="green-btn"
-onclick="saveNotes()">
-
-GUARDAR NOTAS
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-     TIENDA
-========================= -->
-
-<div
-class="tab-panel"
-id="tab-tienda-admin">
-
-<h2>
-Agregar producto
-</h2>
-
-
-<form id="shop-form">
-
-<input
-type="hidden"
-id="shop-id">
-
-
-<label>
-Nombre
-</label>
-
-<input
-id="shop-name"
-required>
-
-
-<label>
-Precio
-</label>
-
-<input
-id="shop-price"
-type="number"
-min="0"
-step="0.01"
-required>
-
-
-<label>
-Moneda
-</label>
-
-<select id="shop-currency">
-
-<option value="USD">
-USD
-</option>
-
-<option value="RUB">
-RUB
-</option>
-
-<option value="EUR">
-EUR
-</option>
-
-<option value="CUP">
-CUP
-</option>
-
-</select>
-
-
-<label>
-URL de imagen
-</label>
-
-<input
-id="shop-image"
-placeholder="https://...">
-
-
-<label>
-Descripción
-</label>
-
-<input
-id="shop-desc">
-
-
-<div class="admin-actions">
-
-<button
-type="submit"
-class="green-btn">
-
-GUARDAR
-
-</button>
-
-</div>
-
-</form>
-
-
-<h2 style="margin-top:24px">
-Productos registrados
-</h2>
-
-<div id="shop-admin-list">
-</div>
-
-</div>
-
-
-<!-- =========================
-     AJUSTES
-========================= -->
-
-<div
-class="tab-panel"
-id="tab-ajustes">
-
-<h2>
-Ajustes generales
-</h2>
-
-
-<label>
-Tasa de cambio
-</label>
-
-<input
-type="number"
-id="settings-tasa"
-value="0"
-step="0.01"
-min="0">
-
-
-<label>
-URL del video YouTube
-</label>
-
-<input
-id="settings-video"
-placeholder="https://www.youtube.com/embed/...">
-
-
-<div class="admin-actions">
-
-<button
-class="green-btn"
-onclick="saveSettings()">
-
-GUARDAR AJUSTES
-
-</button>
-
-</div>
-
-</div>
-
-
-</div>
-
-
-<div
-id="status"
-class="status">
-
-</div>
-
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
+</main>
 
 <footer>
-
-<h3 style="color:#e8b94f">
-YOUR BRIDGE HOME
-</h3>
-
-Daynel Caminero Administrador
-
-<br>
-
-Servicios y conexiones internacionales
-
-
-<br>
-
-
-<a
-class="whatsapp"
-href="https://wa.me/79046319565"
-target="_blank">
-
-CONTACTAR POR WHATSAPP
-
-</a>
-
-
-<p>
-© 2026 YOUR BRIDGE HOME.
-Todos los derechos reservados.
-</p>
-
+ <strong>YOUR BRIDGE HOME</strong><br>
+ Daynel Caminero Administrador<br>
+ <span>Información y precios sujetos a confirmación.</span>
 </footer>
 
+<script>
+/* ==========================================
+   CONEXIÓN SUPABASE
+   Pega tu clave Publishable completa aquí.
+   Nunca pongas una clave service_role.
+========================================== */
+const SUPABASE_URL = "https://wvhptkcmlyifnieqbgnq.supabase.co";
+const SUPABASE_KEY = "PEGA_AQUI_TU_CLAVE_PUBLISHABLE";
 
-<!-- =====================================================
-     WHATSAPP FLOTANTE
-===================================================== -->
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const ADMIN_EMAIL = "daynelcc@gmail.com";
+const PHONE = "79046319565";
 
-<a
-class="float-wa"
-href="https://wa.me/79046319565"
-target="_blank"
-title="WhatsApp">
-
-💬
-
-</a>
-
-
-<!-- =====================================================
-     MODAL
-===================================================== -->
-
-<div
-class="modal-overlay"
-id="welcome-modal">
-
-<div class="modal-box">
-
-<button
-class="modal-close"
-onclick="cerrarModal()">
-
-✕
-
-</button>
-
-
-<h2>
-¡Bienvenido!
-</h2>
-
-
-<p>
-
-Escríbenos por WhatsApp y obtén un
-<strong>5% de descuento</strong>
-en tu primera recarga o remesa.
-
-</p>
-
-
-<a
-href="https://wa.me/79046319565"
-target="_blank"
-class="green-btn"
-style="
-display:inline-block;
-text-decoration:none;
-padding:12px 25px;">
-
-RECLAMAR DESCUENTO
-
-</a>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
-<script type="module">
-
-/* =====================================================
-   SUPABASE
-===================================================== */
-
-import {
-    createClient
-}
-from
-'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
-
-
-const SUPABASE_URL =
-'https://wvhptkcmlyifnieqbgnq.supabase.co';
-
-
-const SUPABASE_KEY =
-'sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7';
-
-
-const supabase =
-createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
-
-/* =====================================================
-   VARIABLES
-===================================================== */
-
-let offers = [];
-let proofs = [];
-let shopItems = [];
+let content = [];
 let settings = {};
+let currentLanguage = "es";
 
-let bannerIndex = 0;
-let galleryIndex = 0;
-
-
-/* =====================================================
-   UTILIDADES
-===================================================== */
-
-function message(text){
-
-    const element =
-        document.getElementById('status');
-
-    if(element){
-        element.textContent = text;
-    }
-
-    console.log(text);
-}
-
+const translations = {
+ es:{home:"Inicio",services:"Servicios",catalog:"Catálogo",explore:"Explora",info:"Información",contact:"Contacto"},
+ ru:{home:"Главная",services:"Услуги",catalog:"Каталог",explore:"Открыть",info:"Информация",contact:"Контакты"},
+ en:{home:"Home",services:"Services",catalog:"Catalog",explore:"Explore",info:"Information",contact:"Contact"}
+};
 
 function escapeHTML(value){
-
-    return String(value ?? '')
-        .replace(
-            /[&<>"']/g,
-            char => ({
-                '&':'&amp;',
-                '<':'&lt;',
-                '>':'&gt;',
-                '"':'&quot;',
-                "'":'&#39;'
-            })[char]
-        );
+ return String(value ?? "").replace(/[&<>"']/g, c => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
 }
-
-
-function formatPrice(value){
-
-    const number =
-        Number(value);
-
-    if(!Number.isFinite(number)){
-        return '0';
-    }
-
-    return number.toLocaleString(
-        'es-ES',
-        {
-            maximumFractionDigits:2
-        }
-    );
+function money(value,currency){
+ if(value === null || value === undefined || value === "") return "Consultar";
+ return Number(value).toLocaleString("es-ES",{maximumFractionDigits:2})+" "+(currency||"");
 }
-
-
-/* =====================================================
-   RELOJ
-===================================================== */
-
-function actualizarReloj(){
-
-    const reloj =
-        document.getElementById(
-            'reloj-digital'
-        );
-
-    if(!reloj)return;
-
-    const ahora =
-        new Date();
-
-    reloj.textContent =
-        String(
-            ahora.getHours()
-        ).padStart(2,'0')
-        + ':'
-        +
-        String(
-            ahora.getMinutes()
-        ).padStart(2,'0')
-        + ':'
-        +
-        String(
-            ahora.getSeconds()
-        ).padStart(2,'0');
+function titleOf(row){
+ return row["title_"+currentLanguage] || row.title_es || row.slug;
 }
-
-actualizarReloj();
-
-setInterval(
-    actualizarReloj,
-    1000
-);
-
-
-/* =====================================================
-   COUNTDOWN
-===================================================== */
-
-let timeLeft =
-    2 * 60 * 60;
-
-
-setInterval(()=>{
-
-    if(timeLeft > 0){
-        timeLeft--;
-    }
-
-    const h =
-        Math.floor(
-            timeLeft / 3600
-        );
-
-    const m =
-        Math.floor(
-            (timeLeft % 3600) / 60
-        );
-
-    const s =
-        timeLeft % 60;
-
-    const countdown =
-        document.getElementById(
-            'countdown'
-        );
-
-    if(countdown){
-
-        countdown.textContent =
-            String(h).padStart(2,'0')
-            + ':'
-            +
-            String(m).padStart(2,'0')
-            + ':'
-            +
-            String(s).padStart(2,'0');
-
-    }
-
-},1000);
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-setTimeout(()=>{
-
-    const modal =
-        document.getElementById(
-            'welcome-modal'
-        );
-
-    if(modal){
-        modal.classList.add(
-            'active'
-        );
-    }
-
-},3000);
-
-
-window.cerrarModal =
-function(){
-
-    const modal =
-        document.getElementById(
-            'welcome-modal'
-        );
-
-    if(modal){
-        modal.classList.remove(
-            'active'
-        );
-    }
-
-};
-
-
-/* =====================================================
-   COMPARTIR
-===================================================== */
-
-window.compartirPagina =
-function(){
-
-    const url =
-        window.location.href;
-
-    const texto =
-        '¡Mira YOUR BRIDGE HOME! ' +
-        'Recargas, remesas y servicios. ' +
-        url;
-
-    window.open(
-        'https://wa.me/?text=' +
-        encodeURIComponent(texto),
-        '_blank'
-    );
-
-};
-
-
-/* =====================================================
-   CLIMA
-===================================================== */
-
-async function obtenerClima(){
-
-    try{
-
-        const response =
-            await fetch(
-                'https://api.open-meteo.com/v1/forecast' +
-                '?latitude=23.11' +
-                '&longitude=-82.36' +
-                '&current_weather=true'
-            );
-
-        if(!response.ok){
-            throw new Error(
-                'No se pudo obtener el clima'
-            );
-        }
-
-        const data =
-            await response.json();
-
-        const weather =
-            data.current_weather;
-
-        const temp =
-            Math.round(
-                weather.temperature
-            );
-
-        const codigo =
-            weather.weathercode;
-
-        let icono =
-            'https://openweathermap.org/img/wn/01d@2x.png';
-
-
-        if(codigo >= 1 && codigo <= 3){
-
-            icono =
-            'https://openweathermap.org/img/wn/02d@2x.png';
-
-        }
-
-
-        if(codigo >= 45 && codigo <= 48){
-
-            icono =
-            'https://openweathermap.org/img/wn/50d@2x.png';
-
-        }
-
-
-        if(codigo >= 51 && codigo <= 67){
-
-            icono =
-            'https://openweathermap.org/img/wn/10d@2x.png';
-
-        }
-
-
-        if(codigo >= 71 && codigo <= 77){
-
-            icono =
-            'https://openweathermap.org/img/wn/13d@2x.png';
-
-        }
-
-
-        if(codigo >= 80 && codigo <= 82){
-
-            icono =
-            'https://openweathermap.org/img/wn/09d@2x.png';
-
-        }
-
-
-        if(codigo >= 95){
-
-            icono =
-            'https://openweathermap.org/img/wn/11d@2x.png';
-
-        }
-
-
-        const tempElement =
-            document.getElementById(
-                'clima-temp'
-            );
-
-        const iconElement =
-            document.getElementById(
-                'clima-icono'
-            );
-
-        const box =
-            document.getElementById(
-                'clima-box'
-            );
-
-
-        if(tempElement){
-
-            tempElement.textContent =
-                temp + '°C';
-
-        }
-
-
-        if(iconElement){
-
-            iconElement.src =
-                icono;
-
-        }
-
-
-        if(box){
-
-            box.style.display =
-                'flex';
-
-        }
-
-
-    }catch(error){
-
-        console.warn(
-            'Clima no disponible',
-            error
-        );
-
-    }
-
+function descriptionOf(row){
+ return row["description_"+currentLanguage] || row.description_es || "";
 }
-
-obtenerClima();
-
-
-/* =====================================================
-   OFERTAS
-===================================================== */
-
-async function loadOffers(){
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-        await supabase
-            .from('offers')
-            .select('*')
-            .order(
-                'price',
-                {
-                    ascending:true
-                }
-            );
-
-
-        if(error){
-            throw error;
-        }
-
-
-        offers =
-            data || [];
-
-
-        renderOffers();
-
-        renderAdminList();
-
-        renderBanner();
-
-        renderTransporte();
-
-
-    }catch(error){
-
-        console.error(error);
-
-        message(
-            'Error cargando ofertas: ' +
-            error.message
-        );
-
-    }
-
+function setStatus(id,message){
+ const el=document.getElementById(id);
+ if(el) el.textContent=message;
 }
-
-
-/* =====================================================
-   MOSTRAR OFERTAS
-===================================================== */
-
-function renderOffers(){
-
-    const categories = {
-
-        Recargas:
-            'grid-recargas',
-
-        Remesas:
-            'grid-remesas',
-
-        Tickets:
-            'grid-tickets'
-
-    };
-
-
-    Object.entries(
-        categories
-    ).forEach(
-        ([category,id])=>{
-
-            const container =
-                document.getElementById(id);
-
-            if(!container)return;
-
-
-            const items =
-                offers.filter(
-                    item =>
-                        item.category === category &&
-                        item.active !== false
-                );
-
-
-            if(items.length === 0){
-
-                container.innerHTML =
-                    '<p style="color:#aabbd0">' +
-                    'Próximamente nuevas ofertas.' +
-                    '</p>';
-
-                return;
-
-            }
-
-
-            container.innerHTML =
-                items.map(
-                    item => {
-
-                        const texto =
-                            '¡Mira esta oferta! ' +
-                            item.title +
-                            ' por solo ' +
-                            item.price +
-                            ' ' +
-                            item.currency +
-                            '. ' +
-                            window.location.href;
-
-
-                        return `
-
-<article class="card">
-
-<a
-href="https://wa.me/?text=${encodeURIComponent(texto)}"
-target="_blank"
-class="btn-share">
-
-📤
-
-</a>
-
-
-<div class="category-label">
-
-${escapeHTML(item.category)}
-
-</div>
-
-
-<h3>
-
-${escapeHTML(item.title)}
-
-</h3>
-
-
-<div class="price">
-
-${formatPrice(item.price)}
-${escapeHTML(item.currency)}
-
-</div>
-
-
-<p>
-
-${escapeHTML(
-    item.details || ''
-)}
-
-</p>
-
-</article>
-
-`;
-
-                    }
-                ).join('');
-
-        }
-    );
-
+function whatsappURL(message){
+ return "https://wa.me/"+PHONE+"?text="+encodeURIComponent(message);
 }
+document.getElementById("whatsappHero").href=whatsappURL("Hola, quiero información de YOUR BRIDGE HOME.");
 
-
-/* =====================================================
-   TRANSPORTE
-===================================================== */
-
-function renderTransporte(){
-
-    const container =
-        document.getElementById(
-            'grid-transporte'
-        );
-
-    if(!container)return;
-
-
-    const items =
-        offers.filter(
-            item =>
-                ['Bus','Tren','Avion']
-                .includes(
-                    item.category
-                ) &&
-                item.active !== false
-        );
-
-
-    if(items.length === 0){
-
-        container.innerHTML =
-            '<p style="color:#aabbd0">' +
-            'Próximamente nuevas ofertas.' +
-            '</p>';
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        items.map(
-            item => {
-
-                const texto =
-                    '¡Mira esta oferta! ' +
-                    item.title +
-                    ' por solo ' +
-                    item.price +
-                    ' ' +
-                    item.currency +
-                    '. ' +
-                    window.location.href;
-
-
-                return `
-
-<article class="card">
-
-<a
-href="https://wa.me/?text=${encodeURIComponent(texto)}"
-target="_blank"
-class="btn-share">
-
-📤
-
-</a>
-
-
-<div class="category-label">
-
-${escapeHTML(item.category)}
-
-</div>
-
-
-<h3>
-
-${escapeHTML(item.title)}
-
-</h3>
-
-
-<div class="price">
-
-${formatPrice(item.price)}
-${escapeHTML(item.currency)}
-
-</div>
-
-
-<p>
-
-${escapeHTML(
-    item.details || ''
-)}
-
-</p>
-
-</article>
-
-`;
-
-            }
-        ).join('');
-
+function applyLanguage(){
+ document.documentElement.lang=currentLanguage;
+ document.querySelectorAll("[data-t]").forEach(el=>{
+  const key=el.dataset.t;
+  el.textContent=translations[currentLanguage][key] || key;
+ });
+ renderContent();
 }
+document.getElementById("language").addEventListener("change",e=>{
+ currentLanguage=e.target.value;
+ applyLanguage();
+});
 
-
-/* =====================================================
-   BANNER
-===================================================== */
-
-function renderBanner(){
-
-    const categories = [
-
-        'Recargas',
-        'Remesas',
-        'Tickets',
-        'Bus',
-        'Tren',
-        'Avion'
-
-    ];
-
-
-    const cheapest = [];
-
-
-    categories.forEach(
-        category => {
-
-            const items =
-                offers
-                    .filter(
-                        item =>
-                            item.category === category &&
-                            item.active !== false
-                    )
-                    .sort(
-                        (a,b) =>
-                            Number(a.price) -
-                            Number(b.price)
-                    );
-
-
-            if(items.length > 0){
-
-                cheapest.push(
-                    items[0]
-                );
-
-            }
-
-        }
-    );
-
-
-    if(cheapest.length === 0){
-
-        document.getElementById(
-            'banner-title'
-        ).textContent =
-            'Próximamente nuevas ofertas';
-
-        return;
-
-    }
-
-
-    if(
-        bannerIndex >=
-        cheapest.length
-    ){
-
-        bannerIndex = 0;
-
-    }
-
-
-    const item =
-        cheapest[bannerIndex];
-
-
-    document.getElementById(
-        'banner-title'
-    ).textContent =
-        '[' +
-        item.category +
-        '] ' +
-        item.title;
-
-
-    document.getElementById(
-        'banner-price'
-    ).textContent =
-        formatPrice(
-            item.price
-        ) +
-        ' ' +
-        item.currency;
-
-
-    document.getElementById(
-        'banner-details'
-    ).textContent =
-        item.details || '';
-
+async function loadContent(){
+ const {data,error}=await db.from("ybh_content")
+  .select("*").eq("active",true).order("sort_order");
+ if(error){console.error(error);return}
+ content=data||[];
+ renderContent();
 }
-
-
-setInterval(
-    ()=>{
-        bannerIndex++;
-        renderBanner();
-    },
-    5000
-);
-
-
-/* =====================================================
-   CALCULADORA
-===================================================== */
-
-function calcRemesa(){
-
-    const tasa =
-        Number(
-            document.getElementById(
-                'tasa'
-            )?.value
-        ) || 0;
-
-
-    const monto =
-        Number(
-            document.getElementById(
-                'monto-envio'
-            )?.value
-        ) || 0;
-
-
-    const resultado =
-        document.getElementById(
-            'res-remesa'
-        );
-
-
-    if(resultado){
-
-        resultado.textContent =
-            (tasa * monto)
-            .toFixed(2);
-
-    }
-
+async function loadSettings(){
+ const {data,error}=await db.from("ybh_settings").select("*");
+ if(error){console.error(error);return}
+ settings={};
+ (data||[]).forEach(row=>settings[row.key]=row.value);
+ const wa=settings.whatsapp?.number;
+ if(wa){
+  const clean=String(wa).replace(/\D/g,"");
+  document.getElementById("whatsappHero").href=
+   "https://wa.me/"+clean+"?text="+encodeURIComponent(settings.whatsapp.message||"Hola");
+ }
+ const rem=settings.remittance||{rubles:1000,cup:9.8};
+ const form=document.getElementById("remittanceForm");
+ form.elements.rubles.value=rem.rubles||1000;
+ form.elements.cup.value=rem.cup||9.8;
+ updateRemittance();
+ renderNotices();
 }
-
-
-function calcPasaje(){
-
-    const tasa =
-        Number(
-            document.getElementById(
-                'tasa'
-            )?.value
-        ) || 0;
-
-
-    const monto =
-        Number(
-            document.getElementById(
-                'monto-pasaje'
-            )?.value
-        ) || 0;
-
-
-    const resultado =
-        document.getElementById(
-            'res-pasaje'
-        );
-
-
-    if(resultado){
-
-        resultado.textContent =
-            (tasa * monto)
-            .toFixed(2);
-
-    }
-
+function renderContent(){
+ const services=content.filter(x=>["recargas","remesas","vuelos"].includes(x.section));
+ const catalog=content.filter(x=>!["avisos"].includes(x.section));
+ document.getElementById("servicesGrid").innerHTML=services.map(cardHTML).join("")||emptyCard();
+ document.getElementById("catalogGrid").innerHTML=catalog.map(cardHTML).join("")||emptyCard();
+ const featured=content.filter(x=>x.active && x.price!==null)
+  .sort((a,b)=>Number(a.price)-Number(b.price))[0];
+ document.getElementById("bannerText").textContent=featured
+  ? titleOf(featured)+" · "+money(featured.price,featured.currency)+" · "+descriptionOf(featured)
+  : (settings.announcement?.text||"Consulta nuestras ofertas.");
 }
-
-
-[
-    'tasa',
-    'monto-envio',
-    'monto-pasaje'
-]
-.forEach(
-    id => {
-
-        const element =
-            document.getElementById(id);
-
-        if(!element)return;
-
-
-        element.addEventListener(
-            'input',
-            ()=>{
-                calcRemesa();
-                calcPasaje();
-            }
-        );
-
-    }
-);
-
-
-/* =====================================================
-   PRUEBAS
-===================================================== */
-
-async function loadProofs(){
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-        await supabase
-            .from('proofs')
-            .select('*')
-            .order(
-                'created_at',
-                {
-                    ascending:false
-                }
-            );
-
-
-        if(error){
-            throw error;
-        }
-
-
-        proofs =
-            data || [];
-
-
-        renderProofs();
-
-        renderProofList();
-
-
-    }catch(error){
-
-        console.warn(
-            'Error cargando pruebas',
-            error
-        );
-
-    }
-
+function emptyCard(){
+ return '<div class="card"><p>Próximamente publicaremos información.</p></div>';
 }
-
-
-function renderProofs(){
-
-    const container =
-        document.getElementById(
-            'grid-pruebas'
-        );
-
-    if(!container)return;
-
-
-    const active =
-        proofs.filter(
-            p =>
-                p.active !== false
-        );
-
-
-    if(active.length === 0){
-
-        container.innerHTML =
-            '<p style="' +
-            'color:#aabbd0;' +
-            'text-align:center;' +
-            'grid-column:1/-1">' +
-            'Próximamente más pruebas.' +
-            '</p>';
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        active.map(
-            p => `
-
-<div class="shop-item">
-
-<img
-src="${escapeHTML(p.url)}"
-alt="${escapeHTML(p.caption || '')}"
-onerror="this.style.display='none'">
-
-
-<div
-class="shop-info"
-style="text-align:center;">
-
-<p>
-
-${escapeHTML(
-    p.caption || ''
-)}
-
-</p>
-
-</div>
-
-</div>
-
-`
-        ).join('');
-
+function cardHTML(row){
+ const icons={recargas:"fa-mobile-screen-button",remesas:"fa-money-bill-transfer",vuelos:"fa-plane",catalogo:"fa-store",avisos:"fa-bell"};
+ const link=row.link
+  ? '<a class="btn secondary" target="_blank" rel="noopener" href="'+escapeHTML(row.link)+'">Más información ↗</a>'
+  : '<a class="btn secondary" href="'+whatsappURL("Hola, quiero información sobre "+titleOf(row))+'">Consultar</a>';
+ return `<article class="card">
+  <div class="symbol"><i class="fa-solid ${icons[row.section]||"fa-star"}"></i></div>
+  ${row.badge?'<span class="tag">'+escapeHTML(row.badge)+'</span>':""}
+  <h3>${escapeHTML(titleOf(row))}</h3>
+  <p>${escapeHTML(descriptionOf(row))}</p>
+  <div class="price">${escapeHTML(money(row.price,row.currency))}</div>
+  ${link}
+ </article>`;
 }
-
-
-/* =====================================================
-   SUBIR PRUEBA
-===================================================== */
-
-window.uploadProof =
-async function(){
-
-    const input =
-        document.getElementById(
-            'proof-file'
-        );
-
-
-    const file =
-        input?.files?.[0];
-
-
-    const caption =
-        document.getElementById(
-            'proof-caption'
-        )?.value.trim() || '';
-
-
-    if(!file){
-
-        message(
-            'Selecciona una imagen primero.'
-        );
-
-        return;
-
-    }
-
-
-    try{
-
-        message(
-            'Subiendo prueba...'
-        );
-
-
-        const fileName =
-            'proof_' +
-            Date.now() +
-            '_' +
-            file.name.replace(
-                /[^a-zA-Z0-9._-]/g,
-                '_'
-            );
-
-
-        const {
-            error:uploadError
-        } =
-        await supabase.storage
-            .from('photos')
-            .upload(
-                fileName,
-                file,
-                {
-                    upsert:false,
-                    contentType:file.type
-                }
-            );
-
-
-        if(uploadError){
-            throw uploadError;
-        }
-
-
-        const {
-            data:urlData
-        } =
-        supabase.storage
-            .from('photos')
-            .getPublicUrl(
-                fileName
-            );
-
-
-        const {
-            error:insertError
-        } =
-        await supabase
-            .from('proofs')
-            .insert({
-
-                url:
-                    urlData.publicUrl,
-
-                caption:
-                    caption,
-
-                active:true
-
-            });
-
-
-        if(insertError){
-            throw insertError;
-        }
-
-
-        input.value = '';
-
-
-        document.getElementById(
-            'proof-caption'
-        ).value = '';
-
-
-        message(
-            '¡Prueba subida correctamente!'
-        );
-
-
-        await loadProofs();
-
-
-    }catch(error){
-
-        console.error(error);
-
-        message(
-            'Error subiendo prueba: ' +
-            error.message
-        );
-
-    }
-
-};
-
-
-/* =====================================================
-   ELIMINAR PRUEBA
-===================================================== */
-
-window.deleteProof =
-async function(id){
-
-    if(
-        !confirm(
-            '¿Eliminar esta prueba?'
-        )
-    ){
-        return;
-    }
-
-
-    const {
-        error
-    } =
-    await supabase
-        .from('proofs')
-        .delete()
-        .eq(
-            'id',
-            id
-        );
-
-
-    if(error){
-
-        message(
-            'Error: ' +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    message(
-        'Prueba eliminada.'
-    );
-
-
-    await loadProofs();
-
-};
-
-
-function renderProofList(){
-
-    const container =
-        document.getElementById(
-            'proof-list'
-        );
-
-    if(!container)return;
-
-
-    container.innerHTML =
-        proofs.map(
-            p => `
-
-<div class="admin-item">
-
-<div>
-
-<strong>
-
-${escapeHTML(
-    p.caption ||
-    '(sin título)'
-)}
-
-</strong>
-
-</div>
-
-
-<div class="admin-actions">
-
-<button
-class="red-btn"
-onclick="deleteProof('${p.id}')">
-
-ELIMINAR
-
-</button>
-
-</div>
-
-</div>
-
-`
-        ).join('');
-
+function renderNotices(){
+ const notices=content.filter(x=>x.section==="avisos");
+ document.getElementById("notices").innerHTML=notices.length
+  ? notices.map(x=>`<div class="notice"><strong>${escapeHTML(titleOf(x))}</strong><br>${escapeHTML(descriptionOf(x))}</div>`).join("")
+  : '<div class="notice">Consulta aquí los avisos y novedades del negocio.</div>';
 }
-
-
-/* =====================================================
-   GALERÍA
-===================================================== */
-
-async function cargarGaleriaSupabase(){
-
-    const container =
-        document.getElementById(
-            'gallery'
-        );
-
-    if(!container)return;
-
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-        await supabase.storage
-            .from('photos')
-            .list(
-                '',
-                {
-                    limit:100,
-                    sort:{
-                        column:'created_at',
-                        order:'desc'
-                    }
-                }
-            );
-
-
-        if(error){
-            throw error;
-        }
-
-
-        const archivos =
-            (data || [])
-            .filter(
-                file =>
-                    /\.(jpg|jpeg|png|webp|gif)$/i
-                    .test(file.name)
-            );
-
-
-        const caption =
-            document.getElementById(
-                'gal-caption'
-            );
-
-
-        if(archivos.length === 0){
-
-            if(caption){
-
-                caption.textContent =
-                    'Aún no hay fotos en el bucket photos.';
-
-            }
-
-            return;
-
-        }
-
-
-        container
-            .querySelectorAll('img')
-            .forEach(
-                img =>
-                    img.remove()
-            );
-
-
-        archivos.forEach(
-            (file,index)=>{
-
-                const {
-                    data:urlData
-                } =
-                supabase.storage
-                    .from('photos')
-                    .getPublicUrl(
-                        file.name
-                    );
-
-
-                const img =
-                    document.createElement(
-                        'img'
-                    );
-
-
-                img.src =
-                    urlData.publicUrl;
-
-
-                img.alt =
-                    'Destino destacado';
-
-
-                if(index === 0){
-
-                    img.classList.add(
-                        'show'
-                    );
-
-                }
-
-
-                container.appendChild(
-                    img
-                );
-
-            }
-        );
-
-
-        galleryIndex = 0;
-
-
-        if(caption){
-
-            caption.textContent =
-                'Destinos destacados';
-
-        }
-
-
-    }catch(error){
-
-        console.warn(
-            'Error cargando galería',
-            error
-        );
-
-
-        const caption =
-            document.getElementById(
-                'gal-caption'
-            );
-
-
-        if(caption){
-
-            caption.textContent =
-                'No se pudo cargar la galería.';
-
-        }
-
-    }
-
+function updateRemittance(){
+ const amount=Number(document.getElementById("rubAmount").value||0);
+ const rate=settings.remittance||{rubles:1000,cup:9.8};
+ const result=amount*(Number(rate.cup)/Number(rate.rubles));
+ document.getElementById("remitResult").textContent=
+  amount>0 ? "Resultado orientativo: "+result.toLocaleString("es-ES",{maximumFractionDigits:2})+" CUP" : "Introduce una cantidad.";
 }
-
-
-/* =====================================================
-   ROTACIÓN GALERÍA
-===================================================== */
-
-setInterval(
-    ()=>{
-
-        const imgs =
-            document.querySelectorAll(
-                '#gallery img'
-            );
-
-
-        if(imgs.length <= 1){
-            return;
-        }
-
-
-        imgs.forEach(
-            img =>
-                img.classList.remove(
-                    'show'
-                )
-        );
-
-
-        galleryIndex =
-            (galleryIndex + 1) %
-            imgs.length;
-
-
-        imgs[
-            galleryIndex
-        ].classList.add(
-            'show'
-        );
-
-    },
-    20000
-);
-
-
-/* =====================================================
-   SUBIR FOTO
-===================================================== */
-
-window.uploadPhoto =
-async function(){
-
-    const input =
-        document.getElementById(
-            'photo-file'
-        );
-
-
-    const file =
-        input?.files?.[0];
-
-
-    const caption =
-        document.getElementById(
-            'photo-caption'
-        )?.value.trim() || '';
-
-
-    const category =
-        document.getElementById(
-            'photo-category'
-        )?.value ||
-        'Destinos';
-
-
-    if(!file){
-
-        message(
-            'Selecciona una foto primero.'
-        );
-
-        return;
-
-    }
-
-
-    if(
-        !file.type.startsWith(
-            'image/'
-        )
-    ){
-
-        message(
-            'El archivo debe ser una imagen.'
-        );
-
-        return;
-
-    }
-
-
-    try{
-
-        message(
-            'Subiendo foto...'
-        );
-
-
-        const extension =
-            file.name
-                .split('.')
-                .pop()
-                .toLowerCase();
-
-
-        const safeName =
-            category.replace(
-                /[^a-zA-Z0-9]/g,
-                '_'
-            );
-
-
-        const fileName =
-            'galeria_' +
-            Date.now() +
-            '_' +
-            safeName +
-            '.' +
-            extension;
-
-
-        const {
-            error
-        } =
-        await supabase.storage
-            .from('photos')
-            .upload(
-                fileName,
-                file,
-                {
-                    upsert:false,
-                    contentType:file.type
-                }
-            );
-
-
-        if(error){
-            throw error;
-        }
-
-
-        input.value = '';
-
-
-        document.getElementById(
-            'photo-caption'
-        ).value = '';
-
-
-        message(
-            '¡Foto subida correctamente!'
-        );
-
-
-        await cargarGaleriaSupabase();
-
-
-    }catch(error){
-
-        console.error(error);
-
-        message(
-            'Error subiendo foto: ' +
-            error.message
-        );
-
-    }
-
-};
-
-
-/* =====================================================
-   TIENDA
-===================================================== */
-
-async function loadShop(){
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-        await supabase
-            .from('shop')
-            .select('*')
-            .order(
-                'created_at',
-                {
-                    ascending:false
-                }
-            );
-
-
-        if(error){
-            throw error;
-        }
-
-
-        shopItems =
-            data || [];
-
-
-        renderShop();
-
-        renderShopAdmin();
-
-
-    }catch(error){
-
-        console.warn(
-            'Error cargando tienda',
-            error
-        );
-
-    }
-
+document.getElementById("rubAmount").addEventListener("input",updateRemittance);
+
+async function submitMessage(form,type,statusId){
+ const data=new FormData(form);
+ const payload={
+  message_type:type,
+  customer_name:String(data.get("customer_name")||"").trim(),
+  contact:String(data.get("contact")||"").trim(),
+  message:String(data.get("message")||"").trim()
+ };
+ if(!payload.message){setStatus(statusId,"Escribe tu mensaje.");return}
+ const {error}=await db.from("ybh_messages").insert(payload);
+ if(error){
+  console.error(error);
+  setStatus(statusId,"No se pudo enviar. Inténtalo de nuevo o contáctanos por WhatsApp.");
+  return;
+ }
+ form.reset();
+ setStatus(statusId,"¡Mensaje enviado correctamente!");
 }
+document.getElementById("requestForm").addEventListener("submit",e=>{
+ e.preventDefault();submitMessage(e.currentTarget,"solicitud","requestStatus");
+});
+document.getElementById("opinionForm").addEventListener("submit",e=>{
+ e.preventDefault();submitMessage(e.currentTarget,"opinion","opinionStatus");
+});
+document.getElementById("suggestForm").addEventListener("submit",e=>{
+ e.preventDefault();submitMessage(e.currentTarget,"sugerencia","suggestStatus");
+});
 
-
-function renderShop(){
-
-    const container =
-        document.getElementById(
-            'grid-tienda'
-        );
-
-
-    if(!container)return;
-
-
-    const items =
-        shopItems.filter(
-            i =>
-                i.active !== false
-        );
-
-
-    if(items.length === 0){
-
-        container.innerHTML =
-            '<p style="color:#aabbd0">' +
-            'Próximamente productos.' +
-            '</p>';
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        items.map(
-            i => `
-
-<div class="shop-item">
-
-${
-    i.image_url
-    ?
-    `
-    <img
-    src="${escapeHTML(i.image_url)}"
-    alt="${escapeHTML(i.name)}"
-    onerror="this.style.display='none'">
-    `
-    :
-    ''
+/* ADMINISTRACIÓN */
+async function checkAdmin(){
+ const {data}=await db.auth.getSession();
+ const user=data.session?.user;
+ const allowed=user?.email?.toLowerCase()===ADMIN_EMAIL;
+ document.getElementById("loginArea").classList.toggle("hidden",allowed);
+ document.getElementById("adminArea").classList.toggle("hidden",!allowed);
+ if(allowed){
+  document.getElementById("adminIdentity").textContent=user.email;
+  await loadAdmin();
+ }
+ return allowed;
 }
+document.getElementById("loginBtn").addEventListener("click",async()=>{
+ const email=document.getElementById("adminEmail").value.trim();
+ const password=document.getElementById("adminPassword").value;
+ setStatus("loginStatus","Comprobando acceso...");
+ const {error}=await db.auth.signInWithPassword({email,password});
+ if(error){setStatus("loginStatus","Acceso no válido. Comprueba tu correo y contraseña.");return}
+ document.getElementById("adminPassword").value="";
+ await checkAdmin();
+});
+document.getElementById("logoutBtn").addEventListener("click",async()=>{
+ await db.auth.signOut();
+ await checkAdmin();
+});
+db.auth.onAuthStateChange(()=>{checkAdmin()});
 
-
-<div class="shop-info">
-
-<h4>
-
-${escapeHTML(i.name)}
-
-</h4>
-
-
-<div class="price">
-
-${formatPrice(i.price)}
-${escapeHTML(i.currency)}
-
-</div>
-
-
-<p>
-
-${escapeHTML(
-    i.description || ''
-)}
-
-</p>
-
-</div>
-
-</div>
-
-`
-        ).join('');
-
+function clearContentForm(){
+ const form=document.getElementById("contentForm");
+ form.reset();
+ form.elements.id.value="";
+ form.elements.currency.value="₽";
+ form.elements.active.checked=true;
 }
+document.getElementById("clearContent").addEventListener("click",clearContentForm);
 
-
-/* =====================================================
-   GUARDAR PRODUCTO
-===================================================== */
-
-const shopForm =
-    document.getElementById(
-        'shop-form'
-    );
-
-
-if(shopForm){
-
-    shopForm.addEventListener(
-        'submit',
-        async event => {
-
-            event.preventDefault();
-
-
-            try{
-
-                const item = {
-
-                    name:
-                        document
-                        .getElementById(
-                            'shop-name'
-                        )
-                        .value
-                        .trim(),
-
-                    price:
-                        Number(
-                            document
-                            .getElementById(
-                                'shop-price'
-                            )
-                            .value
-                        ),
-
-                    currency:
-                        document
-                        .getElementById(
-                            'shop-currency'
-                        )
-                        .value,
-
-                    image_url:
-                        document
-                        .getElementById(
-                            'shop-image'
-                        )
-                        .value
-                        .trim(),
-
-                    description:
-                        document
-                        .getElementById(
-                            'shop-desc'
-                        )
-                        .value
-                        .trim(),
-
-                    active:true
-
-                };
-
-
-                const {
-                    error
-                } =
-                await supabase
-                    .from('shop')
-                    .insert(item);
-
-
-                if(error){
-                    throw error;
-                }
-
-
-                message(
-                    'Producto guardado correctamente.'
-                );
-
-
-                shopForm.reset();
-
-
-                await loadShop();
-
-
-            }catch(error){
-
-                message(
-                    'Error guardando producto: ' +
-                    error.message
-                );
-
-            }
-
-        }
-    );
-
+document.getElementById("contentForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(!await checkAdmin()) return;
+ const form=e.currentTarget;
+ const f=new FormData(form);
+ const id=String(f.get("id")||"");
+ const row={
+  section:f.get("section"),slug:String(f.get("slug")).trim(),
+  title_es:f.get("title_es"),title_ru:f.get("title_ru"),
+  title_en:f.get("title_en"),description_es:f.get("description_es"),
+  description_ru:f.get("description_ru"),description_en:f.get("description_en"),
+  price:f.get("price")===""?null:Number(f.get("price")),
+  currency:f.get("currency")||"₽",badge:f.get("badge")||"",
+  link:f.get("link")||"",active:form.elements.active.checked,
+  sort_order:Number(f.get("sort_order")||0),updated_at:new Date().toISOString()
+ };
+ const query=id
+  ? db.from("ybh_content").update(row).eq("id",id)
+  : db.from("ybh_content").insert(row);
+ const {error}=await query;
+ if(error){setStatus("contentStatus","Error al guardar: "+error.message);return}
+ setStatus("contentStatus","Publicación guardada correctamente.");
+ clearContentForm();
+ await loadContent();
+ await loadAdmin();
+});
+function editContent(id){
+ const row=content.find(x=>x.id===id);
+ if(!row)return;
+ const form=document.getElementById("contentForm");
+ Object.keys(row).forEach(k=>{
+  if(form.elements[k]) form.elements[k].value=row[k]??"";
+ });
+ form.elements.active.checked=row.active;
+ form.scrollIntoView({behavior:"smooth"});
 }
-
-
-/* =====================================================
-   ELIMINAR PRODUCTO
-===================================================== */
-
-window.deleteShopItem =
-async function(id){
-
-    if(
-        !confirm(
-            '¿Eliminar este producto?'
-        )
-    ){
-        return;
-    }
-
-
-    const {
-        error
-    } =
-    await supabase
-        .from('shop')
-        .delete()
-        .eq(
-            'id',
-            id
-        );
-
-
-    if(error){
-
-        message(
-            'Error: ' +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    message(
-        'Producto eliminado.'
-    );
-
-
-    await loadShop();
-
-};
-
-
-function renderShopAdmin(){
-
-    const container =
-        document.getElementById(
-            'shop-admin-list'
-        );
-
-
-    if(!container)return;
-
-
-    container.innerHTML =
-        shopItems.map(
-            i => `
-
-<div class="admin-item">
-
-<div>
-
-<strong>
-
-${escapeHTML(i.name)}
-
-</strong>
-
-<br>
-
-<small>
-
-${formatPrice(i.price)}
-${escapeHTML(i.currency)}
-
-</small>
-
-</div>
-
-
-<div class="admin-actions">
-
-<button
-class="red-btn"
-onclick="deleteShopItem('${i.id}')">
-
-ELIMINAR
-
-</button>
-
-</div>
-
-</div>
-
-`
-        ).join('');
-
+async function deleteContent(id){
+ if(!confirm("¿Eliminar esta publicación?"))return;
+ const {error}=await db.from("ybh_content").delete().eq("id",id);
+ if(error){alert("No se pudo eliminar: "+error.message);return}
+ await loadContent();await loadAdmin();
 }
+async function loadAdmin(){
+ const {data,error}=await db.from("ybh_content").select("*").order("sort_order");
+ if(error){console.error(error);return}
+ content=data||[];
+ document.getElementById("adminContentList").innerHTML=content.map(row=>`
+  <div class="admin-row">
+   <div><strong>${escapeHTML(row.title_es)}</strong><br><small>${escapeHTML(row.section)} · ${escapeHTML(money(row.price,row.currency))} · ${row.active?"Publicado":"Oculto"}</small></div>
+   <div style="display:flex;gap:6px">
+    <button class="btn secondary" type="button" data-edit="${row.id}">Editar</button>
+    <button class="btn danger" type="button" data-delete="${row.id}">Borrar</button>
+   </div>
+  </div>`).join("")||"Sin publicaciones.";
+ document.getElementById("adminContentList").querySelectorAll("[data-edit]").forEach(b=>b.addEventListener("click",()=>editContent(b.dataset.edit)));
+ document.getElementById("adminContentList").querySelectorAll("[data-delete]").forEach(b=>b.addEventListener("click",()=>deleteContent(b.dataset.delete)));
 
-
-/* =====================================================
-   NOTAS / AJUSTES
-===================================================== */
-
-async function loadNotes(){
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-        await supabase
-            .from('settings')
-            .select('*')
-            .eq(
-                'id',
-                1
-            )
-            .maybeSingle();
-
-
-        if(error){
-            throw error;
-        }
-
-
-        settings =
-            data || {};
-
-
-        const notes =
-            settings.notes || '';
-
-
-        const tasa =
-            settings.tasa || 0;
-
-
-        const video =
-            settings.video_url || '';
-
-
-        const publicNotes =
-            document.getElementById(
-                'notes-public'
-            );
-
-
-        if(publicNotes){
-
-            publicNotes.textContent =
-                notes ||
-                'Sin notas por ahora.';
-
-        }
-
-
-        const notesInput =
-            document.getElementById(
-                'notes-input'
-            );
-
-
-        if(notesInput){
-
-            notesInput.value =
-                notes;
-
-        }
-
-
-        const settingsTasa =
-            document.getElementById(
-                'settings-tasa'
-            );
-
-
-        if(settingsTasa){
-
-            settingsTasa.value =
-                tasa;
-
-        }
-
-
-        const settingsVideo =
-            document.getElementById(
-                'settings-video'
-            );
-
-
-        if(settingsVideo){
-
-            settingsVideo.value =
-                video;
-
-        }
-
-
-        const tasaInput =
-            document.getElementById(
-                'tasa'
-            );
-
-
-        if(tasaInput){
-
-            tasaInput.value =
-                tasa;
-
-        }
-
-
-        if(video){
-
-            const frame =
-                document.getElementById(
-                    'video-frame'
-                );
-
-
-            if(frame){
-
-                frame.src =
-                    video;
-
-            }
-
-        }
-
-
-        calcRemesa();
-
-        calcPasaje();
-
-
-    }catch(error){
-
-        console.warn(
-            'Error cargando ajustes',
-            error
-        );
-
-    }
-
+ const {data:messages}=await db.from("ybh_messages").select("*").order("created_at",{ascending:false}).limit(50);
+ document.getElementById("adminMessages").innerHTML=(messages||[]).map(m=>`
+  <div class="admin-row">
+   <div><strong>${escapeHTML(m.message_type)} · ${escapeHTML(m.customer_name||"Cliente")}</strong>
+   <br><small>${escapeHTML(m.contact)} · ${new Date(m.created_at).toLocaleString()}</small>
+   <p>${escapeHTML(m.message)}</p></div>
+   <span class="tag">${escapeHTML(m.status)}</span>
+  </div>`).join("")||"No hay mensajes.";
 }
-
-
-/* =====================================================
-   GUARDAR NOTAS
-===================================================== */
-
-window.saveNotes =
-async function(){
-
-    const notes =
-        document.getElementById(
-            'notes-input'
-        )?.value || '';
-
-
-    const {
-        error
-    } =
-    await supabase
-        .from('settings')
-        .upsert(
-            {
-                id:1,
-                notes:notes
-            },
-            {
-                onConflict:'id'
-            }
-        );
-
-
-    if(error){
-
-        message(
-            'Error guardando notas: ' +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    message(
-        'Notas guardadas correctamente.'
-    );
-
-
-    await loadNotes();
-
-};
-
-
-/* =====================================================
-   GUARDAR AJUSTES
-===================================================== */
-
-window.saveSettings =
-async function(){
-
-    const tasa =
-        Number(
-            document.getElementById(
-                'settings-tasa'
-            )?.value
-        ) || 0;
-
-
-    const video_url =
-        document.getElementById(
-            'settings-video'
-        )?.value.trim() || '';
-
-
-    const {
-        error
-    } =
-    await supabase
-        .from('settings')
-        .upsert(
-            {
-                id:1,
-                tasa:tasa,
-                video_url:video_url
-            },
-            {
-                onConflict:'id'
-            }
-        );
-
-
-    if(error){
-
-        message(
-            'Error guardando ajustes: ' +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    message(
-        'Ajustes guardados correctamente.'
-    );
-
-
-    await loadNotes();
-
-};
-
-
-/* =====================================================
-   TABS
-===================================================== */
-
-window.showTab =
-function(name,button){
-
-    document
-        .querySelectorAll(
-            '.tab-panel'
-        )
-        .forEach(
-            panel =>
-                panel.classList.remove(
-                    'active'
-                )
-        );
-
-
-    document
-        .querySelectorAll(
-            '.tab-bar button'
-        )
-        .forEach(
-            btn =>
-                btn.classList.remove(
-                    'active'
-                )
-        );
-
-
-    const panel =
-        document.getElementById(
-            'tab-' + name
-        );
-
-
-    if(panel){
-
-        panel.classList.add(
-            'active'
-        );
-
-    }
-
-
-    if(button){
-
-        button.classList.add(
-            'active'
-        );
-
-    }
-
-};
-
-
-/* =====================================================
-   FORMULARIO OFERTAS
-===================================================== */
-
-const offerForm =
-    document.getElementById(
-        'offer-form'
-    );
-
-
-if(offerForm){
-
-    offerForm.addEventListener(
-        'submit',
-        async event => {
-
-            event.preventDefault();
-
-
-            try{
-
-                const id =
-                    document.getElementById(
-                        'offer-id'
-                    ).value;
-
-
-                const item = {
-
-                    category:
-                        document.getElementById(
-                            'category'
-                        ).value,
-
-                    title:
-                        document.getElementById(
-                            'title'
-                        ).value.trim(),
-
-                    price:
-                        Number(
-                            document.getElementById(
-                                'price'
-                            ).value
-                        ),
-
-                    currency:
-                        document.getElementById(
-                            'currency'
-                        ).value,
-
-                    details:
-                        document.getElementById(
-                            'details'
-                        ).value.trim(),
-
-                    active:
-                        document.getElementById(
-                            'active'
-                        ).checked
-
-                };
-
-
-                if(id){
-
-                    item.id =
-                        id;
-
-                }
-
-
-                const {
-                    error
-                } =
-                await supabase
-                    .from('offers')
-                    .upsert(
-                        item,
-                        {
-                            onConflict:'id'
-                        }
-                    );
-
-
-                if(error){
-                    throw error;
-                }
-
-
-                message(
-                    '¡Oferta guardada correctamente!'
-                );
-
-
-                window.resetForm();
-
-
-                await loadOffers();
-
-
-            }catch(error){
-
-                message(
-                    'No se pudo guardar: ' +
-                    error.message
-                );
-
-            }
-
-        }
-    );
-
+document.getElementById("remittanceForm").addEventListener("submit",async e=>{
+ e.preventDefault();
+ if(!await checkAdmin())return;
+ const f=new FormData(e.currentTarget);
+ const value={rubles:Number(f.get("rubles")),cup:Number(f.get("cup"))};
+ const {error}=await db.from("ybh_settings").upsert({key:"remittance",value,updated_at:new Date().toISOString()});
+ if(error){setStatus("rateStatus","Error: "+error.message);return}
+ settings.remittance=value;
+ updateRemittance();
+ setStatus("rateStatus","Tasa guardada.");
+});
+
+/* Actualización de contenido para visitantes */
+db.channel("ybh-live-content")
+ .on("postgres_changes",{event:"*",schema:"public",table:"ybh_content"},()=>loadContent())
+ .on("postgres_changes",{event:"*",schema:"public",table:"ybh_settings"},()=>loadSettings())
+ .subscribe();
+
+async function init(){
+ if(SUPABASE_KEY==="PEGA_AQUI_TU_CLAVE_PUBLISHABLE"){
+  document.getElementById("bannerText").textContent="Falta colocar la clave Publishable de Supabase en el código.";
+  return;
+ }
+ await Promise.all([loadContent(),loadSettings()]);
+ await checkAdmin();
 }
-
-
-/* =====================================================
-   EDITAR OFERTA
-===================================================== */
-
-window.editOffer =
-function(id){
-
-    const item =
-        offers.find(
-            o =>
-                String(o.id) ===
-                String(id)
-        );
-
-
-    if(!item)return;
-
-
-    document.getElementById(
-        'offer-id'
-    ).value =
-        item.id;
-
-
-    document.getElementById(
-        'category'
-    ).value =
-        item.category;
-
-
-    document.getElementById(
-        'title'
-    ).value =
-        item.title;
-
-
-    document.getElementById(
-        'price'
-    ).value =
-        item.price;
-
-
-    document.getElementById(
-        'currency'
-    ).value =
-        item.currency;
-
-
-    document.getElementById(
-        'details'
-    ).value =
-        item.details || '';
-
-
-    document.getElementById(
-        'active'
-    ).checked =
-        item.active !== false;
-
-
-    document.getElementById(
-        'offer-form'
-    ).scrollIntoView({
-        behavior:'smooth'
-    });
-
-
-    message(
-        'Editando: ' +
-        item.title
-    );
-
-};
-
-
-/* =====================================================
-   ELIMINAR OFERTA
-===================================================== */
-
-window.deleteOffer =
-async function(id){
-
-    if(
-        !confirm(
-            '¿Seguro que deseas eliminar esta oferta?'
-        )
-    ){
-
-        return;
-
-    }
-
-
-    const {
-        error
-    } =
-    await supabase
-        .from('offers')
-        .delete()
-        .eq(
-            'id',
-            id
-        );
-
-
-    if(error){
-
-        message(
-            'Error eliminando oferta: ' +
-            error.message
-        );
-
-        return;
-
-    }
-
-
-    message(
-        'Oferta eliminada.'
-    );
-
-
-    await loadOffers();
-
-};
-
-
-/* =====================================================
-   RESET OFERTA
-===================================================== */
-
-window.resetForm =
-function(){
-
-    const form =
-        document.getElementById(
-            'offer-form'
-        );
-
-
-    if(form){
-
-        form.reset();
-
-    }
-
-
-    const id =
-        document.getElementById(
-            'offer-id'
-        );
-
-
-    if(id){
-
-        id.value = '';
-
-    }
-
-
-    const active =
-        document.getElementById(
-            'active'
-        );
-
-
-    if(active){
-
-        active.checked =
-            true;
-
-    }
-
-};
-
-
-/* =====================================================
-   LISTA ADMIN
-===================================================== */
-
-function renderAdminList(){
-
-    const container =
-        document.getElementById(
-            'admin-list'
-        );
-
-
-    if(!container)return;
-
-
-    if(offers.length === 0){
-
-        container.innerHTML =
-            '<p style="color:#aabbd0">' +
-            'No hay ofertas registradas.' +
-            '</p>';
-
-        return;
-
-    }
-
-
-    container.innerHTML =
-        offers.map(
-            item => `
-
-<div class="admin-item">
-
-<div>
-
-<strong>
-
-${escapeHTML(item.title)}
-
-</strong>
-
-<br>
-
-<small>
-
-${escapeHTML(item.category)}
-
-·
-
-${formatPrice(item.price)}
-${escapeHTML(item.currency)}
-
-·
-
-${
-    item.active !== false
-    ? 'Visible'
-    : 'Oculta'
-}
-
-</small>
-
-</div>
-
-
-<div class="admin-actions">
-
-<button
-class="gold-btn"
-onclick="editOffer('${item.id}')">
-
-EDITAR
-
-</button>
-
-
-<button
-class="red-btn"
-onclick="deleteOffer('${item.id}')">
-
-ELIMINAR
-
-</button>
-
-</div>
-
-</div>
-
-`
-        ).join('');
-
-}
-
-
-/* =====================================================
-   IDIOMAS
-===================================================== */
-
-window.setLang =
-function(lang,button){
-
-    document
-        .querySelectorAll(
-            '.lang-btn'
-        )
-        .forEach(
-            btn =>
-                btn.classList.remove(
-                    'active'
-                )
-        );
-
-
-    if(button){
-
-        button.classList.add(
-            'active'
-        );
-
-    }
-
-
-    const translations = {
-
-        es:{
-            inicio:'Inicio',
-            recargas:'Recargas',
-            remesas:'Remesas',
-            tickets:'Tickets',
-            transporte:'Transporte',
-            calculadora:'Calculadora',
-            administracion:'Administración'
-        },
-
-        en:{
-            inicio:'Home',
-            recargas:'Top-ups',
-            remesas:'Remittances',
-            tickets:'Flight Tickets',
-            transporte:'Transport',
-            calculadora:'Calculator',
-            administracion:'Administration'
-        },
-
-        ru:{
-            inicio:'Главная',
-            recargas:'Пополнения',
-            remesas:'Переводы',
-            tickets:'Авиабилеты',
-            transporte:'Транспорт',
-            calculadora:'Калькулятор',
-            administracion:'Администрация'
-        }
-
-    };
-
-
-    const t =
-        translations[lang] ||
-        translations.es;
-
-
-    const links =
-        document.querySelectorAll(
-            'nav a'
-        );
-
-
-    if(links.length >= 7){
-
-        links[0].textContent =
-            t.inicio;
-
-        links[1].textContent =
-            t.recargas;
-
-        links[2].textContent =
-            t.remesas;
-
-        links[3].textContent =
-            t.tickets;
-
-        links[4].textContent =
-            t.transporte;
-
-        links[5].textContent =
-            t.calculadora;
-
-        links[6].textContent =
-            t.administracion;
-
-    }
-
-};
-
-
-/* =====================================================
-   INICIALIZACIÓN
-===================================================== */
-
-async function iniciarPagina(){
-
-    message(
-        'Conectando con YOUR BRIDGE HOME...'
-    );
-
-
-    await Promise.allSettled([
-
-        loadOffers(),
-
-        loadProofs(),
-
-        loadShop(),
-
-        loadNotes(),
-
-        cargarGaleriaSupabase()
-
-    ]);
-
-
-    message(
-        'YOUR BRIDGE HOME está conectado.'
-    );
-
-}
-
-
-/* =====================================================
-   REALTIME
-===================================================== */
-
-try{
-
-
-    supabase
-        .channel(
-            'changes-offers'
-        )
-        .on(
-            'postgres_changes',
-            {
-                event:'*',
-                schema:'public',
-                table:'offers'
-            },
-            () =>
-                loadOffers()
-        )
-        .subscribe();
-
-
-    supabase
-        .channel(
-            'changes-proofs'
-        )
-        .on(
-            'postgres_changes',
-            {
-                event:'*',
-                schema:'public',
-                table:'proofs'
-            },
-            () =>
-                loadProofs()
-        )
-        .subscribe();
-
-
-    supabase
-        .channel(
-            'changes-shop'
-        )
-        .on(
-            'postgres_changes',
-            {
-                event:'*',
-                schema:'public',
-                table:'shop'
-            },
-            () =>
-                loadShop()
-        )
-        .subscribe();
-
-
-    supabase
-        .channel(
-            'changes-settings'
-        )
-        .on(
-            'postgres_changes',
-            {
-                event:'*',
-                schema:'public',
-                table:'settings'
-            },
-            () =>
-                loadNotes()
-        )
-        .subscribe();
-
-
-}catch(error){
-
-    console.warn(
-        'Realtime no disponible:',
-        error
-    );
-
-}
-
-
-/* =====================================================
-   ARRANCAR
-===================================================== */
-
-iniciarPagina();
-
+init();
 </script>
-
 </body>
 </html>
