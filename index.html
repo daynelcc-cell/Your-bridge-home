@@ -1,434 +1,2056 @@
-YOUR BRIDGE HOME
-TU PUENTE HACIA NUEVAS OPORTUNIDADES
-Daynel Caminero · Administrador
-🕒 --:--:--
-EspañolEnglishРусский
-InicioServiciosBoletosTasasExploraCalculadoraTarjetasContacto⚙ Administrar
-   Conectando con la base de datos...
- 
-OFERTAS DESTACADAS
-YOUR BRIDGE HOME
-Servicios, viajes y oportunidades en un solo lugar.
-Descubre nuestras ofertas
-Ver servicios
-🌤️ El Clima Ahora
-Cargando clima...
-Consultando el pronóstico...
---°
-Nuestras ofertas
-Información importante
-Bienvenido a YOUR BRIDGE HOME.
-Nuestros servicios
-Boletos de avión, bus y tren
-Uzbekistán · Boletos
-Tasas de cambio manuales
-Explora el mundo
-✈️ Viajes
-Busca rutas y destinos.
-Buscar vuelos
-🏨 Hoteles
-Encuentra alojamientos.
-Buscar hoteles
-🌍 Destinos
-Explora lugares y actividades.
-Google Travel
-🛂 Visados
-Consulta requisitos de viaje.
-Visa Index
-🌦️ Tiempo
-Consulta el pronóstico del tiempo.
-Meteoblue
-📍 Mapas
-Localiza ciudades y lugares.
-Abrir mapas
-Calculadora de remesas
-Selecciona la tasaCantidad que deseas enviar
-Resultado estimado
-0
-Generador de tarjetas
-Título de la tarjetaDescripciónTu puente hacia nuevas oportunidades.
-Precio
-Etiqueta
-Color de fondoAzul eleganteAzul turquesaDorado oscuroVerde eleganteGenerar tarjetaDescargar imagen
-Contacto
-YOUR BRIDGE HOME
-Administrador: Daynel Caminero
-WhatsApp: +7904-631-95-65
-Escribir por WhatsApp
-🔒 Acceso Restringido
-Panel de Administración
-Desbloquear
-⚙ Administración
-Modo AdministradorCerrar Sesión
-📦 Ofertas / Servicios
-NombreDescripción
-Precio
-Moneda
-CategoríaRecargaRemesaBoletoServicio
-Etiqueta
- Mostrar como destacada (en el banner)
-Guardar ofertaLimpiar
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-✈️ Boletos (Avión, Bus, Tren)
-OrigenDestino
-Fecha
-Compañía / Transporte
-Precio
-Moneda
- Es boleto de Uzbekistán
-Añadir boleto
-
-📋 Contenido guardado
- YOUR BRIDGE HOME · Daynel Caminero
-Comprobando conexión...
+<script>
 /* =====================================================
-   CONFIGURACIÓN SUPABASE
+   YOUR BRIDGE HOME
+   CONFIGURACIÓN
 ===================================================== */
-const SUPABASE_URL="https://wvhptkcmlyifnieqbgnq.supabase.co";
-const SUPABASE_KEY="sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7";
-const TABLE="ybh_contenido";
-const WHATSAPP="79046319565";
-const CLAVE_ADMIN = "MI_CLAVE_SECRETA"; 
 
-// Datos por defecto por si falla Supabase
-const defaultData={
- offers:[
-  {id:"o1",title:"INTERNET +",description:"2 GB LTE + 300 MB.cu",price:350,currency:"₽",type:"recarga",tag:"Oferta",featured:true},
-  {id:"o2",title:"Remesas a Cuba",description:"1.000 rublos = 9.80 CUP",price:1000,currency:"₽",type:"remesa",tag:"Consultar",featured:true}
- ],
- flights:[],
- rates:[{id:"r1",name:"RUB a CUP",from:"RUB",to:"CUP",value:0.0098}],
- bannerTitle:"YOUR BRIDGE HOME",
- bannerDescription:"Tu puente hacia nuevas oportunidades.",
- notice:"Bienvenido a YOUR BRIDGE HOME."
+const SUPABASE_URL = "https://wvhptkcmlyifnieqbgnq.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7";
+
+const TABLE = "ybh_contenido";
+
+const WHATSAPP = "79046319565";
+
+/*
+  IMPORTANTE:
+  Esta clave NO es una seguridad real porque está dentro
+  del HTML que puede ver cualquier visitante.
+  Por ahora sirve solamente para ocultar el panel.
+*/
+const CLAVE_ADMIN = "MI_CLAVE_SECRETA";
+
+
+/* =====================================================
+   DATOS POR DEFECTO
+   SI SUPABASE FALLA, LA PÁGINA SIGUE FUNCIONANDO
+===================================================== */
+
+const defaultData = {
+
+  offers: [
+    {
+      id: "o1",
+      title: "INTERNET +",
+      description: "2 GB LTE + 300 MB.cu",
+      price: 350,
+      currency: "₽",
+      type: "recarga",
+      tag: "Oferta",
+      featured: true
+    },
+
+    {
+      id: "o2",
+      title: "Remesas a Cuba",
+      description: "1.000 rublos = 9.80 CUP",
+      price: 1000,
+      currency: "₽",
+      type: "remesa",
+      tag: "Consultar",
+      featured: true
+    }
+  ],
+
+  flights: [],
+
+  rates: [
+    {
+      id: "r1",
+      name: "RUB a CUP",
+      from: "RUB",
+      to: "CUP",
+      value: 0.0098
+    }
+  ],
+
+  bannerTitle: "YOUR BRIDGE HOME",
+
+  bannerDescription:
+    "Tu puente hacia nuevas oportunidades.",
+
+  notice:
+    "Bienvenido a YOUR BRIDGE HOME."
 };
 
-let data=JSON.parse(JSON.stringify(defaultData));
-let db=null;
-let bannerIndex=0;
-let isAdminAuthenticated = false; 
+
+let data = JSON.parse(JSON.stringify(defaultData));
+
+let db = null;
+
+let bannerIndex = 0;
+
+let isAdminAuthenticated = false;
+
 
 /* =====================================================
-   RELOJ Y CLIMA
+   RELOJ
 ===================================================== */
+
 function updateClock() {
+
+  const clock = document.getElementById("liveClock");
+
+  if (!clock) return;
+
   const now = new Date();
-  document.getElementById("liveClock").textContent = 
-    String(now.getHours()).padStart(2, "0") + ":" + 
-    String(now.getMinutes()).padStart(2, "0") + ":" + 
+
+  clock.textContent =
+    String(now.getHours()).padStart(2, "0") +
+    ":" +
+    String(now.getMinutes()).padStart(2, "0") +
+    ":" +
     String(now.getSeconds()).padStart(2, "0");
 }
-setInterval(updateClock, 1000);
+
 updateClock();
 
-async function loadWeather() {
-  try {
-    const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=55.75&longitude=37.61&current_weather=true");
-    const json = await res.json();
-    if(json.current_weather) {
-      document.getElementById("weatherCity").textContent = "Moscú";
-      document.getElementById("weatherTemp").textContent = json.current_weather.temperature + "°C";
-      document.getElementById("weatherDesc").textContent = "Viento: " + json.current_weather.windspeed + " km/h";
-    }
-  } catch(e) {
-    document.getElementById("weatherCity").textContent = "Clima no disponible";
-  }
-}
-loadWeather();
+setInterval(updateClock, 1000);
+
 
 /* =====================================================
-   CONEXIÓN A SUPABASE
+   CLIMA
 ===================================================== */
-async function initSupabase(){
- if(!window.supabase) {
-   document.getElementById("connectionNotice").textContent = "Error: No se cargó la librería de Supabase.";
-   return;
- }
- db=window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
- await loadData();
- 
- db.channel('ybh-admin-changes')
-   .on('postgres_changes', { event: '*', schema: 'public', table: TABLE }, payload => {
-      if(payload.new && payload.new.id === 'main'){
-        data = {
-          offers: payload.new.offers || [],
-          flights: payload.new.flights || [],
-          rates: payload.new.rates || [],
-          bannerTitle: payload.new.bannerTitle,
-          bannerDescription: payload.new.bannerDescription,
-          notice: payload.new.notice
-        };
-        renderAll();
-        if(isAdminAuthenticated) renderAdmin();
-        document.getElementById("connectionNotice").textContent = "✅ En vivo (Tiempo real activo)";
-        document.getElementById("connectionNotice").style.color = "var(--green)";
+
+async function loadWeather() {
+
+  try {
+
+    const response = await fetch(
+      "https://api.open-meteo.com/v1/forecast" +
+      "?latitude=55.75" +
+      "&longitude=37.61" +
+      "&current_weather=true"
+    );
+
+    if (!response.ok) {
+      throw new Error("Error del clima");
+    }
+
+    const json = await response.json();
+
+    if (json.current_weather) {
+
+      const city =
+        document.getElementById("weatherCity");
+
+      const temp =
+        document.getElementById("weatherTemp");
+
+      const desc =
+        document.getElementById("weatherDesc");
+
+      if (city) {
+        city.textContent = "Moscú";
       }
-   }).subscribe();
-}
 
-async function loadData(){
- try{
-  const { data: res, error } = await db.from(TABLE).select('*').eq('id', 'main').single();
-  if(error) throw error;
-  if(res){
-    data = {
-      offers: res.offers || [],
-      flights: res.flights || [],
-      rates: res.rates || [],
-      bannerTitle: res.bannerTitle || "YOUR BRIDGE HOME",
-      bannerDescription: res.bannerDescription || "Tu puente",
-      notice: res.notice || "Bienvenido"
-    };
-    document.getElementById("connectionNotice").textContent = "✅ Conectado a la base de datos correctamente.";
-    document.getElementById("connectionNotice").style.color = "var(--green)";
-    document.getElementById("storageStatus").textContent = "Nube activa";
+      if (temp) {
+        temp.textContent =
+          json.current_weather.temperature + "°C";
+      }
+
+      if (desc) {
+        desc.textContent =
+          "Viento: " +
+          json.current_weather.windspeed +
+          " km/h";
+      }
+    }
+
+  } catch (error) {
+
+    console.error("Clima:", error);
+
+    const city =
+      document.getElementById("weatherCity");
+
+    if (city) {
+      city.textContent = "Clima no disponible";
+    }
   }
- }catch(e){
-  console.error(e);
-  document.getElementById("connectionNotice").textContent = "⚠️ Error al conectar con Supabase. Mostrando datos de prueba.";
-  document.getElementById("connectionNotice").style.color = "var(--red)";
- }
- renderAll();
 }
 
-async function saveToCloud(){
- if(!db) return;
- try{
-  await db.from(TABLE).upsert({
-    id: 'main',
-    offers: data.offers,
-    flights: data.flights,
-    rates: data.rates,
-    bannerTitle: data.bannerTitle,
-    bannerDescription: data.bannerDescription,
-    notice: data.notice
-  });
-  toast("Guardado en la nube");
- }catch(e){
-  console.error(e);
-  toast("Error al guardar");
- }
+loadWeather();
+
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+async function initSupabase() {
+
+  try {
+
+    if (!window.supabase) {
+
+      setConnectionMessage(
+        "⚠️ No se cargó Supabase. Usando datos locales."
+      );
+
+      renderAll();
+
+      return;
+    }
+
+    db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+    await loadData();
+
+    /*
+      Actualización en tiempo real.
+      Si Realtime no está configurado en Supabase,
+      simplemente continúa funcionando normalmente.
+    */
+
+    try {
+
+      db.channel("ybh-admin-changes")
+
+        .on(
+          "postgres_changes",
+          {
+            event: "*",
+            schema: "public",
+            table: TABLE
+          },
+          function(payload) {
+
+            if (
+              payload &&
+              payload.new &&
+              payload.new.id === "main"
+            ) {
+
+              data = {
+
+                offers:
+                  payload.new.offers || [],
+
+                flights:
+                  payload.new.flights || [],
+
+                rates:
+                  payload.new.rates || [],
+
+                bannerTitle:
+                  payload.new.bannerTitle ||
+                  "YOUR BRIDGE HOME",
+
+                bannerDescription:
+                  payload.new.bannerDescription ||
+                  "Tu puente hacia nuevas oportunidades.",
+
+                notice:
+                  payload.new.notice ||
+                  "Bienvenido a YOUR BRIDGE HOME."
+              };
+
+              renderAll();
+
+              if (isAdminAuthenticated) {
+                renderAdmin();
+              }
+
+              setConnectionMessage(
+                "✅ Actualización recibida en tiempo real.",
+                true
+              );
+            }
+          }
+        )
+
+        .subscribe();
+
+    } catch (realtimeError) {
+
+      console.warn(
+        "Realtime no disponible:",
+        realtimeError
+      );
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Error iniciando Supabase:",
+      error
+    );
+
+    setConnectionMessage(
+      "⚠️ Supabase no disponible. La página está usando datos locales."
+    );
+
+    renderAll();
+  }
 }
+
+
+/* =====================================================
+   MENSAJE DE CONEXIÓN
+===================================================== */
+
+function setConnectionMessage(message, success = false) {
+
+  const element =
+    document.getElementById("connectionNotice");
+
+  if (!element) return;
+
+  element.textContent = message;
+
+  element.style.color =
+    success
+      ? "var(--green, #28d17c)"
+      : "var(--red, #ff5b5b)";
+}
+
+
+/* =====================================================
+   CARGAR DATOS
+===================================================== */
+
+async function loadData() {
+
+  if (!db) {
+
+    renderAll();
+
+    return;
+  }
+
+  try {
+
+    const result = await db
+      .from(TABLE)
+      .select("*")
+      .eq("id", "main")
+      .maybeSingle();
+
+    if (result.error) {
+      throw result.error;
+    }
+
+    const res = result.data;
+
+    if (res) {
+
+      data = {
+
+        offers:
+          Array.isArray(res.offers)
+            ? res.offers
+            : [],
+
+        flights:
+          Array.isArray(res.flights)
+            ? res.flights
+            : [],
+
+        rates:
+          Array.isArray(res.rates)
+            ? res.rates
+            : [],
+
+        bannerTitle:
+          res.bannerTitle ||
+          "YOUR BRIDGE HOME",
+
+        bannerDescription:
+          res.bannerDescription ||
+          "Tu puente hacia nuevas oportunidades.",
+
+        notice:
+          res.notice ||
+          "Bienvenido a YOUR BRIDGE HOME."
+      };
+
+      setConnectionMessage(
+        "✅ Conectado a la base de datos correctamente.",
+        true
+      );
+
+      const storage =
+        document.getElementById("storageStatus");
+
+      if (storage) {
+        storage.textContent = "Nube activa";
+      }
+
+    } else {
+
+      /*
+        Si todavía no existe el registro "main",
+        intentamos crearlo.
+      */
+
+      await createInitialCloudData();
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Error cargando Supabase:",
+      error
+    );
+
+    setConnectionMessage(
+      "⚠️ No se pudo cargar Supabase. Mostrando datos locales."
+    );
+  }
+
+  renderAll();
+}
+
+
+/* =====================================================
+   CREAR REGISTRO INICIAL
+===================================================== */
+
+async function createInitialCloudData() {
+
+  if (!db) return;
+
+  try {
+
+    const result = await db
+      .from(TABLE)
+      .upsert({
+        id: "main",
+
+        offers: data.offers,
+
+        flights: data.flights,
+
+        rates: data.rates,
+
+        bannerTitle: data.bannerTitle,
+
+        bannerDescription:
+          data.bannerDescription,
+
+        notice: data.notice
+      });
+
+    if (result.error) {
+      console.warn(
+        "No se pudo crear el registro inicial:",
+        result.error
+      );
+    }
+
+  } catch (error) {
+
+    console.warn(
+      "No se pudo crear datos iniciales:",
+      error
+    );
+  }
+}
+
+
+/* =====================================================
+   GUARDAR EN SUPABASE
+===================================================== */
+
+async function saveToCloud() {
+
+  if (!db) {
+
+    toast(
+      "Guardado solamente en esta sesión. Supabase no está conectado."
+    );
+
+    return;
+  }
+
+  try {
+
+    const result = await db
+      .from(TABLE)
+      .upsert(
+        {
+          id: "main",
+
+          offers: data.offers,
+
+          flights: data.flights,
+
+          rates: data.rates,
+
+          bannerTitle:
+            data.bannerTitle,
+
+          bannerDescription:
+            data.bannerDescription,
+
+          notice:
+            data.notice
+        },
+        {
+          onConflict: "id"
+        }
+      );
+
+    if (result.error) {
+      throw result.error;
+    }
+
+    toast("✅ Guardado en la nube");
+
+  } catch (error) {
+
+    console.error(
+      "Error guardando:",
+      error
+    );
+
+    toast(
+      "⚠️ No se pudo guardar en Supabase"
+    );
+  }
+}
+
 
 /* =====================================================
    SEGURIDAD DEL PANEL
 ===================================================== */
+
 function checkPin() {
-  if(document.getElementById("adminPin").value === CLAVE_ADMIN) {
+
+  const input =
+    document.getElementById("adminPin");
+
+  if (!input) return;
+
+  if (input.value === CLAVE_ADMIN) {
+
     isAdminAuthenticated = true;
-    document.getElementById("adminPin").value = "";
-    document.getElementById("admin").classList.add("active");
-    document.getElementById("admin-lock").classList.remove("active");
+
+    input.value = "";
+
+    const admin =
+      document.getElementById("admin");
+
+    const lock =
+      document.getElementById("admin-lock");
+
+    if (admin) {
+      admin.classList.add("active");
+    }
+
+    if (lock) {
+      lock.classList.remove("active");
+    }
+
     renderAdmin();
+
   } else {
-    toast("Clave incorrecta");
+
+    toast("❌ Clave incorrecta");
   }
 }
 
+
 function lockAdmin() {
+
   isAdminAuthenticated = false;
-  document.getElementById("admin").classList.remove("active");
-  document.getElementById("admin-lock").classList.remove("active");
-  document.getElementById("home").classList.add("active");
-  document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
-  document.querySelector("nav button").classList.add("active");
+
+  const admin =
+    document.getElementById("admin");
+
+  const lock =
+    document.getElementById("admin-lock");
+
+  const home =
+    document.getElementById("home");
+
+  if (admin) {
+    admin.classList.remove("active");
+  }
+
+  if (lock) {
+    lock.classList.remove("active");
+  }
+
+  if (home) {
+    home.classList.add("active");
+  }
+
+  document
+    .querySelectorAll("nav button")
+    .forEach(function(button) {
+      button.classList.remove("active");
+    });
+
+  const firstButton =
+    document.querySelector("nav button");
+
+  if (firstButton) {
+    firstButton.classList.add("active");
+  }
 }
+
 
 /* =====================================================
-   LÓGICA DE FILTRO Y RENDERIZADO
+   FILTRO DE BOLETOS
 ===================================================== */
+
 function filterTickets() {
-  const searchInput = document.getElementById("ticketSearch");
-  if(!searchInput) return;
-  const query = searchInput.value.toLowerCase();
-  
-  const filtered = (data.flights || []).filter(f => 
-    !f.uzbek && (
-      (f.origin && f.origin.toLowerCase().includes(query)) || 
-      (f.destination && f.destination.toLowerCase().includes(query)) ||
-      (f.airline && f.airline.toLowerCase().includes(query))
-    )
+
+  const searchInput =
+    document.getElementById("ticketSearch");
+
+  const list =
+    document.getElementById("ticketList");
+
+  if (!list) return;
+
+  const query =
+    searchInput
+      ? searchInput.value.toLowerCase().trim()
+      : "";
+
+  const filtered =
+    (data.flights || []).filter(function(f) {
+
+      if (f.uzbek) return false;
+
+      return (
+
+        (f.origin || "")
+          .toLowerCase()
+          .includes(query)
+
+        ||
+
+        (f.destination || "")
+          .toLowerCase()
+          .includes(query)
+
+        ||
+
+        (f.airline || "")
+          .toLowerCase()
+          .includes(query)
+      );
+    });
+
+  list.innerHTML =
+    filtered.length
+      ? filtered.map(ticketCard).join("")
+      : '<div class="empty">No se encontraron boletos.</div>';
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function toast(message) {
+
+  const element =
+    document.getElementById("toast");
+
+  if (!element) {
+
+    alert(message);
+
+    return;
+  }
+
+  element.textContent = message;
+
+  element.style.display = "block";
+
+  setTimeout(function() {
+
+    element.style.display = "none";
+
+  }, 2500);
+}
+
+
+/* =====================================================
+   DINERO
+===================================================== */
+
+function money(value, currency) {
+
+  if (
+    value === undefined ||
+    value === null ||
+    value === ""
+  ) {
+    return "Consultar";
+  }
+
+  const number =
+    Number(value);
+
+  if (Number.isNaN(number)) {
+    return "Consultar";
+  }
+
+  return (
+    number.toLocaleString("es-ES") +
+    " " +
+    (currency || "")
   );
-  document.getElementById("ticketList").innerHTML = filtered.length ? filtered.map(ticketCard).join("") : '<div class="empty">No se encontraron boletos.</div>';
 }
 
-function toast(msg){
- const t=document.getElementById("toast");
- t.textContent=msg;t.style.display="block";
- setTimeout(()=>t.style.display="none",2500);
-}
-function money(value,currency){
- if(!value && value !== 0) return "Consultar";
- return Number(value).toLocaleString("es-ES") + " " + (currency||"");
-}
-function safe(value){
- return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-}
-function showPage(id,button){
- if(id === 'admin' && !isAdminAuthenticated) id = 'admin-lock'; 
- document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
- document.getElementById(id).classList.add("active");
- document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
- if(button)button.classList.add("active");
- if(id==="admin") renderAdmin();
- if(id==="cards") generateCard();
- if(id==="tickets") filterTickets();
- window.scrollTo({top:0,behavior:"smooth"});
-}
-function whatsappLink(text){
- return "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(text);
-}
-function offerCard(o){
- return `<article class="card">
-  ${o.tag?`<span class="pill">${safe(o.tag)}</span>`:""}
-  <h3>${safe(o.title)}</h3><p class="muted">${safe(o.description)}</p>
-  <div class="price">${money(o.price,o.currency)}</div>
-  <a class="btn green" target="_blank" href="${whatsappLink("Hola, quiero info de: "+o.title)}">Consultar</a>
- </article>`;
-}
-function ticketCard(f){
- return `<article class="card">
-  <span class="pill">${f.uzbek?"UZBEKISTÁN":"BOLETO"}</span>
-  <h3>✈️ ${safe(f.origin)} → ${safe(f.destination)}</h3>
-  <p class="muted">Fecha: ${safe(f.date||"Consultar")}<br>Transporte: ${safe(f.airline||"Consultar")}</p>
-  <div class="price">${money(f.price,f.currency)}</div>
-  <a class="btn green" target="_blank" href="${whatsappLink("Hola, quiero consultar el boleto de "+f.origin+" a "+f.destination)}">Consultar</a>
- </article>`;
-}
-function renderAll(){
- const active=data.offers||[];
- const featured=active.filter(o=>o.featured);
- const current=featured.length?featured[bannerIndex%featured.length]:null;
- 
- const bannerEl = document.getElementById("mainBanner");
- if(bannerEl) {
-   bannerEl.style.opacity = 0;
-   setTimeout(() => {
-     document.getElementById("bannerTitle").textContent=current?current.title:data.bannerTitle;
-     document.getElementById("bannerDescription").textContent=current?current.description:data.bannerDescription;
-     document.getElementById("bannerPrice").textContent=current?money(current.price,current.currency):"";
-     bannerEl.style.opacity = 1;
-   }, 200);
- }
 
- document.getElementById("noticeText").textContent=data.notice||"";
- document.getElementById("homeOffers").innerHTML=active.length?active.map(offerCard).join(""):'<div class="empty">Sin ofertas.</div>';
- document.getElementById("serviceList").innerHTML=active.filter(o=>o.type==="recarga"||o.type==="remesa"||o.type==="servicio").map(offerCard).join("")||'<div class="empty">Sin servicios.</div>';
- 
- filterTickets();
- document.getElementById("uzbekList").innerHTML=(data.flights||[]).filter(f=>f.uzbek).map(ticketCard).join("")||'<div class="empty">Sin boletos.</div>';
- document.getElementById("rateList").innerHTML=(data.rates||[]).map(r=>`<div class="card"><h3>${safe(r.name)}</h3><div class="price">${r.value}</div></div>`).join("");
- 
- const sel=document.getElementById("calcRate");
- if(sel){
-  sel.innerHTML=(data.rates||[]).filter(r=>Number(r.value)>0).map(r=>`<option value="${safe(r.id)}">${safe(r.name)}</option>`).join("");
- }
- calculate();
+/* =====================================================
+   SEGURIDAD HTML
+===================================================== */
+
+function safe(value) {
+
+  return String(value ?? "")
+    .replace(/[&<>"']/g, function(char) {
+
+      const entities = {
+
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      };
+
+      return entities[char];
+    });
 }
-function renderAdmin(){
- let html="";
- data.offers.forEach(o=>{
-  html+=`<div class="notice"><strong>${safe(o.title)}</strong> (${o.featured?'Destacada':'Normal'}) 
-   <div class="row"><button class="btn secondary" onclick="editOffer('${o.id}')">Editar</button>
-   <button class="btn red" onclick="deleteOffer('${o.id}')">Eliminar</button></div></div>`;
- });
- data.flights.forEach(f=>{
-  html+=`<div class="notice"><strong>${safe(f.origin)} → ${safe(f.destination)}</strong> 
-   <div class="row"><button class="btn red" onclick="deleteFlight('${f.id}')">Eliminar boleto</button></div></div>`;
- });
- document.getElementById("adminItems").innerHTML=html||"No hay datos guardados.";
+
+
+/* =====================================================
+   NAVEGACIÓN
+===================================================== */
+
+function showPage(id, button) {
+
+  if (
+    id === "admin" &&
+    !isAdminAuthenticated
+  ) {
+
+    id = "admin-lock";
+  }
+
+  document
+    .querySelectorAll(".page")
+    .forEach(function(page) {
+
+      page.classList.remove("active");
+    });
+
+  const page =
+    document.getElementById(id);
+
+  if (page) {
+    page.classList.add("active");
+  }
+
+  document
+    .querySelectorAll("nav button")
+    .forEach(function(btn) {
+
+      btn.classList.remove("active");
+    });
+
+  if (button) {
+    button.classList.add("active");
+  }
+
+  if (id === "admin") {
+    renderAdmin();
+  }
+
+  if (id === "cards") {
+    generateCard();
+  }
+
+  if (id === "tickets") {
+    filterTickets();
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
 }
-function clearOfferForm(){
- ["editId","offerTitle","offerDescription","offerPrice","offerTag"].forEach(id=>document.getElementById(id).value="");
- document.getElementById("offerCurrency").value="₽";
- document.getElementById("offerFeatured").checked=false;
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+function whatsappLink(text) {
+
+  return (
+    "https://wa.me/" +
+    WHATSAPP +
+    "?text=" +
+    encodeURIComponent(text)
+  );
 }
-function saveOffer(){
- const title=document.getElementById("offerTitle").value.trim();
- if(!title){toast("Falta el nombre");return}
- const id=document.getElementById("editId").value||("o"+Date.now());
- const item={
-  id,title,description:document.getElementById("offerDescription").value,
-  price:Number(document.getElementById("offerPrice").value),
-  currency:document.getElementById("offerCurrency").value||"₽",
-  type:document.getElementById("offerType").value,
-  tag:document.getElementById("offerTag").value,
-  featured:document.getElementById("offerFeatured").checked
- };
- const index=data.offers.findIndex(o=>o.id===id);
- if(index>=0)data.offers[index]=item;else data.offers.push(item);
- renderAll(); renderAdmin(); saveToCloud(); clearOfferForm();
+
+
+/* =====================================================
+   TARJETA DE OFERTA
+===================================================== */
+
+function offerCard(o) {
+
+  return `
+    <article class="card">
+
+      ${
+        o.tag
+          ? `<span class="pill">${safe(o.tag)}</span>`
+          : ""
+      }
+
+      <h3>${safe(o.title)}</h3>
+
+      <p class="muted">
+        ${safe(o.description)}
+      </p>
+
+      <div class="price">
+        ${money(o.price, o.currency)}
+      </div>
+
+      <a
+        class="btn green"
+        target="_blank"
+        href="${whatsappLink(
+          "Hola, quiero información sobre: " +
+          o.title
+        )}"
+      >
+        Consultar
+      </a>
+
+    </article>
+  `;
 }
-function editOffer(id){
- const o=data.offers.find(x=>x.id===id);if(!o)return;
- document.getElementById("editId").value=o.id;
- document.getElementById("offerTitle").value=o.title;
- document.getElementById("offerDescription").value=o.description;
- document.getElementById("offerPrice").value=o.price;
- document.getElementById("offerCurrency").value=o.currency;
- document.getElementById("offerType").value=o.type;
- document.getElementById("offerTag").value=o.tag||"";
- document.getElementById("offerFeatured").checked=!!o.featured;
+
+
+/* =====================================================
+   TARJETA DE BOLETO
+===================================================== */
+
+function ticketCard(f) {
+
+  return `
+    <article class="card">
+
+      <span class="pill">
+        ${f.uzbek ? "UZBEKISTÁN" : "BOLETO"}
+      </span>
+
+      <h3>
+        ✈️ ${safe(f.origin)}
+        →
+        ${safe(f.destination)}
+      </h3>
+
+      <p class="muted">
+
+        Fecha:
+        ${safe(f.date || "Consultar")}
+
+        <br>
+
+        Transporte:
+        ${safe(f.airline || "Consultar")}
+
+      </p>
+
+      <div class="price">
+        ${money(f.price, f.currency)}
+      </div>
+
+      <a
+        class="btn green"
+        target="_blank"
+        href="${whatsappLink(
+          "Hola, quiero consultar el boleto de " +
+          (f.origin || "") +
+          " a " +
+          (f.destination || "")
+        )}"
+      >
+        Consultar
+      </a>
+
+    </article>
+  `;
 }
-function deleteOffer(id){
- if(!confirm("¿Eliminar?"))return;
- data.offers=data.offers.filter(o=>o.id!==id); renderAll(); renderAdmin(); saveToCloud();
+
+
+/* =====================================================
+   RENDERIZAR TODA LA PÁGINA
+===================================================== */
+
+function renderAll() {
+
+  const offers =
+    data.offers || [];
+
+  const featured =
+    offers.filter(function(o) {
+      return o.featured;
+    });
+
+  const current =
+    featured.length
+      ? featured[
+          bannerIndex % featured.length
+        ]
+      : null;
+
+
+  /* BANNER */
+
+  const banner =
+    document.getElementById("mainBanner");
+
+  if (banner) {
+
+    banner.style.opacity = "0";
+
+    setTimeout(function() {
+
+      const title =
+        document.getElementById("bannerTitle");
+
+      const description =
+        document.getElementById(
+          "bannerDescription"
+        );
+
+      const price =
+        document.getElementById(
+          "bannerPrice"
+        );
+
+      if (title) {
+
+        title.textContent =
+          current
+            ? current.title
+            : data.bannerTitle;
+      }
+
+      if (description) {
+
+        description.textContent =
+          current
+            ? current.description
+            : data.bannerDescription;
+      }
+
+      if (price) {
+
+        price.textContent =
+          current
+            ? money(
+                current.price,
+                current.currency
+              )
+            : "";
+      }
+
+      banner.style.opacity = "1";
+
+    }, 200);
+  }
+
+
+  /* INFORMACIÓN */
+
+  const notice =
+    document.getElementById(
+      "noticeText"
+    );
+
+  if (notice) {
+
+    notice.textContent =
+      data.notice || "";
+  }
+
+
+  /* OFERTAS */
+
+  const homeOffers =
+    document.getElementById(
+      "homeOffers"
+    );
+
+  if (homeOffers) {
+
+    homeOffers.innerHTML =
+      offers.length
+        ? offers
+            .map(offerCard)
+            .join("")
+        : '<div class="empty">Sin ofertas.</div>';
+  }
+
+
+  /* SERVICIOS */
+
+  const serviceList =
+    document.getElementById(
+      "serviceList"
+    );
+
+  if (serviceList) {
+
+    const services =
+      offers.filter(function(o) {
+
+        return (
+          o.type === "recarga" ||
+          o.type === "remesa" ||
+          o.type === "servicio"
+        );
+      });
+
+    serviceList.innerHTML =
+      services.length
+        ? services
+            .map(offerCard)
+            .join("")
+        : '<div class="empty">Sin servicios.</div>';
+  }
+
+
+  /* BOLETOS */
+
+  filterTickets();
+
+
+  /* BOLETOS UZBEKISTÁN */
+
+  const uzbekList =
+    document.getElementById(
+      "uzbekList"
+    );
+
+  if (uzbekList) {
+
+    const uzbek =
+      (data.flights || [])
+        .filter(function(f) {
+          return f.uzbek;
+        });
+
+    uzbekList.innerHTML =
+      uzbek.length
+        ? uzbek
+            .map(ticketCard)
+            .join("")
+        : '<div class="empty">Sin boletos de Uzbekistán.</div>';
+  }
+
+
+  /* TASAS */
+
+  const rateList =
+    document.getElementById(
+      "rateList"
+    );
+
+  if (rateList) {
+
+    rateList.innerHTML =
+      (data.rates || [])
+        .map(function(r) {
+
+          return `
+            <div class="card">
+
+              <h3>
+                ${safe(r.name)}
+              </h3>
+
+              <div class="price">
+                ${safe(r.value)}
+              </div>
+
+            </div>
+          `;
+        })
+        .join("");
+  }
+
+
+  /* CALCULADORA */
+
+  const select =
+    document.getElementById(
+      "calcRate"
+    );
+
+  if (select) {
+
+    select.innerHTML =
+      (data.rates || [])
+        .filter(function(r) {
+          return Number(r.value) > 0;
+        })
+        .map(function(r) {
+
+          return `
+            <option value="${safe(r.id)}">
+              ${safe(r.name)}
+            </option>
+          `;
+        })
+        .join("");
+  }
+
+  calculate();
 }
-function saveFlight(){
- const origin=document.getElementById("flightOrigin").value.trim();
- const destination=document.getElementById("flightDestination").value.trim();
- const price=document.getElementById("flightPrice").value;
- if(!origin||!destination||!price){toast("Faltan datos");return}
- data.flights.push({
-  id:"f"+Date.now(),origin,destination,
-  date:document.getElementById("flightDate").value,
-  airline:document.getElementById("flightAirline").value,
-  price:Number(price),currency:document.getElementById("flightCurrency").value||"₽",
-  uzbek:document.getElementById("flightUzbek").checked
- });
- renderAll(); renderAdmin(); saveToCloud();
- ["flightOrigin","flightDestination","flightDate","flightAirline","flightPrice"].forEach(id=>document.getElementById(id).value="");
+
+
+/* =====================================================
+   PANEL ADMINISTRACIÓN
+===================================================== */
+
+function renderAdmin() {
+
+  const container =
+    document.getElementById(
+      "adminItems"
+    );
+
+  if (!container) return;
+
+  let html = "";
+
+
+  /* OFERTAS */
+
+  (data.offers || [])
+    .forEach(function(o) {
+
+      html += `
+
+        <div class="notice">
+
+          <strong>
+            ${safe(o.title)}
+          </strong>
+
+          ${
+            o.featured
+              ? "(Destacada)"
+              : "(Normal)"
+          }
+
+          <div class="row">
+
+            <button
+              class="btn secondary"
+              onclick="editOffer('${safe(o.id)}')"
+            >
+              Editar
+            </button>
+
+            <button
+              class="btn red"
+              onclick="deleteOffer('${safe(o.id)}')"
+            >
+              Eliminar
+            </button>
+
+          </div>
+
+        </div>
+      `;
+    });
+
+
+  /* BOLETOS */
+
+  (data.flights || [])
+    .forEach(function(f) {
+
+      html += `
+
+        <div class="notice">
+
+          <strong>
+            ${safe(f.origin)}
+            →
+            ${safe(f.destination)}
+          </strong>
+
+          <div class="row">
+
+            <button
+              class="btn red"
+              onclick="deleteFlight('${safe(f.id)}')"
+            >
+              Eliminar boleto
+            </button>
+
+          </div>
+
+        </div>
+      `;
+    });
+
+
+  container.innerHTML =
+    html ||
+    "No hay datos guardados.";
 }
-function deleteFlight(id){
- if(!confirm("¿Eliminar boleto?"))return;
- data.flights=data.flights.filter(f=>f.id!==id); renderAll(); renderAdmin(); saveToCloud();
+
+
+/* =====================================================
+   LIMPIAR FORMULARIO DE OFERTA
+===================================================== */
+
+function clearOfferForm() {
+
+  [
+    "editId",
+    "offerTitle",
+    "offerDescription",
+    "offerPrice",
+    "offerTag"
+  ].forEach(function(id) {
+
+    const element =
+      document.getElementById(id);
+
+    if (element) {
+      element.value = "";
+    }
+  });
+
+
+  const currency =
+    document.getElementById(
+      "offerCurrency"
+    );
+
+  if (currency) {
+    currency.value = "₽";
+  }
+
+
+  const featured =
+    document.getElementById(
+      "offerFeatured"
+    );
+
+  if (featured) {
+    featured.checked = false;
+  }
 }
-function calculate(){
- const id=document.getElementById("calcRate").value;
- const amount=Number(document.getElementById("calcAmount").value||0);
- const rate=data.rates.find(r=>r.id===id);
- document.getElementById("calcResult").textContent=rate?(amount*Number(rate.value)).toLocaleString("es-ES")+" "+rate.to:"0";
+
+
+/* =====================================================
+   GUARDAR OFERTA
+===================================================== */
+
+function saveOffer() {
+
+  const titleElement =
+    document.getElementById(
+      "offerTitle"
+    );
+
+  if (!titleElement) return;
+
+  const title =
+    titleElement.value.trim();
+
+  if (!title) {
+
+    toast("Falta el nombre");
+
+    return;
+  }
+
+
+  const editId =
+    document.getElementById(
+      "editId"
+    );
+
+
+  const id =
+    editId &&
+    editId.value
+      ? editId.value
+      : "o" + Date.now();
+
+
+  const description =
+    document.getElementById(
+      "offerDescription"
+    );
+
+
+  const price =
+    document.getElementById(
+      "offerPrice"
+    );
+
+
+  const currency =
+    document.getElementById(
+      "offerCurrency"
+    );
+
+
+  const type =
+    document.getElementById(
+      "offerType"
+    );
+
+
+  const tag =
+    document.getElementById(
+      "offerTag"
+    );
+
+
+  const featured =
+    document.getElementById(
+      "offerFeatured"
+    );
+
+
+  const item = {
+
+    id: id,
+
+    title: title,
+
+    description:
+      description
+        ? description.value
+        : "",
+
+    price:
+      price
+        ? Number(price.value || 0)
+        : 0,
+
+    currency:
+      currency
+        ? currency.value || "₽"
+        : "₽",
+
+    type:
+      type
+        ? type.value
+        : "servicio",
+
+    tag:
+      tag
+        ? tag.value
+        : "",
+
+    featured:
+      featured
+        ? featured.checked
+        : false
+  };
+
+
+  const index =
+    data.offers.findIndex(
+      function(o) {
+        return o.id === id;
+      }
+    );
+
+
+  if (index >= 0) {
+
+    data.offers[index] =
+      item;
+
+  } else {
+
+    data.offers.push(item);
+  }
+
+
+  renderAll();
+
+  renderAdmin();
+
+  saveToCloud();
+
+  clearOfferForm();
+
+  toast("✅ Oferta guardada");
 }
-function generateCard(){
- const c=document.getElementById("promoCanvas");
- if(!c)return;
- const ctx=c.getContext("2d");
- ctx.fillStyle=document.getElementById("cardColor").value;ctx.fillRect(0,0,c.width,c.height);
- ctx.strokeStyle="#e9bd65";ctx.lineWidth=8;ctx.strokeRect(20,20,860,560);
- ctx.textAlign="center";
- ctx.fillStyle="#e9bd65";ctx.font="bold 32px Arial";ctx.fillText("YOUR BRIDGE HOME",450,105);
- ctx.fillStyle="#54d8e8";ctx.font="bold 22px Arial";ctx.fillText((document.getElementById("cardTag").value||"OFERTA").toUpperCase(),450,190);
- ctx.fillStyle="#ffffff";ctx.font="bold 43px Arial";ctx.fillText(document.getElementById("cardTitle").value||"Tu oferta",450,270);
- ctx.fillStyle="#dce6f0";ctx.font="25px Arial";ctx.fillText(document.getElementById("cardDescription").value||"",450,370);
- ctx.fillStyle="#e9bd65";ctx.font="bold 48px Arial";ctx.fillText(document.getElementById("cardPrice").value||"CONSULTAR",450,500);
+
+
+/* =====================================================
+   EDITAR OFERTA
+===================================================== */
+
+function editOffer(id) {
+
+  const offer =
+    data.offers.find(
+      function(o) {
+        return o.id === id;
+      }
+    );
+
+  if (!offer) return;
+
+
+  const editId =
+    document.getElementById(
+      "editId"
+    );
+
+  const title =
+    document.getElementById(
+      "offerTitle"
+    );
+
+  const description =
+    document.getElementById(
+      "offerDescription"
+    );
+
+  const price =
+    document.getElementById(
+      "offerPrice"
+    );
+
+  const currency =
+    document.getElementById(
+      "offerCurrency"
+    );
+
+  const type =
+    document.getElementById(
+      "offerType"
+    );
+
+  const tag =
+    document.getElementById(
+      "offerTag"
+    );
+
+  const featured =
+    document.getElementById(
+      "offerFeatured"
+    );
+
+
+  if (editId) editId.value = offer.id;
+
+  if (title) title.value = offer.title;
+
+  if (description)
+    description.value =
+      offer.description || "";
+
+  if (price)
+    price.value =
+      offer.price || "";
+
+  if (currency)
+    currency.value =
+      offer.currency || "₽";
+
+  if (type)
+    type.value =
+      offer.type || "servicio";
+
+  if (tag)
+    tag.value =
+      offer.tag || "";
+
+  if (featured)
+    featured.checked =
+      !!offer.featured;
 }
-function downloadCard(){
- generateCard();
- const a=document.createElement("a");a.href=document.getElementById("promoCanvas").toDataURL();
- a.download="YBH.png";a.click();
+
+
+/* =====================================================
+   ELIMINAR OFERTA
+===================================================== */
+
+function deleteOffer(id) {
+
+  if (!confirm("¿Eliminar esta oferta?")) {
+    return;
+  }
+
+  data.offers =
+    data.offers.filter(
+      function(o) {
+        return o.id !== id;
+      }
+    );
+
+  renderAll();
+
+  renderAdmin();
+
+  saveToCloud();
+
+  toast("Oferta eliminada");
 }
-function setLanguage(lang){
- const labels={
-  es:["Inicio","Servicios","Boletos","Tasas","Explora","Calculadora","Tarjetas","Contacto","⚙ Administrar"],
-  en:["Home","Services","Tickets","Rates","Explore","Calculator","Cards","Contact","⚙ Admin"],
-  ru:["Главная","Услуги","Билеты","Курсы","Обзор","Калькулятор","Карточки","Контакты","⚙ Управление"]
- };
- document.querySelectorAll("#navigation button").forEach((b,i)=>b.textContent=labels[lang][i]);
+
+
+/* =====================================================
+   GUARDAR BOLETO
+===================================================== */
+
+function saveFlight() {
+
+  const originElement =
+    document.getElementById(
+      "flightOrigin"
+    );
+
+  const destinationElement =
+    document.getElementById(
+      "flightDestination"
+    );
+
+  const priceElement =
+    document.getElementById(
+      "flightPrice"
+    );
+
+
+  if (
+    !originElement ||
+    !destinationElement ||
+    !priceElement
+  ) {
+    return;
+  }
+
+
+  const origin =
+    originElement.value.trim();
+
+  const destination =
+    destinationElement.value.trim();
+
+  const price =
+    priceElement.value;
+
+
+  if (
+    !origin ||
+    !destination ||
+    !price
+  ) {
+
+    toast(
+      "Faltan datos del boleto"
+    );
+
+    return;
+  }
+
+
+  const dateElement =
+    document.getElementById(
+      "flightDate"
+    );
+
+  const airlineElement =
+    document.getElementById(
+      "flightAirline"
+    );
+
+  const currencyElement =
+    document.getElementById(
+      "flightCurrency"
+    );
+
+  const uzbekElement =
+    document.getElementById(
+      "flightUzbek"
+    );
+
+
+  data.flights.push({
+
+    id:
+      "f" + Date.now(),
+
+    origin:
+      origin,
+
+    destination:
+      destination,
+
+    date:
+      dateElement
+        ? dateElement.value
+        : "",
+
+    airline:
+      airlineElement
+        ? airlineElement.value
+        : "",
+
+    price:
+      Number(price),
+
+    currency:
+      currencyElement
+        ? currencyElement.value || "₽"
+        : "₽",
+
+    uzbek:
+      uzbekElement
+        ? uzbekElement.checked
+        : false
+  });
+
+
+  renderAll();
+
+  renderAdmin();
+
+  saveToCloud();
+
+
+  [
+    "flightOrigin",
+    "flightDestination",
+    "flightDate",
+    "flightAirline",
+    "flightPrice"
+  ].forEach(function(id) {
+
+    const element =
+      document.getElementById(id);
+
+    if (element) {
+      element.value = "";
+    }
+  });
+
+
+  toast("✅ Boleto añadido");
 }
-setInterval(()=>{
- const featured=data.offers.filter(o=>o.featured);
- if(featured.length>1){bannerIndex=(bannerIndex + 1)%featured.length;renderAll()}
+
+
+/* =====================================================
+   ELIMINAR BOLETO
+===================================================== */
+
+function deleteFlight(id) {
+
+  if (!confirm("¿Eliminar este boleto?")) {
+    return;
+  }
+
+  data.flights =
+    data.flights.filter(
+      function(f) {
+        return f.id !== id;
+      }
+    );
+
+  renderAll();
+
+  renderAdmin();
+
+  saveToCloud();
+
+  toast("Boleto eliminado");
+}
+
+
+/* =====================================================
+   CALCULADORA
+===================================================== */
+
+function calculate() {
+
+  const rateSelect =
+    document.getElementById(
+      "calcRate"
+    );
+
+  const amountInput =
+    document.getElementById(
+      "calcAmount"
+    );
+
+  const resultElement =
+    document.getElementById(
+      "calcResult"
+    );
+
+
+  if (
+    !rateSelect ||
+    !amountInput ||
+    !resultElement
+  ) {
+    return;
+  }
+
+
+  const id =
+    rateSelect.value;
+
+  const amount =
+    Number(
+      amountInput.value || 0
+    );
+
+
+  const rate =
+    data.rates.find(
+      function(r) {
+        return r.id === id;
+      }
+    );
+
+
+  if (!rate) {
+
+    resultElement.textContent =
+      "0";
+
+    return;
+  }
+
+
+  const result =
+    amount *
+    Number(rate.value);
+
+
+  resultElement.textContent =
+    result.toLocaleString(
+      "es-ES"
+    ) +
+    " " +
+    rate.to;
+}
+
+
+/* =====================================================
+   GENERADOR DE TARJETAS
+===================================================== */
+
+function generateCard() {
+
+  const canvas =
+    document.getElementById(
+      "promoCanvas"
+    );
+
+  if (!canvas) return;
+
+
+  const ctx =
+    canvas.getContext("2d");
+
+
+  const colorElement =
+    document.getElementById(
+      "cardColor"
+    );
+
+
+  const color =
+    colorElement
+      ? colorElement.value
+      : "#071629";
+
+
+  ctx.fillStyle = color;
+
+  ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
+
+
+  ctx.strokeStyle =
+    "#e9bd65";
+
+  ctx.lineWidth = 8;
+
+  ctx.strokeRect(
+    20,
+    20,
+    canvas.width - 40,
+    canvas.height - 40
+  );
+
+
+  ctx.textAlign =
+    "center";
+
+
+  ctx.fillStyle =
+    "#e9bd65";
+
+  ctx.font =
+    "bold 32px Arial";
+
+  ctx.fillText(
+    "YOUR BRIDGE HOME",
+    canvas.width / 2,
+    105
+  );
+
+
+  const tagElement =
+    document.getElementById(
+      "cardTag"
+    );
+
+
+  ctx.fillStyle =
+    "#54d8e8";
+
+  ctx.font =
+    "bold 22px Arial";
+
+  ctx.fillText(
+    (
+      tagElement
+        ? tagElement.value
+        : "OFERTA"
+    ).toUpperCase(),
+    canvas.width / 2,
+    190
+  );
+
+
+  const titleElement =
+    document.getElementById(
+      "cardTitle"
+    );
+
+
+  ctx.fillStyle =
+    "#ffffff";
+
+  ctx.font =
+    "bold 43px Arial";
+
+  ctx.fillText(
+    titleElement &&
+    titleElement.value
+      ? titleElement.value
+      : "Tu oferta",
+    canvas.width / 2,
+    270
+  );
+
+
+  const descriptionElement =
+    document.getElementById(
+      "cardDescription"
+    );
+
+
+  ctx.fillStyle =
+    "#dce6f0";
+
+  ctx.font =
+    "25px Arial";
+
+  ctx.fillText(
+    descriptionElement
+      ? descriptionElement.value
+      : "",
+    canvas.width / 2,
+    370
+  );
+
+
+  const priceElement =
+    document.getElementById(
+      "cardPrice"
+    );
+
+
+  ctx.fillStyle =
+    "#e9bd65";
+
+  ctx.font =
+    "bold 48px Arial";
+
+  ctx.fillText(
+    priceElement &&
+    priceElement.value
+      ? priceElement.value
+      : "CONSULTAR",
+    canvas.width / 2,
+    500
+  );
+}
+
+
+/* =====================================================
+   DESCARGAR TARJETA
+===================================================== */
+
+function downloadCard() {
+
+  const canvas =
+    document.getElementById(
+      "promoCanvas"
+    );
+
+  if (!canvas) return;
+
+  generateCard();
+
+  const link =
+    document.createElement("a");
+
+  link.href =
+    canvas.toDataURL(
+      "image/png"
+    );
+
+  link.download =
+    "YOUR-BRIDGE-HOME.png";
+
+  link.click();
+}
+
+
+/* =====================================================
+   IDIOMAS
+===================================================== */
+
+function setLanguage(lang) {
+
+  const labels = {
+
+    es: [
+      "Inicio",
+      "Servicios",
+      "Boletos",
+      "Tasas",
+      "Explora",
+      "Calculadora",
+      "Tarjetas",
+      "Contacto",
+      "⚙ Administrar"
+    ],
+
+    en: [
+      "Home",
+      "Services",
+      "Tickets",
+      "Rates",
+      "Explore",
+      "Calculator",
+      "Cards",
+      "Contact",
+      "⚙ Admin"
+    ],
+
+    ru: [
+      "Главная",
+      "Услуги",
+      "Билеты",
+      "Курсы",
+      "Обзор",
+      "Калькулятор",
+      "Карточки",
+      "Контакты",
+      "⚙ Управление"
+    ]
+  };
+
+
+  if (!labels[lang]) {
+    return;
+  }
+
+
+  document
+    .querySelectorAll(
+      "#navigation button"
+    )
+    .forEach(function(button, index) {
+
+      if (labels[lang][index]) {
+
+        button.textContent =
+          labels[lang][index];
+      }
+    });
+}
+
+
+/* =====================================================
+   CAMBIO AUTOMÁTICO DEL BANNER
+   CADA 20 SEGUNDOS
+===================================================== */
+
+setInterval(function() {
+
+  const featured =
+    data.offers.filter(
+      function(o) {
+        return o.featured;
+      }
+    );
+
+
+  if (featured.length > 1) {
+
+    bannerIndex =
+      (
+        bannerIndex + 1
+      ) %
+      featured.length;
+
+    renderAll();
+  }
+
 }, 20000);
 
-// INICIAR
-initSupabase();
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    initSupabase();
+
+  }
+);
+
+</script>
