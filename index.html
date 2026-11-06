@@ -6,8 +6,6 @@
 <meta name="theme-color" content="#071629">
 <title>YOUR BRIDGE HOME</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
 :root {
   --bg:#071629;
@@ -181,7 +179,7 @@ hr{border:0;border-top:1px solid #29435d;margin:18px 0}
         <h3>Panel de administración</h3>
         <button class="secondary" onclick="adminLogout()">Cerrar sesión</button>
       </div>
-      <p class="muted">Edita los datos y pulsa Guardar. Los clientes recibirán las actualizaciones automáticamente.</p>
+      <p class="muted">Edita los datos y pulsa Guardar. Los cambios se guardarán en este navegador.</p>
 
       <h3>Recargas</h3>
       <label>Nombre de la oferta</label><input id="editRechargeName">
@@ -204,8 +202,15 @@ hr{border:0;border-top:1px solid #29435d;margin:18px 0}
       <label>Anuncio principal</label><input id="editBanner">
       <label>Nota importante para clientes</label><textarea id="editNotice"></textarea>
 
-      <button onclick="saveChanges()" style="margin-top:15px;">Guardar y publicar cambios</button>
+      <button onclick="saveChanges()" style="margin-top:15px;">Guardar cambios locales</button>
       <p id="saveStatus" class="status"></p>
+      
+      <hr>
+      <h3>💾 Copia de seguridad</h3>
+      <p class="muted">Guarda un archivo con tus datos o cárgalo en otro dispositivo.</p>
+      <button class="secondary" onclick="exportData()">Exportar copia</button>
+      <label>Importar copia</label>
+      <input type="file" id="importFile" accept=".json" onchange="importData()">
     </div>
   </section>
 </main>
@@ -213,7 +218,7 @@ hr{border:0;border-top:1px solid #29435d;margin:18px 0}
 <footer>
   YOUR BRIDGE HOME © 2026<br>
   Tu puente hacia nuevas oportunidades.
-  <p id="connectionStatus" class="small">Conectando con el servidor…</p>
+  <p id="connectionStatus" class="small">Guardado local activo</p>
 </footer>
 
 <a class="whatsapp" href="https://wa.me/79046319565" target="_blank">WhatsApp</a>
@@ -222,17 +227,13 @@ hr{border:0;border-top:1px solid #29435d;margin:18px 0}
 /* ==========================================
    CONFIGURACIÓN
    ========================================== */
-const SUPABASE_URL = "https://wvhptkcmlyifnieqbgnq.supabase.co";
-const SUPABASE_KEY = "sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7";
-const TABLE_NAME = "ybh_contenido";
-const ROW_ID = "main";
-const CLAVE_ADMIN = "MI_CLAVE_SECRETA"; // 👈 CAMBIA ESTO POR TU CLAVE
+const CLAVE_ADMIN = "MI_CLAVE_SECRETA"; // 👈 Cambia tu clave aquí
+const STORAGE_KEY = "YBH_LOCAL_DATA";
 
-const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 let isAdmin = false;
 
+// Datos por defecto (si no hay nada guardado)
 let currentData = {
-  published: true,
   notice: "Bienvenido a YOUR BRIDGE HOME. Consulta nuestras ofertas.",
   banner: "Ofertas internacionales",
   recharge: { name: "INTERNET +", price: 350, description: "2 GB LTE + 300 MB.cu" },
@@ -240,6 +241,22 @@ let currentData = {
   flights: { cheapest: 99800, description: "Rusia → Cuba: 17–30 de noviembre." },
   uzbekistan: { price: "Consultar" }
 };
+
+// Cargar datos guardados en el navegador
+function loadLocalData() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    try {
+      currentData = { ...currentData, ...JSON.parse(saved) };
+    } catch(e) {}
+  }
+  renderPage();
+}
+
+// Guardar datos en el navegador
+function saveLocalData() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(currentData));
+}
 
 /* ==========================================
    RENDERIZADO
@@ -266,61 +283,7 @@ function escapeHTML(value) {
 }
 
 /* ==========================================
-   SUPABASE (CONEXIÓN Y GUARDADO)
-   ========================================== */
-async function loadData() {
-  const status = document.getElementById("connectionStatus");
-  try {
-    const { data, error } = await db.from(TABLE_NAME).select("data").eq("id", ROW_ID).maybeSingle();
-    if (error) throw error;
-
-    if (data && data.data && data.data.published === true) {
-      currentData = { ...currentData, ...data.data };
-      renderPage();
-      status.textContent = "Conectado · Datos actualizados";
-      status.className = "status good";
-    } else {
-      status.textContent = "Conectado · Usando datos locales";
-    }
-  } catch (error) {
-    status.textContent = "Error de Supabase: " + error.message;
-    status.className = "status bad";
-  }
-}
-
-async function saveChanges() {
-  const status = document.getElementById("saveStatus");
-  if (!isAdmin) return;
-
-  const newData = {
-    published: true,
-    banner: document.getElementById("editBanner").value.trim(),
-    notice: document.getElementById("editNotice").value.trim(),
-    recharge: { name: document.getElementById("editRechargeName").value, price: Number(document.getElementById("editRechargePrice").value), description: document.getElementById("editRechargeDescription").value },
-    remittance: { rubles: Number(document.getElementById("editRemitRubles").value), cup: Number(document.getElementById("editRemitCup").value) },
-    flights: { cheapest: Number(document.getElementById("editFlightPrice").value), description: document.getElementById("editFlightDescription").value },
-    uzbekistan: { price: document.getElementById("editUzbekistanPrice").value || "Consultar" }
-  };
-
-  status.textContent = "Guardando cambios...";
-  status.className = "status";
-
-  const { error } = await db.from(TABLE_NAME).upsert({ id: ROW_ID, data: newData }, { onConflict: "id" });
-
-  if (error) {
-    status.textContent = "Error al guardar: " + error.message;
-    status.className = "status bad";
-    return;
-  }
-
-  currentData = newData;
-  renderPage();
-  status.textContent = "¡Cambios guardados y publicados!";
-  status.className = "status good";
-}
-
-/* ==========================================
-   LOGIN DEL ADMINISTRADOR (CON CLAVE)
+   LOGIN Y GUARDADO LOCAL
    ========================================== */
 function adminLogin() {
   const pass = document.getElementById("adminPassword").value;
@@ -361,27 +324,59 @@ function fillEditor() {
   document.getElementById("editNotice").value = d.notice;
 }
 
-/* ==========================================
-   BANNER AUTOMÁTICO
-   ========================================== */
-const bannerMessages = ["Ofertas de recargas internacionales", "Remesas y servicios para Cuba", "Tickets y destinos internacionales", "YOUR BRIDGE HOME: tu puente hacia nuevas oportunidades"];
-let bannerIndex = 0;
+function saveChanges() {
+  const status = document.getElementById("saveStatus");
+  if (!isAdmin) return;
 
-setInterval(() => {
-  bannerIndex = (bannerIndex + 1) % bannerMessages.length;
-  document.getElementById("bannerTitle").textContent = currentData.banner || bannerMessages[bannerIndex];
-  document.getElementById("bannerText").textContent = bannerMessages[bannerIndex];
-}, 20000);
+  currentData = {
+    banner: document.getElementById("editBanner").value.trim(),
+    notice: document.getElementById("editNotice").value.trim(),
+    recharge: { name: document.getElementById("editRechargeName").value, price: Number(document.getElementById("editRechargePrice").value), description: document.getElementById("editRechargeDescription").value },
+    remittance: { rubles: Number(document.getElementById("editRemitRubles").value), cup: Number(document.getElementById("editRemitCup").value) },
+    flights: { cheapest: Number(document.getElementById("editFlightPrice").value), description: document.getElementById("editFlightDescription").value },
+    uzbekistan: { price: document.getElementById("editUzbekistanPrice").value || "Consultar" }
+  };
 
-/* ==========================================
-   CALCULADORA, RELOJ, CLIMA Y BUSCADORES
-   ========================================== */
-function calculateRemittance() {
-  const amount = Number(document.getElementById("remitAmount").value || 0);
-  const rate = Number(currentData.remittance.cup) / Number(currentData.remittance.rubles);
-  document.getElementById("remitResult").textContent = (amount * rate).toFixed(2) + " CUP";
+  saveLocalData();
+  renderPage();
+  
+  status.textContent = "¡Cambios guardados en este navegador!";
+  status.className = "status good";
 }
 
+/* ==========================================
+   COPIAS DE SEGURIDAD
+   ========================================== */
+function exportData() {
+  const blob = new Blob([JSON.stringify(currentData, null, 2)], {type: "application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "ybh-backup.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function importData() {
+  const file = document.getElementById("importFile").files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const imported = JSON.parse(reader.result);
+      currentData = { ...currentData, ...imported };
+      saveLocalData();
+      renderPage();
+      alert("Copia importada correctamente.");
+    } catch(e) {
+      alert("El archivo no es válido.");
+    }
+  };
+  reader.readAsText(file);
+}
+
+/* ==========================================
+   RELOJ, CLIMA Y BUSCADORES
+   ========================================== */
 function updateClock() {
   const now = new Date();
   document.getElementById("clock").textContent = now.toLocaleTimeString();
@@ -433,9 +428,14 @@ function searchTransport(type) {
   window.open(url, "_blank", "noopener");
 }
 
+function calculateRemittance() {
+  const amount = Number(document.getElementById("remitAmount").value || 0);
+  const rate = Number(currentData.remittance.cup) / Number(currentData.remittance.rubles);
+  document.getElementById("remitResult").textContent = (amount * rate).toFixed(2) + " CUP";
+}
+
 /* INICIO */
-renderPage();
-loadData();
+loadLocalData();
 getWeather();
 </script>
 </body>
