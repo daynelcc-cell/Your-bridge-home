@@ -5,18 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#071629">
 <title>YOUR BRIDGE HOME</title>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root {
-  --bg:#071629;
-  --panel:#10243c;
-  --panel2:#142d49;
-  --gold:#e8bd65;
-  --text:#f5f7fa;
-  --muted:#aab8c9;
-  --green:#36c98a;
-  --red:#ff7777;
-}
+:root { --bg:#071629; --panel:#10243c; --panel2:#142d49; --gold:#e8bd65; --text:#f5f7fa; --muted:#aab8c9; --green:#36c98a; --red:#ff7777; }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;line-height:1.5}
 header{padding:22px 16px;text-align:center;background:linear-gradient(135deg,#071629,#173655);border-bottom:1px solid #b98b3d}
@@ -52,14 +43,11 @@ hr{border:0;border-top:1px solid #29435d;margin:18px 0}
 @media(max-width:600px){ .logo{font-size:22px} nav{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap} nav a,nav button{white-space:nowrap} }
 </style>
 </head>
-
 <body>
 <header>
   <div class="logo">YOUR BRIDGE HOME</div>
   <div class="slogan">TU PUENTE HACIA NUEVAS OPORTUNIDADES</div>
-  <p class="muted">Servicios, viajes y oportunidades internacionales</p>
 </header>
-
 <nav>
   <a href="#inicio">Inicio</a>
   <a href="#recargas">Recargas</a>
@@ -70,236 +58,152 @@ hr{border:0;border-top:1px solid #29435d;margin:18px 0}
   <a href="#contacto">Contacto</a>
   <a href="#administracion">Administración</a>
 </nav>
-
 <main>
   <section id="inicio">
     <div class="banner" id="mainBanner">
       <div class="muted">OFERTAS DESTACADAS</div>
       <strong id="bannerTitle">YOUR BRIDGE HOME</strong>
-      <p id="bannerText">Descubre nuestras ofertas y servicios.</p>
+      <p id="bannerText">Cargando ofertas...</p>
     </div>
-
     <div class="grid">
-      <div class="card">
-        <h3>Hora local</h3>
-        <div class="price" id="clock">--:--:--</div>
-        <div class="muted" id="clockDate"></div>
-      </div>
-      <div class="card">
-        <h3>Clima</h3>
-        <div class="price" id="weatherTemp">--°</div>
-        <div id="weatherDescription">Consultando el clima…</div>
-        <div class="muted" id="weatherPlace">Ubicación pendiente</div>
-        <button class="secondary" onclick="getWeather()">Actualizar clima</button>
-      </div>
+      <div class="card"><h3>Hora local</h3><div class="price" id="clock">--:--:--</div><div class="muted" id="clockDate"></div></div>
+      <div class="card"><h3>Clima</h3><div class="price" id="weatherTemp">--°</div><div id="weatherDescription">Consultando el clima…</div><div class="muted" id="weatherPlace"></div><button class="secondary" onclick="getWeather()">Actualizar clima</button></div>
     </div>
-
-    <div class="card notice">
-      <h3>Información importante</h3>
-      <p id="publicNotice">Bienvenido a YOUR BRIDGE HOME.</p>
-    </div>
+    <div class="card notice"><h3>Información importante</h3><p id="publicNotice">Bienvenido a YOUR BRIDGE HOME.</p></div>
   </section>
-
-  <section id="recargas">
-    <h2>Recargas</h2>
-    <div class="grid" id="rechargeCards"></div>
-  </section>
-
-  <section id="remesas">
-    <h2>Remesas</h2>
-    <div class="grid" id="remittanceCards"></div>
-    <div class="card">
-      <h3>Calculadora de remesas</h3>
-      <label>Importe en rublos</label>
-      <input id="remitAmount" type="number" value="1000" min="0" oninput="calculateRemittance()">
-      <div class="price" id="remitResult">9.80 CUP</div>
-      <div class="muted">Cálculo orientativo según la tasa publicada.</div>
-    </div>
-  </section>
-
-  <section id="tickets">
-    <h2>Tickets de avión</h2>
-    <div class="grid" id="ticketCards"></div>
-    <div class="card">
-      <h3>Buscar vuelos</h3>
-      <label>Origen</label><input id="flightFrom" placeholder="Ej. Moscú">
-      <label>Destino</label><input id="flightTo" placeholder="Ej. La Habana">
-      <label>Fecha de salida</label><input id="flightDate" type="date">
-      <button onclick="searchFlights()">Buscar vuelos</button>
-      <p class="muted">La búsqueda abre Google Flights. Los precios finales dependen del proveedor.</p>
-    </div>
-  </section>
-
-  <section id="transporte">
-    <h2>Transporte y conexiones</h2>
-    <div class="card">
-      <h3>Autobuses y trenes</h3>
-      <label>Ciudad de salida</label><input id="transportFrom" placeholder="Ciudad de salida">
-      <label>Destino</label><input id="transportTo" placeholder="Ciudad de destino">
-      <label>Fecha</label><input id="transportDate" type="date">
-      <button onclick="searchTransport('bus')">Buscar autobuses</button>
-      <button class="secondary" onclick="searchTransport('train')">Buscar trenes</button>
-      <p class="muted">Abre buscadores externos (Omio o Trainline).</p>
-    </div>
-  </section>
-
-  <section id="explora">
-    <h2>Explora</h2>
-    <div class="grid">
-      <div class="card"><h3>Requisitos de viaje</h3><a class="action" href="https://www.visaindex.com/" target="_blank">Visa Index</a></div>
-      <div class="card"><h3>Hoteles</h3><a class="action" href="https://www.booking.com/" target="_blank">Booking</a></div>
-      <div class="card"><h3>Destinos</h3><a class="action" href="https://www.skyscanner.net/" target="_blank">Skyscanner</a></div>
-    </div>
-  </section>
-
-  <section id="contacto">
-    <h2>Contacto</h2>
-    <div class="card">
-      <h3>YOUR BRIDGE HOME</h3>
-      <p>Daynel Caminero · Administrador</p>
-      <p>WhatsApp: +7904-631-95-65</p>
-      <a class="action" href="https://wa.me/79046319565" target="_blank">Contactar por WhatsApp</a>
-    </div>
-  </section>
+  <section id="recargas"><h2>Recargas</h2><div class="grid" id="rechargeCards"></div></section>
+  <section id="remesas"><h2>Remesas</h2><div class="grid" id="remittanceCards"></div><div class="card"><h3>Calculadora</h3><label>Importe en rublos</label><input id="remitAmount" type="number" value="1000" oninput="calculateRemittance()"><div class="price" id="remitResult">0 CUP</div></div></section>
+  <section id="tickets"><h2>Tickets de avión</h2><div class="grid" id="ticketCards"></div><div class="card"><h3>Buscar vuelos</h3><input id="flightFrom" placeholder="Origen"><input id="flightTo" placeholder="Destino"><button onclick="searchFlights()">Buscar</button></div></section>
+  <section id="transporte"><h2>Transporte</h2><div class="card"><h3>Buses y Trenes</h3><input id="transportFrom" placeholder="Origen"><input id="transportTo" placeholder="Destino"><button onclick="searchTransport('bus')">Buscar Bus</button><button class="secondary" onclick="searchTransport('train')">Buscar Tren</button></div></section>
+  <section id="explora"><h2>Explora</h2><div class="grid"><div class="card"><a class="action" href="https://www.visaindex.com/" target="_blank">Visa Index</a></div><div class="card"><a class="action" href="https://www.booking.com/" target="_blank">Hoteles</a></div><div class="card"><a class="action" href="https://www.skyscanner.net/" target="_blank">Skyscanner</a></div></div></section>
+  <section id="contacto"><h2>Contacto</h2><div class="card"><h3>Daynel Caminero</h3><a class="action" href="https://wa.me/79046319565" target="_blank">WhatsApp</a></div></section>
 
   <section id="administracion">
     <h2>Administración</h2>
-
     <div class="card" id="loginPanel">
       <h3>Acceso del administrador</h3>
-      <p class="muted">Introduce tu clave secreta para gestionar los precios.</p>
-      <label>Clave de acceso</label>
       <input type="password" id="adminPassword" placeholder="Tu clave secreta">
       <button onclick="adminLogin()">Entrar</button>
       <p id="loginStatus" class="status"></p>
     </div>
-
     <div class="card hidden" id="editorPanel">
-      <div class="row" style="display:flex; justify-content:space-between; align-items:center;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
         <h3>Panel de administración</h3>
-        <button class="secondary" onclick="adminLogout()">Cerrar sesión</button>
+        <button class="secondary" onclick="adminLogout()">Salir</button>
       </div>
-      <p class="muted">Edita los datos y pulsa Guardar. Los cambios se guardarán en este navegador.</p>
-
       <h3>Recargas</h3>
-      <label>Nombre de la oferta</label><input id="editRechargeName">
-      <label>Precio en rublos</label><input id="editRechargePrice" type="number">
+      <label>Nombre</label><input id="editRechargeName">
+      <label>Precio</label><input id="editRechargePrice" type="number">
       <label>Descripción</label><input id="editRechargeDescription">
-
-      <hr>
-      <h3>Remesas</h3>
-      <label>Importe enviado en rublos</label><input id="editRemitRubles" type="number">
-      <label>Importe recibido en CUP</label><input id="editRemitCup" type="number" step="0.01">
-
-      <hr>
-      <h3>Tickets</h3>
-      <label>Precio más económico en rublos</label><input id="editFlightPrice" type="number">
-      <label>Ruta y fechas de la oferta principal</label><textarea id="editFlightDescription"></textarea>
-      <label>Precio de tickets a Uzbekistán</label><input id="editUzbekistanPrice" placeholder="Escribe el precio o Consultar">
-
-      <hr>
-      <h3>Información y anuncio</h3>
-      <label>Anuncio principal</label><input id="editBanner">
-      <label>Nota importante para clientes</label><textarea id="editNotice"></textarea>
-
-      <button onclick="saveChanges()" style="margin-top:15px;">Guardar cambios locales</button>
+      <hr><h3>Remesas</h3>
+      <label>Rublos a enviar</label><input id="editRemitRubles" type="number">
+      <label>Recibes en CUP</label><input id="editRemitCup" type="number" step="0.01">
+      <hr><h3>Tickets</h3>
+      <label>Precio más barato</label><input id="editFlightPrice" type="number">
+      <label>Descripción oferta</label><textarea id="editFlightDescription"></textarea>
+      <label>Precio Uzbekistán</label><input id="editUzbekistanPrice">
+      <hr><h3>Anuncios</h3>
+      <label>Banner</label><input id="editBanner">
+      <label>Aviso</label><textarea id="editNotice"></textarea>
+      <button onclick="saveChanges()" style="margin-top:15px;">Guardar y publicar en la nube</button>
       <p id="saveStatus" class="status"></p>
-      
-      <hr>
-      <h3>💾 Copia de seguridad</h3>
-      <p class="muted">Guarda un archivo con tus datos o cárgalo en otro dispositivo.</p>
-      <button class="secondary" onclick="exportData()">Exportar copia</button>
-      <label>Importar copia</label>
-      <input type="file" id="importFile" accept=".json" onchange="importData()">
     </div>
   </section>
 </main>
-
-<footer>
-  YOUR BRIDGE HOME © 2026<br>
-  Tu puente hacia nuevas oportunidades.
-  <p id="connectionStatus" class="small">Guardado local activo</p>
-</footer>
-
+<footer>YOUR BRIDGE HOME © 2026<p id="connectionStatus" class="small">Conectando a la nube...</p></footer>
 <a class="whatsapp" href="https://wa.me/79046319565" target="_blank">WhatsApp</a>
 
 <script>
 /* ==========================================
-   CONFIGURACIÓN
+   CONEXIÓN A SUPABASE (TU NUEVO PROYECTO)
    ========================================== */
-const CLAVE_ADMIN = "MI_CLAVE_SECRETA"; // 👈 Cambia tu clave aquí
-const STORAGE_KEY = "YBH_LOCAL_DATA";
+const SUPABASE_URL = "https://icsnqgwfduquoszvprzd.supabase.co";
+const SUPABASE_KEY = "sb_publishable_-XVYwgGCH5-htksQV1YS4A_68GEI1QP";
+const TABLE_NAME = "ybh_contenido";
+const ROW_ID = "main";
+const CLAVE_ADMIN = "MI_CLAVE_SECRETA"; 
 
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 let isAdmin = false;
 
-// Datos por defecto (si no hay nada guardado)
 let currentData = {
-  notice: "Bienvenido a YOUR BRIDGE HOME. Consulta nuestras ofertas.",
-  banner: "Ofertas internacionales",
-  recharge: { name: "INTERNET +", price: 350, description: "2 GB LTE + 300 MB.cu" },
+  published: true, notice: "Bienvenido", banner: "Ofertas",
+  recharge: { name: "INTERNET +", price: 350, description: "2 GB LTE" },
   remittance: { rubles: 1000, cup: 9.80 },
-  flights: { cheapest: 99800, description: "Rusia → Cuba: 17–30 de noviembre." },
+  flights: { cheapest: 99800, description: "Rusia → Cuba" },
   uzbekistan: { price: "Consultar" }
 };
 
-// Cargar datos guardados en el navegador
-function loadLocalData() {
-  const saved = localStorage.getItem(STORAGE_KEY);
-  if (saved) {
-    try {
-      currentData = { ...currentData, ...JSON.parse(saved) };
-    } catch(e) {}
-  }
-  renderPage();
-}
+function escapeHTML(value) { return String(value ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" })[c]); }
 
-// Guardar datos en el navegador
-function saveLocalData() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(currentData));
-}
-
-/* ==========================================
-   RENDERIZADO
-   ========================================== */
 function renderPage() {
   const d = currentData;
   document.getElementById("publicNotice").textContent = d.notice || "";
   document.getElementById("bannerTitle").textContent = d.banner || "YOUR BRIDGE HOME";
-  
   document.getElementById("bannerText").textContent = `${d.recharge.name}: ${d.recharge.price} ₽ | ${d.remittance.rubles} ₽ → ${Number(d.remittance.cup).toFixed(2)} CUP | Tickets desde ${d.flights.cheapest} ₽`;
-
-  document.getElementById("rechargeCards").innerHTML = `<div class="card"><h3>${escapeHTML(d.recharge.name)}</h3><div class="price">${escapeHTML(d.recharge.price)} ₽</div><p>${escapeHTML(d.recharge.description)}</p><a class="action" href="https://wa.me/79046319565?text=Solicito la recarga ${d.recharge.name}">Solicitar</a></div>`;
-  
-  document.getElementById("remittanceCards").innerHTML = `<div class="card"><h3>Remesas a Cuba</h3><div class="price">${escapeHTML(d.remittance.rubles)} ₽</div><p>Recibes ${Number(d.remittance.cup).toFixed(2)} CUP</p><a class="action" href="https://wa.me/79046319565?text=Solicito remesa">Enviar consulta</a></div>`;
-  
-  document.getElementById("ticketCards").innerHTML = `<div class="card"><h3>Ofertas de vuelos</h3><div class="price">Desde ${escapeHTML(d.flights.cheapest)} ₽</div><p>${escapeHTML(d.flights.description)}</p><a class="action" href="https://www.skyscanner.net/" target="_blank">Consultar</a></div><div class="card"><h3>Uzbekistán</h3><div class="price">${escapeHTML(d.uzbekistan.price)} ${d.uzbekistan.price === "Consultar" ? "" : "₽"}</div><a class="action" href="https://wa.me/79046319565?text=Ticket Uzbekistán">Consultar</a></div>`;
-
+  document.getElementById("rechargeCards").innerHTML = `<div class="card"><h3>${escapeHTML(d.recharge.name)}</h3><div class="price">${escapeHTML(d.recharge.price)} ₽</div><p>${escapeHTML(d.recharge.description)}</p></div>`;
+  document.getElementById("remittanceCards").innerHTML = `<div class="card"><h3>Remesas</h3><div class="price">${escapeHTML(d.remittance.rubles)} ₽</div><p>Recibes ${Number(d.remittance.cup).toFixed(2)} CUP</p></div>`;
+  document.getElementById("ticketCards").innerHTML = `<div class="card"><h3>Vuelos</h3><div class="price">Desde ${escapeHTML(d.flights.cheapest)} ₽</div><p>${escapeHTML(d.flights.description)}</p></div><div class="card"><h3>Uzbekistán</h3><div class="price">${escapeHTML(d.uzbekistan.price)}</div></div>`;
   calculateRemittance();
   if (isAdmin) fillEditor();
 }
 
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" })[c]);
+async function loadData() {
+  const status = document.getElementById("connectionStatus");
+  try {
+    const { data, error } = await db.from(TABLE_NAME).select("data").eq("id", ROW_ID).maybeSingle();
+    if (error) throw error;
+    if (data && data.data) {
+      currentData = { ...currentData, ...data.data };
+      renderPage();
+      status.textContent = "✅ Conectado a Supabase en vivo";
+      status.className = "status good";
+    }
+  } catch (error) {
+    status.textContent = "❌ Error: " + error.message;
+    status.className = "status bad";
+  }
 }
 
-/* ==========================================
-   LOGIN Y GUARDADO LOCAL
-   ========================================== */
-function adminLogin() {
-  const pass = document.getElementById("adminPassword").value;
-  const status = document.getElementById("loginStatus");
+async function saveChanges() {
+  const status = document.getElementById("saveStatus");
+  if (!isAdmin) return;
 
-  if (pass === CLAVE_ADMIN) {
+  const newData = {
+    published: true,
+    banner: document.getElementById("editBanner").value.trim(),
+    notice: document.getElementById("editNotice").value.trim(),
+    recharge: { name: document.getElementById("editRechargeName").value, price: Number(document.getElementById("editRechargePrice").value), description: document.getElementById("editRechargeDescription").value },
+    remittance: { rubles: Number(document.getElementById("editRemitRubles").value), cup: Number(document.getElementById("editRemitCup").value) },
+    flights: { cheapest: Number(document.getElementById("editFlightPrice").value), description: document.getElementById("editFlightDescription").value },
+    uzbekistan: { price: document.getElementById("editUzbekistanPrice").value || "Consultar" }
+  };
+
+  status.textContent = "Guardando en la nube...";
+  const { error } = await db.from(TABLE_NAME).upsert({ id: ROW_ID, data: newData }, { onConflict: "id" });
+
+  if (error) {
+    status.textContent = "Error al guardar: " + error.message;
+    status.className = "status bad";
+    return;
+  }
+  currentData = newData;
+  renderPage();
+  status.textContent = "✅ ¡Guardado y publicado para todos!";
+  status.className = "status good";
+}
+
+function adminLogin() {
+  if (document.getElementById("adminPassword").value === CLAVE_ADMIN) {
     isAdmin = true;
     document.getElementById("loginPanel").classList.add("hidden");
     document.getElementById("editorPanel").classList.remove("hidden");
-    document.getElementById("adminPassword").value = "";
     fillEditor();
-    status.textContent = "Sesión iniciada.";
-    status.className = "status good";
+    document.getElementById("loginStatus").textContent = "Sesión iniciada.";
+    document.getElementById("loginStatus").className = "status good";
   } else {
-    status.textContent = "Clave incorrecta. Inténtalo de nuevo.";
-    status.className = "status bad";
+    document.getElementById("loginStatus").textContent = "Clave incorrecta.";
+    document.getElementById("loginStatus").className = "status bad";
   }
 }
 
@@ -307,7 +211,6 @@ function adminLogout() {
   isAdmin = false;
   document.getElementById("editorPanel").classList.add("hidden");
   document.getElementById("loginPanel").classList.remove("hidden");
-  document.getElementById("loginStatus").textContent = "Sesión cerrada.";
 }
 
 function fillEditor() {
@@ -324,59 +227,12 @@ function fillEditor() {
   document.getElementById("editNotice").value = d.notice;
 }
 
-function saveChanges() {
-  const status = document.getElementById("saveStatus");
-  if (!isAdmin) return;
-
-  currentData = {
-    banner: document.getElementById("editBanner").value.trim(),
-    notice: document.getElementById("editNotice").value.trim(),
-    recharge: { name: document.getElementById("editRechargeName").value, price: Number(document.getElementById("editRechargePrice").value), description: document.getElementById("editRechargeDescription").value },
-    remittance: { rubles: Number(document.getElementById("editRemitRubles").value), cup: Number(document.getElementById("editRemitCup").value) },
-    flights: { cheapest: Number(document.getElementById("editFlightPrice").value), description: document.getElementById("editFlightDescription").value },
-    uzbekistan: { price: document.getElementById("editUzbekistanPrice").value || "Consultar" }
-  };
-
-  saveLocalData();
-  renderPage();
-  
-  status.textContent = "¡Cambios guardados en este navegador!";
-  status.className = "status good";
+function calculateRemittance() {
+  const amount = Number(document.getElementById("remitAmount").value || 0);
+  const rate = Number(currentData.remittance.cup) / Number(currentData.remittance.rubles);
+  document.getElementById("remitResult").textContent = (amount * rate).toFixed(2) + " CUP";
 }
 
-/* ==========================================
-   COPIAS DE SEGURIDAD
-   ========================================== */
-function exportData() {
-  const blob = new Blob([JSON.stringify(currentData, null, 2)], {type: "application/json"});
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "ybh-backup.json";
-  a.click();
-  URL.revokeObjectURL(a.href);
-}
-
-function importData() {
-  const file = document.getElementById("importFile").files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = () => {
-    try {
-      const imported = JSON.parse(reader.result);
-      currentData = { ...currentData, ...imported };
-      saveLocalData();
-      renderPage();
-      alert("Copia importada correctamente.");
-    } catch(e) {
-      alert("El archivo no es válido.");
-    }
-  };
-  reader.readAsText(file);
-}
-
-/* ==========================================
-   RELOJ, CLIMA Y BUSCADORES
-   ========================================== */
 function updateClock() {
   const now = new Date();
   document.getElementById("clock").textContent = now.toLocaleTimeString();
@@ -387,56 +243,29 @@ setInterval(updateClock, 1000); updateClock();
 async function getWeather() {
   const temp = document.getElementById("weatherTemp");
   const desc = document.getElementById("weatherDescription");
-  const place = document.getElementById("weatherPlace");
-  if (!navigator.geolocation) { desc.textContent = "Geolocalización no soportada."; return; }
-  
-  desc.textContent = "Actualizando…";
-  navigator.geolocation.getCurrentPosition(async position => {
+  if (!navigator.geolocation) { desc.textContent = "No soportado"; return; }
+  navigator.geolocation.getCurrentPosition(async pos => {
     try {
-      const url = `https://api.open-meteo.com/v1/forecast?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&current=temperature_2m,weather_code&timezone=auto`;
-      const res = await fetch(url); const result = await res.json(); const current = result.current;
-      temp.textContent = Math.round(current.temperature_2m) + "°C";
-      desc.textContent = weatherText(current.weather_code);
-      place.textContent = "Actualizado: " + new Date().toLocaleTimeString();
-    } catch (e) { desc.textContent = "Error al obtener clima."; }
-  }, () => { desc.textContent = "Permite la ubicación para el clima."; }, { timeout: 10000 });
-}
-
-function weatherText(code) {
-  if (code === 0) return "Despejado";
-  if ([1,2,3].includes(code)) return "Parcialmente nublado";
-  if ([45,48].includes(code)) return "Niebla";
-  if ([51,53,55,61,63,65,80,81,82].includes(code)) return "Lluvia";
-  if ([71,73,75,77,85,86].includes(code)) return "Nieve";
-  if ([95,96,99].includes(code)) return "Tormenta";
-  return "Variable";
+      const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&current=temperature_2m,weather_code&timezone=auto`);
+      const json = await res.json();
+      temp.textContent = Math.round(json.current.temperature_2m) + "°C";
+      desc.textContent = "Actualizado: " + new Date().toLocaleTimeString();
+    } catch (e) { desc.textContent = "Error"; }
+  }, () => { desc.textContent = "Sin acceso a ubicación"; });
 }
 
 function searchFlights() {
-  const from = document.getElementById("flightFrom").value.trim();
-  const to = document.getElementById("flightTo").value.trim();
-  if (!from || !to) return alert("Escribe origen y destino");
-  const url = "https://www.google.com/travel/flights?q=" + encodeURIComponent(`Flights from ${from} to ${to}`);
-  window.open(url, "_blank", "noopener");
+  const f = document.getElementById("flightFrom").value;
+  const t = document.getElementById("flightTo").value;
+  if (f && t) window.open(`https://www.google.com/travel/flights?q=${encodeURIComponent(f + " to " + t)}`, "_blank");
 }
-
 function searchTransport(type) {
-  const from = document.getElementById("transportFrom").value.trim();
-  const to = document.getElementById("transportTo").value.trim();
-  if (!from || !to) return alert("Escribe origen y destino");
-  const url = type === "train" ? "https://www.thetrainline.com/" : "https://www.omio.com/";
-  window.open(url, "_blank", "noopener");
+  const f = document.getElementById("transportFrom").value;
+  const t = document.getElementById("transportTo").value;
+  if (f && t) window.open(type === "train" ? "https://www.thetrainline.com/" : "https://www.omio.com/", "_blank");
 }
 
-function calculateRemittance() {
-  const amount = Number(document.getElementById("remitAmount").value || 0);
-  const rate = Number(currentData.remittance.cup) / Number(currentData.remittance.rubles);
-  document.getElementById("remitResult").textContent = (amount * rate).toFixed(2) + " CUP";
-}
-
-/* INICIO */
-loadLocalData();
-getWeather();
+renderPage(); loadData(); getWeather();
 </script>
 </body>
 </html>
