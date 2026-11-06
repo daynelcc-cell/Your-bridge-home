@@ -232,12 +232,25 @@ canvas{max-width:100%;border-radius:12px;background:white}
  </div>
 </section>
 
+<!-- PANTALLA DE BLOQUEO DEL ADMINISTRADOR -->
+<section id="admin-lock" class="page">
+ <h2 class="sectiontitle">🔒 Acceso Restringido</h2>
+ <div class="card" style="max-width:400px; margin: 40px auto; text-align:center;">
+  <h3>Panel de Administración</h3>
+  <p class="muted">Introduce tu clave secreta para editar los precios y servicios.</p>
+  <input type="password" id="adminPin" placeholder="Clave de administrador" style="text-align:center; font-size:20px; letter-spacing:5px;">
+  <button class="btn" onclick="checkPin()" style="width:100%;">Desbloquear</button>
+ </div>
+</section>
+
+<!-- PANEL DE ADMINISTRACIÓN REAL (Oculto por defecto) -->
 <section id="admin" class="page">
  <h2 class="sectiontitle">⚙ Administración de YOUR BRIDGE HOME</h2>
- <div class="notice">
-  <strong>Administración en la nube</strong>
-  <p class="muted">Los cambios se guardan en Supabase y los verán todos tus clientes.</p>
+ <div class="notice" style="display:flex; justify-content:space-between; align-items:center;">
+  <span><strong>Modo Administrador</strong></span>
+  <button class="btn red" onclick="lockAdmin()" style="margin:0;">Cerrar Sesión</button>
  </div>
+ 
  <div class="adminbox">
   <h3>📦 Crear o editar oferta / servicio</h3>
   <input type="hidden" id="editId">
@@ -323,7 +336,7 @@ canvas{max-width:100%;border-radius:12px;background:white}
 <footer>
  YOUR BRIDGE HOME · Daynel Caminero Administrador<br>
  Servicios, viajes y oportunidades.<br>
- <span id="storageStatus">Conectando con la nube...</span>
+ <span id="storageStatus">Conectando a la nube...</span>
 </footer>
 <div id="toast"></div>
 
@@ -335,6 +348,9 @@ const SUPABASE_URL="https://wvhptkcmlyifnieqbgnq.supabase.co";
 const SUPABASE_KEY="sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7";
 const TABLE="ybh_contenido";
 const WHATSAPP="79046319565";
+
+/* 🔐 CONTRASEÑA DEL ADMINISTRADOR (Cámbiala aquí) */
+const CLAVE_ADMIN = "MI_CLAVE_SECRETA"; 
 
 const defaultData={
  offers:[
@@ -359,6 +375,7 @@ const defaultData={
 let data=JSON.parse(JSON.stringify(defaultData));
 let db=null;
 let bannerIndex=0;
+let isAdminAuthenticated = false; // Controla si ya metió la clave
 
 /* =====================================================
    CONEXIÓN A SUPABASE
@@ -366,11 +383,8 @@ let bannerIndex=0;
 async function initSupabase(){
  if(!window.supabase) return;
  db=window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
- 
- // Cargar datos iniciales
  await loadData();
  
- // Escuchar cambios en tiempo real
  db.channel('ybh-admin-changes')
    .on('postgres_changes', { event: '*', schema: 'public', table: TABLE }, payload => {
       if(payload.new && payload.new.id === 'main'){
@@ -383,7 +397,7 @@ async function initSupabase(){
           notice: payload.new.notice
         };
         renderAll();
-        renderAdmin();
+        if(isAdminAuthenticated) renderAdmin();
         document.getElementById("storageStatus").textContent="Sincronizado en tiempo real";
       }
    }).subscribe();
@@ -409,7 +423,6 @@ async function loadData(){
   document.getElementById("storageStatus").textContent="Error al cargar Supabase (usando datos locales)";
  }
  renderAll();
- renderAdmin();
 }
 
 async function saveToCloud(){
@@ -433,7 +446,33 @@ async function saveToCloud(){
 }
 
 /* =====================================================
-   RESTO DE FUNCIONES (Mismo diseño y lógica)
+   SEGURIDAD DEL PANEL
+===================================================== */
+function checkPin() {
+  const pin = document.getElementById("adminPin").value;
+  if(pin === CLAVE_ADMIN) {
+    isAdminAuthenticated = true;
+    document.getElementById("adminPin").value = "";
+    document.getElementById("admin").classList.add("active");
+    document.getElementById("admin-lock").classList.remove("active");
+    renderAdmin();
+  } else {
+    toast("Clave incorrecta. Inténtalo de nuevo.");
+  }
+}
+
+function lockAdmin() {
+  isAdminAuthenticated = false;
+  document.getElementById("admin").classList.remove("active");
+  document.getElementById("admin-lock").classList.remove("active");
+  document.getElementById("home").classList.add("active");
+  // Actualizar botones del menú
+  document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+  document.querySelector("nav button").classList.add("active");
+}
+
+/* =====================================================
+   RESTO DE FUNCIONES
 ===================================================== */
 function toast(msg){
  const t=document.getElementById("toast");
@@ -448,12 +487,18 @@ function safe(value){
  return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
 function showPage(id,button){
+ // Si intenta entrar a 'admin' y no está logueado, lo manda al login
+ if(id === 'admin' && !isAdminAuthenticated) {
+   id = 'admin-lock'; 
+ }
+ 
  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
  document.getElementById(id).classList.add("active");
  document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
  if(button)button.classList.add("active");
- if(id==="admin")renderAdmin();
- if(id==="cards")generateCard();
+ 
+ if(id==="admin") renderAdmin();
+ if(id==="cards") generateCard();
  window.scrollTo({top:0,behavior:"smooth"});
 }
 function whatsappLink(text){
