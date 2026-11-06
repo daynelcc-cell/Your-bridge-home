@@ -46,7 +46,7 @@ hr{border:0;border-top:1px solid var(--border);margin:18px 0}
 footer{text-align:center;color:var(--muted);padding:28px 12px;border-top:1px solid var(--border);margin-top:30px;font-size:12px}
 .empty{color:var(--muted);padding:20px;text-align:center}
 .pill{display:inline-block;padding:5px 9px;background:#263f58;border-radius:20px;font-size:11px;color:var(--gold);margin-bottom:8px}
-#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#183c50;color:white;padding:12px 18px;border-radius:12px;display:none;z-index:99;box-shadow:0 4px 20px #0008}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#183c50;color:white;padding:12px 18px;border-radius:12px;display:none;z-index:99;box-shadow:0 4px 20px #0008; text-align:center; max-width:90%;}
 @media(max-width:600px){ .logo{font-size:22px}.banner h2{font-size:23px} main{padding:10px}.topline{flex-wrap:wrap} }
 </style>
 </head>
@@ -82,7 +82,6 @@ footer{text-align:center;color:var(--muted);padding:28px 12px;border-top:1px sol
   <div class="price" id="bannerPrice">Cargando...</div>
  </div>
  
- <!-- EL CLIMA ARREGLADO -->
  <h2 class="sectiontitle">🌤️ El Clima Ahora en Moscú</h2>
  <div class="card" style="display:flex; align-items:center; justify-content:space-between;">
    <div>
@@ -92,7 +91,6 @@ footer{text-align:center;color:var(--muted);padding:28px 12px;border-top:1px sol
    <div style="font-size:40px; font-weight:bold; color:var(--cyan);" id="weatherTemp">--°C</div>
  </div>
 
- <!-- VUELOS EN VIVO GRATIS -->
  <h2 class="sectiontitle">✈️ Buscar Vuelos en Tiempo Real</h2>
  <div class="card" style="padding:0; overflow:hidden; margin-bottom:20px; background:white;">
   <script async src="https://tpwd.xyz/content?campaign_id=100&promo_id=1" charset="utf-8"></script>
@@ -180,25 +178,17 @@ function updateClock() {
 }
 setInterval(updateClock, 1000); updateClock();
 
-// FUNCIÓN DEL CLIMA CORREGIDA
 async function loadWeather() {
   try {
-    // Coordenadas de Moscú
     const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=55.75&longitude=37.61&current_weather=true");
     const json = await res.json();
-    
     if(json.current_weather) {
-      const temp = json.current_weather.temperature;
-      const wind = json.current_weather.windspeed;
-      
       document.getElementById("weatherCity").textContent = "Moscú";
-      document.getElementById("weatherTemp").textContent = temp + "°C";
-      document.getElementById("weatherDesc").textContent = "Viento: " + wind + " km/h";
+      document.getElementById("weatherTemp").textContent = json.current_weather.temperature + "°C";
+      document.getElementById("weatherDesc").textContent = "Viento: " + json.current_weather.windspeed + " km/h";
     }
   } catch(e) {
-    console.error("Error clima:", e);
     document.getElementById("weatherCity").textContent = "Clima no disponible";
-    document.getElementById("weatherDesc").textContent = "Revisa tu conexión a internet";
   }
 }
 loadWeather();
@@ -251,13 +241,19 @@ async function saveToCloud(){
   };
   
   const { error } = await db.from(TABLE).upsert(payload);
-  if(error) throw error;
   
-  toast("✅ Guardado en la nube");
+  if(error) {
+    // Si hay un error de Supabase, mostramos el mensaje real en el toast
+    toast("❌ Error: " + error.message);
+    console.error("Supabase Error:", error);
+    return;
+  }
+  
+  toast("✅ Guardado correctamente en la nube");
   document.getElementById("storageStatus").textContent="Cambios guardados en Supabase";
  }catch(e){
-  console.error("Error guardando:", e);
-  toast("❌ Error al guardar en la nube");
+  console.error("Error de red:", e);
+  toast("❌ Error de conexión al guardar");
  }
 }
 
@@ -277,7 +273,7 @@ function lockAdmin() {
   document.querySelector("nav button").classList.add("active");
 }
 
-function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg;t.style.display="block"; setTimeout(()=>t.style.display="none",3000); }
+function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg;t.style.display="block"; setTimeout(()=>t.style.display="none",4000); }
 function money(value,currency){ return Number(value).toLocaleString("es-ES") + " " + (currency||""); }
 function safe(value){ return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 function showPage(id,button){
