@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -120,6 +119,25 @@ footer{border-top:1px solid var(--line);margin-top:35px;padding:30px 18px;text-a
  <div class="status" id="bannerStatus">Ofertas publicadas por YOUR BRIDGE HOME.</div>
 </div>
 
+<!-- 🌤️ CLIMA DEBAJO DEL BANNER -->
+<section class="wrap" id="clima">
+ <h2 class="title">🌤️ Clima y pronóstico</h2>
+ <p class="subtitle">Consulta las condiciones meteorológicas de la ciudad que quieras.</p>
+ <div class="card">
+  <div class="row">
+   <div class="field">
+    <label>Ciudad</label>
+    <input id="weatherCity" value="Moscú" placeholder="Ej. Tashkent">
+   </div>
+   <div class="field" style="justify-content:end">
+    <button class="btn cyan" onclick="loadWeather()">Actualizar clima</button>
+   </div>
+  </div>
+  <div id="weatherResult" class="muted">Consultando clima...</div>
+  <div id="weatherUpdated" class="status"></div>
+ </div>
+</section>
+
 <section class="wrap" id="servicios">
  <h2 class="title">Nuestros servicios</h2>
  <p class="subtitle">Ofertas y soluciones para conectar contigo.</p>
@@ -227,24 +245,6 @@ footer{border-top:1px solid var(--line);margin-top:35px;padding:30px 18px;text-a
  <h2 class="title">💱 Tasas de cambio</h2>
  <p class="subtitle">Valores informativos. Confirma la tasa y el importe final antes de realizar una operación.</p>
  <div class="grid" id="rateCards"></div>
-</section>
-
-<section class="wrap" id="clima">
- <h2 class="title">🌤️ Clima y pronóstico</h2>
- <p class="subtitle">Consulta las condiciones meteorológicas de la ciudad que quieras.</p>
- <div class="card">
-  <div class="row">
-   <div class="field">
-    <label>Ciudad</label>
-    <input id="weatherCity" value="Moscú" placeholder="Ej. Tashkent">
-   </div>
-   <div class="field" style="justify-content:end">
-    <button class="btn cyan" onclick="loadWeather()">Actualizar clima</button>
-   </div>
-  </div>
-  <div id="weatherResult" class="muted">Consultando clima...</div>
-  <div id="weatherUpdated" class="status"></div>
- </div>
 </section>
 
 <section class="wrap" id="explora">
@@ -456,7 +456,7 @@ loadLocal();
 renderAll();
 loadCloud();
 loadWeather();
-setInterval(loadWeather,15*60*1000);
+setInterval(loadWeather,5*60*1000);
 
 /* ALMACENAMIENTO LOCAL */
 function loadLocal(){
@@ -843,11 +843,10 @@ function searchTrain(){
 }
 function searchRome2Rio(){
  const t=getTravel();if(!t)return;
- const q=`${t.from} to ${t.to}`;
  openSearch("https://www.rome2rio.com/s/"+encodeURIComponent(t.from)+"/"+encodeURIComponent(t.to));
 }
 
-/* CLIMA: GEOCODIFICACIÓN Y PRONÓSTICO OPEN-METEO */
+/* CLIMA */
 async function loadWeather(){
  const city=document.getElementById("weatherCity").value.trim();
  const result=document.getElementById("weatherResult");
@@ -899,7 +898,7 @@ function sendFeedback(){
  openSearch(whatsappLink("Hola, soy "+(name||"un cliente")+". "+message));
 }
 
-/* IDIOMAS: BASE DE NAVEGACIÓN */
+/* IDIOMAS */
 function setLanguage(language){
  const messages={
   es:"Recargas, remesas, boletos y soluciones para conectar destinos. Encuentra ofertas y consulta directamente con nuestro equipo.",
@@ -909,13 +908,6 @@ function setLanguage(language){
  document.getElementById("heroText").textContent=messages[language]||messages.es;
  data.language=language;
  saveLocal();
-}
-
-/* GUARDADO Y ACTUALIZACIÓN */
-function saveAllLocalAndCloud(){
- saveLocal();
- renderAll();
- saveCloud();
 }
 </script>
 </body>
