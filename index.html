@@ -71,7 +71,6 @@ hr{border:0;border-top:1px solid var(--border);margin:18px 0}
 footer{text-align:center;color:var(--muted);padding:28px 12px;border-top:1px solid var(--border);
  margin-top:30px;font-size:12px}
 .empty{color:var(--muted);padding:20px;text-align:center}
-.stat{font-size:24px;color:var(--cyan);font-weight:bold}
 .hidden{display:none!important}
 .pill{display:inline-block;padding:5px 9px;background:#263f58;border-radius:20px;
  font-size:11px;color:var(--gold);margin-bottom:8px}
@@ -117,7 +116,6 @@ canvas{max-width:100%;border-radius:12px;background:white}
 
 <main>
 <section id="home" class="page active">
- <!-- BANNER ROTATIVO -->
  <div class="banner" id="mainBanner">
   <small>OFERTAS DESTACADAS</small>
   <h2 id="bannerTitle">YOUR BRIDGE HOME</h2>
@@ -126,7 +124,6 @@ canvas{max-width:100%;border-radius:12px;background:white}
   <button class="btn" onclick="showPage('services')">Ver servicios</button>
  </div>
  
- <!-- CLIMA -->
  <h2 class="sectiontitle">🌤️ El Clima Ahora</h2>
  <div class="card" style="display:flex; align-items:center; justify-content:space-between;">
    <div>
@@ -152,14 +149,10 @@ canvas{max-width:100%;border-radius:12px;background:white}
 <section id="tickets" class="page">
  <h2 class="sectiontitle">Boletos de avión, bus y tren</h2>
  <p class="muted">Filtra por origen, destino o compañía para encontrar tu boleto ideal.</p>
- 
- <!-- BUSCADOR EN TIEMPO REAL -->
  <div class="card" style="margin-bottom:15px;">
    <input type="text" id="ticketSearch" placeholder="🔍 Escribe Moscú, La Habana, Tren, etc..." oninput="filterTickets()">
  </div>
-
  <div class="grid" id="ticketList"></div>
- 
  <h2 class="sectiontitle">Uzbekistán · Boletos</h2>
  <div class="grid" id="uzbekList"></div>
 </section>
@@ -304,7 +297,7 @@ canvas{max-width:100%;border-radius:12px;background:white}
   <label>Destino</label><input id="flightDestination" placeholder="Ej. La Habana">
   <div class="row">
    <div><label>Fecha</label><input id="flightDate" type="date"></div>
-   <div><label>Compañía aérea / Transporte</label><input id="flightAirline" placeholder="Ej. Avianca, Bus, Tren"></div>
+   <div><label>Compañía / Transporte</label><input id="flightAirline" placeholder="Avión, Bus, Tren"></div>
   </div>
   <div class="row">
    <div><label>Precio</label><input id="flightPrice" type="number"></div>
@@ -513,7 +506,10 @@ function lockAdmin() {
    LÓGICA DE BOLETOS Y FILTRO EN TIEMPO REAL
 ===================================================== */
 function filterTickets() {
-  const query = document.getElementById("ticketSearch").value.toLowerCase();
+  const searchInput = document.getElementById("ticketSearch");
+  if(!searchInput) return;
+  const query = searchInput.value.toLowerCase();
+  
   const filtered = (data.flights || []).filter(f => 
     !f.uzbek && (
       (f.origin && f.origin.toLowerCase().includes(query)) || 
@@ -549,7 +545,7 @@ function showPage(id,button){
  if(button)button.classList.add("active");
  if(id==="admin") renderAdmin();
  if(id==="cards") generateCard();
- if(id==="tickets") filterTickets(); // Mostrar todos al entrar
+ if(id==="tickets") filterTickets();
  window.scrollTo({top:0,behavior:"smooth"});
 }
 function whatsappLink(text){
@@ -577,21 +573,21 @@ function renderAll(){
  const featured=active.filter(o=>o.featured);
  const current=featured.length?featured[bannerIndex%featured.length]:null;
  
- // Animación simple del banner
  const bannerEl = document.getElementById("mainBanner");
- bannerEl.style.opacity = 0;
- setTimeout(() => {
-   document.getElementById("bannerTitle").textContent=current?current.title:data.bannerTitle;
-   document.getElementById("bannerDescription").textContent=current?current.description:data.bannerDescription;
-   document.getElementById("bannerPrice").textContent=current?money(current.price,current.currency):"";
-   bannerEl.style.opacity = 1;
- }, 200);
+ if(bannerEl) {
+   bannerEl.style.opacity = 0;
+   setTimeout(() => {
+     document.getElementById("bannerTitle").textContent=current?current.title:data.bannerTitle;
+     document.getElementById("bannerDescription").textContent=current?current.description:data.bannerDescription;
+     document.getElementById("bannerPrice").textContent=current?money(current.price,current.currency):"";
+     bannerEl.style.opacity = 1;
+   }, 200);
+ }
 
  document.getElementById("noticeText").textContent=data.notice||"";
  document.getElementById("homeOffers").innerHTML=active.length?active.map(offerCard).join(""):'<div class="empty">No hay ofertas disponibles.</div>';
  document.getElementById("serviceList").innerHTML=active.filter(o=>o.type==="recarga"||o.type==="remesa"||o.type==="servicio").map(offerCard).join("")||'<div class="empty">Próximamente.</div>';
  
- // Boletos (se filtran si hay búsqueda activa)
  filterTickets();
 
  document.getElementById("uzbekList").innerHTML=(data.flights||[]).filter(f=>f.uzbek).map(ticketCard).join("")||'<div class="empty">Próximamente se añadirán ofertas de Uzbekistán.</div>';
@@ -599,4 +595,195 @@ function renderAll(){
  
  const sel=document.getElementById("calcRate");
  if(sel){
-  const old=sel.value
+  const old=sel.value;
+  sel.innerHTML=(data.rates||[]).filter(r=>Number(r.value)>0).map(r=>`<option value="${safe(r.id)}">${safe(r.name)}</option>`).join("");
+  if([...sel.options].some(o=>o.value===old))sel.value=old;
+ }
+ calculate();
+}
+function renderAdmin(){
+ document.getElementById("bannerEditTitle").value=data.bannerTitle||"";
+ document.getElementById("bannerEditDescription").value=data.bannerDescription||"";
+ document.getElementById("noticeEdit").value=data.notice||"";
+ let html="";
+ data.offers.forEach(o=>{
+  html+=`<div class="notice"><strong>${safe(o.title)}</strong> · ${money(o.price,o.currency)}
+   <div class="row"><button class="btn secondary" onclick="editOffer('${o.id}')">Editar</button>
+   <button class="btn red" onclick="deleteOffer('${o.id}')">Eliminar</button></div></div>`;
+ });
+ data.flights.forEach(f=>{
+  html+=`<div class="notice"><strong>${safe(f.origin)} → ${safe(f.destination)}</strong> · ${money(f.price,f.currency)}
+   <div class="row"><button class="btn red" onclick="deleteFlight('${f.id}')">Eliminar boleto</button></div></div>`;
+ });
+ data.rates.forEach(r=>{
+  html+=`<div class="notice"><strong>${safe(r.name)}</strong> · ${r.value}
+   <div class="row"><button class="btn red" onclick="deleteRate('${r.id}')">Eliminar tasa</button></div></div>`;
+ });
+ document.getElementById("adminItems").innerHTML=html||"No hay datos guardados.";
+}
+function clearOfferForm(){
+ ["editId","offerTitle","offerDescription","offerPrice","offerTag"].forEach(id=>document.getElementById(id).value="");
+ document.getElementById("offerCurrency").value="₽";
+ document.getElementById("offerType").value="recarga";
+ document.getElementById("offerFeatured").checked=false;
+}
+function saveOffer(){
+ const title=document.getElementById("offerTitle").value.trim();
+ if(!title){toast("Escribe el nombre de la oferta");return}
+ const id=document.getElementById("editId").value||("o"+Date.now());
+ const item={
+  id,title,description:document.getElementById("offerDescription").value,
+  price:document.getElementById("offerPrice").value===""?null:Number(document.getElementById("offerPrice").value),
+  currency:document.getElementById("offerCurrency").value||"₽",
+  type:document.getElementById("offerType").value,
+  tag:document.getElementById("offerTag").value,
+  featured:document.getElementById("offerFeatured").checked
+ };
+ const index=data.offers.findIndex(o=>o.id===id);
+ if(index>=0)data.offers[index]=item;else data.offers.push(item);
+ renderAll(); renderAdmin(); saveToCloud(); clearOfferForm();
+}
+function editOffer(id){
+ const o=data.offers.find(x=>x.id===id);if(!o)return;
+ document.getElementById("editId").value=o.id;
+ document.getElementById("offerTitle").value=o.title;
+ document.getElementById("offerDescription").value=o.description;
+ document.getElementById("offerPrice").value=o.price??"";
+ document.getElementById("offerCurrency").value=o.currency;
+ document.getElementById("offerType").value=o.type;
+ document.getElementById("offerTag").value=o.tag||"";
+ document.getElementById("offerFeatured").checked=!!o.featured;
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function deleteOffer(id){
+ if(!confirm("¿Eliminar esta oferta?"))return;
+ data.offers=data.offers.filter(o=>o.id!==id); renderAll(); renderAdmin(); saveToCloud();
+}
+function saveFlight(){
+ const origin=document.getElementById("flightOrigin").value.trim();
+ const destination=document.getElementById("flightDestination").value.trim();
+ const price=document.getElementById("flightPrice").value;
+ if(!origin||!destination||price===""){toast("Completa origen, destino y precio");return}
+ data.flights.push({
+  id:"f"+Date.now(),origin,destination,
+  date:document.getElementById("flightDate").value,
+  airline:document.getElementById("flightAirline").value,
+  price:Number(price),currency:document.getElementById("flightCurrency").value||"₽",
+  uzbek:document.getElementById("flightUzbek").checked
+ });
+ renderAll(); renderAdmin(); saveToCloud();
+ ["flightOrigin","flightDestination","flightDate","flightAirline","flightPrice"].forEach(id=>document.getElementById(id).value="");
+}
+function deleteFlight(id){
+ if(!confirm("¿Eliminar boleto?"))return;
+ data.flights=data.flights.filter(f=>f.id!==id); renderAll(); renderAdmin(); saveToCloud();
+}
+function saveRate(){
+ const name=document.getElementById("rateName").value.trim();
+ const from=document.getElementById("rateFrom").value.trim().toUpperCase();
+ const to=document.getElementById("rateTo").value.trim().toUpperCase();
+ const value=document.getElementById("rateValue").value;
+ if(!name||!from||!to||value===""){toast("Completa todos los campos de la tasa");return}
+ const old=data.rates.find(r=>r.from===from&&r.to===to);
+ if(old){old.name=name;old.value=Number(value)}
+ else data.rates.push({id:"r"+Date.now(),name,from,to,value:Number(value)});
+ renderAll(); renderAdmin(); saveToCloud();
+}
+function deleteRate(id){
+ if(!confirm("¿Eliminar tasa?"))return;
+ data.rates=data.rates.filter(r=>r.id!==id); renderAll(); renderAdmin(); saveToCloud();
+}
+function saveMessages(){
+ data.bannerTitle=document.getElementById("bannerEditTitle").value;
+ data.bannerDescription=document.getElementById("bannerEditDescription").value;
+ data.notice=document.getElementById("noticeEdit").value;
+ renderAll(); renderAdmin(); saveToCloud();
+}
+function calculate(){
+ const id=document.getElementById("calcRate").value;
+ const amount=Number(document.getElementById("calcAmount").value||0);
+ const rate=data.rates.find(r=>r.id===id);
+ document.getElementById("calcResult").textContent=rate?(amount*Number(rate.value)).toLocaleString("es-ES",{maximumFractionDigits:2})+" "+rate.to:"0";
+}
+function generateCard(){
+ const c=document.getElementById("promoCanvas");
+ if(!c)return;
+ const ctx=c.getContext("2d");
+ const bg=document.getElementById("cardColor").value;
+ ctx.fillStyle=bg;ctx.fillRect(0,0,c.width,c.height);
+ ctx.strokeStyle="#e9bd65";ctx.lineWidth=8;ctx.strokeRect(20,20,860,560);
+ ctx.textAlign="center";
+ ctx.fillStyle="#e9bd65";ctx.font="bold 32px Arial";
+ ctx.fillText("YOUR BRIDGE HOME",450,105);
+ ctx.fillStyle="#54d8e8";ctx.font="bold 22px Arial";
+ ctx.fillText((document.getElementById("cardTag").value||"OFERTA ESPECIAL").toUpperCase().slice(0,35),450,190);
+ ctx.fillStyle="#ffffff";ctx.font="bold 43px Arial";
+ wrapText(ctx,document.getElementById("cardTitle").value||"Tu oferta",450,270,760,52);
+ ctx.fillStyle="#dce6f0";ctx.font="25px Arial";
+ wrapText(ctx,document.getElementById("cardDescription").value||"",450,370,740,36);
+ ctx.fillStyle="#e9bd65";ctx.font="bold 48px Arial";
+ ctx.fillText(document.getElementById("cardPrice").value||"CONSULTAR",450,500);
+}
+function wrapText(ctx,text,x,y,maxWidth,lineHeight){
+ const words=String(text).split(" ");let line="",lines=[];
+ words.forEach(word=>{
+  const test=line?line+" "+word:word;
+  if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}
+  else line=test;
+ });
+ if(line)lines.push(line);
+ lines.slice(0,3).forEach((l,i)=>ctx.fillText(l,x,y+i*lineHeight));
+}
+function downloadCard(){
+ generateCard();
+ document.getElementById("promoCanvas").toBlob(blob=>{
+  if(!blob){toast("No se pudo generar la imagen");return}
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+  a.download="YOUR-BRIDGE-HOME-tarjeta.png";a.click();
+  URL.revokeObjectURL(a.href);
+ });
+}
+async function shareCard(){
+ generateCard();
+ const c=document.getElementById("promoCanvas");
+ c.toBlob(async blob=>{
+  if(!blob)return;
+  const file=new File([blob],"YOUR-BRIDGE-HOME.png",{type:"image/png"});
+  if(navigator.canShare&&navigator.canShare({files:[file]})){
+   try{await navigator.share({files:[file],title:"YOUR BRIDGE HOME"});}
+   catch(e){}
+  }else{
+   downloadCard();toast("Imagen descargada. Puedes adjuntarla en WhatsApp.");
+  }
+ });
+}
+function sendRequest(){
+ const name=document.getElementById("requestName").value;
+ const type=document.getElementById("requestType").value;
+ const details=document.getElementById("requestDetails").value;
+ if(!details.trim()){toast("Escribe los detalles de tu solicitud");return}
+ window.open(whatsappLink("Solicitud YOUR BRIDGE HOME\nNombre: "+name+"\nServicio: "+type+"\nDetalles: "+details),"_blank");
+}
+function sendFeedback(){
+ const text=document.getElementById("feedbackText").value;
+ if(!text.trim()){toast("Escribe tu opinión primero");return}
+ window.open(whatsappLink("Opinión o sugerencia:\n"+text),"_blank");
+}
+function setLanguage(lang){
+ const labels={
+  es:["Inicio","Servicios","Boletos","Tasas","Explora","Calculadora","Tarjetas","Contacto","⚙ Administrar"],
+  en:["Home","Services","Tickets","Rates","Explore","Calculator","Cards","Contact","⚙ Admin"],
+  ru:["Главная","Услуги","Билеты","Курсы","Обзор","Калькулятор","Карточки","Контакты","⚙ Управление"]
+ };
+ document.querySelectorAll("#navigation button").forEach((b,i)=>b.textContent=labels[lang][i]);
+}
+setInterval(()=>{
+ const featured=data.offers.filter(o=>o.featured);
+ if(featured.length>1){bannerIndex=(bannerIndex+1)%featured.length;renderAll()}
+},20000);
+
+// INICIAR
+initSupabase();
+</script>
+</body>
+</html>
