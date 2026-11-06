@@ -1,653 +1,685 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#071629">
-  <title>YOUR BRIDGE HOME</title>
-
-  <!-- SUPABASE -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <style>
-    :root{
-      --bg:#071629;--panel:#10243c;--panel2:#142d49;
-      --gold:#e8bd62;--cyan:#46d6df;--white:#f5f7fb;
-      --muted:#a9bacd;--line:#29415c;--green:#38d69a;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,Helvetica,sans-serif}
-    a{text-decoration:none;color:inherit}
-    button,input,select,textarea{font:inherit}
-    .container{width:min(1160px,92%);margin:auto}
-
-    /* HEADER */
-    header{position:sticky;top:0;z-index:50;background:rgba(7,22,41,.97);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
-    .header-top{min-height:75px;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;padding:12px 0}
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo-mark{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--gold);color:var(--bg);font-weight:900;font-size:20px}
-    .logo strong{display:block;letter-spacing:1px}
-    .logo small{color:var(--muted);font-size:11px}
-    .lang,.field input,.field select,.field textarea{background:#071629;color:white;border:1px solid var(--line);border-radius:10px;padding:12px;width:100%}
-    .lang{width:auto}
-    nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:12px}
-    nav a{white-space:nowrap;padding:10px 13px;border-radius:9px;color:var(--muted);font-size:13px;font-weight:bold}
-    nav a:hover{background:var(--panel);color:var(--gold)}
-
-    /* BOTONES */
-    .btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:11px;padding:12px 17px;background:var(--gold);color:#172338;font-weight:bold}
-    .btn-whatsapp{background:#20bd75;color:#062719}
-    .btn-outline{background:transparent;color:white;border:1px solid var(--line)}
-
-    /* RELOJ */
-    .clock{
-      background:#071629;color:var(--gold);border:1px solid var(--line);
-      border-radius:10px;padding:10px 14px;font-size:13px;font-weight:bold;
-      letter-spacing:0.5px;white-space:nowrap;font-variant-numeric:tabular-nums;
-      display:inline-flex;align-items:center;gap:6px;
-    }
-    .clock::before{content:"🕒";font-size:14px}
-    .footer-clock{color:var(--gold);font-weight:bold;font-variant-numeric:tabular-nums}
-
-    /* HERO */
-    .hero{padding:38px 0 25px}
-    .hero-box{border:1px solid #35506b;border-radius:25px;padding:clamp(24px,5vw,55px);background:radial-gradient(circle at 90% 10%,#46d6df25,transparent 32%),radial-gradient(circle at 10% 100%,#e8bd6225,transparent 35%),linear-gradient(120deg,#10243c,#0b1b30)}
-    .eyebrow{color:var(--gold);font-size:12px;font-weight:bold;letter-spacing:2px}
-    h1{font-size:clamp(32px,6vw,58px);line-height:1.05;margin:14px 0}
-    .hero p,.section-head p{color:var(--muted);line-height:1.7}
-    .hero-offer{margin-top:25px;padding:19px;border-radius:16px;border:1px solid #e8bd6260;background:#050f1c70;display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-    .hero-offer small{color:var(--gold);font-weight:bold}
-    .hero-offer h2{margin:7px 0;font-size:25px}
-    .hero-offer p{margin:0}
-    .price-large{font-size:clamp(25px,5vw,38px);color:var(--gold);font-weight:900}
-
-    /* SECCIONES */
-    section{padding:30px 0;scroll-margin-top:130px}
-    .section-head{margin-bottom:20px}
-    .section-head h2{font-size:clamp(23px,4vw,32px);margin:0 0 8px}
-
-    /* TARJETAS DE SERVICIOS */
-    .grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:16px}
-    .card{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:21px;display:flex;flex-direction:column;min-height:220px}
-    .card-img{width:100%;height:160px;object-fit:cover;border-radius:12px;margin-bottom:15px;border:1px solid var(--line)}
-    .tag{color:var(--gold);background:#e8bd621c;padding:7px 9px;border-radius:20px;font-size:10px;font-weight:bold;align-self:flex-start}
-    .card h3{font-size:20px;margin:18px 0 8px}
-    .card p{color:var(--muted);line-height:1.55}
-    .card-price{font-size:27px;color:var(--gold);font-weight:900;margin-top:auto;padding-top:15px}
-    .card .btn{margin-top:16px;width:100%}
-    .empty{color:var(--muted);padding:22px;border:1px dashed var(--line);border-radius:14px;grid-column:1/-1}
-
-    /* EXPLORA Y PANELES */
-    .two-col{display:grid;grid-template-columns:1fr 1fr;gap:17px}
-    .panel,.rate,.link-card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:20px}
-    .link-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
-    .link-card{display:block}
-    .link-card strong{display:block;color:var(--gold);margin-bottom:7px}
-    .link-card span{font-size:13px;color:var(--muted);line-height:1.5}
-
-    /* FORMULARIOS */
-    .field{display:flex;flex-direction:column;gap:7px;margin:12px 0}
-    .field label{font-size:13px;color:var(--muted)}
-    .result{padding:15px;background:#071629;border:1px solid var(--line);border-radius:12px}
-    .result strong{font-size:24px;color:var(--gold)}
-
-    /* TASAS */
-    .rate-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-    .rate small{color:var(--muted)}
-    .rate strong{display:block;font-size:22px;color:var(--gold);margin-top:9px}
-
-    /* ESTADOS Y AVISOS */
-    .notice{padding:18px;background:var(--panel);border-left:4px solid var(--gold);border-radius:10px;line-height:1.7}
-    .status{font-size:12px;color:var(--muted);margin-top:12px}
-    .online{color:var(--green)}
-    .error{color:#ff9a9a}
-    .admin-info{background:#e8bd6210;border:1px solid #e8bd6250;padding:16px;border-radius:13px;line-height:1.7}
-
-    /* FOOTER */
-    footer{margin-top:35px;padding:30px 0;background:#050f1c;border-top:1px solid var(--line);color:var(--muted);font-size:13px;line-height:1.8}
-    .footer-row{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-
-    /* FLOTANTE */
-    .whatsapp-float{position:fixed;right:18px;bottom:18px;z-index:40;border-radius:50px;padding:14px 19px;background:#20bd75;color:#062719;font-weight:bold}
-
-    /* RESPONSIVE */
-    @media(max-width:800px){
-      .rate-grid{grid-template-columns:repeat(2,1fr)}
-      .link-grid{grid-template-columns:repeat(2,1fr)}
-    }
-    @media(max-width:560px){
-      .two-col,.link-grid{grid-template-columns:1fr}
-      .header-top{align-items:flex-start}
-      nav a{padding:9px 11px}
-      .clock{font-size:12px;padding:8px 10px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071629">
+<title>YOUR BRIDGE HOME</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{
+ --bg:#071629;--panel:#10243b;--panel2:#142d48;--gold:#e9bd65;
+ --cyan:#54d8e8;--white:#f5f7fb;--muted:#aab9ca;--green:#36c98b;
+ --red:#ff7070;--border:#29425d;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(145deg,#061321,#0c2037 60%,#071629);
+ color:var(--white);font-family:Arial,Helvetica,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+header{padding:22px 16px 16px;text-align:center;border-bottom:1px solid var(--border);
+ background:rgba(5,17,31,.92);position:relative}
+.logo{font-size:27px;font-weight:900;letter-spacing:2px;color:var(--gold)}
+.subtitle{font-size:12px;color:var(--muted);margin-top:7px}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:8px;
+ max-width:1100px;margin:12px auto 0}
+select,.smallbtn{background:#142d48;color:white;border:1px solid var(--border);
+ border-radius:10px;padding:9px}
+nav{display:flex;gap:8px;overflow-x:auto;padding:12px;max-width:1200px;margin:auto}
+nav button{white-space:nowrap;border:1px solid var(--border);background:#10243b;
+ color:white;padding:11px 15px;border-radius:12px}
+nav button.active,nav button:hover{background:var(--gold);color:#071629}
+main{max-width:1100px;margin:auto;padding:14px}
+section.page{display:none}
+section.page.active{display:block}
+.banner{border:1px solid #8e713d;background:linear-gradient(120deg,#263c53,#10243b);
+ border-radius:18px;padding:22px;margin:10px 0 18px;text-align:center}
+.banner small{color:var(--cyan);letter-spacing:2px}
+.banner h2{color:var(--gold);font-size:27px;margin:12px 0}
+.banner p{color:#dbe6f0}
+h2.sectiontitle{color:var(--gold);font-size:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:13px}
+.card{background:linear-gradient(145deg,#142d48,#0e2035);border:1px solid var(--border);
+ border-radius:16px;padding:17px;min-width:0}
+.card h3{margin:0 0 9px;color:var(--gold)}
+.price{font-size:24px;font-weight:900;color:var(--cyan);margin:12px 0}
+.muted{color:var(--muted);font-size:13px;line-height:1.5}
+.btn{display:inline-block;border:0;border-radius:10px;padding:11px 15px;
+ background:var(--gold);color:#071629;font-weight:bold;margin:4px 3px 4px 0}
+.btn.secondary{background:#23415e;color:white;border:1px solid #45617c}
+.btn.green{background:var(--green);color:#062318}
+.btn.red{background:#713d4b;color:white}
+.btn.cyan{background:var(--cyan);color:#06212a}
+input,select,textarea{width:100%;padding:11px;margin:5px 0 12px;border-radius:9px;
+ border:1px solid var(--border);background:#091a2c;color:white}
+textarea{min-height:75px;resize:vertical}
+label{font-size:13px;color:var(--muted)}
+hr{border:0;border-top:1px solid var(--border);margin:18px 0}
+.notice{padding:14px;border-left:4px solid var(--gold);background:#142d48;
+ border-radius:9px;margin:12px 0}
+.adminbox{border:1px solid var(--gold);border-radius:17px;padding:16px;background:#0c2036}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row>*{flex:1}
+footer{text-align:center;color:var(--muted);padding:28px 12px;border-top:1px solid var(--border);
+ margin-top:30px;font-size:12px}
+.empty{color:var(--muted);padding:20px;text-align:center}
+.stat{font-size:24px;color:var(--cyan);font-weight:bold}
+.hidden{display:none!important}
+.pill{display:inline-block;padding:5px 9px;background:#263f58;border-radius:20px;
+ font-size:11px;color:var(--gold);margin-bottom:8px}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);
+ background:#183c50;color:white;padding:12px 18px;border-radius:12px;
+ display:none;z-index:99;box-shadow:0 4px 20px #0008}
+canvas{max-width:100%;border-radius:12px;background:white}
+@media(max-width:600px){
+ .logo{font-size:22px}.banner h2{font-size:23px}
+ main{padding:10px}.topline{flex-wrap:wrap}
+}
+</style>
 </head>
-
 <body>
+<header>
+ <div class="logo">YOUR BRIDGE HOME</div>
+ <div class="subtitle">TU PUENTE HACIA NUEVAS OPORTUNIDADES</div>
+ <div class="topline">
+  <span class="muted">Daynel Caminero · Administrador</span>
+  <select id="language" style="width:auto;margin:0" onchange="setLanguage(this.value)">
+   <option value="es">Español</option>
+   <option value="en">English</option>
+   <option value="ru">Русский</option>
+  </select>
+ </div>
+</header>
 
-  <!-- HEADER -->
-  <header>
-    <div class="container">
-      <div class="header-top">
-        <a class="logo" href="#inicio">
-          <div class="logo-mark">YB</div>
-          <div>
-            <strong>YOUR BRIDGE HOME</strong>
-            <small>Tu puente hacia nuevas oportunidades</small>
-          </div>
-        </a>
-        <div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap">
-          <span class="clock" id="liveClock">--:--:--</span>
-          <select class="lang" id="language">
-            <option value="es">ES</option>
-            <option value="ru">RU</option>
-            <option value="en">EN</option>
-          </select>
-          <a class="btn btn-whatsapp" id="topWhatsApp" target="_blank" rel="noopener">WhatsApp</a>
-        </div>
-      </div>
-      <nav>
-        <a href="#inicio">Inicio</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#explora">Explora</a>
-        <a href="#calculadora">Calculadora</a>
-        <a href="#tasas">Tasas</a>
-        <a href="#informacion">Información</a>
-        <a href="#contacto">Contacto</a>
-      </nav>
-    </div>
-  </header>
+<nav id="navigation">
+ <button class="active" onclick="showPage('home',this)">Inicio</button>
+ <button onclick="showPage('services',this)">Servicios</button>
+ <button onclick="showPage('tickets',this)">Boletos</button>
+ <button onclick="showPage('rates',this)">Tasas</button>
+ <button onclick="showPage('explore',this)">Explora</button>
+ <button onclick="showPage('calculator',this)">Calculadora</button>
+ <button onclick="showPage('cards',this)">Tarjetas</button>
+ <button onclick="showPage('contact',this)">Contacto</button>
+ <button onclick="showPage('admin',this)">⚙ Administrar</button>
+</nav>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero" id="inicio">
-      <div class="container">
-        <div class="hero-box">
-          <div class="eyebrow">YOUR BRIDGE HOME · 2026</div>
-          <h1 id="heroTitle">Tu conexión con el mundo.</h1>
-          <p id="heroText">Recargas, remesas, vuelos y servicios para acercarte a lo que más importa. Atención directa y ofertas actualizadas.</p>
-          
-          <div class="hero-offer">
-            <div>
-              <small>OFERTA DESTACADA</small>
-              <h2 id="bannerTitle">INTERNET +</h2>
-              <p id="bannerDescription">2 GB LTE + 300 MB.cu</p>
-            </div>
-            <div>
-              <div class="price-large" id="bannerPrice">350 ₽</div>
-              <a class="btn" id="bannerContact" target="_blank" rel="noopener">Consultar oferta</a>
-            </div>
-          </div>
+<main>
+<section id="home" class="page active">
+ <div class="banner">
+  <small>OFERTAS DESTACADAS</small>
+  <h2 id="bannerTitle">YOUR BRIDGE HOME</h2>
+  <p id="bannerDescription">Servicios, viajes y oportunidades en un solo lugar.</p>
+  <div class="price" id="bannerPrice">Descubre nuestras ofertas</div>
+  <button class="btn" onclick="showPage('services')">Ver servicios</button>
+ </div>
+ <h2 class="sectiontitle">Nuestras ofertas</h2>
+ <div class="grid" id="homeOffers"></div>
+ <div class="notice" id="publicNotice">
+  <strong>Información importante</strong>
+  <p id="noticeText">Bienvenido a YOUR BRIDGE HOME.</p>
+ </div>
+ <h2 class="sectiontitle">Conecta con nosotros</h2>
+ <div class="card">
+  <p>Te ayudamos a encontrar servicios, remesas y opciones de viaje.</p>
+  <a class="btn green" href="https://wa.me/79046319565" target="_blank">WhatsApp directo</a>
+ </div>
+</section>
 
-          <div class="status" id="connectionStatus">Conectando con Supabase...</div>
-        </div>
-      </div>
-    </section>
+<section id="services" class="page">
+ <h2 class="sectiontitle">Nuestros servicios</h2>
+ <div class="grid" id="serviceList"></div>
+</section>
 
-    <!-- SERVICIOS -->
-    <section id="servicios">
-      <div class="container">
-        <div class="section-head">
-          <h2>Nuestros servicios</h2>
-          <p>Consulta las ofertas actualizadas y contacta directamente.</p>
-        </div>
-        <div class="grid" id="servicesGrid">
-          <div class="empty">Cargando ofertas...</div>
-        </div>
-      </div>
-    </section>
+<section id="tickets" class="page">
+ <h2 class="sectiontitle">Boletos de avión</h2>
+ <p class="muted">Consulta las ofertas disponibles y solicita tu itinerario.</p>
+ <div class="grid" id="ticketList"></div>
+ <h2 class="sectiontitle">Uzbekistán · Boletos</h2>
+ <div class="grid" id="uzbekList"></div>
+</section>
 
-    <!-- EXPLORA -->
-    <section id="explora">
-      <div class="container">
-        <div class="section-head">
-          <h2>Explora y descubre</h2>
-          <p>Encuentra ideas para tus próximos viajes y experiencias.</p>
-        </div>
-        <div class="link-grid">
-          <a class="link-card" href="https://www.google.com/travel/" target="_blank" rel="noopener"><strong>✈️ Viajes y destinos</strong><span>Explora destinos y vuelos.</span></a>
-          <a class="link-card" href="https://www.booking.com/" target="_blank" rel="noopener"><strong>🏨 Hoteles</strong><span>Consulta alojamientos.</span></a>
-          <a class="link-card" href="https://www.google.com/maps" target="_blank" rel="noopener"><strong>🍽️ Restaurantes y ocio</strong><span>Descubre lugares y actividades.</span></a>
-          <a class="link-card" href="https://www.visaindex.com/" target="_blank" rel="noopener"><strong>🌍 Visa Index</strong><span>Consulta requisitos de viaje.</span></a>
-          <a class="link-card" href="https://www.meteoblue.com/" target="_blank" rel="noopener"><strong>🌤️ Pronóstico del tiempo</strong><span>Consulta el clima en tu destino.</span></a>
-          <a class="link-card" href="https://www.skyscanner.net/" target="_blank" rel="noopener"><strong>🧳 Comparar viajes</strong><span>Compara opciones de vuelos.</span></a>
-        </div>
-      </div>
-    </section>
+<section id="rates" class="page">
+ <h2 class="sectiontitle">Tasas de cambio manuales</h2>
+ <p class="muted">Valores informativos introducidos por el administrador. Confirma la tasa antes de realizar una operación.</p>
+ <div class="grid" id="rateList"></div>
+</section>
 
-    <!-- CALCULADORA -->
-    <section id="calculadora">
-      <div class="container">
-        <div class="section-head">
-          <h2>Calculadora de remesas</h2>
-          <p>Estimación según la tasa publicada.</p>
-        </div>
-        <div class="panel">
-          <div class="field">
-            <label for="rubles">Cantidad en rublos (₽)</label>
-            <input type="number" id="rubles" min="0" value="1000">
-          </div>
-          <div class="result">
-            <div>Estimación en CUP</div>
-            <strong id="cupResult">10.70 CUP</strong>
-          </div>
-        </div>
-      </div>
-    </section>
+<section id="explore" class="page">
+ <h2 class="sectiontitle">Explora el mundo</h2>
+ <div class="grid">
+  <div class="card"><h3>✈️ Viajes</h3><p class="muted">Busca rutas y destinos.</p>
+   <a class="btn" href="https://www.skyscanner.net/" target="_blank">Buscar vuelos</a></div>
+  <div class="card"><h3>🏨 Hoteles</h3><p class="muted">Encuentra alojamientos.</p>
+   <a class="btn" href="https://www.booking.com/" target="_blank">Buscar hoteles</a></div>
+  <div class="card"><h3>🌍 Destinos</h3><p class="muted">Explora lugares y actividades.</p>
+   <a class="btn" href="https://www.google.com/travel/" target="_blank">Google Travel</a></div>
+  <div class="card"><h3>🛂 Visados</h3><p class="muted">Consulta requisitos de viaje.</p>
+   <a class="btn" href="https://www.visaindex.com/" target="_blank">Visa Index</a></div>
+  <div class="card"><h3>🌦️ Tiempo</h3><p class="muted">Consulta el pronóstico del tiempo.</p>
+   <a class="btn" href="https://www.meteoblue.com/" target="_blank">Meteoblue</a></div>
+  <div class="card"><h3>📍 Mapas</h3><p class="muted">Localiza ciudades y lugares.</p>
+   <a class="btn" href="https://maps.google.com/" target="_blank">Abrir mapas</a></div>
+ </div>
+</section>
 
-    <!-- TASAS -->
-    <section id="tasas">
-      <div class="container">
-        <div class="section-head">
-          <h2>Tasas de referencia</h2>
-          <p>Valores publicados y actualizados por administración.</p>
-        </div>
-        <div class="rate-grid">
-          <div class="rate"><small>USD</small><strong id="rateUSD">Consultar</strong></div>
-          <div class="rate"><small>MLC</small><strong id="rateMLC">Consultar</strong></div>
-          <div class="rate"><small>EUR</small><strong id="rateEUR">Consultar</strong></div>
-          <div class="rate"><small>BTC</small><strong id="rateBTC">Consultar</strong></div>
-        </div>
-      </div>
-    </section>
+<section id="calculator" class="page">
+ <h2 class="sectiontitle">Calculadora de remesas</h2>
+ <div class="card">
+  <label>Selecciona la tasa</label>
+  <select id="calcRate"></select>
+  <label>Cantidad que deseas enviar</label>
+  <input type="number" id="calcAmount" placeholder="Introduce la cantidad" oninput="calculate()">
+  <div class="notice">
+   <div class="muted">Resultado estimado</div>
+   <div class="price" id="calcResult">0</div>
+  </div>
+  <p class="muted">El cálculo es orientativo y utiliza las tasas introducidas manualmente.</p>
+ </div>
+</section>
 
-    <!-- INFORMACIÓN -->
-    <section id="informacion">
-      <div class="container">
-        <div class="section-head">
-          <h2>Información importante</h2>
-          <p>Avisos y novedades de YOUR BRIDGE HOME.</p>
-        </div>
-        <div class="notice" id="publicNotice">Bienvenido a YOUR BRIDGE HOME. Consulta nuestras novedades.</div>
-      </div>
-    </section>
+<section id="cards" class="page">
+ <h2 class="sectiontitle">Generador de tarjetas</h2>
+ <div class="card">
+  <label>Título de la tarjeta</label>
+  <input id="cardTitle" value="YOUR BRIDGE HOME">
+  <label>Descripción</label>
+  <textarea id="cardDescription">Tu puente hacia nuevas oportunidades.</textarea>
+  <div class="row">
+   <div><label>Precio</label><input id="cardPrice" placeholder="350 ₽"></div>
+   <div><label>Etiqueta</label><input id="cardTag" placeholder="OFERTA ESPECIAL"></div>
+  </div>
+  <label>Color de fondo</label>
+  <select id="cardColor">
+   <option value="#10243b">Azul elegante</option>
+   <option value="#183c50">Azul turquesa</option>
+   <option value="#352b20">Dorado oscuro</option>
+   <option value="#273b30">Verde elegante</option>
+  </select>
+  <button class="btn" onclick="generateCard()">Generar tarjeta</button>
+  <button class="btn secondary" onclick="downloadCard()">Descargar imagen</button>
+  <button class="btn green" onclick="shareCard()">Compartir</button>
+  <div style="margin-top:15px;text-align:center">
+   <canvas id="promoCanvas" width="900" height="600"></canvas>
+  </div>
+ </div>
+</section>
 
-    <!-- CONTACTO -->
-    <section id="contacto">
-      <div class="container">
-        <div class="section-head">
-          <h2>Contacto y atención</h2>
-          <p>Estamos disponibles para responder tus consultas.</p>
-        </div>
-        <div class="two-col">
-          <div class="panel">
-            <h3>YOUR BRIDGE HOME</h3>
-            <p>Daynel Caminero<br>Administrador</p>
-            <p>📱 +7904-631-95-65</p>
-            <p>✉️ daynelcc@gmail.com</p>
-            <a class="btn btn-whatsapp" id="contactWhatsApp" target="_blank" rel="noopener">Escribir por WhatsApp</a>
-          </div>
-          <div class="panel">
-            <h3>Solicitar información</h3>
-            <form id="requestForm">
-              <div class="field">
-                <label for="clientName">Nombre</label>
-                <input id="clientName" required maxlength="80">
-              </div>
-              <div class="field">
-                <label for="clientService">Servicio</label>
-                <select id="clientService">
-                  <option>Recargas</option>
-                  <option>Remesas</option>
-                  <option>Ticket de avión</option>
-                  <option>Bus</option>
-                  <option>Tren</option>
-                  <option>Otra consulta</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="clientMessage">Mensaje</label>
-                <textarea id="clientMessage" required maxlength="500"></textarea>
-              </div>
-              <button class="btn btn-whatsapp" type="submit">Enviar por WhatsApp</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
+<section id="contact" class="page">
+ <h2 class="sectiontitle">Contacto</h2>
+ <div class="card">
+  <h3>YOUR BRIDGE HOME</h3>
+  <p>Administrador: Daynel Caminero</p>
+  <p>WhatsApp: +7904-631-95-65</p>
+  <p>Correo: daynelcc@gmail.com</p>
+  <a class="btn green" href="https://wa.me/79046319565" target="_blank">Escribir por WhatsApp</a>
+  <a class="btn secondary" href="mailto:daynelcc@gmail.com">Enviar correo</a>
+ </div>
+ <h2 class="sectiontitle">Solicita un servicio</h2>
+ <div class="card">
+  <label>Tu nombre</label><input id="requestName" placeholder="Nombre">
+  <label>¿Qué necesitas?</label>
+  <select id="requestType">
+   <option>Recarga</option><option>Remesa</option><option>Boleto de avión</option>
+   <option>Boleto Uzbekistán</option><option>Otro servicio</option>
+  </select>
+  <label>Detalles</label><textarea id="requestDetails" placeholder="Escribe tu solicitud"></textarea>
+  <button class="btn green" onclick="sendRequest()">Enviar solicitud por WhatsApp</button>
+ </div>
+ <h2 class="sectiontitle">Opiniones y sugerencias</h2>
+ <div class="card">
+  <label>Tu opinión</label><textarea id="feedbackText" placeholder="Cuéntanos tu experiencia o sugiere un servicio"></textarea>
+  <button class="btn" onclick="sendFeedback()">Enviar opinión</button>
+ </div>
+</section>
 
-    <!-- ADMINISTRACIÓN -->
-    <section id="administracion">
-      <div class="container">
-        <div class="section-head">
-          <h2>Administración</h2>
-          <p>Información para mantener la página actualizada.</p>
-        </div>
-        <div class="admin-info">
-          <strong>Edición protegida</strong><br>
-          Esta versión permite que los clientes consulten la información y reciban los cambios de Supabase.
-          Para editar precios, ofertas y avisos, entra en Supabase → Table Editor →
-          <strong>ybh_contenido</strong> y modifica los registros.
-        </div>
-      </div>
-    </section>
-  </main>
+<section id="admin" class="page">
+ <h2 class="sectiontitle">⚙ Administración de YOUR BRIDGE HOME</h2>
+ <div class="notice">
+  <strong>Administración en la nube</strong>
+  <p class="muted">Los cambios se guardan en Supabase y los verán todos tus clientes.</p>
+ </div>
+ <div class="adminbox">
+  <h3>📦 Crear o editar oferta / servicio</h3>
+  <input type="hidden" id="editId">
+  <label>Nombre</label><input id="offerTitle" placeholder="Ej. INTERNET +">
+  <label>Descripción</label><textarea id="offerDescription" placeholder="Beneficios y detalles"></textarea>
+  <div class="row">
+   <div><label>Precio</label><input id="offerPrice" type="number" step="0.01" placeholder="350"></div>
+   <div><label>Moneda</label><input id="offerCurrency" value="₽"></div>
+  </div>
+  <div class="row">
+   <div><label>Categoría</label>
+    <select id="offerType">
+     <option value="recarga">Recarga</option><option value="remesa">Remesa</option>
+     <option value="boleto">Boleto</option><option value="uzbekistan">Boleto Uzbekistán</option>
+     <option value="servicio">Otro servicio</option>
+    </select>
+   </div>
+   <div><label>Etiqueta</label><input id="offerTag" placeholder="Más económico / Oferta"></div>
+  </div>
+  <label><input type="checkbox" id="offerFeatured" style="width:auto"> Mostrar como oferta destacada</label>
+  <div class="row">
+   <button class="btn" onclick="saveOffer()">Guardar oferta</button>
+   <button class="btn secondary" onclick="clearOfferForm()">Limpiar</button>
+  </div>
+ </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container footer-row">
-      <div>
-        <strong style="color:var(--gold)">YOUR BRIDGE HOME</strong><br>
-        Daynel Caminero · Administrador<br>
-        +7904-631-95-65<br>daynelcc@gmail.com
-      </div>
-      <div>
-        © 2026 YOUR BRIDGE HOME<br>
-        Todos los derechos reservados.<br>
-        <span class="footer-clock" id="footerClock">--</span>
-      </div>
-    </div>
-  </footer>
+ <hr>
+ <div class="adminbox">
+  <h3>✈️ Añadir boleto con itinerario</h3>
+  <label>Origen</label><input id="flightOrigin" placeholder="Ej. Moscú">
+  <label>Destino</label><input id="flightDestination" placeholder="Ej. La Habana">
+  <div class="row">
+   <div><label>Fecha</label><input id="flightDate" type="date"></div>
+   <div><label>Compañía aérea</label><input id="flightAirline" placeholder="Compañía"></div>
+  </div>
+  <div class="row">
+   <div><label>Precio</label><input id="flightPrice" type="number"></div>
+   <div><label>Moneda</label><input id="flightCurrency" value="₽"></div>
+  </div>
+  <label><input type="checkbox" id="flightUzbek" style="width:auto"> Es boleto de Uzbekistán</label>
+  <button class="btn" onclick="saveFlight()">Añadir boleto</button>
+ </div>
 
-  <a class="whatsapp-float" id="floatingWhatsApp" target="_blank" rel="noopener">WhatsApp</a>
+ <hr>
+ <div class="adminbox">
+  <h3>💱 Añadir o modificar tasa</h3>
+  <label>Nombre de la tasa</label><input id="rateName" placeholder="Ej. RUB a CUP">
+  <div class="row">
+   <div><label>Moneda origen</label><input id="rateFrom" placeholder="RUB"></div>
+   <div><label>Moneda destino</label><input id="rateTo" placeholder="CUP"></div>
+  </div>
+  <label>Valor de la tasa</label><input id="rateValue" type="number" step="0.000001" placeholder="0">
+  <button class="btn" onclick="saveRate()">Guardar tasa</button>
+ </div>
 
-  <!-- JAVASCRIPT -->
-  <script>
-    /* =============================================
-       1. CONFIGURACIÓN SUPABASE
-       (Si dejas el "use_supabase" en false, 
-       usará los precios manuales de abajo)
-    ============================================= */
-    const use_supabase = false; // 👈 Cambia a true si quieres usar la base de datos
-    
-    const SUPABASE_URL = "https://wvhptkcmlyifnieqbgnq.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7";
-    const TABLE = "ybh_contenido";
-    const PHONE = "79046319565";
+ <hr>
+ <div class="adminbox">
+  <h3>📢 Anuncio e información</h3>
+  <label>Título del banner</label><input id="bannerEditTitle">
+  <label>Texto del banner</label><textarea id="bannerEditDescription"></textarea>
+  <label>Mensaje importante para los visitantes</label><textarea id="noticeEdit"></textarea>
+  <button class="btn" onclick="saveMessages()">Guardar anuncios</button>
+ </div>
 
-    /* =============================================
-       2. PRECIOS EDITABLES MANUALMENTE
-       Cambia los números y textos aquí abajo.
-    ============================================= */
-    const defaultOffers = [
-      { 
-        id: "1", 
-        tipo: "avion", 
-        titulo: "Vuelo a La Habana", 
-        descripcion: "Equipaje de 23kg incluido. Salidas desde Moscú.", 
-        precio: 85000, 
-        moneda: "₽", 
-        etiqueta: "AVIÓN", 
-        activo: true, 
-        orden: 1 
-      },
-      { 
-        id: "2", 
-        tipo: "bus", 
-        titulo: "Bus Moscú - San Petersburgo", 
-        descripcion: "Salidas diarias. Asientos reclinables y WiFi.", 
-        precio: 2500, 
-        moneda: "₽", 
-        etiqueta: "BUS", 
-        activo: true, 
-        orden: 2 
-      },
-      { 
-        id: "3", 
-        tipo: "tren", 
-        titulo: "Tren Sapsan (Rápido)", 
-        descripcion: "Tren de alta velocidad. 4 horas de viaje.", 
-        precio: 4500, 
-        moneda: "₽", 
-        etiqueta: "TREN", 
-        activo: true, 
-        orden: 3 
-      },
-      { 
-        id: "4", 
-        tipo: "recarga", 
-        titulo: "INTERNET +", 
-        descripcion: "2 GB LTE + 300 MB.cu", 
-        precio: 350, 
-        moneda: "₽", 
-        etiqueta: "OFERTA", 
-        activo: true, 
-        orden: 4 
-      },
-      { 
-        id: "5", 
-        tipo: "remesa", 
-        titulo: "Remesas a Cuba", 
-        descripcion: "1.000 rublos = 9.80 CUP en Cuba", 
-        precio: 1000, 
-        moneda: "₽", 
-        etiqueta: "REMESAS", 
-        activo: true, 
-        orden: 5 
+ <hr>
+ <div class="adminbox">
+  <h3>📋 Contenido guardado</h3>
+  <div id="adminItems"></div>
+ </div>
+
+ <hr>
+ <div class="adminbox">
+  <h3>💾 Copia de seguridad</h3>
+  <p class="muted">Exporta tus ofertas, boletos, tasas y mensajes.</p>
+  <button class="btn" onclick="exportData()">Exportar copia</button>
+  <label>Importar una copia JSON</label>
+  <input type="file" id="importFile" accept=".json,application/json">
+  <button class="btn secondary" onclick="importData()">Importar copia</button>
+ </div>
+</section>
+</main>
+
+<footer>
+ YOUR BRIDGE HOME · Daynel Caminero Administrador<br>
+ Servicios, viajes y oportunidades.<br>
+ <span id="storageStatus">Conectando con la nube...</span>
+</footer>
+<div id="toast"></div>
+
+<script>
+/* =====================================================
+   CONFIGURACIÓN SUPABASE
+===================================================== */
+const SUPABASE_URL="https://wvhptkcmlyifnieqbgnq.supabase.co";
+const SUPABASE_KEY="sb_publishable_wCBRzP_vgdxEgeAs6SudsA_LhgS69U7";
+const TABLE="ybh_contenido";
+const WHATSAPP="79046319565";
+
+const defaultData={
+ offers:[
+  {id:"o1",title:"INTERNET +",description:"2 GB LTE + 300 MB.cu",price:350,currency:"₽",type:"recarga",tag:"Oferta",featured:true},
+  {id:"o2",title:"Remesas a Cuba",description:"Referencia de remesa: 1.000 rublos = 9.80 CUP en Cuba",price:1000,currency:"₽",type:"remesa",tag:"Consultar",featured:true},
+  {id:"o3",title:"Ticket de avión",description:"Precio de referencia. Confirma disponibilidad y fechas.",price:99800,currency:"₽",type:"boleto",tag:"Desde",featured:true}
+ ],
+ flights:[],
+ rates:[
+  {id:"r1",name:"RUB a CUP · Referencia remesa",from:"RUB",to:"CUP",value:0.0098},
+  {id:"r2",name:"USD a CUP",from:"USD",to:"CUP",value:0},
+  {id:"r3",name:"EUR a CUP",from:"EUR",to:"CUP",value:0},
+  {id:"r4",name:"MLC a CUP",from:"MLC",to:"CUP",value:0},
+  {id:"r5",name:"BTC a CUP",from:"BTC",to:"CUP",value:0},
+  {id:"r6",name:"RUB a UZS",from:"RUB",to:"UZS",value:0}
+ ],
+ bannerTitle:"YOUR BRIDGE HOME",
+ bannerDescription:"Tu puente hacia nuevas oportunidades.",
+ notice:"Bienvenido a YOUR BRIDGE HOME. Consulta nuestras ofertas y servicios."
+};
+
+let data=JSON.parse(JSON.stringify(defaultData));
+let db=null;
+let bannerIndex=0;
+
+/* =====================================================
+   CONEXIÓN A SUPABASE
+===================================================== */
+async function initSupabase(){
+ if(!window.supabase) return;
+ db=window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+ 
+ // Cargar datos iniciales
+ await loadData();
+ 
+ // Escuchar cambios en tiempo real
+ db.channel('ybh-admin-changes')
+   .on('postgres_changes', { event: '*', schema: 'public', table: TABLE }, payload => {
+      if(payload.new && payload.new.id === 'main'){
+        data = {
+          offers: payload.new.offers || [],
+          flights: payload.new.flights || [],
+          rates: payload.new.rates || [],
+          bannerTitle: payload.new.bannerTitle,
+          bannerDescription: payload.new.bannerDescription,
+          notice: payload.new.notice
+        };
+        renderAll();
+        renderAdmin();
+        document.getElementById("storageStatus").textContent="Sincronizado en tiempo real";
       }
-    ];
+   }).subscribe();
+}
 
-    /* =============================================
-       3. ESTADO GLOBAL
-    ============================================= */
-    let db = null;
-    let offers = [...defaultOffers];
-    let bannerIndex = 0;
-
-    /* =============================================
-       4. UTILIDADES
-    ============================================= */
-    function wa(message){
-      return "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(message);
-    }
-
-    function esc(value){
-      return String(value ?? "").replace(/[&<>"']/g, function(c){
-        return { "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[c];
-      });
-    }
-
-    function priceText(price, currency){
-      if(price === null || price === undefined || price === "") return "Consultar";
-      const number = Number(price);
-      if(!Number.isFinite(number)) return esc(price);
-      return number.toLocaleString("es-ES") + " " + (currency || "₽");
-    }
-
-    function connectionMessage(message, type){
-      const el = document.getElementById("connectionStatus");
-      el.textContent = message;
-      el.className = "status " + (type || "");
-    }
-
-    /* =============================================
-       5. RENDERIZADO
-    ============================================= */
-    function offerCard(item){
-      const title = esc(item.titulo);
-      const description = esc(item.descripcion);
-      const price = priceText(item.precio, item.moneda);
-      const tag = esc(item.etiqueta);
-      const imgUrl = item.imagen_url ? esc(item.imagen_url) : null;
-
-      return `
-        <article class="card">
-          ${imgUrl ? `<img src="${imgUrl}" class="card-img" alt="${title}">` : ''}
-          <div><span class="tag">${tag}</span></div>
-          <h3>${title}</h3>
-          <p>${description}</p>
-          <div class="card-price">${price}</div>
-          <a class="btn" href="${wa("Hola, quiero información sobre " + title + ". Precio: " + price)}"
-             target="_blank" rel="noopener">Consultar por WhatsApp</a>
-        </article>
-      `;
-    }
-
-    function renderBanner(){
-      const active = offers.filter(x => x.activo !== false);
-      if(!active.length) return;
-      bannerIndex = bannerIndex % active.length;
-      const item = active[bannerIndex];
-
-      document.getElementById("bannerTitle").textContent = item.titulo;
-      document.getElementById("bannerDescription").textContent = item.descripcion;
-      document.getElementById("bannerPrice").textContent = priceText(item.precio, item.moneda);
-      document.getElementById("bannerContact").href = wa("Hola, quiero información sobre " + item.titulo + ". Precio: " + priceText(item.precio, item.moneda));
-    }
-
-    function renderOffers(){
-      const active = offers
-        .filter(x => x.activo !== false)
-        .sort((a, b) => Number(a.orden || 0) - Number(b.orden || 0));
-
-      const grid = document.getElementById("servicesGrid");
-      if(!active.length){
-        grid.innerHTML = '<div class="empty">No hay ofertas publicadas actualmente.</div>';
-        return;
-      }
-      grid.innerHTML = active.map(offerCard).join("");
-      renderBanner();
-    }
-
-    /* =============================================
-       6. CONEXIÓN SUPABASE (Solo si use_supabase = true)
-    ============================================= */
-    async function loadOffers(){
-      if(!db) return;
-      try{
-        const { data, error } = await db.from(TABLE).select("*").order("orden", { ascending: true });
-        if(error) throw error;
-        offers = (data && data.length) ? data : [...defaultOffers];
-        renderOffers();
-        connectionMessage("Conectado. Sincronizado con Supabase.", "online");
-      }catch(error){
-        console.error("Supabase:", error);
-        connectionMessage("Error al cargar Supabase. Usando datos locales.", "error");
-      }
-    }
-
-    function connectSupabase(){
-      if(!use_supabase){
-        offers = [...defaultOffers];
-        renderOffers();
-        connectionMessage("Modo local. Mostrando precios del código HTML.", "online");
-        return;
-      }
-
-      if(!window.supabase) return;
-      try{
-        db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        loadOffers();
-        
-        db.channel("ybh-public-updates").on(
-          "postgres_changes", 
-          { event: "*", schema: "public", table: TABLE },
-          function(){ loadOffers(); }
-        ).subscribe(function(status){
-          if(status === "SUBSCRIBED"){
-            connectionMessage("En directo: Supabase activo.", "online");
-          }
-        });
-      }catch(error){
-        console.error(error);
-        connectionMessage("No se pudo iniciar Supabase.", "error");
-      }
-    }
-
-    /* =============================================
-       7. CALCULADORA
-    ============================================= */
-    function calculateRemittance(){
-      const amount = Number(document.getElementById("rubles").value || 0);
-      const cup = amount * (9.8 / 1000);
-      document.getElementById("cupResult").textContent =
-        cup.toLocaleString("es-ES", { maximumFractionDigits: 2 }) + " CUP";
-    }
-
-    /* =============================================
-       8. CONTACTO
-    ============================================= */
-    function setupContact(){
-      const link = wa("Hola, quiero información sobre YOUR BRIDGE HOME.");
-      ["topWhatsApp", "contactWhatsApp", "floatingWhatsApp"].forEach(id => {
-        document.getElementById(id).href = link;
-      });
-
-      document.getElementById("requestForm").addEventListener("submit", function(e){
-        e.preventDefault();
-        const name = document.getElementById("clientName").value.trim();
-        const service = document.getElementById("clientService").value;
-        const message = document.getElementById("clientMessage").value.trim();
-        const text = "Hola, soy " + name + ". Servicio: " + service + ". Consulta: " + message;
-        window.open(wa(text), "_blank", "noopener");
-      });
-    }
-
-    /* =============================================
-       9. TASAS E INFORMACIÓN
-    ============================================= */
-    function setupRates(){
-      ["USD", "MLC", "EUR", "BTC"].forEach(code => {
-        document.getElementById("rate" + code).textContent = "Consultar";
-      });
-    }
-
-    /* =============================================
-       10. IDIOMAS
-    ============================================= */
-    const translations = {
-      es: { home:"Inicio", services:"Servicios", explore:"Explora", calculator:"Calculadora", rates:"Tasas", info:"Información", contact:"Contacto", title:"Tu conexión con el mundo.", description:"Recargas, remesas, vuelos y servicios para acercarte a lo que más importa." },
-      ru: { home:"Главная", services:"Услуги", explore:"Откройте мир", calculator:"Калькулятор", rates:"Курсы", info:"Информация", contact:"Контакты", title:"Ваша связь с миром.", description:"Пополнение, переводы, авиабилеты и услуги." },
-      en: { home:"Home", services:"Services", explore:"Explore", calculator:"Calculator", rates:"Rates", info:"Information", contact:"Contact", title:"Your connection to the world.", description:"Mobile top-ups, remittances, flights and services." }
+async function loadData(){
+ try{
+  const { data: res, error } = await db.from(TABLE).select('*').eq('id', 'main').single();
+  if(error) throw error;
+  if(res){
+    data = {
+      offers: res.offers || [],
+      flights: res.flights || [],
+      rates: res.rates || [],
+      bannerTitle: res.bannerTitle,
+      bannerDescription: res.bannerDescription,
+      notice: res.notice
     };
+    document.getElementById("storageStatus").textContent="Datos cargados desde Supabase";
+  }
+ }catch(e){
+  console.error(e);
+  document.getElementById("storageStatus").textContent="Error al cargar Supabase (usando datos locales)";
+ }
+ renderAll();
+ renderAdmin();
+}
 
-    function changeLanguage(code){
-      const t = translations[code] || translations.es;
-      const nav = document.querySelectorAll("nav a");
-      const keys = ["home", "services", "explore", "calculator", "rates", "info", "contact"];
-      nav.forEach((item, index) => { if(t[keys[index]]) item.textContent = t[keys[index]]; });
-      document.getElementById("heroTitle").textContent = t.title;
-      document.getElementById("heroText").textContent = t.description;
-      document.documentElement.lang = code;
-    }
+async function saveToCloud(){
+ if(!db) return;
+ try{
+  await db.from(TABLE).upsert({
+    id: 'main',
+    offers: data.offers,
+    flights: data.flights,
+    rates: data.rates,
+    bannerTitle: data.bannerTitle,
+    bannerDescription: data.bannerDescription,
+    notice: data.notice
+  });
+  toast("Cambios guardados en la nube");
+  document.getElementById("storageStatus").textContent="Cambios guardados en Supabase";
+ }catch(e){
+  console.error(e);
+  toast("Error al guardar en la nube");
+ }
+}
 
-    /* =============================================
-       11. RELOJ EN VIVO
-    ============================================= */
-    function updateClock(){
-      const now = new Date();
-      const clockEl = document.getElementById("liveClock");
-      const footerEl = document.getElementById("footerClock");
+/* =====================================================
+   RESTO DE FUNCIONES (Mismo diseño y lógica)
+===================================================== */
+function toast(msg){
+ const t=document.getElementById("toast");
+ t.textContent=msg;t.style.display="block";
+ setTimeout(()=>t.style.display="none",2500);
+}
+function money(value,currency){
+ if(value===null||value===undefined||value==="")return "Consultar";
+ return Number(value).toLocaleString("es-ES",{maximumFractionDigits:2})+" "+(currency||"");
+}
+function safe(value){
+ return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+function showPage(id,button){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+ if(button)button.classList.add("active");
+ if(id==="admin")renderAdmin();
+ if(id==="cards")generateCard();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function whatsappLink(text){
+ return "https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(text);
+}
+function offerCard(o){
+ return `<article class="card">
+  ${o.tag?`<span class="pill">${safe(o.tag)}</span>`:""}
+  <h3>${safe(o.title)}</h3><p class="muted">${safe(o.description)}</p>
+  <div class="price">${money(o.price,o.currency)}</div>
+  <a class="btn green" target="_blank" href="${whatsappLink("Hola, deseo información sobre: "+o.title+" · "+o.description+" · Precio: "+money(o.price,o.currency))}">Consultar</a>
+ </article>`;
+}
+function ticketCard(f){
+ return `<article class="card">
+  <span class="pill">${f.uzbek?"UZBEKISTÁN":"BOLETO DE AVIÓN"}</span>
+  <h3>✈️ ${safe(f.origin)} → ${safe(f.destination)}</h3>
+  <p class="muted">Fecha: ${safe(f.date||"Consultar")}<br>Compañía: ${safe(f.airline||"Consultar")}</p>
+  <div class="price">${money(f.price,f.currency)}</div>
+  <a class="btn green" target="_blank" href="${whatsappLink("Hola, quiero consultar este boleto: "+f.origin+" a "+f.destination+"; fecha "+(f.date||"por confirmar")+"; precio "+money(f.price,f.currency))}">Consultar boleto</a>
+ </article>`;
+}
+function renderAll(){
+ const active=data.offers||[];
+ const featured=active.filter(o=>o.featured);
+ const current=featured.length?featured[bannerIndex%featured.length]:null;
+ document.getElementById("bannerTitle").textContent=current?current.title:data.bannerTitle;
+ document.getElementById("bannerDescription").textContent=current?current.description:data.bannerDescription;
+ document.getElementById("bannerPrice").textContent=current?money(current.price,current.currency):"";
+ document.getElementById("noticeText").textContent=data.notice||"";
+ document.getElementById("homeOffers").innerHTML=active.length?active.map(offerCard).join(""):'<div class="empty">No hay ofertas disponibles.</div>';
+ document.getElementById("serviceList").innerHTML=active.filter(o=>o.type==="recarga"||o.type==="remesa"||o.type==="servicio").map(offerCard).join("")||'<div class="empty">Próximamente.</div>';
+ document.getElementById("ticketList").innerHTML=(data.flights||[]).filter(f=>!f.uzbek).map(ticketCard).join("")||'<div class="empty">Consulta nuestros boletos por WhatsApp.</div>';
+ document.getElementById("uzbekList").innerHTML=(data.flights||[]).filter(f=>f.uzbek).map(ticketCard).join("")||'<div class="empty">Próximamente se añadirán ofertas de Uzbekistán.</div>';
+ document.getElementById("rateList").innerHTML=(data.rates||[]).map(r=>`<div class="card"><h3>${safe(r.name)}</h3><p class="muted">${safe(r.from)} → ${safe(r.to)}</p><div class="price">${Number(r.value)>0?Number(r.value).toLocaleString("es-ES",{maximumFractionDigits:6}):"Consultar"}</div></div>`).join("");
+ const sel=document.getElementById("calcRate");
+ if(sel){
+  const old=sel.value;
+  sel.innerHTML=(data.rates||[]).filter(r=>Number(r.value)>0).map(r=>`<option value="${safe(r.id)}">${safe(r.name)}</option>`).join("");
+  if([...sel.options].some(o=>o.value===old))sel.value=old;
+ }
+ calculate();
+}
+function renderAdmin(){
+ document.getElementById("bannerEditTitle").value=data.bannerTitle||"";
+ document.getElementById("bannerEditDescription").value=data.bannerDescription||"";
+ document.getElementById("noticeEdit").value=data.notice||"";
+ let html="";
+ data.offers.forEach(o=>{
+  html+=`<div class="notice"><strong>${safe(o.title)}</strong> · ${money(o.price,o.currency)}
+   <div class="row"><button class="btn secondary" onclick="editOffer('${o.id}')">Editar</button>
+   <button class="btn red" onclick="deleteOffer('${o.id}')">Eliminar</button></div></div>`;
+ });
+ data.flights.forEach(f=>{
+  html+=`<div class="notice"><strong>${safe(f.origin)} → ${safe(f.destination)}</strong> · ${money(f.price,f.currency)}
+   <div class="row"><button class="btn red" onclick="deleteFlight('${f.id}')">Eliminar boleto</button></div></div>`;
+ });
+ data.rates.forEach(r=>{
+  html+=`<div class="notice"><strong>${safe(r.name)}</strong> · ${r.value}
+   <div class="row"><button class="btn red" onclick="deleteRate('${r.id}')">Eliminar tasa</button></div></div>`;
+ });
+ document.getElementById("adminItems").innerHTML=html||"No hay datos guardados.";
+}
+function clearOfferForm(){
+ ["editId","offerTitle","offerDescription","offerPrice","offerTag"].forEach(id=>document.getElementById(id).value="");
+ document.getElementById("offerCurrency").value="₽";
+ document.getElementById("offerType").value="recarga";
+ document.getElementById("offerFeatured").checked=false;
+}
+function saveOffer(){
+ const title=document.getElementById("offerTitle").value.trim();
+ if(!title){toast("Escribe el nombre de la oferta");return}
+ const id=document.getElementById("editId").value||("o"+Date.now());
+ const item={
+  id,title,description:document.getElementById("offerDescription").value,
+  price:document.getElementById("offerPrice").value===""?null:Number(document.getElementById("offerPrice").value),
+  currency:document.getElementById("offerCurrency").value||"₽",
+  type:document.getElementById("offerType").value,
+  tag:document.getElementById("offerTag").value,
+  featured:document.getElementById("offerFeatured").checked
+ };
+ const index=data.offers.findIndex(o=>o.id===id);
+ if(index>=0)data.offers[index]=item;else data.offers.push(item);
+ renderAll(); renderAdmin(); saveToCloud(); clearOfferForm();
+}
+function editOffer(id){
+ const o=data.offers.find(x=>x.id===id);if(!o)return;
+ document.getElementById("editId").value=o.id;
+ document.getElementById("offerTitle").value=o.title;
+ document.getElementById("offerDescription").value=o.description;
+ document.getElementById("offerPrice").value=o.price??"";
+ document.getElementById("offerCurrency").value=o.currency;
+ document.getElementById("offerType").value=o.type;
+ document.getElementById("offerTag").value=o.tag||"";
+ document.getElementById("offerFeatured").checked=!!o.featured;
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function deleteOffer(id){
+ if(!confirm("¿Eliminar esta oferta?"))return;
+ data.offers=data.offers.filter(o=>o.id!==id); renderAll(); renderAdmin(); saveToCloud();
+}
+function saveFlight(){
+ const origin=document.getElementById("flightOrigin").value.trim();
+ const destination=document.getElementById("flightDestination").value.trim();
+ const price=document.getElementById("flightPrice").value;
+ if(!origin||!destination||price===""){toast("Completa origen, destino y precio");return}
+ data.flights.push({
+  id:"f"+Date.now(),origin,destination,
+  date:document.getElementById("flightDate").value,
+  airline:document.getElementById("flightAirline").value,
+  price:Number(price),currency:document.getElementById("flightCurrency").value||"₽",
+  uzbek:document.getElementById("flightUzbek").checked
+ });
+ renderAll(); renderAdmin(); saveToCloud();
+ ["flightOrigin","flightDestination","flightDate","flightAirline","flightPrice"].forEach(id=>document.getElementById(id).value="");
+}
+function deleteFlight(id){
+ if(!confirm("¿Eliminar boleto?"))return;
+ data.flights=data.flights.filter(f=>f.id!==id); renderAll(); renderAdmin(); saveToCloud();
+}
+function saveRate(){
+ const name=document.getElementById("rateName").value.trim();
+ const from=document.getElementById("rateFrom").value.trim().toUpperCase();
+ const to=document.getElementById("rateTo").value.trim().toUpperCase();
+ const value=document.getElementById("rateValue").value;
+ if(!name||!from||!to||value===""){toast("Completa todos los campos de la tasa");return}
+ const old=data.rates.find(r=>r.from===from&&r.to===to);
+ if(old){old.name=name;old.value=Number(value)}
+ else data.rates.push({id:"r"+Date.now(),name,from,to,value:Number(value)});
+ renderAll(); renderAdmin(); saveToCloud();
+}
+function deleteRate(id){
+ if(!confirm("¿Eliminar tasa?"))return;
+ data.rates=data.rates.filter(r=>r.id!==id); renderAll(); renderAdmin(); saveToCloud();
+}
+function saveMessages(){
+ data.bannerTitle=document.getElementById("bannerEditTitle").value;
+ data.bannerDescription=document.getElementById("bannerEditDescription").value;
+ data.notice=document.getElementById("noticeEdit").value;
+ renderAll(); renderAdmin(); saveToCloud();
+}
+function calculate(){
+ const id=document.getElementById("calcRate").value;
+ const amount=Number(document.getElementById("calcAmount").value||0);
+ const rate=data.rates.find(r=>r.id===id);
+ document.getElementById("calcResult").textContent=rate?(amount*Number(rate.value)).toLocaleString("es-ES",{maximumFractionDigits:2})+" "+rate.to:"0";
+}
+function generateCard(){
+ const c=document.getElementById("promoCanvas");
+ if(!c)return;
+ const ctx=c.getContext("2d");
+ const bg=document.getElementById("cardColor").value;
+ ctx.fillStyle=bg;ctx.fillRect(0,0,c.width,c.height);
+ ctx.strokeStyle="#e9bd65";ctx.lineWidth=8;ctx.strokeRect(20,20,860,560);
+ ctx.textAlign="center";
+ ctx.fillStyle="#e9bd65";ctx.font="bold 32px Arial";
+ ctx.fillText("YOUR BRIDGE HOME",450,105);
+ ctx.fillStyle="#54d8e8";ctx.font="bold 22px Arial";
+ ctx.fillText((document.getElementById("cardTag").value||"OFERTA ESPECIAL").toUpperCase().slice(0,35),450,190);
+ ctx.fillStyle="#ffffff";ctx.font="bold 43px Arial";
+ wrapText(ctx,document.getElementById("cardTitle").value||"Tu oferta",450,270,760,52);
+ ctx.fillStyle="#dce6f0";ctx.font="25px Arial";
+ wrapText(ctx,document.getElementById("cardDescription").value||"",450,370,740,36);
+ ctx.fillStyle="#e9bd65";ctx.font="bold 48px Arial";
+ ctx.fillText(document.getElementById("cardPrice").value||"CONSULTAR",450,500);
+}
+function wrapText(ctx,text,x,y,maxWidth,lineHeight){
+ const words=String(text).split(" ");let line="",lines=[];
+ words.forEach(word=>{
+  const test=line?line+" "+word:word;
+  if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}
+  else line=test;
+ });
+ if(line)lines.push(line);
+ lines.slice(0,3).forEach((l,i)=>ctx.fillText(l,x,y+i*lineHeight));
+}
+function downloadCard(){
+ generateCard();
+ document.getElementById("promoCanvas").toBlob(blob=>{
+  if(!blob){toast("No se pudo generar la imagen");return}
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+  a.download="YOUR-BRIDGE-HOME-tarjeta.png";a.click();
+  URL.revokeObjectURL(a.href);
+ });
+}
+async function shareCard(){
+ generateCard();
+ const c=document.getElementById("promoCanvas");
+ c.toBlob(async blob=>{
+  if(!blob)return;
+  const file=new File([blob],"YOUR-BRIDGE-HOME.png",{type:"image/png"});
+  if(navigator.canShare&&navigator.canShare({files:[file]})){
+   try{await navigator.share({files:[file],title:"YOUR BRIDGE HOME"});}
+   catch(e){}
+  }else{
+   downloadCard();toast("Imagen descargada. Puedes adjuntarla en WhatsApp.");
+  }
+ });
+}
+function sendRequest(){
+ const name=document.getElementById("requestName").value;
+ const type=document.getElementById("requestType").value;
+ const details=document.getElementById("requestDetails").value;
+ if(!details.trim()){toast("Escribe los detalles de tu solicitud");return}
+ window.open(whatsappLink("Solicitud YOUR BRIDGE HOME\nNombre: "+name+"\nServicio: "+type+"\nDetalles: "+details),"_blank");
+}
+function sendFeedback(){
+ const text=document.getElementById("feedbackText").value;
+ if(!text.trim()){toast("Escribe tu opinión primero");return}
+ window.open(whatsappLink("Opinión o sugerencia:\n"+text),"_blank");
+}
+function setLanguage(lang){
+ const labels={
+  es:["Inicio","Servicios","Boletos","Tasas","Explora","Calculadora","Tarjetas","Contacto","⚙ Administrar"],
+  en:["Home","Services","Tickets","Rates","Explore","Calculator","Cards","Contact","⚙ Admin"],
+  ru:["Главная","Услуги","Билеты","Курсы","Обзор","Калькулятор","Карточки","Контакты","⚙ Управление"]
+ };
+ document.querySelectorAll("#navigation button").forEach((b,i)=>b.textContent=labels[lang][i]);
+}
+setInterval(()=>{
+ const featured=data.offers.filter(o=>o.featured);
+ if(featured.length>1){bannerIndex=(bannerIndex+1)%featured.length;renderAll()}
+},20000);
 
-      const hh = String(now.getHours()).padStart(2, "0");
-      const mm = String(now.getMinutes()).padStart(2, "0");
-      const ss = String(now.getSeconds()).padStart(2, "0");
-
-      const days = ["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"];
-      const months = ["ene","feb","mar","abr","may","jun","jul","ago","sep","oct","nov","dic"];
-
-      if(clockEl) clockEl.textContent = hh + ":" + mm + ":" + ss;
-      if(footerEl){
-        footerEl.textContent =
-          days[now.getDay()] + " " + now.getDate() + " " + months[now.getMonth()] +
-          " " + now.getFullYear() + " · " + hh + ":" + mm + ":" + ss;
-      }
-    }
-
-    updateClock();
-    setInterval(updateClock, 1000);
-
-    /* =============================================
-       12. INICIALIZACIÓN
-    ============================================= */
-    document.getElementById("language").addEventListener("change", function(){ changeLanguage(this.value); });
-    document.getElementById("rubles").addEventListener("input", calculateRemittance);
-
-    setupContact();
-    setupRates();
-    calculateRemittance();
-    changeLanguage("es");
-    connectSupabase(); // Inicia la carga de ofertas
-
-    setInterval(function(){
-      const active = offers.filter(x => x.activo !== false);
-      if(active.length > 1){
-        bannerIndex = (bannerIndex + 1) % active.length;
-        renderBanner();
-      }
-    }, 20000);
-  </script>
+// INICIAR
+initSupabase();
+</script>
 </body>
 </html>
