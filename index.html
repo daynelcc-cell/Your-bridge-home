@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#071629">
-<title>YOUR BRIDGE HOME</title>
+<title>YOUR BRIDGE HOME - Tienda</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root { --bg:#071629; --panel:#10243c; --panel2:#142d49; --gold:#e8bd65; --text:#f5f7fa; --muted:#aab8c9; --green:#36c98a; --red:#ff7777; --cyan:#54d8e8; }
@@ -22,7 +22,9 @@ h2{color:var(--gold);font-size:24px; border-bottom: 2px solid var(--gold); paddi
 h3{margin-top:0; font-size: 18px;}
 
 /* TARJETAS DE LA TIENDA */
-.card{background:linear-gradient(145deg,var(--panel),var(--panel2)); border:1px solid #29435d; border-radius:16px; padding:15px; margin:10px 0; box-shadow:0 5px 20px #0002; display:flex; flex-direction:column;}
+.card{background:linear-gradient(145deg,var(--panel),var(--panel2)); border:1px solid #29435d; border-radius:16px; padding:15px; margin:10px 0; box-shadow:0 5px 20px #0002; display:flex; flex-direction:column; transition: transform 0.3s;}
+.card:hover { transform: translateY(-3px); border-color: var(--gold); }
+.card img { width:100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; border: 1px solid #29435d; background: #000; }
 .card .price { font-size: 28px; color: var(--cyan); font-weight: 900; margin: 10px 0; }
 .card .btn-comprar { background: var(--green); color: #062318; font-weight: bold; padding: 12px; border-radius: 10px; text-align: center; text-decoration: none; margin-top: auto; transition: 0.3s;}
 .card .btn-comprar:hover { opacity: 0.9; transform: scale(1.02); }
@@ -175,17 +177,20 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
       <label>Nombre del servicio</label><input id="editRechargeName">
       <label>Precio (₽)</label><input id="editRechargePrice" type="number">
       <label>Descripción corta</label><input id="editRechargeDescription">
+      <label>URL de la Foto (ImgBB)</label><input id="editRechargeImg" placeholder="https://i.ibb.co/...">
       
       <hr>
       <h3>💸 Remesas</h3>
       <label>Rublos a enviar</label><input id="editRemitRubles" type="number">
       <label>Recibes en CUP</label><input id="editRemitCup" type="number" step="0.01">
+      <label>URL de la Foto (ImgBB)</label><input id="editRemitImg" placeholder="https://i.ibb.co/...">
       
       <hr>
       <h3>✈️ Tickets</h3>
       <label>Precio más barato (₽)</label><input id="editFlightPrice" type="number">
       <label>Ruta / Descripción</label><textarea id="editFlightDescription"></textarea>
       <label>Precio a Uzbekistán</label><input id="editUzbekistanPrice">
+      <label>URL de la Foto (ImgBB)</label><input id="editFlightImg" placeholder="https://i.ibb.co/...">
       
       <hr>
       <h3>📢 Aviso Global</h3>
@@ -215,17 +220,17 @@ let isAdmin = false;
 let bannerIndex = 0;
 let bannerList = [];
 
-// Fotos fijas que siempre funcionan
-const FOTO_RECARGA = "https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=600";
-const FOTO_REMESA = "https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=600";
-const FOTO_VUELO = "https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg?auto=compress&cs=tinysrgb&w=600";
+// Fotos por defecto si no se pone ninguna
+const DEF_FOTO_RECARGA = "https://i.ibb.co/PbQ5w4h/file-00000000b78881f5abcd0a24e54c2eed.jpg";
+const DEF_FOTO_REMESA = "https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=600";
+const DEF_FOTO_VUELO = "https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg?auto=compress&cs=tinysrgb&w=600";
 
 let currentData = {
   published: true, 
   notice: "Bienvenido a nuestra tienda online.",
-  recharge: { name: "INTERNET +", price: 350, description: "2 GB LTE + 300 MB.cu" },
-  remittance: { rubles: 1000, cup: 9.80 },
-  flights: { cheapest: 99800, description: "Rusia → Cuba: 17–30 de noviembre." },
+  recharge: { name: "INTERNET +", price: 350, description: "2 GB LTE + 300 MB.cu", image: DEF_FOTO_RECARGA },
+  remittance: { rubles: 1000, cup: 9.80, image: DEF_FOTO_REMESA },
+  flights: { cheapest: 99800, description: "Rusia → Cuba: 17–30 de noviembre.", image: DEF_FOTO_VUELO },
   uzbekistan: { price: "Consultar" }
 };
 
@@ -278,8 +283,14 @@ cargarFraseDelDia();
 function renderPage() {
   const d = currentData;
   
+  // Usamos la foto de Supabase o la de defecto
+  const imgRecarga = d.recharge.image || DEF_FOTO_RECARGA;
+  const imgRemesa = d.remittance.image || DEF_FOTO_REMESA;
+  const imgVuelo = d.flights.image || DEF_FOTO_VUELO;
+
   document.getElementById("rechargeCards").innerHTML = `
     <div class="card">
+      <img src="${escapeHTML(imgRecarga)}" alt="Recarga">
       <h3>${escapeHTML(d.recharge.name)}</h3>
       <p class="muted">${escapeHTML(d.recharge.description)}</p>
       <div class="price">${escapeHTML(d.recharge.price)} ₽</div>
@@ -288,6 +299,7 @@ function renderPage() {
 
   document.getElementById("remittanceCards").innerHTML = `
     <div class="card">
+      <img src="${escapeHTML(imgRemesa)}" alt="Remesa">
       <h3>Envío de Remesas</h3>
       <p class="muted">Envía dinero seguro y rápido a tu familia.</p>
       <div class="price">${escapeHTML(d.remittance.rubles)} ₽</div>
@@ -296,12 +308,14 @@ function renderPage() {
 
   document.getElementById("ticketCards").innerHTML = `
     <div class="card">
+      <img src="${escapeHTML(imgVuelo)}" alt="Vuelo">
       <h3>Vuelos a Cuba</h3>
       <p class="muted">${escapeHTML(d.flights.description)}</p>
       <div class="price">Desde ${escapeHTML(d.flights.cheapest)} ₽</div>
       <a class="btn-comprar" href="https://wa.me/79046319565?text=Hola, quiero info de vuelos a Cuba" target="_blank">Consultar Vuelos</a>
     </div>
     <div class="card">
+      <img src="${escapeHTML(imgVuelo)}" alt="Uzbekistán">
       <h3>Vuelos a Uzbekistán</h3>
       <p class="muted">Consulta disponibilidad y fechas.</p>
       <div class="price">${escapeHTML(d.uzbekistan.price)} ${d.uzbekistan.price === "Consultar" ? "" : "₽"}</div>
@@ -316,10 +330,14 @@ function renderPage() {
 // BANNER
 function setupBannerRotativo() {
   const d = currentData;
+  const imgRecarga = d.recharge.image || DEF_FOTO_RECARGA;
+  const imgRemesa = d.remittance.image || DEF_FOTO_REMESA;
+  const imgVuelo = d.flights.image || DEF_FOTO_VUELO;
+
   bannerList = [
-    { tag: "TIENDA DE RECARGAS", title: d.recharge.name, text: d.recharge.description, price: d.recharge.price + " ₽", btn: "Comprar Recarga", link: "https://wa.me/79046319565?text=Hola, quiero la recarga " + d.recharge.name, img: FOTO_RECARGA },
-    { tag: "ENVÍO DE REMESAS", title: "Remesas a Cuba", text: `Envía ${d.remittance.rubles} ₽ y recibe en Cuba`, price: Number(d.remittance.cup).toFixed(2) + " CUP", btn: "Enviar Remesa", link: "https://wa.me/79046319565?text=Hola, quiero enviar una remesa", img: FOTO_REMESA },
-    { tag: "AGENCIA DE VIAJES", title: "Tickets de Avión", text: d.flights.description, price: "Desde " + d.flights.cheapest + " ₽", btn: "Comprar Vuelo", link: "https://wa.me/79046319565?text=Hola, quiero info de vuelos", img: FOTO_VUELO }
+    { tag: "TIENDA DE RECARGAS", title: d.recharge.name, text: d.recharge.description, price: d.recharge.price + " ₽", btn: "Comprar Recarga", link: "https://wa.me/79046319565?text=Hola, quiero la recarga " + d.recharge.name, img: imgRecarga },
+    { tag: "ENVÍO DE REMESAS", title: "Remesas a Cuba", text: `Envía ${d.remittance.rubles} ₽ y recibe en Cuba`, price: Number(d.remittance.cup).toFixed(2) + " CUP", btn: "Enviar Remesa", link: "https://wa.me/79046319565?text=Hola, quiero enviar una remesa", img: imgRemesa },
+    { tag: "AGENCIA DE VIAJES", title: "Tickets de Avión", text: d.flights.description, price: "Desde " + d.flights.cheapest + " ₽", btn: "Comprar Vuelo", link: "https://wa.me/79046319565?text=Hola, quiero info de vuelos", img: imgVuelo }
   ];
   updateBannerDisplay();
 }
@@ -367,9 +385,22 @@ async function saveChanges() {
   const newData = {
     published: true,
     notice: document.getElementById("editNotice").value.trim(),
-    recharge: { name: document.getElementById("editRechargeName").value, price: Number(document.getElementById("editRechargePrice").value), description: document.getElementById("editRechargeDescription").value },
-    remittance: { rubles: Number(document.getElementById("editRemitRubles").value), cup: Number(document.getElementById("editRemitCup").value) },
-    flights: { cheapest: Number(document.getElementById("editFlightPrice").value), description: document.getElementById("editFlightDescription").value },
+    recharge: { 
+      name: document.getElementById("editRechargeName").value, 
+      price: Number(document.getElementById("editRechargePrice").value), 
+      description: document.getElementById("editRechargeDescription").value,
+      image: document.getElementById("editRechargeImg").value.trim()
+    },
+    remittance: { 
+      rubles: Number(document.getElementById("editRemitRubles").value), 
+      cup: Number(document.getElementById("editRemitCup").value),
+      image: document.getElementById("editRemitImg").value.trim()
+    },
+    flights: { 
+      cheapest: Number(document.getElementById("editFlightPrice").value), 
+      description: document.getElementById("editFlightDescription").value,
+      image: document.getElementById("editFlightImg").value.trim()
+    },
     uzbekistan: { price: document.getElementById("editUzbekistanPrice").value || "Consultar" }
   };
   status.textContent = "Guardando...";
@@ -407,10 +438,16 @@ function fillEditor() {
   document.getElementById("editRechargeName").value = d.recharge.name;
   document.getElementById("editRechargePrice").value = d.recharge.price;
   document.getElementById("editRechargeDescription").value = d.recharge.description;
+  document.getElementById("editRechargeImg").value = d.recharge.image || "";
+  
   document.getElementById("editRemitRubles").value = d.remittance.rubles;
   document.getElementById("editRemitCup").value = d.remittance.cup;
+  document.getElementById("editRemitImg").value = d.remittance.image || "";
+  
   document.getElementById("editFlightPrice").value = d.flights.cheapest;
   document.getElementById("editFlightDescription").value = d.flights.description;
+  document.getElementById("editFlightImg").value = d.flights.image || "";
+  
   document.getElementById("editUzbekistanPrice").value = d.uzbekistan.price;
   document.getElementById("editNotice").value = d.notice;
 }
