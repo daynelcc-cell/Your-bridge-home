@@ -22,10 +22,9 @@ h2{color:var(--gold);font-size:24px; border-bottom: 2px solid var(--gold); paddi
 h3{margin-top:0; font-size: 18px;}
 
 /* TARJETAS DE LA TIENDA */
-.card{background:linear-gradient(145deg,var(--panel),var(--panel2)); border:1px solid #29435d; border-radius:16px; padding:15px; margin:10px 0; box-shadow:0 5px 20px #0002; display:flex; flex-direction:column; transition: transform 0.3s;}
-.card:hover { transform: translateY(-3px); border-color: var(--gold); }
-.card img { width:100%; height: 180px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; border: 1px solid #29435d; background: #000; }
-.card .price { font-size: 28px; color: var(--cyan); font-weight: 900; margin: 10px 0; }
+.card{background:linear-gradient(145deg,var(--panel),var(--panel2)); border:1px solid #29435d; border-radius:16px; padding:15px; margin:10px 0; box-shadow:0 5px 20px #0002; display:flex; flex-direction:column;}
+.card img { width:100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; border: 1px solid #29435d; background: #000; }
+.card .price { font-size: 26px; color: var(--cyan); font-weight: 900; margin: 10px 0; }
 .card .btn-comprar { background: var(--green); color: #062318; font-weight: bold; padding: 12px; border-radius: 10px; text-align: center; text-decoration: none; margin-top: auto; transition: 0.3s;}
 .card .btn-comprar:hover { opacity: 0.9; transform: scale(1.02); }
 
@@ -47,6 +46,14 @@ h3{margin-top:0; font-size: 18px;}
 .capsula-tiempo .frase-texto-es { font-size: 16px; font-style: italic; color: var(--cyan); margin-bottom: 15px; line-height: 1.4; }
 .card-reloj { background: linear-gradient(145deg, var(--panel), var(--panel2)); border: 1px solid var(--gold); border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 20px; }
 .card-reloj .hora { font-size: 36px; color: var(--cyan); font-weight: bold; letter-spacing: 2px; }
+
+/* NUEVA SECCIÓN: ENLACES OFICIALES DE CUBA */
+.cuba-links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-top: 20px; }
+.cuba-card { background: linear-gradient(145deg, var(--panel), var(--panel2)); border: 1px solid #29435d; border-radius: 16px; padding: 18px; display: flex; align-items: center; gap: 15px; text-decoration: none; color: white; transition: 0.3s; }
+.cuba-card:hover { border-color: var(--gold); transform: translateY(-3px); box-shadow: 0 5px 15px #0004; }
+.cuba-icon { font-size: 30px; background: #18324e; width: 55px; height: 55px; border-radius: 50%; display: flex; justify-content: center; align-items: center; flex-shrink: 0; border: 1px solid #29435d;}
+.cuba-text h4 { margin: 0 0 5px 0; color: var(--gold); font-size: 16px; }
+.cuba-text p { margin: 0; font-size: 13px; color: var(--muted); }
 
 .grid-normal{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
 .price{color:var(--gold);font-weight:bold}
@@ -80,7 +87,7 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
   <a href="#recargas">Recargas</a>
   <a href="#remesas">Remesas</a>
   <a href="#tickets">Tickets</a>
-  <a href="#explora">Explora</a>
+  <a href="#cuba">🇨🇺 Cuba</a>
   <a href="#contacto">Contacto</a>
   <a href="#administracion">Administración</a>
 </nav>
@@ -140,12 +147,67 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
     </div>
   </section>
 
-  <section id="explora">
-    <h2>Explora y Organiza tu Viaje</h2>
-    <div class="grid-normal">
-      <div class="card"><h3>🛂 Visados</h3><p class="muted">Requisitos de entrada.</p><a class="action" href="https://www.visaindex.com/" target="_blank" style="margin-top:10px;">Consultar</a></div>
-      <div class="card"><h3>🏨 Hoteles</h3><p class="muted">Alojamiento al mejor precio.</p><a class="action" href="https://www.booking.com/" target="_blank" style="margin-top:10px;">Buscar Hotel</a></div>
-      <div class="card"><h3>🌍 Vuelos</h3><p class="muted">Compara aerolíneas.</p><a class="action" href="https://www.skyscanner.net/" target="_blank" style="margin-top:10px;">Skyscanner</a></div>
+  <!-- NUEVA SECCIÓN DE ENLACES OFICIALES DE CUBA -->
+  <section id="cuba">
+    <h2>🇨🇺 Enlaces Oficiales de Cuba</h2>
+    <p class="muted" style="text-align:center; margin-bottom:15px;">Accede directamente a los portales oficiales del gobierno cubano para tus trámites.</p>
+    
+    <div class="cuba-links-grid">
+      <a href="https://www.minint.gob.cu/" target="_blank" class="cuba-card">
+        <div class="cuba-icon">🛂</div>
+        <div class="cuba-text">
+          <h4>DIIE – MININT</h4>
+          <p>Identificación, Inmigración y Extranjería / Pasaporte</p>
+        </div>
+      </a>
+      
+      <a href="https://dviajeros.mitrans.gob.cu/" target="_blank" class="cuba-card">
+        <div class="cuba-icon">🧳</div>
+        <div class="cuba-text">
+          <h4>D'Viajeros – MITRANS</h4>
+          <p>Formulario de entrada a Cuba</p>
+        </div>
+      </a>
+
+      <a href="https://www.aduana.gob.cu/" target="_blank" class="cuba-card">
+        <div class="cuba-icon">🛃</div>
+        <div class="cuba-text">
+          <h4>Aduana de Cuba</h4>
+          <p>Aduana General de la República</p>
+        </div>
+      </a>
+
+      <a href="https://www.minjus.gob.cu/" target="_blank" class="cuba-card">
+        <div class="cuba-icon">📜</div>
+        <div class="cuba-text">
+          <h4>MINJUS</h4>
+          <p>Registro Civil / Ministerio de Justicia</p>
+        </div>
+      </a>
+
+      <a href="https://www.minjus.gob.cu/certificaciones/" target="_blank" class="cuba-card">
+        <div class="cuba-icon">📑</div>
+        <div class="cuba-text">
+          <h4>Certificaciones MINJUS</h4>
+          <p>Verificación de certificaciones del Registro Civil</p>
+        </div>
+      </a>
+
+      <a href="https://www.gacetaoficial.gob.cu/" target="_blank" class="cuba-card">
+        <div class="cuba-icon">⚖️</div>
+        <div class="cuba-text">
+          <h4>Gaceta Oficial</h4>
+          <p>Gaceta Oficial de Cuba</p>
+        </div>
+      </a>
+
+      <a href="https://www.mitrans.gob.cu/" target="_blank" class="cuba-card">
+        <div class="cuba-icon">🚗</div>
+        <div class="cuba-text">
+          <h4>MITRANS</h4>
+          <p>Ministerio de Transporte</p>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -220,7 +282,6 @@ let isAdmin = false;
 let bannerIndex = 0;
 let bannerList = [];
 
-// Fotos por defecto si no se pone ninguna
 const DEF_FOTO_RECARGA = "https://i.ibb.co/PbQ5w4h/file-00000000b78881f5abcd0a24e54c2eed.jpg";
 const DEF_FOTO_REMESA = "https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=600";
 const DEF_FOTO_VUELO = "https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg?auto=compress&cs=tinysrgb&w=600";
@@ -236,9 +297,6 @@ let currentData = {
 
 function escapeHTML(value) { return String(value ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" })[c]); }
 
-/* ==========================================
-   CÁPSULA DEL TIEMPO
-   ========================================== */
 async function cargarFraseDelDia() {
   const fraseEn = document.getElementById("fraseEn");
   const fraseEs = document.getElementById("fraseEs");
@@ -277,13 +335,9 @@ async function cargarFraseDelDia() {
 }
 cargarFraseDelDia();
 
-/* ==========================================
-   RENDERIZADO DE LA TIENDA
-   ========================================== */
 function renderPage() {
   const d = currentData;
   
-  // Usamos la foto de Supabase o la de defecto
   const imgRecarga = d.recharge.image || DEF_FOTO_RECARGA;
   const imgRemesa = d.remittance.image || DEF_FOTO_REMESA;
   const imgVuelo = d.flights.image || DEF_FOTO_VUELO;
@@ -327,7 +381,6 @@ function renderPage() {
   if (isAdmin) fillEditor();
 }
 
-// BANNER
 function setupBannerRotativo() {
   const d = currentData;
   const imgRecarga = d.recharge.image || DEF_FOTO_RECARGA;
