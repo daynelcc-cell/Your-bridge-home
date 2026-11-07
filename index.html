@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#071629">
-<title>YOUR BRIDGE HOME - Tienda</title>
+<title>YOUR BRIDGE HOME</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root { --bg:#071629; --panel:#10243c; --panel2:#142d49; --gold:#e8bd65; --text:#f5f7fa; --muted:#aab8c9; --green:#36c98a; --red:#ff7777; --cyan:#54d8e8; }
@@ -21,10 +21,9 @@ section{margin:24px 0;scroll-margin-top:80px}
 h2{color:var(--gold);font-size:24px; border-bottom: 2px solid var(--gold); padding-bottom: 8px; margin-bottom: 20px; text-align: center;}
 h3{margin-top:0; font-size: 18px;}
 
-/* TARJETAS DE LA TIENDA CON FOTO */
+/* TARJETAS DE LA TIENDA */
 .card{background:linear-gradient(145deg,var(--panel),var(--panel2)); border:1px solid #29435d; border-radius:16px; padding:15px; margin:10px 0; box-shadow:0 5px 20px #0002; display:flex; flex-direction:column;}
-.card img { width:100%; height: 160px; object-fit: cover; border-radius: 12px; margin-bottom: 15px; border: 1px solid #29435d; background: #000; }
-.card .price { font-size: 26px; color: var(--cyan); font-weight: 900; margin: 10px 0; }
+.card .price { font-size: 28px; color: var(--cyan); font-weight: 900; margin: 10px 0; }
 .card .btn-comprar { background: var(--green); color: #062318; font-weight: bold; padding: 12px; border-radius: 10px; text-align: center; text-decoration: none; margin-top: auto; transition: 0.3s;}
 .card .btn-comprar:hover { opacity: 0.9; transform: scale(1.02); }
 
@@ -46,22 +45,6 @@ h3{margin-top:0; font-size: 18px;}
 .capsula-tiempo .frase-texto-es { font-size: 16px; font-style: italic; color: var(--cyan); margin-bottom: 15px; line-height: 1.4; }
 .card-reloj { background: linear-gradient(145deg, var(--panel), var(--panel2)); border: 1px solid var(--gold); border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 20px; }
 .card-reloj .hora { font-size: 36px; color: var(--cyan); font-weight: bold; letter-spacing: 2px; }
-
-/* SECCIÓN LO MÁS BUSCADO */
-.vote-card { display: flex; justify-content: space-between; align-items: center; background: #142d49; padding: 15px; border-radius: 12px; margin-bottom: 10px; border: 1px solid #29435d; }
-.vote-card span { font-weight: bold; font-size: 16px; }
-.vote-btns { display: flex; gap: 8px; }
-.vote-btns button { padding: 8px 12px; font-size: 14px; border-radius: 8px; }
-.btn-like { background: var(--green); color: #062318; }
-.btn-dislike { background: #29435d; color: white; }
-
-/* ZONA EXPLORA (JUEGOS) */
-.game-card { background: linear-gradient(145deg, var(--panel), var(--panel2)); border: 1px solid var(--gold); border-radius: 16px; padding: 20px; margin-bottom: 20px; text-align: center; }
-.game-card h3 { color: var(--gold); }
-.flag-quiz { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-.flag-quiz button { background: #18324e; color: white; border: 1px solid #294663; padding: 12px; border-radius: 10px; font-size: 15px; }
-.flag-quiz button:hover { background: var(--gold); color: #152237; }
-.roulette-box { font-size: 50px; margin: 20px 0; font-weight: bold; color: var(--cyan); }
 
 .grid-normal{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:15px}
 .price{color:var(--gold);font-weight:bold}
@@ -95,7 +78,7 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
   <a href="#recargas">Recargas</a>
   <a href="#remesas">Remesas</a>
   <a href="#tickets">Tickets</a>
-  <a href="#zona-juegos">🎮 Zona Explora</a>
+  <a href="#explora">Explora</a>
   <a href="#contacto">Contacto</a>
   <a href="#administracion">Administración</a>
 </nav>
@@ -123,22 +106,6 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
       <div class="hora" id="clock">--:--:--</div>
       <div class="fecha" id="clockDate"></div>
     </div>
-
-    <!-- SECCIÓN LO MÁS BUSCADO -->
-    <h2>📢 Lo más buscado esta semana</h2>
-    <p class="muted" style="text-align:center; margin-bottom:15px;">¡Ayúdanos a saber qué destinos te interesan más! Vota por los que te gustaría ver en oferta.</p>
-    
-    <div class="vote-card"><span>✈️ Tickets a Cuba</span><div class="vote-btns"><button class="btn-like" onclick="vote('cuba', 'like')">👍</button><button class="btn-dislike" onclick="vote('cuba', 'dislike')">👎</button></div></div>
-    <div class="vote-card"><span>💸 Remesas</span><div class="vote-btns"><button class="btn-like" onclick="vote('remesas', 'like')">👍</button><button class="btn-dislike" onclick="vote('remesas', 'dislike')">👎</button></div></div>
-    <div class="vote-card"><span>📱 Recargas</span><div class="vote-btns"><button class="btn-like" onclick="vote('recargas', 'like')">👍</button><button class="btn-dislike" onclick="vote('recargas', 'dislike')">👎</button></div></div>
-    <div class="vote-card"><span>🇷🇺 Rusia (Moscú / San Petersburgo)</span><div class="vote-btns"><button class="btn-like" onclick="vote('rusia', 'like')">👍</button><button class="btn-dislike" onclick="vote('rusia', 'dislike')">👎</button></div></div>
-    <div class="vote-card"><span>🇹🇷 Turquía (Estambul)</span><div class="vote-btns"><button class="btn-like" onclick="vote('turquia', 'like')">👍</button><button class="btn-dislike" onclick="vote('turquia', 'dislike')">👎</button></div></div>
-    <div class="vote-card"><span>🇦🇪 Emiratos Árabes (Dubái)</span><div class="vote-btns"><button class="btn-like" onclick="vote('dubai', 'like')">👍</button><button class="btn-dislike" onclick="vote('dubai', 'dislike')">👎</button></div></div>
-    <div class="vote-card"><span>🇮🇹 Italia (Roma / Milán)</span><div class="vote-btns"><button class="btn-like" onclick="vote('italia', 'like')">👍</button><button class="btn-dislike" onclick="vote('italia', 'dislike')">👎</button></div></div>
-    <div class="vote-card"><span>🇪🇸 España (Madrid / Barcelona)</span><div class="vote-btns"><button class="btn-like" onclick="vote('espana', 'like')">👍</button><button class="btn-dislike" onclick="vote('espana', 'dislike')">👎</button></div></div>
-    <div class="vote-card"><span>🇺🇸 Estados Unidos (Miami / Nueva York)</span><div class="vote-btns"><button class="btn-like" onclick="vote('eeuu', 'like')">👍</button><button class="btn-dislike" onclick="vote('eeuu', 'dislike')">👎</button></div></div>
-    <div class="vote-card"><span>🇬🇧 Inglaterra (Londres)</span><div class="vote-btns"><button class="btn-like" onclick="vote('inglaterra', 'like')">👍</button><button class="btn-dislike" onclick="vote('inglaterra', 'dislike')">👎</button></div></div>
-    <p id="voteMessage" class="status good" style="text-align:center;"></p>
   </section>
 
   <section id="recargas">
@@ -160,6 +127,7 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
   <section id="tickets">
     <h2>✈️ Tienda de Vuelos y Tickets</h2>
     <div class="grid-normal" id="ticketCards"></div>
+    
     <div class="card" style="margin-top:20px; text-align:center;">
       <h3>Buscar Vuelos Reales</h3>
       <div class="grid-normal" style="grid-template-columns: 1fr 1fr;">
@@ -170,25 +138,12 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
     </div>
   </section>
 
-  <!-- ZONA EXPLORA CON JUEGOS -->
-  <section id="zona-juegos">
-    <h2>🎮 Zona Explora</h2>
-    <p class="muted" style="text-align:center; margin-bottom:20px;">Diviértete un rato mientras descubres nuevos destinos.</p>
-
-    <div class="game-card">
-      <h3>🌍 Adivina la Bandera</h3>
-      <p class="muted">¿A qué país pertenece esta bandera?</p>
-      <div style="font-size: 80px; margin: 15px 0;" id="flagDisplay">🇨🇺</div>
-      <div class="flag-quiz" id="flagOptions"></div>
-      <p id="flagResult" style="margin-top:15px; font-weight:bold; font-size:18px;"></p>
-      <button class="secondary" onclick="nextFlagGame()" style="margin-top:10px;">Siguiente Bandera</button>
-    </div>
-
-    <div class="game-card">
-      <h3>🗺️ Ruleta de Destinos</h3>
-      <p class="muted">¿A dónde te gustaría viajar? Deja que la suerte decida.</p>
-      <div class="roulette-box" id="rouletteResult">❓</div>
-      <button onclick="spinRoulette()" style="width:100%;">🎲 Girar Ruleta</button>
+  <section id="explora">
+    <h2>Explora y Organiza tu Viaje</h2>
+    <div class="grid-normal">
+      <div class="card"><h3>🛂 Visados</h3><p class="muted">Requisitos de entrada.</p><a class="action" href="https://www.visaindex.com/" target="_blank" style="margin-top:10px;">Consultar</a></div>
+      <div class="card"><h3>🏨 Hoteles</h3><p class="muted">Alojamiento al mejor precio.</p><a class="action" href="https://www.booking.com/" target="_blank" style="margin-top:10px;">Buscar Hotel</a></div>
+      <div class="card"><h3>🌍 Vuelos</h3><p class="muted">Compara aerolíneas.</p><a class="action" href="https://www.skyscanner.net/" target="_blank" style="margin-top:10px;">Skyscanner</a></div>
     </div>
   </section>
 
@@ -220,18 +175,22 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
       <label>Nombre del servicio</label><input id="editRechargeName">
       <label>Precio (₽)</label><input id="editRechargePrice" type="number">
       <label>Descripción corta</label><input id="editRechargeDescription">
+      
       <hr>
       <h3>💸 Remesas</h3>
       <label>Rublos a enviar</label><input id="editRemitRubles" type="number">
       <label>Recibes en CUP</label><input id="editRemitCup" type="number" step="0.01">
+      
       <hr>
       <h3>✈️ Tickets</h3>
       <label>Precio más barato (₽)</label><input id="editFlightPrice" type="number">
       <label>Ruta / Descripción</label><textarea id="editFlightDescription"></textarea>
       <label>Precio a Uzbekistán</label><input id="editUzbekistanPrice">
+      
       <hr>
       <h3>📢 Aviso Global</h3>
       <label>Aviso Importante</label><textarea id="editNotice"></textarea>
+      
       <button onclick="saveChanges()" style="margin-top:15px; width:100%; font-size:16px;">🚀 Guardar y publicar</button>
       <p id="saveStatus" class="status" style="text-align:center;"></p>
     </div>
@@ -256,7 +215,7 @@ let isAdmin = false;
 let bannerIndex = 0;
 let bannerList = [];
 
-// FOTOS FIJAS SEGURAS (Pexels)
+// Fotos fijas que siempre funcionan
 const FOTO_RECARGA = "https://images.pexels.com/photos/1092644/pexels-photo-1092644.jpeg?auto=compress&cs=tinysrgb&w=600";
 const FOTO_REMESA = "https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=600";
 const FOTO_VUELO = "https://images.pexels.com/photos/46148/aircraft-jet-landing-cloud-46148.jpeg?auto=compress&cs=tinysrgb&w=600";
@@ -314,82 +273,13 @@ async function cargarFraseDelDia() {
 cargarFraseDelDia();
 
 /* ==========================================
-   JUEGOS LIGEROS
-   ========================================== */
-const banderas = [
-  { emoji: "🇨🇺", pais: "Cuba" }, { emoji: "🇷🇺", pais: "Rusia" }, { emoji: "🇲🇽", pais: "México" },
-  { emoji: "🇺🇿", pais: "Uzbekistán" }, { emoji: "🇹🇷", pais: "Turquía" }, { emoji: "🇦🇪", pais: "Emiratos Árabes" },
-  { emoji: "🇮🇹", pais: "Italia" }, { emoji: "🇪🇸", pais: "España" }, { emoji: "🇺🇸", pais: "Estados Unidos" }, { emoji: "🇬🇧", pais: "Inglaterra" }
-];
-let currentFlag = {};
-
-function nextFlagGame() {
-  const azar = Math.floor(Math.random() * banderas.length);
-  currentFlag = banderas[azar];
-  document.getElementById("flagDisplay").textContent = currentFlag.emoji;
-  
-  let opciones = [currentFlag.pais];
-  while(opciones.length < 4) {
-    const randomPais = banderas[Math.floor(Math.random() * banderas.length)].pais;
-    if(!opciones.includes(randomPais)) opciones.push(randomPais);
-  }
-  opciones.sort(() => Math.random() - 0.5);
-  
-  document.getElementById("flagOptions").innerHTML = opciones.map(op => 
-    `<button onclick="checkFlag('${op}')">${op}</button>`
-  ).join("");
-  document.getElementById("flagResult").textContent = "";
-}
-
-function checkFlag(respuesta) {
-  const resultado = document.getElementById("flagResult");
-  if(respuesta === currentFlag.pais) {
-    resultado.textContent = "✅ ¡Correcto! Eres un experto en geografía.";
-    resultado.style.color = "var(--green)";
-  } else {
-    resultado.textContent = "❌ Incorrecto. La respuesta era: " + currentFlag.pais;
-    resultado.style.color = "var(--red)";
-  }
-}
-
-const destinosRuleta = ["La Habana 🇨🇺", "Moscú 🇷🇺", "Estambul 🇹🇷", "Dubái 🇦🇪", "Taskent 🇺🇿", "Cancún 🇲🇽", "Roma 🇮🇹", "Madrid 🇪🇸", "Miami 🇺🇸", "Londres 🇬🇧"];
-let spinning = false;
-
-function spinRoulette() {
-  if(spinning) return;
-  spinning = true;
-  const display = document.getElementById("rouletteResult");
-  let counter = 0;
-  const totalGiros = 15;
-  const interval = setInterval(() => {
-    display.textContent = destinosRuleta[Math.floor(Math.random() * destinosRuleta.length)];
-    counter++;
-    if(counter >= totalGiros) { clearInterval(interval); spinning = false; }
-  }, 100);
-}
-
-/* ==========================================
-   SISTEMA DE VOTOS
-   ========================================== */
-function vote(destino, tipo) {
-  const votosGuardados = JSON.parse(localStorage.getItem("ybh_votos") || "{}");
-  votosGuardados[destino] = tipo;
-  localStorage.setItem("ybh_votos", JSON.stringify(votosGuardados));
-  
-  const msg = document.getElementById("voteMessage");
-  msg.textContent = `¡Gracias! Has votado ${tipo === 'like' ? '👍' : '👎'} por ${destino}.`;
-  setTimeout(() => { msg.textContent = ""; }, 3000);
-}
-
-/* ==========================================
-   RENDERIZADO DE LA TIENDA (CON FOTOS)
+   RENDERIZADO DE LA TIENDA
    ========================================== */
 function renderPage() {
   const d = currentData;
   
   document.getElementById("rechargeCards").innerHTML = `
     <div class="card">
-      <img src="${FOTO_RECARGA}" alt="Recarga">
       <h3>${escapeHTML(d.recharge.name)}</h3>
       <p class="muted">${escapeHTML(d.recharge.description)}</p>
       <div class="price">${escapeHTML(d.recharge.price)} ₽</div>
@@ -398,7 +288,6 @@ function renderPage() {
 
   document.getElementById("remittanceCards").innerHTML = `
     <div class="card">
-      <img src="${FOTO_REMESA}" alt="Remesa">
       <h3>Envío de Remesas</h3>
       <p class="muted">Envía dinero seguro y rápido a tu familia.</p>
       <div class="price">${escapeHTML(d.remittance.rubles)} ₽</div>
@@ -407,14 +296,12 @@ function renderPage() {
 
   document.getElementById("ticketCards").innerHTML = `
     <div class="card">
-      <img src="${FOTO_VUELO}" alt="Vuelo">
       <h3>Vuelos a Cuba</h3>
       <p class="muted">${escapeHTML(d.flights.description)}</p>
       <div class="price">Desde ${escapeHTML(d.flights.cheapest)} ₽</div>
       <a class="btn-comprar" href="https://wa.me/79046319565?text=Hola, quiero info de vuelos a Cuba" target="_blank">Consultar Vuelos</a>
     </div>
     <div class="card">
-      <img src="${FOTO_VUELO}" alt="Uzbekistán">
       <h3>Vuelos a Uzbekistán</h3>
       <p class="muted">Consulta disponibilidad y fechas.</p>
       <div class="price">${escapeHTML(d.uzbekistan.price)} ${d.uzbekistan.price === "Consultar" ? "" : "₽"}</div>
@@ -545,11 +432,8 @@ function searchFlights() {
   const f = document.getElementById("flightFrom").value;
   const t = document.getElementById("flightTo").value;
   if (f && t) window.open(`https://www.google.com/travel/flights?q=${encodeURIComponent(f + " to " + t)}`, "_blank");
-  else alert("Por favor, escribe origen y destino.");
+  else alert("Escribe origen y destino.");
 }
-
-// Iniciar juegos
-nextFlagGame();
 
 renderPage(); loadData();
 </script>
