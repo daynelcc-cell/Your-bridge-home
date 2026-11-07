@@ -133,7 +133,6 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
     </div>
   </section>
 
-  <!-- NUEVA SECCIÓN DE DESTINOS -->
   <section id="destinos">
     <h2>✈️ Nuestros Destinos</h2>
     <p class="muted" style="text-align:center; margin-bottom:20px;">Consulta los precios y solicita tu boleto directamente por WhatsApp.</p>
@@ -149,7 +148,6 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
     </div>
   </section>
 
-  <!-- SECCIÓN DE ENLACES OFICIALES DE CUBA -->
   <section id="cuba">
     <h2>🇨🇺 Enlaces Oficiales de Cuba</h2>
     <p class="muted" style="text-align:center; margin-bottom:15px;">Accede directamente a los portales oficiales del gobierno cubano para tus trámites.</p>
@@ -162,7 +160,6 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
           <p>Identificación, Inmigración y Extranjería / Pasaporte</p>
         </div>
       </a>
-      
       <a href="https://dviajeros.mitrans.gob.cu/" target="_blank" class="cuba-card">
         <div class="cuba-icon">🧳</div>
         <div class="cuba-text">
@@ -170,7 +167,6 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
           <p>Formulario de entrada a Cuba</p>
         </div>
       </a>
-
       <a href="https://www.aduana.gob.cu/" target="_blank" class="cuba-card">
         <div class="cuba-icon">🛃</div>
         <div class="cuba-text">
@@ -178,7 +174,6 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
           <p>Aduana General de la República</p>
         </div>
       </a>
-
       <a href="https://www.minjus.gob.cu/" target="_blank" class="cuba-card">
         <div class="cuba-icon">📜</div>
         <div class="cuba-text">
@@ -186,7 +181,6 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
           <p>Registro Civil / Ministerio de Justicia</p>
         </div>
       </a>
-
       <a href="https://www.minjus.gob.cu/certificaciones/" target="_blank" class="cuba-card">
         <div class="cuba-icon">📑</div>
         <div class="cuba-text">
@@ -194,7 +188,6 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
           <p>Verificación de certificaciones del Registro Civil</p>
         </div>
       </a>
-
       <a href="https://www.gacetaoficial.gob.cu/" target="_blank" class="cuba-card">
         <div class="cuba-icon">⚖️</div>
         <div class="cuba-text">
@@ -202,7 +195,6 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
           <p>Gaceta Oficial de Cuba</p>
         </div>
       </a>
-
       <a href="https://www.mitrans.gob.cu/" target="_blank" class="cuba-card">
         <div class="cuba-icon">🚗</div>
         <div class="cuba-text">
@@ -251,10 +243,14 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px; border-
       
       <hr>
       <h3>✈️ Destinos (Boletos)</h3>
-      <label>Precio Base Cuba (₽)</label><input id="editCubaPrice" type="number">
-      <label>Precio Base Uzbekistán (₽)</label><input id="editUzbekistanPrice" type="number">
-      <label>Precio Base Rusia (₽)</label><input id="editRussiaPrice" type="number">
-      <label>Precio Base Turquía (₽)</label><input id="editTurkeyPrice" type="number">
+      <label>Precio Cuba (₽)</label><input id="editCubaPrice" type="number">
+      <label>URL Foto Cuba</label><input id="editCubaImg" placeholder="https://i.ibb.co/...">
+      <label>Precio Uzbekistán (₽)</label><input id="editUzbekistanPrice" type="number">
+      <label>URL Foto Uzbekistán</label><input id="editUzbekistanImg" placeholder="https://i.ibb.co/...">
+      <label>Precio Rusia (₽)</label><input id="editRussiaPrice" type="number">
+      <label>URL Foto Rusia</label><input id="editRussiaImg" placeholder="https://i.ibb.co/...">
+      <label>Precio Turquía (₽)</label><input id="editTurkeyPrice" type="number">
+      <label>URL Foto Turquía</label><input id="editTurkeyImg" placeholder="https://i.ibb.co/...">
       
       <hr>
       <h3>📢 Aviso Global</h3>
@@ -284,28 +280,29 @@ let isAdmin = false;
 let bannerIndex = 0;
 let bannerList = [];
 
-// FOTOS FIJAS PARA LOS DESTINOS (Pexels)
-const FOTO_CUBA = "https://images.pexels.com/photos/2067062/pexels-photo-2067062.jpeg?auto=compress&cs=tinysrgb&w=600";
-const FOTO_UZBEKISTAN = "https://images.pexels.com/photos/66257/pexels-photo-66257.jpeg?auto=compress&cs=tinysrgb&w=600";
-const FOTO_RUSIA = "https://images.pexels.com/photos/2367958/pexels-photo-2367958.jpeg?auto=compress&cs=tinysrgb&w=600";
-const FOTO_TURQUIA = "https://images.pexels.com/photos/1056552/pexels-photo-1056552.jpeg?auto=compress&cs=tinysrgb&w=600";
-
 const DEF_FOTO_RECARGA = "https://i.ibb.co/PbQ5w4h/file-00000000b78881f5abcd0a24e54c2eed.jpg";
 const DEF_FOTO_REMESA = "https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=600";
+
+const DEF_FOTO_CUBA = "https://images.pexels.com/photos/2067062/pexels-photo-2067062.jpeg?auto=compress&cs=tinysrgb&w=600";
+const DEF_FOTO_UZBEKISTAN = "https://images.pexels.com/photos/66257/pexels-photo-66257.jpeg?auto=compress&cs=tinysrgb&w=600";
+const DEF_FOTO_RUSIA = "https://images.pexels.com/photos/2367958/pexels-photo-2367958.jpeg?auto=compress&cs=tinysrgb&w=600";
+const DEF_FOTO_TURQUIA = "https://images.pexels.com/photos/1056552/pexels-photo-1056552.jpeg?auto=compress&cs=tinysrgb&w=600";
 
 let currentData = {
   published: true, 
   notice: "Bienvenido a nuestra tienda online.",
   recharge: { name: "INTERNET +", price: 350, description: "2 GB LTE + 300 MB.cu", image: DEF_FOTO_RECARGA },
   remittance: { rubles: 1000, cup: 9.80, image: DEF_FOTO_REMESA },
-  flights: { cuba: 99800, uzbekistan: 0, rusia: 0, turquia: 0 }
+  flights: { 
+    cuba: 99800, img_cuba: DEF_FOTO_CUBA,
+    uzbekistan: 0, img_uzbekistan: DEF_FOTO_UZBEKISTAN,
+    rusia: 0, img_rusia: DEF_FOTO_RUSIA,
+    turquia: 0, img_turquia: DEF_FOTO_TURQUIA
+  }
 };
 
 function escapeHTML(value) { return String(value ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" })[c]); }
 
-/* ==========================================
-   CÁPSULA DEL TIEMPO
-   ========================================== */
 async function cargarFraseDelDia() {
   const fraseEn = document.getElementById("fraseEn");
   const fraseEs = document.getElementById("fraseEs");
@@ -344,16 +341,12 @@ async function cargarFraseDelDia() {
 }
 cargarFraseDelDia();
 
-/* ==========================================
-   RENDERIZADO DE LA TIENDA Y DESTINOS
-   ========================================== */
 function renderPage() {
   const d = currentData;
   
   const imgRecarga = d.recharge.image || DEF_FOTO_RECARGA;
   const imgRemesa = d.remittance.image || DEF_FOTO_REMESA;
 
-  // Recargas
   document.getElementById("rechargeCards").innerHTML = `
     <div class="card">
       <img src="${escapeHTML(imgRecarga)}" alt="Recarga">
@@ -363,7 +356,6 @@ function renderPage() {
       <a class="btn-comprar" href="https://wa.me/79046319565?text=Hola, quiero comprar la recarga ${escapeHTML(d.recharge.name)}" target="_blank">Comprar por WhatsApp</a>
     </div>`;
 
-  // Remesas
   document.getElementById("remittanceCards").innerHTML = `
     <div class="card">
       <img src="${escapeHTML(imgRemesa)}" alt="Remesa">
@@ -373,36 +365,40 @@ function renderPage() {
       <a class="btn-comprar" href="https://wa.me/79046319565?text=Hola, quiero enviar una remesa" target="_blank">Enviar Remesa</a>
     </div>`;
 
-  // Destinos (Boletos)
   const priceCuba = d.flights.cuba ? d.flights.cuba + " ₽" : "Consultar";
   const priceUzb = d.flights.uzbekistan ? d.flights.uzbekistan + " ₽" : "Consultar";
   const priceRusia = d.flights.rusia ? d.flights.rusia + " ₽" : "Consultar";
   const priceTurquia = d.flights.turquia ? d.flights.turquia + " ₽" : "Consultar";
 
+  const imgCuba = d.flights.img_cuba || DEF_FOTO_CUBA;
+  const imgUzb = d.flights.img_uzbekistan || DEF_FOTO_UZBEKISTAN;
+  const imgRusia = d.flights.img_rusia || DEF_FOTO_RUSIA;
+  const imgTurquia = d.flights.img_turquia || DEF_FOTO_TURQUIA;
+
   document.getElementById("ticketCards").innerHTML = `
     <div class="card">
-      <img src="${FOTO_CUBA}" alt="Cuba">
+      <img src="${escapeHTML(imgCuba)}" alt="Cuba">
       <h3>Vuelos a Cuba</h3>
-      <p class="muted">La Habana, Varadero y más.</p>
+      <p class="muted">Estambul ➔ Panamá (escala) ➔ La Habana</p>
       <div class="price">Desde ${priceCuba}</div>
       <a class="btn-comprar" href="https://wa.me/79046319565?text=Hola, quiero info de vuelos a Cuba" target="_blank">Consultar Vuelos</a>
     </div>
     <div class="card">
-      <img src="${FOTO_UZBEKISTAN}" alt="Uzbekistán">
+      <img src="${escapeHTML(imgUzb)}" alt="Uzbekistán">
       <h3>Vuelos a Uzbekistán</h3>
       <p class="muted">Taskent y Samarcanda.</p>
       <div class="price">Desde ${priceUzb}</div>
       <a class="btn-comprar" href="https://wa.me/79046319565?text=Hola, quiero info de vuelos a Uzbekistán" target="_blank">Consultar Vuelos</a>
     </div>
     <div class="card">
-      <img src="${FOTO_RUSIA}" alt="Rusia">
+      <img src="${escapeHTML(imgRusia)}" alt="Rusia">
       <h3>Vuelos a Rusia</h3>
       <p class="muted">Moscú y San Petersburgo.</p>
       <div class="price">Desde ${priceRusia}</div>
       <a class="btn-comprar" href="https://wa.me/79046319565?text=Hola, quiero info de vuelos a Rusia" target="_blank">Consultar Vuelos</a>
     </div>
     <div class="card">
-      <img src="${FOTO_TURQUIA}" alt="Turquía">
+      <img src="${escapeHTML(imgTurquia)}" alt="Turquía">
       <h3>Vuelos a Turquía</h3>
       <p class="muted">Estambul y Antalya.</p>
       <div class="price">Desde ${priceTurquia}</div>
@@ -414,17 +410,17 @@ function renderPage() {
   if (isAdmin) fillEditor();
 }
 
-// BANNER (Ahora muestra Recarga, Remesa y Cuba)
 function setupBannerRotativo() {
   const d = currentData;
   const imgRecarga = d.recharge.image || DEF_FOTO_RECARGA;
   const imgRemesa = d.remittance.image || DEF_FOTO_REMESA;
+  const imgCuba = d.flights.img_cuba || DEF_FOTO_CUBA;
   const priceCuba = d.flights.cuba ? d.flights.cuba + " ₽" : "Consultar";
 
   bannerList = [
     { tag: "TIENDA DE RECARGAS", title: d.recharge.name, text: d.recharge.description, price: d.recharge.price + " ₽", btn: "Comprar Recarga", link: "https://wa.me/79046319565?text=Hola, quiero la recarga " + d.recharge.name, img: imgRecarga },
     { tag: "ENVÍO DE REMESAS", title: "Remesas a Cuba", text: `Envía ${d.remittance.rubles} ₽ y recibe en Cuba`, price: Number(d.remittance.cup).toFixed(2) + " CUP", btn: "Enviar Remesa", link: "https://wa.me/79046319565?text=Hola, quiero enviar una remesa", img: imgRemesa },
-    { tag: "VUELOS DISPONIBLES", title: "Vuelos a Cuba", text: "Descubre La Habana y Varadero", price: "Desde " + priceCuba, btn: "Consultar Vuelo", link: "https://wa.me/79046319565?text=Hola, quiero info de vuelos a Cuba", img: FOTO_CUBA }
+    { tag: "VUELOS DISPONIBLES", title: "Vuelos a Cuba", text: "Estambul ➔ Panamá (escala) ➔ La Habana", price: "Desde " + priceCuba, btn: "Consultar Vuelo", link: "https://wa.me/79046319565?text=Hola, quiero info de vuelos a Cuba", img: imgCuba }
   ];
   updateBannerDisplay();
 }
@@ -485,9 +481,13 @@ async function saveChanges() {
     },
     flights: { 
       cuba: Number(document.getElementById("editCubaPrice").value), 
+      img_cuba: document.getElementById("editCubaImg").value.trim(),
       uzbekistan: Number(document.getElementById("editUzbekistanPrice").value),
+      img_uzbekistan: document.getElementById("editUzbekistanImg").value.trim(),
       rusia: Number(document.getElementById("editRussiaPrice").value),
-      turquia: Number(document.getElementById("editTurkeyPrice").value)
+      img_rusia: document.getElementById("editRussiaImg").value.trim(),
+      turquia: Number(document.getElementById("editTurkeyPrice").value),
+      img_turquia: document.getElementById("editTurkeyImg").value.trim()
     }
   };
   status.textContent = "Guardando...";
@@ -532,9 +532,13 @@ function fillEditor() {
   document.getElementById("editRemitImg").value = d.remittance.image || "";
   
   document.getElementById("editCubaPrice").value = d.flights.cuba || "";
+  document.getElementById("editCubaImg").value = d.flights.img_cuba || "";
   document.getElementById("editUzbekistanPrice").value = d.flights.uzbekistan || "";
+  document.getElementById("editUzbekistanImg").value = d.flights.img_uzbekistan || "";
   document.getElementById("editRussiaPrice").value = d.flights.rusia || "";
+  document.getElementById("editRussiaImg").value = d.flights.img_rusia || "";
   document.getElementById("editTurkeyPrice").value = d.flights.turquia || "";
+  document.getElementById("editTurkeyImg").value = d.flights.img_turquia || "";
   
   document.getElementById("editNotice").value = d.notice;
 }
