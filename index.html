@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bienvenido a MiPlataforma: recargas, remesas y boletos en un solo lugar.">
+  <title>Bienvenido | MiPlataforma</title>
+  <style>
+    /* ===== RESET ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .welcome {
+      max-width: 600px;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .logo {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      margin-bottom: 35px;
+      line-height: 1.6;
+    }
+
+    .servicios {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .servicios span {
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .btn {
+      display: inline-block;
+      background: #fff;
+      color: #2563eb;
+      padding: 14px 36px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 0.85rem;
+      opacity: 0.7;
+    }
+
+    /* ===== ANIMACIONES ===== */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 500px) {
+      h1 { font-size: 1.9rem; }
+      .subtitle { font-size: 1rem; }
+      .logo { font-size: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="welcome">
+    <div class="logo">🌐</div>
+    <h1>Bienvenido a MiPlataforma</h1>
+    <p class="subtitle">
+      Recargas, remesas y boletos de bus, avión y tren.<br>
+      Todo lo que necesitas, en un solo lugar.
+    </p>
+
+    <div class="servicios">
+      <span>📱 Recargas</span>
+      <span>💸 Remesas</span>
+      <span>🚌 Bus</span>
+      <span>✈️ Avión</span>
+      <span>🚆 Tren</span>
+    </div>
+
+    <a href="#" class="btn">Comenzar →</a>
+
+    <footer>© 2026 MiPlataforma</footer>
+  </main>
+
+</body>
+</html>
