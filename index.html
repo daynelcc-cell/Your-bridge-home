@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Bienvenido a Your-bridge-home: recargas, remesas y boletos en un solo lugar.">
-  <title>Bienvenido | Your-bridge-home</title>
+  <title>Your-bridge-home</title>
   <style>
-    /* ===== RESET ===== */
+    /* ===== ESTILOS GENERALES ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
@@ -21,23 +20,20 @@
       text-align: center;
     }
 
-    .welcome {
+    /* ===== PANTALLA DE BIENVENIDA (HOME) ===== */
+    .pantalla { 
+      width: 100%;
       max-width: 600px;
-      animation: fadeIn 1s ease-out;
+      animation: fadeIn 0.5s ease-out;
+    }
+    
+    .oculto { 
+      display: none !important; 
     }
 
-    .logo {
-      font-size: 4rem;
-      margin-bottom: 20px;
-      animation: bounce 2s infinite;
-    }
-
-    h1 {
-      font-size: 2.6rem;
-      margin-bottom: 15px;
-      line-height: 1.2;
-    }
-
+    .logo { font-size: 4rem; margin-bottom: 20px; animation: bounce 2s infinite; }
+    h1 { font-size: 2.6rem; margin-bottom: 15px; line-height: 1.2; }
+    
     .subtitle {
       font-size: 1.2rem;
       opacity: 0.95;
@@ -45,14 +41,7 @@
       line-height: 1.6;
     }
 
-    .servicios {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 40px;
-    }
-
+    .servicios { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 40px; }
     .servicios span {
       background: rgba(255, 255, 255, 0.15);
       border: 1px solid rgba(255, 255, 255, 0.3);
@@ -62,7 +51,7 @@
       backdrop-filter: blur(6px);
     }
 
-    .btn {
+    .btn-blanco {
       display: inline-block;
       background: #fff;
       color: #2563eb;
@@ -71,33 +60,96 @@
       text-decoration: none;
       font-weight: 700;
       font-size: 1.05rem;
-      transition: transform 0.2s, box-shadow 0.2s;
+      border: none;
+      cursor: pointer;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      transition: transform 0.2s;
+    }
+    .btn-blanco:hover { transform: translateY(-3px); }
+
+    footer { margin-top: 50px; font-size: 0.85rem; opacity: 0.7; }
+
+    /* ===== FORMULARIO DE RECARGAS ===== */
+    .card-form {
+      background: #fff;
+      padding: 25px;
+      border-radius: 16px;
+      width: 100%;
+      text-align: left;
+      color: #1f2937;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     }
 
-    .btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+    .btn-volver {
+      background: none;
+      border: none;
+      color: #2563eb;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 15px;
+      padding: 0;
     }
 
-    footer {
-      margin-top: 50px;
-      font-size: 0.85rem;
-      opacity: 0.7;
+    .imagen-logo {
+      width: 100%;
+      height: 120px;
+      background: #e5e7eb;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .imagen-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .grupo { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+    }
+    input:focus, select:focus { border-color: #2563eb; }
+
+    .fila-monto { display: flex; gap: 10px; }
+    .fila-monto input { flex: 2; }
+    .fila-monto select { flex: 1; }
+
+    .btn-azul {
+      width: 100%;
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .mensaje-exito {
+      display: none;
+      text-align: center;
+      color: #059669;
+      font-weight: 600;
+      margin-top: 15px;
+      padding: 15px;
+      background: #d1fae5;
+      border-radius: 8px;
     }
 
     /* ===== ANIMACIONES ===== */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-10px); }
-    }
-
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 500px) {
       h1 { font-size: 1.9rem; }
       .subtitle { font-size: 1rem; }
@@ -107,7 +159,8 @@
 </head>
 <body>
 
-  <main class="welcome">
+  <!-- ================= PANTALLA 1: BIENVENIDA ================= -->
+  <main id="pantalla-inicio" class="pantalla">
     <div class="logo">🌐</div>
     <h1>Bienvenido a Your-bridge-home</h1>
     <p class="subtitle">
@@ -123,10 +176,108 @@
       <span>🚆 Tren</span>
     </div>
 
-    <a href="#" class="btn">Comenzar →</a>
+    <!-- ESTE ES EL BOTÓN QUE ABRE LAS RECARGAS -->
+    <button onclick="abrirRecargas()" class="btn-blanco">Comenzar →</button>
 
     <footer>© 2026 Your-bridge-home</footer>
   </main>
+
+
+  <!-- ================= PANTALLA 2: FORMULARIO DE RECARGAS ================= -->
+  <main id="pantalla-recargas" class="pantalla oculto">
+    <div class="card-form">
+      
+      <button onclick="volverInicio()" class="btn-volver">← Volver al inicio</button>
+
+      <!-- Aquí va la imagen. Cambia el enlace del "src" por tu propia foto -->
+      <div class="imagen-logo">
+        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Banner Recargas">
+      </div>
+
+      <form id="form-recarga">
+        <div class="grupo">
+          <label>Número de teléfono</label>
+          <input type="tel" placeholder="Ej: +1 234 567 8900" required>
+        </div>
+
+        <div class="grupo">
+          <label>Compañía / Operador</label>
+          <select required>
+            <option value="">Selecciona un operador...</option>
+            <option value="claro">Claro</option>
+            <option value="movistar">Movistar</option>
+            <option value="att">AT&T</option>
+            <option value="tigo">Tigo</option>
+            <option value="verizon">Verizon</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+
+        <div class="grupo">
+          <label>Monto de la recarga</label>
+          <div class="fila-monto">
+            <input type="number" placeholder="10.00" min="1" step="0.01" required>
+            <!-- AQUÍ ESTÁN TODAS LAS MONEDAS -->
+            <select required>
+              <option value="USD">USD $</option>
+              <option value="EUR">EUR €</option>
+              <option value="MXN">MXN $</option>
+              <option value="COP">COP $</option>
+              <option value="ARS">ARS $</option>
+              <option value="CLP">CLP $</option>
+              <option value="PEN">PEN S/</option>
+              <option value="DOP">DOP $</option>
+              <option value="BRL">BRL R$</option>
+              <option value="BOB">BOB Bs</option>
+              <option value="GTQ">GTQ Q</option>
+              <option value="HNL">HNL L</option>
+              <option value="PYG">PYG ₲</option>
+              <option value="UYU">UYU $U</option>
+              <option value="VES">VES Bs.</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-azul">Recargar ahora</button>
+      </form>
+
+      <div class="mensaje-exito" id="msg">
+        ✅ ¡Recarga procesada con éxito! (Simulación)
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== LÓGICA PARA CAMBIAR DE PANTALLA ===== -->
+  <script>
+    const inicio = document.getElementById('pantalla-inicio');
+    const recargas = document.getElementById('pantalla-recargas');
+    const form = document.getElementById('form-recarga');
+    const msg = document.getElementById('msg');
+
+    // Función para ir a recargas
+    function abrirRecargas() {
+      inicio.classList.add('oculto');
+      recargas.classList.remove('oculto');
+    }
+
+    // Función para volver al inicio
+    function volverInicio() {
+      recargas.classList.add('oculto');
+      inicio.classList.remove('oculto');
+      // Resetear el formulario por si acaso
+      form.reset();
+      form.style.display = 'block';
+      msg.style.display = 'none';
+    }
+
+    // Función para simular el envío del formulario
+    form.addEventListener('submit', (e) => {
+      e.preventDefault(); 
+      form.style.display = 'none'; 
+      msg.style.display = 'block'; 
+    });
+  </script>
 
 </body>
 </html>
