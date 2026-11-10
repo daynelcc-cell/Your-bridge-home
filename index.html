@@ -46,7 +46,7 @@
     }
     .tarjeta:hover { transform: scale(1.02); border-color: #fbbf24; }
 
-    /* Imagen de la oferta */
+    /* Imagen de la oferta (Por defecto) */
     .foto-oferta {
       width: 70px; height: 70px; border-radius: 12px; object-fit: cover;
       background: #233554; display: flex; align-items: center; justify-content: center;
@@ -85,7 +85,7 @@
     /* Footer Flotante WhatsApp */
     .footer-wsp {
       position: fixed; bottom: 20px; left: 0; right: 0; text-align: center;
-      padding: 0 20px; z-index: 100;
+      padding: 0 20px; z-index: 100; display: none;
     }
     .btn-wsp-grande {
       background: #25D366; color: white; text-decoration: none;
@@ -94,8 +94,7 @@
       font-weight: 800; font-size: 1.1rem; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
     }
     
-    .oculto { display: none !important; }
-    
+    /* Media query para móviles muy pequeños */
     @media (max-width: 450px) {
       .tarjeta { flex-wrap: wrap; }
       .accion-oferta { flex-direction: row; align-items: center; width: 100%; justify-content: space-between; margin-top: 10px; padding-top: 10px; border-top: 1px solid #233554; }
@@ -113,216 +112,252 @@
   </div>
 
   <!-- ================= PANTALLA 2: OFERTAS ================= -->
-  <div id="ofertas" class="pantalla-ofertas oculto">
+  <div id="ofertas" class="pantalla-ofertas">
     <div class="header-ofertas">
       <h2>Ofertas Disponibles</h2>
       <p>Selecciona la que mejor se adapte a ti</p>
     </div>
     
-    <!-- Aquí se generan las tarjetas automáticamente -->
-    <div id="contenedor-tarjetas"></div>
+    <!-- ========================================== -->
+    <!-- AQUÍ ESTÁN TUS OFERTAS                     -->
+    <!-- Si quieres cambiar el ícono por una foto,  -->
+    <!-- cambia: <div class="foto-oferta">📱</div>  -->
+    <!-- por: <img src="TU_ENLACE" class="foto-oferta"> -->
+    <!-- ========================================== -->
+
+    <!-- Oferta 1 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-vendido">⭐ Más Vendido</div>
+      <div class="foto-oferta">📱</div>
+      <div class="info-oferta">
+        <h3>VOZ</h3>
+        <div class="detalles"><span>📞 80 MIN</span></div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">200 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('VOZ', '200')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Oferta 2 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-especial">✨ Especial</div>
+      <div class="foto-oferta">📱</div>
+      <div class="info-oferta">
+        <h3>SALDO</h3>
+        <div class="detalles"><span>💳 350 CUP de SALDO</span><span>📞 LIMITADO</span></div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">250 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('SALDO', '250')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Oferta 3 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-oferta">🔥 Oferta</div>
+      <div class="foto-oferta">📱</div>
+      <div class="info-oferta">
+        <h3>VOZ +</h3>
+        <div class="detalles"><span>📞 200 MIN</span></div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">270 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('VOZ +', '270')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Oferta 4 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-vip">👑 VIP</div>
+      <div class="foto-oferta">📱</div>
+      <div class="info-oferta">
+        <h3>COMBO</h3>
+        <div class="detalles"><span>💳 120 SALDO</span><span>📞 15 MIN + 20 SMS</span></div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">300 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('COMBO', '300')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Oferta 5 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-oferta" style="background:#3b82f6;">🌐 Internet</div>
+      <div class="foto-oferta">📶</div>
+      <div class="info-oferta">
+        <h3>INTERNET +</h3>
+        <div class="detalles"><span>🌐 2GB LTE + 300MB.cu</span></div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">350 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('INTERNET +', '350')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Oferta 6 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-oferta">🔥 Oferta</div>
+      <div class="foto-oferta">📱</div>
+      <div class="info-oferta">
+        <h3>COMBO +</h3>
+        <div class="detalles"><span>🌐 2GB + 300MB</span><span>📞 15 MIN + 20 SMS</span></div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">400 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('COMBO +', '400')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Oferta 7 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-especial">✨ Especial</div>
+      <div class="foto-oferta">📱</div>
+      <div class="info-oferta">
+        <h3>COMBITO +</h3>
+        <div class="detalles"><span>💳 240 SALDO</span><span>📞 15 MIN + 20 SMS</span></div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">550 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('COMBITO +', '550')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Oferta 8 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-especial">✨ Especial</div>
+      <div class="foto-oferta">📶</div>
+      <div class="info-oferta">
+        <h3>INTERNET 1</h3>
+        <div class="detalles"><span>🌐 3GB + 300MB.cu</span></div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">650 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('INTERNET 1', '650')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Oferta 9 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-vendido">⭐ Más Vendido</div>
+      <div class="foto-oferta">📱</div>
+      <div class="info-oferta">
+        <h3>COMBO 1</h3>
+        <div class="detalles"><span>🌐 3GB + 300MB.cu</span><span>📞 25 MIN + 20 SMS</span></div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">750 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('COMBO 1', '750')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Oferta 10 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-premium">👑 Premium</div>
+      <div class="foto-oferta">📱</div>
+      <div class="info-oferta">
+        <h3>COMBITO MEJOR</h3>
+        <div class="detalles"><span>💳 360 SALDO</span><span>📞 15 MIN + 20 SMS</span></div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">750 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('COMBITO MEJOR', '750')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Oferta 11 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-premium">👑 Premium</div>
+      <div class="foto-oferta">📶</div>
+      <div class="info-oferta">
+        <h3>INTERNET 2 🤓</h3>
+        <div class="detalles"><span>🌐 7GB + 300MB</span></div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">1250 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('INTERNET 2', '1250')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Oferta 12 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-especial">✨ Especial</div>
+      <div class="foto-oferta">📱</div>
+      <div class="info-oferta">
+        <h3>COMBO 2 😍</h3>
+        <div class="detalles"><span>🌐 7GB + 300MB</span><span>📞 40 MIN + 20 SMS</span></div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">1300 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('COMBO 2', '1300')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Oferta 13 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-vendido">⭐ Más Vendido</div>
+      <div class="foto-oferta">📶</div>
+      <div class="info-oferta">
+        <h3>INTERNET 3 🤯</h3>
+        <div class="detalles"><span>🌐 15GB + 300MB</span></div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">2500 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('INTERNET 3', '2500')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Oferta 14 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-especial">✨ Especial</div>
+      <div class="foto-oferta">📱</div>
+      <div class="info-oferta">
+        <h3>COMBO 3 🎉</h3>
+        <div class="detalles"><span>🌐 15GB + 300MB</span><span>📞 80 MIN + 20 SMS</span></div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">2700 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('COMBO 3', '2700')">Comprar</a>
+      </div>
+    </div>
+
   </div>
 
   <!-- Footer Flotante -->
-  <div id="footer" class="footer-wsp oculto">
+  <div id="footer" class="footer-wsp">
     <a href="#" id="btn-wsp-footer" target="_blank" class="btn-wsp-grande">
       💬 Recargar por WhatsApp
     </a>
   </div>
 
   <script>
-    // =====================================================================
-    // ⚙️ CONFIGURACIÓN: PON TU NÚMERO AQUÍ (Sin el símbolo +)
-    // Ejemplo: 5355123456
-    // =====================================================================
-    const MI_WHATSAPP = "TU_NUMERO_AQUI"; 
+    // =======================================================
+    // ⚙️ TU NÚMERO DE WHATSAPP CONFIGURADO (Rusia: 7 + tu número)
+    // =======================================================
+    const MI_WHATSAPP = "79046319565"; 
 
-
-    // =====================================================================
-    // ⚙️ TUS OFERTAS: Modifica los textos, precios y fotos aquí abajo.
-    // "imagen": "URL_DE_TU_FOTO" (Si lo dejas vacío "", saldrá un ícono).
-    // =====================================================================
-    const misOfertas = [
-      { 
-        nombre: "VOZ", 
-        precio: "200", 
-        etiqueta: "⭐ Más Vendido", 
-        claseEtiqueta: "tag-vendido", 
-        detalles: ["📞 80 MIN"], 
-        imagen: "" // Pon aquí el enlace de tu foto
-      },
-      { 
-        nombre: "SALDO", 
-        precio: "250", 
-        etiqueta: "✨ Especial", 
-        claseEtiqueta: "tag-especial", 
-        detalles: ["💳 350 CUP de SALDO", "📞 LIMITADO"], 
-        imagen: "" 
-      },
-      { 
-        nombre: "VOZ +", 
-        precio: "270", 
-        etiqueta: "🔥 Oferta", 
-        claseEtiqueta: "tag-oferta", 
-        detalles: ["📞 200 MIN"], 
-        imagen: "" 
-      },
-      { 
-        nombre: "COMBO", 
-        precio: "300", 
-        etiqueta: "👑 VIP", 
-        claseEtiqueta: "tag-vip", 
-        detalles: ["💳 120 SALDO", "📞 15 MIN + 20 SMS"], 
-        imagen: "" 
-      },
-      { 
-        nombre: "INTERNET +", 
-        precio: "350", 
-        etiqueta: "🌐 Internet", 
-        claseEtiqueta: "tag-oferta", 
-        detalles: ["🌐 2GB LTE + 300MB.cu"], 
-        imagen: "" 
-      },
-      { 
-        nombre: "COMBO +", 
-        precio: "400", 
-        etiqueta: "🔥 Oferta", 
-        claseEtiqueta: "tag-oferta", 
-        detalles: ["🌐 2GB + 300MB", "📞 15 MIN + 20 SMS"], 
-        imagen: "" 
-      },
-      { 
-        nombre: "COMBITO +", 
-        precio: "550", 
-        etiqueta: "✨ Especial", 
-        claseEtiqueta: "tag-especial", 
-        detalles: ["💳 240 SALDO", "📞 15 MIN + 20 SMS"], 
-        imagen: "" 
-      },
-      { 
-        nombre: "INTERNET 1", 
-        precio: "650", 
-        etiqueta: "✨ Especial", 
-        claseEtiqueta: "tag-especial", 
-        detalles: ["🌐 3GB + 300MB.cu"], 
-        imagen: "" 
-      },
-      { 
-        nombre: "COMBO 1", 
-        precio: "750", 
-        etiqueta: "⭐ Más Vendido", 
-        claseEtiqueta: "tag-vendido", 
-        detalles: ["🌐 3GB + 300MB.cu", "📞 25 MIN + 20 SMS"], 
-        imagen: "" 
-      },
-      { 
-        nombre: "COMBITO MEJOR", 
-        precio: "750", 
-        etiqueta: "👑 Premium", 
-        claseEtiqueta: "tag-premium", 
-        detalles: ["💳 360 SALDO", "📞 15 MIN + 20 SMS"], 
-        imagen: "" 
-      },
-      { 
-        nombre: "INTERNET 2 🤓", 
-        precio: "1250", 
-        etiqueta: "👑 Premium", 
-        claseEtiqueta: "tag-premium", 
-        detalles: ["🌐 7GB + 300MB"], 
-        imagen: "" 
-      },
-      { 
-        nombre: "COMBO 2 😍", 
-        precio: "1300", 
-        etiqueta: "✨ Especial", 
-        claseEtiqueta: "tag-especial", 
-        detalles: ["🌐 7GB + 300MB", "📞 40 MIN + 20 SMS"], 
-        imagen: "" 
-      },
-      { 
-        nombre: "INTERNET 3 🤯", 
-        precio: "2500", 
-        etiqueta: "⭐ Más Vendido", 
-        claseEtiqueta: "tag-vendido", 
-        detalles: ["🌐 15GB + 300MB"], 
-        imagen: "" 
-      },
-      { 
-        nombre: "COMBO 3 🎉", 
-        precio: "2700", 
-        etiqueta: "✨ Especial", 
-        claseEtiqueta: "tag-especial", 
-        detalles: ["🌐 15GB + 300MB", "📞 80 MIN + 20 SMS"], 
-        imagen: "" 
-      }
-    ];
-    // =====================================================================
-
-
-    // 1. Función que dibuja las tarjetas en la página
-    function cargarOfertas() {
-      const contenedor = document.getElementById('contenedor-tarjetas');
-      let html = '';
-
-      misOfertas.forEach(oferta => {
-        // Lógica de la foto: si hay enlace, usa <img>, si no, usa un <div> con emoji.
-        let fotoHTML = oferta.imagen 
-          ? `<img src="${oferta.imagen}" alt="${oferta.nombre}" class="foto-oferta">` 
-          : `<div class="foto-oferta">📱</div>`;
-
-        // Une los detalles en pequeños textos
-        let detallesHTML = oferta.detalles.map(d => `<span>${d}</span>`).join('');
-
-        // Crea la tarjeta HTML
-        html += `
-          <div class="tarjeta">
-            ${oferta.etiqueta ? `<div class="etiqueta ${oferta.claseEtiqueta}">${oferta.etiqueta}</div>` : ''}
-            
-            ${fotoHTML}
-            
-            <div class="info-oferta">
-              <h3>${oferta.nombre}</h3>
-              <div class="detalles">${detallesHTML}</div>
-            </div>
-            
-            <div class="accion-oferta">
-              <div class="precio">${oferta.precio} P</div>
-              <a href="#" class="btn-comprar" onclick="comprar('${oferta.nombre}', '${oferta.precio}')">Comprar</a>
-            </div>
-          </div>
-        `;
-      });
-
-      contenedor.innerHTML = html;
-    }
-
-    // 2. Funciones de navegación
+    // Lógica para cambiar de pantalla
     const inicio = document.getElementById('inicio');
     const ofertas = document.getElementById('ofertas');
     const footer = document.getElementById('footer');
 
     function mostrarOfertas() {
-      inicio.classList.add('oculto');
-      ofertas.classList.remove('oculto');
-      footer.classList.remove('oculto');
+      inicio.style.display = 'none';
+      ofertas.style.display = 'block';
+      footer.style.display = 'block';
       window.scrollTo(0, 0);
     }
 
-    // 3. Función del botón Comprar (Abre WhatsApp)
+    // Lógica del botón comprar (Abre WhatsApp con mensaje)
     function comprar(nombreOferta, precio) {
       const mensaje = `Hola, quiero comprar la oferta: *${nombreOferta}* por un valor de *${precio} P*. ¿Me ayudas a procesarla?`;
       const url = `https://wa.me/${MI_WHATSAPP}?text=${encodeURIComponent(mensaje)}`;
       window.open(url, '_blank');
     }
 
-    // 4. Configurar el enlace del botón flotante de WhatsApp
+    // Configurar el botón grande de abajo
     const btnWspFooter = document.getElementById('btn-wsp-footer');
-    if (MI_WHATSAPP !== "TU_NUMERO_AQUI") {
-        btnWspFooter.href = `https://wa.me/${MI_WHATSAPP}?text=Hola,%20quiero%20hacer%20una%20recarga%20a%20Cuba`;
-    }
-
-    // 5. Ejecutar al cargar la página
-    cargarOfertas();
+    btnWspFooter.href = `https://wa.me/${MI_WHATSAPP}?text=Hola,%20quiero%20hacer%20una%20recarga%20a%20Cuba`;
   </script>
 
 </body>
