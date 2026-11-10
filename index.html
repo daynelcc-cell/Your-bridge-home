@@ -3,280 +3,373 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your-bridge-home</title>
+  <title>Your Bridge Home | Recargas a Cuba</title>
   <style>
     /* ===== ESTILOS GENERALES ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+      background: #0a192f; /* Azul oscuro elegante */
       color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-
-    /* ===== PANTALLA DE BIENVENIDA (HOME) ===== */
-    .pantalla { 
-      width: 100%;
-      max-width: 600px;
-      animation: fadeIn 0.5s ease-out;
+      min-height: 100vh;
     }
     
-    .oculto { 
-      display: none !important; 
+    /* ===== PANTALLA DE BIENVENIDA ===== */
+    .pantalla-inicio {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 20px; text-align: center;
+      background: linear-gradient(135deg, #0a192f 0%, #1e3a8a 100%);
     }
-
-    .logo { font-size: 4rem; margin-bottom: 20px; animation: bounce 2s infinite; }
-    h1 { font-size: 2.6rem; margin-bottom: 15px; line-height: 1.2; }
+    .pantalla-inicio h1 { font-size: 2.8rem; margin-bottom: 10px; color: #fff; }
+    .pantalla-inicio h2 { font-size: 1.5rem; color: #fbbf24; margin-bottom: 30px; font-style: italic; }
+    .pantalla-inicio p { font-size: 1.1rem; color: #cbd5e1; margin-bottom: 40px; max-width: 500px; }
     
-    .subtitle {
-      font-size: 1.2rem;
-      opacity: 0.95;
-      margin-bottom: 35px;
-      line-height: 1.6;
-    }
-
-    .servicios { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 40px; }
-    .servicios span {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 8px 18px;
-      border-radius: 999px;
-      font-size: 0.95rem;
-      backdrop-filter: blur(6px);
-    }
-
-    .btn-blanco {
-      display: inline-block;
-      background: #fff;
-      color: #2563eb;
-      padding: 14px 36px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.05rem;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    .btn-principal {
+      background: #fbbf24; color: #0a192f; padding: 15px 40px;
+      border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 1.2rem;
+      border: none; cursor: pointer; box-shadow: 0 10px 20px rgba(251, 191, 36, 0.3);
       transition: transform 0.2s;
     }
-    .btn-blanco:hover { transform: translateY(-3px); }
+    .btn-principal:hover { transform: translateY(-3px); }
 
-    footer { margin-top: 50px; font-size: 0.85rem; opacity: 0.7; }
-
-    /* ===== FORMULARIO DE RECARGAS ===== */
-    .card-form {
-      background: #fff;
-      padding: 25px;
-      border-radius: 16px;
-      width: 100%;
-      text-align: left;
-      color: #1f2937;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    /* ===== PANTALLA DE OFERTAS ===== */
+    .pantalla-ofertas { display: none; padding: 20px; max-width: 600px; margin: 0 auto; padding-bottom: 100px; }
+    
+    .header-ofertas {
+      text-align: center; margin-bottom: 25px; padding-top: 20px;
     }
+    .header-ofertas h2 { font-size: 1.8rem; color: #fff; margin-bottom: 5px; }
+    .header-ofertas p { color: #94a3b8; font-size: 0.9rem; }
 
-    .btn-volver {
-      background: none;
-      border: none;
-      color: #2563eb;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-bottom: 15px;
-      padding: 0;
+    /* Tarjetas de oferta */
+    .tarjeta {
+      background: #112240; border: 1px solid #233554;
+      border-radius: 16px; padding: 15px; margin-bottom: 15px;
+      display: flex; align-items: center; justify-content: space-between;
+      position: relative; overflow: hidden; transition: transform 0.2s;
     }
+    .tarjeta:hover { transform: scale(1.02); border-color: #fbbf24; }
 
-    .imagen-logo {
-      width: 100%;
-      height: 120px;
-      background: #e5e7eb;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      overflow: hidden;
+    /* Etiquetas (VIP, Oferta, etc) */
+    .etiqueta {
+      position: absolute; top: 0; left: 0; padding: 4px 12px;
+      font-size: 0.7rem; font-weight: 800; border-bottom-right-radius: 10px;
     }
-    .imagen-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .tag-vendido { background: #fbbf24; color: #000; }
+    .tag-especial { background: #eab308; color: #000; }
+    .tag-oferta { background: #ef4444; color: #fff; }
+    .tag-vip { background: #000; color: #fbbf24; border: 1px solid #fbbf24; }
+    .tag-premium { background: #7c3aed; color: #fff; }
+
+    /* Contenido de la tarjeta */
+    .info-oferta { flex: 1; padding-top: 10px; }
+    .info-oferta h3 { font-size: 1.2rem; color: #e2e8f0; font-weight: 800; margin-bottom: 5px; }
+    .detalles { display: flex; flex-direction: column; gap: 3px; font-size: 0.85rem; color: #94a3b8; }
+    .detalles span { display: flex; align-items: center; gap: 5px; }
+
+    /* Precio y botón */
+    .accion-oferta { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; padding-top: 10px; }
+    .precio { 
+      background: #ef4444; color: white; font-weight: 900; font-size: 1.3rem;
+      padding: 5px 15px; border-radius: 50px; border: 2px solid #7f1d1d;
     }
-
-    .grupo { margin-bottom: 15px; }
-    label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 0.9rem; }
-    input, select {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-family: inherit;
-      outline: none;
+    .btn-comprar {
+      background: #25D366; color: white; border: none; padding: 8px 15px;
+      border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer;
+      text-decoration: none; display: inline-block;
     }
-    input:focus, select:focus { border-color: #2563eb; }
+    .btn-comprar:hover { background: #1da851; }
 
-    .fila-monto { display: flex; gap: 10px; }
-    .fila-monto input { flex: 2; }
-    .fila-monto select { flex: 1; }
-
-    .btn-azul {
-      width: 100%;
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 14px;
-      border-radius: 8px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 10px;
+    /* Footer Flotante WhatsApp */
+    .footer-wsp {
+      position: fixed; bottom: 20px; left: 0; right: 0; text-align: center;
+      padding: 0 20px; z-index: 100;
     }
-
-    .mensaje-exito {
-      display: none;
-      text-align: center;
-      color: #059669;
-      font-weight: 600;
-      margin-top: 15px;
-      padding: 15px;
-      background: #d1fae5;
-      border-radius: 8px;
+    .btn-wsp-grande {
+      background: #25D366; color: white; text-decoration: none;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      width: 100%; max-width: 400px; padding: 15px; border-radius: 50px;
+      font-weight: 800; font-size: 1.1rem; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
     }
-
-    /* ===== ANIMACIONES ===== */
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-
-    @media (max-width: 500px) {
-      h1 { font-size: 1.9rem; }
-      .subtitle { font-size: 1rem; }
-      .logo { font-size: 3rem; }
+    
+    /* Utilidades */
+    .oculto { display: none !important; }
+    
+    @media (max-width: 400px) {
+      .tarjeta { flex-direction: column; align-items: flex-start; }
+      .accion-oferta { flex-direction: row; align-items: center; width: 100%; justify-content: space-between; margin-top: 10px; }
     }
   </style>
 </head>
 <body>
 
   <!-- ================= PANTALLA 1: BIENVENIDA ================= -->
-  <main id="pantalla-inicio" class="pantalla">
-    <div class="logo">🌐</div>
-    <h1>Bienvenido a Your-bridge-home</h1>
-    <p class="subtitle">
-      Recargas, remesas y boletos de bus, avión y tren.<br>
-      Todo lo que necesitas, en un solo lugar.
-    </p>
+  <div id="inicio" class="pantalla-inicio">
+    <h1>YOUR BRIDGE HOME</h1>
+    <h2>Conecta con los tuyos en Cuba ♥️</h2>
+    <p>Recargas internacionales rápidas, seguras y al mejor precio. Activa el saldo de tus familiares en segundos.</p>
+    <button onclick="mostrarOfertas()" class="btn-principal">Ver Ofertas de Recarga</button>
+  </div>
 
-    <div class="servicios">
-      <span>📱 Recargas</span>
-      <span>💸 Remesas</span>
-      <span>🚌 Bus</span>
-      <span>✈️ Avión</span>
-      <span>🚆 Tren</span>
+  <!-- ================= PANTALLA 2: OFERTAS ================= -->
+  <div id="ofertas" class="pantalla-ofertas oculto">
+    
+    <div class="header-ofertas">
+      <h2>Ofertas Disponibles</h2>
+      <p>Selecciona la que mejor se adapte a ti</p>
     </div>
 
-    <!-- ESTE ES EL BOTÓN QUE ABRE LAS RECARGAS -->
-    <button onclick="abrirRecargas()" class="btn-blanco">Comenzar →</button>
-
-    <footer>© 2026 Your-bridge-home</footer>
-  </main>
-
-
-  <!-- ================= PANTALLA 2: FORMULARIO DE RECARGAS ================= -->
-  <main id="pantalla-recargas" class="pantalla oculto">
-    <div class="card-form">
-      
-      <button onclick="volverInicio()" class="btn-volver">← Volver al inicio</button>
-
-      <!-- Aquí va la imagen. Cambia el enlace del "src" por tu propia foto -->
-      <div class="imagen-logo">
-        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Banner Recargas">
+    <!-- Tarjeta 1 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-vendido">⭐ Más Vendido</div>
+      <div class="info-oferta">
+        <h3>VOZ</h3>
+        <div class="detalles">
+          <span>📞 80 MIN</span>
+        </div>
       </div>
-
-      <form id="form-recarga">
-        <div class="grupo">
-          <label>Número de teléfono</label>
-          <input type="tel" placeholder="Ej: +1 234 567 8900" required>
-        </div>
-
-        <div class="grupo">
-          <label>Compañía / Operador</label>
-          <select required>
-            <option value="">Selecciona un operador...</option>
-            <option value="claro">Claro</option>
-            <option value="movistar">Movistar</option>
-            <option value="att">AT&T</option>
-            <option value="tigo">Tigo</option>
-            <option value="verizon">Verizon</option>
-            <option value="otro">Otro</option>
-          </select>
-        </div>
-
-        <div class="grupo">
-          <label>Monto de la recarga</label>
-          <div class="fila-monto">
-            <input type="number" placeholder="10.00" min="1" step="0.01" required>
-            <!-- AQUÍ ESTÁN TODAS LAS MONEDAS -->
-            <select required>
-              <option value="USD">USD $</option>
-              <option value="EUR">EUR €</option>
-              <option value="MXN">MXN $</option>
-              <option value="COP">COP $</option>
-              <option value="ARS">ARS $</option>
-              <option value="CLP">CLP $</option>
-              <option value="PEN">PEN S/</option>
-              <option value="DOP">DOP $</option>
-              <option value="BRL">BRL R$</option>
-              <option value="BOB">BOB Bs</option>
-              <option value="GTQ">GTQ Q</option>
-              <option value="HNL">HNL L</option>
-              <option value="PYG">PYG ₲</option>
-              <option value="UYU">UYU $U</option>
-              <option value="VES">VES Bs.</option>
-            </select>
-          </div>
-        </div>
-
-        <button type="submit" class="btn-azul">Recargar ahora</button>
-      </form>
-
-      <div class="mensaje-exito" id="msg">
-        ✅ ¡Recarga procesada con éxito! (Simulación)
+      <div class="accion-oferta">
+        <div class="precio">200 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('VOZ - 80 MIN', '200')">Comprar</a>
       </div>
-
     </div>
-  </main>
 
-  <!-- ===== LÓGICA PARA CAMBIAR DE PANTALLA ===== -->
+    <!-- Tarjeta 2 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-especial">✨ Especial</div>
+      <div class="info-oferta">
+        <h3>SALDO</h3>
+        <div class="detalles">
+          <span>💳 350 CUP de SALDO</span>
+          <span>📞 LIMITADO</span>
+        </div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">250 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('SALDO - 350 CUP', '250')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Tarjeta 3 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-oferta">🔥 Oferta</div>
+      <div class="info-oferta">
+        <h3>VOZ +</h3>
+        <div class="detalles">
+          <span>📞 200 MIN</span>
+        </div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">270 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('VOZ + - 200 MIN', '270')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Tarjeta 4 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-vip">👑 VIP</div>
+      <div class="info-oferta">
+        <h3>COMBO</h3>
+        <div class="detalles">
+          <span>💳 120 SALDO</span>
+          <span>📞 15 MIN + 20 SMS</span>
+        </div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">300 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('COMBO VIP', '300')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Tarjeta 5 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-oferta" style="background: #3b82f6;">🌐 Internet</div>
+      <div class="info-oferta">
+        <h3>INTERNET +</h3>
+        <div class="detalles">
+          <span>🌐 2GB LTE + 300MB.cu</span>
+        </div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">350 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('INTERNET +', '350')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Tarjeta 6 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-oferta">🔥 Oferta</div>
+      <div class="info-oferta">
+        <h3>COMBO +</h3>
+        <div class="detalles">
+          <span>🌐 2GB + 300MB</span>
+          <span>📞 15 MIN + 20 SMS</span>
+        </div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">400 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('COMBO +', '400')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Tarjeta 7 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-especial">✨ Especial</div>
+      <div class="info-oferta">
+        <h3>COMBITO +</h3>
+        <div class="detalles">
+          <span>💳 240 SALDO</span>
+          <span>📞 15 MIN + 20 SMS</span>
+        </div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">550 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('COMBITO +', '550')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Tarjeta 8 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-especial">✨ Especial</div>
+      <div class="info-oferta">
+        <h3>INTERNET 1</h3>
+        <div class="detalles">
+          <span>🌐 3GB + 300MB.cu</span>
+        </div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">650 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('INTERNET 1', '650')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Tarjeta 9 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-vendido">⭐ Más Vendido</div>
+      <div class="info-oferta">
+        <h3>COMBO 1</h3>
+        <div class="detalles">
+          <span>🌐 3GB + 300MB.cu</span>
+          <span>📞 25 MIN + 20 SMS</span>
+        </div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">750 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('COMBO 1', '750')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Tarjeta 10 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-premium">👑 Premium</div>
+      <div class="info-oferta">
+        <h3>COMBITO MEJOR</h3>
+        <div class="detalles">
+          <span>💳 360 SALDO</span>
+          <span>📞 15 MIN + 20 SMS</span>
+        </div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">750 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('COMBITO MEJOR', '750')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Tarjeta 11 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-premium">👑 Premium</div>
+      <div class="info-oferta">
+        <h3>INTERNET 2 🤓</h3>
+        <div class="detalles">
+          <span>🌐 7GB + 300MB</span>
+        </div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">1250 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('INTERNET 2', '1250')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Tarjeta 12 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-especial">✨ Especial</div>
+      <div class="info-oferta">
+        <h3>COMBO 2 😍</h3>
+        <div class="detalles">
+          <span>🌐 7GB + 300MB</span>
+          <span>📞 40 MIN + 20 SMS</span>
+        </div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">1300 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('COMBO 2', '1300')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Tarjeta 13 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-vendido">⭐ Más Vendido</div>
+      <div class="info-oferta">
+        <h3>INTERNET 3 🤯</h3>
+        <div class="detalles">
+          <span>🌐 15GB + 300MB</span>
+        </div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">2500 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('INTERNET 3', '2500')">Comprar</a>
+      </div>
+    </div>
+
+    <!-- Tarjeta 14 -->
+    <div class="tarjeta">
+      <div class="etiqueta tag-especial">✨ Especial</div>
+      <div class="info-oferta">
+        <h3>COMBO 3 🎉</h3>
+        <div class="detalles">
+          <span>🌐 15GB + 300MB</span>
+          <span>📞 80 MIN + 20 SMS</span>
+        </div>
+      </div>
+      <div class="accion-oferta">
+        <div class="precio">2700 P</div>
+        <a href="#" class="btn-comprar" onclick="comprar('COMBO 3', '2700')">Comprar</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer Flotante -->
+  <div id="footer" class="footer-wsp oculto">
+    <a href="https://wa.me/TU_NUMERO_AQUI?text=Hola,%20quiero%20hacer%20una%20recarga%20a%20Cuba" target="_blank" class="btn-wsp-grande">
+      💬 Recargar por WhatsApp
+    </a>
+  </div>
+
   <script>
-    const inicio = document.getElementById('pantalla-inicio');
-    const recargas = document.getElementById('pantalla-recargas');
-    const form = document.getElementById('form-recarga');
-    const msg = document.getElementById('msg');
+    // 1. Cambiar de pantalla
+    const inicio = document.getElementById('inicio');
+    const ofertas = document.getElementById('ofertas');
+    const footer = document.getElementById('footer');
 
-    // Función para ir a recargas
-    function abrirRecargas() {
+    function mostrarOfertas() {
       inicio.classList.add('oculto');
-      recargas.classList.remove('oculto');
+      ofertas.classList.remove('oculto');
+      footer.classList.remove('oculto'); // Muestra el botón de WhatsApp abajo
+      window.scrollTo(0, 0); // Sube al inicio de la página
     }
 
-    // Función para volver al inicio
-    function volverInicio() {
-      recargas.classList.add('oculto');
-      inicio.classList.remove('oculto');
-      // Resetear el formulario por si acaso
-      form.reset();
-      form.style.display = 'block';
-      msg.style.display = 'none';
+    // 2. Función para cuando el cliente le da a "Comprar"
+    function comprar(nombreOferta, precio) {
+      // Aquí más adelante puedes conectar Supabase o Stripe
+      // Por ahora, abrimos WhatsApp con el mensaje listo para el cliente
+      
+      const telefonoNegocio = "TU_NUMERO_AQUI"; // <-- PON TU NÚMERO AQUÍ
+      const mensaje = `Hola, quiero comprar la oferta: *${nombreOferta}* por un valor de *${precio} P*. ¿Me ayudas a procesarla?`;
+      
+      const url = `https://wa.me/${telefonoNegocio}?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
     }
-
-    // Función para simular el envío del formulario
-    form.addEventListener('submit', (e) => {
-      e.preventDefault(); 
-      form.style.display = 'none'; 
-      msg.style.display = 'block'; 
-    });
   </script>
 
 </body>
