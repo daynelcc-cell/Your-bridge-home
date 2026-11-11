@@ -45,7 +45,6 @@ input:focus,textarea:focus,select:focus{border-color:var(--primary);box-shadow:0
 label{font-size:13px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px}
 .badge-modern{background:linear-gradient(135deg,var(--accent),#ea580c);color:#fff;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:800;display:inline-block;margin-bottom:8px}
 .product-card.featured{border:2px solid var(--accent)}
-.stock{color:var(--muted);font-size:12px}
 .recharge-list{display:flex;flex-direction:column;gap:10px}
 .recharge-item{flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:14px}
 .recharge-item-info{flex:1;min-width:150px;display:flex;align-items:center;gap:14px}
@@ -61,6 +60,9 @@ label{font-size:13px;color:var(--muted);font-weight:600;display:block;margin-bot
 .banner-precios .item:hover{border-color:var(--accent);transform:translateY(-2px)}
 .banner-precios .item b{display:block;font-size:19px;color:var(--gold)}
 .banner-precios .item span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.tasas-item{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:12px;padding:10px 16px;min-width:120px;text-align:center}
+.tasas-item b{display:block;font-size:17px;color:var(--primary)}
+.tasas-item span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
 .promo-box{background:linear-gradient(135deg,rgba(249,115,22,.12),rgba(99,102,241,.12));border:2px solid var(--accent);border-radius:16px;padding:20px;text-align:center;margin-bottom:20px;display:none}
 .promo-box .countdown{font-size:30px;font-weight:900;color:var(--accent);letter-spacing:3px;margin-top:8px}
 .banner-rotativo{position:relative;border-radius:20px;min-height:320px;transition:opacity .6s;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background-size:cover;background-position:center;margin-bottom:20px;border:1px solid var(--border)}
@@ -94,7 +96,6 @@ label{font-size:13px;color:var(--muted);font-weight:600;display:block;margin-bot
 .message-card{border-color:rgba(249,115,22,.35)}
 .msg-header{font-weight:800;color:var(--accent);font-size:14px}
 .msg-body{color:var(--text);font-style:italic;margin:10px 0;font-size:15px}
-.msg-footer{color:var(--muted);font-size:12px}
 .cuba-links-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px;margin-top:20px}
 .cuba-card{flex-direction:row;align-items:center;gap:15px;text-decoration:none;color:#fff}
 .cuba-icon{font-size:22px;background:rgba(99,102,241,.15);width:48px;height:48px;border-radius:50%;display:flex;justify-content:center;align-items:center;flex-shrink:0}
@@ -220,6 +221,13 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       <div class="titulo">🔥 <span data-i18n="banner_eco">Precios más económicos</span></div>
       <div class="fila" id="preciosFila"></div>
     </div>
+    <div class="card" style="padding:16px;">
+      <div style="font-weight:900;font-size:16px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;">💱 Tasas del día (oficiales)</div>
+      <div id="tasasVivasFila" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:12px;">
+        <span class="status">Cargando tasas del día...</span>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:10px;" id="tasasVivasFecha"></div>
+    </div>
     <div class="banner-rotativo" id="mainBanner">
       <div class="banner-overlay"></div>
       <div class="banner-content">
@@ -242,24 +250,29 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
   <section id="remesas">
     <h2>💸 <span data-i18n="t_remesas">Envío de Remesas</span></h2>
     <div class="grid-normal" id="remittanceCards"></div>
-    <div class="grid-normal" style="margin-top:18px;">
-      <div class="card">
-        <h3 data-i18n="calc_remit">Calculadora de remesa</h3>
-        <label data-i18n="c_monto">Importe a enviar:</label>
-        <input id="remitAmount" type="number" value="0" min="0" oninput="calculateRemittance()">
-        <label data-i18n="c_comision">Comisión (%):</label>
-        <input id="remitFee" type="number" value="0" min="0" max="100" oninput="calculateRemittance()">
-        <div class="price" id="remitResult">0 CUP</div>
-        <button class="btn-comprar" style="background:linear-gradient(135deg,var(--gold),#b8860b);" onclick="abrirComprobante('proceso','Remesa',document.getElementById('remitAmount').value+' RUB','Cuba')" data-i18n="btn_solicitar">Solicitar Remesa</button>
-      </div>
-      <div class="card">
-        <h3 data-i18n="calc_pasaje">Calculadora de pasaje (cambio de moneda)</h3>
-        <label data-i18n="c_precio">Precio del pasaje (USD):</label>
-        <input id="pasajeUSD" type="number" value="0" min="0" oninput="calcPasaje()">
-        <label data-i18n="c_tasa">Tasa de cambio (moneda local por 1 USD):</label>
-        <input id="pasajeTasa" type="number" value="0" min="0" oninput="calcPasaje()">
-        <div class="price" id="pasajeResult">0</div>
-      </div>
+    <div class="card" style="margin-top:18px;">
+      <h3>💱 Calculadora de remesas</h3>
+      <label>Enviar en (moneda base):</label>
+      <select id="remitBaseMoneda" onchange="calcularRemesaNueva()">
+        <option value="RUB">Rublos (RUB)</option>
+        <option value="USD">Dólares (USD)</option>
+        <option value="EUR">Euros (EUR)</option>
+      </select>
+      <label>País destino:</label>
+      <select id="remitPais" onchange="calcularRemesaNueva()"></select>
+      <label>Monto a enviar:</label>
+      <input id="remitMonto" type="number" value="1000" min="0" oninput="calcularRemesaNueva()">
+      <div id="remitInfo" style="background:rgba(0,0,0,.3);border-radius:12px;padding:12px;margin:10px 0;border:1px solid var(--border);font-size:13px;color:var(--muted);"></div>
+      <div class="price" id="remitResultado">0</div>
+      <button class="btn-comprar" style="background:linear-gradient(135deg,var(--gold),#b8860b);color:#0f1115;" onclick="solicitarRemesa()">Solicitar Remesa</button>
+    </div>
+    <div class="card">
+      <h3 data-i18n="calc_pasaje">Calculadora de pasaje (cambio de moneda)</h3>
+      <label data-i18n="c_precio">Precio del pasaje (USD):</label>
+      <input id="pasajeUSD" type="number" value="0" min="0" oninput="calcPasaje()">
+      <label data-i18n="c_tasa">Tasa de cambio (moneda local por 1 USD):</label>
+      <input id="pasajeTasa" type="number" value="0" min="0" oninput="calcPasaje()">
+      <div class="price" id="pasajeResult">0</div>
     </div>
     <p style="text-align:center;margin-top:14px;">🔗 <a href="https://www.bc.gob.cu" target="_blank" style="color:var(--primary);font-weight:700;" data-i18n="l_bc">Banco de Cuba – tasa oficial</a></p>
   </section>
@@ -289,15 +302,10 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
     </div>
     <div id="panel-avion">
       <div class="card" style="text-align:center;">
-        <label data-i18n="sel_pais">País de destino:</label>
-        <select id="selector-paises" onchange="mostrarInfoPais()" style="width:auto;display:inline-block;min-width:220px;"></select>
-        <div id="informacion-pasaje" style="background:rgba(0,0,0,.3);border-radius:12px;padding:15px;margin-top:12px;border:1px solid var(--border);"><p data-i18n="sel_pais_hint">Selecciona un país.</p></div>
-        <div style="margin-top:14px;">
-          <label data-i18n="ver_precios">Ver precios en: </label>
-          <select id="moneda-usuario" onchange="actualizarPreciosEnPantalla()" style="width:auto;display:inline-block;">
-            <option value="RUB">Rublos (RUB)</option><option value="USD">Dólares (USD)</option><option value="EUR">Euros (EUR)</option><option value="MLC">MLC (Cuba)</option>
-          </select>
-        </div>
+        <label data-i18n="ver_precios">Ver precios en:</label>
+        <select id="moneda-usuario" onchange="actualizarPreciosEnPantalla()" style="width:auto;display:inline-block;">
+          <option value="RUB">Rublos (RUB)</option><option value="USD">Dólares (USD)</option><option value="EUR">Euros (EUR)</option><option value="MLC">MLC (Cuba)</option>
+        </select>
       </div>
       <div class="grid-normal" id="ticketCards"></div>
     </div>
@@ -547,7 +555,10 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
         <div><label>🚌 Bus (RUB):</label><input id="editPrBus" type="number"></div>
         <div><label>📱 Recarga desde (RUB):</label><input id="editPrRec" type="number"></div>
       </div>
-      <h3>💱 Tasas de cambio (por 1 USD)</h3>
+      <h3>💱 Tasas de remesas por país (País | Moneda | Tasa | Mínimo | Base)</h3>
+      <p style="font-size:12px;color:var(--muted);">La tasa es moneda local por 1 unidad de la moneda base. Ej: Cuba → 10.70 CUP por 1 RUB, mínimo 1000 RUB.</p>
+      <textarea id="editTasasRemesas" rows="8" style="font-family:monospace;"></textarea>
+      <h3>💱 Tasas de conversión entre monedas (moneda local por 1 USD)</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
         <div><label>Cuba (CUP):</label><input id="editRateCuba" type="number"></div>
         <div><label>Venezuela (Bs):</label><input id="editRateVen" type="number"></div>
@@ -556,6 +567,7 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       <div id="lista-visas-admin" style="margin-bottom:1rem;"></div>
       <button onclick="agregarVisasAdmin()" style="background:linear-gradient(135deg,var(--green),#15803d);">➕ Agregar País (Visa)</button>
       <h3>🌍 Países y Destinos (Boletos avión)</h3>
+      <p style="font-size:12px;color:var(--muted);">Agrega o quita países. El precio se muestra en la moneda base que elijas aquí y se convierte a la moneda que el cliente seleccione arriba (RUB/USD/EUR/MLC).</p>
       <div id="lista-paises-admin" style="margin-bottom:1rem;"></div>
       <button onclick="agregarPaisAdmin()" style="background:linear-gradient(135deg,var(--green),#15803d);">➕ Agregar País</button>
       <h3>🚆🚌 Info Tren y Bus</h3>
@@ -565,7 +577,7 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       <div style="display:flex;gap:10px;align-items:center;"><label style="margin:0;">Moneda:</label>
       <select id="editRechargesCurrency" style="width:auto;margin:0;"><option>RUB</option><option>USD</option><option>EUR</option></select></div>
       <textarea id="editRechargesList" rows="10" style="font-family:monospace;"></textarea>
-      <h3>💸 Remesas</h3>
+      <h3>💸 Remesas (tarjeta principal)</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
         <div><label>Moneda:</label><select id="editRemitCurrency" style="margin:0;"><option>RUB</option><option>USD</option><option>EUR</option></select></div>
         <div><label>Cantidad ejemplo:</label><input id="editRemitRubles" type="number" style="margin:0;"></div>
@@ -651,9 +663,9 @@ let capFA=Math.floor(Math.random()*8)+2, capFB=Math.floor(Math.random()*8)+2;
 let deferredPrompt=null, timerPromo=null, timerC=null, ci=0;
 
 const I18N={
-es:{slogan:"TU PUENTE HACIA NUEVAS OPORTUNIDADES",admin_info:"Administrador: Daynel Caminero · Tel: +7 904 631-95-65",nav_inicio:"Inicio",nav_recargas:"Recargas",nav_remesas:"Remesas",nav_pagos:"Cómo Pagar",nav_seguimiento:"Seguimiento",nav_boletos:"Boletos",nav_destinos:"Fotos Destinos",nav_video:"Video",nav_juegos:"Juegos",nav_testimonios:"Testimonios",nav_faq:"FAQ",nav_info:"Información",nav_paquetes:"Paquetes",nav_visas:"Visas",nav_socios:"Socios",nav_cuba:"Cuba",nav_notas:"Notas",nav_contacto:"Contacto",nav_admin:"Admin",banner_eco:"Precios más económicos",noticias:"Noticias de Viajes, Remesas y Recargas",btn_comprar:"Comprar Ahora",hora_local:"Hora local",t_recargas:"Tienda de Recargas",t_remesas:"Envío de Remesas",t_pagos:"Cómo Pagar",t_seguimiento:"Seguimiento de mi solicitud",s_id:"Escribe el ID de tu comprobante:",calc_remit:"Calculadora de remesa",c_monto:"Importe a enviar:",c_comision:"Comisión (%):",btn_solicitar:"Solicitar Remesa",calc_pasaje:"Calculadora de pasaje (cambio de moneda)",c_precio:"Precio del pasaje (USD):",c_tasa:"Tasa de cambio (por 1 USD):",l_bc:"Banco de Cuba – tasa oficial",t_boletos:"Boletos: Avión · Tren · Bus",t_avion:"Avión",t_tren:"Tren",t_bus2:"Bus",sel_pais:"País de destino:",sel_pais_hint:"Selecciona un país.",ver_precios:"Ver precios en: ",consultar:"Consultar por WhatsApp",t_destinos:"Destinos: fotos, hoteles y restaurantes económicos",t_video:"Video",video_nube:"El video se reproduce desde YouTube: no consume tu espacio en la nube.",t_tienda:"Tienda en línea",t_juegos:"Juegos gratis (no consumen tu nube)",t_testimonios:"Lo que dicen nuestros clientes",t_faq:"Preguntas Frecuentes",t_info:"Información Importante",t_socios:"Registra tu Negocio",t_cuba:"Enlaces Oficiales de Cuba",t_notas:"Notas e información importante",t_contacto:"Contacto",t_admin:"Administración",acceso:"Acceso Restringido",comprar:"Comprar"},
-ru:{slogan:"ТВОЙ МОСТ К НОВЫМ ВОЗМОЖНОСТЯМ",admin_info:"Администратор: Daynel Caminero · Тел: +7 904 631-95-65",nav_inicio:"Начало",nav_recargas:"Пополнения",nav_remesas:"Переводы",nav_pagos:"Как оплатить",nav_seguimiento:"Отслеживание",nav_boletos:"Билеты",nav_destinos:"Фото направлений",nav_video:"Видео",nav_juegos:"Игры",nav_testimonios:"Отзывы",nav_faq:"Вопросы",nav_info:"Информация",nav_paquetes:"Пакеты",nav_visas:"Визы",nav_socios:"Партнёры",nav_cuba:"Куба",nav_notas:"Заметки",nav_contacto:"Контакты",nav_admin:"Админ",banner_eco:"Самые выгодные цены",noticias:"Новости путешествий, переводов и пополнений",btn_comprar:"Купить сейчас",hora_local:"Местное время",t_recargas:"Магазин пополнений",t_remesas:"Отправка переводов",t_pagos:"Как оплатить",t_seguimiento:"Отслеживание заявки",s_id:"Введите ID вашей квитанции:",calc_remit:"Калькулятор перевода",c_monto:"Сумма перевода:",c_comision:"Комиссия (%):",btn_solicitar:"Оформить перевод",calc_pasaje:"Калькулятор билета (обмен валюты)",c_precio:"Цена билета (USD):",c_tasa:"Курс (за 1 USD):",l_bc:"Банк Кубы – официальный курс",t_boletos:"Билеты: самолёт · поезд · автобус",t_avion:"Самолёт",t_tren:"Поезд",t_bus2:"Автобус",sel_pais:"Страна назначения:",sel_pais_hint:"Выберите страну.",ver_precios:"Показать цены в: ",consultar:"Спросить в WhatsApp",t_destinos:"Направления: фото, отели и рестораны подешевле",t_video:"Видео",video_nube:"Видео воспроизводится с YouTube: место не расходуется.",t_tienda:"Онлайн-магазин",t_juegos:"Бесплатные игры",t_testimonios:"Что говорят наши клиенты",t_faq:"Частые вопросы",t_info:"Важная информация",t_socios:"Зарегистрируй свой бизнес",t_cuba:"Официальные ссылки Кубы",t_notas:"Заметки и важная информация",t_contacto:"Контакты",t_admin:"Администрирование",acceso:"Ограниченный доступ",comprar:"Купить"},
-en:{slogan:"YOUR BRIDGE TO NEW OPPORTUNITIES",admin_info:"Administrator: Daynel Caminero · Tel: +7 904 631-95-65",nav_inicio:"Home",nav_recargas:"Top-ups",nav_remesas:"Remittances",nav_pagos:"How to Pay",nav_seguimiento:"Tracking",nav_boletos:"Tickets",nav_destinos:"Destination Photos",nav_video:"Video",nav_juegos:"Games",nav_testimonios:"Testimonials",nav_faq:"FAQ",nav_info:"Information",nav_paquetes:"Packages",nav_visas:"Visas",nav_socios:"Partners",nav_cuba:"Cuba",nav_notas:"Notes",nav_contacto:"Contact",nav_admin:"Admin",banner_eco:"Cheapest prices",noticias:"Travel, Remittance & Top-up News",btn_comprar:"Buy Now",hora_local:"Local time",t_recargas:"Top-up Store",t_remesas:"Send Remittances",t_pagos:"How to Pay",t_seguimiento:"Track my request",s_id:"Enter your receipt ID:",calc_remit:"Remittance calculator",c_monto:"Amount to send:",c_comision:"Fee (%):",btn_solicitar:"Request Remittance",calc_pasaje:"Ticket calculator (currency exchange)",c_precio:"Ticket price (USD):",c_tasa:"Exchange rate (per 1 USD):",l_bc:"Bank of Cuba – official rate",t_boletos:"Tickets: Plane · Train · Bus",t_avion:"Plane",t_tren:"Train",t_bus2:"Bus",sel_pais:"Destination country:",sel_pais_hint:"Select a country.",ver_precios:"Show prices in: ",consultar:"Ask via WhatsApp",t_destinos:"Destinations: photos, budget hotels and restaurants",t_video:"Video",video_nube:"Video plays from YouTube: it does not use your cloud storage.",t_tienda:"Online store",t_juegos:"Free games",t_testimonios:"What our clients say",t_faq:"Frequently Asked Questions",t_info:"Important Information",t_socios:"Register your Business",t_cuba:"Official Links of Cuba",t_notas:"Notes and important information",t_contacto:"Contact",t_admin:"Administration",acceso:"Restricted Access",comprar:"Buy"}
+es:{slogan:"TU PUENTE HACIA NUEVAS OPORTUNIDADES",admin_info:"Administrador: Daynel Caminero · Tel: +7 904 631-95-65",nav_inicio:"Inicio",nav_recargas:"Recargas",nav_remesas:"Remesas",nav_pagos:"Cómo Pagar",nav_seguimiento:"Seguimiento",nav_boletos:"Boletos",nav_destinos:"Fotos Destinos",nav_video:"Video",nav_juegos:"Juegos",nav_testimonios:"Testimonios",nav_faq:"FAQ",nav_info:"Información",nav_paquetes:"Paquetes",nav_visas:"Visas",nav_socios:"Socios",nav_cuba:"Cuba",nav_notas:"Notas",nav_contacto:"Contacto",nav_admin:"Admin",banner_eco:"Precios más económicos",noticias:"Noticias de Viajes, Remesas y Recargas",btn_comprar:"Comprar Ahora",hora_local:"Hora local",t_recargas:"Tienda de Recargas",t_remesas:"Envío de Remesas",t_pagos:"Cómo Pagar",t_seguimiento:"Seguimiento de mi solicitud",s_id:"Escribe el ID de tu comprobante:",calc_pasaje:"Calculadora de pasaje (cambio de moneda)",c_precio:"Precio del pasaje (USD):",c_tasa:"Tasa de cambio (por 1 USD):",l_bc:"Banco de Cuba – tasa oficial",t_boletos:"Boletos: Avión · Tren · Bus",t_avion:"Avión",t_tren:"Tren",t_bus2:"Bus",ver_precios:"Ver precios en:",consultar:"Consultar por WhatsApp",t_destinos:"Destinos: fotos, hoteles y restaurantes económicos",t_video:"Video",video_nube:"El video se reproduce desde YouTube: no consume tu espacio en la nube.",t_tienda:"Tienda en línea",t_juegos:"Juegos gratis (no consumen tu nube)",t_testimonios:"Lo que dicen nuestros clientes",t_faq:"Preguntas Frecuentes",t_info:"Información Importante",t_socios:"Registra tu Negocio",t_cuba:"Enlaces Oficiales de Cuba",t_notas:"Notas e información importante",t_contacto:"Contacto",t_admin:"Administración",acceso:"Acceso Restringido",comprar:"Comprar"},
+ru:{slogan:"ТВОЙ МОСТ К НОВЫМ ВОЗМОЖНОСТЯМ",admin_info:"Администратор: Daynel Caminero · Тел: +7 904 631-95-65",nav_inicio:"Начало",nav_recargas:"Пополнения",nav_remesas:"Переводы",nav_pagos:"Как оплатить",nav_seguimiento:"Отслеживание",nav_boletos:"Билеты",nav_destinos:"Фото направлений",nav_video:"Видео",nav_juegos:"Игры",nav_testimonios:"Отзывы",nav_faq:"Вопросы",nav_info:"Информация",nav_paquetes:"Пакеты",nav_visas:"Визы",nav_socios:"Партнёры",nav_cuba:"Куба",nav_notas:"Заметки",nav_contacto:"Контакты",nav_admin:"Админ",banner_eco:"Самые выгодные цены",noticias:"Новости путешествий, переводов и пополнений",btn_comprar:"Купить сейчас",hora_local:"Местное время",t_recargas:"Магазин пополнений",t_remesas:"Отправка переводов",t_pagos:"Как оплатить",t_seguimiento:"Отслеживание заявки",s_id:"Введите ID вашей квитанции:",calc_pasaje:"Калькулятор билета (обмен валюты)",c_precio:"Цена билета (USD):",c_tasa:"Курс (за 1 USD):",l_bc:"Банк Кубы – официальный курс",t_boletos:"Билеты: самолёт · поезд · автобус",t_avion:"Самолёт",t_tren:"Поезд",t_bus2:"Автобус",ver_precios:"Показать цены в:",consultar:"Спросить в WhatsApp",t_destinos:"Направления: фото, отели и рестораны подешевле",t_video:"Видео",video_nube:"Видео воспроизводится с YouTube: место не расходуется.",t_tienda:"Онлайн-магазин",t_juegos:"Бесплатные игры",t_testimonios:"Что говорят наши клиенты",t_faq:"Частые вопросы",t_info:"Важная информация",t_socios:"Зарегистрируй свой бизнес",t_cuba:"Официальные ссылки Кубы",t_notas:"Заметки и важная информация",t_contacto:"Контакты",t_admin:"Администрирование",acceso:"Ограниченный доступ",comprar:"Купить"},
+en:{slogan:"YOUR BRIDGE TO NEW OPPORTUNITIES",admin_info:"Administrator: Daynel Caminero · Tel: +7 904 631-95-65",nav_inicio:"Home",nav_recargas:"Top-ups",nav_remesas:"Remittances",nav_pagos:"How to Pay",nav_seguimiento:"Tracking",nav_boletos:"Tickets",nav_destinos:"Destination Photos",nav_video:"Video",nav_juegos:"Games",nav_testimonios:"Testimonials",nav_faq:"FAQ",nav_info:"Information",nav_paquetes:"Packages",nav_visas:"Visas",nav_socios:"Partners",nav_cuba:"Cuba",nav_notas:"Notes",nav_contacto:"Contact",nav_admin:"Admin",banner_eco:"Cheapest prices",noticias:"Travel, Remittance & Top-up News",btn_comprar:"Buy Now",hora_local:"Local time",t_recargas:"Top-up Store",t_remesas:"Send Remittances",t_pagos:"How to Pay",t_seguimiento:"Track my request",s_id:"Enter your receipt ID:",calc_pasaje:"Ticket calculator (currency exchange)",c_precio:"Ticket price (USD):",c_tasa:"Exchange rate (per 1 USD):",l_bc:"Bank of Cuba – official rate",t_boletos:"Tickets: Plane · Train · Bus",t_avion:"Plane",t_tren:"Train",t_bus2:"Bus",ver_precios:"Show prices in:",consultar:"Ask via WhatsApp",t_destinos:"Destinations: photos, budget hotels and restaurants",t_video:"Video",video_nube:"Video plays from YouTube: it does not use your cloud storage.",t_tienda:"Online store",t_juegos:"Free games",t_testimonios:"What our clients say",t_faq:"Frequently Asked Questions",t_info:"Important Information",t_socios:"Register your Business",t_cuba:"Official Links of Cuba",t_notas:"Notes and important information",t_contacto:"Contact",t_admin:"Administration",acceso:"Restricted Access",comprar:"Buy"}
 };
 let lang = localStorage.getItem("ybh_lang") || "es";
 function setLang(l){lang=l;localStorage.setItem("ybh_lang",l);document.documentElement.lang=l;
@@ -698,6 +710,16 @@ COMBO 2 | 1300 | 🌐 7GB + 300MB / 📞 40 MIN + 20 SMS |
 INTERNET 3 | 2500 | 🌐 15GB + 300MB |
 COMBO 3 | 2700 | 🌐 15GB + 300MB / 📞 80 MIN + 20 SMS`;
 
+// Tasas de remesas por país (editable en Admin)
+// Formato: País | Moneda local | Tasa (moneda local por 1 base) | Mínimo | Moneda base
+const DEF_TASAS_REMESAS = `Cuba | CUP | 10.70 | 1000 | RUB
+México | MXN | 0.195 | 2000 | RUB
+Brasil | BRL | 0.057 | 2000 | RUB
+Surinam | SRD | 0.40 | 2000 | RUB
+Guyana | GYD | 2.30 | 2000 | RUB
+Rusia | RUB | 1.00 | 1000 | RUB
+Dubái | AED | 0.038 | 2000 | RUB`;
+
 let currentData={published:true,
 noticeText:"Bienvenido a nuestra tienda online.",noticeImg:"",
 newsTitle:"",newsDesc:"",newsLink:"",
@@ -706,6 +728,7 @@ rechargesListText:DEF_RECARGAS_TEXTO,rechargesCurrency:"RUB",
 remittance:{rubles:1000,cup:9.80,currency:"RUB",image:DEF_FOTO_REMESA},
 prices:{avion:99800,tren:5000,bus:2000,rec:200},
 rates:{cuba:320,venezuela:40},
+tasasRemesas:DEF_TASAS_REMESAS,
 trenInfo:"Rutas y horarios de tren disponibles. Consulta precios por WhatsApp.",
 busInfo:"Rutas de bus locales e internacionales. Consulta precios por WhatsApp.",
 video:"",notes:"Escribe aquí tus notas e información importante…",
@@ -720,6 +743,56 @@ photos:[]};
 function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);}
 function generarID(){const a=new Date();return `YBH-${a.getFullYear()}${String(a.getMonth()+1).padStart(2,'0')}${String(a.getDate()).padStart(2,'0')}-${Math.floor(Math.random()*9000)+1000}`;}
 function obtenerFechaHora(){const a=new Date();return `${String(a.getDate()).padStart(2,'0')}/${String(a.getMonth()+1).padStart(2,'0')}/${a.getFullYear()} • ${String(a.getHours()).padStart(2,'0')}:${String(a.getMinutes()).padStart(2,'0')}`;}
+
+// ===== CALCULADORA DE REMESAS CON TU TASA =====
+function parsearTasasRemesas(){
+return (currentData.tasasRemesas || DEF_TASAS_REMESAS).split('\n').filter(l=>l.trim()).map(l=>{
+const p=l.split('|').map(s=>(s||"").trim());
+return {pais:p[0]||"País",moneda:p[1]||"CUP",tasa:parseFloat(p[2])||0,minimo:parseFloat(p[3])||0,base:p[4]||"RUB"};});}
+function poblarSelectorRemesas(){
+const sel=document.getElementById("remitPais");if(!sel)return;
+sel.innerHTML="";
+parsearTasasRemesas().forEach((t,i)=>{const o=document.createElement("option");o.value=i;o.textContent=`${t.pais} (${t.moneda})`;sel.appendChild(o);});}
+function calcularRemesaNueva(){
+const lista=parsearTasasRemesas();
+const i=Number(document.getElementById("remitPais").value||0);
+const t=lista[i];if(!t)return;
+const monto=Number(document.getElementById("remitMonto").value||0);
+const baseElegida=document.getElementById("remitBaseMoneda").value;
+const aRub={RUB:1,USD:MIS_TASAS_MANUALES.USD,EUR:MIS_TASAS_MANUALES.EUR};
+const montoBaseTasa=(monto*aRub[baseElegida])/aRub[t.base];
+const minimo=t.minimo*aRub[t.base]/aRub[baseElegida];
+const resultado=montoBaseTasa*t.tasa;
+document.getElementById("remitInfo").innerHTML=
+`Tasa actual: <b style="color:var(--gold);">${t.tasa} ${t.moneda} por 1 ${t.base}</b>`+
+(monto<minimo?` · ⚠️ Mínimo: <b style="color:var(--red);">${minimo.toFixed(0)} ${baseElegida}</b>`:` · ✅ Mínimo cubierto (${minimo.toFixed(0)} ${baseElegida})`);
+document.getElementById("remitResultado").textContent=resultado.toLocaleString('es',{maximumFractionDigits:2})+" "+t.moneda;
+datosRemesaActual={pais:t.pais,moneda:t.moneda,base:baseElegida,monto,resultado,minimoOk:monto>=minimo};}
+let datosRemesaActual={};
+function solicitarRemesa(){
+if(!datosRemesaActual||!datosRemesaActual.minimoOk){alert("⚠️ El monto está por debajo del mínimo permitido.");return;}
+abrirComprobante('proceso',`Remesa a ${datosRemesaActual.pais}`,`${datosRemesaActual.monto} ${datosRemesaActual.base}`,datosRemesaActual.pais);}
+
+// ===== BANNER DE TASAS OFICIALES EN VIVO (una consulta al día) =====
+async function cargarTasasVivas(){
+const cont=document.getElementById("tasasVivasFila");
+if(!cont)return;
+const hoy=new Date().toISOString().slice(0,10);
+const cache=localStorage.getItem("ybh_tasas_"+hoy);
+if(cache){pintarTasas(JSON.parse(cache),"Actualizado hoy · tasa oficial diaria");return;}
+try{
+const res=await fetch("https://open.er-api.com/v6/latest/USD");
+const data=await res.json();
+if(!data.rates)throw new Error("sin datos");
+const tasas={cup:data.rates.CUP,mxn:data.rates.MXN,brl:data.rates.BRL,srd:data.rates.SRD,gyd:data.rates.GYD,rub:data.rates.RUB,aed:data.rates.AED};
+localStorage.setItem("ybh_tasas_"+hoy,JSON.stringify(tasas));
+pintarTasas(tasas,"Actualizado hoy · tasa oficial diaria");
+}catch(e){
+cont.innerHTML=`<span class="status">No se pudo actualizar. Inténtalo más tarde o consulta por WhatsApp.</span>`;}}
+function pintarTasas(t,nota){
+const paises=[["cup","🇨🇺 Cuba CUP/USD"],["mxn","🇲🇽 México MXN/USD"],["brl","🇧🇷 Brasil BRL/USD"],["srd","🇸🇷 Surinam SRD/USD"],["gyd","🇬🇾 Guyana GYD/USD"],["rub","🇷🇺 Rusia RUB/USD"],["aed","🇦🇪 Dubái AED/USD"]];
+document.getElementById("tasasVivasFila").innerHTML=paises.map(([k,n])=>`<div class="tasas-item"><b>${t[k]?t[k].toFixed(2):"—"}</b><span>${n}</span></div>`).join('');
+document.getElementById("tasasVivasFecha").textContent=nota;}
 
 // ===== COMPROBANTE + GUARDAR EN LA NUBE =====
 function abrirComprobante(estado,servicio,monto,destino){
@@ -854,25 +927,6 @@ else window.open("https://wa.me/?text="+encodeURIComponent("Mira esta página: "
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById("btnInstall").classList.remove("hidden");});
 function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;document.getElementById("btnInstall").classList.add("hidden");}}
 
-// ===== SELECTOR DE PAÍSES =====
-async function cargarSelectorPaises(){
-const sel=document.getElementById("selector-paises");if(!sel)return;
-sel.innerHTML='<option value="">-- Selecciona un país --</option>';
-const lista=currentData.paises||paisesPorDefecto;paisesActuales=lista;
-lista.forEach(p=>{const o=document.createElement("option");o.value=p.codigo;o.textContent=p.nombre;sel.appendChild(o);});
-try{const{data:neg}=await db.from('negocios_socios').select('*').eq('aprobado',true);
-if(neg)neg.forEach(n=>{const o=document.createElement("option");o.value=`socio-${n.id}`;o.textContent=`🤝 ${n.nombre_negocio} (${n.paises})`;sel.appendChild(o);});}catch(e){}}
-function mostrarInfoPais(){
-const cod=document.getElementById("selector-paises").value,cont=document.getElementById("informacion-pasaje");
-if(cod.startsWith("socio-")){
-db.from('negocios_socios').select('*').eq('id',cod.replace("socio-","")).single().then(({data})=>{
-if(data)cont.innerHTML=`<h3>🤝 ${escapeHTML(data.nombre_negocio)}</h3><p style="color:var(--muted);">${escapeHTML(data.descripcion)}</p><p>Contacto: <a href="https://wa.me/${String(data.whatsapp).replace(/\+/g,'')}" target="_blank" style="color:var(--green);">${escapeHTML(data.whatsapp)}</a></p>`;});return;}
-const p=paisesActuales.find(x=>x.codigo===cod);
-if(p){const mb=p.monedaBase||"RUB";
-cont.innerHTML=`<h3>Pasajes a ${p.nombre}</h3><p style="color:var(--muted);">${p.info}</p><p>Precio base: <strong style="color:var(--accent);">${p.precio} ${mb}</strong></p>
-<button class="btn-whatsapp" onclick="abrirComprobante('proceso','Vuelo a ${p.nombre}','${p.precio} ${mb}','${p.nombre}')">✈️ Generar Solicitud</button>`;}
-else cont.innerHTML=`<p>Selecciona un país de la lista para ver los detalles.</p>`;}
-
 // ===== ADMIN: PAÍSES Y VISAS =====
 function renderizarAdminPaises(){
 const c=document.getElementById("lista-paises-admin");if(!c)return;
@@ -900,10 +954,14 @@ function eliminarVisasAdmin(i){listaVisas.splice(i,1);renderizarAdminVisas();}
 
 function actualizarPreciosEnPantalla(){
 const s=document.getElementById("moneda-usuario");if(!s)return;
-const t=MIS_TASAS_MANUALES[s.value];
+const destino=s.value,T=MIS_TASAS_MANUALES;
 document.querySelectorAll('.precio-dinamico').forEach(el=>{
-const pb=parseFloat(el.getAttribute('data-precio-rub'))||0;
-if(pb===0)return;el.innerText=(pb/t).toFixed(2);});}
+const pb=parseFloat(el.getAttribute('data-precio-base'))||0;
+const mb=el.getAttribute('data-moneda-base')||"RUB";
+if(!pb)return;
+const enRub=pb*(T[mb]||1);
+const final=enRub/(T[destino]||1);
+el.textContent=`Desde ${final.toFixed(2)} ${destino}`;});}
 
 // ===== RENDER PRINCIPAL =====
 function renderPage(){
@@ -916,6 +974,7 @@ else document.getElementById("globalNoticeImg").style.display="none";}
 else document.getElementById("globalNoticeBox").style.display="none";
 
 cargarNoticiasReales();renderizarVisas();renderizarTestimonios();renderizarFamilia();renderizarFAQ();mostrarPromo();
+poblarSelectorRemesas();calcularRemesaNueva();cargarTasasVivas();
 
 const pr=d.prices||{};
 const recMin=(d.rechargesListText||DEF_RECARGAS_TEXTO).split('\n').map(l=>parseFloat(l.split('|')[1])||0).filter(x=>x>0);
@@ -940,13 +999,14 @@ document.getElementById("remittanceCards").innerHTML=`<div class="card"><img src
 
 document.getElementById("payInfoView").textContent=d.payInfo||"";
 
+// Tarjetas de países con conversión de moneda dinámica
 document.getElementById("ticketCards").innerHTML=(d.paises||paisesPorDefecto).map(p=>{
 const mb=p.monedaBase||"RUB";
 return`<div class="card" style="justify-content:space-between;overflow:hidden;">
 <img src="${escapeHTML(p.img||'https://images.pexels.com/photos/2067062/pexels-photo-2067062.jpeg')}" alt="${escapeHTML(p.nombre)}" style="height:180px;">
 <div style="padding:4px 2px;"><h3 style="margin:0;">✈️ Vuelos a ${escapeHTML(p.nombre)}</h3>
 <p style="color:var(--muted);font-size:.9rem;margin:8px 0;">${escapeHTML(p.info)}</p>
-<div class="price" style="text-align:center;">Desde ${p.precio} ${mb}</div></div>
+<div class="price precio-dinamico" style="text-align:center;" data-precio-base="${p.precio||0}" data-moneda-base="${mb}">Desde ${p.precio} ${mb}</div></div>
 <div style="display:flex;flex-direction:column;gap:8px;">
 <button class="btn-comprar" onclick="abrirComprobante('proceso','Boleto a ${escapeHTML(p.nombre)}','${p.precio} ${mb}','${escapeHTML(p.nombre)}')">🎫 Comprar Boleto</button>
 ${p.linkAfiliado?`<a class="action" href="${p.linkAfiliado}" target="_blank" style="background:rgba(255,255,255,.06);border:1px solid var(--border);font-size:.8rem;padding:8px;">Ver Opciones en Trip.com</a>`:''}
@@ -959,7 +1019,6 @@ document.getElementById("waBus").href="https://wa.me/"+MI_TELEFONO;
 document.getElementById("v-frame").src=d.video?"https://www.youtube.com/embed/"+d.video:"";
 document.getElementById("notesView").textContent=d.notes||"—";
 
-// Tienda: café destacado con badge moderno
 document.getElementById("shopCards").innerHTML=(d.shop||"").split('\n').filter(l=>l.trim()).map(l=>{
 const[n,p,ds]=l.split('|').map(s=>(s||"").trim());
 const esCafe=(n||"").toLowerCase().includes("café")||(n||"").toLowerCase().includes("cafe");
@@ -972,7 +1031,7 @@ ${esCafe?`<div class="badge-modern">☕ Más vendido</div>`:''}
 
 buildCarousel();setupBannerRotativo();calcularTodo();
 if(isAdmin){fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();cargarStats();}
-actualizarPreciosEnPantalla();cargarSelectorPaises();mostrarInfoPais();}
+actualizarPreciosEnPantalla();}
 
 // ===== CARRUSEL (20 SEG) =====
 function buildCarousel(){
@@ -1056,14 +1115,10 @@ setInterval(()=>{if(bannerList.length>1){bannerIndex++;updateBannerDisplay();}},
 // ===== PESTAÑAS / CALCULADORAS =====
 function cambiarTab(t){["avion","tren","bus"].forEach(x=>document.getElementById("panel-"+x).classList.toggle("hidden",x!==t));
 ["avion","tren","bus"].forEach(x=>document.getElementById("tab-"+x).classList.toggle("active",x===t));}
-function calculateRemittance(){
-const a=Number(document.getElementById("remitAmount").value||0),f=Number(document.getElementById("remitFee").value||0);
-const r=Number(currentData.remittance.cup)/Number(currentData.remittance.rubles||1);
-document.getElementById("remitResult").textContent=((a-a*f/100)*r).toFixed(2)+" CUP";}
 function calcPasaje(){
 const p=Number(document.getElementById("pasajeUSD").value||0),r=Number(document.getElementById("pasajeTasa").value||0);
 document.getElementById("pasajeResult").textContent=(p*r).toFixed(2);}
-function calcularTodo(){calculateRemittance();calcPasaje();}
+function calcularTodo(){calcPasaje();}
 
 // ===== RELOJ =====
 function updateClockDate(){
@@ -1140,6 +1195,7 @@ if(data&&data.data){
 currentData=Object.assign({},currentData,data.data);
 listaVisas=currentData.visas||listaVisasDef;
 if(!currentData.paises)currentData.paises=paisesPorDefecto;
+if(!currentData.tasasRemesas)currentData.tasasRemesas=DEF_TASAS_REMESAS;
 renderPage();
 s.textContent="✅ Tienda conectada";s.className="status good";}
 }catch(e){s.textContent="❌ Error";s.className="status bad";}
@@ -1164,6 +1220,7 @@ promo:{titulo:document.getElementById("editPromoTitulo").value.trim(),precio:doc
 visas:listaVisas,paises:paisesActuales,
 prices:{avion:+document.getElementById("editPrAvion").value||0,tren:+document.getElementById("editPrTren").value||0,bus:+document.getElementById("editPrBus").value||0,rec:+document.getElementById("editPrRec").value||0},
 rates:{cuba:+document.getElementById("editRateCuba").value||0,venezuela:+document.getElementById("editRateVen").value||0},
+tasasRemesas:document.getElementById("editTasasRemesas").value,
 trenInfo:document.getElementById("editTren").value,
 busInfo:document.getElementById("editBus").value,
 rechargesListText:document.getElementById("editRechargesList").value,
@@ -1211,6 +1268,7 @@ document.getElementById("editPrBus").value=(d.prices||{}).bus??0;
 document.getElementById("editPrRec").value=(d.prices||{}).rec??0;
 document.getElementById("editRateCuba").value=(d.rates||{}).cuba??0;
 document.getElementById("editRateVen").value=(d.rates||{}).venezuela??0;
+document.getElementById("editTasasRemesas").value=d.tasasRemesas||DEF_TASAS_REMESAS;
 document.getElementById("editTren").value=d.trenInfo||"";
 document.getElementById("editBus").value=d.busInfo||"";
 document.getElementById("editRechargesList").value=d.rechargesListText||DEF_RECARGAS_TEXTO;
