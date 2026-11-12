@@ -221,13 +221,34 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       <div class="titulo">🔥 <span data-i18n="banner_eco">Precios más económicos</span></div>
       <div class="fila" id="preciosFila"></div>
     </div>
+
+    <!-- BLOQUE 1: TU TASA DE VENTA -->
+    <div class="card" style="padding:16px;border:1px solid var(--gold);">
+      <div style="font-weight:900;font-size:16px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;">
+        💱 Nuestra tasa de venta (YOUR BRIDGE HOME)
+      </div>
+      <div id="tasasVentaFila" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:12px;">
+        <span class="status">Cargando...</span>
+      </div>
+      <div style="font-size:11px;color:var(--muted);margin-top:10px;">
+        Tasas aplicadas a nuestras operaciones · actualizadas por el administrador
+      </div>
+    </div>
+
+    <!-- BLOQUE 2: TASA OFICIAL DE REFERENCIA -->
     <div class="card" style="padding:16px;">
-      <div style="font-weight:900;font-size:16px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;">💱 Tasas del día (oficiales)</div>
+      <div style="font-weight:900;font-size:16px;color:var(--primary);text-transform:uppercase;letter-spacing:1px;">
+        📊 Tasa oficial de referencia
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin:6px 0 0;">
+        Solo informativa. No es la tasa que aplicamos a nuestras operaciones.
+      </p>
       <div id="tasasVivasFila" style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:12px;">
-        <span class="status">Cargando tasas del día...</span>
+        <span class="status">Cargando tasas oficiales...</span>
       </div>
       <div style="font-size:11px;color:var(--muted);margin-top:10px;" id="tasasVivasFecha"></div>
     </div>
+
     <div class="banner-rotativo" id="mainBanner">
       <div class="banner-overlay"></div>
       <div class="banner-content">
@@ -304,7 +325,11 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       <div class="card" style="text-align:center;">
         <label data-i18n="ver_precios">Ver precios en:</label>
         <select id="moneda-usuario" onchange="actualizarPreciosEnPantalla()" style="width:auto;display:inline-block;">
-          <option value="RUB">Rublos (RUB)</option><option value="USD">Dólares (USD)</option><option value="EUR">Euros (EUR)</option><option value="MLC">MLC (Cuba)</option>
+          <option value="RUB">Rublos (RUB)</option>
+          <option value="USD">Dólares (USD)</option>
+          <option value="EUR">Euros (EUR)</option>
+          <option value="CUP">Peso cubano (CUP)</option>
+          <option value="MLC">MLC (Cuba)</option>
         </select>
       </div>
       <div class="grid-normal" id="ticketCards"></div>
@@ -558,16 +583,25 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       <h3>💱 Tasas de remesas por país (País | Moneda | Tasa | Mínimo | Base)</h3>
       <p style="font-size:12px;color:var(--muted);">La tasa es moneda local por 1 unidad de la moneda base. Ej: Cuba → 10.70 CUP por 1 RUB, mínimo 1000 RUB.</p>
       <textarea id="editTasasRemesas" rows="8" style="font-family:monospace;"></textarea>
-      <h3>💱 Tasas de conversión entre monedas (moneda local por 1 USD)</h3>
+
+      <h3>💱 Tus tasas de venta (las que tú decides)</h3>
+      <p style="font-size:12px;color:var(--muted);">
+        Estas son las tasas que usa la calculadora de remesas y el selector de moneda.
+        No son las oficiales: son las que tú cobras.
+      </p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
-        <div><label>Cuba (CUP):</label><input id="editRateCuba" type="number"></div>
-        <div><label>Venezuela (Bs):</label><input id="editRateVen" type="number"></div>
+        <div><label>RUB (base):</label><input id="editTasaVentaRUB" type="number" step="0.01"></div>
+        <div><label>USD:</label><input id="editTasaVentaUSD" type="number" step="0.01"></div>
+        <div><label>EUR:</label><input id="editTasaVentaEUR" type="number" step="0.01"></div>
+        <div><label>CUP (peso cubano):</label><input id="editTasaVentaCUP" type="number" step="0.01"></div>
+        <div><label>MLC (Cuba):</label><input id="editTasaVentaMLC" type="number" step="0.01"></div>
       </div>
+
       <h3>🛂 Gestión de Visas</h3>
       <div id="lista-visas-admin" style="margin-bottom:1rem;"></div>
       <button onclick="agregarVisasAdmin()" style="background:linear-gradient(135deg,var(--green),#15803d);">➕ Agregar País (Visa)</button>
       <h3>🌍 Países y Destinos (Boletos avión)</h3>
-      <p style="font-size:12px;color:var(--muted);">Agrega o quita países. El precio se muestra en la moneda base que elijas aquí y se convierte a la moneda que el cliente seleccione arriba (RUB/USD/EUR/MLC).</p>
+      <p style="font-size:12px;color:var(--muted);">Agrega o quita países. El precio se muestra en la moneda base que elijas aquí y se convierte a la moneda que el cliente seleccione arriba (RUB/USD/EUR/CUP/MLC).</p>
       <div id="lista-paises-admin" style="margin-bottom:1rem;"></div>
       <button onclick="agregarPaisAdmin()" style="background:linear-gradient(135deg,var(--green),#15803d);">➕ Agregar País</button>
       <h3>🚆🚌 Info Tren y Bus</h3>
@@ -698,7 +732,7 @@ const paisesPorDefecto=[
 {codigo:"esp",nombre:"España",info:"Vuelos a Madrid o Barcelona.",precio:800,monedaBase:"EUR",linkAfiliado:"",img:"https://images.pexels.com/photos/2067062/pexels-photo-2067062.jpeg?auto=compress&cs=tinysrgb&w=600"},
 {codigo:"col",nombre:"Colombia",info:"Vuelos a Bogotá o Medellín.",precio:850,monedaBase:"USD",linkAfiliado:"",img:"https://images.pexels.com/photos/2067062/pexels-photo-2067062.jpeg?auto=compress&cs=tinysrgb&w=600"}];
 
-const MIS_TASAS_MANUALES={RUB:1,USD:95.50,EUR:102.10,MLC:85.00};
+const MIS_TASAS_MANUALES={RUB:1,USD:95.50,EUR:102.10,CUP:320.00,MLC:85.00};
 const DEF_FOTO_REMESA="https://images.pexels.com/photos/259027/pexels-photo-259027.jpeg?auto=compress&cs=tinysrgb&w=600";
 const DEF_RECARGAS_TEXTO=`VOZ | 200 | 📞 80 MIN | https://images.unsplash.com/photo-1512428559087-560fa5ceab42
 SALDO | 250 | 💳 350 CUP de SALDO LIMITADO |
@@ -710,8 +744,6 @@ COMBO 2 | 1300 | 🌐 7GB + 300MB / 📞 40 MIN + 20 SMS |
 INTERNET 3 | 2500 | 🌐 15GB + 300MB |
 COMBO 3 | 2700 | 🌐 15GB + 300MB / 📞 80 MIN + 20 SMS`;
 
-// Tasas de remesas por país (editable en Admin)
-// Formato: País | Moneda local | Tasa (moneda local por 1 base) | Mínimo | Moneda base
 const DEF_TASAS_REMESAS = `Cuba | CUP | 10.70 | 1000 | RUB
 México | MXN | 0.195 | 2000 | RUB
 Brasil | BRL | 0.057 | 2000 | RUB
@@ -728,6 +760,7 @@ rechargesListText:DEF_RECARGAS_TEXTO,rechargesCurrency:"RUB",
 remittance:{rubles:1000,cup:9.80,currency:"RUB",image:DEF_FOTO_REMESA},
 prices:{avion:99800,tren:5000,bus:2000,rec:200},
 rates:{cuba:320,venezuela:40},
+tasasVenta:{RUB:1, USD:95.50, EUR:102.10, CUP:320.00, MLC:85.00},
 tasasRemesas:DEF_TASAS_REMESAS,
 trenInfo:"Rutas y horarios de tren disponibles. Consulta precios por WhatsApp.",
 busInfo:"Rutas de bus locales e internacionales. Consulta precios por WhatsApp.",
@@ -740,11 +773,11 @@ familia:"Mamá Carmen | Yaniel en Moscú | Hijo mío: trabaja con orden, cuida t
 faq:"¿Cuánto tarda una remesa? | Normalmente entre 15 minutos y 2 horas, dependiendo del horario.\n¿Cómo pago? | Ve a la sección Cómo Pagar. Te damos los datos y confirmas por WhatsApp.\n¿Qué documentos necesito para la visa? | Pasaporte vigente, carnet, foto tipo visa y ocupación actual.\n¿Las recargas son inmediatas? | Sí, la activación es inmediata en el 99% de los casos.",
 photos:[]};
 
-function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);}
+function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function generarID(){const a=new Date();return `YBH-${a.getFullYear()}${String(a.getMonth()+1).padStart(2,'0')}${String(a.getDate()).padStart(2,'0')}-${Math.floor(Math.random()*9000)+1000}`;}
 function obtenerFechaHora(){const a=new Date();return `${String(a.getDate()).padStart(2,'0')}/${String(a.getMonth()+1).padStart(2,'0')}/${a.getFullYear()} • ${String(a.getHours()).padStart(2,'0')}:${String(a.getMinutes()).padStart(2,'0')}`;}
 
-// ===== CALCULADORA DE REMESAS CON TU TASA =====
+// ===== CALCULADORA DE REMESAS CON TUS TASAS DE VENTA =====
 function parsearTasasRemesas(){
 return (currentData.tasasRemesas || DEF_TASAS_REMESAS).split('\n').filter(l=>l.trim()).map(l=>{
 const p=l.split('|').map(s=>(s||"").trim());
@@ -754,26 +787,61 @@ const sel=document.getElementById("remitPais");if(!sel)return;
 sel.innerHTML="";
 parsearTasasRemesas().forEach((t,i)=>{const o=document.createElement("option");o.value=i;o.textContent=`${t.pais} (${t.moneda})`;sel.appendChild(o);});}
 function calcularRemesaNueva(){
-const lista=parsearTasasRemesas();
-const i=Number(document.getElementById("remitPais").value||0);
-const t=lista[i];if(!t)return;
-const monto=Number(document.getElementById("remitMonto").value||0);
-const baseElegida=document.getElementById("remitBaseMoneda").value;
-const aRub={RUB:1,USD:MIS_TASAS_MANUALES.USD,EUR:MIS_TASAS_MANUALES.EUR};
-const montoBaseTasa=(monto*aRub[baseElegida])/aRub[t.base];
-const minimo=t.minimo*aRub[t.base]/aRub[baseElegida];
-const resultado=montoBaseTasa*t.tasa;
-document.getElementById("remitInfo").innerHTML=
-`Tasa actual: <b style="color:var(--gold);">${t.tasa} ${t.moneda} por 1 ${t.base}</b>`+
-(monto<minimo?` · ⚠️ Mínimo: <b style="color:var(--red);">${minimo.toFixed(0)} ${baseElegida}</b>`:` · ✅ Mínimo cubierto (${minimo.toFixed(0)} ${baseElegida})`);
-document.getElementById("remitResultado").textContent=resultado.toLocaleString('es',{maximumFractionDigits:2})+" "+t.moneda;
-datosRemesaActual={pais:t.pais,moneda:t.moneda,base:baseElegida,monto,resultado,minimoOk:monto>=minimo};}
+  const lista = parsearTasasRemesas();
+  const i = Number(document.getElementById("remitPais").value || 0);
+  const t = lista[i];
+  if(!t) return;
+  const monto = Number(document.getElementById("remitMonto").value || 0);
+  const baseElegida = document.getElementById("remitBaseMoneda").value;
+
+  const T = currentData.tasasVenta || MIS_TASAS_MANUALES;
+  const aRub = { RUB:1, USD:T.USD || 1, EUR:T.EUR || 1 };
+
+  const montoBaseTasa = (monto * aRub[baseElegida]) / aRub[t.base];
+  const minimo = t.minimo * aRub[t.base] / aRub[baseElegida];
+  const resultado = montoBaseTasa * t.tasa;
+
+  document.getElementById("remitInfo").innerHTML =
+    `Tasa aplicada: <b style="color:var(--gold);">${t.tasa} ${t.moneda} por 1 ${t.base}</b>` +
+    (monto < minimo
+      ? ` · ⚠️ Mínimo: <b style="color:var(--red);">${minimo.toFixed(0)} ${baseElegida}</b>`
+      : ` · ✅ Mínimo cubierto (${minimo.toFixed(0)} ${baseElegida})`) +
+    `<br><span style="font-size:11px;color:var(--muted);">Tasa de venta YOUR BRIDGE HOME aplicada a esta operación.</span>`;
+
+  document.getElementById("remitResultado").textContent =
+    resultado.toLocaleString('es',{maximumFractionDigits:2}) + " " + t.moneda;
+
+  datosRemesaActual = {
+    pais:t.pais, moneda:t.moneda, base:baseElegida,
+    monto, resultado, minimoOk: monto >= minimo
+  };
+}
 let datosRemesaActual={};
 function solicitarRemesa(){
 if(!datosRemesaActual||!datosRemesaActual.minimoOk){alert("⚠️ El monto está por debajo del mínimo permitido.");return;}
 abrirComprobante('proceso',`Remesa a ${datosRemesaActual.pais}`,`${datosRemesaActual.monto} ${datosRemesaActual.base}`,datosRemesaActual.pais);}
 
-// ===== BANNER DE TASAS OFICIALES EN VIVO (una consulta al día) =====
+// ===== TUS TASAS DE VENTA (bloque nuevo) =====
+function pintarTasasVenta(){
+  const cont = document.getElementById("tasasVentaFila");
+  if(!cont) return;
+  const T = currentData.tasasVenta || MIS_TASAS_MANUALES;
+  const filas = [
+    ["RUB","🇷🇺 Rublo (RUB) · base"],
+    ["USD","🇺🇸 Dólar (USD)"],
+    ["EUR","🇪🇺 Euro (EUR)"],
+    ["CUP","🇨🇺 Peso cubano (CUP)"],
+    ["MLC","🇨🇺 MLC (Cuba)"]
+  ];
+  cont.innerHTML = filas.map(([k,n]) =>
+    `<div class="tasas-item" style="border-color:var(--gold);">
+       <b style="color:var(--gold);">${T[k] ?? "—"}</b>
+       <span>${n}</span>
+     </div>`
+  ).join('');
+}
+
+// ===== TASA OFICIAL DE REFERENCIA (API + CUP/MLC como ref. admin) =====
 async function cargarTasasVivas(){
 const cont=document.getElementById("tasasVivasFila");
 if(!cont)return;
@@ -784,15 +852,43 @@ try{
 const res=await fetch("https://open.er-api.com/v6/latest/USD");
 const data=await res.json();
 if(!data.rates)throw new Error("sin datos");
-const tasas={cup:data.rates.CUP,mxn:data.rates.MXN,brl:data.rates.BRL,srd:data.rates.SRD,gyd:data.rates.GYD,rub:data.rates.RUB,aed:data.rates.AED};
+const tasas={rub:data.rates.RUB,mxn:data.rates.MXN,brl:data.rates.BRL,srd:data.rates.SRD,gyd:data.rates.GYD,aed:data.rates.AED};
 localStorage.setItem("ybh_tasas_"+hoy,JSON.stringify(tasas));
 pintarTasas(tasas,"Actualizado hoy · tasa oficial diaria");
 }catch(e){
 cont.innerHTML=`<span class="status">No se pudo actualizar. Inténtalo más tarde o consulta por WhatsApp.</span>`;}}
 function pintarTasas(t,nota){
-const paises=[["cup","🇨🇺 Cuba CUP/USD"],["mxn","🇲🇽 México MXN/USD"],["brl","🇧🇷 Brasil BRL/USD"],["srd","🇸🇷 Surinam SRD/USD"],["gyd","🇬🇾 Guyana GYD/USD"],["rub","🇷🇺 Rusia RUB/USD"],["aed","🇦🇪 Dubái AED/USD"]];
-document.getElementById("tasasVivasFila").innerHTML=paises.map(([k,n])=>`<div class="tasas-item"><b>${t[k]?t[k].toFixed(2):"—"}</b><span>${n}</span></div>`).join('');
-document.getElementById("tasasVivasFecha").textContent=nota;}
+  const paises = [
+    ["rub","🇷🇺 Rusia RUB/USD"],
+    ["mxn","🇲🇽 México MXN/USD"],
+    ["brl","🇧🇷 Brasil BRL/USD"],
+    ["srd","🇸🇷 Surinam SRD/USD"],
+    ["gyd","🇬🇾 Guyana GYD/USD"],
+    ["aed","🇦🇪 Dubái AED/USD"]
+  ];
+  let html = paises.map(([k,n]) =>
+    `<div class="tasas-item">
+       <b>${t[k] ? t[k].toFixed(2) : "—"}</b>
+       <span>${n}</span>
+     </div>`
+  ).join('');
+
+  // CUP y MLC: referencia del administrador (la API no las da de forma fiable)
+  const TV = currentData.tasasVenta || MIS_TASAS_MANUALES;
+  html += `
+    <div class="tasas-item" style="border-color:var(--muted);">
+      <b>${TV.CUP ?? "—"}</b>
+      <span>🇨🇺 Cuba CUP (ref. admin)</span>
+    </div>
+    <div class="tasas-item" style="border-color:var(--muted);">
+      <b>${TV.MLC ?? "—"}</b>
+      <span>🇨🇺 Cuba MLC (ref. admin)</span>
+    </div>`;
+
+  document.getElementById("tasasVivasFila").innerHTML = html;
+  document.getElementById("tasasVivasFecha").textContent =
+    nota + " · Fuente: open.er-api.com + referencia del administrador para CUP/MLC";
+}
 
 // ===== COMPROBANTE + GUARDAR EN LA NUBE =====
 function abrirComprobante(estado,servicio,monto,destino){
@@ -930,7 +1026,7 @@ function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt
 // ===== ADMIN: PAÍSES Y VISAS =====
 function renderizarAdminPaises(){
 const c=document.getElementById("lista-paises-admin");if(!c)return;
-c.innerHTML="";const monedas=["RUB","USD","EUR","MLC","BRL","MXN","CAD","UYU"];
+c.innerHTML="";const monedas=["RUB","USD","EUR","MLC","CUP","BRL","MXN","CAD","UYU"];
 paisesActuales.forEach((p,i)=>{const div=document.createElement("div");div.className="admin-pais-item";
 div.innerHTML=`<label>Código</label><input value="${escapeHTML(p.codigo)}" onchange="paisesActuales[${i}].codigo=this.value">
 <label>Nombre</label><input value="${escapeHTML(p.nombre)}" onchange="paisesActuales[${i}].nombre=this.value">
@@ -954,7 +1050,8 @@ function eliminarVisasAdmin(i){listaVisas.splice(i,1);renderizarAdminVisas();}
 
 function actualizarPreciosEnPantalla(){
 const s=document.getElementById("moneda-usuario");if(!s)return;
-const destino=s.value,T=MIS_TASAS_MANUALES;
+const destino=s.value;
+const T = currentData.tasasVenta || MIS_TASAS_MANUALES;
 document.querySelectorAll('.precio-dinamico').forEach(el=>{
 const pb=parseFloat(el.getAttribute('data-precio-base'))||0;
 const mb=el.getAttribute('data-moneda-base')||"RUB";
@@ -974,7 +1071,9 @@ else document.getElementById("globalNoticeImg").style.display="none";}
 else document.getElementById("globalNoticeBox").style.display="none";
 
 cargarNoticiasReales();renderizarVisas();renderizarTestimonios();renderizarFamilia();renderizarFAQ();mostrarPromo();
-poblarSelectorRemesas();calcularRemesaNueva();cargarTasasVivas();
+poblarSelectorRemesas();calcularRemesaNueva();
+pintarTasasVenta();
+cargarTasasVivas();
 
 const pr=d.prices||{};
 const recMin=(d.rechargesListText||DEF_RECARGAS_TEXTO).split('\n').map(l=>parseFloat(l.split('|')[1])||0).filter(x=>x>0);
@@ -999,7 +1098,6 @@ document.getElementById("remittanceCards").innerHTML=`<div class="card"><img src
 
 document.getElementById("payInfoView").textContent=d.payInfo||"";
 
-// Tarjetas de países con conversión de moneda dinámica
 document.getElementById("ticketCards").innerHTML=(d.paises||paisesPorDefecto).map(p=>{
 const mb=p.monedaBase||"RUB";
 return`<div class="card" style="justify-content:space-between;overflow:hidden;">
@@ -1180,6 +1278,7 @@ try{const datos=JSON.parse(e.target.result);
 const{error}=await db.from(TABLE_NAME).upsert({id:ROW_ID,data:datos},{onConflict:"id"});
 if(error)return alert("❌ Error al restaurar");
 currentData=Object.assign({},currentData,datos);
+if(!currentData.tasasVenta) currentData.tasasVenta = {RUB:1, USD:95.50, EUR:102.10, CUP:320.00, MLC:85.00};
 if(currentData.visas)listaVisas=currentData.visas;
 renderPage();fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();
 alert("✅ Contenido restaurado");}catch(err){alert("❌ Archivo no válido");}};
@@ -1196,12 +1295,14 @@ currentData=Object.assign({},currentData,data.data);
 listaVisas=currentData.visas||listaVisasDef;
 if(!currentData.paises)currentData.paises=paisesPorDefecto;
 if(!currentData.tasasRemesas)currentData.tasasRemesas=DEF_TASAS_REMESAS;
+if(!currentData.tasasVenta) currentData.tasasVenta = {RUB:1, USD:95.50, EUR:102.10, CUP:320.00, MLC:85.00};
 renderPage();
 s.textContent="✅ Tienda conectada";s.className="status good";}
 }catch(e){s.textContent="❌ Error";s.className="status bad";}
 try{
 db.channel("ybh-cambios").on("postgres_changes",{event:"UPDATE",schema:"public",table:TABLE_NAME},payload=>{
 currentData=Object.assign({},currentData,payload.new.data);
+if(!currentData.tasasVenta) currentData.tasasVenta = {RUB:1, USD:95.50, EUR:102.10, CUP:320.00, MLC:85.00};
 if(currentData.visas)listaVisas=currentData.visas;
 renderPage();}).subscribe();
 }catch(e){}}
@@ -1220,6 +1321,13 @@ promo:{titulo:document.getElementById("editPromoTitulo").value.trim(),precio:doc
 visas:listaVisas,paises:paisesActuales,
 prices:{avion:+document.getElementById("editPrAvion").value||0,tren:+document.getElementById("editPrTren").value||0,bus:+document.getElementById("editPrBus").value||0,rec:+document.getElementById("editPrRec").value||0},
 rates:{cuba:+document.getElementById("editRateCuba").value||0,venezuela:+document.getElementById("editRateVen").value||0},
+tasasVenta:{
+  RUB: +document.getElementById("editTasaVentaRUB").value || 1,
+  USD: +document.getElementById("editTasaVentaUSD").value || 0,
+  EUR: +document.getElementById("editTasaVentaEUR").value || 0,
+  CUP: +document.getElementById("editTasaVentaCUP").value || 0,
+  MLC: +document.getElementById("editTasaVentaMLC").value || 0
+},
 tasasRemesas:document.getElementById("editTasasRemesas").value,
 trenInfo:document.getElementById("editTren").value,
 busInfo:document.getElementById("editBus").value,
@@ -1268,6 +1376,12 @@ document.getElementById("editPrBus").value=(d.prices||{}).bus??0;
 document.getElementById("editPrRec").value=(d.prices||{}).rec??0;
 document.getElementById("editRateCuba").value=(d.rates||{}).cuba??0;
 document.getElementById("editRateVen").value=(d.rates||{}).venezuela??0;
+const TV = d.tasasVenta || MIS_TASAS_MANUALES;
+document.getElementById("editTasaVentaRUB").value = TV.RUB ?? 1;
+document.getElementById("editTasaVentaUSD").value = TV.USD ?? 0;
+document.getElementById("editTasaVentaEUR").value = TV.EUR ?? 0;
+document.getElementById("editTasaVentaCUP").value = TV.CUP ?? 0;
+document.getElementById("editTasaVentaMLC").value = TV.MLC ?? 0;
 document.getElementById("editTasasRemesas").value=d.tasasRemesas||DEF_TASAS_REMESAS;
 document.getElementById("editTren").value=d.trenInfo||"";
 document.getElementById("editBus").value=d.busInfo||"";
