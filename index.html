@@ -777,7 +777,6 @@ function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;",
 function generarID(){const a=new Date();return `YBH-${a.getFullYear()}${String(a.getMonth()+1).padStart(2,'0')}${String(a.getDate()).padStart(2,'0')}-${Math.floor(Math.random()*9000)+1000}`;}
 function obtenerFechaHora(){const a=new Date();return `${String(a.getDate()).padStart(2,'0')}/${String(a.getMonth()+1).padStart(2,'0')}/${a.getFullYear()} • ${String(a.getHours()).padStart(2,'0')}:${String(a.getMinutes()).padStart(2,'0')}`;}
 
-// ===== CALCULADORA DE REMESAS CON TUS TASAS DE VENTA =====
 function parsearTasasRemesas(){
 return (currentData.tasasRemesas || DEF_TASAS_REMESAS).split('\n').filter(l=>l.trim()).map(l=>{
 const p=l.split('|').map(s=>(s||"").trim());
@@ -821,7 +820,6 @@ function solicitarRemesa(){
 if(!datosRemesaActual||!datosRemesaActual.minimoOk){alert("⚠️ El monto está por debajo del mínimo permitido.");return;}
 abrirComprobante('proceso',`Remesa a ${datosRemesaActual.pais}`,`${datosRemesaActual.monto} ${datosRemesaActual.base}`,datosRemesaActual.pais);}
 
-// ===== TUS TASAS DE VENTA (bloque nuevo) =====
 function pintarTasasVenta(){
   const cont = document.getElementById("tasasVentaFila");
   if(!cont) return;
@@ -841,7 +839,6 @@ function pintarTasasVenta(){
   ).join('');
 }
 
-// ===== TASA OFICIAL DE REFERENCIA (API + CUP/MLC como ref. admin) =====
 async function cargarTasasVivas(){
 const cont=document.getElementById("tasasVivasFila");
 if(!cont)return;
@@ -873,7 +870,6 @@ function pintarTasas(t,nota){
      </div>`
   ).join('');
 
-  // CUP y MLC: referencia del administrador (la API no las da de forma fiable)
   const TV = currentData.tasasVenta || MIS_TASAS_MANUALES;
   html += `
     <div class="tasas-item" style="border-color:var(--muted);">
@@ -890,7 +886,6 @@ function pintarTasas(t,nota){
     nota + " · Fuente: open.er-api.com + referencia del administrador para CUP/MLC";
 }
 
-// ===== COMPROBANTE + GUARDAR EN LA NUBE =====
 function abrirComprobante(estado,servicio,monto,destino){
 datosComprobanteActual={id:generarID(),cliente:"Cliente Web",servicio,destino,monto,fecha:obtenerFechaHora(),estado:"En Proceso"};
 actualizarVistaComprobante(estado);
@@ -912,7 +907,6 @@ function descargarPDF(){html2pdf().set({margin:0,filename:`Comprobante_${datosCo
 function enviarWhatsApp(){const e=document.getElementById("statusBadge").textContent;window.open(`https://wa.me/${MI_TELEFONO}?text=${encodeURIComponent(`Hola, aquí tienes tu comprobante:\n\n🆔 ID: ${datosComprobanteActual.id}\n📦 Servicio: ${datosComprobanteActual.servicio}\n💰 Monto: ${datosComprobanteActual.monto}\n📅 Fecha: ${datosComprobanteActual.fecha}\n⚡ Estado: ${e}`)}`,'_blank');}
 function enviarCorreo(){const e=document.getElementById("statusBadge").textContent;window.location.href=`mailto:?subject=Comprobante ${datosComprobanteActual.id}&body=ID: ${datosComprobanteActual.id}%0AServicio: ${datosComprobanteActual.servicio}%0AMonto: ${datosComprobanteActual.monto}%0AFecha: ${datosComprobanteActual.fecha}%0AEstado: ${e}`;}
 
-// ===== SEGUIMIENTO POR ID =====
 async function buscarSolicitud(){
 const id=document.getElementById("trackId").value.trim(),out=document.getElementById("trackResult");
 if(!id){out.innerHTML=`<p class="bad">Escribe un ID.</p>`;return;}
@@ -924,7 +918,6 @@ const ok=data.estado==="Completada";
 out.innerHTML=`<div class="sol-row" style="font-size:14px;"><div><b>#${escapeHTML(data.id)}</b><br><span style="color:var(--muted);">${escapeHTML(data.servicio)} · ${escapeHTML(data.monto)} · ${escapeHTML(data.fecha)}</span></div><div class="${ok?'good':'status'}" style="font-weight:800;">${escapeHTML(data.estado)}</div></div>`;
 }catch(e){out.innerHTML=`<p class="bad">No se pudo consultar (¿ejecutaste setup.sql?).</p>`;}}
 
-// ===== VISITAS Y ESTADÍSTICAS =====
 async function registrarVisita(){try{await db.from('ybh_visitas').insert([{}]);}catch(e){}}
 async function cargarStats(){
 if(!isAdmin)return;
@@ -935,12 +928,10 @@ if(!error&&data){solic=data;data.forEach(s=>{const k=(s.servicio||"").split(' ')
 g.innerHTML=`<div class="stat-item"><b>${visitas}</b><span>Visitas totales</span></div><div class="stat-item"><b>${solic.length}</b><span>Solicitudes</span></div>`+Object.entries(porServ).slice(0,3).map(([k,v])=>`<div class="stat-item"><b>${v}</b><span>${escapeHTML(k)}</span></div>`).join('');
 document.getElementById("solicitudesList").innerHTML=solic.slice(0,15).map(s=>`<div class="sol-row"><div>#${escapeHTML(s.id)} · ${escapeHTML(s.servicio)} · ${escapeHTML(s.monto)}</div><div style="color:var(--muted);">${escapeHTML(s.fecha||"")} · ${escapeHTML(s.estado)}</div></div>`).join('')||`<p class="status">Aún no hay solicitudes guardadas.</p>`;}
 
-// ===== TICKER DE CONFIANZA =====
 const mensajesConfianza=["🛡️ Compra 100% Segura y Garantizada","⚡ Recargas y Remesas con Activación Inmediata","⭐ Atención Personalizada las 24 Horas","🤝 Únete a nuestra red de socios y gana comisiones","✈️ Encuentra los mejores precios para tu viaje"];
 (function(){const el=document.getElementById("trustMensaje");let i=0;el.textContent=mensajesConfianza[0];
 setInterval(()=>{el.style.opacity=0;setTimeout(()=>{el.textContent=mensajesConfianza[i%mensajesConfianza.length];el.style.opacity=1;i++;},500);},4000);})();
 
-// ===== NOTICIAS =====
 async function cargarNoticiasReales(){
 const t=document.getElementById("newsTitle"),d=document.getElementById("newsDesc"),l=document.getElementById("newsLink");
 if(currentData.newsTitle&&currentData.newsTitle.trim()!==""){
@@ -970,7 +961,6 @@ const n=noticiasRSS[indiceNoticiaRSS%noticiasRSS.length],t=document.getElementBy
 t.style.opacity=0;
 setTimeout(()=>{document.getElementById("newsTitle").textContent=n.titulo;document.getElementById("newsDesc").textContent=n.desc;document.getElementById("newsLink").href=n.link;t.style.opacity=1;indiceNoticiaRSS++;},500);}
 
-// ===== VISAS / TESTIMONIOS / FAMILIA / FAQ =====
 function renderizarVisas(){
 const c=document.getElementById("visaCards");if(!c)return;
 c.innerHTML=listaVisas.map(v=>`<div class="tarjeta-servicio"><div><h3>${v.emoji} ${escapeHTML(v.pais)}</h3><p style="color:var(--muted);font-size:.9rem;">${escapeHTML(v.servicios)}</p></div><a href="https://wa.me/${MI_TELEFONO}?text=${encodeURIComponent('Hola, quiero solicitar una evaluación para visa a '+v.pais)}" target="_blank" class="btn-whatsapp" style="margin-top:auto;">📲 Solicitar Evaluación</a></div>`).join('');}
@@ -987,7 +977,6 @@ const c=document.getElementById("faqList");if(!c)return;
 c.innerHTML=(currentData.faq||"").split('\n').filter(l=>l.trim()).map(l=>{const[p,r]=l.split('|');
 return`<div class="faq-item" onclick="this.classList.toggle('open')"><div class="preg">${escapeHTML((p||"").trim())}</div><div class="resp">${escapeHTML((r||"").trim())}</div></div>`;}).join('')||`<p class="status" style="text-align:center;">Aún no hay preguntas frecuentes.</p>`;}
 
-// ===== BUSCADOR =====
 function buscarEnPagina(){
 const q=(document.getElementById("searchInput").value||"").toLowerCase().trim(),out=document.getElementById("searchResults");
 if(q.length<2){out.innerHTML="";return;}
@@ -999,7 +988,6 @@ const r=[];
 listaVisas.forEach(v=>{if((v.pais||"").toLowerCase().includes(q))r.push(`<a href="#visas">🛂 ${escapeHTML(v.pais)}</a>`);});
 out.innerHTML=r.slice(0,12).join('');}
 
-// ===== PROMO CON CUENTA ATRÁS =====
 function mostrarPromo(){
 const box=document.getElementById("promoBox"),p=currentData.promo||{};
 if(!p.fin||new Date(p.fin)<=new Date()){box.style.display="none";return;}
@@ -1013,7 +1001,6 @@ const h=Math.floor(dif/3600000),m=Math.floor(dif%3600000/60000),s=Math.floor(dif
 document.getElementById("promoCountdown").textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;};
 tick();timerPromo=setInterval(tick,1000);}
 
-// ===== LIGHTBOX / COMPARTIR / INSTALAR =====
 function abrirLightbox(){const s=document.getElementById("c-img").src;if(!s)return;
 document.getElementById("lightboxImg").src=s;document.getElementById("lightbox").style.display="flex";}
 function cerrarLightbox(){document.getElementById("lightbox").style.display="none";}
@@ -1023,7 +1010,6 @@ else window.open("https://wa.me/?text="+encodeURIComponent("Mira esta página: "
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById("btnInstall").classList.remove("hidden");});
 function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;document.getElementById("btnInstall").classList.add("hidden");}}
 
-// ===== ADMIN: PAÍSES Y VISAS =====
 function renderizarAdminPaises(){
 const c=document.getElementById("lista-paises-admin");if(!c)return;
 c.innerHTML="";const monedas=["RUB","USD","EUR","MLC","CUP","BRL","MXN","CAD","UYU"];
@@ -1060,7 +1046,6 @@ const enRub=pb*(T[mb]||1);
 const final=enRub/(T[destino]||1);
 el.textContent=`Desde ${final.toFixed(2)} ${destino}`;});}
 
-// ===== RENDER PRINCIPAL =====
 function renderPage(){
 const d=currentData;
 if(d.noticeText||d.noticeImg){
@@ -1131,7 +1116,6 @@ buildCarousel();setupBannerRotativo();calcularTodo();
 if(isAdmin){fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();cargarStats();}
 actualizarPreciosEnPantalla();}
 
-// ===== CARRUSEL (20 SEG) =====
 function buildCarousel(){
 const dots=document.getElementById("c-dots");dots.innerHTML="";
 currentData.photos.forEach((_,i)=>dots.innerHTML+=`<span class="dot ${i===ci?'active':''}" onclick="goFoto(${i})"></span>`);
@@ -1180,7 +1164,6 @@ const{error}=await db.from(TABLE_NAME).upsert({id:ROW_ID,data:currentData},{onCo
 if(error)return alert("❌ Error al guardar la foto");
 renderizarFotosAdmin();renderPage();alert("✅ Foto agregada");}
 
-// ===== BANNER ROTATIVO =====
 function setupBannerRotativo(){
 const d=currentData;
 const l=(d.rechargesListText||DEF_RECARGAS_TEXTO).split('\n');
@@ -1210,7 +1193,6 @@ btn.setAttribute('onclick',i.action+"; return false;");
 b.style.opacity=1;},500);}
 setInterval(()=>{if(bannerList.length>1){bannerIndex++;updateBannerDisplay();}},7000);
 
-// ===== PESTAÑAS / CALCULADORAS =====
 function cambiarTab(t){["avion","tren","bus"].forEach(x=>document.getElementById("panel-"+x).classList.toggle("hidden",x!==t));
 ["avion","tren","bus"].forEach(x=>document.getElementById("tab-"+x).classList.toggle("active",x===t));}
 function calcPasaje(){
@@ -1218,14 +1200,12 @@ const p=Number(document.getElementById("pasajeUSD").value||0),r=Number(document.
 document.getElementById("pasajeResult").textContent=(p*r).toFixed(2);}
 function calcularTodo(){calcPasaje();}
 
-// ===== RELOJ =====
 function updateClockDate(){
 const n=new Date();
 document.getElementById("clock").textContent=n.toLocaleTimeString();
 document.getElementById("clockDate").textContent=n.toLocaleDateString(lang==="ru"?"ru-RU":lang==="en"?"en-US":"es-ES",{weekday:'long',year:'numeric',month:'long',day:'numeric'});}
 setInterval(updateClockDate,1000);
 
-// ===== CAPTCHAS Y FORMULARIOS =====
 function pintarCaptcha(){
 document.getElementById("captchaPregunta").textContent=`${captchaA} + ${captchaB}`;
 document.querySelectorAll('.captcha-fam').forEach(el=>el.textContent=`${capFA} + ${capFB}`);}
@@ -1268,7 +1248,6 @@ const msg=`*SOLICITUD DE VISA - YOUR BRIDGE HOME*%0A%0A`+
 `_Por favor, indíquenme los siguientes pasos para mi trámite._`;
 window.open(`https://wa.me/${MI_TELEFONO}?text=${msg}`,'_blank');});
 
-// ===== RESTAURAR CON CONFIRMACIÓN =====
 async function restaurarBackup(ev){
 const f=ev.target.files[0];if(!f)return;
 if(!confirm("⚠️ ¿Seguro? Se reemplazará TODO el contenido actual por el del archivo.")){ev.target.value="";return;}
@@ -1276,15 +1255,15 @@ const rd=new FileReader();
 rd.onload=async e=>{
 try{const datos=JSON.parse(e.target.result);
 const{error}=await db.from(TABLE_NAME).upsert({id:ROW_ID,data:datos},{onConflict:"id"});
-if(error)return alert("❌ Error al restaurar");
+if(error){alert("❌ Error al restaurar: "+(error.message||""));return;}
 currentData=Object.assign({},currentData,datos);
 if(!currentData.tasasVenta) currentData.tasasVenta = {RUB:1, USD:95.50, EUR:102.10, CUP:320.00, MLC:85.00};
+if(!Array.isArray(currentData.photos)) currentData.photos = [];
 if(currentData.visas)listaVisas=currentData.visas;
 renderPage();fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();
 alert("✅ Contenido restaurado");}catch(err){alert("❌ Archivo no válido");}};
 rd.readAsText(f);}
 
-// ===== CARGA / GUARDADO / REALTIME =====
 async function loadData(){
 const s=document.getElementById("connectionStatus");
 try{
@@ -1296,6 +1275,7 @@ listaVisas=currentData.visas||listaVisasDef;
 if(!currentData.paises)currentData.paises=paisesPorDefecto;
 if(!currentData.tasasRemesas)currentData.tasasRemesas=DEF_TASAS_REMESAS;
 if(!currentData.tasasVenta) currentData.tasasVenta = {RUB:1, USD:95.50, EUR:102.10, CUP:320.00, MLC:85.00};
+if(!Array.isArray(currentData.photos)) currentData.photos = [];
 renderPage();
 s.textContent="✅ Tienda conectada";s.className="status good";}
 }catch(e){s.textContent="❌ Error";s.className="status bad";}
@@ -1303,51 +1283,80 @@ try{
 db.channel("ybh-cambios").on("postgres_changes",{event:"UPDATE",schema:"public",table:TABLE_NAME},payload=>{
 currentData=Object.assign({},currentData,payload.new.data);
 if(!currentData.tasasVenta) currentData.tasasVenta = {RUB:1, USD:95.50, EUR:102.10, CUP:320.00, MLC:85.00};
+if(!Array.isArray(currentData.photos)) currentData.photos = [];
 if(currentData.visas)listaVisas=currentData.visas;
 renderPage();}).subscribe();
 }catch(e){}}
 
 async function saveChanges(){
-const s=document.getElementById("saveStatus");if(!isAdmin)return;
-const n=Object.assign({},currentData,{
-published:true,
-noticeText:document.getElementById("editNoticeText").value.trim(),
-noticeImg:document.getElementById("editNoticeImg").value.trim(),
-newsTitle:document.getElementById("editNewsTitle").value.trim(),
-newsDesc:document.getElementById("editNewsDesc").value.trim(),
-newsLink:document.getElementById("editNewsLink").value.trim(),
-payInfo:document.getElementById("editPayInfo").value,
-promo:{titulo:document.getElementById("editPromoTitulo").value.trim(),precio:document.getElementById("editPromoPrecio").value.trim(),fin:document.getElementById("editPromoFin").value},
-visas:listaVisas,paises:paisesActuales,
-prices:{avion:+document.getElementById("editPrAvion").value||0,tren:+document.getElementById("editPrTren").value||0,bus:+document.getElementById("editPrBus").value||0,rec:+document.getElementById("editPrRec").value||0},
-rates:{cuba:+document.getElementById("editRateCuba").value||0,venezuela:+document.getElementById("editRateVen").value||0},
-tasasVenta:{
-  RUB: +document.getElementById("editTasaVentaRUB").value || 1,
-  USD: +document.getElementById("editTasaVentaUSD").value || 0,
-  EUR: +document.getElementById("editTasaVentaEUR").value || 0,
-  CUP: +document.getElementById("editTasaVentaCUP").value || 0,
-  MLC: +document.getElementById("editTasaVentaMLC").value || 0
-},
-tasasRemesas:document.getElementById("editTasasRemesas").value,
-trenInfo:document.getElementById("editTren").value,
-busInfo:document.getElementById("editBus").value,
-rechargesListText:document.getElementById("editRechargesList").value,
-rechargesCurrency:document.getElementById("editRechargesCurrency").value,
-remittance:{rubles:Number(document.getElementById("editRemitRubles").value),cup:Number(document.getElementById("editRemitCup").value),currency:document.getElementById("editRemitCurrency").value,image:document.getElementById("editRemitImg").value.trim()},
-video:document.getElementById("editVideo").value.trim(),
-notes:document.getElementById("editNotes").value,
-shop:document.getElementById("editShop").value,
-testimonios:document.getElementById("editTestimonios").value,
-familia:document.getElementById("editFamilia").value,
-faq:document.getElementById("editFaq").value,
-photos:currentData.photos});
-s.textContent="Guardando...";
-const{error}=await db.from(TABLE_NAME).upsert({id:ROW_ID,data:n},{onConflict:"id"});
-if(error){s.textContent="Error";s.className="status bad";return;}
-currentData=n;listaVisas=n.visas;renderPage();
-s.textContent="✅ ¡Publicado! Tus clientes lo ven al instante.";s.className="status good";}
+  const s = document.getElementById("saveStatus");
+  if(!isAdmin) return;
 
-// ===== ADMIN =====
+  // Asegurar arrays
+  if(!Array.isArray(currentData.photos)) currentData.photos = [];
+
+  const n = Object.assign({}, currentData, {
+    published:true,
+    noticeText:document.getElementById("editNoticeText").value.trim(),
+    noticeImg:document.getElementById("editNoticeImg").value.trim(),
+    newsTitle:document.getElementById("editNewsTitle").value.trim(),
+    newsDesc:document.getElementById("editNewsDesc").value.trim(),
+    newsLink:document.getElementById("editNewsLink").value.trim(),
+    payInfo:document.getElementById("editPayInfo").value,
+    promo:{titulo:document.getElementById("editPromoTitulo").value.trim(),precio:document.getElementById("editPromoPrecio").value.trim(),fin:document.getElementById("editPromoFin").value},
+    visas:listaVisas,
+    paises:paisesActuales,
+    prices:{avion:+document.getElementById("editPrAvion").value||0,tren:+document.getElementById("editPrTren").value||0,bus:+document.getElementById("editPrBus").value||0,rec:+document.getElementById("editPrRec").value||0},
+    rates:{cuba:+document.getElementById("editRateCuba").value||0,venezuela:+document.getElementById("editRateVen").value||0},
+    tasasVenta:{
+      RUB: +document.getElementById("editTasaVentaRUB").value || 1,
+      USD: +document.getElementById("editTasaVentaUSD").value || 0,
+      EUR: +document.getElementById("editTasaVentaEUR").value || 0,
+      CUP: +document.getElementById("editTasaVentaCUP").value || 0,
+      MLC: +document.getElementById("editTasaVentaMLC").value || 0
+    },
+    tasasRemesas:document.getElementById("editTasasRemesas").value,
+    trenInfo:document.getElementById("editTren").value,
+    busInfo:document.getElementById("editBus").value,
+    rechargesListText:document.getElementById("editRechargesList").value,
+    rechargesCurrency:document.getElementById("editRechargesCurrency").value,
+    remittance:{
+      rubles:Number(document.getElementById("editRemitRubles").value)||0,
+      cup:Number(document.getElementById("editRemitCup").value)||0,
+      currency:document.getElementById("editRemitCurrency").value||"RUB",
+      image:document.getElementById("editRemitImg").value.trim()
+    },
+    video:document.getElementById("editVideo").value.trim(),
+    notes:document.getElementById("editNotes").value,
+    shop:document.getElementById("editShop").value,
+    testimonios:document.getElementById("editTestimonios").value,
+    familia:document.getElementById("editFamilia").value,
+    faq:document.getElementById("editFaq").value,
+    photos:currentData.photos
+  });
+
+  s.textContent = "Guardando...";
+  s.className = "status";
+
+  // Log para depurar qué se envía
+  console.log("📤 Enviando a Supabase:", JSON.stringify(n, null, 2));
+
+  const { error } = await db.from(TABLE_NAME).upsert({ id: ROW_ID, data: n }, { onConflict: "id" });
+
+  if(error){
+    console.error("❌ Error Supabase:", error);
+    s.textContent = "❌ Error: " + (error.message || error.details || "No se pudo guardar");
+    s.className = "status bad";
+    return;
+  }
+
+  currentData = n;
+  listaVisas = n.visas;
+  renderPage();
+  s.textContent = "✅ ¡Publicado! Tus clientes lo ven al instante.";
+  s.className = "status good";
+}
+
 function adminLogin(){
 if(document.getElementById("adminPassword").value===CLAVE_ADMIN){
 isAdmin=true;
@@ -1403,7 +1412,6 @@ const blob=new Blob([JSON.stringify(currentData,null,2)],{type:"application/json
 const a=document.createElement("a");a.href=URL.createObjectURL(blob);
 a.download="ybh-backup-"+new Date().toISOString().slice(0,10)+".json";a.click();}
 
-// ===== INICIO =====
 listaVisas=listaVisasDef;
 pintarCaptcha();
 registrarVisita();
