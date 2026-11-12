@@ -153,7 +153,26 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
 .sol-row{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:8px;background:rgba(0,0,0,.3);border-radius:8px;margin-bottom:6px;font-size:12px}
 .notice-banner{background:rgba(99,102,241,.1);border:1px solid var(--primary);border-radius:16px;overflow:hidden;margin-bottom:20px;display:none}
 .notice-text{padding:15px;text-align:center;font-weight:bold}
-@media(max-width:600px){.banner-rotativo strong{font-size:24px}.amount-display h1{font-size:30px}h2{font-size:21px}}
+
+/* ===== BANNER ROTATIVO FAMILIA ===== */
+.familia-banner{position:relative;border-radius:20px;min-height:260px;overflow:hidden;border:1px solid var(--gold);background:linear-gradient(135deg,rgba(212,160,23,.15),rgba(99,102,241,.12));display:flex;align-items:center;justify-content:center;text-align:center;padding:30px 22px;margin-bottom:20px;transition:opacity .6s ease;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+.familia-banner::before{content:"❤️";position:absolute;top:14px;left:18px;font-size:22px;opacity:.55}
+.familia-banner::after{content:"❤️";position:absolute;bottom:14px;right:18px;font-size:22px;opacity:.55}
+.familia-banner .fam-contenido{position:relative;z-index:2;max-width:720px}
+.familia-banner .fam-de{color:var(--gold);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:2px;margin-bottom:10px}
+.familia-banner .fam-texto{color:#fff;font-size:19px;font-style:italic;font-weight:600;line-height:1.55;margin:10px 0 14px}
+.familia-banner .fam-para{color:var(--muted);font-size:13px;font-weight:700}
+.familia-banner .fam-dots{text-align:center;margin-top:14px}
+.familia-banner .fam-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#3a4252;margin:3px;cursor:pointer;transition:.3s}
+.familia-banner .fam-dot.active{background:var(--gold);transform:scale(1.3)}
+
+@media(max-width:600px){
+  .banner-rotativo strong{font-size:24px}
+  .amount-display h1{font-size:30px}
+  h2{font-size:21px}
+  .familia-banner{min-height:220px;padding:22px 16px}
+  .familia-banner .fam-texto{font-size:16px}
+}
 </style>
 </head>
 <body>
@@ -354,7 +373,14 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
   <section id="familia">
     <h2>❤️ Corazón y Palabras</h2>
     <p style="text-align:center;color:var(--muted);font-style:italic;margin-bottom:20px;">Consejos y bendiciones de padres a hijos, a través de la distancia.</p>
-    <div class="grid-normal" id="familiaCards"></div>
+    <div class="familia-banner" id="familiaBanner">
+      <div class="fam-contenido">
+        <div class="fam-de" id="famDe">—</div>
+        <div class="fam-texto" id="famTexto">Cargando mensajes...</div>
+        <div class="fam-para" id="famPara">—</div>
+        <div class="fam-dots" id="famDots"></div>
+      </div>
+    </div>
     <div class="card" style="margin-top:20px;">
       <h3>✍️ Deja tu mensaje (lo reviso antes de publicarlo)</h3>
       <form id="form-familia" style="display:flex;flex-direction:column;gap:6px;">
@@ -592,7 +618,7 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       <h3>⭐ Testimonios (Nombre | Texto)</h3>
       <textarea id="editTestimonios" rows="4"></textarea>
       <h3>❤️ Familia (De | Para | Mensaje) — una línea por mensaje</h3>
-      <textarea id="editFamilia" rows="4"></textarea>
+      <textarea id="editFamilia" rows="8"></textarea>
       <h3>❓ FAQ (Pregunta | Respuesta)</h3>
       <textarea id="editFaq" rows="4"></textarea>
       <h3>📸 Fotos del carrusel</h3>
@@ -647,7 +673,6 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
 </div>
 
 <script>
-// ⚠️ CONFIGURACIÓN DE TU SUPABASE (SIN CAMBIOS)
 const SUPABASE_URL = "https://qobahmyqmwgpnocjhudp.supabase.co";
 const SUPABASE_KEY = "sb_publishable_Y5Cv-rNlmWgSm8gr4F5nAg_0SKI6OfV";
 const TABLE_NAME = "ybh_contenido";
@@ -710,8 +735,6 @@ COMBO 2 | 1300 | 🌐 7GB + 300MB / 📞 40 MIN + 20 SMS |
 INTERNET 3 | 2500 | 🌐 15GB + 300MB |
 COMBO 3 | 2700 | 🌐 15GB + 300MB / 📞 80 MIN + 20 SMS`;
 
-// Tasas de remesas por país (editable en Admin)
-// Formato: País | Moneda local | Tasa (moneda local por 1 base) | Mínimo | Moneda base
 const DEF_TASAS_REMESAS = `Cuba | CUP | 10.70 | 1000 | RUB
 México | MXN | 0.195 | 2000 | RUB
 Brasil | BRL | 0.057 | 2000 | RUB
@@ -736,15 +759,14 @@ shop:"Café molido | 500 RUB | Tostado artesanal en Cuba. Sabor que recuerda a c
 payInfo:"1) Pide el monto exacto por WhatsApp.\n2) Realiza la transferencia a los datos que te daremos.\n3) Envía el número de operación por WhatsApp.\n4) Recibe tu comprobante y confirma.",
 promo:{titulo:"",precio:"",fin:""},
 testimonios:"María G. | Recargué a mi mamá en La Habana y en minutos ya tenía saldo. ¡Excelente servicio!\nPedro R. | El trámite de la visa me lo explicaron paso a paso. Muy profesionales.\nAna L. | Las remesas llegan rápido y siempre me avisan cuando la familia recibe el dinero.",
-familia:"Mamá Carmen | Yaniel en Moscú | Hijo mío: trabaja con orden, cuida tu salud y no olvides nunca de dónde vienes. Estoy orgullosa de ti.\nPapá Ernesto | María en La Habana | No tengas miedo de los cambios. Un puente no se construye en un día, pero se construye.",
+familia:"Mamá Carmen | Yaniel en Moscú | Hijo mío: trabaja con orden, cuida tu salud y no olvides nunca de dónde vienes. Estoy orgullosa de ti.\nPapá Ernesto | María en La Habana | No tengas miedo de los cambios. Un puente no se construye en un día, pero se construye.\nAbuela Rosa | Nieto querido | Donde quiera que estés, lleva a tu familia en el corazón. Es tu raíz y tu fuerza.\nMamá | Mi niño | La distancia no rompe un corazón que sabe esperar. Yo te espero aquí, siempre.\nPapá | Hijo mío | Sé hombre de palabra y de trabajo. El respeto se gana, no se pide.\nTía Mercedes | Sobrino | Cada paso que das lejos de casa es un ladrillo en tu futuro. No te rindas.\nMamá | Mi hija | Aunque estemos lejos, cada noche rezo por ti. Nunca estás sola.\nAbuelo José | Mis nietos | El dinero va y viene, pero la familia es para siempre. Cuídense entre ustedes.\nPapá | Mi princesa | Estudia, aprende, prepárate. El conocimiento nadie te lo puede quitar.\nMamá | Mi hijo | Si algún día te sientes perdido, recuerda de dónde vienes. Tu casa siempre tendrá las puertas abiertas.\nAbuela Carmen | Nieta | Sé fuerte como la palma, que se dobla pero no se rompe.\nPapá | Todos mis hijos | Lo único que les pido es que nunca se olviden de su familia. El resto lo tendrán.\nMamá | Mi tesoro | Donde estés, come bien, abrígate y escríbeme. Tu madre nunca deja de preocuparse.\nTío Raúl | Sobrinos | Trabajen, ahorren y sean humildes. El éxito llega cuando menos lo esperas.\nMamá | Mi vida | No importa cuántos kilómetros nos separen: mi amor por ti cruza cualquier frontera.\nPapá | Hijo | Aprende de tus errores, que los míos fueron más grandes. Nunca te rindas.\nAbuela | Mi niño lindo | La nostalgia es el precio del progreso. Aprovéchalo y vuelve triunfador.\nMamá | Mi hijo del alma | Si un día quieres llorar, hazlo; pero después sigue caminando. Yo estoy contigo.\nPapá | Mis hijos | El verdadero éxito es ser buena persona. Todo lo demás viene por añadidura.\nAbuela | Mi nieto del corazón | No olvides saludar, ser respetuoso y dar gracias. Un hombre educado abre puertas.",
 faq:"¿Cuánto tarda una remesa? | Normalmente entre 15 minutos y 2 horas, dependiendo del horario.\n¿Cómo pago? | Ve a la sección Cómo Pagar. Te damos los datos y confirmas por WhatsApp.\n¿Qué documentos necesito para la visa? | Pasaporte vigente, carnet, foto tipo visa y ocupación actual.\n¿Las recargas son inmediatas? | Sí, la activación es inmediata en el 99% de los casos.",
 photos:[]};
 
-function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);}
+function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function generarID(){const a=new Date();return `YBH-${a.getFullYear()}${String(a.getMonth()+1).padStart(2,'0')}${String(a.getDate()).padStart(2,'0')}-${Math.floor(Math.random()*9000)+1000}`;}
 function obtenerFechaHora(){const a=new Date();return `${String(a.getDate()).padStart(2,'0')}/${String(a.getMonth()+1).padStart(2,'0')}/${a.getFullYear()} • ${String(a.getHours()).padStart(2,'0')}:${String(a.getMinutes()).padStart(2,'0')}`;}
 
-// ===== CALCULADORA DE REMESAS CON TU TASA =====
 function parsearTasasRemesas(){
 return (currentData.tasasRemesas || DEF_TASAS_REMESAS).split('\n').filter(l=>l.trim()).map(l=>{
 const p=l.split('|').map(s=>(s||"").trim());
@@ -773,7 +795,6 @@ function solicitarRemesa(){
 if(!datosRemesaActual||!datosRemesaActual.minimoOk){alert("⚠️ El monto está por debajo del mínimo permitido.");return;}
 abrirComprobante('proceso',`Remesa a ${datosRemesaActual.pais}`,`${datosRemesaActual.monto} ${datosRemesaActual.base}`,datosRemesaActual.pais);}
 
-// ===== BANNER DE TASAS OFICIALES EN VIVO (una consulta al día) =====
 async function cargarTasasVivas(){
 const cont=document.getElementById("tasasVivasFila");
 if(!cont)return;
@@ -794,7 +815,6 @@ const paises=[["cup","🇨🇺 Cuba CUP/USD"],["mxn","🇲🇽 México MXN/USD"]
 document.getElementById("tasasVivasFila").innerHTML=paises.map(([k,n])=>`<div class="tasas-item"><b>${t[k]?t[k].toFixed(2):"—"}</b><span>${n}</span></div>`).join('');
 document.getElementById("tasasVivasFecha").textContent=nota;}
 
-// ===== COMPROBANTE + GUARDAR EN LA NUBE =====
 function abrirComprobante(estado,servicio,monto,destino){
 datosComprobanteActual={id:generarID(),cliente:"Cliente Web",servicio,destino,monto,fecha:obtenerFechaHora(),estado:"En Proceso"};
 actualizarVistaComprobante(estado);
@@ -816,7 +836,6 @@ function descargarPDF(){html2pdf().set({margin:0,filename:`Comprobante_${datosCo
 function enviarWhatsApp(){const e=document.getElementById("statusBadge").textContent;window.open(`https://wa.me/${MI_TELEFONO}?text=${encodeURIComponent(`Hola, aquí tienes tu comprobante:\n\n🆔 ID: ${datosComprobanteActual.id}\n📦 Servicio: ${datosComprobanteActual.servicio}\n💰 Monto: ${datosComprobanteActual.monto}\n📅 Fecha: ${datosComprobanteActual.fecha}\n⚡ Estado: ${e}`)}`,'_blank');}
 function enviarCorreo(){const e=document.getElementById("statusBadge").textContent;window.location.href=`mailto:?subject=Comprobante ${datosComprobanteActual.id}&body=ID: ${datosComprobanteActual.id}%0AServicio: ${datosComprobanteActual.servicio}%0AMonto: ${datosComprobanteActual.monto}%0AFecha: ${datosComprobanteActual.fecha}%0AEstado: ${e}`;}
 
-// ===== SEGUIMIENTO POR ID =====
 async function buscarSolicitud(){
 const id=document.getElementById("trackId").value.trim(),out=document.getElementById("trackResult");
 if(!id){out.innerHTML=`<p class="bad">Escribe un ID.</p>`;return;}
@@ -828,7 +847,6 @@ const ok=data.estado==="Completada";
 out.innerHTML=`<div class="sol-row" style="font-size:14px;"><div><b>#${escapeHTML(data.id)}</b><br><span style="color:var(--muted);">${escapeHTML(data.servicio)} · ${escapeHTML(data.monto)} · ${escapeHTML(data.fecha)}</span></div><div class="${ok?'good':'status'}" style="font-weight:800;">${escapeHTML(data.estado)}</div></div>`;
 }catch(e){out.innerHTML=`<p class="bad">No se pudo consultar (¿ejecutaste setup.sql?).</p>`;}}
 
-// ===== VISITAS Y ESTADÍSTICAS =====
 async function registrarVisita(){try{await db.from('ybh_visitas').insert([{}]);}catch(e){}}
 async function cargarStats(){
 if(!isAdmin)return;
@@ -839,12 +857,10 @@ if(!error&&data){solic=data;data.forEach(s=>{const k=(s.servicio||"").split(' ')
 g.innerHTML=`<div class="stat-item"><b>${visitas}</b><span>Visitas totales</span></div><div class="stat-item"><b>${solic.length}</b><span>Solicitudes</span></div>`+Object.entries(porServ).slice(0,3).map(([k,v])=>`<div class="stat-item"><b>${v}</b><span>${escapeHTML(k)}</span></div>`).join('');
 document.getElementById("solicitudesList").innerHTML=solic.slice(0,15).map(s=>`<div class="sol-row"><div>#${escapeHTML(s.id)} · ${escapeHTML(s.servicio)} · ${escapeHTML(s.monto)}</div><div style="color:var(--muted);">${escapeHTML(s.fecha||"")} · ${escapeHTML(s.estado)}</div></div>`).join('')||`<p class="status">Aún no hay solicitudes guardadas.</p>`;}
 
-// ===== TICKER DE CONFIANZA =====
 const mensajesConfianza=["🛡️ Compra 100% Segura y Garantizada","⚡ Recargas y Remesas con Activación Inmediata","⭐ Atención Personalizada las 24 Horas","🤝 Únete a nuestra red de socios y gana comisiones","✈️ Encuentra los mejores precios para tu viaje"];
 (function(){const el=document.getElementById("trustMensaje");let i=0;el.textContent=mensajesConfianza[0];
 setInterval(()=>{el.style.opacity=0;setTimeout(()=>{el.textContent=mensajesConfianza[i%mensajesConfianza.length];el.style.opacity=1;i++;},500);},4000);})();
 
-// ===== NOTICIAS =====
 async function cargarNoticiasReales(){
 const t=document.getElementById("newsTitle"),d=document.getElementById("newsDesc"),l=document.getElementById("newsLink");
 if(currentData.newsTitle&&currentData.newsTitle.trim()!==""){
@@ -874,7 +890,6 @@ const n=noticiasRSS[indiceNoticiaRSS%noticiasRSS.length],t=document.getElementBy
 t.style.opacity=0;
 setTimeout(()=>{document.getElementById("newsTitle").textContent=n.titulo;document.getElementById("newsDesc").textContent=n.desc;document.getElementById("newsLink").href=n.link;t.style.opacity=1;indiceNoticiaRSS++;},500);}
 
-// ===== VISAS / TESTIMONIOS / FAMILIA / FAQ =====
 function renderizarVisas(){
 const c=document.getElementById("visaCards");if(!c)return;
 c.innerHTML=listaVisas.map(v=>`<div class="tarjeta-servicio"><div><h3>${v.emoji} ${escapeHTML(v.pais)}</h3><p style="color:var(--muted);font-size:.9rem;">${escapeHTML(v.servicios)}</p></div><a href="https://wa.me/${MI_TELEFONO}?text=${encodeURIComponent('Hola, quiero solicitar una evaluación para visa a '+v.pais)}" target="_blank" class="btn-whatsapp" style="margin-top:auto;">📲 Solicitar Evaluación</a></div>`).join('');}
@@ -882,16 +897,68 @@ function renderizarTestimonios(){
 const c=document.getElementById("testimoniosCards");if(!c)return;
 c.innerHTML=(currentData.testimonios||"").split('\n').filter(l=>l.trim()).map(l=>{const[a,t]=l.split('|');
 return`<div class="testimonio"><div class="autor">⭐ ${escapeHTML((a||"").trim())}</div><div class="texto">"${escapeHTML((t||"").trim())}"</div></div>`;}).join('')||`<p class="status" style="text-align:center;">Aún no hay testimonios.</p>`;}
+
+let familiaIndex=0, familiaTimer=null;
 function renderizarFamilia(){
-const c=document.getElementById("familiaCards");if(!c)return;
-c.innerHTML=(currentData.familia||"").split('\n').filter(l=>l.trim()).map(l=>{const[de,para,t]=l.split('|');
-return`<div class="message-card"><div class="msg-header">💌 De ${escapeHTML((de||"").trim())}, para ${escapeHTML((para||"").trim())}</div><div class="msg-body">"${escapeHTML((t||"").trim())}"</div></div>`;}).join('')||`<p class="status" style="text-align:center;">Aún no hay mensajes. ¡Sé el primero!</p>`;}
+const deEl=document.getElementById("famDe");
+const txEl=document.getElementById("famTexto");
+const paEl=document.getElementById("famPara");
+const dots=document.getElementById("famDots");
+if(!deEl||!txEl||!paEl||!dots)return;
+
+const lista=(currentData.familia||"").split('\n').filter(l=>l.trim()).map(l=>{
+  const[de,para,t]=l.split('|');
+  return {de:(de||"").trim(),para:(para||"").trim(),texto:(t||"").trim()};
+});
+
+if(!lista.length){
+  deEl.textContent="❤️";
+  txEl.textContent="Aún no hay mensajes. ¡Sé el primero!";
+  paEl.textContent="";
+  dots.innerHTML="";
+  return;
+}
+
+familiaIndex=0;
+dots.innerHTML=lista.map((_,i)=>`<span class="fam-dot ${i===0?'active':''}" onclick="goFamilia(${i})"></span>`).join('');
+
+function mostrar(i){
+  const b=document.getElementById("familiaBanner");
+  if(!b)return;
+  b.style.opacity=0;
+  setTimeout(()=>{
+    const m=lista[i];
+    deEl.textContent="💌 De "+m.de;
+    txEl.textContent='"'+m.texto+'"';
+    paEl.textContent="Para: "+m.para;
+    document.querySelectorAll(".fam-dot").forEach((d,k)=>d.classList.toggle("active",k===i));
+    b.style.opacity=1;
+  },400);
+}
+mostrar(0);
+
+if(familiaTimer)clearInterval(familiaTimer);
+familiaTimer=setInterval(()=>{
+  familiaIndex=(familiaIndex+1)%lista.length;
+  mostrar(familiaIndex);
+},6000);
+
+window.goFamilia=function(i){
+  familiaIndex=i;
+  if(familiaTimer)clearInterval(familiaTimer);
+  mostrar(i);
+  familiaTimer=setInterval(()=>{
+    familiaIndex=(familiaIndex+1)%lista.length;
+    mostrar(familiaIndex);
+  },6000);
+};
+}
+
 function renderizarFAQ(){
 const c=document.getElementById("faqList");if(!c)return;
 c.innerHTML=(currentData.faq||"").split('\n').filter(l=>l.trim()).map(l=>{const[p,r]=l.split('|');
 return`<div class="faq-item" onclick="this.classList.toggle('open')"><div class="preg">${escapeHTML((p||"").trim())}</div><div class="resp">${escapeHTML((r||"").trim())}</div></div>`;}).join('')||`<p class="status" style="text-align:center;">Aún no hay preguntas frecuentes.</p>`;}
 
-// ===== BUSCADOR =====
 function buscarEnPagina(){
 const q=(document.getElementById("searchInput").value||"").toLowerCase().trim(),out=document.getElementById("searchResults");
 if(q.length<2){out.innerHTML="";return;}
@@ -903,7 +970,6 @@ const r=[];
 listaVisas.forEach(v=>{if((v.pais||"").toLowerCase().includes(q))r.push(`<a href="#visas">🛂 ${escapeHTML(v.pais)}</a>`);});
 out.innerHTML=r.slice(0,12).join('');}
 
-// ===== PROMO CON CUENTA ATRÁS =====
 function mostrarPromo(){
 const box=document.getElementById("promoBox"),p=currentData.promo||{};
 if(!p.fin||new Date(p.fin)<=new Date()){box.style.display="none";return;}
@@ -917,7 +983,6 @@ const h=Math.floor(dif/3600000),m=Math.floor(dif%3600000/60000),s=Math.floor(dif
 document.getElementById("promoCountdown").textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;};
 tick();timerPromo=setInterval(tick,1000);}
 
-// ===== LIGHTBOX / COMPARTIR / INSTALAR =====
 function abrirLightbox(){const s=document.getElementById("c-img").src;if(!s)return;
 document.getElementById("lightboxImg").src=s;document.getElementById("lightbox").style.display="flex";}
 function cerrarLightbox(){document.getElementById("lightbox").style.display="none";}
@@ -927,7 +992,6 @@ else window.open("https://wa.me/?text="+encodeURIComponent("Mira esta página: "
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById("btnInstall").classList.remove("hidden");});
 function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;document.getElementById("btnInstall").classList.add("hidden");}}
 
-// ===== ADMIN: PAÍSES Y VISAS =====
 function renderizarAdminPaises(){
 const c=document.getElementById("lista-paises-admin");if(!c)return;
 c.innerHTML="";const monedas=["RUB","USD","EUR","MLC","BRL","MXN","CAD","UYU"];
@@ -963,7 +1027,6 @@ const enRub=pb*(T[mb]||1);
 const final=enRub/(T[destino]||1);
 el.textContent=`Desde ${final.toFixed(2)} ${destino}`;});}
 
-// ===== RENDER PRINCIPAL =====
 function renderPage(){
 const d=currentData;
 if(d.noticeText||d.noticeImg){
@@ -999,7 +1062,6 @@ document.getElementById("remittanceCards").innerHTML=`<div class="card"><img src
 
 document.getElementById("payInfoView").textContent=d.payInfo||"";
 
-// Tarjetas de países con conversión de moneda dinámica
 document.getElementById("ticketCards").innerHTML=(d.paises||paisesPorDefecto).map(p=>{
 const mb=p.monedaBase||"RUB";
 return`<div class="card" style="justify-content:space-between;overflow:hidden;">
@@ -1033,7 +1095,6 @@ buildCarousel();setupBannerRotativo();calcularTodo();
 if(isAdmin){fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();cargarStats();}
 actualizarPreciosEnPantalla();}
 
-// ===== CARRUSEL (20 SEG) =====
 function buildCarousel(){
 const dots=document.getElementById("c-dots");dots.innerHTML="";
 currentData.photos.forEach((_,i)=>dots.innerHTML+=`<span class="dot ${i===ci?'active':''}" onclick="goFoto(${i})"></span>`);
@@ -1082,7 +1143,6 @@ const{error}=await db.from(TABLE_NAME).upsert({id:ROW_ID,data:currentData},{onCo
 if(error)return alert("❌ Error al guardar la foto");
 renderizarFotosAdmin();renderPage();alert("✅ Foto agregada");}
 
-// ===== BANNER ROTATIVO =====
 function setupBannerRotativo(){
 const d=currentData;
 const l=(d.rechargesListText||DEF_RECARGAS_TEXTO).split('\n');
@@ -1112,7 +1172,6 @@ btn.setAttribute('onclick',i.action+"; return false;");
 b.style.opacity=1;},500);}
 setInterval(()=>{if(bannerList.length>1){bannerIndex++;updateBannerDisplay();}},7000);
 
-// ===== PESTAÑAS / CALCULADORAS =====
 function cambiarTab(t){["avion","tren","bus"].forEach(x=>document.getElementById("panel-"+x).classList.toggle("hidden",x!==t));
 ["avion","tren","bus"].forEach(x=>document.getElementById("tab-"+x).classList.toggle("active",x===t));}
 function calcPasaje(){
@@ -1120,14 +1179,12 @@ const p=Number(document.getElementById("pasajeUSD").value||0),r=Number(document.
 document.getElementById("pasajeResult").textContent=(p*r).toFixed(2);}
 function calcularTodo(){calcPasaje();}
 
-// ===== RELOJ =====
 function updateClockDate(){
 const n=new Date();
 document.getElementById("clock").textContent=n.toLocaleTimeString();
 document.getElementById("clockDate").textContent=n.toLocaleDateString(lang==="ru"?"ru-RU":lang==="en"?"en-US":"es-ES",{weekday:'long',year:'numeric',month:'long',day:'numeric'});}
 setInterval(updateClockDate,1000);
 
-// ===== CAPTCHAS Y FORMULARIOS =====
 function pintarCaptcha(){
 document.getElementById("captchaPregunta").textContent=`${captchaA} + ${captchaB}`;
 document.querySelectorAll('.captcha-fam').forEach(el=>el.textContent=`${capFA} + ${capFB}`);}
@@ -1170,7 +1227,6 @@ const msg=`*SOLICITUD DE VISA - YOUR BRIDGE HOME*%0A%0A`+
 `_Por favor, indíquenme los siguientes pasos para mi trámite._`;
 window.open(`https://wa.me/${MI_TELEFONO}?text=${msg}`,'_blank');});
 
-// ===== RESTAURAR CON CONFIRMACIÓN =====
 async function restaurarBackup(ev){
 const f=ev.target.files[0];if(!f)return;
 if(!confirm("⚠️ ¿Seguro? Se reemplazará TODO el contenido actual por el del archivo.")){ev.target.value="";return;}
@@ -1185,7 +1241,6 @@ renderPage();fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderi
 alert("✅ Contenido restaurado");}catch(err){alert("❌ Archivo no válido");}};
 rd.readAsText(f);}
 
-// ===== CARGA / GUARDADO / REALTIME =====
 async function loadData(){
 const s=document.getElementById("connectionStatus");
 try{
@@ -1239,7 +1294,6 @@ if(error){s.textContent="Error";s.className="status bad";return;}
 currentData=n;listaVisas=n.visas;renderPage();
 s.textContent="✅ ¡Publicado! Tus clientes lo ven al instante.";s.className="status good";}
 
-// ===== ADMIN =====
 function adminLogin(){
 if(document.getElementById("adminPassword").value===CLAVE_ADMIN){
 isAdmin=true;
@@ -1289,7 +1343,6 @@ const blob=new Blob([JSON.stringify(currentData,null,2)],{type:"application/json
 const a=document.createElement("a");a.href=URL.createObjectURL(blob);
 a.download="ybh-backup-"+new Date().toISOString().slice(0,10)+".json";a.click();}
 
-// ===== INICIO =====
 listaVisas=listaVisasDef;
 pintarCaptcha();
 registrarVisita();
