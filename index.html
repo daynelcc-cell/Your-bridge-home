@@ -166,6 +166,12 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
 .familia-banner .fam-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#3a4252;margin:3px;cursor:pointer;transition:.3s}
 .familia-banner .fam-dot.active{background:var(--gold);transform:scale(1.3)}
 
+/* ===== PDF LINKS ===== */
+.pdf-links{background:rgba(212,160,23,.08);border:1px solid var(--gold);border-radius:12px;padding:14px;margin-top:14px;text-align:left}
+.pdf-links b{color:var(--gold);font-size:13px;display:block;margin-bottom:8px}
+.pdf-links a{display:inline-block;background:rgba(212,160,23,.15);color:var(--gold);padding:8px 14px;border-radius:10px;text-decoration:none;font-size:13px;font-weight:700;margin:4px 4px 0 0;border:1px solid rgba(212,160,23,.3)}
+.pdf-links a:hover{background:var(--gold);color:#0f1115}
+
 @media(max-width:600px){
   .banner-rotativo strong{font-size:24px}
   .amount-display h1{font-size:30px}
@@ -187,29 +193,29 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
   </div>
 </header>
 
-<nav>
+<nav id="mainNav">
   <a href="#inicio" data-i18n="nav_inicio">Inicio</a>
-  <a href="#recargas" data-i18n="nav_recargas">Recargas</a>
-  <a href="#remesas" data-i18n="nav_remesas">Remesas</a>
-  <a href="#pagos" data-i18n="nav_pagos">Cómo Pagar</a>
-  <a href="#seguimiento" data-i18n="nav_seguimiento">Seguimiento</a>
-  <a href="#boletos" data-i18n="nav_boletos">Boletos</a>
-  <a href="#destinos" data-i18n="nav_destinos">Fotos Destinos</a>
-  <a href="#video" data-i18n="nav_video">Video</a>
-  <a href="#tienda">☕ Tienda</a>
-  <a href="#juegos" data-i18n="nav_juegos">Juegos</a>
-  <a href="#testimonios" data-i18n="nav_testimonios">Testimonios</a>
-  <a href="#familia">❤️ Familia</a>
-  <a href="#faq" data-i18n="nav_faq">FAQ</a>
-  <a href="#informacion" data-i18n="nav_info">Información</a>
-  <a href="#paquetes" data-i18n="nav_paquetes">Paquetes</a>
-  <a href="#visas" data-i18n="nav_visas">Visas</a>
-  <a href="#dubai">Dubái</a>
-  <a href="#turquia">Turquía</a>
-  <a href="#socios" data-i18n="nav_socios">Socios</a>
-  <a href="#cuba" data-i18n="nav_cuba">Cuba</a>
-  <a href="#notas" data-i18n="nav_notas">Notas</a>
-  <a href="#contacto" data-i18n="nav_contacto">Contacto</a>
+  <a href="#recargas" data-seccion="recargas" data-i18n="nav_recargas">Recargas</a>
+  <a href="#remesas" data-seccion="remesas" data-i18n="nav_remesas">Remesas</a>
+  <a href="#pagos" data-seccion="pagos" data-i18n="nav_pagos">Cómo Pagar</a>
+  <a href="#seguimiento" data-seccion="seguimiento" data-i18n="nav_seguimiento">Seguimiento</a>
+  <a href="#boletos" data-seccion="boletos" data-i18n="nav_boletos">Boletos</a>
+  <a href="#destinos" data-seccion="destinos" data-i18n="nav_destinos">Fotos Destinos</a>
+  <a href="#video" data-seccion="video" data-i18n="nav_video">Video</a>
+  <a href="#tienda" data-seccion="tienda">☕ Tienda</a>
+  <a href="#juegos" data-seccion="juegos" data-i18n="nav_juegos">Juegos</a>
+  <a href="#testimonios" data-seccion="testimonios" data-i18n="nav_testimonios">Testimonios</a>
+  <a href="#familia" data-seccion="familia">❤️ Familia</a>
+  <a href="#faq" data-seccion="faq" data-i18n="nav_faq">FAQ</a>
+  <a href="#informacion" data-seccion="informacion" data-i18n="nav_info">Información</a>
+  <a href="#paquetes" data-seccion="paquetes" data-i18n="nav_paquetes">Paquetes</a>
+  <a href="#visas" data-seccion="visas" data-i18n="nav_visas">Visas</a>
+  <a href="#dubai" data-seccion="dubai">Dubái</a>
+  <a href="#turquia" data-seccion="turquia">Turquía</a>
+  <a href="#socios" data-seccion="socios" data-i18n="nav_socios">Socios</a>
+  <a href="#cuba" data-seccion="cuba" data-i18n="nav_cuba">Cuba</a>
+  <a href="#notas" data-seccion="notas" data-i18n="nav_notas">Notas</a>
+  <a href="#contacto" data-seccion="contacto" data-i18n="nav_contacto">Contacto</a>
   <a href="#administracion" data-i18n="nav_admin">Admin</a>
 </nav>
 
@@ -264,10 +270,10 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
     </div>
   </section>
 
-  <section id="recargas"><h2>📱 <span data-i18n="t_recargas">Tienda de Recargas</span></h2><div class="recharge-list" id="rechargeCards"></div></section>
+  <section id="recargas"><h2 id="h2-recargas">📱 <span data-i18n="t_recargas">Tienda de Recargas</span></h2><div class="recharge-list" id="rechargeCards"></div><div id="pdf-recargas"></div></section>
 
   <section id="remesas">
-    <h2>💸 <span data-i18n="t_remesas">Envío de Remesas</span></h2>
+    <h2 id="h2-remesas">💸 <span data-i18n="t_remesas">Envío de Remesas</span></h2>
     <div class="grid-normal" id="remittanceCards"></div>
     <div class="card" style="margin-top:18px;">
       <h3>💱 Calculadora de remesas</h3>
@@ -294,26 +300,29 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       <div class="price" id="pasajeResult">0</div>
     </div>
     <p style="text-align:center;margin-top:14px;">🔗 <a href="https://www.bc.gob.cu" target="_blank" style="color:var(--primary);font-weight:700;" data-i18n="l_bc">Banco de Cuba – tasa oficial</a></p>
+    <div id="pdf-remesas"></div>
   </section>
 
   <section id="pagos">
-    <h2>💳 <span data-i18n="t_pagos">Cómo Pagar</span></h2>
+    <h2 id="h2-pagos">💳 <span data-i18n="t_pagos">Cómo Pagar</span></h2>
     <div class="pay-box" id="payInfoView"></div>
     <a class="btn-whatsapp" href="https://wa.me/79046319565?text=Hola,%20necesito%20ayuda%20con%20el%20pago" style="margin-top:12px;">💬 Ayuda con el pago</a>
+    <div id="pdf-pagos"></div>
   </section>
 
   <section id="seguimiento">
-    <h2>🔎 <span data-i18n="t_seguimiento">Seguimiento de mi solicitud</span></h2>
+    <h2 id="h2-seguimiento">🔎 <span data-i18n="t_seguimiento">Seguimiento de mi solicitud</span></h2>
     <div class="card">
       <label data-i18n="s_id">Escribe el ID de tu comprobante (ej: YBH-20261111-1234):</label>
       <input id="trackId" placeholder="YBH-XXXXXXXX-XXXX">
       <button class="btn-comprar" onclick="buscarSolicitud()">🔍 Buscar</button>
       <div id="trackResult" style="margin-top:12px;"></div>
     </div>
+    <div id="pdf-seguimiento"></div>
   </section>
 
   <section id="boletos">
-    <h2>🎫 <span data-i18n="t_boletos">Boletos: Avión · Tren · Bus</span></h2>
+    <h2 id="h2-boletos">🎫 <span data-i18n="t_boletos">Boletos: Avión · Tren · Bus</span></h2>
     <div class="tabs" style="justify-content:center;">
       <button id="tab-avion" class="active" onclick="cambiarTab('avion')">✈️ <span data-i18n="t_avion">Avión</span></button>
       <button id="tab-tren" onclick="cambiarTab('tren')">🚆 <span data-i18n="t_tren">Tren</span></button>
@@ -330,10 +339,11 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
     </div>
     <div id="panel-tren" class="hidden"><div class="card"><h3>🚆 <span data-i18n="t_tren">Tren</span></h3><p class="notas-box" id="trenInfo"></p><a class="btn-whatsapp" id="waTren" href="#">💬 <span data-i18n="consultar">Consultar por WhatsApp</span></a></div></div>
     <div id="panel-bus" class="hidden"><div class="card"><h3>🚌 <span data-i18n="t_bus2">Bus</span></h3><p class="notas-box" id="busInfo"></p><a class="btn-whatsapp" id="waBus" href="#">💬 <span data-i18n="consultar">Consultar por WhatsApp</span></a></div></div>
+    <div id="pdf-boletos"></div>
   </section>
 
   <section id="destinos">
-    <h2>📍 <span data-i18n="t_destinos">Destinos: fotos, hoteles y restaurantes económicos</span></h2>
+    <h2 id="h2-destinos">📍 <span data-i18n="t_destinos">Destinos: fotos, hoteles y restaurantes económicos</span></h2>
     <div id="carousel">
       <img id="c-img" src="" alt="destino" onclick="abrirLightbox()">
       <div class="carousel-info">
@@ -343,35 +353,40 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       </div>
       <div class="dots" id="c-dots"></div>
     </div>
+    <div id="pdf-destinos"></div>
   </section>
 
   <section id="video">
-    <h2>🎬 <span data-i18n="t_video">Video</span></h2>
+    <h2 id="h2-video">🎬 <span data-i18n="t_video">Video</span></h2>
     <p style="text-align:center;color:var(--muted);font-size:13px;" data-i18n="video_nube">El video se reproduce desde YouTube: no consume tu espacio en la nube.</p>
     <div class="video-box"><iframe id="v-frame" src="" allowfullscreen loading="lazy"></iframe></div>
+    <div id="pdf-video"></div>
   </section>
 
   <section id="tienda">
-    <h2>🛍️ <span data-i18n="t_tienda">Tienda en línea</span></h2>
+    <h2 id="h2-tienda">🛍️ <span data-i18n="t_tienda">Tienda en línea</span></h2>
     <div class="grid-normal" id="shopCards"></div>
+    <div id="pdf-tienda"></div>
   </section>
 
   <section id="juegos">
-    <h2>🎮 <span data-i18n="t_juegos">Juegos gratis (no consumen tu nube)</span></h2>
+    <h2 id="h2-juegos">🎮 <span data-i18n="t_juegos">Juegos gratis (no consumen tu nube)</span></h2>
     <div class="tabs" style="justify-content:center;">
       <button onclick="window.open('https://play2048.co','_blank')">🎮 2048</button>
       <button onclick="window.open('https://sudoku.com/es','_blank')">🧩 Sudoku</button>
       <button onclick="window.open('https://www.chess.com/play/computer','_blank')">♟️ Ajedrez</button>
     </div>
+    <div id="pdf-juegos"></div>
   </section>
 
   <section id="testimonios">
-    <h2>⭐ <span data-i18n="t_testimonios">Lo que dicen nuestros clientes</span></h2>
+    <h2 id="h2-testimonios">⭐ <span data-i18n="t_testimonios">Lo que dicen nuestros clientes</span></h2>
     <div class="grid-normal" id="testimoniosCards"></div>
+    <div id="pdf-testimonios"></div>
   </section>
 
   <section id="familia">
-    <h2>❤️ Corazón y Palabras</h2>
+    <h2 id="h2-familia">❤️ Corazón y Palabras</h2>
     <p style="text-align:center;color:var(--muted);font-style:italic;margin-bottom:20px;">Consejos y bendiciones de padres a hijos, a través de la distancia.</p>
     <div class="familia-banner" id="familiaBanner">
       <div class="fam-contenido">
@@ -393,15 +408,17 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       </form>
       <p id="fam-estado" class="status" style="text-align:center;"></p>
     </div>
+    <div id="pdf-familia"></div>
   </section>
 
   <section id="faq">
-    <h2>❓ <span data-i18n="t_faq">Preguntas Frecuentes</span></h2>
+    <h2 id="h2-faq">❓ <span data-i18n="t_faq">Preguntas Frecuentes</span></h2>
     <div id="faqList"></div>
+    <div id="pdf-faq"></div>
   </section>
 
   <section id="informacion">
-    <h2>⚠️ <span data-i18n="t_info">Información Importante</span></h2>
+    <h2 id="h2-informacion">⚠️ <span data-i18n="t_info">Información Importante</span></h2>
     <div class="card" style="border:2px solid var(--red);">
       <h3 style="text-align:center;color:var(--red);">🚨 DETALLES IMPORTANTES PARA SU VUELO ✈️</h3>
       <ul style="color:var(--text);font-size:14px;display:flex;flex-direction:column;gap:10px;margin-top:12px;list-style:none;">
@@ -416,11 +433,12 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       <p style="color:var(--muted);margin-top:10px;">Debido a que todo inicio de trámite requiere de <strong>costos y honorarios</strong>.</p>
     </div>
     <p style="text-align:center;color:var(--muted);font-style:italic;">"Tu visa, nuestra prioridad"</p>
+    <div id="pdf-informacion"></div>
   </section>
 
   <section id="paquetes">
     <div class="card" style="border:2px solid var(--red);">
-      <h2 style="color:#fff;-webkit-text-fill-color:#fff;">NUESTROS PAQUETES DE VIAJE ✈️</h2>
+      <h2 id="h2-paquetes" style="color:#fff;-webkit-text-fill-color:#fff;">NUESTROS PAQUETES DE VIAJE ✈️</h2>
       <ul style="list-style:none;color:var(--text);font-weight:700;display:flex;flex-direction:column;gap:8px;margin:10px 0 20px;">
         <li>• BOLETOS AÉREOS Y TRASLADOS</li><li>• ALOJAMIENTO Y ALIMENTACIÓN</li>
       </ul>
@@ -440,10 +458,11 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       </div>
       <a href="https://wa.me/79046319565?text=Hola,%20estoy%20interesado%20en%20los%20paquetes%20de%20viaje." target="_blank" style="background:var(--gold);color:#0f1115;font-weight:900;font-size:1.05rem;">💬 COTIZAR MI PAQUETE</a>
     </div>
+    <div id="pdf-paquetes"></div>
   </section>
 
   <section id="visas">
-    <h2>🛂 Todos los Trámites de Visa</h2>
+    <h2 id="h2-visas">🛂 Todos los Trámites de Visa</h2>
     <div class="grid-normal" id="visaCards"></div>
     <div class="card" style="padding:22px;">
       <h3 style="text-align:center;">Requisitos para solicitud de <span style="color:var(--gold);">VISA ✈️</span></h3>
@@ -457,46 +476,21 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
         <button type="submit" style="background:linear-gradient(135deg,var(--green),#15803d);">💬 Enviar Datos por WhatsApp</button>
       </form>
     </div>
+    <div id="pdf-visas"></div>
   </section>
 
   <section id="dubai">
-    <div class="card" style="border:2px solid var(--gold);text-align:center;">
-      <h3>Visa de Turismo a</h3>
-      <h2 style="font-size:3rem;">DUBAI 🇦🇪</h2>
-      <p style="color:var(--muted);font-style:italic;">"Vive una experiencia única en uno de los destinos más exclusivos del mundo."</p>
-      <div class="grid-normal">
-        <div class="product-card" style="text-align:center;"><span class="badge-modern">🛂 Solo Visa</span><div style="font-size:1.8rem;font-weight:900;">$1,500</div><div style="color:var(--muted);font-weight:700;">USD</div></div>
-        <div class="product-card" style="text-align:center;"><span class="badge-modern">✈️ Visa + Pasaje</span><div style="font-size:1.8rem;font-weight:900;">$3,500</div><div style="color:var(--muted);font-weight:700;">USD</div></div>
-      </div>
-      <div class="notas-box" style="text-align:left;margin-top:14px;">
-📋 REQUISITOS
-🛂 Pasaporte vigente, bien escaneado todas las páginas.
-🪪 Carnet de identidad escaneado ambas caras.
-📞 Número de teléfono. ✉️ Correo electrónico.
-📸 Foto digital tipo visa. 💼 Ocupación actual.
-🏢 Nombre y dirección del lugar de trabajo.</div>
-      <a href="https://wa.me/79046319565?text=Hola,%20estoy%20interesado%20en%20la%20Visa%20de%20Turismo%20a%20Dubái." target="_blank" style="background:linear-gradient(135deg,var(--gold),#b8860b);color:#0f1115;margin-top:16px;">💬 Solicitar Visa a Dubái</a>
-    </div>
+    <div class="card" style="border:2px solid var(--gold);text-align:center;" id="dubaiCard"></div>
+    <div id="pdf-dubai"></div>
   </section>
 
   <section id="turquia">
-    <div class="card" style="border:2px solid var(--red);text-align:center;">
-      <h3>Trámite de Visa para</h3>
-      <h2 style="font-size:2.8rem;">TURQUÍA</h2>
-      <span class="badge-modern">Desde Cuba 🇨🇺</span>
-      <div class="notas-box" style="text-align:left;margin:14px 0;">
-✨ NUESTRO SERVICIO INCLUYE:
-📋 PREPARACIÓN del expediente · 🔍 REVISIÓN de documentación
-🛡️ ASESORÍA personalizada · 💻 GESTIÓN de la solicitud · ✅ SEGUIMIENTO del proceso</div>
-      <div style="display:inline-block;background:var(--gold);color:#0f1115;padding:14px 36px;border-radius:16px;border:3px solid var(--red);transform:rotate(-2deg);font-weight:900;">
-        <div style="font-size:2.4rem;">1250</div><div style="font-size:1.3rem;">USD</div>
-      </div>
-      <a href="https://wa.me/79046319565?text=Hola,%20soy%20cubano%20y%20estoy%20interesado%20en%20el%20trámite%20de%20Visa%20para%20Turquía." target="_blank" style="background:linear-gradient(135deg,var(--red),#b91c1c);margin-top:18px;">📍 Trámite disponible desde Cuba</a>
-    </div>
+    <div class="card" style="border:2px solid var(--red);text-align:center;" id="turquiaCard"></div>
+    <div id="pdf-turquia"></div>
   </section>
 
   <section id="socios">
-    <h2>🤝 <span data-i18n="t_socios">Registra tu Negocio</span></h2>
+    <h2 id="h2-socios">🤝 <span data-i18n="t_socios">Registra tu Negocio</span></h2>
     <div class="tarjeta-formulario">
       <form id="form-nuevo-negocio">
         <input type="text" id="nombre-negocio" placeholder="Nombre del Negocio" required>
@@ -509,10 +503,11 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       </form>
       <p id="mensaje-estado" class="status" style="text-align:center;"></p>
     </div>
+    <div id="pdf-socios"></div>
   </section>
 
   <section id="cuba">
-    <h2>🇨🇺 <span data-i18n="t_cuba">Enlaces Oficiales de Cuba</span></h2>
+    <h2 id="h2-cuba">🇨🇺 <span data-i18n="t_cuba">Enlaces Oficiales de Cuba</span></h2>
     <div class="cuba-links-grid">
       <a href="https://www.minint.gob.cu/" target="_blank" class="cuba-card"><div class="cuba-icon">🛂</div><div class="cuba-text"><h4>DIIE – MININT</h4><p>Pasaporte e Inmigración</p></div></a>
       <a href="https://dviajeros.mitrans.gob.cu/" target="_blank" class="cuba-card"><div class="cuba-icon">🧳</div><div class="cuba-text"><h4>D'Viajeros</h4><p>Formulario de entrada</p></div></a>
@@ -520,16 +515,18 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       <a href="https://www.minjus.gob.cu/" target="_blank" class="cuba-card"><div class="cuba-icon">📜</div><div class="cuba-text"><h4>MINJUS</h4><p>Registro Civil</p></div></a>
       <a href="https://www.gacetaoficial.gob.cu/" target="_blank" class="cuba-card"><div class="cuba-icon">⚖️</div><div class="cuba-text"><h4>Gaceta Oficial</h4><p>Leyes y decretos</p></div></a>
     </div>
+    <div id="pdf-cuba"></div>
   </section>
 
   <section id="notas">
-    <h2>📝 <span data-i18n="t_notas">Notas e información importante</span></h2>
+    <h2 id="h2-notas">📝 <span data-i18n="t_notas">Notas e información importante</span></h2>
     <div class="notas-box" id="notesView"></div>
     <p style="text-align:center;margin-top:14px;"><a href="#familia" style="color:var(--accent);font-weight:bold;">❤️ Leer consejos de padres a hijos</a></p>
+    <div id="pdf-notas"></div>
   </section>
 
   <section id="contacto">
-    <h2 data-i18n="t_contacto">Contacto</h2>
+    <h2 id="h2-contacto" data-i18n="t_contacto">Contacto</h2>
     <div class="card" style="text-align:center;">
       <h3>Daynel Caminero · Administrador</h3>
       <p style="color:var(--muted);">Atención personalizada · Tel: +7 904 631-95-65</p>
@@ -537,6 +534,7 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       <button class="secondary" style="margin-top:10px;" onclick="compartirPagina()">📤 Compartir esta página</button>
       <button class="secondary hidden" id="btnInstall" onclick="instalarApp()">📲 Instalar como app</button>
     </div>
+    <div id="pdf-contacto"></div>
   </section>
 
   <section id="administracion">
@@ -559,6 +557,31 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       <h3>📊 Estadísticas</h3>
       <div class="stat-grid" id="statGrid"><div class="stat-item"><b>—</b><span>Cargando...</span></div></div>
       <div id="solicitudesList"></div>
+
+      <h3>🏷️ Renombrar pestañas (título visible del menú y de la sección)</h3>
+      <p style="font-size:12px;color:var(--muted);">Cambia el nombre visible de cada pestaña sin crear nuevas. Se aplica al menú superior y al título H2 de la sección.</p>
+      <div id="renombrarTabs" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;"></div>
+
+      <h3>📎 Subir PDFs por sección (desde Recargas en adelante)</h3>
+      <p style="font-size:12px;color:var(--muted);">Sube uno o varios PDFs por sección. Requiere bucket público "documentos" en Supabase Storage. Si no existe, se guarda base64 (pesado).</p>
+      <div id="pdfUploader" style="display:flex;flex-direction:column;gap:14px;"></div>
+
+      <h3>🇦🇪 Visa Dubái (editable)</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div><label>Precio Solo Visa (USD):</label><input id="editDubaiSoloVisa" type="number"></div>
+        <div><label>Precio Visa + Pasaje (USD):</label><input id="editDubaiVisaPasaje" type="number"></div>
+      </div>
+      <label>URL Foto:</label><input id="editDubaiImg" placeholder="https://...">
+      <label>Requisitos (una línea por requisito):</label><textarea id="editDubaiRequisitos" rows="6"></textarea>
+
+      <h3>🇹🇷 Visa Turquía (editable)</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div><label>Precio (USD):</label><input id="editTurquiaPrecio" type="number"></div>
+        <div><label>Nota del botón:</label><input id="editTurquiaNota" placeholder="📍 Trámite disponible desde Cuba"></div>
+      </div>
+      <label>URL Foto:</label><input id="editTurquiaImg" placeholder="https://...">
+      <label>Qué incluye (una línea por ítem):</label><textarea id="editTurquiaIncluye" rows="6"></textarea>
+
       <h3>🔥 Promoción con cuenta atrás</h3>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
         <div><label>Título:</label><input id="editPromoTitulo" placeholder="Ej: Recarga COMBO 2 al mejor precio"></div>
@@ -743,6 +766,31 @@ Guyana | GYD | 2.30 | 2000 | RUB
 Rusia | RUB | 1.00 | 1000 | RUB
 Dubái | AED | 0.038 | 2000 | RUB`;
 
+/* ===== Nombres por defecto de pestañas (editables) ===== */
+const TABS_DEF = {
+  recargas:{menu:"Recargas",titulo:"📱 Tienda de Recargas"},
+  remesas:{menu:"Remesas",titulo:"💸 Envío de Remesas"},
+  pagos:{menu:"Cómo Pagar",titulo:"💳 Cómo Pagar"},
+  seguimiento:{menu:"Seguimiento",titulo:"🔎 Seguimiento de mi solicitud"},
+  boletos:{menu:"Boletos",titulo:"🎫 Boletos: Avión · Tren · Bus"},
+  destinos:{menu:"Fotos Destinos",titulo:"📍 Destinos: fotos, hoteles y restaurantes económicos"},
+  video:{menu:"Video",titulo:"🎬 Video"},
+  tienda:{menu:"☕ Tienda",titulo:"🛍️ Tienda en línea"},
+  juegos:{menu:"Juegos",titulo:"🎮 Juegos gratis (no consumen tu nube)"},
+  testimonios:{menu:"Testimonios",titulo:"⭐ Lo que dicen nuestros clientes"},
+  familia:{menu:"❤️ Familia",titulo:"❤️ Corazón y Palabras"},
+  faq:{menu:"FAQ",titulo:"❓ Preguntas Frecuentes"},
+  informacion:{menu:"Información",titulo:"⚠️ Información Importante"},
+  paquetes:{menu:"Paquetes",titulo:"NUESTROS PAQUETES DE VIAJE ✈️"},
+  visas:{menu:"Visas",titulo:"🛂 Todos los Trámites de Visa"},
+  dubai:{menu:"Dubái",titulo:"Visa Dubái"},
+  turquia:{menu:"Turquía",titulo:"Visa Turquía"},
+  socios:{menu:"Socios",titulo:"🤝 Registra tu Negocio"},
+  cuba:{menu:"Cuba",titulo:"🇨🇺 Enlaces Oficiales de Cuba"},
+  notas:{menu:"Notas",titulo:"📝 Notas e información importante"},
+  contacto:{menu:"Contacto",titulo:"Contacto"}
+};
+
 let currentData={published:true,
 noticeText:"Bienvenido a nuestra tienda online.",noticeImg:"",
 newsTitle:"",newsDesc:"",newsLink:"",
@@ -761,12 +809,171 @@ promo:{titulo:"",precio:"",fin:""},
 testimonios:"María G. | Recargué a mi mamá en La Habana y en minutos ya tenía saldo. ¡Excelente servicio!\nPedro R. | El trámite de la visa me lo explicaron paso a paso. Muy profesionales.\nAna L. | Las remesas llegan rápido y siempre me avisan cuando la familia recibe el dinero.",
 familia:"Mamá Carmen | Yaniel en Moscú | Hijo mío: trabaja con orden, cuida tu salud y no olvides nunca de dónde vienes. Estoy orgullosa de ti.\nPapá Ernesto | María en La Habana | No tengas miedo de los cambios. Un puente no se construye en un día, pero se construye.\nAbuela Rosa | Nieto querido | Donde quiera que estés, lleva a tu familia en el corazón. Es tu raíz y tu fuerza.\nMamá | Mi niño | La distancia no rompe un corazón que sabe esperar. Yo te espero aquí, siempre.\nPapá | Hijo mío | Sé hombre de palabra y de trabajo. El respeto se gana, no se pide.\nTía Mercedes | Sobrino | Cada paso que das lejos de casa es un ladrillo en tu futuro. No te rindas.\nMamá | Mi hija | Aunque estemos lejos, cada noche rezo por ti. Nunca estás sola.\nAbuelo José | Mis nietos | El dinero va y viene, pero la familia es para siempre. Cuídense entre ustedes.\nPapá | Mi princesa | Estudia, aprende, prepárate. El conocimiento nadie te lo puede quitar.\nMamá | Mi hijo | Si algún día te sientes perdido, recuerda de dónde vienes. Tu casa siempre tendrá las puertas abiertas.\nAbuela Carmen | Nieta | Sé fuerte como la palma, que se dobla pero no se rompe.\nPapá | Todos mis hijos | Lo único que les pido es que nunca se olviden de su familia. El resto lo tendrán.\nMamá | Mi tesoro | Donde estés, come bien, abrígate y escríbeme. Tu madre nunca deja de preocuparse.\nTío Raúl | Sobrinos | Trabajen, ahorren y sean humildes. El éxito llega cuando menos lo esperas.\nMamá | Mi vida | No importa cuántos kilómetros nos separen: mi amor por ti cruza cualquier frontera.\nPapá | Hijo | Aprende de tus errores, que los míos fueron más grandes. Nunca te rindas.\nAbuela | Mi niño lindo | La nostalgia es el precio del progreso. Aprovéchalo y vuelve triunfador.\nMamá | Mi hijo del alma | Si un día quieres llorar, hazlo; pero después sigue caminando. Yo estoy contigo.\nPapá | Mis hijos | El verdadero éxito es ser buena persona. Todo lo demás viene por añadidura.\nAbuela | Mi nieto del corazón | No olvides saludar, ser respetuoso y dar gracias. Un hombre educado abre puertas.",
 faq:"¿Cuánto tarda una remesa? | Normalmente entre 15 minutos y 2 horas, dependiendo del horario.\n¿Cómo pago? | Ve a la sección Cómo Pagar. Te damos los datos y confirmas por WhatsApp.\n¿Qué documentos necesito para la visa? | Pasaporte vigente, carnet, foto tipo visa y ocupación actual.\n¿Las recargas son inmediatas? | Sí, la activación es inmediata en el 99% de los casos.",
-photos:[]};
+photos:[],
+dubai:{
+  img:"https://images.pexels.com/photos/1470502/pexels-photo-1470502.jpeg?auto=compress&cs=tinysrgb&w=800",
+  precioSoloVisa:1500,
+  precioVisaPasaje:3500,
+  requisitos:"🛂 Pasaporte vigente, bien escaneado todas las páginas.\n🪪 Carnet de identidad escaneado ambas caras.\n📞 Número de teléfono. ✉️ Correo electrónico.\n📸 Foto digital tipo visa. 💼 Ocupación actual.\n🏢 Nombre y dirección del lugar de trabajo."
+},
+turquia:{
+  img:"https://images.pexels.com/photos/2044434/pexels-photo-2044434.jpeg?auto=compress&cs=tinysrgb&w=800",
+  precio:1250,
+  incluye:"📋 PREPARACIÓN del expediente · 🔍 REVISIÓN de documentación\n🛡️ ASESORÍA personalizada · 💻 GESTIÓN de la solicitud · ✅ SEGUIMIENTO del proceso",
+  nota:"📍 Trámite disponible desde Cuba"
+},
+tabs:TABS_DEF,
+documentos:{}
+};
 
 function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function generarID(){const a=new Date();return `YBH-${a.getFullYear()}${String(a.getMonth()+1).padStart(2,'0')}${String(a.getDate()).padStart(2,'0')}-${Math.floor(Math.random()*9000)+1000}`;}
 function obtenerFechaHora(){const a=new Date();return `${String(a.getDate()).padStart(2,'0')}/${String(a.getMonth()+1).padStart(2,'0')}/${a.getFullYear()} • ${String(a.getHours()).padStart(2,'0')}:${String(a.getMinutes()).padStart(2,'0')}`;}
 
+/* ===== Nombres de pestañas ===== */
+function getTabsData(){
+  const t = currentData.tabs || {};
+  const out = {};
+  Object.keys(TABS_DEF).forEach(k=>{
+    out[k] = {menu:(t[k]&&t[k].menu)||TABS_DEF[k].menu, titulo:(t[k]&&t[k].titulo)||TABS_DEF[k].titulo};
+  });
+  return out;
+}
+function aplicarNombresPestanas(){
+  const tabs = getTabsData();
+  document.querySelectorAll('nav a[data-seccion]').forEach(a=>{
+    const k = a.getAttribute('data-seccion');
+    if(tabs[k]) a.textContent = tabs[k].menu;
+  });
+  Object.keys(tabs).forEach(k=>{
+    const h = document.getElementById("h2-"+k);
+    if(h) h.textContent = tabs[k].titulo;
+  });
+}
+
+/* ===== PDFs por sección ===== */
+function renderDocumentos(seccion){
+  const docs = (currentData.documentos||{})[seccion]||[];
+  if(!docs.length) return "";
+  return `<div class="pdf-links"><b>📎 Documentos PDF disponibles:</b>
+    ${docs.map(d=>`<a href="${escapeHTML(d.url)}" target="_blank" rel="noopener">📄 ${escapeHTML(d.nombre)}</a>`).join('')}
+  </div>`;
+}
+function pintarPDFsEnSecciones(){
+  const secciones = Object.keys(TABS_DEF);
+  secciones.forEach(k=>{
+    const cont = document.getElementById("pdf-"+k);
+    if(cont) cont.innerHTML = renderDocumentos(k);
+  });
+}
+async function subirPDF(seccion, input){
+  const f = input.files[0];
+  if(!f) return;
+  const nombre = f.name;
+  let url = "";
+  try{
+    const path = `pdfs/${seccion}/${Date.now()}-${nombre.replace(/[^\w.\-]/g,'_')}`;
+    const {error} = await db.storage.from("documentos").upload(path, f, {upsert:false});
+    if(!error){
+      const {data} = db.storage.from("documentos").getPublicUrl(path);
+      url = data.publicUrl;
+    }
+  }catch(e){}
+  if(!url){
+    // Fallback base64
+    url = await new Promise(res=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.readAsDataURL(f);});
+  }
+  if(!currentData.documentos) currentData.documentos={};
+  if(!currentData.documentos[seccion]) currentData.documentos[seccion]=[];
+  currentData.documentos[seccion].push({nombre,url});
+  const {error} = await db.from(TABLE_NAME).upsert({id:ROW_ID,data:currentData},{onConflict:"id"});
+  if(error){alert("❌ Error al guardar el PDF");return;}
+  alert("✅ PDF subido correctamente");
+  input.value="";
+  renderizarPDFUploader();
+  pintarPDFsEnSecciones();
+}
+async function eliminarPDF(seccion, idx){
+  if(!confirm("¿Eliminar este PDF?"))return;
+  currentData.documentos[seccion].splice(idx,1);
+  await db.from(TABLE_NAME).upsert({id:ROW_ID,data:currentData},{onConflict:"id"});
+  renderizarPDFUploader();
+  pintarPDFsEnSecciones();
+}
+function renderizarPDFUploader(){
+  const cont = document.getElementById("pdfUploader");
+  if(!cont) return;
+  cont.innerHTML="";
+  Object.keys(TABS_DEF).forEach(k=>{
+    const docs = (currentData.documentos||{})[k]||[];
+    const div = document.createElement("div");
+    div.className="admin-pais-item";
+    div.innerHTML=`<b>${escapeHTML(TABS_DEF[k].titulo)}</b>
+      ${docs.map((d,i)=>`<div style="display:flex;gap:8px;align-items:center;margin:4px 0;">
+        <a href="${escapeHTML(d.url)}" target="_blank" style="color:var(--primary);font-weight:700;font-size:12px;flex:1;">📄 ${escapeHTML(d.nombre)}</a>
+        <button class="secondary" style="width:auto;padding:4px 10px;font-size:11px;" onclick="eliminarPDF('${k}',${i})">🗑️</button>
+      </div>`).join('')}
+      <input type="file" accept="application/pdf" onchange="subirPDF('${k}',this)" style="margin-top:8px;">`;
+    cont.appendChild(div);
+  });
+}
+
+/* ===== Renombrar pestañas (admin) ===== */
+function renderizarRenombrarTabs(){
+  const cont = document.getElementById("renombrarTabs");
+  if(!cont) return;
+  const tabs = getTabsData();
+  cont.innerHTML="";
+  Object.keys(TABS_DEF).forEach(k=>{
+    const div = document.createElement("div");
+    div.className="admin-pais-item";
+    div.innerHTML=`<label>Pestaña: <b>#${k}</b></label>
+      <label>Nombre en el menú:</label>
+      <input value="${escapeHTML(tabs[k].menu)}" onchange="cambiarNombreTab('${k}','menu',this.value)">
+      <label>Título de la sección (H2):</label>
+      <input value="${escapeHTML(tabs[k].titulo)}" onchange="cambiarNombreTab('${k}','titulo',this.value)">`;
+    cont.appendChild(div);
+  });
+}
+function cambiarNombreTab(k, campo, valor){
+  if(!currentData.tabs) currentData.tabs={};
+  if(!currentData.tabs[k]) currentData.tabs[k]={menu:TABS_DEF[k].menu,titulo:TABS_DEF[k].titulo};
+  currentData.tabs[k][campo]=valor;
+  aplicarNombresPestanas();
+}
+
+/* ===== Dubái y Turquía editables ===== */
+function renderizarDubai(){
+  const d = currentData.dubai||{};
+  const c = document.getElementById("dubaiCard"); if(!c)return;
+  c.innerHTML=`
+    ${d.img?`<img src="${escapeHTML(d.img)}" alt="Dubái" style="width:100%;max-height:280px;object-fit:cover;border-radius:14px;margin-bottom:14px;">`:''}
+    <h3>Visa de Turismo a</h3>
+    <h2 style="font-size:3rem;color:var(--gold);">DUBAI 🇦🇪</h2>
+    <p style="color:var(--muted);font-style:italic;">"Vive una experiencia única en uno de los destinos más exclusivos del mundo."</p>
+    <div class="grid-normal">
+      <div class="product-card" style="text-align:center;"><span class="badge-modern">🛂 Solo Visa</span><div style="font-size:1.8rem;font-weight:900;">$${Number(d.precioSoloVisa||0).toLocaleString()}</div><div style="color:var(--muted);font-weight:700;">USD</div></div>
+      <div class="product-card" style="text-align:center;"><span class="badge-modern">✈️ Visa + Pasaje</span><div style="font-size:1.8rem;font-weight:900;">$${Number(d.precioVisaPasaje||0).toLocaleString()}</div><div style="color:var(--muted);font-weight:700;">USD</div></div>
+    </div>
+    <div class="notas-box" style="text-align:left;margin-top:14px;white-space:pre-wrap;">${escapeHTML(d.requisitos||"")}</div>
+    <a href="https://wa.me/${MI_TELEFONO}?text=${encodeURIComponent('Hola, estoy interesado en la Visa de Turismo a Dubái.')}" target="_blank" style="background:linear-gradient(135deg,var(--gold),#b8860b);color:#0f1115;margin-top:16px;">💬 Solicitar Visa a Dubái</a>`;
+}
+function renderizarTurquia(){
+  const d = currentData.turquia||{};
+  const c = document.getElementById("turquiaCard"); if(!c)return;
+  c.innerHTML=`
+    ${d.img?`<img src="${escapeHTML(d.img)}" alt="Turquía" style="width:100%;max-height:280px;object-fit:cover;border-radius:14px;margin-bottom:14px;">`:''}
+    <h3>Trámite de Visa para</h3>
+    <h2 style="font-size:2.8rem;color:var(--red);">TURQUÍA</h2>
+    <span class="badge-modern">Desde Cuba 🇨🇺</span>
+    <div class="notas-box" style="text-align:left;margin:14px 0;white-space:pre-wrap;">✨ NUESTRO SERVICIO INCLUYE:\n${escapeHTML(d.incluye||"")}</div>
+    <div style="display:inline-block;background:var(--gold);color:#0f1115;padding:14px 36px;border-radius:16px;border:3px solid var(--red);transform:rotate(-2deg);font-weight:900;">
+      <div style="font-size:2.4rem;">${Number(d.precio||0).toLocaleString()}</div><div style="font-size:1.3rem;">USD</div>
+    </div>
+    <a href="https://wa.me/${MI_TELEFONO}?text=${encodeURIComponent('Hola, soy cubano y estoy interesado en el trámite de Visa para Turquía.')}" target="_blank" style="background:linear-gradient(135deg,var(--red),#b91c1c);margin-top:18px;">${escapeHTML(d.nota||'📍 Trámite disponible desde Cuba')}</a>`;
+}
+
+/* ===== Resto de funciones originales ===== */
 function parsearTasasRemesas(){
 return (currentData.tasasRemesas || DEF_TASAS_REMESAS).split('\n').filter(l=>l.trim()).map(l=>{
 const p=l.split('|').map(s=>(s||"").trim());
@@ -819,7 +1026,7 @@ function abrirComprobante(estado,servicio,monto,destino){
 datosComprobanteActual={id:generarID(),cliente:"Cliente Web",servicio,destino,monto,fecha:obtenerFechaHora(),estado:"En Proceso"};
 actualizarVistaComprobante(estado);
 document.getElementById("modalComprobante").style.display="flex";
-db.from('solicitudes').insert([{id:datosComprobanteActual.id,servicio,monto:String(monto),destino,fecha:datosComprobanteActual.fecha,estado:"En Proceso"}]).then(r=>{if(r.error)console.log("Tabla solicitudes no existe aún (ejecuta setup.sql)");});}
+db.from('solicitudes').insert([{id:datosComprobanteActual.id,servicio,monto:String(monto),destino,fecha:datosComprobanteActual.fecha,estado:"En Proceso"}]).then(r=>{if(r.error)console.log("Tabla solicitudes no existe aún");});}
 function actualizarVistaComprobante(estado){
 const b=document.getElementById("statusBadge");
 if(estado==='proceso'){b.className="status-badge proceso";b.textContent="En Proceso";document.getElementById("btnSimularCompletado").style.display="block";}
@@ -845,7 +1052,7 @@ const{data,error}=await db.from('solicitudes').select('*').eq('id',id).maybeSing
 if(error||!data){out.innerHTML=`<p class="bad">No se encontró esa solicitud. Verifica el ID.</p>`;return;}
 const ok=data.estado==="Completada";
 out.innerHTML=`<div class="sol-row" style="font-size:14px;"><div><b>#${escapeHTML(data.id)}</b><br><span style="color:var(--muted);">${escapeHTML(data.servicio)} · ${escapeHTML(data.monto)} · ${escapeHTML(data.fecha)}</span></div><div class="${ok?'good':'status'}" style="font-weight:800;">${escapeHTML(data.estado)}</div></div>`;
-}catch(e){out.innerHTML=`<p class="bad">No se pudo consultar (¿ejecutaste setup.sql?).</p>`;}}
+}catch(e){out.innerHTML=`<p class="bad">No se pudo consultar.</p>`;}}
 
 async function registrarVisita(){try{await db.from('ybh_visitas').insert([{}]);}catch(e){}}
 async function cargarStats(){
@@ -963,8 +1170,8 @@ function buscarEnPagina(){
 const q=(document.getElementById("searchInput").value||"").toLowerCase().trim(),out=document.getElementById("searchResults");
 if(q.length<2){out.innerHTML="";return;}
 const r=[];
-[["recargas","Recargas"],["remesas","Remesas"],["pagos","Cómo pagar"],["seguimiento","Seguimiento"],["boletos","Boletos"],["destinos","Fotos destinos"],["tienda","Tienda"],["testimonios","Testimonios"],["familia","Familia"],["faq","Preguntas frecuentes"],["visas","Visas"],["dubai","Visa Dubái"],["turquia","Visa Turquía"],["paquetes","Paquetes"],["socios","Socios"],["contacto","Contacto"]]
-.forEach(([id,n])=>{if(n.toLowerCase().includes(q))r.push(`<a href="#${id}">${n}</a>`);});
+const tabs=getTabsData();
+Object.keys(tabs).forEach(k=>{if(tabs[k].menu.toLowerCase().includes(q)||tabs[k].titulo.toLowerCase().includes(q))r.push(`<a href="#${k}">${escapeHTML(tabs[k].menu)}</a>`);});
 (currentData.rechargesListText||"").split('\n').forEach(l=>{const n=l.split('|')[0];if(n&&n.toLowerCase().includes(q))r.push(`<a href="#recargas">📱 ${escapeHTML(n.trim())}</a>`);});
 (currentData.paises||[]).forEach(p=>{if((p.nombre||"").toLowerCase().includes(q))r.push(`<a href="#boletos">✈️ ${escapeHTML(p.nombre)}</a>`);});
 listaVisas.forEach(v=>{if((v.pais||"").toLowerCase().includes(q))r.push(`<a href="#visas">🛂 ${escapeHTML(v.pais)}</a>`);});
@@ -1029,6 +1236,7 @@ el.textContent=`Desde ${final.toFixed(2)} ${destino}`;});}
 
 function renderPage(){
 const d=currentData;
+aplicarNombresPestanas();
 if(d.noticeText||d.noticeImg){
 document.getElementById("globalNoticeBox").style.display="block";
 document.getElementById("globalNoticeText").textContent=d.noticeText||"";
@@ -1037,6 +1245,7 @@ else document.getElementById("globalNoticeImg").style.display="none";}
 else document.getElementById("globalNoticeBox").style.display="none";
 
 cargarNoticiasReales();renderizarVisas();renderizarTestimonios();renderizarFamilia();renderizarFAQ();mostrarPromo();
+renderizarDubai();renderizarTurquia();
 poblarSelectorRemesas();calcularRemesaNueva();cargarTasasVivas();
 
 const pr=d.prices||{};
@@ -1092,7 +1301,8 @@ ${esCafe?`<div class="badge-modern">☕ Más vendido</div>`:''}
 <a class="btn-comprar" href="https://wa.me/${MI_TELEFONO}?text=${msg}" target="_blank">💬 ${I18N[lang].comprar}</a></div>`;}).join('');
 
 buildCarousel();setupBannerRotativo();calcularTodo();
-if(isAdmin){fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();cargarStats();}
+pintarPDFsEnSecciones();
+if(isAdmin){fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();renderizarRenombrarTabs();renderizarPDFUploader();cargarStats();}
 actualizarPreciosEnPantalla();}
 
 function buildCarousel(){
@@ -1237,7 +1447,7 @@ const{error}=await db.from(TABLE_NAME).upsert({id:ROW_ID,data:datos},{onConflict
 if(error)return alert("❌ Error al restaurar");
 currentData=Object.assign({},currentData,datos);
 if(currentData.visas)listaVisas=currentData.visas;
-renderPage();fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();
+renderPage();fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();renderizarRenombrarTabs();renderizarPDFUploader();
 alert("✅ Contenido restaurado");}catch(err){alert("❌ Archivo no válido");}};
 rd.readAsText(f);}
 
@@ -1251,6 +1461,10 @@ currentData=Object.assign({},currentData,data.data);
 listaVisas=currentData.visas||listaVisasDef;
 if(!currentData.paises)currentData.paises=paisesPorDefecto;
 if(!currentData.tasasRemesas)currentData.tasasRemesas=DEF_TASAS_REMESAS;
+if(!currentData.documentos)currentData.documentos={};
+if(!currentData.tabs)currentData.tabs=TABS_DEF;
+if(!currentData.dubai)currentData.dubai=JSON.parse(JSON.stringify({img:"",precioSoloVisa:1500,precioVisaPasaje:3500,requisitos:""}));
+if(!currentData.turquia)currentData.turquia=JSON.parse(JSON.stringify({img:"",precio:1250,incluye:"",nota:"📍 Trámite disponible desde Cuba"}));
 renderPage();
 s.textContent="✅ Tienda conectada";s.className="status good";}
 }catch(e){s.textContent="❌ Error";s.className="status bad";}
@@ -1287,7 +1501,22 @@ shop:document.getElementById("editShop").value,
 testimonios:document.getElementById("editTestimonios").value,
 familia:document.getElementById("editFamilia").value,
 faq:document.getElementById("editFaq").value,
-photos:currentData.photos});
+photos:currentData.photos,
+tabs:currentData.tabs,
+documentos:currentData.documentos,
+dubai:{
+  img:document.getElementById("editDubaiImg").value.trim(),
+  precioSoloVisa:+document.getElementById("editDubaiSoloVisa").value||0,
+  precioVisaPasaje:+document.getElementById("editDubaiVisaPasaje").value||0,
+  requisitos:document.getElementById("editDubaiRequisitos").value
+},
+turquia:{
+  img:document.getElementById("editTurquiaImg").value.trim(),
+  precio:+document.getElementById("editTurquiaPrecio").value||0,
+  incluye:document.getElementById("editTurquiaIncluye").value,
+  nota:document.getElementById("editTurquiaNota").value.trim()||"📍 Trámite disponible desde Cuba"
+}
+});
 s.textContent="Guardando...";
 const{error}=await db.from(TABLE_NAME).upsert({id:ROW_ID,data:n},{onConflict:"id"});
 if(error){s.textContent="Error";s.className="status bad";return;}
@@ -1299,7 +1528,7 @@ if(document.getElementById("adminPassword").value===CLAVE_ADMIN){
 isAdmin=true;
 document.getElementById("loginPanel").classList.add("hidden");
 document.getElementById("editorPanel").classList.remove("hidden");
-fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();cargarStats();
+fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();renderizarRenombrarTabs();renderizarPDFUploader();cargarStats();
 }else document.getElementById("loginStatus").textContent="Clave incorrecta.";}
 function adminLogout(){
 isAdmin=false;
@@ -1337,6 +1566,14 @@ document.getElementById("editShop").value=d.shop||"";
 document.getElementById("editTestimonios").value=d.testimonios||"";
 document.getElementById("editFamilia").value=d.familia||"";
 document.getElementById("editFaq").value=d.faq||"";
+document.getElementById("editDubaiSoloVisa").value=(d.dubai||{}).precioSoloVisa||0;
+document.getElementById("editDubaiVisaPasaje").value=(d.dubai||{}).precioVisaPasaje||0;
+document.getElementById("editDubaiImg").value=(d.dubai||{}).img||"";
+document.getElementById("editDubaiRequisitos").value=(d.dubai||{}).requisitos||"";
+document.getElementById("editTurquiaPrecio").value=(d.turquia||{}).precio||0;
+document.getElementById("editTurquiaImg").value=(d.turquia||{}).img||"";
+document.getElementById("editTurquiaIncluye").value=(d.turquia||{}).incluye||"";
+document.getElementById("editTurquiaNota").value=(d.turquia||{}).nota||"";
 if(d.paises)paisesActuales=JSON.parse(JSON.stringify(d.paises));}
 function descargarBackup(){
 const blob=new Blob([JSON.stringify(currentData,null,2)],{type:"application/json"});
