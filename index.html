@@ -199,6 +199,37 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
 .tarjeta-destino h4{font-size:1.1rem;margin-bottom:5px;color:#fff}
 .tarjeta-destino a{color:var(--primary);font-size:13px;font-weight:bold;text-decoration:none}
 
+/* ===== PUENTE, AVISOS Y OPORTUNIDADES ===== */
+.puente-mundo{background:linear-gradient(135deg, rgba(99,102,241,.2), rgba(212,160,23,.1));border:2px solid var(--primary);border-radius:20px;padding:30px 20px;text-align:center;margin-bottom:30px}
+.puente-mundo h2{font-size:2rem;color:#fff;margin-bottom:5px;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.puente-mundo p.sub{font-size:1.1rem;color:var(--muted);font-style:italic;margin-bottom:25px}
+.puente-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:20px}
+.puente-item{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:16px;padding:20px;transition:.3s;text-decoration:none;color:#fff}
+.puente-item:hover{border-color:var(--gold);transform:translateY(-5px);background:rgba(212,160,23,.1)}
+.puente-item h3{color:var(--gold);margin-bottom:10px;font-size:1.2rem}
+.puente-item p{color:var(--muted);font-size:.9rem;margin-bottom:15px}
+.puente-item span{display:inline-block;background:var(--primary);padding:8px 20px;border-radius:30px;font-weight:bold;font-size:14px}
+.puente-frase{font-size:1.2rem;font-weight:900;color:var(--gold);letter-spacing:1px}
+
+.aviso-banner{background:linear-gradient(90deg, rgba(239,68,68,.2), rgba(249,115,22,.2));border:1px solid var(--red);border-radius:12px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.aviso-texto{color:#fff;font-weight:bold;font-size:14px;display:flex;align-items:center;gap:8px}
+.aviso-badge{background:var(--red);color:#fff;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:1px}
+.aviso-fecha{color:var(--muted);font-size:12px}
+
+.centro-oportunidades{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:15px;margin-top:20px}
+.oportunidad-card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:15px;display:flex;flex-direction:column;gap:10px;transition:.3s;position:relative}
+.oportunidad-card:hover{border-color:var(--primary);background:rgba(99,102,241,.1)}
+.oportunidad-tag{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:1px;padding:4px 8px;border-radius:6px;display:inline-block;align-self:flex-start}
+.tag-vuelo{background:rgba(99,102,241,.2);color:#a5b4fc}
+.tag-recarga{background:rgba(34,197,94,.2);color:#86efac}
+.tag-remesa{background:rgba(212,160,23,.2);color:#fcd34d}
+.oportunidad-card h4{color:#fff;font-size:1.1rem;margin:0}
+.oportunidad-card p{color:var(--muted);font-size:.9rem;margin:0}
+.oportunidad-acciones{display:flex;gap:10px;margin-top:auto}
+.oportunidad-acciones a,.oportunidad-acciones button{flex:1;padding:8px;font-size:12px;border-radius:8px;text-align:center;text-decoration:none;font-weight:bold;display:flex;align-items:center;justify-content:center;gap:5px;border:none;cursor:pointer}
+.btn-ver{background:var(--primary);color:#fff}
+.btn-wa-share{background:var(--green);color:#fff}
+
 @media(max-width:600px){
   .banner-rotativo strong{font-size:24px}
   .amount-display h1{font-size:30px}
@@ -249,6 +280,39 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
 </nav>
 
 <main>
+  <!-- AVISOS IMPORTANTES -->
+  <div class="aviso-banner" id="avisoBanner">
+    <div class="aviso-texto">
+      <span class="aviso-badge">🔔 NUEVO</span>
+      <span id="avisoTexto">Nuevos destinos y tarifas actualizadas. ¡Consulta los precios de hoy!</span>
+    </div>
+    <span class="aviso-fecha" id="avisoFecha">Hoy</span>
+  </div>
+
+  <!-- TU PUENTE AL MUNDO -->
+  <section class="puente-mundo" id="puente">
+    <h2>🌉 TU PUENTE AL MUNDO</h2>
+    <p class="sub">Un solo lugar para conectar, enviar y viajar.</p>
+    <div class="puente-grid">
+      <a href="#remesas" class="puente-item">
+        <h3>💰 ¿Quieres enviar dinero?</h3>
+        <p>Remesas rápidas y seguras a Cuba.</p>
+        <span>Ir a Remesas</span>
+      </a>
+      <a href="#recargas" class="puente-item">
+        <h3>📱 ¿Quieres comunicarte?</h3>
+        <p>Recargas telefónicas al instante.</p>
+        <span>Ir a Recargas</span>
+      </a>
+      <a href="#buscador-vuelos" class="puente-item">
+        <h3>✈️ ¿Quieres viajar?</h3>
+        <p>Boletos a Cuba y el mundo.</p>
+        <span>Buscar Vuelo</span>
+      </a>
+    </div>
+    <p class="puente-frase">CONECTA · ENVÍA · VIAJA</p>
+  </section>
+
   <!-- ================= PORTADA NUEVA (VENDER) ================= -->
   <section id="portada">
     <div class="hero-principal">
@@ -328,6 +392,48 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
     </div>
   </section>
   <!-- ================= FIN PORTADA NUEVA ================= -->
+
+  <!-- CENTRO DE OPORTUNIDADES -->
+  <section id="oportunidades">
+    <h2 style="text-align:center;color:var(--gold);">🎯 CENTRO DE OPORTUNIDADES</h2>
+    <p style="text-align:center;color:var(--muted);margin-bottom:20px;">Las mejores ofertas de la semana, actualizadas por Daynel.</p>
+    <div class="centro-oportunidades">
+      
+      <!-- Oferta Vuelos -->
+      <div class="oportunidad-card">
+        <span class="oportunidad-tag tag-vuelo">✈️ VUELO DESTACADO</span>
+        <h4>La Habana desde Moscú</h4>
+        <p>Salidas directas y con escala. Consulta fechas disponibles para este mes.</p>
+        <div class="oportunidad-acciones">
+          <a href="#buscador-vuelos" class="btn-ver">Ver oferta</a>
+          <button onclick="compartirOportunidad('Vuelo a La Habana desde Moscú. Consulta fechas y precios aquí: ' + window.location.href + '#buscador-vuelos')" class="btn-wa-share">📤 Compartir</button>
+        </div>
+      </div>
+
+      <!-- Oferta Recargas -->
+      <div class="oportunidad-card">
+        <span class="oportunidad-tag tag-recarga">📱 RECARGA ECONÓMICA</span>
+        <h4>Paquete Internet + </h4>
+        <p>2 GB LTE + 300 MB.cu para tu familia en Cuba. Activación inmediata.</p>
+        <div class="oportunidad-acciones">
+          <a href="#recargas" class="btn-ver">Ver paquete</a>
+          <button onclick="compartirOportunidad('Recarga de Internet 2GB + 300MB a Cuba por solo 350 RUB. Pídela aquí: ' + window.location.href + '#recargas')" class="btn-wa-share">📤 Compartir</button>
+        </div>
+      </div>
+
+      <!-- Oferta Remesas -->
+      <div class="oportunidad-card">
+        <span class="oportunidad-tag tag-remesa">💰 REMESA SEGURA</span>
+        <h4>Envía 1000 RUB a Cuba</h4>
+        <p>Tu familia recibe el saldo en CUP al mejor tipo de cambio del día.</p>
+        <div class="oportunidad-acciones">
+          <a href="#remesas" class="btn-ver">Calcular envío</a>
+          <button onclick="compartirOportunidad('Remesas a Cuba desde Rusia con la mejor tasa. Calcula tu envío aquí: ' + window.location.href + '#remesas')" class="btn-wa-share">📤 Compartir</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <section id="inicio">
     <div class="notice-banner" id="globalNoticeBox">
@@ -1356,6 +1462,44 @@ function actualizarOfertasDestacadas() {
   if(elVuelo) elVuelo.textContent = "Desde " + (pr.avion || 99800).toLocaleString() + " ₽";
 }
 
+// Función para compartir ofertas por WhatsApp
+function compartirOportunidad(mensaje) {
+  const url = "https://wa.me/?text=" + encodeURIComponent(mensaje);
+  window.open(url, '_blank');
+}
+
+// Función para el buscador de vuelos
+function consultarVueloWA(e) {
+  e.preventDefault();
+  const origen = document.getElementById("vuelo-origen").value;
+  const destino = document.getElementById("vuelo-destino").value;
+  const fecha = document.getElementById("vuelo-fecha").value;
+  const pasajeros = document.getElementById("vuelo-pasajeros").value;
+  
+  const mensaje = `Hola Daynel, quiero consultar un vuelo de *${origen}* a *${destino}* para *${pasajeros}* persona(s) el día *${fecha}*. ¿Qué opciones tienes?`;
+  window.open(`https://wa.me/79046319565?text=${encodeURIComponent(mensaje)}`, '_blank');
+}
+
+// Rotador de avisos importantes
+const avisos = [
+  "🔔 NUEVO: Nuevos destinos disponibles. ¡Consulta los precios!",
+  "🔔 ACTUALIZADO: Nueva tarifa de vuelos a La Habana.",
+  "🔔 PROMOCIÓN: Nueva oferta de recargas. ¡Aprovecha!",
+  "🔔 INFO: Recuerda revisar los requisitos de tu visa antes de viajar."
+];
+let avisoIndex = 0;
+setInterval(() => {
+  const el = document.getElementById("avisoTexto");
+  if(el) {
+    avisoIndex = (avisoIndex + 1) % avisos.length;
+    el.style.opacity = 0;
+    setTimeout(() => {
+      el.textContent = avisos[avisoIndex];
+      el.style.opacity = 1;
+    }, 500);
+  }
+}, 8000);
+
 function renderPage(){
 const d=currentData;
 aplicarNombresPestanas();
@@ -1715,6 +1859,26 @@ function consultarVueloWA(e) {
   const mensaje = `Hola Daynel, quiero consultar un vuelo de *${origen}* a *${destino}* para *${pasajeros}* persona(s) el día *${fecha}*. ¿Qué opciones tienes?`;
   window.open(`https://wa.me/79046319565?text=${encodeURIComponent(mensaje)}`, '_blank');
 }
+
+// Rotador de avisos importantes
+const avisos = [
+  "🔔 NUEVO: Nuevos destinos disponibles. ¡Consulta los precios!",
+  "🔔 ACTUALIZADO: Nueva tarifa de vuelos a La Habana.",
+  "🔔 PROMOCIÓN: Nueva oferta de recargas. ¡Aprovecha!",
+  "🔔 INFO: Recuerda revisar los requisitos de tu visa antes de viajar."
+];
+let avisoIndex = 0;
+setInterval(() => {
+  const el = document.getElementById("avisoTexto");
+  if(el) {
+    avisoIndex = (avisoIndex + 1) % avisos.length;
+    el.style.opacity = 0;
+    setTimeout(() => {
+      el.textContent = avisos[avisoIndex];
+      el.style.opacity = 1;
+    }, 500);
+  }
+}, 8000);
 
 listaVisas=listaVisasDef;
 pintarCaptcha();
