@@ -123,7 +123,7 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
 .dots{text-align:center;padding-bottom:14px}
 .modal-comprobante{display:none;position:fixed;inset:0;background:rgba(15,17,21,.92);backdrop-filter:blur(8px);z-index:2000;justify-content:center;align-items:center;padding:15px;overflow-y:auto}
 .receipt-wrapper{width:100%;max-width:400px;margin:auto}
-.receipt-card{background:linear-gradient(135deg,#1a1f26,#0f1115);border-radius:22px;border:1px solid var(--primary);overflow:hidden;backdrop-filter:none!important}
+.receipt-card{background:linear-gradient(135deg,#1a1f26,#0f1115);border-radius:22px;border:1px solid var(--primary);overflow:hidden}
 .receipt-header{padding:24px;text-align:center;border-bottom:1px dashed var(--border)}
 .logo-brand{font-size:23px;font-weight:800;color:var(--primary)}
 .subtitle{color:var(--muted);font-size:11px;letter-spacing:2px;text-transform:uppercase}
@@ -153,6 +153,8 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
 .sol-row{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;padding:8px;background:rgba(0,0,0,.3);border-radius:8px;margin-bottom:6px;font-size:12px}
 .notice-banner{background:rgba(99,102,241,.1);border:1px solid var(--primary);border-radius:16px;overflow:hidden;margin-bottom:20px;display:none}
 .notice-text{padding:15px;text-align:center;font-weight:bold}
+
+/* ===== BANNER ROTATIVO FAMILIA ===== */
 .familia-banner{position:relative;border-radius:20px;min-height:260px;overflow:hidden;border:1px solid var(--gold);background:linear-gradient(135deg,rgba(212,160,23,.15),rgba(99,102,241,.12));display:flex;align-items:center;justify-content:center;text-align:center;padding:30px 22px;margin-bottom:20px;transition:opacity .6s ease;box-shadow:0 10px 40px rgba(0,0,0,.4)}
 .familia-banner::before{content:"❤️";position:absolute;top:14px;left:18px;font-size:22px;opacity:.55}
 .familia-banner::after{content:"❤️";position:absolute;bottom:14px;right:18px;font-size:22px;opacity:.55}
@@ -163,16 +165,48 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
 .familia-banner .fam-dots{text-align:center;margin-top:14px}
 .familia-banner .fam-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#3a4252;margin:3px;cursor:pointer;transition:.3s}
 .familia-banner .fam-dot.active{background:var(--gold);transform:scale(1.3)}
+
+/* ===== PDF LINKS ===== */
 .pdf-links{background:rgba(212,160,23,.08);border:1px solid var(--gold);border-radius:12px;padding:14px;margin-top:14px;text-align:left}
 .pdf-links b{color:var(--gold);font-size:13px;display:block;margin-bottom:8px}
 .pdf-links a{display:inline-block;background:rgba(212,160,23,.15);color:var(--gold);padding:8px 14px;border-radius:10px;text-decoration:none;font-size:13px;font-weight:700;margin:4px 4px 0 0;border:1px solid rgba(212,160,23,.3)}
 .pdf-links a:hover{background:var(--gold);color:#0f1115}
+
+/* ===== NUEVOS ESTILOS PARA LA PORTADA DE VENTAS ===== */
+.hero-principal{text-align:center;padding:30px 15px;background:linear-gradient(180deg, rgba(99,102,241,.15) 0%, transparent 100%);border-radius:20px;margin-bottom:20px;border:1px solid rgba(99,102,241,.3)}
+.hero-principal h1{font-size:2.5rem;color:#fff;margin-bottom:5px;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.hero-principal p{font-size:1.2rem;color:var(--gold);font-weight:bold;margin-bottom:20px}
+.hero-servicios{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin-bottom:25px;font-size:1.1rem}
+.hero-servicios span{background:rgba(255,255,255,.1);padding:8px 15px;border-radius:30px}
+.btn-gigante{font-size:1.2rem;padding:18px;border-radius:50px;background:linear-gradient(135deg,#25D366,#128C7E);box-shadow:0 10px 20px rgba(37,211,102,.3);text-transform:uppercase;letter-spacing:1px;display:inline-block;width:100%;max-width:400px;margin:0 auto;color:#fff;font-weight:900;text-decoration:none;transition:.3s}
+.btn-gigante:hover{transform:scale(1.05);box-shadow:0 15px 25px rgba(37,211,102,.5)}
+.grid-ofertas{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:20px}
+.tarjeta-oferta{background:linear-gradient(145deg, #1a1f26, #0f1115);border:1px solid var(--gold);border-radius:16px;padding:20px;text-align:center;position:relative;overflow:hidden}
+.tarjeta-oferta::before{content:"🔥 OFERTA";position:absolute;top:10px;right:-30px;background:var(--accent);color:#fff;font-size:10px;font-weight:bold;padding:5px 30px;transform:rotate(45deg);letter-spacing:1px}
+.tarjeta-oferta h4{color:var(--muted);font-size:14px;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px}
+.tarjeta-oferta .precio-destacado{font-size:32px;font-weight:900;color:var(--gold);margin:10px 0}
+.tarjeta-oferta .detalle{color:#fff;font-size:14px;margin-bottom:15px}
+.btn-oferta{background:var(--gold);color:#000;font-weight:900;padding:12px;border-radius:10px;text-decoration:none;display:block;width:100%;transition:.3s}
+.btn-oferta:hover{background:#fff;transform:translateY(-2px)}
+.buscador-vuelos{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:16px;padding:25px;margin:30px 0}
+.buscador-vuelos h3{text-align:center;color:var(--gold);margin-bottom:20px;font-size:1.5rem}
+.form-vuelos{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.form-vuelos input, .form-vuelos select{background:rgba(0,0,0,.5);border:1px solid #444;padding:12px;border-radius:8px;color:#fff;width:100%}
+.form-vuelos button{grid-column:1 / -1;margin-top:10px}
+.grid-destinos{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
+.tarjeta-destino{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:12px;padding:15px;text-align:center;transition:.3s;cursor:pointer}
+.tarjeta-destino:hover{border-color:var(--primary);transform:translateY(-5px);background:rgba(99,102,241,.1)}
+.tarjeta-destino h4{font-size:1.1rem;margin-bottom:5px;color:#fff}
+.tarjeta-destino a{color:var(--primary);font-size:13px;font-weight:bold;text-decoration:none}
+
 @media(max-width:600px){
   .banner-rotativo strong{font-size:24px}
   .amount-display h1{font-size:30px}
   h2{font-size:21px}
   .familia-banner{min-height:220px;padding:22px 16px}
   .familia-banner .fam-texto{font-size:16px}
+  .form-vuelos{grid-template-columns:1fr}
+  .hero-principal h1{font-size:1.8rem}
 }
 </style>
 </head>
@@ -215,6 +249,86 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
 </nav>
 
 <main>
+  <!-- ================= PORTADA NUEVA (VENDER) ================= -->
+  <section id="portada">
+    <div class="hero-principal">
+      <h1>YOUR BRIDGE HOME</h1>
+      <p>Tu puente al mundo</p>
+      <div class="hero-servicios">
+        <span>✈️ Tickets</span>
+        <span>💳 Recargas</span>
+        <span>💰 Remesas</span>
+        <span>🌎 Destinos</span>
+      </div>
+      <a href="https://wa.me/79046319565?text=Hola%20Daynel,%20necesito%20informaci%C3%B3n%20sobre%20tus%20servicios." target="_blank" class="btn-gigante">
+        🟢 CONSULTAR POR WHATSAPP
+      </a>
+    </div>
+
+    <h2 style="text-align:center;color:var(--gold);margin-top:30px;">🔥 OFERTAS MÁS ECONÓMICAS</h2>
+    <div class="grid-ofertas">
+      <div class="tarjeta-oferta">
+        <h4>📱 Recarga a Cuba</h4>
+        <div class="precio-destacado" id="oferta-recarga-precio">Desde 200 ₽</div>
+        <div class="detalle">Internet, saldo y combos</div>
+        <a href="#recargas" class="btn-oferta">👉 Ver paquetes</a>
+      </div>
+      <div class="tarjeta-oferta">
+        <h4>💰 Remesa a Cuba</h4>
+        <div class="precio-destacado">1,000 ₽</div>
+        <div class="detalle" id="oferta-remesa-desc">Recibe 10,700 CUP aprox.</div>
+        <a href="#remesas" class="btn-oferta">👉 Calcular envío</a>
+      </div>
+      <div class="tarjeta-oferta">
+        <h4>✈️ Tickets de avión</h4>
+        <div class="precio-destacado" id="oferta-vuelo-precio">Desde 99,800 ₽</div>
+        <div class="detalle">A Cuba y otros destinos</div>
+        <a href="#buscador-vuelos" class="btn-oferta" style="background:var(--primary);color:#fff;">👉 Buscar vuelo</a>
+      </div>
+    </div>
+
+    <div class="buscador-vuelos" id="buscador-vuelos">
+      <h3>✈️ ENCUENTRA TU PRÓXIMO VIAJE</h3>
+      <form class="form-vuelos" onsubmit="consultarVueloWA(event)">
+        <div><label>Origen (Ej: Moscú)</label><input type="text" id="vuelo-origen" placeholder="Ciudad de salida" required></div>
+        <div><label>Destino</label>
+          <select id="vuelo-destino" required>
+            <option value="La Habana, Cuba">🇨🇺 La Habana, Cuba</option>
+            <option value="Guyana">🇬🇾 Guyana</option>
+            <option value="Santa Lucía">🇱🇨 Santa Lucía</option>
+            <option value="Trinidad y Tobago">🇹🇹 Trinidad y Tobago</option>
+            <option value="España">🇪🇸 España</option>
+            <option value="Italia">🇮🇹 Italia</option>
+            <option value="Brasil">🇧🇷 Brasil</option>
+            <option value="Uzbekistán">🇺🇿 Uzbekistán</option>
+            <option value="Dubái">🇦🇪 Dubái</option>
+            <option value="México">🇲🇽 México</option>
+          </select>
+        </div>
+        <div><label>Fecha de viaje</label><input type="date" id="vuelo-fecha" required></div>
+        <div><label>Pasajeros</label><input type="number" id="vuelo-pasajeros" min="1" value="1" required></div>
+        <button type="submit" class="btn-comprar" style="background:var(--green);font-size:1.1rem;">🔎 CONSULTAR VUELO POR WHATSAPP</button>
+      </form>
+    </div>
+
+    <h2 style="text-align:center;margin-top:30px;">🌍 DESTINOS DISPONIBLES</h2>
+    <div class="grid-destinos">
+      <div class="tarjeta-destino"><h4>🇨🇺 La Habana</h4><a href="https://wa.me/79046319565?text=Hola,%20quiero%20precio%20de%20vuelo%20a%20La%20Habana">Ver precio →</a></div>
+      <div class="tarjeta-destino"><h4>🇱🇨 Santa Lucía</h4><a href="https://wa.me/79046319565?text=Hola,%20quiero%20precio%20de%20vuelo%20a%20Santa%20Luc%C3%ADa">Ver precio →</a></div>
+      <div class="tarjeta-destino"><h4>🇬🇾 Guyana</h4><a href="https://wa.me/79046319565?text=Hola,%20quiero%20precio%20de%20vuelo%20a%20Guyana">Ver precio →</a></div>
+      <div class="tarjeta-destino"><h4>🇹🇹 Trinidad y Tobago</h4><a href="https://wa.me/79046319565?text=Hola,%20quiero%20precio%20de%20vuelo%20a%20Trinidad%20y%20Tobago">Ver precio →</a></div>
+      <div class="tarjeta-destino"><h4>🇺🇿 Uzbekistán</h4><a href="https://wa.me/79046319565?text=Hola,%20quiero%20precio%20de%20vuelo%20a%20Uzbekist%C3%A1n">Ver precio →</a></div>
+      <div class="tarjeta-destino"><h4>🇪🇸 España</h4><a href="https://wa.me/79046319565?text=Hola,%20quiero%20precio%20de%20vuelo%20a%20Espa%C3%B1a">Ver precio →</a></div>
+      <div class="tarjeta-destino"><h4>🇮🇹 Italia</h4><a href="https://wa.me/79046319565?text=Hola,%20quiero%20precio%20de%20vuelo%20a%20Italia">Ver precio →</a></div>
+      <div class="tarjeta-destino"><h4>🇧🇷 Brasil</h4><a href="https://wa.me/79046319565?text=Hola,%20quiero%20precio%20de%20vuelo%20a%20Brasil">Ver precio →</a></div>
+      <div class="tarjeta-destino"><h4>🇺🇾 Uruguay</h4><a href="https://wa.me/79046319565?text=Hola,%20quiero%20precio%20de%20vuelo%20a%20Uruguay">Ver precio →</a></div>
+      <div class="tarjeta-destino"><h4>🇸🇷 Surinam</h4><a href="https://wa.me/79046319565?text=Hola,%20quiero%20precio%20de%20vuelo%20a%20Surinam">Ver precio →</a></div>
+      <div class="tarjeta-destino"><h4>🇲🇽 México</h4><a href="https://wa.me/79046319565?text=Hola,%20quiero%20precio%20de%20vuelo%20a%20M%C3%A9xico">Ver precio →</a></div>
+      <div class="tarjeta-destino"><h4>🇦🇪 Dubái</h4><a href="https://wa.me/79046319565?text=Hola,%20quiero%20precio%20de%20vuelo%20a%20Dub%C3%A1i">Ver precio →</a></div>
+    </div>
+  </section>
+  <!-- ================= FIN PORTADA NUEVA ================= -->
+
   <section id="inicio">
     <div class="notice-banner" id="globalNoticeBox">
       <img id="globalNoticeImg" src="" alt="" style="display:none;width:100%;max-height:250px;object-fit:cover;">
@@ -231,15 +345,12 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
       <input id="searchInput" type="text" placeholder="🔍 Buscar: recarga, visa, pasaje, remesa, café..." oninput="buscarEnPagina()">
       <div id="searchResults"></div>
     </div>
-
-    <div class="promo-box" id="promoBox" style="display:none;">
+    <div class="promo-box" id="promoBox">
       <div style="font-weight:900;font-size:19px;color:var(--accent);text-transform:uppercase;">🔥 <span id="promoTitulo">Promoción especial</span></div>
-      <div style="font-size:15px;color:var(--muted);margin:6px 0;" id="promoPrecio"></div>
-      <div style="font-size:12px;color:var(--muted);margin-bottom:8px;" id="promoFechaFin"></div>
+      <div style="font-size:15px;color:var(--muted);" id="promoPrecio"></div>
       <div class="countdown" id="promoCountdown">--:--:--</div>
-      <a class="btn-comprar" id="promoBtn" href="https://wa.me/79046319565?text=Hola,%20quiero%20aprovechar%20la%20promoción" style="margin-top:12px;background:linear-gradient(135deg,var(--accent),#ea580c);">💬 Aprovechar Oferta</a>
+      <a class="btn-comprar" href="https://wa.me/79046319565?text=Hola,%20quiero%20aprovechar%20la%20promoción%20especial" style="margin-top:12px;">💬 Aprovechar Oferta</a>
     </div>
-
     <div class="banner-precios">
       <div class="titulo">🔥 <span data-i18n="banner_eco">Precios más económicos</span></div>
       <div class="fila" id="preciosFila"></div>
@@ -275,38 +386,27 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
     <div class="grid-normal" id="remittanceCards"></div>
     <div class="card" style="margin-top:18px;">
       <h3>💱 Calculadora de remesas</h3>
-      <p style="color:var(--muted);font-size:13px;margin-bottom:10px;">Ingresa cuánto quieres enviar y te decimos exactamente cuánto recibe tu familia en Cuba.</p>
-      <label>Envías desde:</label>
+      <label>Enviar en (moneda base):</label>
       <select id="remitBaseMoneda" onchange="calcularRemesaNueva()">
-        <option value="RUB">Rusia · Rublos (RUB)</option>
+        <option value="RUB">Rublos (RUB)</option>
         <option value="USD">Dólares (USD)</option>
         <option value="EUR">Euros (EUR)</option>
       </select>
       <label>País destino:</label>
       <select id="remitPais" onchange="calcularRemesaNueva()"></select>
-      <label>Monto que envías:</label>
-      <input id="remitMonto" type="number" value="1000" min="0" inputmode="decimal" oninput="calcularRemesaNueva()">
+      <label>Monto a enviar:</label>
+      <input id="remitMonto" type="number" value="1000" min="0" oninput="calcularRemesaNueva()">
       <div id="remitInfo" style="background:rgba(0,0,0,.3);border-radius:12px;padding:12px;margin:10px 0;border:1px solid var(--border);font-size:13px;color:var(--muted);"></div>
-      <div style="text-align:center;margin:14px 0;">
-        <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">Tu familia recibe</div>
-        <div class="price" id="remitResultado" style="font-size:34px;margin:6px 0;">0</div>
-      </div>
-      <div style="background:rgba(34,197,94,.1);border:1px solid var(--green);border-radius:12px;padding:12px;font-size:13px;color:#bbf7d0;margin-bottom:12px;">
-        ✅ Este es el monto exacto que llegará a Cuba. Sin comisiones ocultas. Si no llega, te devolvemos el dinero.
-      </div>
-      <button class="btn-comprar" style="background:linear-gradient(135deg,var(--gold),#b8860b);color:#0f1115;" onclick="solicitarRemesa()">Solicitar Remesa por WhatsApp</button>
+      <div class="price" id="remitResultado">0</div>
+      <button class="btn-comprar" style="background:linear-gradient(135deg,var(--gold),#b8860b);color:#0f1115;" onclick="solicitarRemesa()">Solicitar Remesa</button>
     </div>
     <div class="card">
       <h3 data-i18n="calc_pasaje">Calculadora de pasaje (cambio de moneda)</h3>
-      <p style="color:var(--muted);font-size:13px;margin-bottom:10px;">Calcula cuánto te cuesta un pasaje en la moneda local del destino.</p>
-      <label>Precio del pasaje en USD:</label>
-      <input id="pasajeUSD" type="number" value="0" min="0" inputmode="decimal" placeholder="Ej. 1200" oninput="calcPasaje()">
-      <label>Tasa de cambio (moneda local por 1 USD):</label>
-      <input id="pasajeTasa" type="number" value="0" min="0" inputmode="decimal" placeholder="Ej. 24.00" oninput="calcPasaje()">
-      <div style="text-align:center;margin-top:12px;">
-        <div style="font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">El pasaje cuesta</div>
-        <div class="price" id="pasajeResult" style="font-size:30px;margin:6px 0;">0.00</div>
-      </div>
+      <label data-i18n="c_precio">Precio del pasaje (USD):</label>
+      <input id="pasajeUSD" type="number" value="0" min="0" oninput="calcPasaje()">
+      <label data-i18n="c_tasa">Tasa de cambio (moneda local por 1 USD):</label>
+      <input id="pasajeTasa" type="number" value="0" min="0" oninput="calcPasaje()">
+      <div class="price" id="pasajeResult">0</div>
     </div>
     <p style="text-align:center;margin-top:14px;">🔗 <a href="https://www.bc.gob.cu" target="_blank" style="color:var(--primary);font-weight:700;" data-i18n="l_bc">Banco de Cuba – tasa oficial</a></p>
     <div id="pdf-remesas"></div>
@@ -322,8 +422,7 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
   <section id="seguimiento">
     <h2 id="h2-seguimiento">🔎 <span data-i18n="t_seguimiento">Seguimiento de mi solicitud</span></h2>
     <div class="card">
-      <p style="color:var(--muted);font-size:13px;margin-bottom:10px;">Cuando compres una recarga, remesa o boleto, te enviamos un ID por WhatsApp (ej. YBH-20261111-1234). Escríbelo aquí para ver el estado.</p>
-      <label data-i18n="s_id">Escribe el ID de tu comprobante:</label>
+      <label data-i18n="s_id">Escribe el ID de tu comprobante (ej: YBH-20261111-1234):</label>
       <input id="trackId" placeholder="YBH-XXXXXXXX-XXXX">
       <button class="btn-comprar" onclick="buscarSolicitud()">🔍 Buscar</button>
       <div id="trackResult" style="margin-top:12px;"></div>
@@ -473,9 +572,6 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
 
   <section id="visas">
     <h2 id="h2-visas">🛂 Todos los Trámites de Visa</h2>
-    <div style="background:rgba(249,115,22,.1);border:1px solid var(--accent);border-radius:12px;padding:14px;margin-bottom:18px;font-size:13px;color:#fed7aa;">
-      ⚠️ <b>Importante:</b> No garantizamos la aprobación de la visa. La decisión es del consulado. Nuestro trabajo es que tu expediente esté perfecto para maximizar tus posibilidades.
-    </div>
     <div class="grid-normal" id="visaCards"></div>
     <div class="card" style="padding:22px;">
       <h3 style="text-align:center;">Requisitos para solicitud de <span style="color:var(--gold);">VISA ✈️</span></h3>
@@ -601,10 +697,6 @@ footer{text-align:center;padding:30px;color:var(--muted);font-size:13px;border-t
         <div><label>Precio (texto):</label><input id="editPromoPrecio" placeholder="Ej: 1250 RUB"></div>
       </div>
       <label>Termina el (fecha y hora):</label><input id="editPromoFin" type="datetime-local">
-      <label>Enlace del botón (opcional, si lo dejas vacío abre WhatsApp):</label>
-      <input id="editPromoLink" placeholder="https://wa.me/... o https://t.me/...">
-      <button class="secondary" type="button" onclick="quitarPromo()" style="margin-top:6px;">🗑️ Quitar promo activa</button>
-
       <h3>📰 Noticias (Banner)</h3>
       <label>Título</label><input id="editNewsTitle">
       <label>Resumen</label><textarea id="editNewsDesc" rows="2"></textarea>
@@ -720,9 +812,7 @@ const ROW_ID = "main";
 const CLAVE_ADMIN = "MI_CLAVE_SECRETA";
 const MI_TELEFONO = "79046319565";
 
-let db=null;
-if(window.supabase){ db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); }
-
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 let isAdmin=false, bannerIndex=0, bannerList=[], paisesActuales=[], listaVisas=[];
 let datosComprobanteActual={}, noticiasRSS=[], indiceNoticiaRSS=0, intervaloNoticias;
 let captchaA=Math.floor(Math.random()*8)+2, captchaB=Math.floor(Math.random()*8)+2;
@@ -736,7 +826,7 @@ en:{slogan:"YOUR BRIDGE TO NEW OPPORTUNITIES",admin_info:"Administrator: Daynel 
 };
 let lang = localStorage.getItem("ybh_lang") || "es";
 function setLang(l){lang=l;localStorage.setItem("ybh_lang",l);document.documentElement.lang=l;
-["es","ru","en"].forEach(x=>{const b=document.getElementById("btn-"+x); if(b) b.classList.toggle("active",x===l);});
+["es","ru","en"].forEach(x=>document.getElementById("btn-"+x).classList.toggle("active",x===l));
 document.querySelectorAll("[data-i18n]").forEach(el=>{const k=el.getAttribute("data-i18n");if(I18N[l][k])el.textContent=I18N[l][k];});
 updateClockDate();renderPage();}
 
@@ -785,6 +875,7 @@ Guyana | GYD | 2.30 | 2000 | RUB
 Rusia | RUB | 1.00 | 1000 | RUB
 Dubái | AED | 0.038 | 2000 | RUB`;
 
+/* ===== Nombres por defecto de pestañas (editables) ===== */
 const TABS_DEF = {
   recargas:{menu:"Recargas",titulo:"📱 Tienda de Recargas"},
   remesas:{menu:"Remesas",titulo:"💸 Envío de Remesas"},
@@ -823,7 +914,7 @@ busInfo:"Rutas de bus locales e internacionales. Consulta precios por WhatsApp."
 video:"",notes:"Escribe aquí tus notas e información importante…",
 shop:"Café molido | 500 RUB | Tostado artesanal en Cuba. Sabor que recuerda a casa.\nGift Card Netflix | Consultar | Suscripciones digitales",
 payInfo:"1) Pide el monto exacto por WhatsApp.\n2) Realiza la transferencia a los datos que te daremos.\n3) Envía el número de operación por WhatsApp.\n4) Recibe tu comprobante y confirma.",
-promo:{titulo:"",precio:"",fin:"",link:""},
+promo:{titulo:"",precio:"",fin:""},
 testimonios:"María G. | Recargué a mi mamá en La Habana y en minutos ya tenía saldo. ¡Excelente servicio!\nPedro R. | El trámite de la visa me lo explicaron paso a paso. Muy profesionales.\nAna L. | Las remesas llegan rápido y siempre me avisan cuando la familia recibe el dinero.",
 familia:"Mamá Carmen | Yaniel en Moscú | Hijo mío: trabaja con orden, cuida tu salud y no olvides nunca de dónde vienes. Estoy orgullosa de ti.\nPapá Ernesto | María en La Habana | No tengas miedo de los cambios. Un puente no se construye en un día, pero se construye.\nAbuela Rosa | Nieto querido | Donde quiera que estés, lleva a tu familia en el corazón. Es tu raíz y tu fuerza.",
 faq:"¿Cuánto tarda una remesa? | Normalmente entre 15 minutos y 2 horas, dependiendo del horario.\n¿Cómo pago? | Ve a la sección Cómo Pagar. Te damos los datos y confirmas por WhatsApp.\n¿Qué documentos necesito para la visa? | Pasaporte vigente, carnet, foto tipo visa y ocupación actual.\n¿Las recargas son inmediatas? | Sí, la activación es inmediata en el 99% de los casos.",
@@ -848,6 +939,7 @@ function escapeHTML(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;",
 function generarID(){const a=new Date();return `YBH-${a.getFullYear()}${String(a.getMonth()+1).padStart(2,'0')}${String(a.getDate()).padStart(2,'0')}-${Math.floor(Math.random()*9000)+1000}`;}
 function obtenerFechaHora(){const a=new Date();return `${String(a.getDate()).padStart(2,'0')}/${String(a.getMonth()+1).padStart(2,'0')}/${a.getFullYear()} • ${String(a.getHours()).padStart(2,'0')}:${String(a.getMinutes()).padStart(2,'0')}`;}
 
+/* ===== Nombres de pestañas ===== */
 function getTabsData(){
   const t = currentData.tabs || {};
   const out = {};
@@ -868,6 +960,7 @@ function aplicarNombresPestanas(){
   });
 }
 
+/* ===== PDFs por sección ===== */
 function renderDocumentos(seccion){
   const docs = (currentData.documentos||{})[seccion]||[];
   if(!docs.length) return "";
@@ -876,168 +969,120 @@ function renderDocumentos(seccion){
   </div>`;
 }
 function pintarPDFsEnSecciones(){
-  Object.keys(TABS_DEF).forEach(k=>{
+  const secciones = Object.keys(TABS_DEF);
+  secciones.forEach(k=>{
     const cont = document.getElementById("pdf-"+k);
     if(cont) cont.innerHTML = renderDocumentos(k);
   });
 }
-
-function mostrarPromo(){
-  const box=document.getElementById("promoBox");
-  if(!box) return;
-  const p=currentData.promo||{};
-  if(!p.titulo || !p.fin){
-    box.style.display="none";
-    if(timerPromo)clearInterval(timerPromo);
-    return;
+async function subirPDF(seccion, input){
+  const f = input.files[0];
+  if(!f) return;
+  const nombre = f.name;
+  let url = "";
+  try{
+    const path = `pdfs/${seccion}/${Date.now()}-${nombre.replace(/[^\w.\-]/g,'_')}`;
+    const {error} = await db.storage.from("documentos").upload(path, f, {upsert:false});
+    if(!error){
+      const {data} = db.storage.from("documentos").getPublicUrl(path);
+      url = data.publicUrl;
+    }
+  }catch(e){}
+  if(!url){
+    // Fallback base64
+    url = await new Promise(res=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.readAsDataURL(f);});
   }
-  const fin=new Date(p.fin);
-  if(isNaN(fin.getTime()) || fin<=new Date()){
-    box.style.display="none";
-    if(timerPromo)clearInterval(timerPromo);
-    return;
-  }
-  box.style.display="block";
-  document.getElementById("promoTitulo").textContent=p.titulo;
-  document.getElementById("promoPrecio").textContent=p.precio||"";
-  document.getElementById("promoFechaFin").textContent="Válida hasta "+fin.toLocaleString('es-ES',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
-  const btn=document.getElementById("promoBtn");
-  if(p.link && p.link.trim()){
-    btn.href=p.link.trim();
-    btn.target="_blank";
-    btn.rel="noopener";
-  }else{
-    btn.href="https://wa.me/"+MI_TELEFONO+"?text="+encodeURIComponent("Hola, quiero aprovechar la promoción: "+(p.titulo||""));
-    btn.removeAttribute("target");
-  }
-  if(timerPromo)clearInterval(timerPromo);
-  const tick=()=>{
-    const dif=fin-new Date();
-    if(dif<=0){box.style.display="none";clearInterval(timerPromo);return;}
-    const h=Math.floor(dif/3600000);
-    const m=Math.floor((dif%3600000)/60000);
-    const s=Math.floor((dif%60000)/1000);
-    document.getElementById("promoCountdown").textContent=
-      `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  };
-  tick();
-  timerPromo=setInterval(tick,1000);
+  if(!currentData.documentos) currentData.documentos={};
+  if(!currentData.documentos[seccion]) currentData.documentos[seccion]=[];
+  currentData.documentos[seccion].push({nombre,url});
+  const {error} = await db.from(TABLE_NAME).upsert({id:ROW_ID,data:currentData},{onConflict:"id"});
+  if(error){alert("❌ Error al guardar el PDF");return;}
+  alert("✅ PDF subido correctamente");
+  input.value="";
+  renderizarPDFUploader();
+  pintarPDFsEnSecciones();
 }
-
-async function quitarPromo(){
-  if(!isAdmin) return;
-  if(!confirm("¿Seguro que quieres quitar la promoción activa?")) return;
-  currentData.promo={titulo:"",precio:"",fin:"",link:""};
-  if(db){
-    const{error}=await db.from(TABLE_NAME).upsert({id:ROW_ID,data:currentData},{onConflict:"id"});
-    if(error){alert("❌ Error al quitar la promo");return;}
-  }
-  document.getElementById("editPromoTitulo").value="";
-  document.getElementById("editPromoPrecio").value="";
-  document.getElementById("editPromoFin").value="";
-  const l=document.getElementById("editPromoLink"); if(l) l.value="";
-  mostrarPromo();
-  alert("✅ Promo eliminada");
+async function eliminarPDF(seccion, idx){
+  if(!confirm("¿Eliminar este PDF?"))return;
+  currentData.documentos[seccion].splice(idx,1);
+  await db.from(TABLE_NAME).upsert({id:ROW_ID,data:currentData},{onConflict:"id"});
+  renderizarPDFUploader();
+  pintarPDFsEnSecciones();
 }
-
-function renderizarVisas(){
-  const c=document.getElementById("visaCards");if(!c)return;
-  c.innerHTML=listaVisas.map(v=>`<div class="tarjeta-servicio"><div><h3>${v.emoji} ${escapeHTML(v.pais)}</h3><p style="color:var(--muted);font-size:.9rem;">${escapeHTML(v.servicios)}</p></div><a href="https://wa.me/${MI_TELEFONO}?text=${encodeURIComponent('Hola, quiero solicitar una evaluación para visa a '+v.pais)}" target="_blank" class="btn-whatsapp" style="margin-top:auto;">📲 Solicitar Evaluación</a></div>`).join('');
-}
-function renderizarTestimonios(){
-  const c=document.getElementById("testimoniosCards");
-  if(!c) return;
-  const lista=(currentData.testimonios||"").split('\n').filter(l=>l.trim());
-  c.innerHTML = lista.map(l=>{
-    const[a,t]=l.split('|');
-    return `<div class="testimonio">
-      <div class="autor">⭐ ${escapeHTML((a||"").trim())} <span style="color:var(--green);font-size:11px;">· Cliente verificado</span></div>
-      <div class="texto">"${escapeHTML((t||"").trim())}"</div>
-    </div>`;
-  }).join('') || `<p class="status" style="text-align:center;">Aún no hay testimonios.</p>`;
-  const nota=document.createElement("p");
-  nota.style.cssText="text-align:center;color:var(--muted);font-size:12px;margin-top:14px;";
-  nota.textContent="Los testimonios son de clientes reales. Puedes pedir referencias por WhatsApp antes de comprar.";
-  c.appendChild(nota);
-}
-
-let familiaIndex=0, familiaTimer=null;
-function renderizarFamilia(){
-  const deEl=document.getElementById("famDe");
-  const txEl=document.getElementById("famTexto");
-  const paEl=document.getElementById("famPara");
-  const dots=document.getElementById("famDots");
-  if(!deEl||!txEl||!paEl||!dots)return;
-  const lista=(currentData.familia||"").split('\n').filter(l=>l.trim()).map(l=>{
-    const[de,para,t]=l.split('|');
-    return {de:(de||"").trim(),para:(para||"").trim(),texto:(t||"").trim()};
+function renderizarPDFUploader(){
+  const cont = document.getElementById("pdfUploader");
+  if(!cont) return;
+  cont.innerHTML="";
+  Object.keys(TABS_DEF).forEach(k=>{
+    const docs = (currentData.documentos||{})[k]||[];
+    const div = document.createElement("div");
+    div.className="admin-pais-item";
+    div.innerHTML=`<b>${escapeHTML(TABS_DEF[k].titulo)}</b>
+      ${docs.map((d,i)=>`<div style="display:flex;gap:8px;align-items:center;margin:4px 0;">
+        <a href="${escapeHTML(d.url)}" target="_blank" style="color:var(--primary);font-weight:700;font-size:12px;flex:1;">📄 ${escapeHTML(d.nombre)}</a>
+        <button class="secondary" style="width:auto;padding:4px 10px;font-size:11px;" onclick="eliminarPDF('${k}',${i})">🗑️</button>
+      </div>`).join('')}
+      <input type="file" accept="application/pdf" onchange="subirPDF('${k}',this)" style="margin-top:8px;">`;
+    cont.appendChild(div);
   });
-  if(!lista.length){
-    deEl.textContent="❤️";
-    txEl.textContent="Aún no hay mensajes. ¡Sé el primero!";
-    paEl.textContent="";
-    dots.innerHTML="";
-    return;
-  }
-  familiaIndex=0;
-  dots.innerHTML=lista.map((_,i)=>`<span class="fam-dot ${i===0?'active':''}" onclick="goFamilia(${i})"></span>`).join('');
-  function mostrar(i){
-    const b=document.getElementById("familiaBanner");
-    if(!b)return;
-    b.style.opacity=0;
-    setTimeout(()=>{
-      const m=lista[i];
-      deEl.textContent="💌 De "+m.de;
-      txEl.textContent='"'+m.texto+'"';
-      paEl.textContent="Para: "+m.para;
-      document.querySelectorAll(".fam-dot").forEach((d,k)=>d.classList.toggle("active",k===i));
-      b.style.opacity=1;
-    },400);
-  }
-  mostrar(0);
-  if(familiaTimer)clearInterval(familiaTimer);
-  familiaTimer=setInterval(()=>{
-    familiaIndex=(familiaIndex+1)%lista.length;
-    mostrar(familiaIndex);
-  },6000);
-  window.goFamilia=function(i){
-    familiaIndex=i;
-    if(familiaTimer)clearInterval(familiaTimer);
-    mostrar(i);
-    familiaTimer=setInterval(()=>{
-      familiaIndex=(familiaIndex+1)%lista.length;
-      mostrar(familiaIndex);
-    },6000);
-  };
 }
 
-function renderizarFAQ(){
-  const c=document.getElementById("faqList");if(!c)return;
-  c.innerHTML=(currentData.faq||"").split('\n').filter(l=>l.trim()).map(l=>{const[p,r]=l.split('|');
-  return`<div class="faq-item" onclick="this.classList.toggle('open')"><div class="preg">${escapeHTML((p||"").trim())}</div><div class="resp">${escapeHTML((r||"").trim())}</div></div>`;}).join('')||`<p class="status" style="text-align:center;">Aún no hay preguntas frecuentes.</p>`;
+/* ===== Renombrar pestañas (admin) ===== */
+function renderizarRenombrarTabs(){
+  const cont = document.getElementById("renombrarTabs");
+  if(!cont) return;
+  const tabs = getTabsData();
+  cont.innerHTML="";
+  Object.keys(TABS_DEF).forEach(k=>{
+    const div = document.createElement("div");
+    div.className="admin-pais-item";
+    div.innerHTML=`<label>Pestaña: <b>#${k}</b></label>
+      <label>Nombre en el menú:</label>
+      <input value="${escapeHTML(tabs[k].menu)}" onchange="cambiarNombreTab('${k}','menu',this.value)">
+      <label>Título de la sección (H2):</label>
+      <input value="${escapeHTML(tabs[k].titulo)}" onchange="cambiarNombreTab('${k}','titulo',this.value)">`;
+    cont.appendChild(div);
+  });
+}
+function cambiarNombreTab(k, campo, valor){
+  if(!currentData.tabs) currentData.tabs={};
+  if(!currentData.tabs[k]) currentData.tabs[k]={menu:TABS_DEF[k].menu,titulo:TABS_DEF[k].titulo};
+  currentData.tabs[k][campo]=valor;
+  aplicarNombresPestanas();
 }
 
-function buscarEnPagina(){
-  const q=(document.getElementById("searchInput").value||"").toLowerCase().trim(),out=document.getElementById("searchResults");
-  if(q.length<2){out.innerHTML="";return;}
-  const r=[];
-  const tabs=getTabsData();
-  Object.keys(tabs).forEach(k=>{if(tabs[k].menu.toLowerCase().includes(q)||tabs[k].titulo.toLowerCase().includes(q))r.push(`<a href="#${k}">${escapeHTML(tabs[k].menu)}</a>`);});
-  (currentData.rechargesListText||"").split('\n').forEach(l=>{const n=l.split('|')[0];if(n&&n.toLowerCase().includes(q))r.push(`<a href="#recargas">📱 ${escapeHTML(n.trim())}</a>`);});
-  (currentData.paises||[]).forEach(p=>{if((p.nombre||"").toLowerCase().includes(q))r.push(`<a href="#boletos">✈️ ${escapeHTML(p.nombre)}</a>`);});
-  listaVisas.forEach(v=>{if((v.pais||"").toLowerCase().includes(q))r.push(`<a href="#visas">🛂 ${escapeHTML(v.pais)}</a>`);});
-  out.innerHTML=r.slice(0,12).join('');
+/* ===== Dubái y Turquía editables ===== */
+function renderizarDubai(){
+  const d = currentData.dubai||{};
+  const c = document.getElementById("dubaiCard"); if(!c)return;
+  c.innerHTML=`
+    ${d.img?`<img src="${escapeHTML(d.img)}" alt="Dubái" style="width:100%;max-height:280px;object-fit:cover;border-radius:14px;margin-bottom:14px;">`:''}
+    <h3>Visa de Turismo a</h3>
+    <h2 style="font-size:3rem;color:var(--gold);">DUBAI 🇦🇪</h2>
+    <p style="color:var(--muted);font-style:italic;">"Vive una experiencia única en uno de los destinos más exclusivos del mundo."</p>
+    <div class="grid-normal">
+      <div class="product-card" style="text-align:center;"><span class="badge-modern">🛂 Solo Visa</span><div style="font-size:1.8rem;font-weight:900;">$${Number(d.precioSoloVisa||0).toLocaleString()}</div><div style="color:var(--muted);font-weight:700;">USD</div></div>
+      <div class="product-card" style="text-align:center;"><span class="badge-modern">✈️ Visa + Pasaje</span><div style="font-size:1.8rem;font-weight:900;">$${Number(d.precioVisaPasaje||0).toLocaleString()}</div><div style="color:var(--muted);font-weight:700;">USD</div></div>
+    </div>
+    <div class="notas-box" style="text-align:left;margin-top:14px;white-space:pre-wrap;">${escapeHTML(d.requisitos||"")}</div>
+    <a href="https://wa.me/${MI_TELEFONO}?text=${encodeURIComponent('Hola, estoy interesado en la Visa de Turismo a Dubái.')}" target="_blank" style="background:linear-gradient(135deg,var(--gold),#b8860b);color:#0f1115;margin-top:16px;">💬 Solicitar Visa a Dubái</a>`;
+}
+function renderizarTurquia(){
+  const d = currentData.turquia||{};
+  const c = document.getElementById("turquiaCard"); if(!c)return;
+  c.innerHTML=`
+    ${d.img?`<img src="${escapeHTML(d.img)}" alt="Turquía" style="width:100%;max-height:280px;object-fit:cover;border-radius:14px;margin-bottom:14px;">`:''}
+    <h3>Trámite de Visa para</h3>
+    <h2 style="font-size:2.8rem;color:var(--red);">TURQUÍA</h2>
+    <span class="badge-modern">Desde Cuba 🇨🇺</span>
+    <div class="notas-box" style="text-align:left;margin:14px 0;white-space:pre-wrap;">✨ NUESTRO SERVICIO INCLUYE:\n${escapeHTML(d.incluye||"")}</div>
+    <div style="display:inline-block;background:var(--gold);color:#0f1115;padding:14px 36px;border-radius:16px;border:3px solid var(--red);transform:rotate(-2deg);font-weight:900;">
+      <div style="font-size:2.4rem;">${Number(d.precio||0).toLocaleString()}</div><div style="font-size:1.3rem;">USD</div>
+    </div>
+    <a href="https://wa.me/${MI_TELEFONO}?text=${encodeURIComponent('Hola, soy cubano y estoy interesado en el trámite de Visa para Turquía.')}" target="_blank" style="background:linear-gradient(135deg,var(--red),#b91c1c);margin-top:18px;">${escapeHTML(d.nota||'📍 Trámite disponible desde Cuba')}</a>`;
 }
 
-function abrirLightbox(){const s=document.getElementById("c-img").src;if(!s)return;
-document.getElementById("lightboxImg").src=s;document.getElementById("lightbox").style.display="flex";}
-function cerrarLightbox(){document.getElementById("lightbox").style.display="none";}
-function compartirPagina(){const url=window.location.href;
-if(navigator.share)navigator.share({title:"YOUR BRIDGE HOME",url}).catch(()=>{});
-else window.open("https://wa.me/?text="+encodeURIComponent("Mira esta página: "+url),"_blank");}
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;const b=document.getElementById("btnInstall"); if(b) b.classList.remove("hidden");});
-function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;const b=document.getElementById("btnInstall"); if(b) b.classList.add("hidden");}}
-
+/* ===== Resto de funciones originales ===== */
 function parsearTasasRemesas(){
 return (currentData.tasasRemesas || DEF_TASAS_REMESAS).split('\n').filter(l=>l.trim()).map(l=>{
 const p=l.split('|').map(s=>(s||"").trim());
@@ -1048,9 +1093,7 @@ sel.innerHTML="";
 parsearTasasRemesas().forEach((t,i)=>{const o=document.createElement("option");o.value=i;o.textContent=`${t.pais} (${t.moneda})`;sel.appendChild(o);});}
 function calcularRemesaNueva(){
 const lista=parsearTasasRemesas();
-const selPais=document.getElementById("remitPais");
-if(!selPais) return;
-const i=Number(selPais.value||0);
+const i=Number(document.getElementById("remitPais").value||0);
 const t=lista[i];if(!t)return;
 const monto=Number(document.getElementById("remitMonto").value||0);
 const baseElegida=document.getElementById("remitBaseMoneda").value;
@@ -1092,8 +1135,7 @@ function abrirComprobante(estado,servicio,monto,destino){
 datosComprobanteActual={id:generarID(),cliente:"Cliente Web",servicio,destino,monto,fecha:obtenerFechaHora(),estado:"En Proceso"};
 actualizarVistaComprobante(estado);
 document.getElementById("modalComprobante").style.display="flex";
-if(db){
-db.from('solicitudes').insert([{id:datosComprobanteActual.id,servicio,monto:String(monto),destino,fecha:datosComprobanteActual.fecha,estado:"En Proceso"}]).then(r=>{if(r.error)console.log("Tabla solicitudes no existe aún");});}}
+db.from('solicitudes').insert([{id:datosComprobanteActual.id,servicio,monto:String(monto),destino,fecha:datosComprobanteActual.fecha,estado:"En Proceso"}]).then(r=>{if(r.error)console.log("Tabla solicitudes no existe aún");});}
 function actualizarVistaComprobante(estado){
 const b=document.getElementById("statusBadge");
 if(estado==='proceso'){b.className="status-badge proceso";b.textContent="En Proceso";document.getElementById("btnSimularCompletado").style.display="block";}
@@ -1104,48 +1146,26 @@ document.getElementById("txtServicio").textContent=datosComprobanteActual.servic
 document.getElementById("txtDestino").textContent=datosComprobanteActual.destino;
 document.getElementById("txtMonto").textContent=datosComprobanteActual.monto;
 document.getElementById("txtFecha").textContent=datosComprobanteActual.fecha;}
-function cambiarEstadoCompletado(){actualizarVistaComprobante('completado');datosComprobanteActual.estado="Completada";
-if(db) db.from('solicitudes').update({estado:"Completada"}).eq('id',datosComprobanteActual.id).then(()=>{});}
+function cambiarEstadoCompletado(){actualizarVistaComprobante('completado');datosComprobanteActual.estado="Completada";db.from('solicitudes').update({estado:"Completada"}).eq('id',datosComprobanteActual.id).then(()=>{});}
 function cerrarModal(){document.getElementById("modalComprobante").style.display="none";}
-function descargarPDF(){
-  if(typeof html2pdf==="undefined"){alert("PDF no disponible, usa WhatsApp o Correo.");return;}
-  html2pdf().set({margin:0,filename:`Comprobante_${datosComprobanteActual.id}.pdf`,image:{type:'jpeg',quality:0.98},html2canvas:{scale:2,useCORS:true,backgroundColor:'#0f1115'},jsPDF:{unit:'in',format:'letter',orientation:'portrait'}}).from(document.getElementById("areaComprobante")).save();}
+function descargarPDF(){html2pdf().set({margin:0,filename:`Comprobante_${datosComprobanteActual.id}.pdf`,image:{type:'jpeg',quality:0.98},html2canvas:{scale:2,useCORS:true,backgroundColor:'#0f1115'},jsPDF:{unit:'in',format:'letter',orientation:'portrait'}}).from(document.getElementById("areaComprobante")).save();}
 function enviarWhatsApp(){const e=document.getElementById("statusBadge").textContent;window.open(`https://wa.me/${MI_TELEFONO}?text=${encodeURIComponent(`Hola, aquí tienes tu comprobante:\n\n🆔 ID: ${datosComprobanteActual.id}\n📦 Servicio: ${datosComprobanteActual.servicio}\n💰 Monto: ${datosComprobanteActual.monto}\n📅 Fecha: ${datosComprobanteActual.fecha}\n⚡ Estado: ${e}`)}`,'_blank');}
 function enviarCorreo(){const e=document.getElementById("statusBadge").textContent;window.location.href=`mailto:?subject=Comprobante ${datosComprobanteActual.id}&body=ID: ${datosComprobanteActual.id}%0AServicio: ${datosComprobanteActual.servicio}%0AMonto: ${datosComprobanteActual.monto}%0AFecha: ${datosComprobanteActual.fecha}%0AEstado: ${e}`;}
 
 async function buscarSolicitud(){
-  const id=document.getElementById("trackId").value.trim(),out=document.getElementById("trackResult");
-  if(!id){
-    out.innerHTML=`<p style="color:var(--muted);">Escribe el ID que te enviamos por WhatsApp.</p>`;
-    return;
-  }
-  out.innerHTML=`<p class="status">Buscando...</p>`;
-  if(!db){out.innerHTML=`<p style="color:var(--red);">Sin conexión. Escríbenos por WhatsApp.</p>`;return;}
-  try{
-    const{data,error}=await db.from('solicitudes').select('*').eq('id',id).maybeSingle();
-    if(error||!data){
-      out.innerHTML=`<p style="color:var(--red);">No encontramos ese ID. Verifica que lo copiaste bien o <a href="https://wa.me/79046319565?text=Hola,%20no%20encuentro%20mi%20solicitud%20${encodeURIComponent(id)}" target="_blank" style="color:var(--primary);">escríbenos por WhatsApp</a>.</p>`;
-      return;
-    }
-    const ok=data.estado==="Completada";
-    out.innerHTML=`<div class="sol-row" style="font-size:14px;">
-      <div><b>#${escapeHTML(data.id)}</b><br>
-      <span style="color:var(--muted);">${escapeHTML(data.servicio)} · ${escapeHTML(data.monto)} · ${escapeHTML(data.fecha)}</span></div>
-      <div class="${ok?'good':'status'}" style="font-weight:800;">${escapeHTML(data.estado)}</div>
-    </div>`;
-  }catch(e){
-    out.innerHTML=`<p style="color:var(--red);">No se pudo consultar. Escríbenos por WhatsApp.</p>`;
-  }
-}
+const id=document.getElementById("trackId").value.trim(),out=document.getElementById("trackResult");
+if(!id){out.innerHTML=`<p class="bad">Escribe un ID.</p>`;return;}
+out.innerHTML=`<p class="status">Buscando...</p>`;
+try{
+const{data,error}=await db.from('solicitudes').select('*').eq('id',id).maybeSingle();
+if(error||!data){out.innerHTML=`<p class="bad">No se encontró esa solicitud. Verifica el ID.</p>`;return;}
+const ok=data.estado==="Completada";
+out.innerHTML=`<div class="sol-row" style="font-size:14px;"><div><b>#${escapeHTML(data.id)}</b><br><span style="color:var(--muted);">${escapeHTML(data.servicio)} · ${escapeHTML(data.monto)} · ${escapeHTML(data.fecha)}</span></div><div class="${ok?'good':'status'}" style="font-weight:800;">${escapeHTML(data.estado)}</div></div>`;
+}catch(e){out.innerHTML=`<p class="bad">No se pudo consultar.</p>`;}}
 
-async function registrarVisita(){
-  if(!db) return;
-  if(sessionStorage.getItem("ybh_visita")) return;
-  sessionStorage.setItem("ybh_visita","1");
-  try{await db.from('ybh_visitas').insert([{}]);}catch(e){}
-}
+async function registrarVisita(){try{await db.from('ybh_visitas').insert([{}]);}catch(e){}}
 async function cargarStats(){
-if(!isAdmin||!db)return;
+if(!isAdmin)return;
 const g=document.getElementById("statGrid");let visitas=0,solic=[],porServ={};
 try{const{count}=await db.from('ybh_visitas').select('*',{count:'exact',head:true});visitas=count||0;}catch(e){}
 try{const{data,error}=await db.from('solicitudes').select('*').order('creado_en',{ascending:false}).limit(30);
@@ -1154,12 +1174,11 @@ g.innerHTML=`<div class="stat-item"><b>${visitas}</b><span>Visitas totales</span
 document.getElementById("solicitudesList").innerHTML=solic.slice(0,15).map(s=>`<div class="sol-row"><div>#${escapeHTML(s.id)} · ${escapeHTML(s.servicio)} · ${escapeHTML(s.monto)}</div><div style="color:var(--muted);">${escapeHTML(s.fecha||"")} · ${escapeHTML(s.estado)}</div></div>`).join('')||`<p class="status">Aún no hay solicitudes guardadas.</p>`;}
 
 const mensajesConfianza=["🛡️ Compra 100% Segura y Garantizada","⚡ Recargas y Remesas con Activación Inmediata","⭐ Atención Personalizada las 24 Horas","🤝 Únete a nuestra red de socios y gana comisiones","✈️ Encuentra los mejores precios para tu viaje"];
-(function(){const el=document.getElementById("trustMensaje");if(!el)return;let i=0;el.textContent=mensajesConfianza[0];
+(function(){const el=document.getElementById("trustMensaje");let i=0;el.textContent=mensajesConfianza[0];
 setInterval(()=>{el.style.opacity=0;setTimeout(()=>{el.textContent=mensajesConfianza[i%mensajesConfianza.length];el.style.opacity=1;i++;},500);},4000);})();
 
 async function cargarNoticiasReales(){
 const t=document.getElementById("newsTitle"),d=document.getElementById("newsDesc"),l=document.getElementById("newsLink");
-if(!t||!d||!l)return;
 if(currentData.newsTitle&&currentData.newsTitle.trim()!==""){
 if(intervaloNoticias)clearInterval(intervaloNoticias);
 t.textContent=currentData.newsTitle;d.textContent=currentData.newsDesc||"";
@@ -1184,305 +1203,110 @@ l.href="https://wa.me/"+MI_TELEFONO;}}
 function mostrarSiguienteNoticia(){
 if(!noticiasRSS.length)return;
 const n=noticiasRSS[indiceNoticiaRSS%noticiasRSS.length],t=document.getElementById("newsTicker");
-if(!t)return;
 t.style.opacity=0;
 setTimeout(()=>{document.getElementById("newsTitle").textContent=n.titulo;document.getElementById("newsDesc").textContent=n.desc;document.getElementById("newsLink").href=n.link;t.style.opacity=1;indiceNoticiaRSS++;},500);}
 
-function buildCarousel(){
-  if(!Array.isArray(currentData.photos)) currentData.photos=[];
-  const dots=document.getElementById("c-dots");if(!dots)return;
-  dots.innerHTML="";
-  currentData.photos.forEach((_,i)=>dots.innerHTML+=`<span class="dot ${i===ci?'active':''}" onclick="goFoto(${i})"></span>`);
-  showFoto(ci);
-  if(timerC)clearInterval(timerC);
-  timerC=setInterval(()=>{if(currentData.photos.length){ci=(ci+1)%currentData.photos.length;showFoto(ci);}},20000);}
-function showFoto(i){
-  const ph=currentData.photos||[];
-  if(!ph.length){const n=document.getElementById("c-nombre");if(n)n.textContent="—";document.getElementById("c-img")?.removeAttribute("src");return;}
-  ci=(i+ph.length)%ph.length;const p=ph[ci];
-  document.getElementById("c-img").src=p.src;
-  document.getElementById("c-nombre").textContent="📍 "+p.name;
-  document.getElementById("c-hotel").textContent=p.hotel||"—";
-  document.getElementById("c-rest").textContent=p.rest||"—";
-  document.querySelectorAll(".dot").forEach((d,k)=>d.classList.toggle("active",k===ci));}
-function goFoto(i){showFoto(i);if(timerC)clearInterval(timerC);
-timerC=setInterval(()=>{if(currentData.photos.length){ci=(ci+1)%currentData.photos.length;showFoto(ci);}},20000);}
+function renderizarVisas(){
+const c=document.getElementById("visaCards");if(!c)return;
+c.innerHTML=listaVisas.map(v=>`<div class="tarjeta-servicio"><div><h3>${v.emoji} ${escapeHTML(v.pais)}</h3><p style="color:var(--muted);font-size:.9rem;">${escapeHTML(v.servicios)}</p></div><a href="https://wa.me/${MI_TELEFONO}?text=${encodeURIComponent('Hola, quiero solicitar una evaluación para visa a '+v.pais)}" target="_blank" class="btn-whatsapp" style="margin-top:auto;">📲 Solicitar Evaluación</a></div>`).join('');}
+function renderizarTestimonios(){
+const c=document.getElementById("testimoniosCards");if(!c)return;
+c.innerHTML=(currentData.testimonios||"").split('\n').filter(l=>l.trim()).map(l=>{const[a,t]=l.split('|');
+return`<div class="testimonio"><div class="autor">⭐ ${escapeHTML((a||"").trim())}</div><div class="texto">"${escapeHTML((t||"").trim())}"</div></div>`;}).join('')||`<p class="status" style="text-align:center;">Aún no hay testimonios.</p>`;}
 
-function renderizarFotosAdmin(){
-const c=document.getElementById("lista-fotos-admin");if(!c)return;
-c.innerHTML="";
-(currentData.photos||[]).forEach((p,i)=>{const div=document.createElement("div");div.className="admin-pais-item";
-div.innerHTML=`<div style="display:flex;gap:10px;align-items:center;"><img src="${p.src}" style="width:60px;height:45px;object-fit:cover;border-radius:8px;"><b>${escapeHTML(p.name)}</b></div>
-<label>Nombre</label><input value="${escapeHTML(p.name)}" onchange="currentData.photos[${i}].name=this.value">
-<label>Hotel</label><input value="${escapeHTML(p.hotel||'')}" onchange="currentData.photos[${i}].hotel=this.value">
-<label>Restaurante</label><input value="${escapeHTML(p.rest||'')}" onchange="currentData.photos[${i}].rest=this.value">
-<button onclick="currentData.photos.splice(${i},1);renderizarFotosAdmin();" class="secondary">🗑️ Eliminar Foto</button>`;
-c.appendChild(div);});}
+let familiaIndex=0, familiaTimer=null;
+function renderizarFamilia(){
+const deEl=document.getElementById("famDe");
+const txEl=document.getElementById("famTexto");
+const paEl=document.getElementById("famPara");
+const dots=document.getElementById("famDots");
+if(!deEl||!txEl||!paEl||!dots)return;
 
-async function agregarFotoCarrusel(){
-const f=document.getElementById("editFotoFile").files[0];
-if(!f)return alert("Selecciona una foto primero");
-if(!Array.isArray(currentData.photos)) currentData.photos=[];
-const nombre="foto-"+Date.now()+"."+f.name.split(".").pop();
-let src="";
-if(db){
-try{const{error}=await db.storage.from("fotos").upload(nombre,f);
-if(!error){const{data}=db.storage.from("fotos").getPublicUrl(nombre);src=data.publicUrl;}}catch(e){}
-}
-if(!src){
-const rd=new FileReader();
-rd.onload=async e=>{
-currentData.photos.push({src:e.target.result,name:document.getElementById("editFotoName").value||"Destino",hotel:document.getElementById("editFotoHotel").value,rest:document.getElementById("editFotoRest").value});
-if(db) await db.from(TABLE_NAME).upsert({id:ROW_ID,data:currentData},{onConflict:"id"});
-renderizarFotosAdmin();renderPage();alert("✅ Foto agregada");};
-rd.readAsDataURL(f);return;}
-currentData.photos.push({src,name:document.getElementById("editFotoName").value||"Destino",hotel:document.getElementById("editFotoHotel").value,rest:document.getElementById("editFotoRest").value});
-if(db){
-const{error}=await db.from(TABLE_NAME).upsert({id:ROW_ID,data:currentData},{onConflict:"id"});
-if(error)return alert("❌ Error al guardar la foto");}
-renderizarFotosAdmin();renderPage();alert("✅ Foto agregada");}
-
-function setupBannerRotativo(){
-const d=currentData;
-const l=(d.rechargesListText||DEF_RECARGAS_TEXTO).split('\n');
-let pr={n:"Recargas",p:200,ds:"Envía saldo al instante"};
-if(l.length&&l[0].trim()){const ps=l[0].split('|');pr={n:ps[0]?.trim()||"Recarga",p:parseFloat(ps[1]?.trim())||0,ds:ps[2]?.trim()||""};}
-const mcR=d.rechargesCurrency||"RUB",mcM=d.remittance.currency||"RUB";
-bannerList=[
-{tag:"⭐ LO MÁS VENDIDO",title:pr.n,text:pr.ds,price:pr.p+" "+mcR,btn:"Comprar Recarga",fn:()=>abrirComprobante('proceso',`Recarga ${pr.n}`,`${pr.p} ${mcR}`,'Cuba'),img:"https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg"},
-{tag:"ENVÍO DE REMESAS",title:"Remesas a Cuba",text:"Envía dinero seguro",price:Number(d.remittance.rubles).toFixed(2)+" "+mcM,btn:"Enviar Remesa",fn:()=>abrirComprobante('proceso','Remesa',`${d.remittance.rubles} ${mcM}`,'Cuba'),img:d.remittance.image||DEF_FOTO_REMESA}];
-(d.paises||paisesPorDefecto).forEach(p=>{const mb=p.monedaBase||"RUB";
-bannerList.push({tag:"VUELOS",title:"Vuelos a "+p.nombre,text:p.info,price:"Desde "+(p.precio||0)+" "+mb,btn:"Consultar Vuelo",fn:()=>abrirComprobante('proceso',`Vuelo a ${p.nombre}`,`${p.precio} ${mb}`,p.nombre),img:p.img||"https://images.pexels.com/photos/2067062/pexels-photo-2067062.jpeg"});});
-bannerList.push(
-{tag:"MICROSERVICIO",title:"Gift Cards",text:"Apple, PlayStation, Netflix o Steam.",price:"Consultar",btn:"Solicitar Código",fn:()=>abrirComprobante('proceso','Gift Card','Por definir','Cuba'),img:"https://images.pexels.com/photos/6169002/pexels-photo-6169002.jpeg"},
-{tag:"TRÁMITE LEGAL",title:"Poderes Notariales",text:"Gestoría para cubanos.",price:"Consultar",btn:"Ver Requisitos",fn:()=>abrirComprobante('proceso','Poder Notarial','Por definir','Cuba'),img:"https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg"});
-updateBannerDisplay();}
-function updateBannerDisplay(){
-if(!bannerList.length)return;
-const i=bannerList[bannerIndex%bannerList.length],b=document.getElementById("mainBanner");
-b.style.opacity=0;
-setTimeout(()=>{b.style.backgroundImage=`url('${i.img}')`;
-document.getElementById("bannerTag").textContent=i.tag;
-document.getElementById("bannerTitle").textContent=i.title;
-document.getElementById("bannerText").textContent=i.text;
-document.getElementById("bannerPrice").textContent=i.price;
-const btn=document.getElementById("bannerBtn");
-btn.textContent=i.btn;
-btn.onclick=(e)=>{e.preventDefault(); if(typeof i.fn==="function") i.fn();};
-b.style.opacity=1;},500);}
-setInterval(()=>{if(bannerList.length>1){bannerIndex++;updateBannerDisplay();}},7000);
-
-function cambiarTab(t){["avion","tren","bus"].forEach(x=>document.getElementById("panel-"+x).classList.toggle("hidden",x!==t));
-["avion","tren","bus"].forEach(x=>document.getElementById("tab-"+x).classList.toggle("active",x===t));}
-function calcPasaje(){
-const p=Number(document.getElementById("pasajeUSD").value||0),r=Number(document.getElementById("pasajeTasa").value||0);
-document.getElementById("pasajeResult").textContent=(p*r).toFixed(2);}
-function calcularTodo(){calcPasaje();}
-
-function updateClockDate(){
-const n=new Date();
-const cl=document.getElementById("clock"); if(cl) cl.textContent=n.toLocaleTimeString();
-const cd=document.getElementById("clockDate"); if(cd) cd.textContent=n.toLocaleDateString(lang==="ru"?"ru-RU":lang==="en"?"en-US":"es-ES",{weekday:'long',year:'numeric',month:'long',day:'numeric'});}
-setInterval(updateClockDate,1000);
-
-function pintarCaptcha(){
-const cp=document.getElementById("captchaPregunta"); if(cp) cp.textContent=`${captchaA} + ${captchaB}`;
-document.querySelectorAll('.captcha-fam').forEach(el=>el.textContent=`${capFA} + ${capFB}`);}
-document.getElementById("form-nuevo-negocio")?.addEventListener("submit",async e=>{
-e.preventDefault();
-if(Number(document.getElementById("captchaRespuesta").value)!==captchaA+captchaB){
-alert("❌ Verificación incorrecta, intenta de nuevo.");
-captchaA=Math.floor(Math.random()*8)+2;captchaB=Math.floor(Math.random()*8)+2;pintarCaptcha();return;}
-if(db){
-const{error}=await db.from('negocios_socios').insert([{
-nombre_negocio:document.getElementById("nombre-negocio").value,
-whatsapp:document.getElementById("contacto-whatsapp").value,
-paises:document.getElementById("paises-operacion").value,
-descripcion:document.getElementById("descripcion-servicio").value,aprobado:false}]);
-const m=document.getElementById("mensaje-estado");
-if(error){m.textContent="Error al enviar.";m.className="status bad";}
-else{m.textContent="¡Solicitud enviada!";m.className="status good";e.target.reset();}
-}});
-
-document.getElementById("form-familia")?.addEventListener("submit",async e=>{
-e.preventDefault();
-if(Number(document.getElementById("fam-captcha").value)!==capFA+capFB){
-alert("❌ Verificación incorrecta, intenta de nuevo.");
-capFA=Math.floor(Math.random()*8)+2;capFB=Math.floor(Math.random()*8)+2;pintarCaptcha();return;}
-if(db){
-const{error}=await db.from('mensajes_familia').insert([{
-de_quien:document.getElementById("fam-de").value,
-para_quien:document.getElementById("fam-para").value,
-texto:document.getElementById("fam-texto").value,aprobado:false}]);
-const m=document.getElementById("fam-estado");
-if(error){m.textContent="Error al enviar.";m.className="status bad";}
-else{m.textContent="💌 ¡Mensaje enviado! Lo publicaré cuando lo revise.";m.className="status good";e.target.reset();}
-}});
-
-document.getElementById('form-visa')?.addEventListener('submit',function(e){
-e.preventDefault();
-const msg=`*SOLICITUD DE VISA - YOUR BRIDGE HOME*%0A%0A`+
-`🛂 *Pasaporte:* ${document.getElementById('visa-pasaporte').value}%0A`+
-`🪪 *Carnet:* ${document.getElementById('visa-carnet').value}%0A`+
-`💍 *Estado Civil:* ${document.getElementById('visa-estado-civil').value}%0A`+
-`💼 *Ocupación:* ${document.getElementById('visa-ocupacion').value}%0A`+
-`📞 *Teléfono:* ${document.getElementById('visa-telefono').value}%0A`+
-`✉️ *Correo:* ${document.getElementById('visa-email').value}%0A%0A`+
-`_Por favor, indíquenme los siguientes pasos para mi trámite._`;
-window.open(`https://wa.me/${MI_TELEFONO}?text=${msg}`,'_blank');});
-
-async function restaurarBackup(ev){
-const f=ev.target.files[0];if(!f)return;
-if(!confirm("⚠️ ¿Seguro? Se reemplazará TODO el contenido actual por el del archivo.")){ev.target.value="";return;}
-const rd=new FileReader();
-rd.onload=async e=>{
-try{const datos=JSON.parse(e.target.result);
-if(db){
-const{error}=await db.from(TABLE_NAME).upsert({id:ROW_ID,data:datos},{onConflict:"id"});
-if(error)return alert("❌ Error al restaurar");}
-currentData=Object.assign({},currentData,datos);
-if(currentData.visas)listaVisas=currentData.visas;
-renderPage();fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();
-alert("✅ Contenido restaurado");}catch(err){alert("❌ Archivo no válido");}};
-rd.readAsText(f);}
-
-async function loadData(){
-const s=document.getElementById("connectionStatus");
-if(!db){if(s){s.textContent="❌ Sin conexión a Supabase";s.className="status bad";}return;}
-try{
-const{data,error}=await db.from(TABLE_NAME).select("data").eq("id",ROW_ID).maybeSingle();
-if(error)throw error;
-if(data&&data.data){
-currentData=Object.assign({},currentData,data.data);
-listaVisas=currentData.visas||listaVisasDef;
-if(!currentData.paises)currentData.paises=paisesPorDefecto;
-if(!currentData.tasasRemesas)currentData.tasasRemesas=DEF_TASAS_REMESAS;
-if(!currentData.documentos)currentData.documentos={};
-if(!currentData.tabs)currentData.tabs=TABS_DEF;
-if(!currentData.dubai)currentData.dubai={img:"",precioSoloVisa:1500,precioVisaPasaje:3500,requisitos:""};
-if(!currentData.turquia)currentData.turquia={img:"",precio:1250,incluye:"",nota:"📍 Trámite disponible desde Cuba"};
-renderPage();
-if(s){s.textContent="✅ Tienda conectada";s.className="status good";}}
-}catch(e){if(s){s.textContent="❌ Error";s.className="status bad";}}
-try{
-db.channel("ybh-cambios").on("postgres_changes",{event:"UPDATE",schema:"public",table:TABLE_NAME},payload=>{
-currentData=Object.assign({},currentData,payload.new.data);
-if(currentData.visas)listaVisas=currentData.visas;
-renderPage();}).subscribe();
-}catch(e){}}
-
-async function saveChanges(){
-const s=document.getElementById("saveStatus");if(!isAdmin)return;
-const n=Object.assign({},currentData,{
-published:true,
-noticeText:document.getElementById("editNoticeText").value.trim(),
-noticeImg:document.getElementById("editNoticeImg").value.trim(),
-newsTitle:document.getElementById("editNewsTitle").value.trim(),
-newsDesc:document.getElementById("editNewsDesc").value.trim(),
-newsLink:document.getElementById("editNewsLink").value.trim(),
-payInfo:document.getElementById("editPayInfo").value,
-promo:{
-  titulo:document.getElementById("editPromoTitulo").value.trim(),
-  precio:document.getElementById("editPromoPrecio").value.trim(),
-  fin:document.getElementById("editPromoFin").value,
-  link:(document.getElementById("editPromoLink")?.value||"").trim()
-},
-visas:listaVisas,paises:paisesActuales,
-prices:{avion:+document.getElementById("editPrAvion").value||0,tren:+document.getElementById("editPrTren").value||0,bus:+document.getElementById("editPrBus").value||0,rec:+document.getElementById("editPrRec").value||0},
-rates:{cuba:+document.getElementById("editRateCuba").value||0,venezuela:+document.getElementById("editRateVen").value||0},
-tasasRemesas:document.getElementById("editTasasRemesas").value,
-trenInfo:document.getElementById("editTren").value,
-busInfo:document.getElementById("editBus").value,
-rechargesListText:document.getElementById("editRechargesList").value,
-rechargesCurrency:document.getElementById("editRechargesCurrency").value,
-remittance:{rubles:Number(document.getElementById("editRemitRubles").value),cup:Number(document.getElementById("editRemitCup").value),currency:document.getElementById("editRemitCurrency").value,image:document.getElementById("editRemitImg").value.trim()},
-video:document.getElementById("editVideo").value.trim(),
-notes:document.getElementById("editNotes").value,
-shop:document.getElementById("editShop").value,
-testimonios:document.getElementById("editTestimonios").value,
-familia:document.getElementById("editFamilia").value,
-faq:document.getElementById("editFaq").value,
-photos:currentData.photos,
-tabs:currentData.tabs,
-documentos:currentData.documentos,
-dubai:{
-  img:document.getElementById("editDubaiImg").value.trim(),
-  precioSoloVisa:+document.getElementById("editDubaiSoloVisa").value||0,
-  precioVisaPasaje:+document.getElementById("editDubaiVisaPasaje").value||0,
-  requisitos:document.getElementById("editDubaiRequisitos").value
-},
-turquia:{
-  img:document.getElementById("editTurquiaImg").value.trim(),
-  precio:+document.getElementById("editTurquiaPrecio").value||0,
-  incluye:document.getElementById("editTurquiaIncluye").value,
-  nota:document.getElementById("editTurquiaNota").value.trim()||"📍 Trámite disponible desde Cuba"
-}
+const lista=(currentData.familia||"").split('\n').filter(l=>l.trim()).map(l=>{
+  const[de,para,t]=l.split('|');
+  return {de:(de||"").trim(),para:(para||"").trim(),texto:(t||"").trim()};
 });
-if(!db){s.textContent="Sin conexión.";s.className="status bad";return;}
-s.textContent="Guardando...";
-const{error}=await db.from(TABLE_NAME).upsert({id:ROW_ID,data:n},{onConflict:"id"});
-if(error){s.textContent="Error";s.className="status bad";return;}
-currentData=n;listaVisas=n.visas;renderPage();
-s.textContent="✅ ¡Publicado! Tus clientes lo ven al instante.";s.className="status good";}
 
-function adminLogin(){
-if(document.getElementById("adminPassword").value===CLAVE_ADMIN){
-isAdmin=true;
-document.getElementById("loginPanel").classList.add("hidden");
-document.getElementById("editorPanel").classList.remove("hidden");
-fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();cargarStats();
-}else document.getElementById("loginStatus").textContent="Clave incorrecta.";}
-function adminLogout(){
-isAdmin=false;
-document.getElementById("editorPanel").classList.add("hidden");
-document.getElementById("loginPanel").classList.remove("hidden");}
-function fillEditor(){
-const d=currentData;
-const set=(id,v)=>{const el=document.getElementById(id); if(el) el.value=v;};
-set("editNoticeText",d.noticeText||"");
-set("editNoticeImg",d.noticeImg||"");
-set("editNewsTitle",d.newsTitle||"");
-set("editNewsDesc",d.newsDesc||"");
-set("editNewsLink",d.newsLink||"");
-set("editPayInfo",d.payInfo||"");
-set("editPromoTitulo",(d.promo||{}).titulo||"");
-set("editPromoPrecio",(d.promo||{}).precio||"");
-set("editPromoFin",(d.promo||{}).fin||"");
-set("editPromoLink",(d.promo||{}).link||"");
-set("editPrAvion",(d.prices||{}).avion??0);
-set("editPrTren",(d.prices||{}).tren??0);
-set("editPrBus",(d.prices||{}).bus??0);
-set("editPrRec",(d.prices||{}).rec??0);
-set("editRateCuba",(d.rates||{}).cuba??0);
-set("editRateVen",(d.rates||{}).venezuela??0);
-set("editTasasRemesas",d.tasasRemesas||DEF_TASAS_REMESAS);
-set("editTren",d.trenInfo||"");
-set("editBus",d.busInfo||"");
-set("editRechargesList",d.rechargesListText||DEF_RECARGAS_TEXTO);
-set("editRechargesCurrency",d.rechargesCurrency||"RUB");
-set("editRemitRubles",d.remittance.rubles);
-set("editRemitCup",d.remittance.cup);
-set("editRemitCurrency",d.remittance.currency||"RUB");
-set("editRemitImg",d.remittance.image||"");
-set("editVideo",d.video||"");
-set("editNotes",d.notes||"");
-set("editShop",d.shop||"");
-set("editTestimonios",d.testimonios||"");
-set("editFamilia",d.familia||"");
-set("editFaq",d.faq||"");
-set("editDubaiSoloVisa",(d.dubai||{}).precioSoloVisa||0);
-set("editDubaiVisaPasaje",(d.dubai||{}).precioVisaPasaje||0);
-set("editDubaiImg",(d.dubai||{}).img||"");
-set("editDubaiRequisitos",(d.dubai||{}).requisitos||"");
-set("editTurquiaPrecio",(d.turquia||{}).precio||0);
-set("editTurquiaImg",(d.turquia||{}).img||"");
-set("editTurquiaIncluye",(d.turquia||{}).incluye||"");
-set("editTurquiaNota",(d.turquia||{}).nota||"");
-if(d.paises)paisesActuales=JSON.parse(JSON.stringify(d.paises));}
-function descargarBackup(){
-const blob=new Blob([JSON.stringify(currentData,null,2)],{type:"application/json"});
-const a=document.createElement("a");a.href=URL.createObjectURL(blob);
-a.download="ybh-backup-"+new Date().toISOString().slice(0,10)+".json";a.click();}
+if(!lista.length){
+  deEl.textContent="❤️";
+  txEl.textContent="Aún no hay mensajes. ¡Sé el primero!";
+  paEl.textContent="";
+  dots.innerHTML="";
+  return;
+}
+
+familiaIndex=0;
+dots.innerHTML=lista.map((_,i)=>`<span class="fam-dot ${i===0?'active':''}" onclick="goFamilia(${i})"></span>`).join('');
+
+function mostrar(i){
+  const b=document.getElementById("familiaBanner");
+  if(!b)return;
+  b.style.opacity=0;
+  setTimeout(()=>{
+    const m=lista[i];
+    deEl.textContent="💌 De "+m.de;
+    txEl.textContent='"'+m.texto+'"';
+    paEl.textContent="Para: "+m.para;
+    document.querySelectorAll(".fam-dot").forEach((d,k)=>d.classList.toggle("active",k===i));
+    b.style.opacity=1;
+  },400);
+}
+mostrar(0);
+
+if(familiaTimer)clearInterval(familiaTimer);
+familiaTimer=setInterval(()=>{
+  familiaIndex=(familiaIndex+1)%lista.length;
+  mostrar(familiaIndex);
+},6000);
+
+window.goFamilia=function(i){
+  familiaIndex=i;
+  if(familiaTimer)clearInterval(familiaTimer);
+  mostrar(i);
+  familiaTimer=setInterval(()=>{
+    familiaIndex=(familiaIndex+1)%lista.length;
+    mostrar(familiaIndex);
+  },6000);
+};
+}
+
+function renderizarFAQ(){
+const c=document.getElementById("faqList");if(!c)return;
+c.innerHTML=(currentData.faq||"").split('\n').filter(l=>l.trim()).map(l=>{const[p,r]=l.split('|');
+return`<div class="faq-item" onclick="this.classList.toggle('open')"><div class="preg">${escapeHTML((p||"").trim())}</div><div class="resp">${escapeHTML((r||"").trim())}</div></div>`;}).join('')||`<p class="status" style="text-align:center;">Aún no hay preguntas frecuentes.</p>`;}
+
+function buscarEnPagina(){
+const q=(document.getElementById("searchInput").value||"").toLowerCase().trim(),out=document.getElementById("searchResults");
+if(q.length<2){out.innerHTML="";return;}
+const r=[];
+const tabs=getTabsData();
+Object.keys(tabs).forEach(k=>{if(tabs[k].menu.toLowerCase().includes(q)||tabs[k].titulo.toLowerCase().includes(q))r.push(`<a href="#${k}">${escapeHTML(tabs[k].menu)}</a>`);});
+(currentData.rechargesListText||"").split('\n').forEach(l=>{const n=l.split('|')[0];if(n&&n.toLowerCase().includes(q))r.push(`<a href="#recargas">📱 ${escapeHTML(n.trim())}</a>`);});
+(currentData.paises||[]).forEach(p=>{if((p.nombre||"").toLowerCase().includes(q))r.push(`<a href="#boletos">✈️ ${escapeHTML(p.nombre)}</a>`);});
+listaVisas.forEach(v=>{if((v.pais||"").toLowerCase().includes(q))r.push(`<a href="#visas">🛂 ${escapeHTML(v.pais)}</a>`);});
+out.innerHTML=r.slice(0,12).join('');}
+
+function mostrarPromo(){
+const box=document.getElementById("promoBox"),p=currentData.promo||{};
+if(!p.fin||new Date(p.fin)<=new Date()){box.style.display="none";return;}
+box.style.display="block";
+document.getElementById("promoTitulo").textContent=p.titulo||"Promoción especial";
+document.getElementById("promoPrecio").textContent=p.precio||"";
+if(timerPromo)clearInterval(timerPromo);
+const tick=()=>{const dif=new Date(p.fin)-new Date();
+if(dif<=0){box.style.display="none";clearInterval(timerPromo);return;}
+const h=Math.floor(dif/3600000),m=Math.floor(dif%3600000/60000),s=Math.floor(dif%60000/1000);
+document.getElementById("promoCountdown").textContent=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;};
+tick();timerPromo=setInterval(tick,1000);}
+
+function abrirLightbox(){const s=document.getElementById("c-img").src;if(!s)return;
+document.getElementById("lightboxImg").src=s;document.getElementById("lightbox").style.display="flex";}
+function cerrarLightbox(){document.getElementById("lightbox").style.display="none";}
+function compartirPagina(){const url=window.location.href;
+if(navigator.share)navigator.share({title:"YOUR BRIDGE HOME",url}).catch(()=>{});
+else window.open("https://wa.me/?text="+encodeURIComponent("Mira esta página: "+url),"_blank");}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;document.getElementById("btnInstall").classList.remove("hidden");});
+function instalarApp(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null;document.getElementById("btnInstall").classList.add("hidden");}}
 
 function renderizarAdminPaises(){
 const c=document.getElementById("lista-paises-admin");if(!c)return;
@@ -1519,16 +1343,28 @@ const enRub=pb*(T[mb]||1);
 const final=enRub/(T[destino]||1);
 el.textContent=`Desde ${final.toFixed(2)} ${destino}`;});}
 
+// Actualizar los precios de la portada automáticamente
+function actualizarOfertasDestacadas() {
+  const pr = currentData.prices || {};
+  const recMin = (currentData.rechargesListText || "").split('\n').map(l=>parseFloat(l.split('|')[1])||0).filter(x=>x>0);
+  const recDesde = recMin.length ? Math.min(...recMin) : 200;
+  
+  const elRec = document.getElementById("oferta-recarga-precio");
+  if(elRec) elRec.textContent = "Desde " + recDesde + " ₽";
+  
+  const elVuelo = document.getElementById("oferta-vuelo-precio");
+  if(elVuelo) elVuelo.textContent = "Desde " + (pr.avion || 99800).toLocaleString() + " ₽";
+}
+
 function renderPage(){
 const d=currentData;
 aplicarNombresPestanas();
-const gnb=document.getElementById("globalNoticeBox");
 if(d.noticeText||d.noticeImg){
-if(gnb) gnb.style.display="block";
-const gnt=document.getElementById("globalNoticeText"); if(gnt) gnt.textContent=d.noticeText||"";
-const gni=document.getElementById("globalNoticeImg");
-if(gni){ if(d.noticeImg){gni.src=d.noticeImg;gni.style.display="block";} else gni.style.display="none"; }
-}else if(gnb) gnb.style.display="none";
+document.getElementById("globalNoticeBox").style.display="block";
+document.getElementById("globalNoticeText").textContent=d.noticeText||"";
+if(d.noticeImg){document.getElementById("globalNoticeImg").src=d.noticeImg;document.getElementById("globalNoticeImg").style.display="block";}
+else document.getElementById("globalNoticeImg").style.display="none";}
+else document.getElementById("globalNoticeBox").style.display="none";
 
 cargarNoticiasReales();renderizarVisas();renderizarTestimonios();renderizarFamilia();renderizarFAQ();mostrarPromo();
 renderizarDubai();renderizarTurquia();
@@ -1537,16 +1373,14 @@ poblarSelectorRemesas();calcularRemesaNueva();cargarTasasVivas();
 const pr=d.prices||{};
 const recMin=(d.rechargesListText||DEF_RECARGAS_TEXTO).split('\n').map(l=>parseFloat(l.split('|')[1])||0).filter(x=>x>0);
 const recDesde=recMin.length?Math.min(...recMin):(pr.rec||0);
-const pf=document.getElementById("preciosFila");
-if(pf) pf.innerHTML=`
+document.getElementById("preciosFila").innerHTML=`
 <div class="item"><b>${pr.avion??0} RUB</b><span>✈️ ${I18N[lang].t_avion}</span></div>
 <div class="item"><b>${pr.tren??0} RUB</b><span>🚆 ${I18N[lang].t_tren}</span></div>
 <div class="item"><b>${pr.bus??0} RUB</b><span>🚌 ${I18N[lang].t_bus2}</span></div>
 <div class="item"><b>${recDesde} RUB</b><span>📱 ${I18N[lang].nav_recargas}</span></div>`;
 
 const mcR=d.rechargesCurrency||"RUB";
-const rc=document.getElementById("rechargeCards");
-if(rc) rc.innerHTML=(d.rechargesListText||DEF_RECARGAS_TEXTO).split('\n').map(l=>{
+document.getElementById("rechargeCards").innerHTML=(d.rechargesListText||DEF_RECARGAS_TEXTO).split('\n').map(l=>{
 if(!l.trim())return'';const p=l.split('|');
 const n=p[0]?.trim()||"Recarga",pri=parseFloat(p[1]?.trim())||0,ds=p[2]?.trim()||"",img=p[3]?.trim()||"";
 const fotoHTML=img?`<img src="${img}" class="recharge-item-img" alt="${escapeHTML(n)}">`:`<div class="recharge-item-img">📱</div>`;
@@ -1555,13 +1389,11 @@ return`<div class="recharge-item"><div class="recharge-item-info">${fotoHTML}<di
 <button class="btn-comprar" onclick="abrirComprobante('proceso','Recarga ${n}','${pri} ${mcR}','Cuba')">Comprar</button></div></div>`;}).join('');
 
 const mcM=(d.remittance.currency||"RUB");
-const rmc=document.getElementById("remittanceCards");
-if(rmc) rmc.innerHTML=`<div class="card"><img src="${escapeHTML(d.remittance.image||DEF_FOTO_REMESA)}" alt="Remesa"><h3>Envío de Remesas</h3><p style="color:var(--muted);">Envía dinero seguro y rápido a tu familia.</p><div class="price">${d.remittance.rubles} ${mcM}</div></div>`;
+document.getElementById("remittanceCards").innerHTML=`<div class="card"><img src="${escapeHTML(d.remittance.image||DEF_FOTO_REMESA)}" alt="Remesa"><h3>Envío de Remesas</h3><p style="color:var(--muted);">Envía dinero seguro y rápido a tu familia.</p><div class="price">${d.remittance.rubles} ${mcM}</div></div>`;
 
-const piv=document.getElementById("payInfoView"); if(piv) piv.textContent=d.payInfo||"";
+document.getElementById("payInfoView").textContent=d.payInfo||"";
 
-const tc=document.getElementById("ticketCards");
-if(tc) tc.innerHTML=(d.paises||paisesPorDefecto).map(p=>{
+document.getElementById("ticketCards").innerHTML=(d.paises||paisesPorDefecto).map(p=>{
 const mb=p.monedaBase||"RUB";
 return`<div class="card" style="justify-content:space-between;overflow:hidden;">
 <img src="${escapeHTML(p.img||'https://images.pexels.com/photos/2067062/pexels-photo-2067062.jpeg')}" alt="${escapeHTML(p.nombre)}" style="height:180px;">
@@ -1573,15 +1405,14 @@ return`<div class="card" style="justify-content:space-between;overflow:hidden;">
 ${p.linkAfiliado?`<a class="action" href="${p.linkAfiliado}" target="_blank" style="background:rgba(255,255,255,.06);border:1px solid var(--border);font-size:.8rem;padding:8px;">Ver Opciones en Trip.com</a>`:''}
 </div></div>`;}).join('');
 
-const ti=document.getElementById("trenInfo"); if(ti) ti.textContent=d.trenInfo||"Consulta rutas y horarios por WhatsApp.";
-const bi=document.getElementById("busInfo"); if(bi) bi.textContent=d.busInfo||"Consulta rutas y horarios por WhatsApp.";
-const wt=document.getElementById("waTren"); if(wt) wt.href="https://wa.me/"+MI_TELEFONO;
-const wb=document.getElementById("waBus"); if(wb) wb.href="https://wa.me/"+MI_TELEFONO;
-const vf=document.getElementById("v-frame"); if(vf) vf.src=d.video?"https://www.youtube.com/embed/"+d.video:"";
-const nv=document.getElementById("notesView"); if(nv) nv.textContent=d.notes||"—";
+document.getElementById("trenInfo").textContent=d.trenInfo||"Consulta rutas y horarios por WhatsApp.";
+document.getElementById("busInfo").textContent=d.busInfo||"Consulta rutas y horarios por WhatsApp.";
+document.getElementById("waTren").href="https://wa.me/"+MI_TELEFONO;
+document.getElementById("waBus").href="https://wa.me/"+MI_TELEFONO;
+document.getElementById("v-frame").src=d.video?"https://www.youtube.com/embed/"+d.video:"";
+document.getElementById("notesView").textContent=d.notes||"—";
 
-const sc=document.getElementById("shopCards");
-if(sc) sc.innerHTML=(d.shop||"").split('\n').filter(l=>l.trim()).map(l=>{
+document.getElementById("shopCards").innerHTML=(d.shop||"").split('\n').filter(l=>l.trim()).map(l=>{
 const[n,p,ds]=l.split('|').map(s=>(s||"").trim());
 const esCafe=(n||"").toLowerCase().includes("café")||(n||"").toLowerCase().includes("cafe");
 const msg=encodeURIComponent("Hola, quiero comprar: "+(n||""));
@@ -1593,124 +1424,304 @@ ${esCafe?`<div class="badge-modern">☕ Más vendido</div>`:''}
 
 buildCarousel();setupBannerRotativo();calcularTodo();
 pintarPDFsEnSecciones();
-if(isAdmin){fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();cargarStats();}
-actualizarPreciosEnPantalla();}
-
-function renderizarDubai(){
-  const d = currentData.dubai||{};
-  const c = document.getElementById("dubaiCard"); if(!c)return;
-  c.innerHTML=`
-    ${d.img?`<img src="${escapeHTML(d.img)}" alt="Dubái" style="width:100%;max-height:280px;object-fit:cover;border-radius:14px;margin-bottom:14px;">`:''}
-    <h3>Visa de Turismo a</h3>
-    <h2 style="font-size:3rem;color:var(--gold);">DUBAI 🇦🇪</h2>
-    <p style="color:var(--muted);font-style:italic;">"Vive una experiencia única en uno de los destinos más exclusivos del mundo."</p>
-    <div class="grid-normal">
-      <div class="product-card" style="text-align:center;"><span class="badge-modern">🛂 Solo Visa</span><div style="font-size:1.8rem;font-weight:900;">$${Number(d.precioSoloVisa||0).toLocaleString()}</div><div style="color:var(--muted);font-weight:700;">USD</div></div>
-      <div class="product-card" style="text-align:center;"><span class="badge-modern">✈️ Visa + Pasaje</span><div style="font-size:1.8rem;font-weight:900;">$${Number(d.precioVisaPasaje||0).toLocaleString()}</div><div style="color:var(--muted);font-weight:700;">USD</div></div>
-    </div>
-    <div class="notas-box" style="text-align:left;margin-top:14px;white-space:pre-wrap;">${escapeHTML(d.requisitos||"")}</div>
-    <a href="https://wa.me/${MI_TELEFONO}?text=${encodeURIComponent('Hola, estoy interesado en la Visa de Turismo a Dubái.')}" target="_blank" style="background:linear-gradient(135deg,var(--gold),#b8860b);color:#0f1115;margin-top:16px;">💬 Solicitar Visa a Dubái</a>`;
-}
-function renderizarTurquia(){
-  const d = currentData.turquia||{};
-  const c = document.getElementById("turquiaCard"); if(!c)return;
-  c.innerHTML=`
-    ${d.img?`<img src="${escapeHTML(d.img)}" alt="Turquía" style="width:100%;max-height:280px;object-fit:cover;border-radius:14px;margin-bottom:14px;">`:''}
-    <h3>Trámite de Visa para</h3>
-    <h2 style="font-size:2.8rem;color:var(--red);">TURQUÍA</h2>
-    <span class="badge-modern">Desde Cuba 🇨🇺</span>
-    <div class="notas-box" style="text-align:left;margin:14px 0;white-space:pre-wrap;">✨ NUESTRO SERVICIO INCLUYE:\n${escapeHTML(d.incluye||"")}</div>
-    <div style="display:inline-block;background:var(--gold);color:#0f1115;padding:14px 36px;border-radius:16px;border:3px solid var(--red);transform:rotate(-2deg);font-weight:900;">
-      <div style="font-size:2.4rem;">${Number(d.precio||0).toLocaleString()}</div><div style="font-size:1.3rem;">USD</div>
-    </div>
-    <a href="https://wa.me/${MI_TELEFONO}?text=${encodeURIComponent('Hola, soy cubano y estoy interesado en el trámite de Visa para Turquía.')}" target="_blank" style="background:linear-gradient(135deg,var(--red),#b91c1c);margin-top:18px;">${escapeHTML(d.nota||'📍 Trámite disponible desde Cuba')}</a>`;
+if(isAdmin){fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();renderizarRenombrarTabs();renderizarPDFUploader();cargarStats();}
+actualizarPreciosEnPantalla();
+actualizarOfertasDestacadas();
 }
 
-function renderizarPDFUploader(){
-  const cont = document.getElementById("pdfUploader");
-  if(!cont) return;
-  cont.innerHTML="";
-  Object.keys(TABS_DEF).forEach(k=>{
-    const docs = (currentData.documentos||{})[k]||[];
-    const div = document.createElement("div");
-    div.className="admin-pais-item";
-    div.innerHTML=`<b>${escapeHTML(TABS_DEF[k].titulo)}</b>
-      ${docs.map((d,i)=>`<div style="display:flex;gap:8px;align-items:center;margin:4px 0;">
-        <a href="${escapeHTML(d.url)}" target="_blank" style="color:var(--primary);font-weight:700;font-size:12px;flex:1;">📄 ${escapeHTML(d.nombre)}</a>
-        <button class="secondary" style="width:auto;padding:4px 10px;font-size:11px;" onclick="eliminarPDF('${k}',${i})">🗑️</button>
-      </div>`).join('')}
-      <input type="file" accept="application/pdf" onchange="subirPDF('${k}',this)" style="margin-top:8px;">`;
-    cont.appendChild(div);
-  });
-}
-async function subirPDF(seccion, input){
-  const f = input.files[0];
-  if(!f) return;
-  const nombre = f.name;
-  let url = "";
-  if(db){
-    try{
-      const path = `pdfs/${seccion}/${Date.now()}-${nombre.replace(/[^\w.\-]/g,'_')}`;
-      const {error} = await db.storage.from("documentos").upload(path, f, {upsert:false});
-      if(!error){
-        const {data} = db.storage.from("documentos").getPublicUrl(path);
-        url = data.publicUrl;
-      }
-    }catch(e){}
-  }
-  if(!url){
-    url = await new Promise(res=>{const r=new FileReader();r.onload=e=>res(e.target.result);r.readAsDataURL(f);});
-  }
-  if(!currentData.documentos) currentData.documentos={};
-  if(!currentData.documentos[seccion]) currentData.documentos[seccion]=[];
-  currentData.documentos[seccion].push({nombre,url});
-  if(db){
-    const {error} = await db.from(TABLE_NAME).upsert({id:ROW_ID,data:currentData},{onConflict:"id"});
-    if(error){alert("❌ Error al guardar el PDF");return;}
-  }
-  alert("✅ PDF subido correctamente");
-  input.value="";
-  renderizarPDFUploader();
-  pintarPDFsEnSecciones();
-}
-async function eliminarPDF(seccion, idx){
-  if(!confirm("¿Eliminar este PDF?"))return;
-  currentData.documentos[seccion].splice(idx,1);
-  if(db) await db.from(TABLE_NAME).upsert({id:ROW_ID,data:currentData},{onConflict:"id"});
-  renderizarPDFUploader();
-  pintarPDFsEnSecciones();
-}
+function buildCarousel(){
+const dots=document.getElementById("c-dots");dots.innerHTML="";
+currentData.photos.forEach((_,i)=>dots.innerHTML+=`<span class="dot ${i===ci?'active':''}" onclick="goFoto(${i})"></span>`);
+showFoto(ci);
+if(timerC)clearInterval(timerC);
+timerC=setInterval(()=>{if(currentData.photos.length){ci=(ci+1)%currentData.photos.length;showFoto(ci);}},20000);}
+function showFoto(i){
+const ph=currentData.photos;
+if(!ph.length){document.getElementById("c-nombre").textContent="—";document.getElementById("c-img").removeAttribute("src");
+document.getElementById("c-hotel").textContent="—";document.getElementById("c-rest").textContent="—";return;}
+ci=(i+ph.length)%ph.length;const p=ph[ci];
+document.getElementById("c-img").src=p.src;
+document.getElementById("c-nombre").textContent="📍 "+p.name;
+document.getElementById("c-hotel").textContent=p.hotel||"—";
+document.getElementById("c-rest").textContent=p.rest||"—";
+document.querySelectorAll(".dot").forEach((d,k)=>d.classList.toggle("active",k===ci));}
+function goFoto(i){showFoto(i);if(timerC)clearInterval(timerC);
+timerC=setInterval(()=>{if(currentData.photos.length){ci=(ci+1)%currentData.photos.length;showFoto(ci);}},20000);}
 
-function renderizarRenombrarTabs(){
-  const cont = document.getElementById("renombrarTabs");
-  if(!cont) return;
-  const tabs = getTabsData();
-  cont.innerHTML="";
-  Object.keys(TABS_DEF).forEach(k=>{
-    const div = document.createElement("div");
-    div.className="admin-pais-item";
-    div.innerHTML=`<label>Pestaña: <b>#${k}</b></label>
-      <label>Nombre en el menú:</label>
-      <input value="${escapeHTML(tabs[k].menu)}" onchange="cambiarNombreTab('${k}','menu',this.value)">
-      <label>Título de la sección (H2):</label>
-      <input value="${escapeHTML(tabs[k].titulo)}" onchange="cambiarNombreTab('${k}','titulo',this.value)">`;
-    cont.appendChild(div);
-  });
-}
-function cambiarNombreTab(k, campo, valor){
-  if(!currentData.tabs) currentData.tabs={};
-  if(!currentData.tabs[k]) currentData.tabs[k]={menu:TABS_DEF[k].menu,titulo:TABS_DEF[k].titulo};
-  currentData.tabs[k][campo]=valor;
-  aplicarNombresPestanas();
-}
+function renderizarFotosAdmin(){
+const c=document.getElementById("lista-fotos-admin");if(!c)return;
+c.innerHTML="";
+currentData.photos.forEach((p,i)=>{const div=document.createElement("div");div.className="admin-pais-item";
+div.innerHTML=`<div style="display:flex;gap:10px;align-items:center;"><img src="${p.src}" style="width:60px;height:45px;object-fit:cover;border-radius:8px;"><b>${escapeHTML(p.name)}</b></div>
+<label>Nombre</label><input value="${escapeHTML(p.name)}" onchange="currentData.photos[${i}].name=this.value">
+<label>Hotel</label><input value="${escapeHTML(p.hotel||'')}" onchange="currentData.photos[${i}].hotel=this.value">
+<label>Restaurante</label><input value="${escapeHTML(p.rest||'')}" onchange="currentData.photos[${i}].rest=this.value">
+<button onclick="currentData.photos.splice(${i},1);renderizarFotosAdmin();" class="secondary">🗑️ Eliminar Foto</button>`;
+c.appendChild(div);});}
 
-document.addEventListener("DOMContentLoaded", () => {
-  listaVisas=listaVisasDef;
-  pintarCaptcha();
-  registrarVisita();
-  setLang(lang);
-  loadData();
+async function agregarFotoCarrusel(){
+const f=document.getElementById("editFotoFile").files[0];
+if(!f)return alert("Selecciona una foto primero");
+const nombre="foto-"+Date.now()+"."+f.name.split(".").pop();
+let src="";
+try{const{error}=await db.storage.from("fotos").upload(nombre,f);
+if(!error){const{data}=db.storage.from("fotos").getPublicUrl(nombre);src=data.publicUrl;}}catch(e){}
+if(!src){const rd=new FileReader();
+rd.onload=async e=>{
+currentData.photos.push({src:e.target.result,name:document.getElementById("editFotoName").value||"Destino",hotel:document.getElementById("editFotoHotel").value,rest:document.getElementById("editFotoRest").value});
+await db.from(TABLE_NAME).upsert({id:ROW_ID,data:currentData},{onConflict:"id"});
+renderizarFotosAdmin();renderPage();alert("✅ Foto agregada");};
+rd.readAsDataURL(f);return;}
+currentData.photos.push({src,name:document.getElementById("editFotoName").value||"Destino",hotel:document.getElementById("editFotoHotel").value,rest:document.getElementById("editFotoRest").value});
+const{error}=await db.from(TABLE_NAME).upsert({id:ROW_ID,data:currentData},{onConflict:"id"});
+if(error)return alert("❌ Error al guardar la foto");
+renderizarFotosAdmin();renderPage();alert("✅ Foto agregada");}
+
+function setupBannerRotativo(){
+const d=currentData;
+const l=(d.rechargesListText||DEF_RECARGAS_TEXTO).split('\n');
+let pr={n:"Recargas",p:200,ds:"Envía saldo al instante"};
+if(l.length&&l[0].trim()){const ps=l[0].split('|');pr={n:ps[0]?.trim()||"Recarga",p:parseFloat(ps[1]?.trim())||0,ds:ps[2]?.trim()||""};}
+const mcR=d.rechargesCurrency||"RUB",mcM=d.remittance.currency||"RUB";
+bannerList=[
+{tag:"⭐ LO MÁS VENDIDO",title:pr.n,text:pr.ds,price:pr.p+" "+mcR,btn:"Comprar Recarga",action:`abrirComprobante('proceso','Recarga ${pr.n}','${pr.p} ${mcR}','Cuba')`,img:"https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg"},
+{tag:"ENVÍO DE REMESAS",title:"Remesas a Cuba",text:"Envía dinero seguro",price:Number(d.remittance.rubles).toFixed(2)+" "+mcM,btn:"Enviar Remesa",action:`abrirComprobante('proceso','Remesa','${d.remittance.rubles} ${mcM}','Cuba')`,img:d.remittance.image||DEF_FOTO_REMESA}];
+(d.paises||paisesPorDefecto).forEach(p=>{const mb=p.monedaBase||"RUB";
+bannerList.push({tag:"VUELOS",title:"Vuelos a "+p.nombre,text:p.info,price:"Desde "+(p.precio||0)+" "+mb,btn:"Consultar Vuelo",action:`abrirComprobante('proceso','Vuelo a ${p.nombre}','${p.precio} ${mb}','${p.nombre}')`,img:p.img||"https://images.pexels.com/photos/2067062/pexels-photo-2067062.jpeg"});});
+bannerList.push(
+{tag:"MICROSERVICIO",title:"Gift Cards",text:"Apple, PlayStation, Netflix o Steam.",price:"Consultar",btn:"Solicitar Código",action:`abrirComprobante('proceso','Gift Card','Por definir','Cuba')`,img:"https://images.pexels.com/photos/6169002/pexels-photo-6169002.jpeg"},
+{tag:"TRÁMITE LEGAL",title:"Poderes Notariales",text:"Gestoría para cubanos.",price:"Consultar",btn:"Ver Requisitos",action:`abrirComprobante('proceso','Poder Notarial','Por definir','Cuba')`,img:"https://images.pexels.com/photos/5668858/pexels-photo-5668858.jpeg"});
+updateBannerDisplay();}
+function updateBannerDisplay(){
+if(!bannerList.length)return;
+const i=bannerList[bannerIndex%bannerList.length],b=document.getElementById("mainBanner");
+b.style.opacity=0;
+setTimeout(()=>{b.style.backgroundImage=`url('${i.img}')`;
+document.getElementById("bannerTag").textContent=i.tag;
+document.getElementById("bannerTitle").textContent=i.title;
+document.getElementById("bannerText").textContent=i.text;
+document.getElementById("bannerPrice").textContent=i.price;
+const btn=document.getElementById("bannerBtn");btn.textContent=i.btn;
+btn.setAttribute('onclick',i.action+"; return false;");
+b.style.opacity=1;},500);}
+setInterval(()=>{if(bannerList.length>1){bannerIndex++;updateBannerDisplay();}},7000);
+
+function cambiarTab(t){["avion","tren","bus"].forEach(x=>document.getElementById("panel-"+x).classList.toggle("hidden",x!==t));
+["avion","tren","bus"].forEach(x=>document.getElementById("tab-"+x).classList.toggle("active",x===t));}
+function calcPasaje(){
+const p=Number(document.getElementById("pasajeUSD").value||0),r=Number(document.getElementById("pasajeTasa").value||0);
+document.getElementById("pasajeResult").textContent=(p*r).toFixed(2);}
+function calcularTodo(){calcPasaje();}
+
+function updateClockDate(){
+const n=new Date();
+document.getElementById("clock").textContent=n.toLocaleTimeString();
+document.getElementById("clockDate").textContent=n.toLocaleDateString(lang==="ru"?"ru-RU":lang==="en"?"en-US":"es-ES",{weekday:'long',year:'numeric',month:'long',day:'numeric'});}
+setInterval(updateClockDate,1000);
+
+function pintarCaptcha(){
+document.getElementById("captchaPregunta").textContent=`${captchaA} + ${captchaB}`;
+document.querySelectorAll('.captcha-fam').forEach(el=>el.textContent=`${capFA} + ${capFB}`);}
+document.getElementById("form-nuevo-negocio")?.addEventListener("submit",async e=>{
+e.preventDefault();
+if(Number(document.getElementById("captchaRespuesta").value)!==captchaA+captchaB){
+alert("❌ Verificación incorrecta, intenta de nuevo.");
+captchaA=Math.floor(Math.random()*8)+2;captchaB=Math.floor(Math.random()*8)+2;pintarCaptcha();return;}
+const{error}=await db.from('negocios_socios').insert([{
+nombre_negocio:document.getElementById("nombre-negocio").value,
+whatsapp:document.getElementById("contacto-whatsapp").value,
+paises:document.getElementById("paises-operacion").value,
+descripcion:document.getElementById("descripcion-servicio").value,aprobado:false}]);
+const m=document.getElementById("mensaje-estado");
+if(error){m.textContent="Error al enviar.";m.className="status bad";}
+else{m.textContent="¡Solicitud enviada!";m.className="status good";e.target.reset();}});
+
+document.getElementById("form-familia")?.addEventListener("submit",async e=>{
+e.preventDefault();
+if(Number(document.getElementById("fam-captcha").value)!==capFA+capFB){
+alert("❌ Verificación incorrecta, intenta de nuevo.");
+capFA=Math.floor(Math.random()*8)+2;capFB=Math.floor(Math.random()*8)+2;pintarCaptcha();return;}
+const{error}=await db.from('mensajes_familia').insert([{
+de_quien:document.getElementById("fam-de").value,
+para_quien:document.getElementById("fam-para").value,
+texto:document.getElementById("fam-texto").value,aprobado:false}]);
+const m=document.getElementById("fam-estado");
+if(error){m.textContent="Error al enviar.";m.className="status bad";}
+else{m.textContent="💌 ¡Mensaje enviado! Lo publicaré cuando lo revise.";m.className="status good";e.target.reset();}});
+
+document.getElementById('form-visa')?.addEventListener('submit',function(e){
+e.preventDefault();
+const msg=`*SOLICITUD DE VISA - YOUR BRIDGE HOME*%0A%0A`+
+`🛂 *Pasaporte:* ${document.getElementById('visa-pasaporte').value}%0A`+
+`🪪 *Carnet:* ${document.getElementById('visa-carnet').value}%0A`+
+`💍 *Estado Civil:* ${document.getElementById('visa-estado-civil').value}%0A`+
+`💼 *Ocupación:* ${document.getElementById('visa-ocupacion').value}%0A`+
+`📞 *Teléfono:* ${document.getElementById('visa-telefono').value}%0A`+
+`✉️ *Correo:* ${document.getElementById('visa-email').value}%0A%0A`+
+`_Por favor, indíquenme los siguientes pasos para mi trámite._`;
+window.open(`https://wa.me/${MI_TELEFONO}?text=${msg}`,'_blank');});
+
+async function restaurarBackup(ev){
+const f=ev.target.files[0];if(!f)return;
+if(!confirm("⚠️ ¿Seguro? Se reemplazará TODO el contenido actual por el del archivo.")){ev.target.value="";return;}
+const rd=new FileReader();
+rd.onload=async e=>{
+try{const datos=JSON.parse(e.target.result);
+const{error}=await db.from(TABLE_NAME).upsert({id:ROW_ID,data:datos},{onConflict:"id"});
+if(error)return alert("❌ Error al restaurar");
+currentData=Object.assign({},currentData,datos);
+if(currentData.visas)listaVisas=currentData.visas;
+renderPage();fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();renderizarRenombrarTabs();renderizarPDFUploader();
+alert("✅ Contenido restaurado");}catch(err){alert("❌ Archivo no válido");}};
+rd.readAsText(f);}
+
+async function loadData(){
+const s=document.getElementById("connectionStatus");
+try{
+const{data,error}=await db.from(TABLE_NAME).select("data").eq("id",ROW_ID).maybeSingle();
+if(error)throw error;
+if(data&&data.data){
+currentData=Object.assign({},currentData,data.data);
+listaVisas=currentData.visas||listaVisasDef;
+if(!currentData.paises)currentData.paises=paisesPorDefecto;
+if(!currentData.tasasRemesas)currentData.tasasRemesas=DEF_TASAS_REMESAS;
+if(!currentData.documentos)currentData.documentos={};
+if(!currentData.tabs)currentData.tabs=TABS_DEF;
+if(!currentData.dubai)currentData.dubai=JSON.parse(JSON.stringify({img:"",precioSoloVisa:1500,precioVisaPasaje:3500,requisitos:""}));
+if(!currentData.turquia)currentData.turquia=JSON.parse(JSON.stringify({img:"",precio:1250,incluye:"",nota:"📍 Trámite disponible desde Cuba"}));
+renderPage();
+s.textContent="✅ Tienda conectada";s.className="status good";}
+}catch(e){s.textContent="❌ Error";s.className="status bad";}
+try{
+db.channel("ybh-cambios").on("postgres_changes",{event:"UPDATE",schema:"public",table:TABLE_NAME},payload=>{
+currentData=Object.assign({},currentData,payload.new.data);
+if(currentData.visas)listaVisas=currentData.visas;
+renderPage();}).subscribe();
+}catch(e){}}
+
+async function saveChanges(){
+const s=document.getElementById("saveStatus");if(!isAdmin)return;
+const n=Object.assign({},currentData,{
+published:true,
+noticeText:document.getElementById("editNoticeText").value.trim(),
+noticeImg:document.getElementById("editNoticeImg").value.trim(),
+newsTitle:document.getElementById("editNewsTitle").value.trim(),
+newsDesc:document.getElementById("editNewsDesc").value.trim(),
+newsLink:document.getElementById("editNewsLink").value.trim(),
+payInfo:document.getElementById("editPayInfo").value,
+promo:{titulo:document.getElementById("editPromoTitulo").value.trim(),precio:document.getElementById("editPromoPrecio").value.trim(),fin:document.getElementById("editPromoFin").value},
+visas:listaVisas,paises:paisesActuales,
+prices:{avion:+document.getElementById("editPrAvion").value||0,tren:+document.getElementById("editPrTren").value||0,bus:+document.getElementById("editPrBus").value||0,rec:+document.getElementById("editPrRec").value||0},
+rates:{cuba:+document.getElementById("editRateCuba").value||0,venezuela:+document.getElementById("editRateVen").value||0},
+tasasRemesas:document.getElementById("editTasasRemesas").value,
+trenInfo:document.getElementById("editTren").value,
+busInfo:document.getElementById("editBus").value,
+rechargesListText:document.getElementById("editRechargesList").value,
+rechargesCurrency:document.getElementById("editRechargesCurrency").value,
+remittance:{rubles:Number(document.getElementById("editRemitRubles").value),cup:Number(document.getElementById("editRemitCup").value),currency:document.getElementById("editRemitCurrency").value,image:document.getElementById("editRemitImg").value.trim()},
+video:document.getElementById("editVideo").value.trim(),
+notes:document.getElementById("editNotes").value,
+shop:document.getElementById("editShop").value,
+testimonios:document.getElementById("editTestimonios").value,
+familia:document.getElementById("editFamilia").value,
+faq:document.getElementById("editFaq").value,
+photos:currentData.photos,
+tabs:currentData.tabs,
+documentos:currentData.documentos,
+dubai:{
+  img:document.getElementById("editDubaiImg").value.trim(),
+  precioSoloVisa:+document.getElementById("editDubaiSoloVisa").value||0,
+  precioVisaPasaje:+document.getElementById("editDubaiVisaPasaje").value||0,
+  requisitos:document.getElementById("editDubaiRequisitos").value
+},
+turquia:{
+  img:document.getElementById("editTurquiaImg").value.trim(),
+  precio:+document.getElementById("editTurquiaPrecio").value||0,
+  incluye:document.getElementById("editTurquiaIncluye").value,
+  nota:document.getElementById("editTurquiaNota").value.trim()||"📍 Trámite disponible desde Cuba"
+}
 });
+s.textContent="Guardando...";
+const{error}=await db.from(TABLE_NAME).upsert({id:ROW_ID,data:n},{onConflict:"id"});
+if(error){s.textContent="Error";s.className="status bad";return;}
+currentData=n;listaVisas=n.visas;renderPage();
+s.textContent="✅ ¡Publicado! Tus clientes lo ven al instante.";s.className="status good";}
+
+function adminLogin(){
+if(document.getElementById("adminPassword").value===CLAVE_ADMIN){
+isAdmin=true;
+document.getElementById("loginPanel").classList.add("hidden");
+document.getElementById("editorPanel").classList.remove("hidden");
+fillEditor();renderizarAdminPaises();renderizarAdminVisas();renderizarFotosAdmin();renderizarRenombrarTabs();renderizarPDFUploader();cargarStats();
+}else document.getElementById("loginStatus").textContent="Clave incorrecta.";}
+function adminLogout(){
+isAdmin=false;
+document.getElementById("editorPanel").classList.add("hidden");
+document.getElementById("loginPanel").classList.remove("hidden");}
+function fillEditor(){
+const d=currentData;
+document.getElementById("editNoticeText").value=d.noticeText||"";
+document.getElementById("editNoticeImg").value=d.noticeImg||"";
+document.getElementById("editNewsTitle").value=d.newsTitle||"";
+document.getElementById("editNewsDesc").value=d.newsDesc||"";
+document.getElementById("editNewsLink").value=d.newsLink||"";
+document.getElementById("editPayInfo").value=d.payInfo||"";
+document.getElementById("editPromoTitulo").value=(d.promo||{}).titulo||"";
+document.getElementById("editPromoPrecio").value=(d.promo||{}).precio||"";
+document.getElementById("editPromoFin").value=(d.promo||{}).fin||"";
+document.getElementById("editPrAvion").value=(d.prices||{}).avion??0;
+document.getElementById("editPrTren").value=(d.prices||{}).tren??0;
+document.getElementById("editPrBus").value=(d.prices||{}).bus??0;
+document.getElementById("editPrRec").value=(d.prices||{}).rec??0;
+document.getElementById("editRateCuba").value=(d.rates||{}).cuba??0;
+document.getElementById("editRateVen").value=(d.rates||{}).venezuela??0;
+document.getElementById("editTasasRemesas").value=d.tasasRemesas||DEF_TASAS_REMESAS;
+document.getElementById("editTren").value=d.trenInfo||"";
+document.getElementById("editBus").value=d.busInfo||"";
+document.getElementById("editRechargesList").value=d.rechargesListText||DEF_RECARGAS_TEXTO;
+document.getElementById("editRechargesCurrency").value=d.rechargesCurrency||"RUB";
+document.getElementById("editRemitRubles").value=d.remittance.rubles;
+document.getElementById("editRemitCup").value=d.remittance.cup;
+document.getElementById("editRemitCurrency").value=d.remittance.currency||"RUB";
+document.getElementById("editRemitImg").value=d.remittance.image||"";
+document.getElementById("editVideo").value=d.video||"";
+document.getElementById("editNotes").value=d.notes||"";
+document.getElementById("editShop").value=d.shop||"";
+document.getElementById("editTestimonios").value=d.testimonios||"";
+document.getElementById("editFamilia").value=d.familia||"";
+document.getElementById("editFaq").value=d.faq||"";
+document.getElementById("editDubaiSoloVisa").value=(d.dubai||{}).precioSoloVisa||0;
+document.getElementById("editDubaiVisaPasaje").value=(d.dubai||{}).precioVisaPasaje||0;
+document.getElementById("editDubaiImg").value=(d.dubai||{}).img||"";
+document.getElementById("editDubaiRequisitos").value=(d.dubai||{}).requisitos||"";
+document.getElementById("editTurquiaPrecio").value=(d.turquia||{}).precio||0;
+document.getElementById("editTurquiaImg").value=(d.turquia||{}).img||"";
+document.getElementById("editTurquiaIncluye").value=(d.turquia||{}).incluye||"";
+document.getElementById("editTurquiaNota").value=(d.turquia||{}).nota||"";
+if(d.paises)paisesActuales=JSON.parse(JSON.stringify(d.paises));}
+function descargarBackup(){
+const blob=new Blob([JSON.stringify(currentData,null,2)],{type:"application/json"});
+const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+a.download="ybh-backup-"+new Date().toISOString().slice(0,10)+".json";a.click();}
+
+// Función para el buscador de vuelos
+function consultarVueloWA(e) {
+  e.preventDefault();
+  const origen = document.getElementById("vuelo-origen").value;
+  const destino = document.getElementById("vuelo-destino").value;
+  const fecha = document.getElementById("vuelo-fecha").value;
+  const pasajeros = document.getElementById("vuelo-pasajeros").value;
+  
+  const mensaje = `Hola Daynel, quiero consultar un vuelo de *${origen}* a *${destino}* para *${pasajeros}* persona(s) el día *${fecha}*. ¿Qué opciones tienes?`;
+  window.open(`https://wa.me/79046319565?text=${encodeURIComponent(mensaje)}`, '_blank');
+}
+
+listaVisas=listaVisasDef;
+pintarCaptcha();
+registrarVisita();
+setLang(lang);
+renderPage();
+loadData();
 </script>
 </body>
 </html>
