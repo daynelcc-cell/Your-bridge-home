@@ -1848,19 +1848,18 @@ const blob=new Blob([JSON.stringify(currentData,null,2)],{type:"application/json
 const a=document.createElement("a");a.href=URL.createObjectURL(blob);
 a.download="ybh-backup-"+new Date().toISOString().slice(0,10)+".json";a.click();}
 
-// Función para el buscador de vuelos
+// ================= FUNCIONES FINALES (SIN DUPLICADOS) =================
+
 function consultarVueloWA(e) {
   e.preventDefault();
   const origen = document.getElementById("vuelo-origen").value;
   const destino = document.getElementById("vuelo-destino").value;
   const fecha = document.getElementById("vuelo-fecha").value;
   const pasajeros = document.getElementById("vuelo-pasajeros").value;
-  
   const mensaje = `Hola Daynel, quiero consultar un vuelo de *${origen}* a *${destino}* para *${pasajeros}* persona(s) el día *${fecha}*. ¿Qué opciones tienes?`;
   window.open(`https://wa.me/79046319565?text=${encodeURIComponent(mensaje)}`, '_blank');
 }
 
-// Rotador de avisos importantes
 const avisos = [
   "🔔 NUEVO: Nuevos destinos disponibles. ¡Consulta los precios!",
   "🔔 ACTUALIZADO: Nueva tarifa de vuelos a La Habana.",
@@ -1880,6 +1879,12 @@ setInterval(() => {
   }
 }, 8000);
 
+function compartirOportunidad(mensaje) {
+  const url = "https://wa.me/?text=" + encodeURIComponent(mensaje);
+  window.open(url, '_blank');
+}
+
+// Inicialización final correcta
 listaVisas=listaVisasDef;
 pintarCaptcha();
 registrarVisita();
