@@ -39,21 +39,12 @@
 
         /* ================= HEADER ================= */
         header{
-            position:sticky;
-            top:0;
-            z-index:1000;
-            background:rgba(6,17,31,.92);
-            backdrop-filter:blur(18px);
-            border-bottom:1px solid rgba(245,197,66,.25);
+            position:sticky; top:0; z-index:1000; background:rgba(6,17,31,.92);
+            backdrop-filter:blur(18px); border-bottom:1px solid rgba(245,197,66,.25);
         }
         .navbar{
-            max-width:1250px;
-            margin:auto;
-            padding:15px 25px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            gap:20px;
+            max-width:1250px; margin:auto; padding:15px 25px;
+            display:flex; justify-content:space-between; align-items:center; gap:20px;
         }
         .logo{ display:flex; align-items:center; gap:12px; text-decoration:none; color:white; }
         .logo-icon{
@@ -102,10 +93,6 @@
             position:relative; min-height:390px; border-radius:30px; overflow:hidden; padding:28px;
             background: linear-gradient(145deg,rgba(245,197,66,.16),rgba(47,128,237,.08)), var(--card);
             border:1px solid rgba(245,197,66,.25); box-shadow:0 25px 70px rgba(0,0,0,.35);
-        }
-        .hero-card:before{
-            content:""; position:absolute; width:230px; height:230px; border-radius:50%;
-            background:rgba(245,197,66,.12); filter:blur(10px); right:-80px; top:-80px;
         }
         .globe{
             width:105px; height:105px; margin:15px auto 20px; border-radius:50%;
@@ -178,7 +165,6 @@
             background: var(--card); padding: 30px; border-radius: 20px; width: 100%; max-width: 500px;
             border: 1px solid var(--gold); position: relative; animation: slideDown 0.3s ease;
         }
-        .modal-content.admin-modal { max-width: 1000px; }
         @keyframes slideDown { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .close-modal { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; color: var(--muted); transition: 0.3s; }
         .close-modal:hover { color: var(--red); }
@@ -232,23 +218,29 @@
         .admin strong{ font-size:11px; }
         .admin small{ display:block; color:#7e8b9b; font-size:9px; }
         .copyright{ color:#5d6b7a; font-size:9px; margin-top:25px; }
-        .admin-link { color: #5d6b7a; cursor: pointer; text-decoration: none; margin-left: 10px; transition: 0.3s; }
-        .admin-link:hover { color: var(--gold); }
+        
+        /* Botón Admin en el menú */
+        .btn-admin-nav {
+            color: var(--gold) !important; 
+            border: 1px solid var(--gold);
+        }
+        .btn-admin-nav:hover {
+            background: var(--gold) !important;
+            color: #071321 !important;
+        }
 
         /* ================= MOBILE ================= */
         @media(max-width:900px){
             .navbar{ padding:12px 15px; }
-            .nav a:not(.contact){ display:none; }
             .hero{ grid-template-columns:1fr; padding:55px 18px 35px; gap:35px; }
             .hero h2{ font-size:43px; letter-spacing:-1.5px; }
-            .hero-description{ font-size:14px; }
-            .hero-card{ min-height:auto; }
             .services-grid{ grid-template-columns:repeat(2,1fr); }
             .info-grid{ grid-template-columns:1fr; }
             .section{ padding:55px 18px; }
             .offer{ padding:0 18px; }
         }
         @media(max-width:520px){
+            .nav a:not(.btn-admin-nav):not(.contact) { display:none; }
             .logo h1{ font-size:15px; }
             .logo-icon{ width:42px; height:42px; }
             .hero h2{ font-size:36px; }
@@ -257,7 +249,6 @@
             .services-grid{ grid-template-columns:1fr; }
             .offer-route{ font-size:19px; gap:10px; }
             .offer-price strong{ font-size:31px; }
-            .section-title h2{ font-size:28px; }
         }
     </style>
 </head>
@@ -279,6 +270,9 @@
                 <a href="#inicio">Inicio</a>
                 <a href="#servicios">Servicios</a>
                 <a href="#ofertas">Ofertas</a>
+                <!-- BOTÓN DE ADMINISTRADOR VISIBLE EN EL MENÚ -->
+                <a onclick="abrirLogin()" class="btn-admin-nav"><i class="fa-solid fa-lock"></i> Admin</a>
+                
                 <a class="contact" href="https://wa.me/79046319565" target="_blank">
                     <i class="fa-brands fa-whatsapp"></i> Contactar
                 </a>
@@ -503,8 +497,6 @@
             </div>
             <p class="copyright">
                 © 2026 Your Bridge Home · Todos los derechos reservados.
-                <!-- CANDADO SECRETO: Al hacer clic aquí, se abre el login -->
-                <a class="admin-link" onclick="abrirLogin()" title="Acceso Administrador"><i class="fa-solid fa-lock"></i></a>
             </p>
         </div>
     </footer>
@@ -512,15 +504,19 @@
     <!-- ================= SCRIPTS ================= -->
     <script>
         // --- CONFIGURACIÓN DE SUPABASE ---
-        // ⚠️ REEMPLAZA ESTO CON TU URL REAL
+        // ⚠️ REEMPLAZA ESTO CON TU URL REAL DE SUPABASE
         const supabaseUrl = 'AQUI_VA_TU_URL_DE_SUPABASE'; 
         const supabaseKey = 'sb_publishable_Y5Cv-rNlmWgSm8gr4F5nAg_0SKI6OfV'; 
         
-        // ⚠️ AQUÍ PONES TU CLAVE SECRETA
+        // ⚠️ AQUÍ PONES TU CLAVE SECRETA PARA EL PANEL
         const CLAVE_SECRETA = "MI_CLAVE_SECRETA"; 
 
         let supabaseClient = null;
-        try { supabaseClient = supabase.createClient(supabaseUrl, supabaseKey); } catch(e) { console.error(e); }
+        try { 
+            supabaseClient = supabase.createClient(supabaseUrl, supabaseKey); 
+        } catch(e) { 
+            console.error("Error Supabase:", e); 
+        }
 
         // --- 1. LÓGICA DEL FORMULARIO PÚBLICO ---
         const modalSolicitud = document.getElementById('modal-solicitud');
@@ -554,9 +550,9 @@
             }]);
 
             if (error) {
-                alert('Error: ' + error.message);
+                alert('Error al enviar: ' + error.message);
             } else {
-                alert('¡Solicitud enviada con éxito!');
+                alert('¡Solicitud enviada con éxito! Nos contactaremos pronto.');
                 cerrarModal();
             }
             btnEnviar.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Solicitud';
@@ -601,7 +597,7 @@
             tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Cargando datos...</td></tr>';
 
             if (!supabaseClient) {
-                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:red;">Error: Revisa la URL de Supabase.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:red;">Error: Revisa la URL de Supabase en el código.</td></tr>';
                 return;
             }
 
