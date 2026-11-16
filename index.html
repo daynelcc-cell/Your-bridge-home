@@ -361,7 +361,13 @@ footer{border-top:1px solid var(--line);background:#030812;padding:45px 0 25px;t
       <div class="form-group"><label>Nombre completo</label><input id="nombre" type="text" placeholder="Ej: Juan Pérez" required></div>
       <div class="form-group"><label>Teléfono / WhatsApp</label><input id="telefono" type="tel" placeholder="+7 900 123 4567" required></div>
       <div class="form-group"><label>Servicio</label><select id="servicio" required onchange="cargarDestinosFormulario()"><option value="">Selecciona un servicio...</option><option value="Remesa">Envío de Remesa</option><option value="Recarga">Recarga Móvil / Nauta</option><option value="Boleto de Avión">Boleto de Avión</option><option value="Boleto de Bus/Tren">Boleto de Bus o Tren</option></select></div>
-      <div class="form-group" id="grupo-destino" style="display:none;"><label>País de Destino</label><select id="destino-pais"></select></div>
+      
+      <!-- DESPLEGABLE DE DESTINOS -->
+      <div class="form-group" id="grupo-destino" style="display:none;">
+        <label>País de Destino (y Precio Base)</label>
+        <select id="destino-pais"></select>
+      </div>
+      
       <div class="form-group"><label>Detalles</label><textarea id="detalles" rows="3" placeholder="Monto, número a recargar, ruta, fecha, etc." required></textarea></div>
       <button class="btn btn-primary full" id="btn-enviar"><i class="fa-solid fa-paper-plane"></i> Enviar solicitud</button>
     </form>
@@ -397,18 +403,21 @@ footer{border-top:1px solid var(--line);background:#030812;padding:45px 0 25px;t
   </div>
 </div>
 
-<!-- ADMIN DESTINOS -->
+<!-- ADMIN DESTINOS (CON PRECIO) -->
 <div id="modal-destinos" class="overlay">
   <div class="modal">
     <button class="close" onclick="cerrarDestinos()">&times;</button>
     <h3><i class="fa-solid fa-globe"></i> Gestionar Destinos</h3>
-    <form id="form-destino" style="margin-bottom:15px; display:flex; gap:10px;">
-      <input type="text" id="nuevo-destino" placeholder="Nombre del país" required style="flex:1; padding:10px; border-radius:8px; border:1px solid #334; background:#071522; color:white;">
-      <select id="nuevo-destino-tipo" style="padding:10px; border-radius:8px; border:1px solid #334; background:#071522; color:white;">
-        <option value="Remesa">Remesa</option>
-        <option value="Boleto">Boleto</option>
-      </select>
-      <button type="submit" class="btn btn-primary" style="padding:10px;"><i class="fa-solid fa-plus"></i></button>
+    <form id="form-destino" style="margin-bottom:15px; display:flex; flex-direction:column; gap:10px; background:rgba(0,0,0,0.2); padding:15px; border-radius:10px;">
+      <input type="text" id="nuevo-destino" placeholder="Nombre del país" required style="padding:10px; border-radius:8px; border:1px solid #334; background:#071522; color:white;">
+      <div style="display:flex; gap:10px;">
+        <select id="nuevo-destino-tipo" style="flex:1; padding:10px; border-radius:8px; border:1px solid #334; background:#071522; color:white;">
+          <option value="Remesa">Remesa</option>
+          <option value="Boleto">Boleto</option>
+        </select>
+        <input type="number" id="nuevo-destino-precio" placeholder="Precio (0 si es gratis)" step="0.01" value="0" style="flex:1; padding:10px; border-radius:8px; border:1px solid #334; background:#071522; color:white;">
+      </div>
+      <button type="submit" class="btn btn-primary full" style="padding:10px;"><i class="fa-solid fa-plus"></i> Añadir Destino</button>
     </form>
     <div id="lista-destinos" style="max-height:300px; overflow-y:auto; display:flex; flex-direction:column; gap:8px;"></div>
   </div>
@@ -541,6 +550,7 @@ async function cargarDestinosFormulario() {
   const grupo = $('grupo-destino');
   const select = $('destino-pais');
   
+  // Si el servicio requiere destino (Remesa, Boleto)
   if(servicio === 'Remesa' || servicio === 'Boleto de Avión' || servicio === 'Boleto de Bus/Tren') {
     grupo.style.display = 'block';
     select.innerHTML = '<option value="">Cargando países...</option>';
@@ -549,7 +559,12 @@ async function cargarDestinosFormulario() {
     const { data } = await supabaseClient.from('destinos').select('*').eq('tipo_servicio', tipo).eq('activo', true);
     
     select.innerHTML = '<option value="">Selecciona país...</option>';
-    if(data) data.forEach(d => select.innerHTML += `<option value="${d.nombre_pais}">${d.nombre_pais}</option>`);
+    if(data) data.forEach(d => {
+      // Mostramos el país y su precio base si tiene
+      let textoOpcion = d.nombre_pais;
+      if (d.precio > 0) textoOpcion += ` (Costo base: $${d.precio})`;
+      select.innerHTML += `<option value="${d.nombre_pais}">${textoOpcion}</option>`;
+    });
   } else {
     grupo.style.display = 'none';
   }
@@ -676,11 +691,11 @@ function cerrarDestinos(){modalDestinos.style.display='none'}
 
 async function cargarListaDestinosAdmin() {
   const lista = $('lista-destinos');
-  const { data } = await supabaseClient.from('destinos').select('*');
+  const { data } = await supabaseClient.from('destinos').select('*').order('nombre_pais');
   lista.innerHTML = '';
   if(data) data.forEach(d => {
     lista.innerHTML += `<div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.05); padding:8px; border-radius:8px;">
-      <span>${d.nombre_pais} <small style="color:var(--gold)">(${d.tipo_servicio})</small></span>
+      <span>${d.nombre_pais} <small style="color:var(--gold)">(${d.tipo_servicio})</small> ${d.precio > 0 ? `<span style="color:var(--cyan)">$${d.precio}</span>` : ''}</span>
       <button onclick="borrarDestino(${d.id})" style="background:none; border:none; color:var(--red); cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
     </div>`;
   });
@@ -688,8 +703,13 @@ async function cargarListaDestinosAdmin() {
 
 $('form-destino').addEventListener('submit', async e => {
   e.preventDefault();
-  await supabaseClient.from('destinos').insert([{ nombre_pais: $('nuevo-destino').value, tipo_servicio: $('nuevo-destino-tipo').value }]);
+  await supabaseClient.from('destinos').insert([{ 
+    nombre_pais: $('nuevo-destino').value, 
+    tipo_servicio: $('nuevo-destino-tipo').value,
+    precio: parseFloat($('nuevo-destino-precio').value) || 0
+  }]);
   $('nuevo-destino').value = '';
+  $('nuevo-destino-precio').value = '0';
   cargarListaDestinosAdmin();
 });
 
