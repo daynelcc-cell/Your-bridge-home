@@ -502,14 +502,11 @@
 
     <!-- ================= SCRIPTS ================= -->
     <script>
-        // --- CONFIGURACIÓN DE SUPABASE ---
-        // ⚠️ REEMPLAZA ESTO CON TU URL REAL DE SUPABASE (Ejemplo: https://tuproyecto.supabase.co)
-        const supabaseUrl = 'https://TU_PROYECTO.supabase.co'; 
+        // --- CONFIGURACIÓN DE SUPABASE (TUS NUEVOS DATOS) ---
+        const supabaseUrl = 'https://lwgeillycitljubenzhv.supabase.co'; 
+        const supabaseKey = 'sb_publishable_LaA2IPL1J_IWAH0CVMUcBQ_j-BZa2pe'; 
         
-        // Llave pública
-        const supabaseKey = 'sb_publishable_Y5Cv-rNlmWgSm8gr4F5nAg_0SKI6OfV'; 
-        
-        // ⚠️ AQUÍ PONES TU CLAVE SECRETA PARA EL PANEL
+        // Clave para entrar al panel de admin
         const CLAVE_SECRETA = "MI_CLAVE_SECRETA"; 
 
         let supabaseClient = null;
@@ -597,8 +594,8 @@
             const tbody = document.getElementById('tabla-solicitudes');
             tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Cargando datos...</td></tr>';
 
-            if (!supabaseClient || supabaseUrl === 'https://TU_PROYECTO.supabase.co') {
-                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:red;">Error: Debes configurar la URL real de Supabase en el código.</td></tr>';
+            if (!supabaseClient) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:red;">Error de conexión.</td></tr>';
                 return;
             }
 
