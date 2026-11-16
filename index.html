@@ -15,126 +15,75 @@
 
     <style>
         :root{
-            --bg:#06111f;
-            --bg2:#0b1c31;
-            --card:#10243c;
-            --card2:#132c48;
-            --gold:#f5c542;
-            --gold2:#ffdf70;
-            --white:#ffffff;
-            --muted:#aebdce;
-            --green:#25d366;
-            --red:#ef4444;
-            --blue:#2f80ed;
+            --bg:#06111f; --card:#10243c; --card2:#132c48;
+            --gold:#f5c542; --gold2:#ffdf70; --white:#ffffff;
+            --muted:#aebdce; --green:#25d366; --red:#ef4444;
         }
         *{ margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat',sans-serif; }
         html{ scroll-behavior:smooth; }
         body{
             background: radial-gradient(circle at 20% 0%,rgba(47,128,237,.15),transparent 35%),
-                        radial-gradient(circle at 90% 20%,rgba(245,197,66,.10),transparent 30%),
-                        var(--bg);
-            color:var(--white);
-            line-height:1.6;
+                        radial-gradient(circle at 90% 20%,rgba(245,197,66,.10),transparent 30%), var(--bg);
+            color:var(--white); line-height:1.6;
         }
 
-        /* ================= HEADER ================= */
-        header{
-            position:sticky; top:0; z-index:1000; background:rgba(6,17,31,.92);
-            backdrop-filter:blur(18px); border-bottom:1px solid rgba(245,197,66,.25);
-        }
-        .navbar{
-            max-width:1250px; margin:auto; padding:15px 25px;
-            display:flex; justify-content:space-between; align-items:center; gap:20px;
-        }
+        /* HEADER */
+        header{ position:sticky; top:0; z-index:1000; background:rgba(6,17,31,.92); backdrop-filter:blur(18px); border-bottom:1px solid rgba(245,197,66,.25); }
+        .navbar{ max-width:1250px; margin:auto; padding:15px 25px; display:flex; justify-content:space-between; align-items:center; gap:20px; }
         .logo{ display:flex; align-items:center; gap:12px; text-decoration:none; color:white; }
-        .logo-icon{
-            width:48px; height:48px; border-radius:15px; display:flex; align-items:center; justify-content:center;
-            background:linear-gradient(135deg,var(--gold),#d99c00); color:#071321; font-size:23px;
-            box-shadow:0 8px 25px rgba(245,197,66,.22);
-        }
+        .logo-icon{ width:48px; height:48px; border-radius:15px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,var(--gold),#d99c00); color:#071321; font-size:23px; box-shadow:0 8px 25px rgba(245,197,66,.22); }
         .logo h1{ font-size:18px; font-weight:900; letter-spacing:.5px; }
         .logo h1 span{ color:var(--gold); }
         .logo small{ display:block; color:var(--muted); font-size:9px; margin-top:-2px; }
         .nav{ display:flex; gap:8px; align-items:center; }
-        .nav a{
-            color:#dce6f1; text-decoration:none; font-size:12px; font-weight:600;
-            padding:9px 12px; border-radius:10px; transition:.3s; cursor:pointer;
-        }
+        .nav a{ color:#dce6f1; text-decoration:none; font-size:12px; font-weight:600; padding:9px 12px; border-radius:10px; transition:.3s; cursor:pointer; }
         .nav a:hover{ background:rgba(245,197,66,.12); color:var(--gold); }
         .nav .contact{ background:var(--gold); color:#071321; font-weight:800; }
-        
-        .btn-admin-nav {
-            color: var(--gold) !important; 
-            border: 1px solid var(--gold);
-        }
-        .btn-admin-nav:hover {
-            background: var(--gold) !important;
-            color: #071321 !important;
-        }
+        .btn-admin-nav { color: var(--gold) !important; border: 1px solid var(--gold); }
+        .btn-admin-nav:hover { background: var(--gold) !important; color: #071321 !important; }
 
-        /* ================= HERO ================= */
-        .hero{
-            max-width:1250px; margin:auto; padding:80px 25px 60px;
-            display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center;
-        }
-        .badge{
-            display:inline-flex; align-items:center; gap:9px; padding:8px 14px; border-radius:50px;
-            background:rgba(245,197,66,.10); border:1px solid rgba(245,197,66,.30);
-            color:var(--gold); font-size:12px; font-weight:700; margin-bottom:20px;
-        }
+        /* HERO */
+        .hero{ max-width:1250px; margin:auto; padding:80px 25px 60px; display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center; }
+        .badge{ display:inline-flex; align-items:center; gap:9px; padding:8px 14px; border-radius:50px; background:rgba(245,197,66,.10); border:1px solid rgba(245,197,66,.30); color:var(--gold); font-size:12px; font-weight:700; margin-bottom:20px; }
         .badge i{ animation:pulse 1.8s infinite; }
         @keyframes pulse{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.25)} }
         .hero h2{ font-size:clamp(38px,5vw,68px); line-height:1.03; font-weight:900; letter-spacing:-2px; margin-bottom:20px; }
         .hero h2 span{ color:var(--gold); }
         .hero-description{ color:var(--muted); font-size:16px; max-width:650px; margin-bottom:28px; }
         .hero-buttons{ display:flex; flex-wrap:wrap; gap:12px; }
-        .btn{
-            text-decoration:none; padding:14px 21px; border-radius:13px; font-size:13px; font-weight:800;
-            display:inline-flex; align-items:center; gap:9px; transition:.3s; cursor:pointer; border:none;
-        }
+        .btn{ text-decoration:none; padding:14px 21px; border-radius:13px; font-size:13px; font-weight:800; display:inline-flex; align-items:center; gap:9px; transition:.3s; cursor:pointer; border:none; }
         .btn-primary{ background:linear-gradient(135deg,var(--gold),#d99c00); color:#071321; box-shadow:0 10px 30px rgba(245,197,66,.20); }
         .btn-primary:hover{ transform:translateY(-3px); }
         .btn-secondary{ border:1px solid rgba(255,255,255,.15); color:white; background:rgba(255,255,255,.04); }
         .btn-secondary:hover{ border-color:var(--gold); color:var(--gold); }
 
-        /* ================= HERO CARD ================= */
-        .hero-card{
-            position:relative; min-height:390px; border-radius:30px; overflow:hidden; padding:28px;
-            background: linear-gradient(145deg,rgba(245,197,66,.16),rgba(47,128,237,.08)), var(--card);
-            border:1px solid rgba(245,197,66,.25); box-shadow:0 25px 70px rgba(0,0,0,.35);
-        }
-        .globe{
-            width:105px; height:105px; margin:15px auto 20px; border-radius:50%;
-            display:flex; align-items:center; justify-content:center; font-size:48px;
-            color:var(--gold); border:1px solid rgba(245,197,66,.35); background:rgba(245,197,66,.08);
-        }
+        /* TASA DE CAMBIO */
+        .rates-container{ max-width:1250px; margin:auto; padding:0 25px; display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; margin-bottom: 40px; }
+        .rate-card { background: var(--card); border: 1px solid rgba(245,197,66,.3); border-radius: 20px; padding: 25px; text-align: center; position: relative; overflow: hidden; }
+        .rate-card h4 { color: var(--muted); font-size: 14px; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .rate-card .value { font-size: 32px; font-weight: 900; color: var(--gold); }
+        .rate-card .value span { font-size: 14px; color: var(--white); font-weight: 600; }
+        .rate-card::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, var(--gold), transparent); }
+
+        /* HERO CARD */
+        .hero-card{ position:relative; min-height:390px; border-radius:30px; overflow:hidden; padding:28px; background: linear-gradient(145deg,rgba(245,197,66,.16),rgba(47,128,237,.08)), var(--card); border:1px solid rgba(245,197,66,.25); box-shadow:0 25px 70px rgba(0,0,0,.35); }
+        .globe{ width:105px; height:105px; margin:15px auto 20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:48px; color:var(--gold); border:1px solid rgba(245,197,66,.35); background:rgba(245,197,66,.08); }
         .hero-card h3{ text-align:center; font-size:22px; margin-bottom:7px; }
         .hero-card p{ text-align:center; color:var(--muted); font-size:13px; }
-        .rate-box{
-            margin-top:25px; padding:18px; border-radius:17px; background:rgba(0,0,0,.22);
-            border:1px solid rgba(255,255,255,.08); display:flex; justify-content:space-between; align-items:center;
-        }
+        .rate-box{ margin-top:25px; padding:18px; border-radius:17px; background:rgba(0,0,0,.22); border:1px solid rgba(255,255,255,.08); display:flex; justify-content:space-between; align-items:center; }
         .rate-box span{ color:var(--muted); font-size:11px; }
         .rate-box strong{ color:var(--gold); font-size:17px; }
 
-        /* ================= SECTION ================= */
+        /* SECTIONS Y OFERTA */
         .section{ max-width:1250px; margin:auto; padding:70px 25px; }
         .section-title{ text-align:center; margin-bottom:40px; }
         .section-title .mini{ color:var(--gold); text-transform:uppercase; font-size:11px; font-weight:800; letter-spacing:2px; }
         .section-title h2{ font-size:34px; font-weight:900; margin-top:6px; }
         .section-title p{ max-width:650px; margin:10px auto 0; color:var(--muted); font-size:13px; }
 
-        /* ================= OFERTA ================= */
         .offer{ max-width:1250px; margin:10px auto 0; padding:0 25px; }
-        .offer-card{
-            position:relative; overflow:hidden; border-radius:25px; padding:30px;
-            background: linear-gradient(110deg,#172d48,#0d1d31); border:1px solid rgba(245,197,66,.30);
-            box-shadow:0 20px 50px rgba(0,0,0,.28);
-        }
-        .offer-card:after{
-            content:"OFERTA"; position:absolute; top:20px; right:-38px; transform:rotate(40deg);
-            background:var(--red); color:white; padding:6px 45px; font-size:10px; font-weight:900;
-        }
+        .offer-card{ position:relative; overflow:hidden; border-radius:25px; padding:30px; background: linear-gradient(110deg,#172d48,#0d1d31); border:1px solid rgba(245,197,66,.30); box-shadow:0 20px 50px rgba(0,0,0,.28); }
+        .offer-card:after{ content:"OFERTA"; position:absolute; top:20px; right:-38px; transform:rotate(40deg); background:var(--red); color:white; padding:6px 45px; font-size:10px; font-weight:900; }
         .offer-top{ color:var(--gold); font-size:12px; font-weight:800; margin-bottom:14px; }
         .offer-route{ display:flex; align-items:center; justify-content:center; gap:18px; font-size:25px; font-weight:900; margin-bottom:12px; }
         .offer-route i{ color:var(--gold); }
@@ -143,37 +92,24 @@
         .offer-price span{ display:block; color:var(--muted); font-size:10px; }
         .offer-price strong{ color:var(--gold); font-size:38px; font-weight:900; }
 
-        /* ================= SERVICES ================= */
+        /* SERVICIOS E INFO */
         .services-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
-        .service{
-            position:relative; overflow:hidden; text-decoration:none; color:white; padding:27px 22px;
-            min-height:205px; border-radius:20px; background:linear-gradient(145deg,var(--card2),var(--card));
-            border:1px solid rgba(255,255,255,.07); transition:.35s; cursor:pointer;
-        }
+        .service{ position:relative; overflow:hidden; text-decoration:none; color:white; padding:27px 22px; min-height:205px; border-radius:20px; background:linear-gradient(145deg,var(--card2),var(--card)); border:1px solid rgba(255,255,255,.07); transition:.35s; cursor:pointer; }
         .service:hover{ transform:translateY(-7px); border-color:rgba(245,197,66,.45); box-shadow:0 20px 40px rgba(0,0,0,.25); }
-        .service-icon{
-            width:55px; height:55px; border-radius:16px; display:flex; justify-content:center; align-items:center;
-            color:var(--gold); background:rgba(245,197,66,.10); font-size:24px; margin-bottom:20px;
-        }
+        .service-icon{ width:55px; height:55px; border-radius:16px; display:flex; justify-content:center; align-items:center; color:var(--gold); background:rgba(245,197,66,.10); font-size:24px; margin-bottom:20px; }
         .service h3{ font-size:16px; margin-bottom:8px; }
         .service p{ color:var(--muted); font-size:11px; }
 
-        /* ================= INFORMATION ================= */
         .info-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
         .info-card{ padding:25px; border-radius:20px; background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08); }
         .info-card i{ font-size:25px; color:var(--gold); margin-bottom:15px; }
         .info-card h3{ font-size:15px; margin-bottom:7px; }
         .info-card p{ color:var(--muted); font-size:11px; }
 
-        /* ================= MODALES ================= */
-        .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 20px;
-        }
-        .modal-content {
-            background: var(--card); padding: 30px; border-radius: 20px; width: 100%; max-width: 500px;
-            border: 1px solid var(--gold); position: relative; animation: slideDown 0.3s ease;
-        }
+        /* MODALES Y FORMULARIOS */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 20px; overflow-y: auto; }
+        .modal-content { background: var(--card); padding: 30px; border-radius: 20px; width: 100%; max-width: 500px; border: 1px solid var(--gold); position: relative; margin: auto; }
+        .modal-content.large { max-width: 800px; }
         @keyframes slideDown { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .close-modal { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; color: var(--muted); transition: 0.3s; }
         .close-modal:hover { color: var(--red); }
@@ -181,14 +117,11 @@
         
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 5px; font-weight: 700; }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334;
-            background: #0d1d31; color: white; font-family: 'Montserrat', sans-serif; font-size: 13px;
-        }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334; background: #0d1d31; color: white; font-family: 'Montserrat', sans-serif; font-size: 13px; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); }
         .form-group textarea { resize: none; }
 
-        /* ================= ADMIN TABLE ================= */
+        /* ADMIN TABLE Y CONFIG */
         .table-container { background: var(--card); border-radius: 15px; overflow-x: auto; margin-top: 20px; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
         th, td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
@@ -197,234 +130,182 @@
         .badge-estado { padding: 5px 10px; border-radius: 20px; font-size: 10px; font-weight: bold; }
         .estado-pendiente { background: rgba(245,197,66,0.2); color: var(--gold); }
         .estado-completado { background: rgba(37,211,102,0.2); color: var(--green); }
-        .acciones button {
-            background: transparent; border: 1px solid var(--muted); color: var(--white);
-            padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-right: 5px; transition: 0.3s;
-        }
+        .acciones button { background: transparent; border: 1px solid var(--muted); color: var(--white); padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-right: 5px; transition: 0.3s; }
         .acciones button:hover { background: var(--muted); color: var(--bg); }
         .acciones .btn-delete { border-color: var(--red); color: var(--red); }
         .acciones .btn-delete:hover { background: var(--red); color: white; }
 
-        /* ================= WHATSAPP ================= */
-        .whatsapp{
-            position:fixed; right:20px; bottom:20px; z-index:2000; width:58px; height:58px; border-radius:50%;
-            display:flex; justify-content:center; align-items:center; background:var(--green); color:white;
-            text-decoration:none; font-size:28px; box-shadow:0 8px 30px rgba(37,211,102,.35); transition:.3s;
-        }
-        .whatsapp:hover{ transform:scale(1.08); }
+        /* CONFIGURACIÓN PANEL */
+        .config-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 30px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); }
+        .config-grid .form-group { margin-bottom: 0; }
+        .config-grid h4 { grid-column: span 2; color: var(--gold); margin-bottom: 10px; border-bottom: 1px solid rgba(245,197,66,0.2); padding-bottom: 10px; }
 
-        /* ================= FOOTER ================= */
+        /* UTILS */
+        .whatsapp{ position:fixed; right:20px; bottom:20px; z-index:2000; width:58px; height:58px; border-radius:50%; display:flex; justify-content:center; align-items:center; background:var(--green); color:white; text-decoration:none; font-size:28px; box-shadow:0 8px 30px rgba(37,211,102,.35); transition:.3s; }
+        .whatsapp:hover{ transform:scale(1.08); }
         footer{ margin-top:50px; background:#030a13; border-top:1px solid rgba(245,197,66,.20); padding:45px 25px 25px; }
         .footer-inner{ max-width:1000px; margin:auto; text-align:center; }
         .footer-logo{ font-size:20px; font-weight:900; }
         .footer-logo span{ color:var(--gold); }
         .footer-description{ color:var(--muted); font-size:11px; margin:10px auto 20px; }
-        .admin{
-            display:inline-flex; align-items:center; gap:10px; padding:9px 17px; border-radius:50px;
-            background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08);
-        }
+        .admin{ display:inline-flex; align-items:center; gap:10px; padding:9px 17px; border-radius:50px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); }
         .admin i{ color:var(--gold); }
         .admin strong{ font-size:11px; }
         .admin small{ display:block; color:#7e8b9b; font-size:9px; }
         .copyright{ color:#5d6b7a; font-size:9px; margin-top:25px; }
 
-        /* ================= MOBILE ================= */
         @media(max-width:900px){
             .navbar{ padding:12px 15px; }
-            .hero{ grid-template-columns:1fr; padding:55px 18px 35px; gap:35px; }
-            .hero h2{ font-size:43px; letter-spacing:-1.5px; }
-            .services-grid{ grid-template-columns:repeat(2,1fr); }
-            .info-grid{ grid-template-columns:1fr; }
-            .section{ padding:55px 18px; }
-            .offer{ padding:0 18px; }
-        }
-        @media(max-width:520px){
             .nav a:not(.btn-admin-nav):not(.contact) { display:none; }
-            .logo h1{ font-size:15px; }
-            .logo-icon{ width:42px; height:42px; }
+            .hero, .rates-container, .services-grid, .info-grid, .config-grid { grid-template-columns:1fr; }
+            .section, .offer, .rates-container { padding-left: 18px; padding-right: 18px; }
+            .hero { padding: 40px 18px; gap: 30px; }
             .hero h2{ font-size:36px; }
             .hero-buttons{ flex-direction:column; }
             .btn{ justify-content:center; width:100%; }
-            .services-grid{ grid-template-columns:1fr; }
-            .offer-route{ font-size:19px; gap:10px; }
-            .offer-price strong{ font-size:31px; }
+            .modal-content.large { padding: 20px; }
+            .config-grid h4 { grid-column: span 1; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ================= HEADER ================= -->
     <header>
         <nav class="navbar">
             <a href="#inicio" class="logo">
-                <div class="logo-icon">
-                    <i class="fa-solid fa-house-chimney"></i>
-                </div>
-                <div>
-                    <h1>YOUR <span>BRIDGE HOME</span></h1>
-                    <small>Tu puente hacia nuevas oportunidades</small>
-                </div>
+                <div class="logo-icon"><i class="fa-solid fa-house-chimney"></i></div>
+                <div><h1>YOUR <span>BRIDGE HOME</span></h1><small>Tu puente hacia nuevas oportunidades</small></div>
             </a>
             <div class="nav">
                 <a href="#inicio">Inicio</a>
                 <a href="#servicios">Servicios</a>
-                <a href="#ofertas">Ofertas</a>
-                <!-- BOTÓN DE ADMINISTRADOR VISIBLE EN EL MENÚ -->
                 <a onclick="abrirLogin()" class="btn-admin-nav"><i class="fa-solid fa-lock"></i> Admin</a>
-                
-                <a class="contact" href="https://wa.me/79046319565" target="_blank">
-                    <i class="fa-brands fa-whatsapp"></i> Contactar
-                </a>
+                <a class="contact" href="https://wa.me/79046319565" target="_blank"><i class="fa-brands fa-whatsapp"></i> Contactar</a>
             </div>
         </nav>
     </header>
 
-    <!-- ================= CONTENIDO PRINCIPAL (WEB PÚBLICA) ================= -->
     <main id="web-publica">
+        <!-- HERO -->
         <section class="hero" id="inicio">
             <div>
-                <div class="badge">
-                    <i class="fa-solid fa-circle-check"></i> Servicio actualizado
-                </div>
+                <div class="badge"><i class="fa-solid fa-circle-check"></i> Servicio actualizado</div>
                 <h2> Tu conexión con <span>el mundo.</span> </h2>
-                <p class="hero-description">
-                    En <strong>Your Bridge Home</strong> facilitamos tus viajes, remesas y recargas internacionales con información clara, servicios prácticos y atención personalizada.
-                </p>
+                <p class="hero-description">En <strong>Your Bridge Home</strong> facilitamos tus viajes, remesas y recargas internacionales con información clara, servicios prácticos y atención personalizada.</p>
                 <div class="hero-buttons">
-                    <a href="#servicios" class="btn btn-primary">
-                        <i class="fa-solid fa-arrow-down"></i> Ver nuestros servicios
-                    </a>
-                    <a href="https://wa.me/79046319565" target="_blank" class="btn btn-secondary">
-                        <i class="fa-brands fa-whatsapp"></i> Hablar por WhatsApp
-                    </a>
+                    <a href="#servicios" class="btn btn-primary"><i class="fa-solid fa-arrow-down"></i> Ver servicios</a>
+                    <a href="https://wa.me/79046319565" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-whatsapp"></i> Hablar por WhatsApp</a>
                 </div>
             </div>
             <div class="hero-card">
-                <div class="globe">
-                    <i class="fa-solid fa-earth-americas"></i>
-                </div>
+                <div class="globe"><i class="fa-solid fa-earth-americas"></i></div>
                 <h3>Información para ti</h3>
                 <p> Consulta nuestras ofertas, servicios y datos de interés directamente desde nuestra página. </p>
                 <div class="rate-box">
-                    <div>
-                        <span>TASA DE CAMBIO</span>
-                        <strong>Mercado informal Cuba</strong>
-                    </div>
-                    <i class="fa-solid fa-chart-line" style="color:var(--gold)"></i>
-                </div>
-                <div class="rate-box">
-                    <div>
-                        <span>ATENCIÓN</span>
-                        <strong>Daynel Caminero</strong>
-                    </div>
+                    <div><span>ATENCIÓN</span><strong>Daynel Caminero</strong></div>
                     <i class="fa-solid fa-user-tie" style="color:var(--gold)"></i>
                 </div>
             </div>
         </section>
 
-        <section class="offer" id="ofertas">
-            <div class="offer-card">
-                <div class="offer-top">
-                    <i class="fa-solid fa-fire"></i> OFERTA DESTACADA
-                </div>
-                <div class="offer-route">
-                    <span>Moscú 🇷🇺</span>
-                    <i class="fa-solid fa-plane"></i>
-                    <span>Cuba 🇨🇺</span>
-                </div>
-                <p class="offer-date">
-                    <i class="fa-regular fa-calendar"></i> 31 de diciembre
-                </p>
-                <div class="offer-price">
-                    <span>PRECIO DEL PASAJE</span>
-                    <strong>119 000 ₽</strong>
-                </div>
+        <!-- TASAS DE CAMBIO -->
+        <div class="rates-container">
+            <div class="rate-card">
+                <h4><i class="fa-solid fa-dollar-sign"></i> Dólar (USD)</h4>
+                <div class="value" id="tasa-usd">Cargando...</div>
+                <p style="color:var(--muted); font-size:10px; margin-top:5px;">Precio en CUP</p>
             </div>
-        </section>
+            <div class="rate-card">
+                <h4><i class="fa-solid fa-euro-sign"></i> Euro (EUR)</h4>
+                <div class="value" id="tasa-eur">Cargando...</div>
+                <p style="color:var(--muted); font-size:10px; margin-top:5px;">Precio en CUP</p>
+            </div>
+            <div class="rate-card">
+                <h4><i class="fa-solid fa-money-bill"></i> MLC</h4>
+                <div class="value" id="tasa-mlc">Cargando...</div>
+                <p style="color:var(--muted); font-size:10px; margin-top:5px;">Precio en CUP</p>
+            </div>
+        </div>
 
+        <!-- SERVICIOS -->
         <section class="section" id="servicios">
             <div class="section-title">
                 <div class="mini">Lo que ofrecemos</div>
                 <h2>Nuestros servicios</h2>
-                <p> Soluciones para tus operaciones, viajes y necesidades internacionales desde un solo lugar. </p>
             </div>
             <div class="services-grid">
                 <a onclick="abrirModal('Remesa')" class="service">
                     <div class="service-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
                     <h3>Remesas</h3>
-                    <p> Envío de dinero a familiares y personas de confianza. </p>
+                    <p> Envío de dinero a distintos países. </p>
                 </a>
                 <a onclick="abrirModal('Recarga')" class="service">
                     <div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
                     <h3>Recargas</h3>
-                    <p> Recargas internacionales para móviles y servicios disponibles. </p>
+                    <p> Recargas móviles internacionales. </p>
                 </a>
                 <a onclick="abrirModal('Boleto de Avión')" class="service">
                     <div class="service-icon"><i class="fa-solid fa-plane-departure"></i></div>
                     <h3>Boletos de avión</h3>
-                    <p> Información y gestión de vuelos internacionales. </p>
+                    <p> Gestión de vuelos internacionales. </p>
                 </a>
                 <a onclick="abrirModal('Boleto de Bus/Tren')" class="service">
                     <div class="service-icon"><i class="fa-solid fa-train-subway"></i></div>
                     <h3>Bus y tren</h3>
-                    <p> Opciones de transporte para tus desplazamientos. </p>
+                    <p> Opciones de transporte nacional. </p>
                 </a>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="section-title">
-                <div class="mini">Más información</div>
-                <h2>Todo en un solo lugar</h2>
-                <p> Seguimos trabajando para ofrecerte una página cada vez más útil, sencilla y actualizada. </p>
-            </div>
-            <div class="info-grid">
-                <div class="info-card">
-                    <i class="fa-solid fa-chart-simple"></i>
-                    <h3>Tasa de cambio</h3>
-                    <p> Consulta información relacionada con el mercado informal de divisas en Cuba. </p>
-                </div>
-                <div class="info-card">
-                    <i class="fa-solid fa-plane-circle-check"></i>
-                    <h3>Viajes internacionales</h3>
-                    <p> Encuentra información sobre vuelos y destinos internacionales. </p>
-                </div>
-                <div class="info-card">
-                    <i class="fa-solid fa-headset"></i>
-                    <h3>Atención personalizada</h3>
-                    <p> Comunícate directamente para consultar disponibilidad, precios y servicios. </p>
-                </div>
             </div>
         </section>
     </main>
 
-    <!-- ================= SECCIÓN OCULTA: PANEL DE ADMINISTRACIÓN ================= -->
+    <!-- PANEL ADMIN -->
     <main id="web-admin" style="display:none; padding: 40px 20px; max-width:1250px; margin:auto; min-height: 80vh;">
-        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #334; padding-bottom:20px; margin-bottom:30px;">
-            <h2 style="color:var(--gold);"><i class="fa-solid fa-chart-line"></i> Panel de Solicitudes</h2>
-            <button onclick="cerrarAdmin()" class="btn" style="background:var(--red); color:white;"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #334; padding-bottom:20px; margin-bottom:30px; flex-wrap: wrap; gap: 15px;">
+            <h2 style="color:var(--gold);"><i class="fa-solid fa-chart-line"></i> Panel de Administración</h2>
+            <div style="display:flex; gap:10px;">
+                <button onclick="abrirConfig()" class="btn btn-secondary" style="border-color:var(--gold); color:var(--gold);"><i class="fa-solid fa-gear"></i> Configurar Tasas y Precios</button>
+                <button onclick="cerrarAdmin()" class="btn" style="background:var(--red); color:white;"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+            </div>
         </div>
         <div class="table-container">
             <table>
                 <thead>
                     <tr>
-                        <th>Fecha</th>
-                        <th>Cliente</th>
-                        <th>Teléfono</th>
-                        <th>Servicio</th>
-                        <th>Detalles</th>
-                        <th>Estado</th>
-                        <th>Acciones</th>
+                        <th>Fecha</th><th>Cliente</th><th>Teléfono</th><th>Servicio</th><th>Detalles</th><th>Estado</th><th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="tabla-solicitudes">
-                    <!-- Se llena con JavaScript -->
-                </tbody>
+                <tbody id="tabla-solicitudes"></tbody>
             </table>
         </div>
     </main>
 
-    <!-- ================= MODAL: FORMULARIO CLIENTES ================= -->
+    <!-- MODAL CONFIGURACIÓN ADMIN -->
+    <div id="modal-config" class="modal-overlay">
+        <div class="modal-content large">
+            <span class="close-modal" onclick="cerrarConfig()">&times;</span>
+            <h3><i class="fa-solid fa-sliders"></i> Configuración Global</h3>
+            <form id="form-config">
+                <div class="config-grid">
+                    <h4><i class="fa-solid fa-money-bill-trend-up"></i> Tasas de Cambio (CUP)</h4>
+                    <div class="form-group">
+                        <label>Tasa USD (Dólar)</label>
+                        <input type="number" id="cfg-usd" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tasa EUR (Euro)</label>
+                        <input type="number" id="cfg-eur" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tasa MLC</label>
+                        <input type="number" id="cfg-mlc" step="0.01" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;"><i class="fa-solid fa-floppy-disk"></i> Guardar Cambios</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: FORMULARIO CLIENTES -->
     <div id="modal-solicitud" class="modal-overlay">
         <div class="modal-content">
             <span class="close-modal" onclick="cerrarModal()">&times;</span>
@@ -450,7 +331,7 @@
                 </div>
                 <div class="form-group">
                     <label>Detalles de la solicitud</label>
-                    <textarea id="detalles" placeholder="Ej: Monto a enviar, destino, fecha de viaje, número a recargar, etc." required rows="3"></textarea>
+                    <textarea id="detalles" placeholder="Ej: Monto, país de destino, número a recargar, etc." required rows="3"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" id="btn-enviar" style="width:100%; justify-content:center;">
                     <i class="fa-solid fa-paper-plane"></i> Enviar Solicitud
@@ -459,7 +340,7 @@
         </div>
     </div>
 
-    <!-- ================= MODAL: LOGIN ADMIN ================= -->
+    <!-- MODAL: LOGIN ADMIN -->
     <div id="modal-login" class="modal-overlay">
         <div class="modal-content" style="max-width: 400px;">
             <span class="close-modal" onclick="cerrarLogin()">&times;</span>
@@ -472,51 +353,43 @@
         </div>
     </div>
 
-    <!-- ================= WHATSAPP FLOTANTE ================= -->
-    <a class="whatsapp" href="https://wa.me/79046319565" target="_blank" aria-label="Contactar por WhatsApp">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
+    <!-- WHATSAPP FLOTANTE -->
+    <a class="whatsapp" href="https://wa.me/79046319565" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
 
-    <!-- ================= FOOTER ================= -->
+    <!-- FOOTER -->
     <footer>
         <div class="footer-inner">
-            <div class="footer-logo">
-                YOUR <span>BRIDGE HOME</span>
-            </div>
-            <p class="footer-description">
-                Tu puente hacia nuevas oportunidades. <br>
-                Viajes · Remesas · Recargas · Servicios internacionales
-            </p>
+            <div class="footer-logo">YOUR <span>BRIDGE HOME</span></div>
+            <p class="footer-description">Tu puente hacia nuevas oportunidades. <br> Viajes · Remesas · Recargas · Servicios internacionales</p>
             <div class="admin">
                 <i class="fa-solid fa-user-tie"></i>
-                <div>
-                    <strong>Daynel Caminero</strong>
-                    <small>Administrador</small>
-                </div>
+                <div><strong>Daynel Caminero</strong><small>Administrador</small></div>
             </div>
-            <p class="copyright">
-                © 2026 Your Bridge Home · Todos los derechos reservados.
-            </p>
+            <p class="copyright">© 2026 Your Bridge Home · Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- ================= SCRIPTS ================= -->
+    <!-- SCRIPTS -->
     <script>
-        // --- CONFIGURACIÓN DE SUPABASE (TUS NUEVOS DATOS) ---
+        // CONFIGURACIÓN DE SUPABASE (TUS DATOS REALES)
         const supabaseUrl = 'https://lwgeillycitljubenzhv.supabase.co'; 
         const supabaseKey = 'sb_publishable_LaA2IPL1J_IWAH0CVMUcBQ_j-BZa2pe'; 
-        
-        // Clave para entrar al panel de admin
         const CLAVE_SECRETA = "MI_CLAVE_SECRETA"; 
 
-        let supabaseClient = null;
-        try { 
-            supabaseClient = supabase.createClient(supabaseUrl, supabaseKey); 
-        } catch(e) { 
-            console.error("Error Supabase:", e); 
-        }
+        const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
-        // --- 1. LÓGICA DEL FORMULARIO PÚBLICO ---
+        // CARGAR TASAS EN LA PÁGINA PÚBLICA
+        async function cargarTasasPublicas() {
+            const { data, error } = await supabaseClient.from('configuracion').select('*').eq('id', 1).single();
+            if (data) {
+                document.getElementById('tasa-usd').innerHTML = `${data.tasa_usd} <span>CUP</span>`;
+                document.getElementById('tasa-eur').innerHTML = `${data.tasa_eur} <span>CUP</span>`;
+                document.getElementById('tasa-mlc').innerHTML = `${data.tasa_mlc} <span>CUP</span>`;
+            }
+        }
+        cargarTasasPublicas(); // Ejecutar al cargar la página
+
+        // --- LÓGICA DEL FORMULARIO PÚBLICO ---
         const modalSolicitud = document.getElementById('modal-solicitud');
         const formSolicitud = document.getElementById('form-solicitud');
         const btnEnviar = document.getElementById('btn-enviar');
@@ -528,10 +401,6 @@
         function cerrarModal() {
             modalSolicitud.style.display = 'none';
             formSolicitud.reset();
-        }
-        window.onclick = function(event) {
-            if (event.target == modalSolicitud) cerrarModal();
-            if (event.target == document.getElementById('modal-login')) cerrarLogin();
         }
 
         formSolicitud.addEventListener('submit', async function(e) {
@@ -550,14 +419,14 @@
             if (error) {
                 alert('Error al enviar: ' + error.message);
             } else {
-                alert('¡Solicitud enviada con éxito! Nos contactaremos pronto.');
+                alert('¡Solicitud enviada con éxito!');
                 cerrarModal();
             }
             btnEnviar.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Solicitud';
             btnEnviar.disabled = false;
         });
 
-        // --- 2. LÓGICA DE LOGIN ADMIN ---
+        // --- LÓGICA DE LOGIN ADMIN ---
         const modalLogin = document.getElementById('modal-login');
         const webPublica = document.getElementById('web-publica');
         const webAdmin = document.getElementById('web-admin');
@@ -570,14 +439,19 @@
         function cerrarLogin() {
             modalLogin.style.display = 'none';
         }
+        window.onclick = function(event) {
+            if (event.target == modalSolicitud) cerrarModal();
+            if (event.target == modalLogin) cerrarLogin();
+            if (event.target == document.getElementById('modal-config')) cerrarConfig();
+        }
 
         function verificarClave() {
             const pass = document.getElementById('admin-password').value;
             if (pass === CLAVE_SECRETA) {
                 cerrarLogin();
-                webPublica.style.display = 'none'; // Ocultar página web
-                webAdmin.style.display = 'block';  // Mostrar panel admin
-                cargarSolicitudesAdmin();          // Cargar tabla
+                webPublica.style.display = 'none';
+                webAdmin.style.display = 'block';
+                cargarSolicitudesAdmin();
             } else {
                 document.getElementById('login-error').style.display = 'block';
             }
@@ -589,20 +463,15 @@
             window.scrollTo(0, 0);
         }
 
-        // --- 3. LÓGICA DE LA TABLA ADMIN ---
+        // --- LÓGICA DE LA TABLA ADMIN ---
         async function cargarSolicitudesAdmin() {
             const tbody = document.getElementById('tabla-solicitudes');
             tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Cargando datos...</td></tr>';
 
-            if (!supabaseClient) {
-                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:red;">Error de conexión.</td></tr>';
-                return;
-            }
-
             const { data, error } = await supabaseClient.from('solicitudes').select('*').order('id', { ascending: false });
 
             if (error) {
-                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:red;">Error: ${error.message}. Verifica los permisos en Supabase.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:red;">Error: ${error.message}</td></tr>`;
                 return;
             }
 
@@ -623,8 +492,8 @@
                     <td>${sol.detalles || 'N/A'}</td>
                     <td><span class="badge-estado ${estadoClass}">${sol.estado || 'Pendiente'}</span></td>
                     <td class="acciones">
-                        ${sol.estado !== 'Completado' ? `<button onclick="marcarCompletado(${sol.id})" title="Completar"><i class="fa-solid fa-check"></i></button>` : ''}
-                        <button class="btn-delete" onclick="borrarSolicitud(${sol.id})" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+                        ${sol.estado !== 'Completado' ? `<button onclick="marcarCompletado(${sol.id})"><i class="fa-solid fa-check"></i></button>` : ''}
+                        <button class="btn-delete" onclick="borrarSolicitud(${sol.id})"><i class="fa-solid fa-trash"></i></button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -642,6 +511,42 @@
             await supabaseClient.from('solicitudes').delete().eq('id', id);
             cargarSolicitudesAdmin();
         }
+
+        // --- CONFIGURACIÓN DE TASAS (ADMIN) ---
+        const modalConfig = document.getElementById('modal-config');
+        const formConfig = document.getElementById('form-config');
+
+        async function abrirConfig() {
+            modalConfig.style.display = 'flex';
+            // Cargar los valores actuales en el formulario
+            const { data } = await supabaseClient.from('configuracion').select('*').eq('id', 1).single();
+            if (data) {
+                document.getElementById('cfg-usd').value = data.tasa_usd;
+                document.getElementById('cfg-eur').value = data.tasa_eur;
+                document.getElementById('cfg-mlc').value = data.tasa_mlc;
+            }
+        }
+        function cerrarConfig() {
+            modalConfig.style.display = 'none';
+        }
+
+        formConfig.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const { error } = await supabaseClient.from('configuracion').update({
+                tasa_usd: document.getElementById('cfg-usd').value,
+                tasa_eur: document.getElementById('cfg-eur').value,
+                tasa_mlc: document.getElementById('cfg-mlc').value,
+                fecha_actualizacion: new Date()
+            }).eq('id', 1);
+
+            if (error) {
+                alert('Error al guardar: ' + error.message);
+            } else {
+                alert('¡Tasas actualizadas con éxito!');
+                cerrarConfig();
+                cargarTasasPublicas(); // Actualizar la vista pública
+            }
+        });
     </script>
 </body>
 </html>
