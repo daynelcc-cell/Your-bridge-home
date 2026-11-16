@@ -3,147 +3,414 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administración | Your Bridge Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Your Bridge Home | Viajes, Remesas y Recargas</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     
     <!-- SDK de Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
-        :root {
-            --bg: #06111f;
-            --card: #10243c;
-            --gold: #f5c542;
-            --white: #ffffff;
-            --muted: #aebdce;
-            --green: #25d366;
-            --red: #ef4444;
+        :root{
+            --bg:#06111f;
+            --bg2:#0b1c31;
+            --card:#10243c;
+            --card2:#132c48;
+            --gold:#f5c542;
+            --gold2:#ffdf70;
+            --white:#ffffff;
+            --muted:#aebdce;
+            --green:#25d366;
+            --red:#ef4444;
+            --blue:#2f80ed;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        body { background: var(--bg); color: var(--white); padding: 20px; }
+        *{ margin:0; padding:0; box-sizing:border-box; font-family:'Montserrat',sans-serif; }
+        html{ scroll-behavior:smooth; }
+        body{
+            background: radial-gradient(circle at 20% 0%,rgba(47,128,237,.15),transparent 35%),
+                        radial-gradient(circle at 90% 20%,rgba(245,197,66,.10),transparent 30%),
+                        var(--bg);
+            color:var(--white);
+            line-height:1.6;
+        }
 
-        /* LOGIN SCREEN */
-        #login-screen {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            flex-direction: column;
+        /* ================= HEADER ================= */
+        header{
+            position:sticky;
+            top:0;
+            z-index:1000;
+            background:rgba(6,17,31,.92);
+            backdrop-filter:blur(18px);
+            border-bottom:1px solid rgba(245,197,66,.25);
         }
-        .login-box {
-            background: var(--card);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid var(--gold);
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        .navbar{
+            max-width:1250px;
+            margin:auto;
+            padding:15px 25px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:20px;
         }
-        .login-box i { font-size: 50px; color: var(--gold); margin-bottom: 20px; }
-        .login-box h2 { margin-bottom: 20px; }
-        .login-box input {
-            width: 100%;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #334;
-            background: #0d1d31;
-            color: white;
-            margin-bottom: 20px;
-            font-size: 16px;
-            text-align: center;
+        .logo{ display:flex; align-items:center; gap:12px; text-decoration:none; color:white; }
+        .logo-icon{
+            width:48px; height:48px; border-radius:15px; display:flex; align-items:center; justify-content:center;
+            background:linear-gradient(135deg,var(--gold),#d99c00); color:#071321; font-size:23px;
+            box-shadow:0 8px 25px rgba(245,197,66,.22);
         }
-        .login-box button {
-            width: 100%;
-            padding: 15px;
-            border-radius: 10px;
-            border: none;
-            background: var(--gold);
-            color: var(--bg);
-            font-weight: 800;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
+        .logo h1{ font-size:18px; font-weight:900; letter-spacing:.5px; }
+        .logo h1 span{ color:var(--gold); }
+        .logo small{ display:block; color:var(--muted); font-size:9px; margin-top:-2px; }
+        .nav{ display:flex; gap:8px; align-items:center; }
+        .nav a{
+            color:#dce6f1; text-decoration:none; font-size:12px; font-weight:600;
+            padding:9px 12px; border-radius:10px; transition:.3s; cursor:pointer;
         }
-        .login-box button:hover { background: #ffdf70; }
+        .nav a:hover{ background:rgba(245,197,66,.12); color:var(--gold); }
+        .nav .contact{ background:var(--gold); color:#071321; font-weight:800; }
 
-        /* DASHBOARD */
-        #dashboard-screen { display: none; max-width: 1200px; margin: auto; }
-        .header-admin {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #334;
-            padding-bottom: 20px;
+        /* ================= HERO ================= */
+        .hero{
+            max-width:1250px; margin:auto; padding:80px 25px 60px;
+            display:grid; grid-template-columns:1.1fr .9fr; gap:60px; align-items:center;
         }
-        .header-admin h1 { color: var(--gold); }
-        .btn-logout {
-            background: var(--red);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
+        .badge{
+            display:inline-flex; align-items:center; gap:9px; padding:8px 14px; border-radius:50px;
+            background:rgba(245,197,66,.10); border:1px solid rgba(245,197,66,.30);
+            color:var(--gold); font-size:12px; font-weight:700; margin-bottom:20px;
         }
+        .badge i{ animation:pulse 1.8s infinite; }
+        @keyframes pulse{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.25)} }
+        .hero h2{ font-size:clamp(38px,5vw,68px); line-height:1.03; font-weight:900; letter-spacing:-2px; margin-bottom:20px; }
+        .hero h2 span{ color:var(--gold); }
+        .hero-description{ color:var(--muted); font-size:16px; max-width:650px; margin-bottom:28px; }
+        .hero-buttons{ display:flex; flex-wrap:wrap; gap:12px; }
+        .btn{
+            text-decoration:none; padding:14px 21px; border-radius:13px; font-size:13px; font-weight:800;
+            display:inline-flex; align-items:center; gap:9px; transition:.3s; cursor:pointer; border:none;
+        }
+        .btn-primary{ background:linear-gradient(135deg,var(--gold),#d99c00); color:#071321; box-shadow:0 10px 30px rgba(245,197,66,.20); }
+        .btn-primary:hover{ transform:translateY(-3px); }
+        .btn-secondary{ border:1px solid rgba(255,255,255,.15); color:white; background:rgba(255,255,255,.04); }
+        .btn-secondary:hover{ border-color:var(--gold); color:var(--gold); }
+
+        /* ================= HERO CARD ================= */
+        .hero-card{
+            position:relative; min-height:390px; border-radius:30px; overflow:hidden; padding:28px;
+            background: linear-gradient(145deg,rgba(245,197,66,.16),rgba(47,128,237,.08)), var(--card);
+            border:1px solid rgba(245,197,66,.25); box-shadow:0 25px 70px rgba(0,0,0,.35);
+        }
+        .hero-card:before{
+            content:""; position:absolute; width:230px; height:230px; border-radius:50%;
+            background:rgba(245,197,66,.12); filter:blur(10px); right:-80px; top:-80px;
+        }
+        .globe{
+            width:105px; height:105px; margin:15px auto 20px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center; font-size:48px;
+            color:var(--gold); border:1px solid rgba(245,197,66,.35); background:rgba(245,197,66,.08);
+        }
+        .hero-card h3{ text-align:center; font-size:22px; margin-bottom:7px; }
+        .hero-card p{ text-align:center; color:var(--muted); font-size:13px; }
+        .rate-box{
+            margin-top:25px; padding:18px; border-radius:17px; background:rgba(0,0,0,.22);
+            border:1px solid rgba(255,255,255,.08); display:flex; justify-content:space-between; align-items:center;
+        }
+        .rate-box span{ color:var(--muted); font-size:11px; }
+        .rate-box strong{ color:var(--gold); font-size:17px; }
+
+        /* ================= SECTION ================= */
+        .section{ max-width:1250px; margin:auto; padding:70px 25px; }
+        .section-title{ text-align:center; margin-bottom:40px; }
+        .section-title .mini{ color:var(--gold); text-transform:uppercase; font-size:11px; font-weight:800; letter-spacing:2px; }
+        .section-title h2{ font-size:34px; font-weight:900; margin-top:6px; }
+        .section-title p{ max-width:650px; margin:10px auto 0; color:var(--muted); font-size:13px; }
+
+        /* ================= OFERTA ================= */
+        .offer{ max-width:1250px; margin:10px auto 0; padding:0 25px; }
+        .offer-card{
+            position:relative; overflow:hidden; border-radius:25px; padding:30px;
+            background: linear-gradient(110deg,#172d48,#0d1d31); border:1px solid rgba(245,197,66,.30);
+            box-shadow:0 20px 50px rgba(0,0,0,.28);
+        }
+        .offer-card:after{
+            content:"OFERTA"; position:absolute; top:20px; right:-38px; transform:rotate(40deg);
+            background:var(--red); color:white; padding:6px 45px; font-size:10px; font-weight:900;
+        }
+        .offer-top{ color:var(--gold); font-size:12px; font-weight:800; margin-bottom:14px; }
+        .offer-route{ display:flex; align-items:center; justify-content:center; gap:18px; font-size:25px; font-weight:900; margin-bottom:12px; }
+        .offer-route i{ color:var(--gold); }
+        .offer-date{ text-align:center; color:var(--muted); font-size:12px; }
+        .offer-price{ text-align:center; margin-top:20px; }
+        .offer-price span{ display:block; color:var(--muted); font-size:10px; }
+        .offer-price strong{ color:var(--gold); font-size:38px; font-weight:900; }
+
+        /* ================= SERVICES ================= */
+        .services-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+        .service{
+            position:relative; overflow:hidden; text-decoration:none; color:white; padding:27px 22px;
+            min-height:205px; border-radius:20px; background:linear-gradient(145deg,var(--card2),var(--card));
+            border:1px solid rgba(255,255,255,.07); transition:.35s; cursor:pointer;
+        }
+        .service:hover{ transform:translateY(-7px); border-color:rgba(245,197,66,.45); box-shadow:0 20px 40px rgba(0,0,0,.25); }
+        .service-icon{
+            width:55px; height:55px; border-radius:16px; display:flex; justify-content:center; align-items:center;
+            color:var(--gold); background:rgba(245,197,66,.10); font-size:24px; margin-bottom:20px;
+        }
+        .service h3{ font-size:16px; margin-bottom:8px; }
+        .service p{ color:var(--muted); font-size:11px; }
+
+        /* ================= INFORMATION ================= */
+        .info-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+        .info-card{ padding:25px; border-radius:20px; background:rgba(255,255,255,.035); border:1px solid rgba(255,255,255,.08); }
+        .info-card i{ font-size:25px; color:var(--gold); margin-bottom:15px; }
+        .info-card h3{ font-size:15px; margin-bottom:7px; }
+        .info-card p{ color:var(--muted); font-size:11px; }
+
+        /* ================= MODALES ================= */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-content {
+            background: var(--card); padding: 30px; border-radius: 20px; width: 100%; max-width: 500px;
+            border: 1px solid var(--gold); position: relative; animation: slideDown 0.3s ease;
+        }
+        .modal-content.admin-modal { max-width: 1000px; }
+        @keyframes slideDown { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        .close-modal { position: absolute; top: 15px; right: 20px; cursor: pointer; font-size: 24px; color: var(--muted); transition: 0.3s; }
+        .close-modal:hover { color: var(--red); }
+        .modal-content h3 { color: var(--gold); margin-bottom: 20px; text-align: center; font-size: 20px; }
         
-        .table-container {
-            background: var(--card);
-            border-radius: 15px;
-            overflow-x: auto;
-            border: 1px solid rgba(255,255,255,0.1);
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 11px; color: var(--muted); margin-bottom: 5px; font-weight: 700; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #334;
+            background: #0d1d31; color: white; font-family: 'Montserrat', sans-serif; font-size: 13px;
         }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold); }
+        .form-group textarea { resize: none; }
+
+        /* ================= ADMIN TABLE ================= */
+        .table-container { background: var(--card); border-radius: 15px; overflow-x: auto; margin-top: 20px; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
-        th, td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; }
+        th, td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
         th { background: rgba(0,0,0,0.2); color: var(--gold); font-weight: 800; }
         tr:hover { background: rgba(255,255,255,0.02); }
-        
-        .badge-estado {
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: bold;
-        }
+        .badge-estado { padding: 5px 10px; border-radius: 20px; font-size: 10px; font-weight: bold; }
         .estado-pendiente { background: rgba(245,197,66,0.2); color: var(--gold); }
         .estado-completado { background: rgba(37,211,102,0.2); color: var(--green); }
-        
         .acciones button {
-            background: transparent;
-            border: 1px solid var(--muted);
-            color: var(--white);
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-right: 5px;
-            transition: 0.3s;
+            background: transparent; border: 1px solid var(--muted); color: var(--white);
+            padding: 5px 10px; border-radius: 5px; cursor: pointer; margin-right: 5px; transition: 0.3s;
         }
         .acciones button:hover { background: var(--muted); color: var(--bg); }
         .acciones .btn-delete { border-color: var(--red); color: var(--red); }
         .acciones .btn-delete:hover { background: var(--red); color: white; }
+
+        /* ================= WHATSAPP ================= */
+        .whatsapp{
+            position:fixed; right:20px; bottom:20px; z-index:2000; width:58px; height:58px; border-radius:50%;
+            display:flex; justify-content:center; align-items:center; background:var(--green); color:white;
+            text-decoration:none; font-size:28px; box-shadow:0 8px 30px rgba(37,211,102,.35); transition:.3s;
+        }
+        .whatsapp:hover{ transform:scale(1.08); }
+
+        /* ================= FOOTER ================= */
+        footer{ margin-top:50px; background:#030a13; border-top:1px solid rgba(245,197,66,.20); padding:45px 25px 25px; }
+        .footer-inner{ max-width:1000px; margin:auto; text-align:center; }
+        .footer-logo{ font-size:20px; font-weight:900; }
+        .footer-logo span{ color:var(--gold); }
+        .footer-description{ color:var(--muted); font-size:11px; margin:10px auto 20px; }
+        .admin{
+            display:inline-flex; align-items:center; gap:10px; padding:9px 17px; border-radius:50px;
+            background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08);
+        }
+        .admin i{ color:var(--gold); }
+        .admin strong{ font-size:11px; }
+        .admin small{ display:block; color:#7e8b9b; font-size:9px; }
+        .copyright{ color:#5d6b7a; font-size:9px; margin-top:25px; }
+        .admin-link { color: #5d6b7a; cursor: pointer; text-decoration: none; margin-left: 10px; transition: 0.3s; }
+        .admin-link:hover { color: var(--gold); }
+
+        /* ================= MOBILE ================= */
+        @media(max-width:900px){
+            .navbar{ padding:12px 15px; }
+            .nav a:not(.contact){ display:none; }
+            .hero{ grid-template-columns:1fr; padding:55px 18px 35px; gap:35px; }
+            .hero h2{ font-size:43px; letter-spacing:-1.5px; }
+            .hero-description{ font-size:14px; }
+            .hero-card{ min-height:auto; }
+            .services-grid{ grid-template-columns:repeat(2,1fr); }
+            .info-grid{ grid-template-columns:1fr; }
+            .section{ padding:55px 18px; }
+            .offer{ padding:0 18px; }
+        }
+        @media(max-width:520px){
+            .logo h1{ font-size:15px; }
+            .logo-icon{ width:42px; height:42px; }
+            .hero h2{ font-size:36px; }
+            .hero-buttons{ flex-direction:column; }
+            .btn{ justify-content:center; width:100%; }
+            .services-grid{ grid-template-columns:1fr; }
+            .offer-route{ font-size:19px; gap:10px; }
+            .offer-price strong{ font-size:31px; }
+            .section-title h2{ font-size:28px; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- PANTALLA DE LOGIN -->
-    <div id="login-screen">
-        <div class="login-box">
-            <i class="fa-solid fa-lock"></i>
-            <h2>Acceso Restringido</h2>
-            <input type="password" id="password-input" placeholder="Ingresa la clave">
-            <button onclick="verificarClave()">Entrar al Panel</button>
-            <p id="error-msg" style="color:var(--red); margin-top:10px; display:none; font-size:12px;">Clave incorrecta</p>
-        </div>
-    </div>
+    <!-- ================= HEADER ================= -->
+    <header>
+        <nav class="navbar">
+            <a href="#inicio" class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-house-chimney"></i>
+                </div>
+                <div>
+                    <h1>YOUR <span>BRIDGE HOME</span></h1>
+                    <small>Tu puente hacia nuevas oportunidades</small>
+                </div>
+            </a>
+            <div class="nav">
+                <a href="#inicio">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#ofertas">Ofertas</a>
+                <a class="contact" href="https://wa.me/79046319565" target="_blank">
+                    <i class="fa-brands fa-whatsapp"></i> Contactar
+                </a>
+            </div>
+        </nav>
+    </header>
 
-    <!-- PANEL DE ADMINISTRACIÓN -->
-    <div id="dashboard-screen">
-        <div class="header-admin">
-            <h1><i class="fa-solid fa-chart-line"></i> Solicitudes Recibidas</h1>
-            <button class="btn-logout" onclick="cerrarSesion()"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+    <!-- ================= CONTENIDO PRINCIPAL (WEB PÚBLICA) ================= -->
+    <main id="web-publica">
+        <section class="hero" id="inicio">
+            <div>
+                <div class="badge">
+                    <i class="fa-solid fa-circle-check"></i> Servicio actualizado
+                </div>
+                <h2> Tu conexión con <span>el mundo.</span> </h2>
+                <p class="hero-description">
+                    En <strong>Your Bridge Home</strong> facilitamos tus viajes, remesas y recargas internacionales con información clara, servicios prácticos y atención personalizada.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#servicios" class="btn btn-primary">
+                        <i class="fa-solid fa-arrow-down"></i> Ver nuestros servicios
+                    </a>
+                    <a href="https://wa.me/79046319565" target="_blank" class="btn btn-secondary">
+                        <i class="fa-brands fa-whatsapp"></i> Hablar por WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="hero-card">
+                <div class="globe">
+                    <i class="fa-solid fa-earth-americas"></i>
+                </div>
+                <h3>Información para ti</h3>
+                <p> Consulta nuestras ofertas, servicios y datos de interés directamente desde nuestra página. </p>
+                <div class="rate-box">
+                    <div>
+                        <span>TASA DE CAMBIO</span>
+                        <strong>Mercado informal Cuba</strong>
+                    </div>
+                    <i class="fa-solid fa-chart-line" style="color:var(--gold)"></i>
+                </div>
+                <div class="rate-box">
+                    <div>
+                        <span>ATENCIÓN</span>
+                        <strong>Daynel Caminero</strong>
+                    </div>
+                    <i class="fa-solid fa-user-tie" style="color:var(--gold)"></i>
+                </div>
+            </div>
+        </section>
+
+        <section class="offer" id="ofertas">
+            <div class="offer-card">
+                <div class="offer-top">
+                    <i class="fa-solid fa-fire"></i> OFERTA DESTACADA
+                </div>
+                <div class="offer-route">
+                    <span>Moscú 🇷🇺</span>
+                    <i class="fa-solid fa-plane"></i>
+                    <span>Cuba 🇨🇺</span>
+                </div>
+                <p class="offer-date">
+                    <i class="fa-regular fa-calendar"></i> 31 de diciembre
+                </p>
+                <div class="offer-price">
+                    <span>PRECIO DEL PASAJE</span>
+                    <strong>119 000 ₽</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="servicios">
+            <div class="section-title">
+                <div class="mini">Lo que ofrecemos</div>
+                <h2>Nuestros servicios</h2>
+                <p> Soluciones para tus operaciones, viajes y necesidades internacionales desde un solo lugar. </p>
+            </div>
+            <div class="services-grid">
+                <a onclick="abrirModal('Remesa')" class="service">
+                    <div class="service-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                    <h3>Remesas</h3>
+                    <p> Envío de dinero a familiares y personas de confianza. </p>
+                </a>
+                <a onclick="abrirModal('Recarga')" class="service">
+                    <div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                    <h3>Recargas</h3>
+                    <p> Recargas internacionales para móviles y servicios disponibles. </p>
+                </a>
+                <a onclick="abrirModal('Boleto de Avión')" class="service">
+                    <div class="service-icon"><i class="fa-solid fa-plane-departure"></i></div>
+                    <h3>Boletos de avión</h3>
+                    <p> Información y gestión de vuelos internacionales. </p>
+                </a>
+                <a onclick="abrirModal('Boleto de Bus/Tren')" class="service">
+                    <div class="service-icon"><i class="fa-solid fa-train-subway"></i></div>
+                    <h3>Bus y tren</h3>
+                    <p> Opciones de transporte para tus desplazamientos. </p>
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-title">
+                <div class="mini">Más información</div>
+                <h2>Todo en un solo lugar</h2>
+                <p> Seguimos trabajando para ofrecerte una página cada vez más útil, sencilla y actualizada. </p>
+            </div>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fa-solid fa-chart-simple"></i>
+                    <h3>Tasa de cambio</h3>
+                    <p> Consulta información relacionada con el mercado informal de divisas en Cuba. </p>
+                </div>
+                <div class="info-card">
+                    <i class="fa-solid fa-plane-circle-check"></i>
+                    <h3>Viajes internacionales</h3>
+                    <p> Encuentra información sobre vuelos y destinos internacionales. </p>
+                </div>
+                <div class="info-card">
+                    <i class="fa-solid fa-headset"></i>
+                    <h3>Atención personalizada</h3>
+                    <p> Comunícate directamente para consultar disponibilidad, precios y servicios. </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= SECCIÓN OCULTA: PANEL DE ADMINISTRACIÓN ================= -->
+    <main id="web-admin" style="display:none; padding: 40px 20px; max-width:1250px; margin:auto; min-height: 80vh;">
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #334; padding-bottom:20px; margin-bottom:30px;">
+            <h2 style="color:var(--gold);"><i class="fa-solid fa-chart-line"></i> Panel de Solicitudes</h2>
+            <button onclick="cerrarAdmin()" class="btn" style="background:var(--red); color:white;"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
         </div>
-        
         <div class="table-container">
             <table>
                 <thead>
@@ -158,60 +425,190 @@
                     </tr>
                 </thead>
                 <tbody id="tabla-solicitudes">
-                    <!-- Los datos se cargarán aquí con JavaScript -->
+                    <!-- Se llena con JavaScript -->
                 </tbody>
             </table>
         </div>
+    </main>
+
+    <!-- ================= MODAL: FORMULARIO CLIENTES ================= -->
+    <div id="modal-solicitud" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="cerrarModal()">&times;</span>
+            <h3>Nueva Solicitud</h3>
+            <form id="form-solicitud">
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="nombre" placeholder="Ej: Juan Pérez" required>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono / WhatsApp</label>
+                    <input type="tel" id="telefono" placeholder="Ej: +7 900 123 4567" required>
+                </div>
+                <div class="form-group">
+                    <label>Servicio a solicitar</label>
+                    <select id="servicio" required>
+                        <option value="">Selecciona un servicio...</option>
+                        <option value="Remesa">Envío de Remesa</option>
+                        <option value="Recarga">Recarga Móvil / Nauta</option>
+                        <option value="Boleto de Avión">Boleto de Avión</option>
+                        <option value="Boleto de Bus/Tren">Boleto de Bus o Tren</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Detalles de la solicitud</label>
+                    <textarea id="detalles" placeholder="Ej: Monto a enviar, destino, fecha de viaje, número a recargar, etc." required rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="btn-enviar" style="width:100%; justify-content:center;">
+                    <i class="fa-solid fa-paper-plane"></i> Enviar Solicitud
+                </button>
+            </form>
+        </div>
     </div>
 
+    <!-- ================= MODAL: LOGIN ADMIN ================= -->
+    <div id="modal-login" class="modal-overlay">
+        <div class="modal-content" style="max-width: 400px;">
+            <span class="close-modal" onclick="cerrarLogin()">&times;</span>
+            <h3 style="margin-bottom: 20px;"><i class="fa-solid fa-lock"></i> Acceso Admin</h3>
+            <div class="form-group">
+                <input type="password" id="admin-password" placeholder="Ingresa la clave" style="text-align: center;">
+                <p id="login-error" style="color:var(--red); font-size:12px; margin-top:10px; display:none; text-align:center;">Clave incorrecta</p>
+            </div>
+            <button onclick="verificarClave()" class="btn btn-primary" style="width:100%; justify-content:center;">Entrar</button>
+        </div>
+    </div>
+
+    <!-- ================= WHATSAPP FLOTANTE ================= -->
+    <a class="whatsapp" href="https://wa.me/79046319565" target="_blank" aria-label="Contactar por WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo">
+                YOUR <span>BRIDGE HOME</span>
+            </div>
+            <p class="footer-description">
+                Tu puente hacia nuevas oportunidades. <br>
+                Viajes · Remesas · Recargas · Servicios internacionales
+            </p>
+            <div class="admin">
+                <i class="fa-solid fa-user-tie"></i>
+                <div>
+                    <strong>Daynel Caminero</strong>
+                    <small>Administrador</small>
+                </div>
+            </div>
+            <p class="copyright">
+                © 2026 Your Bridge Home · Todos los derechos reservados.
+                <!-- CANDADO SECRETO: Al hacer clic aquí, se abre el login -->
+                <a class="admin-link" onclick="abrirLogin()" title="Acceso Administrador"><i class="fa-solid fa-lock"></i></a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ================= SCRIPTS ================= -->
     <script>
-        // --- CONFIGURACIÓN ---
-        const CLAVE_SECRETA = "MI_CLAVE_SECRETA"; // 🔐 CAMBIA ESTO POR TU CONTRASEÑA SEGURA
-        
-        // Supabase (Usa las mismas que en tu index.html)
+        // --- CONFIGURACIÓN DE SUPABASE ---
+        // ⚠️ REEMPLAZA ESTO CON TU URL REAL
         const supabaseUrl = 'AQUI_VA_TU_URL_DE_SUPABASE'; 
         const supabaseKey = 'sb_publishable_Y5Cv-rNlmWgSm8gr4F5nAg_0SKI6OfV'; 
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+        
+        // ⚠️ AQUÍ PONES TU CLAVE SECRETA
+        const CLAVE_SECRETA = "MI_CLAVE_SECRETA"; 
 
-        // --- LÓGICA DE LOGIN ---
-        function verificarClave() {
-            const input = document.getElementById('password-input').value;
-            if (input === CLAVE_SECRETA) {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('dashboard-screen').style.display = 'block';
-                cargarSolicitudes(); // Cargar datos al entrar
-                // Guardar sesión en el navegador para no pedir clave a cada rato
-                sessionStorage.setItem('adminLogueado', 'true');
+        let supabaseClient = null;
+        try { supabaseClient = supabase.createClient(supabaseUrl, supabaseKey); } catch(e) { console.error(e); }
+
+        // --- 1. LÓGICA DEL FORMULARIO PÚBLICO ---
+        const modalSolicitud = document.getElementById('modal-solicitud');
+        const formSolicitud = document.getElementById('form-solicitud');
+        const btnEnviar = document.getElementById('btn-enviar');
+
+        function abrirModal(servicio) {
+            modalSolicitud.style.display = 'flex';
+            if (servicio) document.getElementById('servicio').value = servicio;
+        }
+        function cerrarModal() {
+            modalSolicitud.style.display = 'none';
+            formSolicitud.reset();
+        }
+        window.onclick = function(event) {
+            if (event.target == modalSolicitud) cerrarModal();
+            if (event.target == document.getElementById('modal-login')) cerrarLogin();
+        }
+
+        formSolicitud.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            btnEnviar.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+            btnEnviar.disabled = true;
+
+            const { error } = await supabaseClient.from('solicitudes').insert([{
+                nombre_cliente: document.getElementById('nombre').value,
+                telefono: document.getElementById('telefono').value,
+                tipo_servicio: document.getElementById('servicio').value,
+                detalles: document.getElementById('detalles').value,
+                estado: 'Pendiente'
+            }]);
+
+            if (error) {
+                alert('Error: ' + error.message);
             } else {
-                document.getElementById('error-msg').style.display = 'block';
+                alert('¡Solicitud enviada con éxito!');
+                cerrarModal();
+            }
+            btnEnviar.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Solicitud';
+            btnEnviar.disabled = false;
+        });
+
+        // --- 2. LÓGICA DE LOGIN ADMIN ---
+        const modalLogin = document.getElementById('modal-login');
+        const webPublica = document.getElementById('web-publica');
+        const webAdmin = document.getElementById('web-admin');
+
+        function abrirLogin() {
+            modalLogin.style.display = 'flex';
+            document.getElementById('admin-password').value = '';
+            document.getElementById('login-error').style.display = 'none';
+        }
+        function cerrarLogin() {
+            modalLogin.style.display = 'none';
+        }
+
+        function verificarClave() {
+            const pass = document.getElementById('admin-password').value;
+            if (pass === CLAVE_SECRETA) {
+                cerrarLogin();
+                webPublica.style.display = 'none'; // Ocultar página web
+                webAdmin.style.display = 'block';  // Mostrar panel admin
+                cargarSolicitudesAdmin();          // Cargar tabla
+            } else {
+                document.getElementById('login-error').style.display = 'block';
             }
         }
 
-        function cerrarSesion() {
-            sessionStorage.removeItem('adminLogueado');
-            location.reload();
+        function cerrarAdmin() {
+            webAdmin.style.display = 'none';
+            webPublica.style.display = 'block';
+            window.scrollTo(0, 0);
         }
 
-        // Mantener sesión iniciada si se recarga la página
-        if (sessionStorage.getItem('adminLogueado') === 'true') {
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('dashboard-screen').style.display = 'block';
-            cargarSolicitudes();
-        }
-
-        // --- CARGAR DATOS DE SUPABASE ---
-        async function cargarSolicitudes() {
+        // --- 3. LÓGICA DE LA TABLA ADMIN ---
+        async function cargarSolicitudesAdmin() {
             const tbody = document.getElementById('tabla-solicitudes');
             tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Cargando datos...</td></tr>';
 
-            // Traer todas las solicitudes ordenadas por fecha (la más nueva primero)
-            const { data, error } = await supabase
-                .from('solicitudes')
-                .select('*')
-                .order('fecha_creacion', { ascending: false });
+            if (!supabaseClient) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:red;">Error: Revisa la URL de Supabase.</td></tr>';
+                return;
+            }
+
+            const { data, error } = await supabaseClient.from('solicitudes').select('*').order('id', { ascending: false });
 
             if (error) {
-                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:var(--red);">Error: ${error.message}</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; color:red;">Error: ${error.message}. Verifica los permisos en Supabase.</td></tr>`;
                 return;
             }
 
@@ -222,53 +619,34 @@
 
             tbody.innerHTML = '';
             data.forEach(sol => {
-                // Formatear fecha
-                const fecha = new Date(sol.fecha_creacion).toLocaleDateString('es-ES', { 
-                    day: '2-digit', month: 'short', hour: '2-digit', minute:'2-digit' 
-                });
-
                 const estadoClass = sol.estado === 'Completado' ? 'estado-completado' : 'estado-pendiente';
-
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td>${fecha}</td>
+                    <td>${sol.fecha_creacion ? new Date(sol.fecha_creacion).toLocaleDateString() : 'N/A'}</td>
                     <td><strong>${sol.nombre_cliente || 'N/A'}</strong></td>
                     <td>${sol.telefono || 'N/A'}</td>
                     <td><span style="color:var(--gold)">${sol.tipo_servicio || 'N/A'}</span></td>
                     <td>${sol.detalles || 'N/A'}</td>
                     <td><span class="badge-estado ${estadoClass}">${sol.estado || 'Pendiente'}</span></td>
                     <td class="acciones">
-                        ${sol.estado !== 'Completado' ? `<button onclick="marcarCompletado(${sol.id})"><i class="fa-solid fa-check"></i></button>` : ''}
-                        <button class="btn-delete" onclick="borrarSolicitud(${sol.id})"><i class="fa-solid fa-trash"></i></button>
+                        ${sol.estado !== 'Completado' ? `<button onclick="marcarCompletado(${sol.id})" title="Completar"><i class="fa-solid fa-check"></i></button>` : ''}
+                        <button class="btn-delete" onclick="borrarSolicitud(${sol.id})" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
         }
 
-        // --- ACCIONES (Actualizar / Borrar) ---
         async function marcarCompletado(id) {
-            if(!confirm('¿Marcar esta solicitud como Completada?')) return;
-
-            const { error } = await supabase
-                .from('solicitudes')
-                .update({ estado: 'Completado' })
-                .eq('id', id);
-
-            if (error) alert('Error al actualizar: ' + error.message);
-            else cargarSolicitudes(); // Recargar tabla
+            if(!confirm('¿Marcar como Completado?')) return;
+            await supabaseClient.from('solicitudes').update({ estado: 'Completado' }).eq('id', id);
+            cargarSolicitudesAdmin();
         }
 
         async function borrarSolicitud(id) {
-            if(!confirm('¿Estás seguro de eliminar esta solicitud permanentemente?')) return;
-
-            const { error } = await supabase
-                .from('solicitudes')
-                .delete()
-                .eq('id', id);
-
-            if (error) alert('Error al borrar: ' + error.message);
-            else cargarSolicitudes(); // Recargar tabla
+            if(!confirm('¿Eliminar permanentemente?')) return;
+            await supabaseClient.from('solicitudes').delete().eq('id', id);
+            cargarSolicitudesAdmin();
         }
     </script>
 </body>
