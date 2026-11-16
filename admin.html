@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin | Your Bridge Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        :root { --bg: #06111f; --card: #10243c; --gold: #f5c542; --white: #ffffff; --muted: #aebdce; --red: #ef4444; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { background: var(--bg); color: var(--white); padding: 20px; }
+        
+        #login-screen { display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column; }
+        .login-box { background: var(--card); padding: 40px; border-radius: 20px; border: 1px solid var(--gold); text-align: center; width: 100%; max-width: 400px; }
+        .login-box i { font-size: 50px; color: var(--gold); margin-bottom: 20px; }
+        .login-box input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #334; background: #0d1d31; color: white; margin-bottom: 20px; font-size: 16px; text-align: center; }
+        .login-box button { width: 100%; padding: 15px; border-radius: 10px; border: none; background: var(--gold); color: var(--bg); font-weight: 800; font-size: 16px; cursor: pointer; }
+        
+        #dashboard-screen { display: none; max-width: 1200px; margin: auto; }
+        .header-admin { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #334; padding-bottom: 20px; }
+        .btn-logout { background: var(--red); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+        .table-container { background: var(--card); border-radius: 15px; overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th, td { padding: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 14px; }
+        th { background: rgba(0,0,0,0.2); color: var(--gold); }
+    </style>
+</head>
+<body>
+
+    <!-- LOGIN -->
+    <div id="login-screen">
+        <div class="login-box">
+            <i class="fa-solid fa-lock"></i>
+            <h2>Acceso Restringido</h2>
+            <input type="password" id="password-input" placeholder="Ingresa la clave">
+            <!-- He cambiado esto para que el botón no dependa de una función externa -->
+            <button onclick="intentarEntrar()">Entrar al Panel</button>
+            <p id="error-msg" style="color:var(--red); margin-top:10px; display:none;">Clave incorrecta o error de sistema.</p>
+        </div>
+    </div>
+
+    <!-- PANEL -->
+    <div id="dashboard-screen">
+        <div class="header-admin">
+            <h1><i class="fa-solid fa-chart-line"></i> Solicitudes</h1>
+            <button class="btn-logout" onclick="cerrarSesion()">Salir</button>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Teléfono</th>
+                        <th>Servicio</th>
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-solicitudes">
+                    <tr><td colspan="5">Cargando...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // ⚠️ 1. VERIFICA QUE ESTA SEA TU URL REAL
+        const supabaseUrl = 'AQUI_VA_TU_URL_DE_SUPABASE'; 
+        const supabaseKey = 'sb_publishable_Y5Cv-rNlmWgSm8gr4F5nAg_0SKI6OfV'; 
+        
+        // ⚠️ 2. VERIFICA QUE LA CLAVE SEA EXACTA
+        const CLAVE_SECRETA = "MI_CLAVE_SECRETA"; 
+
+        // Variable global para Supabase
+        let supabaseClient = null;
+
+        // Iniciar Supabase (con manejo de errores)
+        try {
+            supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
+        } catch (e) {
+            console.error("Error al conectar con Supabase:", e);
+        }
+
+        // FUNCIÓN DE LOGIN
+        function intentarEntrar() {
+            const input = document.getElementById('password-input').value;
+            const errorMsg = document.getElementById('error-msg');
+            
+            if (input === CLAVE_SECRETA) {
+                // Clave correcta
+                errorMsg.style.display = 'none';
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('dashboard-screen').style.display = 'block';
+                cargarSolicitudes();
+            } else {
+                // Clave incorrecta
+                errorMsg.style.display = 'block';
+                errorMsg.innerText = "Clave incorrecta. Intenta de nuevo.";
+            }
+        }
+
+        function cerrarSesion() {
+            location.reload(); // Recarga la página para volver al login
+        }
+
+        // CARGAR DATOS
+        async function cargarSolicitudes() {
+            const tbody = document.getElementById('tabla-solicitudes');
+            
+            if (!supabaseClient) {
+                tbody.innerHTML = '<tr><td colspan="5" style="color:red">Error: No se pudo iniciar Supabase. Revisa la URL en el código.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = '<tr><td colspan="5">Buscando datos...</td></tr>';
+
+            const { data, error } = await supabaseClient
+                .from('solicitudes')
+                .select('*');
+
+            if (error) {
+                console.error(error);
+                tbody.innerHTML = `<tr><td colspan="5" style="color:red">Error de base de datos: ${error.message}. ¿Ejecutaste los permisos SQL en Supabase?</td></tr>`;
+                return;
+            }
+
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5">No hay solicitudes guardadas aún.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = '';
+            data.forEach(sol => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${sol.fecha_creacion ? new Date(sol.fecha_creacion).toLocaleDateString() : 'N/A'}</td>
+                    <td><strong>${sol.nombre_cliente || 'N/A'}</strong></td>
+                    <td>${sol.telefono || 'N/A'}</td>
+                    <td>${sol.tipo_servicio || 'N/A'}</td>
+                    <td>${sol.detalles || 'N/A'}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+    </script>
+</body>
+</html>
