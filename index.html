@@ -62,6 +62,15 @@
         }
         .nav a:hover{ background:rgba(245,197,66,.12); color:var(--gold); }
         .nav .contact{ background:var(--gold); color:#071321; font-weight:800; }
+        
+        .btn-admin-nav {
+            color: var(--gold) !important; 
+            border: 1px solid var(--gold);
+        }
+        .btn-admin-nav:hover {
+            background: var(--gold) !important;
+            color: #071321 !important;
+        }
 
         /* ================= HERO ================= */
         .hero{
@@ -218,16 +227,6 @@
         .admin strong{ font-size:11px; }
         .admin small{ display:block; color:#7e8b9b; font-size:9px; }
         .copyright{ color:#5d6b7a; font-size:9px; margin-top:25px; }
-        
-        /* Botón Admin en el menú */
-        .btn-admin-nav {
-            color: var(--gold) !important; 
-            border: 1px solid var(--gold);
-        }
-        .btn-admin-nav:hover {
-            background: var(--gold) !important;
-            color: #071321 !important;
-        }
 
         /* ================= MOBILE ================= */
         @media(max-width:900px){
@@ -504,8 +503,10 @@
     <!-- ================= SCRIPTS ================= -->
     <script>
         // --- CONFIGURACIÓN DE SUPABASE ---
-        // ⚠️ REEMPLAZA ESTO CON TU URL REAL DE SUPABASE
-        const supabaseUrl = 'AQUI_VA_TU_URL_DE_SUPABASE'; 
+        // ⚠️ REEMPLAZA ESTO CON TU URL REAL DE SUPABASE (Ejemplo: https://tuproyecto.supabase.co)
+        const supabaseUrl = 'https://TU_PROYECTO.supabase.co'; 
+        
+        // Llave pública
         const supabaseKey = 'sb_publishable_Y5Cv-rNlmWgSm8gr4F5nAg_0SKI6OfV'; 
         
         // ⚠️ AQUÍ PONES TU CLAVE SECRETA PARA EL PANEL
@@ -596,8 +597,8 @@
             const tbody = document.getElementById('tabla-solicitudes');
             tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;">Cargando datos...</td></tr>';
 
-            if (!supabaseClient) {
-                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:red;">Error: Revisa la URL de Supabase en el código.</td></tr>';
+            if (!supabaseClient || supabaseUrl === 'https://TU_PROYECTO.supabase.co') {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:red;">Error: Debes configurar la URL real de Supabase en el código.</td></tr>';
                 return;
             }
 
