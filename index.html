@@ -67,6 +67,18 @@ button{cursor:pointer}
 .mini-stat{display:flex;align-items:center;gap:9px;color:#b9c7d6;font-size:10px}
 .mini-stat i{color:var(--gold)}
 
+/* CALCULADORA */
+.calc-box{background:linear-gradient(145deg,rgba(17,41,68,.85),rgba(9,23,39,.8));border:1px solid rgba(246,201,74,.3);border-radius:20px;padding:20px;margin-top:25px;box-shadow:0 15px 40px rgba(0,0,0,.3)}
+.calc-title{font-size:14px;font-weight:800;color:var(--gold);margin-bottom:15px;display:flex;align-items:center;gap:8px}
+.calc-row{display:grid;grid-template-columns:1.5fr 1fr;gap:10px;margin-bottom:10px}
+.calc-input{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#071522;color:#fff;outline:none;font-size:14px;font-weight:700}
+.calc-input:focus{border-color:var(--gold)}
+.calc-select{width:100%;padding:12px;border-radius:10px;border:1px solid var(--line);background:#071522;color:#fff;outline:none;font-size:14px;font-weight:700;cursor:pointer}
+.calc-result{background:rgba(246,201,74,.1);border:1px dashed var(--gold);border-radius:10px;padding:15px;text-align:center;margin-top:10px}
+.calc-result span{font-size:11px;color:var(--muted);display:block;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+.calc-result strong{font-size:26px;color:var(--gold);font-family:Montserrat}
+.calc-result small{font-size:10px;color:#8ba1b9;display:block;margin-top:5px}
+
 /* HERO VISUAL */
 .visual{position:relative;min-height:465px}
 .glow{position:absolute;inset:12% 10%;background:radial-gradient(circle,rgba(246,201,74,.16),transparent 62%);filter:blur(18px)}
@@ -125,6 +137,19 @@ button{cursor:pointer}
 .service:hover{transform:translateY(-7px);border-color:rgba(246,201,74,.35);box-shadow:0 22px 55px rgba(0,0,0,.28)}
 .service-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:16px;background:rgba(246,201,74,.09);border:1px solid rgba(246,201,74,.12);color:var(--gold);font-size:21px;margin-bottom:21px}
 .service h3{font-family:Montserrat;font-size:15px}.service p{font-size:10px;color:var(--muted);line-height:1.7;margin-top:7px}.service-arrow{position:absolute;right:20px;bottom:20px;color:#526a82;font-size:11px}
+
+/* PLANES DE RECARGA (CUADRÍCULA) */
+.planes-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));gap:15px;margin-top:20px}
+.plan-card{background:linear-gradient(145deg,rgba(17,41,68,.88),rgba(7,20,34,.88));border:1px solid var(--line);border-radius:16px;padding:20px;position:relative;cursor:pointer;transition:.3s;display:flex;flex-direction:column;justify-content:space-between}
+.plan-card:hover{border-color:rgba(246,201,74,.4);transform:translateY(-3px);box-shadow:0 10px 25px rgba(0,0,0,.3)}
+.plan-tag{position:absolute;top:-10px;right:15px;background:var(--gold);color:#07111f;font-size:8px;font-weight:900;padding:4px 10px;border-radius:20px;text-transform:uppercase}
+.plan-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.plan-name{font-family:Montserrat;font-size:16px;font-weight:800;color:var(--gold)}
+.plan-price{font-size:20px;font-weight:900;color:#fff;background:rgba(255,255,255,.05);padding:4px 10px;border-radius:8px}
+.plan-desc{font-size:11px;color:var(--muted);line-height:1.5;margin-bottom:5px;font-weight:600}
+.plan-desc2{font-size:10px;color:var(--cyan);font-weight:700}
+.plan-btn{margin-top:15px;width:100%;padding:10px;border-radius:10px;border:none;background:rgba(246,201,74,.15);color:var(--gold);font-size:10px;font-weight:800;transition:.3s}
+.plan-card:hover .plan-btn{background:var(--gold);color:#07111f}
 
 /* INFO */
 .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
@@ -187,6 +212,7 @@ footer{border-top:1px solid var(--line);background:#030812;padding:45px 0 25px;t
     <nav class="nav">
       <a href="#inicio">Inicio</a>
       <a href="#servicios">Servicios</a>
+      <a href="#recargas">Recargas</a>
       <a href="#tasas">Tasas</a>
       <button class="admin-link" onclick="abrirLogin()"><i class="fa-solid fa-lock"></i> Admin</button>
       <a class="contact" href="https://wa.me/79046319565" target="_blank"><i class="fa-brands fa-whatsapp"></i> Contactar</a>
@@ -202,14 +228,41 @@ footer{border-top:1px solid var(--line);background:#030812;padding:45px 0 25px;t
     <div class="eyebrow"><span class="live-dot"></span> Servicio actualizado</div>
     <h1>Tu conexión con <span>el mundo.</span></h1>
     <p class="hero-copy"><strong>Your Bridge Home</strong> reúne soluciones prácticas para tus viajes, remesas y recargas internacionales. Información clara, atención personalizada y un espacio diseñado para facilitar tus gestiones.</p>
+    
+    <!-- CALCULADORA -->
+    <div class="calc-box">
+      <div class="calc-title"><i class="fa-solid fa-calculator"></i> Calculadora de Divisas</div>
+      <div class="calc-row">
+        <input type="number" id="calc-monto" class="calc-input" placeholder="Monto (Ej: 100)" oninput="calcularDivisa()">
+        <select id="calc-moneda-desde" class="calc-select" onchange="calcularDivisa()">
+          <option value="usd">USD ($)</option>
+          <option value="eur">EUR (€)</option>
+          <option value="rub">RUB (₽)</option>
+          <option value="mlc">MLC</option>
+          <option value="gbp">GBP (£)</option>
+          <option value="cup" selected>CUP</option>
+        </select>
+      </div>
+      <div class="calc-row">
+        <select id="calc-moneda-hacia" class="calc-select" onchange="calcularDivisa()">
+          <option value="cup" selected>CUP</option>
+          <option value="usd">USD ($)</option>
+          <option value="eur">EUR (€)</option>
+          <option value="rub">RUB (₽)</option>
+          <option value="mlc">MLC</option>
+          <option value="gbp">GBP (£)</option>
+        </select>
+      </div>
+      <div class="calc-result">
+        <span>Total a Recibir</span>
+        <strong id="calc-res">0.00</strong>
+        <small id="calc-rate-used">Tasa aplicada: -</small>
+      </div>
+    </div>
+
     <div class="hero-actions">
       <a href="#servicios" class="btn btn-primary"><i class="fa-solid fa-compass"></i> Explorar servicios</a>
       <a href="https://wa.me/79046319565" target="_blank" class="btn btn-ghost"><i class="fa-brands fa-whatsapp"></i> Hablar por WhatsApp</a>
-    </div>
-    <div class="hero-mini">
-      <div class="mini-stat"><i class="fa-solid fa-shield-halved"></i> Atención personalizada</div>
-      <div class="mini-stat"><i class="fa-solid fa-globe"></i> Servicios internacionales</div>
-      <div class="mini-stat"><i class="fa-solid fa-bolt"></i> Información actualizada</div>
     </div>
   </div>
 
@@ -242,7 +295,20 @@ footer{border-top:1px solid var(--line);background:#030812;padding:45px 0 25px;t
   <div class="rates">
     <div class="rate"><div class="rate-top"><span>DÓLAR · USD</span><div class="rate-icon"><i class="fa-solid fa-dollar-sign"></i></div></div><div class="rate-value" id="tasa-usd">Cargando...</div><div class="rate-note">Precio en CUP</div></div>
     <div class="rate"><div class="rate-top"><span>EURO · EUR</span><div class="rate-icon"><i class="fa-solid fa-euro-sign"></i></div></div><div class="rate-value" id="tasa-eur">Cargando...</div><div class="rate-note">Precio en CUP</div></div>
+    <div class="rate"><div class="rate-top"><span>RUBLO · RUB</span><div class="rate-icon"><i class="fa-solid fa-ruble-sign"></i></div></div><div class="rate-value" id="tasa-rub">Cargando...</div><div class="rate-note">Precio en CUP</div></div>
+  </div>
+  <div class="rates" style="margin-top:16px; grid-template-columns: repeat(2, 1fr);">
     <div class="rate"><div class="rate-top"><span>MLC</span><div class="rate-icon"><i class="fa-solid fa-money-bill"></i></div></div><div class="rate-value" id="tasa-mlc">Cargando...</div><div class="rate-note">Precio en CUP</div></div>
+    <div class="rate"><div class="rate-top"><span>LIBRA · GBP</span><div class="rate-icon"><i class="fa-solid fa-sterling-sign"></i></div></div><div class="rate-value" id="tasa-gbp">Cargando...</div><div class="rate-note">Precio en CUP</div></div>
+  </div>
+</section>
+
+<!-- SECCIÓN DE RECARGAS -->
+<section class="container section" id="recargas">
+  <div class="section-head"><div class="kicker">Conecta con los tuyos</div><h2>Recargas Internacionales</h2><p>Rápido · Seguro · Al Mejor Precio. Elige un plan para solicitar tu recarga.</p></div>
+  <div class="planes-grid" id="contenedor-recargas">
+    <!-- Los planes se cargan desde Supabase aquí -->
+    <p style="color:var(--muted); text-align:center; grid-column:1/-1;">Cargando planes...</p>
   </div>
 </section>
 
@@ -276,9 +342,14 @@ footer{border-top:1px solid var(--line);background:#030812;padding:45px 0 25px;t
 <main id="web-admin" class="container">
   <div class="admin-head">
     <h2><i class="fa-solid fa-chart-line"></i> Panel de Administración</h2>
-    <div class="admin-actions"><button class="btn btn-ghost" onclick="abrirConfig()"><i class="fa-solid fa-sliders"></i> Tasas</button><button class="btn" style="background:var(--red);color:#fff" onclick="cerrarAdmin()"><i class="fa-solid fa-right-from-bracket"></i> Salir</button></div>
+    <div class="admin-actions">
+      <button class="btn btn-ghost" onclick="abrirConfig()"><i class="fa-solid fa-sliders"></i> Tasas</button>
+      <button class="btn btn-ghost" onclick="abrirDestinos()"><i class="fa-solid fa-globe"></i> Destinos</button>
+      <button class="btn btn-ghost" onclick="abrirRecargasAdmin()"><i class="fa-solid fa-mobile-screen"></i> Recargas</button>
+      <button class="btn" style="background:var(--red);color:#fff" onclick="cerrarAdmin()"><i class="fa-solid fa-right-from-bracket"></i> Salir</button>
+    </div>
   </div>
-  <div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Cliente</th><th>Teléfono</th><th>Servicio</th><th>Detalles</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="tabla-solicitudes"></tbody></table></div>
+  <div class="table-wrap"><table><thead><tr><th>Fecha</th><th>Cliente</th><th>Teléfono</th><th>Servicio</th><th>Destino/Detalles</th><th>Estado</th><th>Acciones</th></tr></thead><tbody id="tabla-solicitudes"></tbody></table></div>
 </main>
 
 <!-- SOLICITUD -->
@@ -289,8 +360,9 @@ footer{border-top:1px solid var(--line);background:#030812;padding:45px 0 25px;t
     <form id="form-solicitud">
       <div class="form-group"><label>Nombre completo</label><input id="nombre" type="text" placeholder="Ej: Juan Pérez" required></div>
       <div class="form-group"><label>Teléfono / WhatsApp</label><input id="telefono" type="tel" placeholder="+7 900 123 4567" required></div>
-      <div class="form-group"><label>Servicio</label><select id="servicio" required><option value="">Selecciona un servicio...</option><option value="Remesa">Envío de Remesa</option><option value="Recarga">Recarga Móvil / Nauta</option><option value="Boleto de Avión">Boleto de Avión</option><option value="Boleto de Bus/Tren">Boleto de Bus o Tren</option></select></div>
-      <div class="form-group"><label>Detalles</label><textarea id="detalles" rows="4" placeholder="Monto, país, número a recargar, ruta, fecha, etc." required></textarea></div>
+      <div class="form-group"><label>Servicio</label><select id="servicio" required onchange="cargarDestinosFormulario()"><option value="">Selecciona un servicio...</option><option value="Remesa">Envío de Remesa</option><option value="Recarga">Recarga Móvil / Nauta</option><option value="Boleto de Avión">Boleto de Avión</option><option value="Boleto de Bus/Tren">Boleto de Bus o Tren</option></select></div>
+      <div class="form-group" id="grupo-destino" style="display:none;"><label>País de Destino</label><select id="destino-pais"></select></div>
+      <div class="form-group"><label>Detalles</label><textarea id="detalles" rows="3" placeholder="Monto, número a recargar, ruta, fecha, etc." required></textarea></div>
       <button class="btn btn-primary full" id="btn-enviar"><i class="fa-solid fa-paper-plane"></i> Enviar solicitud</button>
     </form>
   </div>
@@ -306,20 +378,58 @@ footer{border-top:1px solid var(--line);background:#030812;padding:45px 0 25px;t
   </div>
 </div>
 
-<!-- CONFIG -->
+<!-- CONFIG TASAS -->
 <div id="modal-config" class="overlay">
   <div class="modal large">
     <button class="close" onclick="cerrarConfig()">&times;</button>
-    <h3><i class="fa-solid fa-sliders"></i> Configuración global</h3>
+    <h3><i class="fa-solid fa-sliders"></i> Configuración de Tasas</h3>
     <form id="form-config">
       <div class="config-grid">
         <div class="config-title"><i class="fa-solid fa-money-bill-trend-up"></i> Tasas de cambio · CUP</div>
-        <div class="form-group"><label>USD · Dólar</label><input id="cfg-usd" type="number" step="0.01" required></div>
-        <div class="form-group"><label>EUR · Euro</label><input id="cfg-eur" type="number" step="0.01" required></div>
+        <div class="form-group"><label>USD</label><input id="cfg-usd" type="number" step="0.01" required></div>
+        <div class="form-group"><label>EUR</label><input id="cfg-eur" type="number" step="0.01" required></div>
+        <div class="form-group"><label>RUB</label><input id="cfg-rub" type="number" step="0.01" required></div>
         <div class="form-group"><label>MLC</label><input id="cfg-mlc" type="number" step="0.01" required></div>
+        <div class="form-group"><label>GBP</label><input id="cfg-gbp" type="number" step="0.01" required></div>
       </div>
-      <button class="btn btn-primary full" type="submit"><i class="fa-solid fa-floppy-disk"></i> Guardar cambios</button>
+      <button class="btn btn-primary full" type="submit"><i class="fa-solid fa-floppy-disk"></i> Guardar Tasas</button>
     </form>
+  </div>
+</div>
+
+<!-- ADMIN DESTINOS -->
+<div id="modal-destinos" class="overlay">
+  <div class="modal">
+    <button class="close" onclick="cerrarDestinos()">&times;</button>
+    <h3><i class="fa-solid fa-globe"></i> Gestionar Destinos</h3>
+    <form id="form-destino" style="margin-bottom:15px; display:flex; gap:10px;">
+      <input type="text" id="nuevo-destino" placeholder="Nombre del país" required style="flex:1; padding:10px; border-radius:8px; border:1px solid #334; background:#071522; color:white;">
+      <select id="nuevo-destino-tipo" style="padding:10px; border-radius:8px; border:1px solid #334; background:#071522; color:white;">
+        <option value="Remesa">Remesa</option>
+        <option value="Boleto">Boleto</option>
+      </select>
+      <button type="submit" class="btn btn-primary" style="padding:10px;"><i class="fa-solid fa-plus"></i></button>
+    </form>
+    <div id="lista-destinos" style="max-height:300px; overflow-y:auto; display:flex; flex-direction:column; gap:8px;"></div>
+  </div>
+</div>
+
+<!-- ADMIN RECARGAS -->
+<div id="modal-recargas" class="overlay">
+  <div class="modal large">
+    <button class="close" onclick="cerrarRecargas()">&times;</button>
+    <h3><i class="fa-solid fa-mobile-screen"></i> Gestionar Planes de Recarga</h3>
+    <form id="form-recarga" style="margin-bottom:20px; background:rgba(0,0,0,0.2); padding:15px; border-radius:10px;">
+      <div class="config-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="form-group"><label>Etiqueta (Ej: Oferta)</label><input type="text" id="rec-etiqueta" placeholder="Opcional"></div>
+        <div class="form-group"><label>Nombre (Ej: COMBO 1)</label><input type="text" id="rec-nombre" required></div>
+        <div class="form-group"><label>Precio (₽)</label><input type="number" id="rec-precio" required></div>
+        <div class="form-group"><label>Descripción 1</label><input type="text" id="rec-desc1" placeholder="Ej: 3GB + 300MB"></div>
+        <div class="form-group"><label>Descripción 2</label><input type="text" id="rec-desc2" placeholder="Ej: 25 MIN + 20 SMS"></div>
+      </div>
+      <button type="submit" class="btn btn-primary full"><i class="fa-solid fa-plus"></i> Añadir Plan</button>
+    </form>
+    <div id="lista-recargas-admin" style="max-height:300px; overflow-y:auto; display:flex; flex-direction:column; gap:8px;"></div>
   </div>
 </div>
 
@@ -342,44 +452,138 @@ const CLAVE_SECRETA='MI_CLAVE_SECRETA';
 const supabaseClient=supabase.createClient(supabaseUrl,supabaseKey);
 
 const $=id=>document.getElementById(id);
-const modalSolicitud=$('modal-solicitud'),modalLogin=$('modal-login'),modalConfig=$('modal-config');
-const webPublica=$('web-publica'),webAdmin=$('web-admin');
+let tasasGlobales = {usd:0, eur:0, rub:0, mlc:0, gbp:0};
 
+// 1. CARGAR TASAS Y CALCULADORA
 async function cargarTasasPublicas(){
   const {data,error}=await supabaseClient.from('configuracion').select('*').eq('id',1).single();
-  if(error||!data){
-    $('tasa-usd').innerHTML='— <span>CUP</span>';
-    $('tasa-eur').innerHTML='— <span>CUP</span>';
-    $('tasa-mlc').innerHTML='— <span>CUP</span>';
-    return;
+  if(data){
+    tasasGlobales = { usd: data.tasa_usd, eur: data.tasa_eur, rub: data.tasa_rub || 0, mlc: data.tasa_mlc, gbp: data.tasa_gbp || 0 };
+    $('tasa-usd').innerHTML=`${data.tasa_usd||0} <span>CUP</span>`;
+    $('tasa-eur').innerHTML=`${data.tasa_eur||0} <span>CUP</span>`;
+    $('tasa-rub').innerHTML=`${data.tasa_rub||0} <span>CUP</span>`;
+    $('tasa-mlc').innerHTML=`${data.tasa_mlc||0} <span>CUP</span>`;
+    $('tasa-gbp').innerHTML=`${data.tasa_gbp||0} <span>CUP</span>`;
+    calcularDivisa();
   }
-  $('tasa-usd').innerHTML=`${data.tasa_usd} <span>CUP</span>`;
-  $('tasa-eur').innerHTML=`${data.tasa_eur} <span>CUP</span>`;
-  $('tasa-mlc').innerHTML=`${data.tasa_mlc} <span>CUP</span>`;
 }
 cargarTasasPublicas();
 
+function calcularDivisa() {
+  const monto = parseFloat($('calc-monto').value) || 0;
+  const desde = $('calc-moneda-desde').value;
+  const hacia = $('calc-moneda-hacia').value;
+  
+  if(desde === hacia) {
+    $('calc-res').innerText = `${monto.toFixed(2)} ${hacia.toUpperCase()}`;
+    $('calc-rate-used').innerText = `Misma moneda`;
+    return;
+  }
+
+  // Convertir a CUP primero
+  let enCup = monto;
+  if (desde !== 'cup') enCup = monto * (tasasGlobales[desde] || 0);
+
+  // Convertir de CUP a la moneda destino
+  let resultado = enCup;
+  if (hacia !== 'cup') {
+    const tasaDestino = tasasGlobales[hacia] || 1;
+    resultado = enCup / tasaDestino;
+  }
+
+  $('calc-res').innerText = `${resultado.toFixed(2)} ${hacia.toUpperCase()}`;
+  if (desde === 'cup' || hacia === 'cup') {
+     const tasa = desde === 'cup' ? tasasGlobales[hacia] : tasasGlobales[desde];
+     $('calc-rate-used').innerText = `Tasa aplicada: 1 ${desde.toUpperCase()} = ${tasa} ${hacia.toUpperCase()}`;
+  } else {
+     $('calc-rate-used').innerText = `Calculado vía CUP (Tasas Cruzadas)`;
+  }
+}
+
+// 2. CARGAR PLANES DE RECARGA (CUADRÍCULA)
+async function cargarPlanesPublicos() {
+  const contenedor = $('contenedor-recargas');
+  const { data, error } = await supabaseClient.from('planes_recargas').select('*').eq('activo', true);
+  
+  if(error || !data || data.length === 0) {
+    contenedor.innerHTML = '<p style="color:var(--muted); text-align:center; grid-column:1/-1;">No hay planes disponibles en este momento.</p>';
+    return;
+  }
+
+  contenedor.innerHTML = '';
+  data.forEach(plan => {
+    const card = document.createElement('div');
+    card.className = 'plan-card';
+    card.onclick = () => abrirModalConDetalles('Recarga', plan.nombre_plan + ' - ' + plan.precio + '₽');
+    card.innerHTML = `
+      ${plan.etiqueta ? `<div class="plan-tag">${plan.etiqueta}</div>` : ''}
+      <div class="plan-header">
+        <div class="plan-name">${plan.nombre_plan}</div>
+        <div class="plan-price">${plan.precio}₽</div>
+      </div>
+      <div>
+        <div class="plan-desc">${plan.descripcion_1 || ''}</div>
+        ${plan.descripcion_2 ? `<div class="plan-desc2">${plan.descripcion_2}</div>` : ''}
+      </div>
+      <button class="plan-btn">Solicitar Recarga</button>
+    `;
+    contenedor.appendChild(card);
+  });
+}
+cargarPlanesPublicos();
+
+// 3. LÓGICA DEL FORMULARIO PÚBLICO Y DESTINOS
+const modalSolicitud=$('modal-solicitud'),modalLogin=$('modal-login');
+const webPublica=$('web-publica'),webAdmin=$('web-admin');
+
+async function cargarDestinosFormulario() {
+  const servicio = $('servicio').value;
+  const grupo = $('grupo-destino');
+  const select = $('destino-pais');
+  
+  if(servicio === 'Remesa' || servicio === 'Boleto de Avión' || servicio === 'Boleto de Bus/Tren') {
+    grupo.style.display = 'block';
+    select.innerHTML = '<option value="">Cargando países...</option>';
+    
+    let tipo = servicio === 'Remesa' ? 'Remesa' : 'Boleto';
+    const { data } = await supabaseClient.from('destinos').select('*').eq('tipo_servicio', tipo).eq('activo', true);
+    
+    select.innerHTML = '<option value="">Selecciona país...</option>';
+    if(data) data.forEach(d => select.innerHTML += `<option value="${d.nombre_pais}">${d.nombre_pais}</option>`);
+  } else {
+    grupo.style.display = 'none';
+  }
+}
+
 function abrirModal(servicio){
   modalSolicitud.style.display='flex';
-  if(servicio)$('servicio').value=servicio;
-}
-function cerrarModal(){
-  modalSolicitud.style.display='none';
   $('form-solicitud').reset();
+  $('grupo-destino').style.display='none';
+  if(servicio) {
+    $('servicio').value = servicio;
+    cargarDestinosFormulario();
+  }
 }
+
+function abrirModalConDetalles(servicio, detalles) {
+  abrirModal(servicio);
+  $('detalles').value = detalles;
+}
+
+function cerrarModal(){ modalSolicitud.style.display='none'; }
 function abrirLogin(){
   modalLogin.style.display='flex';
   $('admin-password').value='';
   $('login-error').style.display='none';
-  setTimeout(()=>$('admin-password').focus(),100);
 }
 function cerrarLogin(){modalLogin.style.display='none'}
-function cerrarConfig(){modalConfig.style.display='none'}
 
 window.addEventListener('click',e=>{
   if(e.target===modalSolicitud)cerrarModal();
   if(e.target===modalLogin)cerrarLogin();
-  if(e.target===modalConfig)cerrarConfig();
+  ['modal-config','modal-destinos','modal-recargas'].forEach(id => {
+    if(e.target === $(id)) $(id).style.display='none';
+  });
 });
 
 async function verificarClave(){
@@ -392,31 +596,34 @@ function cerrarAdmin(){webAdmin.style.display='none';webPublica.style.display='b
 $('form-solicitud').addEventListener('submit',async e=>{
   e.preventDefault();
   const btn=$('btn-enviar');btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Enviando...';
+  const destinoVal = $('grupo-destino').style.display === 'block' ? $('destino-pais').value : 'N/A';
   const {error}=await supabaseClient.from('solicitudes').insert([{
     nombre_cliente:$('nombre').value,telefono:$('telefono').value,
-    tipo_servicio:$('servicio').value,detalles:$('detalles').value,estado:'Pendiente'
+    tipo_servicio:$('servicio').value, destino: destinoVal, detalles:$('detalles').value,estado:'Pendiente'
   }]);
-  if(error)alert('No se pudo enviar la solicitud: '+error.message);
-  else{alert('¡Solicitud enviada con éxito!');cerrarModal()}
+  if(error)alert('No se pudo enviar: '+error.message);
+  else{alert('¡Solicitud enviada!');cerrarModal()}
   btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> Enviar solicitud';
 });
 
+// 4. LÓGICA DEL PANEL ADMIN
 async function cargarSolicitudesAdmin(){
-  const tbody=$('tabla-solicitudes');tbody.innerHTML='<tr><td colspan="7" style="text-align:center">Cargando solicitudes...</td></tr>';
+  const tbody=$('tabla-solicitudes');tbody.innerHTML='<tr><td colspan="7" style="text-align:center">Cargando...</td></tr>';
   const {data,error}=await supabaseClient.from('solicitudes').select('*').order('id',{ascending:false});
-  if(error){tbody.innerHTML=`<tr><td colspan="7" style="color:#ff7b84;text-align:center">Error: ${error.message}</td></tr>`;return}
-  if(!data?.length){tbody.innerHTML='<tr><td colspan="7" style="text-align:center">No hay solicitudes todavía.</td></tr>';return}
+  if(error){tbody.innerHTML=`<tr><td colspan="7" style="color:red">Error: ${error.message}</td></tr>`;return}
+  if(!data?.length){tbody.innerHTML='<tr><td colspan="7" style="text-align:center">No hay solicitudes.</td></tr>';return}
+  
   tbody.innerHTML='';
   data.forEach(sol=>{
     const tr=document.createElement('tr');
     const done=sol.estado==='Completado';
     tr.innerHTML=`
       <td>${sol.fecha_creacion?new Date(sol.fecha_creacion).toLocaleDateString():'N/A'}</td>
-      <td><strong>${esc(sol.nombre_cliente||'N/A')}</strong></td>
-      <td>${esc(sol.telefono||'N/A')}</td>
-      <td style="color:var(--gold)">${esc(sol.tipo_servicio||'N/A')}</td>
-      <td>${esc(sol.detalles||'N/A')}</td>
-      <td><span class="status-badge ${done?'done':'pending'}">${esc(sol.estado||'Pendiente')}</span></td>
+      <td><strong>${esc(sol.nombre_cliente)}</strong></td>
+      <td>${esc(sol.telefono)}</td>
+      <td style="color:var(--gold)">${esc(sol.tipo_servicio)}</td>
+      <td>${esc(sol.destino)} | ${esc(sol.detalles)}</td>
+      <td><span class="status-badge ${done?'done':'pending'}">${esc(sol.estado)}</span></td>
       <td>${done?'':`<button class="action-btn" onclick="marcarCompletado(${sol.id})"><i class="fa-solid fa-check"></i></button>`}<button class="action-btn delete" onclick="borrarSolicitud(${sol.id})"><i class="fa-solid fa-trash"></i></button></td>`;
     tbody.appendChild(tr);
   });
@@ -424,29 +631,111 @@ async function cargarSolicitudesAdmin(){
 function esc(v){return String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
 
 async function marcarCompletado(id){
-  if(!confirm('¿Marcar esta solicitud como completada?'))return;
-  const {error}=await supabaseClient.from('solicitudes').update({estado:'Completado'}).eq('id',id);
-  if(error)alert(error.message);else cargarSolicitudesAdmin();
+  if(!confirm('¿Marcar como completada?'))return;
+  await supabaseClient.from('solicitudes').update({estado:'Completado'}).eq('id',id);
+  cargarSolicitudesAdmin();
 }
 async function borrarSolicitud(id){
-  if(!confirm('¿Eliminar permanentemente esta solicitud?'))return;
-  const {error}=await supabaseClient.from('solicitudes').delete().eq('id',id);
-  if(error)alert(error.message);else cargarSolicitudesAdmin();
+  if(!confirm('¿Eliminar permanentemente?'))return;
+  await supabaseClient.from('solicitudes').delete().eq('id',id);
+  cargarSolicitudesAdmin();
 }
+
+// 5. CONFIGURACIÓN TASAS
+const modalConfig=$('modal-config');
 async function abrirConfig(){
   modalConfig.style.display='flex';
   const {data}=await supabaseClient.from('configuracion').select('*').eq('id',1).single();
-  if(data){$('cfg-usd').value=data.tasa_usd;$('cfg-eur').value=data.tasa_eur;$('cfg-mlc').value=data.tasa_mlc}
+  if(data){
+    $('cfg-usd').value=data.tasa_usd || 0;
+    $('cfg-eur').value=data.tasa_eur || 0;
+    $('cfg-rub').value=data.tasa_rub || 0;
+    $('cfg-mlc').value=data.tasa_mlc || 0;
+    $('cfg-gbp').value=data.tasa_gbp || 0;
+  }
 }
+function cerrarConfig(){modalConfig.style.display='none'}
+
 $('form-config').addEventListener('submit',async e=>{
   e.preventDefault();
   const {error}=await supabaseClient.from('configuracion').update({
-    tasa_usd:$('cfg-usd').value,tasa_eur:$('cfg-eur').value,tasa_mlc:$('cfg-mlc').value,
-    fecha_actualizacion:new Date()
+    tasa_usd:$('cfg-usd').value, tasa_eur:$('cfg-eur').value, tasa_rub:$('cfg-rub').value,
+    tasa_mlc:$('cfg-mlc').value, tasa_gbp:$('cfg-gbp').value, fecha_actualizacion:new Date()
   }).eq('id',1);
-  if(error)alert('Error al guardar: '+error.message);
+  if(error)alert('Error: '+error.message);
   else{alert('¡Tasas actualizadas!');cerrarConfig();cargarTasasPublicas()}
 });
+
+// 6. ADMIN DESTINOS
+const modalDestinos=$('modal-destinos');
+async function abrirDestinos(){
+  modalDestinos.style.display='flex';
+  cargarListaDestinosAdmin();
+}
+function cerrarDestinos(){modalDestinos.style.display='none'}
+
+async function cargarListaDestinosAdmin() {
+  const lista = $('lista-destinos');
+  const { data } = await supabaseClient.from('destinos').select('*');
+  lista.innerHTML = '';
+  if(data) data.forEach(d => {
+    lista.innerHTML += `<div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.05); padding:8px; border-radius:8px;">
+      <span>${d.nombre_pais} <small style="color:var(--gold)">(${d.tipo_servicio})</small></span>
+      <button onclick="borrarDestino(${d.id})" style="background:none; border:none; color:var(--red); cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
+    </div>`;
+  });
+}
+
+$('form-destino').addEventListener('submit', async e => {
+  e.preventDefault();
+  await supabaseClient.from('destinos').insert([{ nombre_pais: $('nuevo-destino').value, tipo_servicio: $('nuevo-destino-tipo').value }]);
+  $('nuevo-destino').value = '';
+  cargarListaDestinosAdmin();
+});
+
+async function borrarDestino(id) {
+  if(!confirm('¿Eliminar destino?')) return;
+  await supabaseClient.from('destinos').delete().eq('id', id);
+  cargarListaDestinosAdmin();
+}
+
+// 7. ADMIN RECARGAS
+const modalRecargas=$('modal-recargas');
+async function abrirRecargasAdmin(){
+  modalRecargas.style.display='flex';
+  cargarListaRecargasAdmin();
+}
+function cerrarRecargas(){modalRecargas.style.display='none'}
+
+async function cargarListaRecargasAdmin() {
+  const lista = $('lista-recargas-admin');
+  const { data } = await supabaseClient.from('planes_recargas').select('*');
+  lista.innerHTML = '';
+  if(data) data.forEach(p => {
+    lista.innerHTML += `<div style="display:flex; justify-content:space-between; align-items:center; background:rgba(255,255,255,0.05); padding:8px; border-radius:8px;">
+      <span><strong>${p.nombre_plan}</strong> - ${p.precio}₽</span>
+      <button onclick="borrarPlanRecarga(${p.id})" style="background:none; border:none; color:var(--red); cursor:pointer;"><i class="fa-solid fa-trash"></i></button>
+    </div>`;
+  });
+}
+
+$('form-recarga').addEventListener('submit', async e => {
+  e.preventDefault();
+  await supabaseClient.from('planes_recargas').insert([{ 
+    etiqueta: $('rec-etiqueta').value, nombre_plan: $('rec-nombre').value, precio: $('rec-precio').value,
+    descripcion_1: $('rec-desc1').value, descripcion_2: $('rec-desc2').value
+  }]);
+  $('rec-nombre').value = ''; $('rec-precio').value = ''; $('rec-desc1').value = ''; $('rec-desc2').value = ''; $('rec-etiqueta').value = '';
+  cargarListaRecargasAdmin();
+  cargarPlanesPublicos();
+});
+
+async function borrarPlanRecarga(id) {
+  if(!confirm('¿Eliminar plan de recarga?')) return;
+  await supabaseClient.from('planes_recargas').delete().eq('id', id);
+  cargarListaRecargasAdmin();
+  cargarPlanesPublicos();
+}
 
 function toggleMobile(){
   const nav=document.querySelector('.nav');
