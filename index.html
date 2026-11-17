@@ -4,5201 +4,1225 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0f172a">
-
 <title>YOUR BRIDGE HOME | Tu puente hacia nuevas oportunidades</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-:root{
-    --bg:#07111f;
-    --bg2:#0f172a;
-    --card:#111d2f;
-    --card2:#16243a;
-    --gold:#f5c542;
-    --gold2:#ffd968;
-    --white:#ffffff;
-    --muted:#aab6c7;
-    --green:#25d366;
-    --red:#ff6262;
-    --blue:#3b82f6;
-    --border:rgba(255,255,255,.09);
-    --shadow:0 18px 50px rgba(0,0,0,.28);
-}
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:'Montserrat',sans-serif;
-    background:
-        radial-gradient(circle at top right,rgba(245,197,66,.08),transparent 30%),
-        linear-gradient(180deg,#07111f,#0b1424 45%,#07111f);
-    color:var(--white);
-    min-height:100vh;
-    overflow-x:hidden;
-}
-
-button,
-input,
-select,
-textarea{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-img{
-    max-width:100%;
-}
-
-/* ================= HEADER ================= */
-
-header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:rgba(7,17,31,.94);
-    backdrop-filter:blur(16px);
-    border-bottom:1px solid var(--border);
-}
-
-.navbar{
-    max-width:1200px;
-    margin:auto;
-    min-height:74px;
-    padding:10px 18px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:11px;
-    min-width:0;
-}
-
-.logo-icon{
-    width:46px;
-    height:46px;
-    border-radius:14px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(135deg,var(--gold),#c88a12);
-    color:#101010;
-    font-size:21px;
-    font-weight:900;
-    box-shadow:0 8px 25px rgba(245,197,66,.22);
-    flex-shrink:0;
-}
-
-.logo-text{
-    min-width:0;
-}
-
-.logo-text strong{
-    display:block;
-    font-size:16px;
-    font-weight:900;
-    letter-spacing:.5px;
-    white-space:nowrap;
-}
-
-.logo-text span{
-    color:var(--gold);
-    font-size:10px;
-    font-weight:600;
-}
-
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:5px;
-}
-
-.nav-links a{
-    padding:10px 11px;
-    border-radius:9px;
-    font-size:12px;
-    font-weight:700;
-    color:#d8e0eb;
-    transition:.2s;
-}
-
-.nav-links a:hover{
-    background:rgba(245,197,66,.1);
-    color:var(--gold);
-}
-
-.menu-btn{
-    display:none;
-    border:1px solid var(--border);
-    background:var(--card);
-    color:white;
-    width:42px;
-    height:42px;
-    border-radius:10px;
-    font-size:18px;
-}
-
-/* ================= HERO ================= */
-
-.hero{
-    max-width:1200px;
-    margin:auto;
-    padding:55px 18px 30px;
-}
-
-.hero-grid{
-    display:grid;
-    grid-template-columns:1.1fr .9fr;
-    gap:30px;
-    align-items:center;
-}
-
-.hero-kicker{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    padding:7px 11px;
-    border-radius:50px;
-    background:rgba(245,197,66,.09);
-    border:1px solid rgba(245,197,66,.18);
-    color:var(--gold);
-    font-size:11px;
-    font-weight:800;
-    margin-bottom:15px;
-}
-
-.hero h1{
-    font-size:clamp(32px,5vw,62px);
-    line-height:1.02;
-    font-weight:900;
-    letter-spacing:-2px;
-}
-
-.hero h1 span{
-    color:var(--gold);
-}
-
-.hero p{
-    margin-top:18px;
-    color:var(--muted);
-    line-height:1.75;
-    font-size:15px;
-    max-width:650px;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-top:25px;
-}
-
-.btn{
-    border:0;
-    padding:13px 18px;
-    border-radius:11px;
-    font-size:12px;
-    font-weight:800;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    transition:.2s;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.btn-gold{
-    background:linear-gradient(135deg,var(--gold),#d69b1b);
-    color:#101010;
-}
-
-.btn-dark{
-    background:var(--card);
-    color:white;
-    border:1px solid var(--border);
-}
-
-.btn-green{
-    background:var(--green);
-    color:#06140b;
-}
-
-.btn-red{
-    background:var(--red);
-    color:#200707;
-}
-
-.btn-blue{
-    background:var(--blue);
-    color:white;
-}
-
-/* ================= HERO VISUAL ================= */
-
-.hero-visual{
-    position:relative;
-    min-width:0;
-}
-
-.dashboard{
-    background:linear-gradient(145deg,#13233a,#0c1729);
-    border:1px solid var(--border);
-    border-radius:25px;
-    padding:20px;
-    box-shadow:var(--shadow);
-    position:relative;
-    overflow:hidden;
-}
-
-.dashboard::before{
-    content:"";
-    position:absolute;
-    width:230px;
-    height:230px;
-    border-radius:50%;
-    background:rgba(245,197,66,.08);
-    top:-130px;
-    right:-80px;
-}
-
-.dashboard-top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:18px;
-}
-
-.dashboard-title{
-    font-size:13px;
-    font-weight:800;
-}
-
-.live{
-    display:flex;
-    align-items:center;
-    gap:5px;
-    color:#71e6a0;
-    font-size:10px;
-    font-weight:700;
-}
-
-.live i{
-    font-size:7px;
-}
-
-.mini-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-}
-
-.mini-card{
-    background:rgba(255,255,255,.045);
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:15px;
-    min-width:0;
-}
-
-.mini-card i{
-    color:var(--gold);
-    margin-bottom:10px;
-}
-
-.mini-card strong{
-    display:block;
-    font-size:14px;
-    margin-bottom:4px;
-}
-
-.mini-card span{
-    display:block;
-    color:var(--muted);
-    font-size:10px;
-    line-height:1.5;
-    overflow-wrap:anywhere;
-}
-
-/* ================= FLOATING CONTACT ================= */
-
-.floating-card{
-    position:absolute;
-    right:14px;
-    bottom:14px;
-    width:min(195px,calc(100% - 28px));
-    max-width:calc(100% - 28px);
-    padding:12px;
-    border-radius:15px;
-    background:rgba(7,17,31,.96);
-    border:1px solid rgba(245,197,66,.25);
-    box-shadow:0 15px 35px rgba(0,0,0,.35);
-    z-index:3;
-    overflow:hidden;
-}
-
-.floating-card small{
-    display:block;
-    color:var(--gold);
-    font-size:9px;
-    font-weight:800;
-    margin-bottom:4px;
-}
-
-.floating-card strong{
-    display:block;
-    font-size:11px;
-    margin-bottom:5px;
-}
-
-.floating-card a{
-    display:block;
-    color:#8cebb1;
-    font-size:10px;
-    font-weight:700;
-    overflow-wrap:anywhere;
-}
-
-/* ================= SECTIONS ================= */
-
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding-left:18px;
-    padding-right:18px;
-}
-
-.section{
-    padding-top:65px;
-}
-
-.section-head{
-    margin-bottom:22px;
-}
-
-.kicker{
-    color:var(--gold);
-    font-size:10px;
-    font-weight:900;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-    margin-bottom:7px;
-}
-
-.section-head h2{
-    font-size:clamp(25px,4vw,36px);
-    font-weight:900;
-}
-
-.section-head p{
-    color:var(--muted);
-    font-size:13px;
-    line-height:1.7;
-    margin-top:7px;
-    max-width:750px;
-}
-
-/* ================= INFO ================= */
-
-.info-grid{
-    display:grid;
-    grid-template-columns:repeat(3,minmax(0,1fr));
-    gap:15px;
-}
-
-.info-card{
-    min-width:0;
-    overflow:hidden;
-    background:linear-gradient(145deg,var(--card),#0c1727);
-    border:1px solid var(--border);
-    border-radius:17px;
-    padding:20px;
-    box-shadow:0 12px 30px rgba(0,0,0,.15);
-}
-
-.info-card i{
-    color:var(--gold);
-    font-size:21px;
-    margin-bottom:12px;
-}
-
-.info-card h3{
-    font-size:15px;
-    margin-bottom:8px;
-}
-
-.info-card p{
-    color:var(--muted);
-    font-size:11px;
-    line-height:1.7;
-    overflow-wrap:anywhere;
-    word-break:break-word;
-}
-
-/* ================= RATES ================= */
-
-.rates-grid{
-    display:grid;
-    grid-template-columns:repeat(5,minmax(0,1fr));
-    gap:10px;
-}
-
-.rate-card{
-    min-width:0;
-    background:linear-gradient(145deg,var(--card),#0c1727);
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:15px;
-}
-
-.rate-card small{
-    color:var(--muted);
-    font-size:9px;
-    font-weight:700;
-}
-
-.rate-card strong{
-    display:block;
-    color:var(--gold);
-    font-size:19px;
-    margin-top:5px;
-    overflow-wrap:anywhere;
-}
-
-.rate-card span{
-    color:#8090a7;
-    font-size:9px;
-}
-
-/* ================= CALCULATOR ================= */
-
-.calc-box{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-    background:linear-gradient(145deg,#13233a,#0b1627);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:20px;
-}
-
-.form-group{
-    margin-bottom:13px;
-}
-
-.form-group label{
-    display:block;
-    color:#cfd7e4;
-    font-size:10px;
-    font-weight:800;
-    margin-bottom:6px;
-}
-
-.input,
-.select,
-.textarea{
-    width:100%;
-    background:#091525;
-    color:white;
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:12px;
-    outline:none;
-    font-size:12px;
-}
-
-.input:focus,
-.select:focus,
-.textarea:focus{
-    border-color:rgba(245,197,66,.55);
-}
-
-.textarea{
-    min-height:100px;
-    resize:vertical;
-}
-
-.calc-result{
-    min-height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    background:rgba(245,197,66,.05);
-    border:1px solid rgba(245,197,66,.12);
-    border-radius:15px;
-    padding:20px;
-}
-
-.calc-result strong{
-    display:block;
-    color:var(--gold);
-    font-size:30px;
-    margin-top:7px;
-}
-
-.calc-result span{
-    color:var(--muted);
-    font-size:10px;
-}
-
-/* ================= SERVICES ================= */
-
-.services-grid{
-    display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:14px;
-}
-
-.service-card{
-    background:linear-gradient(145deg,var(--card),#0c1727);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:20px;
-    min-width:0;
-}
-
-.service-card .icon{
-    width:43px;
-    height:43px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:12px;
-    background:rgba(245,197,66,.09);
-    color:var(--gold);
-    margin-bottom:13px;
-}
-
-.service-card h3{
-    font-size:14px;
-    margin-bottom:8px;
-}
-
-.service-card p{
-    color:var(--muted);
-    font-size:10px;
-    line-height:1.7;
-}
-
-/* ================= RECHARGES ================= */
-
-.cards-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:15px;
-}
-
-.offer-card{
-    background:linear-gradient(145deg,var(--card),#0b1627);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:20px;
-    position:relative;
-    overflow:hidden;
-}
-
-.offer-card::after{
-    content:"";
-    position:absolute;
-    width:110px;
-    height:110px;
-    border-radius:50%;
-    right:-55px;
-    top:-55px;
-    background:rgba(245,197,66,.07);
-}
-
-.offer-tag{
-    display:inline-block;
-    padding:5px 8px;
-    border-radius:20px;
-    background:rgba(245,197,66,.1);
-    color:var(--gold);
-    font-size:8px;
-    font-weight:900;
-    margin-bottom:10px;
-}
-
-.offer-card h3{
-    font-size:16px;
-    margin-bottom:7px;
-}
-
-.offer-price{
-    color:var(--gold);
-    font-size:25px;
-    font-weight:900;
-    margin:9px 0;
-}
-
-.offer-card p{
-    color:var(--muted);
-    font-size:10px;
-    line-height:1.7;
-}
-
-/* ================= TICKETS ================= */
-
-.ticket-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:15px;
-}
-
-.ticket-card{
-    background:linear-gradient(145deg,var(--card),#0b1627);
-    border:1px solid var(--border);
-    border-radius:19px;
-    padding:18px;
-    overflow:hidden;
-    min-width:0;
-}
-
-.ticket-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:16px;
-}
-
-.ticket-type{
-    padding:5px 8px;
-    border-radius:20px;
-    background:rgba(59,130,246,.12);
-    color:#7db0ff;
-    font-size:8px;
-    font-weight:900;
-}
-
-.ticket-label{
-    color:var(--gold);
-    font-size:9px;
-    font-weight:800;
-    text-align:right;
-}
-
-.ticket-route{
-    display:grid;
-    grid-template-columns:1fr auto 1fr;
-    align-items:center;
-    gap:8px;
-}
-
-.ticket-city{
-    min-width:0;
-}
-
-.ticket-city:last-child{
-    text-align:right;
-}
-
-.ticket-city small{
-    display:block;
-    color:var(--muted);
-    font-size:8px;
-    margin-bottom:4px;
-}
-
-.ticket-city strong{
-    display:block;
-    font-size:16px;
-    overflow-wrap:anywhere;
-}
-
-.ticket-arrow{
-    color:var(--gold);
-}
-
-.ticket-dates{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-    margin-top:15px;
-}
-
-.ticket-date{
-    background:rgba(255,255,255,.035);
-    border-radius:10px;
-    padding:9px;
-}
-
-.ticket-date small{
-    display:block;
-    color:#8190a6;
-    font-size:8px;
-}
-
-.ticket-date strong{
-    display:block;
-    font-size:10px;
-    margin-top:4px;
-}
-
-.ticket-bottom{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-top:15px;
-    padding-top:13px;
-    border-top:1px solid var(--border);
-}
-
-.ticket-price{
-    color:var(--gold);
-    font-size:19px;
-    font-weight:900;
-}
-
-.ticket-note{
-    color:var(--muted);
-    font-size:8px;
-    line-height:1.5;
-    margin-top:10px;
-}
-
-.no-data{
-    padding:30px;
-    text-align:center;
-    border:1px dashed var(--border);
-    border-radius:15px;
-    color:var(--muted);
-    font-size:11px;
-}
-
-/* ================= ATTENTION ================= */
-
-.attention{
-    background:linear-gradient(135deg,rgba(245,197,66,.11),rgba(245,197,66,.025));
-    border:1px solid rgba(245,197,66,.15);
-    border-radius:20px;
-    padding:22px;
-}
-
-.attention-grid{
-    display:grid;
-    grid-template-columns:1fr auto;
-    align-items:center;
-    gap:20px;
-}
-
-.attention h3{
-    font-size:20px;
-    margin-bottom:7px;
-}
-
-.attention p{
-    color:var(--muted);
-    font-size:11px;
-    line-height:1.7;
-    overflow-wrap:anywhere;
-}
-
-/* ================= REQUEST ================= */
-
-.request-box{
-    background:linear-gradient(145deg,#13233a,#0b1627);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:22px;
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:12px;
-}
-
-.full{
-    grid-column:1/-1;
-}
-
-/* ================= FOOTER ================= */
-
-footer{
-    margin-top:70px;
-    border-top:1px solid var(--border);
-    background:#050c16;
-}
-
-.footer-inner{
-    max-width:1200px;
-    margin:auto;
-    padding:30px 18px;
-    display:grid;
-    grid-template-columns:1.2fr 1fr 1fr;
-    gap:25px;
-}
-
-.footer-block{
-    min-width:0;
-}
-
-.footer-block h4{
-    font-size:12px;
-    margin-bottom:10px;
-    color:var(--gold);
-}
-
-.footer-block p,
-.footer-block a{
-    color:var(--muted);
-    font-size:10px;
-    line-height:1.8;
-    overflow-wrap:anywhere;
-}
-
-.footer-copy{
-    border-top:1px solid var(--border);
-    text-align:center;
-    padding:14px;
-    color:#637087;
-    font-size:9px;
-}
-
-/* ================= WHATSAPP ================= */
-
-.whatsapp{
-    position:fixed;
-    right:18px;
-    bottom:18px;
-    width:55px;
-    height:55px;
-    border-radius:50%;
-    background:var(--green);
-    color:#06140b;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:27px;
-    box-shadow:0 12px 30px rgba(37,211,102,.28);
-    z-index:1500;
-}
-
-/* ================= MODALS ================= */
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(7px);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:15px;
-    z-index:3000;
-}
-
-.modal.active{
-    display:flex;
-}
-
-.modal-box{
-    width:min(900px,100%);
-    max-height:92vh;
-    overflow:auto;
-    background:#0d192b;
-    border:1px solid var(--border);
-    border-radius:20px;
-    box-shadow:0 30px 100px rgba(0,0,0,.55);
-}
-
-.modal-small{
-    width:min(430px,100%);
-}
-
-.modal-header{
-    position:sticky;
-    top:0;
-    z-index:2;
-    background:#0d192b;
-    padding:17px 20px;
-    border-bottom:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.modal-header h3{
-    font-size:15px;
-}
-
-.close{
-    width:35px;
-    height:35px;
-    border:0;
-    border-radius:9px;
-    background:rgba(255,255,255,.06);
-    color:white;
-    font-size:16px;
-}
-
-.modal-body{
-    padding:20px;
-}
-
-/* ================= ADMIN ================= */
-
-.admin-toolbar{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
-    gap:9px;
-}
-
-.admin-toolbar button{
-    border:1px solid var(--border);
-    background:#111d2f;
-    color:white;
-    border-radius:10px;
-    padding:11px;
-    font-size:10px;
-    font-weight:800;
-}
-
-.admin-toolbar button:hover{
-    border-color:rgba(245,197,66,.35);
-    color:var(--gold);
-}
-
-.admin-list{
-    margin-top:15px;
-}
-
-.admin-item{
-    background:rgba(255,255,255,.035);
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:12px;
-    margin-bottom:8px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    min-width:0;
-}
-
-.admin-item-content{
-    min-width:0;
-}
-
-.admin-item strong{
-    display:block;
-    font-size:11px;
-    overflow-wrap:anywhere;
-}
-
-.admin-item span{
-    color:var(--muted);
-    font-size:9px;
-    line-height:1.6;
-    overflow-wrap:anywhere;
-}
-
-.admin-actions{
-    display:flex;
-    gap:5px;
-    flex-shrink:0;
-}
-
-.admin-actions button{
-    border:0;
-    border-radius:8px;
-    padding:7px 9px;
-    font-size:9px;
-    font-weight:800;
-    background:#1c2b40;
-    color:white;
-}
-
-.admin-actions .delete{
-    background:rgba(255,98,98,.13);
-    color:#ff8e8e;
-}
-
-/* ================= IMAGE GENERATOR ================= */
-
-.generator-layout{
-    display:grid;
-    grid-template-columns:1fr 360px;
-    gap:18px;
-    align-items:start;
-}
-
-.generator-controls{
-    min-width:0;
-}
-
-.generator-preview{
-    position:sticky;
-    top:15px;
-    min-width:0;
-}
-
-.preview-frame{
-    background:#030914;
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:10px;
-}
-
-#promoCanvas{
-    display:block;
-    width:100%;
-    height:auto;
-    border-radius:12px;
-    background:#07111f;
-}
-
-.check-grid{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:8px;
-    margin-top:8px;
-}
-
-.check{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    background:#091525;
-    border:1px solid var(--border);
-    border-radius:9px;
-    padding:10px;
-    color:#cbd5e1;
-    font-size:9px;
-}
-
-.check input{
-    accent-color:var(--gold);
-}
-
-.generator-actions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-    margin-top:12px;
-}
-
-.generated-message{
-    background:#091525;
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:12px;
-    margin-top:12px;
-    color:#b7c3d3;
-    font-size:9px;
-    line-height:1.7;
-    white-space:pre-wrap;
-}
-
-/* ================= TOAST ================= */
-
-.toast{
-    position:fixed;
-    left:50%;
-    bottom:25px;
-    transform:translateX(-50%) translateY(20px);
-    background:#15243a;
-    border:1px solid var(--border);
-    color:white;
-    padding:11px 15px;
-    border-radius:10px;
-    font-size:10px;
-    font-weight:700;
-    opacity:0;
-    pointer-events:none;
-    transition:.25s;
-    z-index:5000;
-    max-width:calc(100% - 30px);
-    text-align:center;
-}
-
-.toast.show{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:1000px){
-    .hero-grid{
-        grid-template-columns:1fr;
-    }
-
-    .rates-grid{
-        grid-template-columns:repeat(3,minmax(0,1fr));
-    }
-
-    .services-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-
-    .info-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .generator-layout{
-        grid-template-columns:1fr;
-    }
-
-    .generator-preview{
-        position:static;
-    }
-}
-
-@media(max-width:760px){
-    .nav-links{
-        display:none;
-        position:absolute;
-        top:74px;
-        left:10px;
-        right:10px;
-        padding:8px;
-        flex-direction:column;
-        align-items:stretch;
-        background:#0d192b;
-        border:1px solid var(--border);
-        border-radius:14px;
-        box-shadow:var(--shadow);
-    }
-
-    .nav-links.open{
-        display:flex;
-    }
-
-    .nav-links a{
-        padding:12px;
-    }
-
-    .menu-btn{
-        display:block;
-    }
-
-    .hero{
-        padding-top:35px;
-    }
-
-    .mini-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .info-grid,
-    .services-grid{
-        grid-template-columns:1fr;
-    }
-
-    .rates-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-
-    .calc-box{
-        grid-template-columns:1fr;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .full{
-        grid-column:auto;
-    }
-
-    .attention-grid{
-        grid-template-columns:1fr;
-    }
-
-    .footer-inner{
-        grid-template-columns:1fr;
-    }
-
-    .floating-card{
-        right:10px;
-        bottom:10px;
-        width:min(180px,calc(100% - 20px));
-        max-width:calc(100% - 20px);
-    }
-
-    .whatsapp{
-        right:13px;
-        bottom:13px;
-    }
-
-    .modal{
-        padding:8px;
-    }
-
-    .modal-body{
-        padding:14px;
-    }
-}
-
-@media(max-width:430px){
-    .logo-text span{
-        display:none;
-    }
-
-    .logo-text strong{
-        font-size:13px;
-    }
-
-    .logo-icon{
-        width:40px;
-        height:40px;
-    }
-
-    .rates-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .mini-grid{
-        grid-template-columns:1fr;
-    }
-
-    .ticket-route{
-        grid-template-columns:1fr auto 1fr;
-    }
-
-    .ticket-city strong{
-        font-size:13px;
-    }
-
-    .generator-actions{
-        grid-template-columns:1fr;
-    }
-
-    .check-grid{
-        grid-template-columns:1fr;
-    }
+:root{--bg:#0f172a;--panel:#17243a;--panel2:#1d2c44;--gold:#e8b84d;--gold2:#ffd978;--white:#f8fafc;--muted:#aab6c8;--line:#33445f;--green:#25d366;--red:#ef6464}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--white);font-family:Montserrat,Arial,sans-serif;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.container{width:min(1160px,calc(100% - 32px));margin:auto}
+header{position:sticky;top:0;z-index:50;background:#0b1425ed;border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
+.nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{font-weight:900;letter-spacing:1px;color:var(--gold);font-size:19px;white-space:nowrap}
+.brand small{display:block;font-size:9px;color:var(--muted);letter-spacing:2px}
+.navlinks{display:flex;align-items:center;gap:20px}
+.navlinks a{font-size:12px;font-weight:700;color:#e5eaf2}
+.navlinks a:hover{color:var(--gold)}
+.nav-actions{display:flex;align-items:center;gap:8px}
+.btn{border:0;border-radius:10px;padding:11px 16px;font-weight:800;font-size:12px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s;cursor:pointer}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#182235}
+.btn-dark{background:#253650;color:white;border:1px solid var(--line)}
+.btn-green{background:var(--green);color:#082515}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.menu-btn{display:none;background:none;border:0;color:white;font-size:23px}
+.hero{padding:76px 0 55px;background:radial-gradient(ellipse at 80% 10%,#b7892924,transparent 40%),linear-gradient(140deg,#101a2d,#14243a)}
+.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:34px;align-items:center}
+.eyebrow{color:var(--gold);font-weight:800;font-size:11px;letter-spacing:3px;text-transform:uppercase}
+h1{font-size:clamp(34px,5vw,58px);line-height:1.12;margin:14px 0}
+h1 span{color:var(--gold)}
+.hero p{color:#c0cada;max-width:650px;font-size:15px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.hero-card,.card{background:linear-gradient(145deg,#1a2941,#142238);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 12px 35px #0002;min-width:0;overflow:hidden}
+.hero-card{border-color:#8f713c66}
+.hero-card h3{color:var(--gold);margin-top:0}
+.hero-card .big{font-size:28px;font-weight:900;overflow-wrap:anywhere}
+.hero-card p{font-size:12px;overflow-wrap:anywhere}
+section{padding:58px 0}
+.section-head{text-align:center;margin-bottom:30px}
+.section-head h2{font-size:clamp(24px,4vw,34px);margin:5px 0 8px}
+.section-head p{color:var(--muted);font-size:13px}
+.gold{color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.service-icon{width:48px;height:48px;border-radius:14px;background:#e8b84d1c;color:var(--gold);display:grid;place-items:center;font-size:21px}
+.card h3{margin:14px 0 7px;overflow-wrap:anywhere}
+.card p{color:var(--muted);font-size:13px;margin:5px 0;overflow-wrap:anywhere}
+.price{font-size:25px;font-weight:900;color:var(--gold);margin:12px 0}
+.mini{font-size:11px;color:var(--muted)}
+.pill{display:inline-block;padding:5px 9px;border-radius:20px;background:#e8b84d1b;color:var(--gold);font-size:10px;font-weight:800}
+.rates{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.rate{padding:17px 10px;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;min-width:0}
+.rate strong{display:block;font-size:22px;color:var(--gold);overflow-wrap:anywhere}
+.rate span{font-size:11px;color:var(--muted)}
+.calculator{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end}
+.field{min-width:0}
+.field label{display:block;font-size:11px;color:#d5deeb;font-weight:700;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;min-width:0;background:#0d192b;color:white;border:1px solid #40516a;border-radius:9px;padding:11px;outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold)}
+.field textarea{min-height:85px;resize:vertical}
+.result{background:#0d192b;border:1px solid var(--gold);border-radius:10px;padding:12px;color:var(--gold);font-weight:900;min-height:44px}
+.offer-card{position:relative}
+.offer-card .price{margin:8px 0}
+.empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;grid-column:1/-1}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.contact-box{overflow:hidden;min-width:0;overflow-wrap:anywhere}
+.contact-box a{overflow-wrap:anywhere;max-width:100%}
+.contact-box .btn{white-space:normal;text-align:center;max-width:100%}
+footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:12px}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.floating{position:fixed;right:16px;bottom:16px;z-index:60;background:var(--green);color:#082515;border-radius:50px;padding:13px 18px;font-size:12px;font-weight:900;box-shadow:0 8px 25px #0005;max-width:calc(100% - 32px);box-sizing:border-box}
+.overlay{display:none;position:fixed;inset:0;background:#020817d9;z-index:100;align-items:center;justify-content:center;padding:14px}
+.overlay.show{display:flex}
+.modal{width:min(850px,100%);max-height:92vh;overflow:auto;background:#142238;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 20px 70px #0009}
+.modal h2{margin-top:0;color:var(--gold)}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.close{background:#2b3c55;color:white;border:0;border-radius:8px;padding:8px 12px}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.form-grid .full{grid-column:1/-1}
+.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.admin-tabs button{background:#263852;color:white;border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:11px;font-weight:800;cursor:pointer}
+.admin-tabs button.active{background:var(--gold);color:#172238}
+.admin-panel{display:none}
+.admin-panel.active{display:block}
+.admin-list{display:grid;gap:9px;margin-top:15px}
+.admin-item{padding:12px;background:#0e1b2e;border:1px solid var(--line);border-radius:10px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;min-width:0}
+.admin-item small{color:var(--muted)}
+.admin-item button{margin:2px}
+.notice{background:#302b1e;border:1px solid #80652e;color:#f4d994;padding:12px;border-radius:10px;font-size:11px;margin:12px 0}
+.generator-preview{width:100%;max-width:420px;margin:15px auto;display:block;border-radius:12px;border:1px solid var(--line);background:#0b1425}
+.checks{display:flex;gap:15px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.checks label{display:flex;gap:6px;align-items:center}
+.hidden{display:none!important}
+button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media(max-width:850px){
+ .navlinks{display:none;position:absolute;top:74px;left:0;right:0;background:#0b1425;padding:18px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
+ .navlinks.open{display:flex}
+ .menu-btn{display:block}
+ .hero-grid{grid-template-columns:1fr}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .rates{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:600px){
+ .container{width:calc(100% - 24px)}
+ .nav{min-height:66px}
+ .brand{font-size:16px;white-space:normal;line-height:1.3}
+ .brand small{font-size:8px;letter-spacing:1px}
+ .navlinks{top:66px}
+ .nav-actions .btn{padding:9px;font-size:10px}
+ .hero{padding:48px 0 38px}
+ section{padding:42px 0}
+ .grid,.info-grid{grid-template-columns:1fr}
+ .rates{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .calculator{grid-template-columns:1fr 1fr}
+ .form-grid{grid-template-columns:1fr}
+ .form-grid .full{grid-column:auto}
+ .modal{padding:15px}
+ .floating{right:10px;bottom:10px;padding:11px 14px;font-size:11px}
+ .hero-card .big{font-size:24px}
 }
 </style>
 </head>
 
 <body>
-
-<!-- ================= HEADER ================= -->
-
 <header>
-<nav class="navbar">
-
-    <a href="#inicio" class="logo">
-        <div class="logo-icon">
-            <i class="fa-solid fa-bridge"></i>
-        </div>
-
-        <div class="logo-text">
-            <strong>YOUR BRIDGE HOME</strong>
-            <span>Tu puente hacia nuevas oportunidades</span>
-        </div>
-    </a>
-
-    <div class="nav-links" id="navLinks">
-        <a href="#inicio">Inicio</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#tasas">Tasas</a>
-        <a href="#recargas">Recargas</a>
-        <a href="#pasajes">Pasajes</a>
-        <a href="#solicitud">Solicitar</a>
-    </div>
-
-    <button class="menu-btn" onclick="toggleMenu()">
-        <i class="fa-solid fa-bars"></i>
-    </button>
-
-</nav>
+ <div class="container nav">
+  <a class="brand" href="#inicio">YOUR BRIDGE HOME<small>TU PUENTE HACIA NUEVAS OPORTUNIDADES</small></a>
+  <nav class="navlinks" id="navlinks">
+   <a href="#inicio">INICIO</a>
+   <a href="#servicios">SERVICIOS</a>
+   <a href="#recargas">RECARGAS</a>
+   <a href="#pasajes">PASAJES</a>
+   <a href="#remesas">REMESAS</a>
+   <a href="#tasas">TASAS</a>
+  </nav>
+  <div class="nav-actions">
+   <button class="btn btn-dark" type="button" onclick="openLogin()"><i class="fa-solid fa-lock"></i> Admin</button>
+   <button class="menu-btn" type="button" onclick="toggleMenu()" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+  </div>
+ </div>
 </header>
 
-
-<!-- ================= HERO ================= -->
-
+<main>
 <section class="hero" id="inicio">
-
-<div class="hero-grid">
-
-    <div>
-
-        <div class="hero-kicker">
-            <i class="fa-solid fa-star"></i>
-            SERVICIOS Y SOLUCIONES
-        </div>
-
-        <h1>
-            Tu puente hacia
-            <span>nuevas oportunidades.</span>
-        </h1>
-
-        <p>
-            Recargas internacionales, remesas, pasajes, información
-            de viajes y diferentes servicios para ayudarte a conectar
-            con tus familiares y destinos.
-        </p>
-
-        <div class="hero-buttons">
-            <a href="#servicios" class="btn btn-gold">
-                <i class="fa-solid fa-grid-2"></i>
-                Ver servicios
-            </a>
-
-            <a href="https://wa.me/79046319565"
-               target="_blank"
-               class="btn btn-green">
-                <i class="fa-brands fa-whatsapp"></i>
-                WhatsApp
-            </a>
-        </div>
-
-    </div>
-
-
-    <div class="hero-visual">
-
-        <div class="dashboard">
-
-            <div class="dashboard-top">
-                <div class="dashboard-title">
-                    YOUR BRIDGE HOME
-                </div>
-
-                <div class="live">
-                    <i class="fa-solid fa-circle"></i>
-                    Atención activa
-                </div>
-            </div>
-
-            <div class="mini-grid">
-
-                <div class="mini-card">
-                    <i class="fa-solid fa-mobile-screen"></i>
-                    <strong>Recargas</strong>
-                    <span>
-                        Opciones internacionales y ofertas.
-                    </span>
-                </div>
-
-                <div class="mini-card">
-                    <i class="fa-solid fa-money-bill-transfer"></i>
-                    <strong>Remesas</strong>
-                    <span>
-                        Envíos y orientación para familiares.
-                    </span>
-                </div>
-
-                <div class="mini-card">
-                    <i class="fa-solid fa-plane"></i>
-                    <strong>Pasajes</strong>
-                    <span>
-                        Avión, bus y tren según disponibilidad.
-                    </span>
-                </div>
-
-                <div class="mini-card">
-                    <i class="fa-solid fa-chart-line"></i>
-                    <strong>Tasas</strong>
-                    <span>
-                        Información de monedas y calculadora.
-                    </span>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="floating-card">
-
-            <small>ATENCIÓN DIRECTA</small>
-
-            <strong>
-                Daynel Caminero · Administrador
-            </strong>
-
-            <a href="https://wa.me/79046319565"
-               target="_blank">
-                <i class="fa-brands fa-whatsapp"></i>
-                +7 904 631 95 65
-            </a>
-
-        </div>
-
-    </div>
-
-</div>
-
+ <div class="container hero-grid">
+  <div>
+   <div class="eyebrow">Conectamos oportunidades</div>
+   <h1>Tu puente hacia <span>nuevas oportunidades</span></h1>
+   <p>Recargas internacionales, envío de remesas, pasajes y orientación para tus viajes. Conectamos personas, familias y destinos con atención personalizada.</p>
+   <div class="hero-actions">
+    <a class="btn btn-gold" href="#servicios">Explorar servicios <i class="fa-solid fa-arrow-right"></i></a>
+    <a class="btn btn-dark" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Contactar ahora</a>
+   </div>
+  </div>
+  <div class="hero-card">
+   <span class="pill">ATENCIÓN PERSONALIZADA</span>
+   <h3>Estamos para ayudarte</h3>
+   <div class="big">YOUR BRIDGE HOME</div>
+   <p>Consulta precios, solicita información y encuentra opciones para tus necesidades.</p>
+   <p><i class="fa-brands fa-whatsapp gold"></i> +7 904 631 95 65</p>
+   <p><strong>Daynel Caminero</strong><br><span class="mini">Administrador</span></p>
+  </div>
+ </div>
 </section>
 
-
-<!-- ================= INFORMACIÓN ================= -->
-
-<section class="container section">
-
-<div class="section-head">
-    <div class="kicker">¿Por qué contactarnos?</div>
-    <h2>Atención personalizada</h2>
-    <p>
-        Un espacio pensado para ayudarte directamente con tus
-        necesidades y orientarte antes de realizar una solicitud.
-    </p>
-</div>
-
-
-<div class="info-grid">
-
-    <div class="info-card">
-        <i class="fa-solid fa-user-check"></i>
-        <h3>Atención personalizada</h3>
-        <p>
-            Cada solicitud puede ser revisada de manera individual.
-            Puedes explicar lo que necesitas y recibir orientación
-            antes de realizar tu operación.
-        </p>
-    </div>
-
-    <div class="info-card">
-        <i class="fa-solid fa-bolt"></i>
-        <h3>Información actualizada</h3>
-        <p>
-            Los precios, tasas y ofertas pueden ser modificados
-            desde el área de administración para mantener la
-            información de la página actualizada.
-        </p>
-    </div>
-
-    <div class="info-card">
-        <i class="fa-solid fa-comments"></i>
-        <h3>Contacto directo</h3>
-        <p>
-            Si no encuentras exactamente lo que buscas, escríbenos
-            por WhatsApp y explica el servicio, destino o información
-            que necesitas.
-        </p>
-    </div>
-
-</div>
-
+<section id="servicios">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">Lo que hacemos</div>
+   <h2>Nuestros <span class="gold">servicios</span></h2>
+   <p>Soluciones para mantenerte conectado y acercarte a tus destinos.</p>
+  </div>
+  <div class="grid">
+   <article class="card">
+    <div class="service-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+    <h3>Recargas internacionales</h3>
+    <p>Planes y ofertas de conectividad para mantenerte comunicado con los tuyos.</p>
+    <a class="btn btn-dark" href="#recargas">Ver recargas</a>
+   </article>
+   <article class="card">
+    <div class="service-icon"><i class="fa-solid fa-money-bill-transfer"></i></div>
+    <h3>Envío de remesas</h3>
+    <p>Consulta opciones de envío de dinero desde distintos países.</p>
+    <a class="btn btn-dark" href="#remesas">Solicitar información</a>
+   </article>
+   <article class="card">
+    <div class="service-icon"><i class="fa-solid fa-plane"></i></div>
+    <h3>Pasajes y transporte</h3>
+    <p>Opciones de vuelos, autobuses y trenes según destino y fechas.</p>
+    <a class="btn btn-dark" href="#pasajes">Consultar pasajes</a>
+   </article>
+  </div>
+ </div>
 </section>
 
-
-<!-- ================= SERVICIOS ================= -->
-
-<section class="container section" id="servicios">
-
-<div class="section-head">
-    <div class="kicker">Lo que ofrecemos</div>
-    <h2>Nuestros servicios</h2>
-    <p>
-        Una plataforma sencilla para consultar servicios y enviar
-        solicitudes directamente.
-    </p>
-</div>
-
-
-<div class="services-grid">
-
-    <div class="service-card">
-        <div class="icon">
-            <i class="fa-solid fa-mobile-screen-button"></i>
-        </div>
-        <h3>Recargas internacionales</h3>
-        <p>
-            Consulta las ofertas disponibles y solicita una recarga
-            para tus familiares.
-        </p>
-    </div>
-
-    <div class="service-card">
-        <div class="icon">
-            <i class="fa-solid fa-money-bill-transfer"></i>
-        </div>
-        <h3>Remesas</h3>
-        <p>
-            Información y solicitudes de remesas con atención
-            personalizada.
-        </p>
-    </div>
-
-    <div class="service-card">
-        <div class="icon">
-            <i class="fa-solid fa-plane-departure"></i>
-        </div>
-        <h3>Pasajes</h3>
-        <p>
-            Consulta boletos disponibles con origen, destino,
-            fechas y moneda del precio.
-        </p>
-    </div>
-
-    <div class="service-card">
-        <div class="icon">
-            <i class="fa-solid fa-route"></i>
-        </div>
-        <h3>Información de viajes</h3>
-        <p>
-            Orientación general sobre destinos y necesidades
-            relacionadas con viajes.
-        </p>
-    </div>
-
-</div>
-
+<section id="recargas">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">Conectividad</div>
+   <h2>Planes de <span class="gold">recargas</span></h2>
+   <p>Consulta las ofertas disponibles y solicita la tuya.</p>
+  </div>
+  <div class="grid" id="rechargesList"><div class="empty">Cargando ofertas...</div></div>
+ </div>
 </section>
 
-
-<!-- ================= TASAS ================= -->
-
-<section class="container section" id="tasas">
-
-<div class="section-head">
-    <div class="kicker">Información financiera</div>
-    <h2>Tasas de cambio</h2>
-    <p>
-        Valores configurables desde el área de administración.
-        La tasa informal de Cuba puede actualizarse manualmente.
-    </p>
-</div>
-
-
-<div class="rates-grid">
-
-    <div class="rate-card">
-        <small>USD → CUP</small>
-        <strong id="rateUSD">—</strong>
-        <span>Dólar estadounidense</span>
-    </div>
-
-    <div class="rate-card">
-        <small>EUR → CUP</small>
-        <strong id="rateEUR">—</strong>
-        <span>Euro</span>
-    </div>
-
-    <div class="rate-card">
-        <small>RUB → CUP</small>
-        <strong id="rateRUB">—</strong>
-        <span>Rublo ruso</span>
-    </div>
-
-    <div class="rate-card">
-        <small>MLC → CUP</small>
-        <strong id="rateMLC">—</strong>
-        <span>MLC</span>
-    </div>
-
-    <div class="rate-card">
-        <small>GBP → CUP</small>
-        <strong id="rateGBP">—</strong>
-        <span>Libra esterlina</span>
-    </div>
-
-</div>
-
-
-<div style="margin-top:12px;color:#74839a;font-size:9px;">
-    Última actualización:
-    <span id="rateDate">—</span>
-</div>
-
+<section id="pasajes" style="background:#0b1425">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">Tu próximo viaje</div>
+   <h2>Pasajes de <span class="gold">avión y transporte</span></h2>
+   <p>Precios, destinos y fechas publicados por administración.</p>
+  </div>
+  <div class="grid" id="ticketsList"><div class="empty">Cargando pasajes...</div></div>
+ </div>
 </section>
 
-
-<!-- ================= CALCULADORA ================= -->
-
-<section class="container section">
-
-<div class="section-head">
-    <div class="kicker">Calculadora</div>
-    <h2>Conversor de monedas</h2>
-    <p>
-        Utiliza las tasas configuradas en la página para realizar
-        una conversión orientativa.
-    </p>
-</div>
-
-
-<div class="calc-box">
-
-    <div>
-
-        <div class="form-group">
-            <label>Cantidad</label>
-            <input
-                class="input"
-                id="calcAmount"
-                type="number"
-                value="1000"
-                min="0"
-                step="0.01"
-                oninput="calculateCurrency()">
-        </div>
-
-
-        <div class="form-group">
-            <label>Moneda de origen</label>
-
-            <select
-                class="select"
-                id="calcFrom"
-                onchange="calculateCurrency()">
-
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="RUB">RUB</option>
-                <option value="MLC">MLC</option>
-                <option value="GBP">GBP</option>
-                <option value="CUP">CUP</option>
-
-            </select>
-        </div>
-
-
-        <div class="form-group">
-            <label>Moneda de destino</label>
-
-            <select
-                class="select"
-                id="calcTo"
-                onchange="calculateCurrency()">
-
-                <option value="CUP">CUP</option>
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="RUB">RUB</option>
-                <option value="MLC">MLC</option>
-                <option value="GBP">GBP</option>
-
-            </select>
-        </div>
-
-    </div>
-
-
-    <div class="calc-result">
-
-        <div>
-
-            <span>Resultado aproximado</span>
-
-            <strong id="calcResult">
-                —
-            </strong>
-
-            <span id="calcDescription">
-                —
-            </span>
-
-        </div>
-
-    </div>
-
-</div>
-
+<section id="remesas">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">Conectamos familias</div>
+   <h2>Servicio de <span class="gold">remesas</span></h2>
+   <p>Solicita información sobre disponibilidad, destinos y condiciones.</p>
+  </div>
+  <div class="grid">
+   <article class="card">
+    <div class="service-icon"><i class="fa-solid fa-earth-americas"></i></div>
+    <h3>Desde distintos países</h3>
+    <p>Consulta opciones de envío desde Europa, Estados Unidos y otros lugares.</p>
+    <button class="btn btn-gold" type="button" onclick="openRequest('Remesa')">Solicitar remesa</button>
+   </article>
+   <article class="card">
+    <div class="service-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+    <h3>Información personalizada</h3>
+    <p>Indícanos el país de origen, destino y cantidad para recibir orientación.</p>
+    <button class="btn btn-dark" type="button" onclick="openRequest('Consulta general')">Hacer consulta</button>
+   </article>
+   <article class="card">
+    <div class="service-icon"><i class="fa-solid fa-comments"></i></div>
+    <h3>Atención directa</h3>
+    <p>Contacta con administración para conocer los detalles de cada operación.</p>
+    <a class="btn btn-dark" href="https://wa.me/79046319565" target="_blank" rel="noopener">Hablar por WhatsApp</a>
+   </article>
+  </div>
+ </div>
 </section>
 
+<section id="tasas" style="background:#0b1425">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">Información financiera</div>
+   <h2>Tasas de <span class="gold">cambio</span></h2>
+   <p>Valores configurados por administración. Confirma la tasa antes de realizar cualquier operación.</p>
+  </div>
+  <div class="rates" id="ratesList">
+   <div class="rate"><span>USD</span><strong>—</strong><span>CUP</span></div>
+   <div class="rate"><span>EUR</span><strong>—</strong><span>CUP</span></div>
+   <div class="rate"><span>RUB</span><strong>—</strong><span>CUP</span></div>
+   <div class="rate"><span>MLC</span><strong>—</strong><span>CUP</span></div>
+   <div class="rate"><span>GBP</span><strong>—</strong><span>CUP</span></div>
+  </div>
 
-<!-- ================= RECARGAS ================= -->
-
-<section class="container section" id="recargas">
-
-<div class="section-head">
-    <div class="kicker">Ofertas disponibles</div>
-    <h2>Recargas internacionales</h2>
-    <p>
-        Consulta las opciones publicadas actualmente.
-    </p>
-</div>
-
-
-<div class="cards-grid" id="rechargesContainer">
-
-    <div class="no-data">
-        Cargando recargas...
-    </div>
-
-</div>
-
+  <div class="card" style="margin-top:20px">
+   <h3><i class="fa-solid fa-calculator gold"></i> Calculadora de monedas</h3>
+   <div class="calculator">
+    <div class="field"><label>Cantidad</label><input id="calcAmount" type="number" min="0" value="100"></div>
+    <div class="field"><label>De</label><select id="calcFrom"><option>USD</option><option>EUR</option><option>RUB</option><option>MLC</option><option>GBP</option><option>CUP</option></select></div>
+    <div class="field"><label>A</label><select id="calcTo"><option>CUP</option><option>USD</option><option>EUR</option><option>RUB</option><option>MLC</option><option>GBP</option></select></div>
+    <button class="btn btn-gold" type="button" onclick="calculate()">Calcular</button>
+   </div>
+   <div class="result" id="calcResult" style="margin-top:14px">Introduce una cantidad para calcular.</div>
+  </div>
+ </div>
 </section>
 
-
-<!-- ================= PASAJES ================= -->
-
-<section class="container section" id="pasajes">
-
-<div class="section-head">
-    <div class="kicker">Viajes</div>
-
-    <h2>Pasajes y boletos</h2>
-
-    <p>
-        Consulta los pasajes publicados con origen, destino,
-        fechas y precio en la moneda seleccionada.
-    </p>
-</div>
-
-
-<div class="ticket-grid" id="ticketsContainer">
-
-    <div class="no-data">
-        Cargando pasajes...
+<section id="solicitud">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">Estamos para ayudarte</div>
+   <h2>Solicita <span class="gold">información</span></h2>
+   <p>Completa tus datos y nos pondremos en contacto contigo.</p>
+  </div>
+  <div class="card">
+   <form id="requestForm" onsubmit="submitRequest(event)">
+    <div class="form-grid">
+     <div class="field"><label>Nombre completo</label><input id="clientName" required maxlength="100" placeholder="Tu nombre"></div>
+     <div class="field"><label>Teléfono / WhatsApp</label><input id="clientPhone" required maxlength="40" placeholder="Tu número de contacto"></div>
+     <div class="field">
+      <label>Servicio</label>
+      <select id="clientService">
+       <option>Recarga</option>
+       <option>Remesa</option>
+       <option>Consulta general</option>
+       <option>Pasaje de avión</option>
+       <option>Autobús o tren</option>
+      </select>
+     </div>
+     <div class="field"><label>Destino</label><input id="clientDestination" maxlength="100" placeholder="País o ciudad"></div>
+     <div class="field full"><label>Detalles de tu solicitud</label><textarea id="clientDetails" maxlength="1500" placeholder="Cuéntanos qué necesitas, fechas, cantidad o cualquier detalle importante."></textarea></div>
+     <div class="full"><button class="btn btn-gold" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar solicitud</button></div>
     </div>
-
-</div>
-
+   </form>
+   <p class="mini" id="requestStatus" aria-live="polite"></p>
+  </div>
+ </div>
 </section>
 
-
-<!-- ================= ATENCIÓN ================= -->
-
-<section class="container section">
-
-<div class="attention">
-
-    <div class="attention-grid">
-
-        <div>
-            <h3>¿Necesitas algo diferente?</h3>
-
-            <p>
-                Si no aparece el destino, recarga, pasaje o servicio
-                que buscas, puedes escribir directamente al administrador.
-                Explica qué necesitas y se revisará tu solicitud.
-            </p>
-        </div>
-
-        <a
-            href="https://wa.me/79046319565"
-            target="_blank"
-            class="btn btn-green">
-
-            <i class="fa-brands fa-whatsapp"></i>
-            Contactar
-
-        </a>
-
-    </div>
-
-</div>
-
+<section>
+ <div class="container info-grid">
+  <div class="card contact-box">
+   <div class="service-icon"><i class="fa-solid fa-headset"></i></div>
+   <h3>Atención personalizada</h3>
+   <p>Recibe orientación directa para encontrar la opción que mejor se adapte a tus necesidades.</p>
+   <p><strong>Administrador:</strong> Daynel Caminero</p>
+   <p><strong>WhatsApp:</strong> <a class="gold" href="https://wa.me/79046319565" target="_blank" rel="noopener">+7 904 631 95 65</a></p>
+   <a class="btn btn-green" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Contactar directamente</a>
+  </div>
+  <div class="card contact-box">
+   <div class="service-icon"><i class="fa-solid fa-circle-info"></i></div>
+   <h3>Información importante</h3>
+   <p>Los precios y las tasas pueden cambiar según la disponibilidad y las condiciones del servicio.</p>
+   <p>Confirma siempre el importe final, las fechas y los requisitos antes de realizar un pago.</p>
+   <p class="mini">YOUR BRIDGE HOME — Tu puente hacia nuevas oportunidades.</p>
+  </div>
+ </div>
 </section>
-
-
-<!-- ================= SOLICITUD ================= -->
-
-<section class="container section" id="solicitud">
-
-<div class="section-head">
-
-    <div class="kicker">Atención</div>
-
-    <h2>Realizar una solicitud</h2>
-
-    <p>
-        Completa los datos y nos pondremos en contacto contigo.
-    </p>
-
-</div>
-
-
-<div class="request-box">
-
-<form id="requestForm">
-
-<div class="form-grid">
-
-    <div class="form-group">
-        <label>Nombre</label>
-        <input
-            class="input"
-            id="reqName"
-            required
-            placeholder="Tu nombre">
-    </div>
-
-
-    <div class="form-group">
-        <label>Teléfono / WhatsApp</label>
-        <input
-            class="input"
-            id="reqPhone"
-            required
-            placeholder="Tu número">
-    </div>
-
-
-    <div class="form-group">
-        <label>Servicio</label>
-
-        <select
-            class="select"
-            id="reqService"
-            onchange="serviceChanged()">
-
-            <option value="Recarga Internacional">
-                Recarga Internacional
-            </option>
-
-            <option value="Remesa">
-                Remesa
-            </option>
-
-            <option value="Boleto de Avión">
-                Boleto de Avión
-            </option>
-
-            <option value="Boleto de Bus/Tren">
-                Boleto de Bus/Tren
-            </option>
-
-            <option value="Información de Viaje">
-                Información de Viaje
-            </option>
-
-            <option value="Otro">
-                Otro
-            </option>
-
-        </select>
-    </div>
-
-
-    <div class="form-group">
-        <label>Destino</label>
-
-        <input
-            class="input"
-            id="reqDestination"
-            placeholder="País / ciudad / destino">
-    </div>
-
-
-    <div class="form-group full">
-
-        <label>Detalles</label>
-
-        <textarea
-            class="textarea"
-            id="reqDetails"
-            placeholder="Escribe aquí lo que necesitas..."></textarea>
-
-    </div>
-
-
-    <div class="full">
-
-        <button
-            type="submit"
-            class="btn btn-gold">
-
-            <i class="fa-solid fa-paper-plane"></i>
-            Enviar solicitud
-
-        </button>
-
-    </div>
-
-</div>
-
-</form>
-
-</div>
-
-</section>
-
-
-<!-- ================= FOOTER ================= -->
+</main>
 
 <footer>
-
-<div class="footer-inner">
-
-    <div class="footer-block">
-
-        <h4>YOUR BRIDGE HOME</h4>
-
-        <p>
-            Tu puente hacia nuevas oportunidades.
-            Servicios, información y atención personalizada.
-        </p>
-
-    </div>
-
-
-    <div class="footer-block">
-
-        <h4>Contacto</h4>
-
-        <p>
-            Daynel Caminero<br>
-            Administrador
-        </p>
-
-        <a href="https://wa.me/79046319565"
-           target="_blank">
-
-            <i class="fa-brands fa-whatsapp"></i>
-            +7 904 631 95 65
-
-        </a>
-
-    </div>
-
-
-    <div class="footer-block">
-
-        <h4>Información</h4>
-
-        <p>
-            Recargas · Remesas · Pasajes ·
-            Tasas · Información de viajes
-        </p>
-
-    </div>
-
-</div>
-
-
-<div class="footer-copy">
-
-    © <span id="year"></span> YOUR BRIDGE HOME · Todos los derechos reservados.
-
-</div>
-
+ <div class="container footer-inner">
+  <div><strong class="gold">YOUR BRIDGE HOME</strong><br>Tu puente hacia nuevas oportunidades.</div>
+  <div>Daynel Caminero · Administrador<br>WhatsApp: +7 904 631 95 65</div>
+  <div>© <span id="year"></span> YOUR BRIDGE HOME</div>
+ </div>
 </footer>
 
+<a class="floating" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> ATENCIÓN DIRECTA</a>
 
-<!-- ================= WHATSAPP ================= -->
-
-<a
-    class="whatsapp"
-    href="https://wa.me/79046319565"
-    target="_blank"
-    aria-label="WhatsApp">
-
-    <i class="fa-brands fa-whatsapp"></i>
-
-</a>
-
-
-<!-- =========================================================
-     LOGIN ADMIN
-========================================================= -->
-
-<div class="modal" id="adminLoginModal">
-
-<div class="modal-box modal-small">
-
-    <div class="modal-header">
-
-        <h3>
-            <i class="fa-solid fa-lock"></i>
-            Administración
-        </h3>
-
-        <button
-            class="close"
-            onclick="closeModal('adminLoginModal')">
-            ×
-        </button>
-
-    </div>
-
-
-    <div class="modal-body">
-
-        <div class="form-group">
-
-            <label>Clave de administrador</label>
-
-            <input
-                class="input"
-                id="adminPassword"
-                type="password"
-                placeholder="Introduce la clave">
-
-        </div>
-
-
-        <button
-            class="btn btn-gold"
-            style="width:100%;"
-            onclick="loginAdmin()">
-
-            <i class="fa-solid fa-right-to-bracket"></i>
-            Entrar
-
-        </button>
-
-    </div>
-
+<!-- ACCESO ADMINISTRADOR -->
+<div class="overlay" id="loginModal">
+ <div class="modal" style="max-width:400px">
+  <div class="modal-head"><h2>Administración</h2><button class="close" type="button" onclick="closeModal('loginModal')">✕</button></div>
+  <p class="mini">Acceso reservado al administrador.</p>
+  <div class="field"><label>Contraseña</label><input type="password" id="adminPassword" placeholder="Contraseña"></div>
+  <p id="loginError" style="color:#ff8b8b;font-size:12px"></p>
+  <button class="btn btn-gold" style="width:100%" type="button" onclick="login()">Entrar</button>
+ </div>
 </div>
 
+<!-- PANEL ADMIN -->
+<div class="overlay" id="adminModal">
+ <div class="modal">
+  <div class="modal-head"><h2><i class="fa-solid fa-screwdriver-wrench"></i> Panel de administración</h2><button class="close" type="button" onclick="closeModal('adminModal')">✕</button></div>
+  <div class="notice">Este panel facilita la edición desde el navegador. La contraseña escrita en el HTML no constituye seguridad real para datos sensibles. Configura las políticas RLS de Supabase y nunca pongas claves secretas de servicio en esta página.</div>
+
+  <div class="admin-tabs">
+   <button type="button" class="active" onclick="showAdminTab('ratesAdmin',this)">Tasas</button>
+   <button type="button" onclick="showAdminTab('rechargeAdmin',this)">Recargas</button>
+   <button type="button" onclick="showAdminTab('ticketAdmin',this)">Pasajes</button>
+   <button type="button" onclick="showAdminTab('requestsAdmin',this)">Solicitudes</button>
+   <button type="button" onclick="showAdminTab('generatorAdmin',this)">Crear anuncios</button>
+  </div>
+
+  <div class="admin-panel active" id="ratesAdmin">
+   <h3>Tasas de cambio (valor de 1 unidad en CUP)</h3>
+   <div class="form-grid">
+    <div class="field"><label>USD → CUP</label><input id="rateUSD" type="number" step="0.0001"></div>
+    <div class="field"><label>EUR → CUP</label><input id="rateEUR" type="number" step="0.0001"></div>
+    <div class="field"><label>RUB → CUP</label><input id="rateRUB" type="number" step="0.0001"></div>
+    <div class="field"><label>MLC → CUP</label><input id="rateMLC" type="number" step="0.0001"></div>
+    <div class="field"><label>GBP → CUP</label><input id="rateGBP" type="number" step="0.0001"></div>
+   </div>
+   <button class="btn btn-gold" style="margin-top:14px" type="button" onclick="saveRates()">Guardar tasas</button>
+  </div>
+
+  <div class="admin-panel" id="rechargeAdmin">
+   <h3>Crear o editar plan de recarga</h3>
+   <input type="hidden" id="rechargeId">
+   <div class="form-grid">
+    <div class="field"><label>Etiqueta</label><input id="rechargeLabel" placeholder="OFERTA ESPECIAL"></div>
+    <div class="field"><label>Nombre del plan</label><input id="rechargeName" placeholder="INTERNET +"></div>
+    <div class="field"><label>Precio</label><input id="rechargePrice" type="number" step="0.01"></div>
+    <div class="field"><label>Moneda</label><select id="rechargeCurrency"><option>RUB</option><option>USD</option><option>EUR</option><option>CUP</option><option>MLC</option></select></div>
+    <div class="field full"><label>Descripción 1</label><input id="rechargeDesc1" placeholder="2 GB LTE"></div>
+    <div class="field full"><label>Descripción 2</label><input id="rechargeDesc2" placeholder="300 MB.cu"></div>
+   </div>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveRecharge()">Guardar plan</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearRechargeForm()">Nuevo</button>
+   <div class="admin-list" id="adminRechargeList"></div>
+  </div>
+
+  <div class="admin-panel" id="ticketAdmin">
+   <h3>Crear o editar pasaje</h3>
+   <input type="hidden" id="ticketId">
+   <div class="form-grid">
+    <div class="field"><label>Etiqueta / oferta</label><input id="ticketLabel" placeholder="PRECIO ESPECIAL"></div>
+    <div class="field"><label>Tipo de transporte</label><select id="ticketType"><option>Avión</option><option>Autobús</option><option>Tren</option></select></div>
+    <div class="field"><label>Origen</label><input id="ticketOrigin" placeholder="Moscú"></div>
+    <div class="field"><label>Destino</label><input id="ticketDestination" placeholder="La Habana"></div>
+    <div class="field"><label>Fecha de salida</label><input id="ticketDeparture" type="date"></div>
+    <div class="field"><label>Fecha de regreso (opcional)</label><input id="ticketReturn" type="date"></div>
+    <div class="field"><label>Precio</label><input id="ticketPrice" type="number" min="0" step="0.01"></div>
+    <div class="field"><label>Moneda</label><select id="ticketCurrency"><option>USD</option><option>MLC</option><option>CUP</option><option>EUR</option><option>RUB</option></select></div>
+    <div class="field full"><label>Descripción adicional</label><textarea id="ticketDescription" placeholder="Equipaje, condiciones, escalas u otros detalles"></textarea></div>
+   </div>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveTicket()">Guardar pasaje</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearTicketForm()">Nuevo</button>
+   <div class="admin-list" id="adminTicketList"></div>
+   <div class="notice">Si la tabla pasajes aún no existe, ejecuta el SQL de instalación que aparece después del código en Supabase → SQL Editor.</div>
+  </div>
+
+  <div class="admin-panel" id="requestsAdmin">
+   <h3>Solicitudes recibidas</h3>
+   <button class="btn btn-dark" type="button" onclick="loadRequests()">Actualizar solicitudes</button>
+   <div class="admin-list" id="adminRequestsList"></div>
+  </div>
+
+  <div class="admin-panel" id="generatorAdmin">
+   <h3><i class="fa-solid fa-image gold"></i> Generador privado de anuncios</h3>
+   <p class="mini">Crea imágenes promocionales para compartir en WhatsApp y redes sociales. Los valores se introducen manualmente.</p>
+   <div class="form-grid">
+    <div class="field full"><label>Título del anuncio</label><input id="adTitle" value="TASA INFORMAL HOY EN CUBA"></div>
+    <div class="field"><label>USD en CUP</label><input id="adUSD" type="number" step="0.01" placeholder="Valor de hoy"></div>
+    <div class="field"><label>EUR en CUP</label><input id="adEUR" type="number" step="0.01"></div>
+    <div class="field"><label>MLC en CUP</label><input id="adMLC" type="number" step="0.01"></div>
+    <div class="field"><label>RUB en CUP</label><input id="adRUB" type="number" step="0.01"></div>
+    <div class="field"><label>Oferta de recarga</label><input id="adRecharge" placeholder="INTERNET + · 350 ₽"></div>
+    <div class="field"><label>Oferta de remesa</label><input id="adRemittance" placeholder="Consulta nuestras opciones"></div>
+    <div class="field"><label>Oferta de pasaje</label><input id="adTicket" placeholder="Vuelos y destinos disponibles"></div>
+    <div class="field"><label>Fecha del anuncio</label><input id="adDate" type="date"></div>
+    <div class="field full"><label>Mensaje adicional</label><textarea id="adNote" placeholder="Consulta disponibilidad y condiciones por WhatsApp"></textarea></div>
+   </div>
+   <div class="checks" style="margin:12px 0">
+    <label><input type="checkbox" id="showAdRates" checked> Mostrar tasas</label>
+    <label><input type="checkbox" id="showAdRecharge" checked> Mostrar recargas</label>
+    <label><input type="checkbox" id="showAdRemittance" checked> Mostrar remesas</label>
+    <label><input type="checkbox" id="showAdTicket" checked> Mostrar pasajes</label>
+   </div>
+   <button class="btn btn-gold" type="button" onclick="generateAd()"><i class="fa-solid fa-wand-magic-sparkles"></i> Generar imagen</button>
+   <button class="btn btn-dark" type="button" onclick="downloadAd()"><i class="fa-solid fa-download"></i> Descargar PNG</button>
+   <button class="btn btn-dark" type="button" onclick="copyAdText()"><i class="fa-regular fa-copy"></i> Copiar texto</button>
+   <canvas id="adCanvas" class="generator-preview" width="1080" height="1350"></canvas>
+   <p class="mini">La imagen se genera localmente en tu navegador. No ocupa espacio de almacenamiento de Supabase.</p>
+  </div>
+ </div>
 </div>
-
-
-<!-- =========================================================
-     PANEL ADMIN
-========================================================= -->
-
-<div class="modal" id="adminModal">
-
-<div class="modal-box">
-
-    <div class="modal-header">
-
-        <h3>
-            <i class="fa-solid fa-screwdriver-wrench"></i>
-            Panel de administración
-        </h3>
-
-        <button
-            class="close"
-            onclick="closeModal('adminModal')">
-            ×
-        </button>
-
-    </div>
-
-
-    <div class="modal-body">
-
-        <div class="admin-toolbar">
-
-            <button onclick="openAdminRates()">
-                <i class="fa-solid fa-chart-line"></i>
-                Tasas
-            </button>
-
-            <button onclick="openAdminRecharges()">
-                <i class="fa-solid fa-mobile-screen"></i>
-                Recargas
-            </button>
-
-            <button onclick="openAdminTickets()">
-                <i class="fa-solid fa-ticket"></i>
-                Pasajes
-            </button>
-
-            <button onclick="openAdminGenerator()">
-                <i class="fa-solid fa-image"></i>
-                Generar imagen
-            </button>
-
-            <button onclick="openAdminRequests()">
-                <i class="fa-solid fa-list-check"></i>
-                Solicitudes
-            </button>
-
-            <button onclick="logoutAdmin()">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                Salir
-            </button>
-
-        </div>
-
-
-        <div id="adminContent" style="margin-top:18px;">
-
-            <div class="no-data">
-                Selecciona una opción de administración.
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-     MODAL PASAJES
-========================================================= -->
-
-<div class="modal" id="ticketModal">
-
-<div class="modal-box">
-
-    <div class="modal-header">
-
-        <h3>
-            <i class="fa-solid fa-ticket"></i>
-            Administrar pasajes
-        </h3>
-
-        <button
-            class="close"
-            onclick="closeModal('ticketModal')">
-            ×
-        </button>
-
-    </div>
-
-
-    <div class="modal-body">
-
-        <form id="ticketForm">
-
-            <input type="hidden" id="ticketId">
-
-            <div class="form-grid">
-
-                <div class="form-group">
-
-                    <label>Etiqueta / oferta</label>
-
-                    <input
-                        class="input"
-                        id="ticketLabel"
-                        placeholder="Ej: Oferta especial">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Tipo</label>
-
-                    <select class="select" id="ticketType">
-
-                        <option value="Avión">
-                            Avión
-                        </option>
-
-                        <option value="Bus/Tren">
-                            Bus / Tren
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Origen</label>
-
-                    <input
-                        class="input"
-                        id="ticketOrigin"
-                        required
-                        placeholder="Ej: Moscú">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Destino</label>
-
-                    <input
-                        class="input"
-                        id="ticketDestination"
-                        required
-                        placeholder="Ej: La Habana">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Fecha de salida</label>
-
-                    <input
-                        class="input"
-                        id="ticketDeparture"
-                        type="date"
-                        required>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Fecha de regreso</label>
-
-                    <input
-                        class="input"
-                        id="ticketReturn"
-                        type="date">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Precio</label>
-
-                    <input
-                        class="input"
-                        id="ticketPrice"
-                        type="number"
-                        min="0"
-                        step="0.01"
-                        required
-                        placeholder="Ej: 99800">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Moneda</label>
-
-                    <select class="select" id="ticketCurrency">
-
-                        <option value="USD">USD</option>
-                        <option value="MLC">MLC</option>
-                        <option value="CUP">CUP</option>
-                        <option value="EUR">EUR</option>
-                        <option value="RUB">RUB</option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="form-group full">
-
-                    <label>Descripción</label>
-
-                    <textarea
-                        class="textarea"
-                        id="ticketDescription"
-                        placeholder="Ej: Equipaje incluido, condiciones, información adicional..."></textarea>
-
-                </div>
-
-
-                <div class="form-group full">
-
-                    <label class="check">
-
-                        <input
-                            type="checkbox"
-                            id="ticketActive"
-                            checked>
-
-                        Mostrar este pasaje públicamente
-
-                    </label>
-
-                </div>
-
-
-                <div class="full"
-                     style="display:flex;gap:8px;flex-wrap:wrap;">
-
-                    <button
-                        type="submit"
-                        class="btn btn-gold">
-
-                        <i class="fa-solid fa-save"></i>
-                        Guardar pasaje
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="btn btn-dark"
-                        onclick="resetTicketForm()">
-
-                        Limpiar
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        </form>
-
-
-        <div class="admin-list" id="adminTicketsList">
-
-            <div class="no-data">
-                Cargando pasajes...
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-</div>
-
-
-<!-- =========================================================
-     GENERADOR DE IMAGEN
-========================================================= -->
-
-<div class="modal" id="generatorModal">
-
-<div class="modal-box">
-
-    <div class="modal-header">
-
-        <h3>
-            <i class="fa-solid fa-image"></i>
-            Generador de imagen promocional
-        </h3>
-
-        <button
-            class="close"
-            onclick="closeModal('generatorModal')">
-            ×
-        </button>
-
-    </div>
-
-
-    <div class="modal-body">
-
-        <div class="generator-layout">
-
-
-            <!-- CONTROLES -->
-
-            <div class="generator-controls">
-
-                <div class="form-group">
-
-                    <label>Título de la imagen</label>
-
-                    <input
-                        class="input"
-                        id="promoTitle"
-                        value="OFERTAS DE HOY"
-                        oninput="generatePromoImage()">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Subtítulo</label>
-
-                    <input
-                        class="input"
-                        id="promoSubtitle"
-                        value="YOUR BRIDGE HOME · Tu puente hacia nuevas oportunidades"
-                        oninput="generatePromoImage()">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Tasa informal USD → CUP</label>
-
-                    <input
-                        class="input"
-                        id="promoUSD"
-                        type="number"
-                        step="0.01"
-                        placeholder="Ej: 500"
-                        oninput="generatePromoImage()">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Tasa informal EUR → CUP</label>
-
-                    <input
-                        class="input"
-                        id="promoEUR"
-                        type="number"
-                        step="0.01"
-                        placeholder="Ej: 580"
-                        oninput="generatePromoImage()">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Tasa informal RUB → CUP</label>
-
-                    <input
-                        class="input"
-                        id="promoRUB"
-                        type="number"
-                        step="0.01"
-                        placeholder="Ej: 6"
-                        oninput="generatePromoImage()">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>MLC → CUP</label>
-
-                    <input
-                        class="input"
-                        id="promoMLC"
-                        type="number"
-                        step="0.01"
-                        placeholder="Ej: 300"
-                        oninput="generatePromoImage()">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Oferta de recarga</label>
-
-                    <input
-                        class="input"
-                        id="promoRecharge"
-                        value="INTERNET + · 350 ₽"
-                        oninput="generatePromoImage()">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Detalle de recarga</label>
-
-                    <input
-                        class="input"
-                        id="promoRechargeDetail"
-                        value="2 GB LTE + 300 MB.cu"
-                        oninput="generatePromoImage()">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Remesa</label>
-
-                    <input
-                        class="input"
-                        id="promoRemittance"
-                        placeholder="Ej: 1000 RUB → 9.80 CUP"
-                        oninput="generatePromoImage()">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Pasaje / oferta de viaje</label>
-
-                    <input
-                        class="input"
-                        id="promoTicket"
-                        placeholder="Ej: Moscú → Cuba · 99800 RUB"
-                        oninput="generatePromoImage()">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Información adicional</label>
-
-                    <input
-                        class="input"
-                        id="promoExtra"
-                        placeholder="Ej: Consulta disponibilidad"
-                        oninput="generatePromoImage()">
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>Selecciona lo que aparecerá</label>
-
-                    <div class="check-grid">
-
-                        <label class="check">
-                            <input
-                                type="checkbox"
-                                id="showRates"
-                                checked
-                                onchange="generatePromoImage()">
-                            Tasas
-                        </label>
-
-                        <label class="check">
-                            <input
-                                type="checkbox"
-                                id="showRecharge"
-                                checked
-                                onchange="generatePromoImage()">
-                            Recarga
-                        </label>
-
-                        <label class="check">
-                            <input
-                                type="checkbox"
-                                id="showRemittance"
-                                checked
-                                onchange="generatePromoImage()">
-                            Remesa
-                        </label>
-
-                        <label class="check">
-                            <input
-                                type="checkbox"
-                                id="showTicket"
-                                checked
-                                onchange="generatePromoImage()">
-                            Pasaje
-                        </label>
-
-                        <label class="check">
-                            <input
-                                type="checkbox"
-                                id="showExtra"
-                                checked
-                                onchange="generatePromoImage()">
-                            Información
-                        </label>
-
-                        <label class="check">
-                            <input
-                                type="checkbox"
-                                id="showContact"
-                                checked
-                                onchange="generatePromoImage()">
-                            WhatsApp
-                        </label>
-
-                    </div>
-
-                </div>
-
-
-                <div class="generator-actions">
-
-                    <button
-                        class="btn btn-gold"
-                        onclick="downloadPromoImage()">
-
-                        <i class="fa-solid fa-download"></i>
-                        Descargar PNG
-
-                    </button>
-
-
-                    <button
-                        class="btn btn-green"
-                        onclick="copyPromoText()">
-
-                        <i class="fa-solid fa-copy"></i>
-                        Copiar texto
-
-                    </button>
-
-                </div>
-
-
-                <div
-                    class="generated-message"
-                    id="promoMessage">
-
-                    El texto promocional aparecerá aquí.
-
-                </div>
-
-            </div>
-
-
-            <!-- PREVIEW -->
-
-            <div class="generator-preview">
-
-                <div class="preview-frame">
-
-                    <canvas
-                        id="promoCanvas"
-                        width="1080"
-                        height="1350">
-                    </canvas>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-</div>
-
-
-<!-- ================= TOAST ================= -->
-
-<div class="toast" id="toast"></div>
-
-
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
 
 <script>
+// CONFIGURACIÓN SUPABASE
+const SUPABASE_URL = "https://lwgeillycitljubenzhv.supabase.co";
+const SUPABASE_KEY = "sb_publishable_LaA2IPL1J_IWAH0CVMUcBQ_j-BZa2pe";
+const ADMIN_PASSWORD = "MI_CLAVE_SECRETA";
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-/* =========================================================
-   CONFIGURACIÓN
-========================================================= */
+// Acceso seguro a los elementos HTML por su ID.
+// Evita depender de variables globales creadas automáticamente por el navegador.
+const $ = id => document.getElementById(id);
 
-const SUPABASE_URL =
-    "https://lwgeillycitljubenzhv.supabase.co";
-
-const SUPABASE_KEY =
-    "sb_publishable_LaA2IPL1J_IWAH0CVMUcBQ_j-BZa2pe";
-
-const ADMIN_PASSWORD =
-    "MI_CLAVE_SECRETA";
-
-let supabaseClient = null;
-
-try{
-
-    supabaseClient =
-        window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_KEY
-        );
-
-}catch(error){
-
-    console.error(error);
-
-}
-
-
-/* =========================================================
-   VARIABLES
-========================================================= */
-
-let rates = {
-
-    USD:0,
-    EUR:0,
-    RUB:0,
-    MLC:0,
-    GBP:0,
-    CUP:1
-
-};
-
+let rates = {USD:0,EUR:0,RUB:0,MLC:0,GBP:0};
 let rechargeData = [];
 let ticketData = [];
+let requestData = [];
 
-let adminLogged = false;
+$("year").textContent = new Date().getFullYear();
+$("adDate").value = new Date().toISOString().slice(0,10);
 
+// NAVEGACIÓN
+function toggleMenu(){
+ $("navlinks").classList.toggle("open");
+}
 
-/* =========================================================
-   INICIO
-========================================================= */
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-    document.getElementById("year").textContent =
-        new Date().getFullYear();
-
-    loadRates();
-    loadRecharges();
-    loadTickets();
-
-    generatePromoImage();
-
+document.querySelectorAll(".navlinks a").forEach(a=>{
+ a.addEventListener("click",()=>{
+  $("navlinks").classList.remove("open");
+ });
 });
 
+// Cierra el menú móvil después de pulsar un enlace interno.
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+ a.addEventListener("click",()=>{
+  const target = $(a.getAttribute("href").slice(1));
+  if(target){
+   $("navlinks").classList.remove("open");
+  }
+ });
+});
 
-/* =========================================================
-   UTILIDADES
-========================================================= */
-
-function esc(value){
-
-    return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
+// MODALES
+function openLogin(){
+ $("loginError").textContent="";
+ $("loginModal").classList.add("show");
+ setTimeout(()=>$("adminPassword").focus(),100);
 }
-
-
-function money(value){
-
-    return Number(value || 0)
-        .toLocaleString("es-ES",{
-            maximumFractionDigits:2
-        });
-
-}
-
-
-function formatDate(date){
-
-    if(!date) return "Sin fecha";
-
-    const parts =
-        String(date).split("-");
-
-    if(parts.length !== 3)
-        return date;
-
-    return `${parts[2]}/${parts[1]}/${parts[0]}`;
-
-}
-
-
-function showToast(message){
-
-    const toast =
-        document.getElementById("toast");
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    setTimeout(()=>{
-        toast.classList.remove("show");
-    },3000);
-
-}
-
 
 function closeModal(id){
-
-    document
-        .getElementById(id)
-        .classList.remove("active");
-
+ $(id).classList.remove("show");
 }
 
-
-/* =========================================================
-   MENÚ
-========================================================= */
-
-function toggleMenu(){
-
-    document
-        .getElementById("navLinks")
-        .classList.toggle("open");
-
+function login(){
+ if($("adminPassword").value === ADMIN_PASSWORD){
+  closeModal("loginModal");
+  $("adminModal").classList.add("show");
+  loadAdminData();
+  $("adminPassword").value="";
+ }else{
+  $("loginError").textContent="Contraseña incorrecta.";
+ }
 }
 
-
-/* =========================================================
-   TASAS
-========================================================= */
-
-async function loadRates(){
-
-    if(!supabaseClient){
-
-        setDefaultRates();
-        return;
-
-    }
-
-    try{
-
-        const {data,error} =
-            await supabaseClient
-                .from("configuracion")
-                .select("*")
-                .eq("id",1)
-                .maybeSingle();
-
-        if(error)
-            throw error;
-
-        if(data){
-
-            rates.USD =
-                Number(data.tasa_usd || 0);
-
-            rates.EUR =
-                Number(data.tasa_eur || 0);
-
-            rates.RUB =
-                Number(data.tasa_rub || 0);
-
-            rates.MLC =
-                Number(data.tasa_mlc || 0);
-
-            rates.GBP =
-                Number(data.tasa_gbp || 0);
-
-            document.getElementById("rateUSD")
-                .textContent = money(rates.USD);
-
-            document.getElementById("rateEUR")
-                .textContent = money(rates.EUR);
-
-            document.getElementById("rateRUB")
-                .textContent = money(rates.RUB);
-
-            document.getElementById("rateMLC")
-                .textContent = money(rates.MLC);
-
-            document.getElementById("rateGBP")
-                .textContent = money(rates.GBP);
-
-            document.getElementById("rateDate")
-                .textContent =
-                    data.fecha_actualizacion
-                    ? new Date(data.fecha_actualizacion)
-                        .toLocaleString("es-ES")
-                    : "No disponible";
-
-        }
-
-    }catch(error){
-
-        console.error("Error tasas:",error);
-
-        setDefaultRates();
-
-    }
-
-    calculateCurrency();
-
-}
-
-
-function setDefaultRates(){
-
-    document.getElementById("rateUSD").textContent = "—";
-    document.getElementById("rateEUR").textContent = "—";
-    document.getElementById("rateRUB").textContent = "—";
-    document.getElementById("rateMLC").textContent = "—";
-    document.getElementById("rateGBP").textContent = "—";
-    document.getElementById("rateDate").textContent = "Manual";
-
-}
-
-
-/* =========================================================
-   CALCULADORA
-========================================================= */
-
-function calculateCurrency(){
-
-    const amount =
-        Number(
-            document.getElementById("calcAmount").value
-        ) || 0;
-
-    const from =
-        document.getElementById("calcFrom").value;
-
-    const to =
-        document.getElementById("calcTo").value;
-
-    if(from === to){
-
-        document.getElementById("calcResult")
-            .textContent = money(amount);
-
-        document.getElementById("calcDescription")
-            .textContent =
-                `${amount} ${from} = ${amount} ${to}`;
-
-        return;
-
-    }
-
-    const fromRate =
-        from === "CUP" ? 1 : Number(rates[from] || 0);
-
-    const toRate =
-        to === "CUP" ? 1 : Number(rates[to] || 0);
-
-    if(!fromRate || !toRate){
-
-        document.getElementById("calcResult")
-            .textContent = "—";
-
-        document.getElementById("calcDescription")
-            .textContent =
-                "Configura las tasas para realizar la conversión.";
-
-        return;
-
-    }
-
-    const result =
-        amount * fromRate / toRate;
-
-    document.getElementById("calcResult")
-        .textContent =
-            `${money(result)} ${to}`;
-
-    document.getElementById("calcDescription")
-        .textContent =
-            `${money(amount)} ${from} ≈ ${money(result)} ${to}`;
-
-}
-
-
-/* =========================================================
-   RECARGAS
-========================================================= */
-
-async function loadRecharges(){
-
-    const container =
-        document.getElementById("rechargesContainer");
-
-    if(!supabaseClient){
-
-        container.innerHTML =
-            `<div class="no-data">
-                No se pudo conectar con Supabase.
-            </div>`;
-
-        return;
-
-    }
-
-    try{
-
-        const {data,error} =
-            await supabaseClient
-                .from("planes_recargas")
-                .select("*")
-                .eq("activo",true)
-                .order("id",{ascending:true});
-
-        if(error)
-            throw error;
-
-        rechargeData = data || [];
-
-        renderRecharges();
-
-    }catch(error){
-
-        console.error(error);
-
-        container.innerHTML =
-            `<div class="no-data">
-                No hay recargas publicadas actualmente.
-            </div>`;
-
-    }
-
-}
-
-
-function renderRecharges(){
-
-    const container =
-        document.getElementById("rechargesContainer");
-
-    if(!rechargeData.length){
-
-        container.innerHTML =
-            `<div class="no-data">
-                No hay recargas publicadas.
-            </div>`;
-
-        return;
-
-    }
-
-    container.innerHTML =
-        rechargeData.map(item=>`
-
-            <div class="offer-card">
-
-                <div class="offer-tag">
-                    ${esc(item.etiqueta || "OFERTA")}
-                </div>
-
-                <h3>
-                    ${esc(item.nombre_plan || "Recarga")}
-                </h3>
-
-                <div class="offer-price">
-                    ${money(item.precio)} ₽
-                </div>
-
-                <p>
-                    ${esc(item.descripcion_1 || "")}
-                    <br>
-                    ${esc(item.descripcion_2 || "")}
-                </p>
-
-                <div style="margin-top:14px;">
-
-                    <button
-                        class="btn btn-gold"
-                        onclick="requestRecharge('${esc(item.nombre_plan || "Recarga")}')">
-
-                        Solicitar
-
-                    </button>
-
-                </div>
-
-            </div>
-
-        `).join("");
-
-}
-
-
-function requestRecharge(name){
-
-    document.getElementById("reqService").value =
-        "Recarga Internacional";
-
-    document.getElementById("reqDetails").value =
-        `Deseo solicitar la recarga: ${name}`;
-
-    document.getElementById("solicitud")
-        .scrollIntoView({behavior:"smooth"});
-
-}
-
-
-/* =========================================================
-   PASAJES
-========================================================= */
-
-async function loadTickets(){
-
-    const container =
-        document.getElementById("ticketsContainer");
-
-    if(!supabaseClient){
-
-        container.innerHTML =
-            `<div class="no-data">
-                No se pudo conectar con Supabase.
-            </div>`;
-
-        return;
-
-    }
-
-    try{
-
-        const {data,error} =
-            await supabaseClient
-                .from("pasajes")
-                .select("*")
-                .eq("activo",true)
-                .order("fecha_salida",{ascending:true});
-
-        if(error)
-            throw error;
-
-        ticketData = data || [];
-
-        renderTickets();
-
-    }catch(error){
-
-        console.error("Pasajes:",error);
-
-        container.innerHTML =
-            `<div class="no-data">
-
-                No hay pasajes publicados
-                actualmente.
-
-                <br><br>
-
-                <small>
-                    Si acabas de crear la tabla "pasajes",
-                    vuelve a cargar la página.
-                </small>
-
-            </div>`;
-
-    }
-
-}
-
-
-function renderTickets(){
-
-    const container =
-        document.getElementById("ticketsContainer");
-
-    if(!ticketData.length){
-
-        container.innerHTML =
-            `<div class="no-data">
-                No hay pasajes publicados actualmente.
-            </div>`;
-
-        return;
-
-    }
-
-    container.innerHTML =
-        ticketData.map(ticket=>`
-
-            <div class="ticket-card">
-
-                <div class="ticket-head">
-
-                    <span class="ticket-type">
-                        ${esc(ticket.tipo || "Avión")}
-                    </span>
-
-                    <span class="ticket-label">
-                        ${esc(ticket.etiqueta || "Pasaje")}
-                    </span>
-
-                </div>
-
-
-                <div class="ticket-route">
-
-                    <div class="ticket-city">
-
-                        <small>ORIGEN</small>
-
-                        <strong>
-                            ${esc(ticket.origen)}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="ticket-arrow">
-
-                        <i class="fa-solid fa-arrow-right"></i>
-
-                    </div>
-
-
-                    <div class="ticket-city">
-
-                        <small>DESTINO</small>
-
-                        <strong>
-                            ${esc(ticket.destino)}
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <div class="ticket-dates">
-
-                    <div class="ticket-date">
-
-                        <small>SALIDA</small>
-
-                        <strong>
-                            ${formatDate(ticket.fecha_salida)}
-                        </strong>
-
-                    </div>
-
-
-                    <div class="ticket-date">
-
-                        <small>REGRESO</small>
-
-                        <strong>
-                            ${ticket.fecha_regreso
-                                ? formatDate(ticket.fecha_regreso)
-                                : "No indicado"}
-                        </strong>
-
-                    </div>
-
-                </div>
-
-
-                <div class="ticket-bottom">
-
-                    <div>
-
-                        <div style="font-size:8px;color:#8190a6;">
-                            PRECIO
-                        </div>
-
-                        <div class="ticket-price">
-                            ${money(ticket.precio)}
-                            ${esc(ticket.moneda)}
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="btn btn-gold"
-                        onclick="requestTicket(${ticket.id})">
-
-                        Solicitar
-
-                    </button>
-
-                </div>
-
-
-                ${
-                    ticket.descripcion
-                    ?
-                    `<div class="ticket-note">
-                        ${esc(ticket.descripcion)}
-                    </div>`
-                    :
-                    ""
-                }
-
-            </div>
-
-        `).join("");
-
-}
-
-
-function requestTicket(id){
-
-    const ticket =
-        ticketData.find(
-            item => Number(item.id) === Number(id)
-        );
-
-    if(!ticket)
-        return;
-
-    document.getElementById("reqService").value =
-        ticket.tipo === "Bus/Tren"
-        ? "Boleto de Bus/Tren"
-        : "Boleto de Avión";
-
-    document.getElementById("reqDestination").value =
-        ticket.destino;
-
-    document.getElementById("reqDetails").value =
-        `Pasaje solicitado:
-${ticket.origen} → ${ticket.destino}
-Salida: ${formatDate(ticket.fecha_salida)}
-${ticket.fecha_regreso
-    ? "Regreso: " + formatDate(ticket.fecha_regreso)
-    : ""}
-Precio publicado: ${money(ticket.precio)} ${ticket.moneda}
-${ticket.descripcion || ""}`;
-
-    document.getElementById("solicitud")
-        .scrollIntoView({behavior:"smooth"});
-
-}
-
-
-/* =========================================================
-   SOLICITUDES
-========================================================= */
-
-function serviceChanged(){
-
-    const service =
-        document.getElementById("reqService").value;
-
-    if(service === "Recarga Internacional"){
-
-        document.getElementById("reqDestination")
-            .placeholder =
-                "Número / destino si corresponde";
-
-    }else{
-
-        document.getElementById("reqDestination")
-            .placeholder =
-                "País / ciudad / destino";
-
-    }
-
-}
-
-
-document
-    .getElementById("requestForm")
-    .addEventListener("submit",async(event)=>{
-
-        event.preventDefault();
-
-        const name =
-            document.getElementById("reqName").value.trim();
-
-        const phone =
-            document.getElementById("reqPhone").value.trim();
-
-        const service =
-            document.getElementById("reqService").value;
-
-        const destination =
-            document.getElementById("reqDestination").value.trim();
-
-        const details =
-            document.getElementById("reqDetails").value.trim();
-
-
-        if(!supabaseClient){
-
-            sendRequestWhatsApp(
-                name,
-                phone,
-                service,
-                destination,
-                details
-            );
-
-            return;
-
-        }
-
-
-        try{
-
-            const {error} =
-                await supabaseClient
-                    .from("solicitudes")
-                    .insert({
-
-                        nombre_cliente:name,
-
-                        telefono:phone,
-
-                        tipo_servicio:service,
-
-                        destino:destination,
-
-                        detalles:details,
-
-                        estado:"Pendiente"
-
-                    });
-
-            if(error)
-                throw error;
-
-
-            showToast(
-                "Solicitud enviada correctamente."
-            );
-
-
-            event.target.reset();
-
-
-            setTimeout(()=>{
-
-                window.open(
-                    "https://wa.me/79046319565",
-                    "_blank"
-                );
-
-            },500);
-
-
-        }catch(error){
-
-            console.error(error);
-
-            sendRequestWhatsApp(
-                name,
-                phone,
-                service,
-                destination,
-                details
-            );
-
-        }
-
+$("adminPassword").addEventListener("keydown",e=>{
+ if(e.key==="Enter")login();
 });
 
+// Cerrar modal al tocar fuera de su contenido.
+["loginModal","adminModal"].forEach(id=>{
+ $(id).addEventListener("click",e=>{
+  if(e.target === $(id))closeModal(id);
+ });
+});
 
-function sendRequestWhatsApp(
-    name,
-    phone,
-    service,
-    destination,
-    details
-){
+// Cerrar modal con Escape.
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape"){
+  closeModal("loginModal");
+  closeModal("adminModal");
+ }
+});
 
-    const text =
-`Nueva solicitud - YOUR BRIDGE HOME
-
-Nombre: ${name}
-Teléfono: ${phone}
-Servicio: ${service}
-Destino: ${destination}
-
-Detalles:
-${details}`;
-
-    window.open(
-        "https://wa.me/79046319565?text=" +
-        encodeURIComponent(text),
-        "_blank"
-    );
-
+// PESTAÑAS DE ADMINISTRACIÓN
+function showAdminTab(id,btn){
+ document.querySelectorAll(".admin-panel").forEach(p=>p.classList.remove("active"));
+ document.querySelectorAll(".admin-tabs button").forEach(b=>b.classList.remove("active"));
+ const panel=$(id);
+ if(panel){
+  panel.classList.add("active");
+  btn.classList.add("active");
+ }
 }
 
-
-/* =========================================================
-   ADMIN LOGIN
-========================================================= */
-
-function openAdminLogin(){
-
-    document
-        .getElementById("adminLoginModal")
-        .classList.add("active");
-
+// UTILIDADES
+function safe(v){
+ return String(v??"").replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
 }
 
-
-function loginAdmin(){
-
-    const password =
-        document.getElementById("adminPassword").value;
-
-    if(password !== ADMIN_PASSWORD){
-
-        showToast("Clave incorrecta.");
-        return;
-
-    }
-
-    adminLogged = true;
-
-    closeModal("adminLoginModal");
-
-    document
-        .getElementById("adminModal")
-        .classList.add("active");
-
-    document.getElementById("adminPassword").value = "";
-
+function money(v,c){
+ return `${Number(v||0).toLocaleString("es-ES",{maximumFractionDigits:2})} ${safe(c||"")}`;
 }
 
-
-function logoutAdmin(){
-
-    adminLogged = false;
-
-    closeModal("adminModal");
-
+function showError(msg){
+ console.error(msg);
 }
 
-
-/* =========================================================
-   ADMIN TASAS
-========================================================= */
-
-function openAdminRates(){
-
-    if(!adminLogged)
-        return;
-
-    document.getElementById("adminContent").innerHTML = `
-
-        <h4 style="margin-bottom:15px;">
-            Editar tasas
-        </h4>
-
-        <div class="form-grid">
-
-            <div class="form-group">
-                <label>USD → CUP</label>
-                <input
-                    class="input"
-                    id="adminUSD"
-                    type="number"
-                    step="0.01"
-                    value="${rates.USD || ""}">
-            </div>
-
-            <div class="form-group">
-                <label>EUR → CUP</label>
-                <input
-                    class="input"
-                    id="adminEUR"
-                    type="number"
-                    step="0.01"
-                    value="${rates.EUR || ""}">
-            </div>
-
-            <div class="form-group">
-                <label>RUB → CUP</label>
-                <input
-                    class="input"
-                    id="adminRUB"
-                    type="number"
-                    step="0.01"
-                    value="${rates.RUB || ""}">
-            </div>
-
-            <div class="form-group">
-                <label>MLC → CUP</label>
-                <input
-                    class="input"
-                    id="adminMLC"
-                    type="number"
-                    step="0.01"
-                    value="${rates.MLC || ""}">
-            </div>
-
-            <div class="form-group">
-                <label>GBP → CUP</label>
-                <input
-                    class="input"
-                    id="adminGBP"
-                    type="number"
-                    step="0.01"
-                    value="${rates.GBP || ""}">
-            </div>
-
-        </div>
-
-        <button
-            class="btn btn-gold"
-            onclick="saveRates()">
-
-            <i class="fa-solid fa-save"></i>
-            Guardar tasas
-
-        </button>
-
-    `;
-
+// CARGA GENERAL
+async function loadAll(){
+ await Promise.all([loadRates(),loadRecharges(),loadTickets()]);
 }
 
+// TASAS
+async function loadRates(){
+ const {data,error}=await db.from("configuracion").select("*").eq("id",1).maybeSingle();
+
+ if(error){
+  showError(error);
+  return;
+ }
+
+ if(data){
+  rates={
+   USD:Number(data.tasa_usd||0),
+   EUR:Number(data.tasa_eur||0),
+   RUB:Number(data.tasa_rub||0),
+   MLC:Number(data.tasa_mlc||0),
+   GBP:Number(data.tasa_gbp||0)
+  };
+
+  $("rateUSD").value=rates.USD;
+  $("rateEUR").value=rates.EUR;
+  $("rateRUB").value=rates.RUB;
+  $("rateMLC").value=rates.MLC;
+  $("rateGBP").value=rates.GBP;
+
+  renderRates();
+ }
+}
+
+function renderRates(){
+ const names=["USD","EUR","RUB","MLC","GBP"];
+ $("ratesList").innerHTML=names.map(n=>`
+  <div class="rate">
+   <span>${n}</span>
+   <strong>${rates[n]?rates[n].toLocaleString("es-ES"):"—"}</strong>
+   <span>CUP</span>
+  </div>
+ `).join("");
+}
 
 async function saveRates(){
+ const vals={
+  tasa_usd:Number($("rateUSD").value)||0,
+  tasa_eur:Number($("rateEUR").value)||0,
+  tasa_rub:Number($("rateRUB").value)||0,
+  tasa_mlc:Number($("rateMLC").value)||0,
+  tasa_gbp:Number($("rateGBP").value)||0,
+  fecha_actualizacion:new Date().toISOString()
+ };
 
-    const values = {
+ const {error}=await db.from("configuracion").upsert({id:1,...vals});
 
-        tasa_usd:
-            Number(document.getElementById("adminUSD").value),
+ if(error){
+  alert("No se pudieron guardar las tasas: "+error.message);
+  return;
+ }
 
-        tasa_eur:
-            Number(document.getElementById("adminEUR").value),
-
-        tasa_rub:
-            Number(document.getElementById("adminRUB").value),
-
-        tasa_mlc:
-            Number(document.getElementById("adminMLC").value),
-
-        tasa_gbp:
-            Number(document.getElementById("adminGBP").value),
-
-        fecha_actualizacion:
-            new Date().toISOString()
-
-    };
-
-
-    if(!supabaseClient){
-
-        showToast("Supabase no está disponible.");
-        return;
-
-    }
-
-
-    try{
-
-        const {error} =
-            await supabaseClient
-                .from("configuracion")
-                .update(values)
-                .eq("id",1);
-
-        if(error)
-            throw error;
-
-        showToast("Tasas actualizadas.");
-
-        await loadRates();
-
-        openAdminRates();
-
-        generatePromoImage();
-
-    }catch(error){
-
-        console.error(error);
-
-        showToast(
-            "No se pudieron guardar las tasas."
-        );
-
-    }
-
+ alert("Tasas actualizadas.");
+ await loadRates();
 }
 
+// CALCULADORA
+function calculate(){
+ const amount=Number($("calcAmount").value);
+ const from=$("calcFrom").value;
+ const to=$("calcTo").value;
 
-/* =========================================================
-   ADMIN RECARGAS
-========================================================= */
+ if(!Number.isFinite(amount)||amount<0){
+  $("calcResult").textContent="Introduce una cantidad válida.";
+  return;
+ }
 
-function openAdminRecharges(){
+ const fromRate=from==="CUP"?1:rates[from];
+ const toRate=to==="CUP"?1:rates[to];
 
-    if(!adminLogged)
-        return;
+ if(!fromRate||!toRate){
+  $("calcResult").textContent="Faltan tasas para realizar este cálculo.";
+  return;
+ }
 
-    document.getElementById("adminContent").innerHTML = `
+ const result=amount*fromRate/toRate;
 
-        <h4 style="margin-bottom:15px;">
-            Recargas publicadas
-        </h4>
-
-        <div class="admin-list">
-
-            ${
-                rechargeData.length
-                ?
-                rechargeData.map(item=>`
-
-                    <div class="admin-item">
-
-                        <div class="admin-item-content">
-
-                            <strong>
-                                ${esc(item.nombre_plan)}
-                            </strong>
-
-                            <span>
-                                ${money(item.precio)} ₽ ·
-                                ${esc(item.descripcion_1 || "")}
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                `).join("")
-                :
-                `<div class="no-data">
-                    No hay recargas.
-                </div>`
-            }
-
-        </div>
-
-        <div style="
-            margin-top:15px;
-            padding:13px;
-            border-radius:12px;
-            background:#091525;
-            color:#aab6c7;
-            font-size:9px;
-            line-height:1.7;">
-
-            Las recargas continúan utilizando la tabla
-            <strong style="color:#f5c542;">
-                planes_recargas
-            </strong>
-            de tu Supabase.
-
-        </div>
-
-    `;
-
+ $("calcResult").textContent=
+  `${amount} ${from} = ${result.toLocaleString("es-ES",{maximumFractionDigits:2})} ${to}`;
 }
 
-
-/* =========================================================
-   ADMIN PASAJES
-========================================================= */
-
-function openAdminTickets(){
-
-    if(!adminLogged)
-        return;
-
-    document
-        .getElementById("ticketModal")
-        .classList.add("active");
-
-    resetTicketForm();
-
-    loadAdminTickets();
-
-}
-
-
-async function loadAdminTickets(){
-
-    const list =
-        document.getElementById("adminTicketsList");
-
-    list.innerHTML =
-        `<div class="no-data">
-            Cargando...
-        </div>`;
-
-    if(!supabaseClient){
-
-        list.innerHTML =
-            `<div class="no-data">
-                Supabase no está disponible.
-            </div>`;
-
-        return;
-
-    }
-
-    try{
-
-        const {data,error} =
-            await supabaseClient
-                .from("pasajes")
-                .select("*")
-                .order("fecha_salida",{ascending:true});
-
-        if(error)
-            throw error;
-
-        const allTickets = data || [];
-
-        list.innerHTML =
-            allTickets.length
-            ?
-            allTickets.map(ticket=>`
-
-                <div class="admin-item">
-
-                    <div class="admin-item-content">
-
-                        <strong>
-                            ${esc(ticket.origen)}
-                            →
-                            ${esc(ticket.destino)}
-                        </strong>
-
-                        <span>
-                            ${formatDate(ticket.fecha_salida)}
-                            ${
-                                ticket.fecha_regreso
-                                ?
-                                " → " +
-                                formatDate(ticket.fecha_regreso)
-                                :
-                                ""
-                            }
-                            ·
-                            ${money(ticket.precio)}
-                            ${esc(ticket.moneda)}
-                            ·
-                            ${esc(ticket.tipo || "Avión")}
-                        </span>
-
-                    </div>
-
-
-                    <div class="admin-actions">
-
-                        <button
-                            onclick="editTicket(${ticket.id})">
-
-                            <i class="fa-solid fa-pen"></i>
-
-                        </button>
-
-                        <button
-                            class="delete"
-                            onclick="deleteTicket(${ticket.id})">
-
-                            <i class="fa-solid fa-trash"></i>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            `).join("")
-            :
-            `<div class="no-data">
-                No hay pasajes registrados.
-            </div>`;
-
-    }catch(error){
-
-        console.error(error);
-
-        list.innerHTML =
-            `<div class="no-data">
-
-                No se pudo cargar la tabla
-                <strong>pasajes</strong>.
-
-                <br><br>
-
-                Crea la tabla usando el SQL
-                que aparece al final de este código.
-
-            </div>`;
-
-    }
-
-}
-
-
-document
-    .getElementById("ticketForm")
-    .addEventListener("submit",async(event)=>{
-
-        event.preventDefault();
-
-        if(!supabaseClient){
-
-            showToast(
-                "Supabase no está disponible."
-            );
-
-            return;
-
-        }
-
-
-        const id =
-            document.getElementById("ticketId").value;
-
-
-        const ticket = {
-
-            etiqueta:
-                document.getElementById("ticketLabel").value.trim(),
-
-            tipo:
-                document.getElementById("ticketType").value,
-
-            origen:
-                document.getElementById("ticketOrigin").value.trim(),
-
-            destino:
-                document.getElementById("ticketDestination").value.trim(),
-
-            fecha_salida:
-                document.getElementById("ticketDeparture").value,
-
-            fecha_regreso:
-                document.getElementById("ticketReturn").value || null,
-
-            precio:
-                Number(
-                    document.getElementById("ticketPrice").value
-                ),
-
-            moneda:
-                document.getElementById("ticketCurrency").value,
-
-            descripcion:
-                document.getElementById("ticketDescription").value.trim(),
-
-            activo:
-                document.getElementById("ticketActive").checked
-
-        };
-
-
-        try{
-
-            let response;
-
-
-            if(id){
-
-                response =
-                    await supabaseClient
-                        .from("pasajes")
-                        .update(ticket)
-                        .eq("id",id);
-
-            }else{
-
-                response =
-                    await supabaseClient
-                        .from("pasajes")
-                        .insert(ticket);
-
-            }
-
-
-            if(response.error)
-                throw response.error;
-
-
-            showToast(
-                id
-                ? "Pasaje actualizado."
-                : "Pasaje creado."
-            );
-
-
-            resetTicketForm();
-
-            await loadAdminTickets();
-
-            await loadTickets();
-
-
-        }catch(error){
-
-            console.error(error);
-
-            showToast(
-                "No se pudo guardar el pasaje."
-            );
-
-        }
-
+// Permite recalcular al cambiar los valores.
+["calcAmount","calcFrom","calcTo"].forEach(id=>{
+ $(id).addEventListener("change",calculate);
 });
 
+// RECARGAS
+async function loadRecharges(){
+ const {data,error}=await db.from("planes_recargas")
+  .select("*").eq("activo",true).order("id");
 
-function resetTicketForm(){
+ if(error){
+  $("rechargesList").innerHTML='<div class="empty">No se pudieron cargar las recargas.</div>';
+  showError(error);
+  return;
+ }
 
-    document.getElementById("ticketForm").reset();
-
-    document.getElementById("ticketId").value = "";
-
-    document.getElementById("ticketActive").checked = true;
-
+ rechargeData=data||[];
+ renderRecharges();
 }
 
+function renderRecharges(){
+ const el=$("rechargesList");
 
-async function editTicket(id){
+ if(!rechargeData.length){
+  el.innerHTML='<div class="empty">Próximamente publicaremos nuevas ofertas de recarga.</div>';
+  return;
+ }
 
-    try{
-
-        const {data,error} =
-            await supabaseClient
-                .from("pasajes")
-                .select("*")
-                .eq("id",id)
-                .single();
-
-        if(error)
-            throw error;
-
-
-        document.getElementById("ticketId").value =
-            data.id;
-
-        document.getElementById("ticketLabel").value =
-            data.etiqueta || "";
-
-        document.getElementById("ticketType").value =
-            data.tipo || "Avión";
-
-        document.getElementById("ticketOrigin").value =
-            data.origen || "";
-
-        document.getElementById("ticketDestination").value =
-            data.destino || "";
-
-        document.getElementById("ticketDeparture").value =
-            data.fecha_salida || "";
-
-        document.getElementById("ticketReturn").value =
-            data.fecha_regreso || "";
-
-        document.getElementById("ticketPrice").value =
-            data.precio || "";
-
-        document.getElementById("ticketCurrency").value =
-            data.moneda || "USD";
-
-        document.getElementById("ticketDescription").value =
-            data.descripcion || "";
-
-        document.getElementById("ticketActive").checked =
-            data.activo !== false;
-
-
-        document
-            .getElementById("ticketModal")
-            .scrollTo({
-                top:0,
-                behavior:"smooth"
-            });
-
-
-    }catch(error){
-
-        console.error(error);
-
-        showToast(
-            "No se pudo cargar el pasaje."
-        );
-
-    }
-
+ el.innerHTML=rechargeData.map((x,i)=>`
+  <article class="card offer-card">
+   <span class="pill">${safe(x.etiqueta||"RECARGA")}</span>
+   <h3>${safe(x.nombre_plan)}</h3>
+   <div class="price">${money(x.precio,x.moneda||"RUB")}</div>
+   <p>${safe(x.descripcion_1||"")}</p>
+   <p>${safe(x.descripcion_2||"")}</p>
+   <button class="btn btn-gold" type="button" onclick="requestRecharge(${i})">Solicitar recarga</button>
+  </article>
+ `).join("");
 }
 
+function requestRecharge(index){
+ const item=rechargeData[index];
+ if(!item)return;
+
+ openRequest("Recarga");
+ $("clientDetails").value=
+  `Estoy interesado en el plan: ${item.nombre_plan}. Precio publicado: ${money(item.precio,item.moneda||"RUB")}.`;
+ $("solicitud").scrollIntoView({behavior:"smooth"});
+}
+
+// PASAJES
+async function loadTickets(){
+ const {data,error}=await db.from("pasajes")
+  .select("*").eq("activo",true).order("fecha_salida",{ascending:true});
+
+ if(error){
+  $("ticketsList").innerHTML='<div class="empty">Los pasajes estarán disponibles cuando se configure la tabla correspondiente en Supabase.</div>';
+  showError(error);
+  return;
+ }
+
+ ticketData=data||[];
+ renderTickets();
+}
+
+function renderTickets(){
+ const el=$("ticketsList");
+
+ if(!ticketData.length){
+  el.innerHTML='<div class="empty">No hay pasajes publicados en este momento. Consulta nuevas opciones por WhatsApp.</div>';
+  return;
+ }
+
+ el.innerHTML=ticketData.map((t,i)=>`
+  <article class="card offer-card">
+   <span class="pill">${safe(t.etiqueta||t.tipo||"PASAJES")}</span>
+   <h3>
+    <i class="fa-solid fa-${t.tipo==="Avión"?"plane":"train"} gold"></i>
+    ${safe(t.origen)} → ${safe(t.destino)}
+   </h3>
+   <p>${safe(t.tipo||"Transporte")}</p>
+   <p><strong>Salida:</strong> ${safe(t.fecha_salida||"Por confirmar")}</p>
+   <p><strong>Regreso:</strong> ${safe(t.fecha_regreso||"No indicado")}</p>
+   <div class="price">${money(t.precio,t.moneda)}</div>
+   <p>${safe(t.descripcion||"Consulta condiciones y disponibilidad.")}</p>
+   <button class="btn btn-gold" type="button" onclick="requestTicket(${i})">Consultar este pasaje</button>
+  </article>
+ `).join("");
+}
+
+function requestTicket(index){
+ const t=ticketData[index];
+ if(!t)return;
+
+ const service=t.tipo==="Avión"?"Pasaje de avión":"Autobús o tren";
+
+ openRequest(service);
+ $("clientDestination").value=t.destino||"";
+ $("clientDetails").value=
+  `Pasaje: ${t.origen} → ${t.destino}. Tipo: ${t.tipo}. Salida: ${t.fecha_salida||"Por confirmar"}. Regreso: ${t.fecha_regreso||"No indicado"}. Precio publicado: ${money(t.precio,t.moneda)}.`;
+ $("solicitud").scrollIntoView({behavior:"smooth"});
+}
+
+// FORMULARIO DE SOLICITUD
+function openRequest(service){
+ $("clientService").value=service;
+
+ // Si se abre desde un botón de servicio, lleva directamente al formulario.
+ $("solicitud").scrollIntoView({behavior:"smooth"});
+ setTimeout(()=>$("clientName").focus({preventScroll:true}),500);
+}
+
+async function submitRequest(e){
+ e.preventDefault();
+
+ const payload={
+  nombre_cliente:$("clientName").value.trim(),
+  telefono:$("clientPhone").value.trim(),
+  tipo_servicio:$("clientService").value,
+  destino:$("clientDestination").value.trim(),
+  detalles:$("clientDetails").value.trim(),
+  estado:"Pendiente"
+ };
+
+ const status=$("requestStatus");
+ status.textContent="Enviando solicitud...";
+
+ const {error}=await db.from("solicitudes").insert(payload);
+
+ if(error){
+  status.textContent="No se pudo enviar. Inténtalo por WhatsApp: +7 904 631 95 65.";
+  showError(error);
+  return;
+ }
+
+ status.textContent="¡Solicitud enviada! Gracias por contactar con YOUR BRIDGE HOME.";
+ $("requestForm").reset();
+}
+
+// ADMINISTRACIÓN
+async function loadAdminData(){
+ await loadRates();
+ await loadRecharges();
+ await loadTickets();
+ await loadRequests();
+
+ renderAdminRecharges();
+ renderAdminTickets();
+}
+
+// ADMINISTRAR RECARGAS
+function renderAdminRecharges(){
+ $("adminRechargeList").innerHTML=rechargeData.map(x=>`
+  <div class="admin-item">
+   <div>
+    <strong>${safe(x.nombre_plan)}</strong><br>
+    <small>${money(x.precio,x.moneda||"RUB")}</small>
+   </div>
+   <div>
+    <button class="btn btn-dark" type="button" onclick="editRecharge('${safe(x.id)}')">Editar</button>
+    <button class="btn btn-dark" type="button" onclick="deleteRecharge('${safe(x.id)}')">Eliminar</button>
+   </div>
+  </div>
+ `).join("")||'<p class="mini">No hay planes cargados.</p>';
+}
+
+function clearRechargeForm(){
+ ["rechargeId","rechargeLabel","rechargeName","rechargePrice","rechargeDesc1","rechargeDesc2"].forEach(id=>{
+  $(id).value="";
+ });
+ $("rechargeCurrency").value="RUB";
+}
+
+function editRecharge(id){
+ const x=rechargeData.find(v=>String(v.id)===String(id));
+ if(!x)return;
+
+ $("rechargeId").value=x.id;
+ $("rechargeLabel").value=x.etiqueta||"";
+ $("rechargeName").value=x.nombre_plan||"";
+ $("rechargePrice").value=x.precio;
+ $("rechargeCurrency").value=x.moneda||"RUB";
+ $("rechargeDesc1").value=x.descripcion_1||"";
+ $("rechargeDesc2").value=x.descripcion_2||"";
+
+ $("rechargeName").focus();
+}
+
+async function saveRecharge(){
+ const id=$("rechargeId").value;
+
+ const payload={
+  etiqueta:$("rechargeLabel").value.trim(),
+  nombre_plan:$("rechargeName").value.trim(),
+  precio:Number($("rechargePrice").value),
+  moneda:$("rechargeCurrency").value,
+  descripcion_1:$("rechargeDesc1").value.trim(),
+  descripcion_2:$("rechargeDesc2").value.trim(),
+  activo:true
+ };
+
+ if(!payload.nombre_plan||!Number.isFinite(payload.precio)||payload.precio<0){
+  alert("Completa el nombre y un precio válido.");
+  return;
+ }
+
+ const query=id
+  ?db.from("planes_recargas").update(payload).eq("id",id)
+  :db.from("planes_recargas").insert(payload);
+
+ const {error}=await query;
+
+ if(error){
+  alert("No se pudo guardar el plan: "+error.message);
+  return;
+ }
+
+ alert("Plan guardado.");
+ clearRechargeForm();
+ await loadRecharges();
+ renderAdminRecharges();
+}
+
+async function deleteRecharge(id){
+ if(!confirm("¿Eliminar este plan?"))return;
+
+ const {error}=await db.from("planes_recargas").delete().eq("id",id);
+
+ if(error){
+  alert("No se pudo eliminar: "+error.message);
+  return;
+ }
+
+ await loadRecharges();
+ renderAdminRecharges();
+}
+
+// ADMINISTRAR PASAJES
+function renderAdminTickets(){
+ $("adminTicketList").innerHTML=ticketData.map(t=>`
+  <div class="admin-item">
+   <div>
+    <strong>${safe(t.origen)} → ${safe(t.destino)}</strong><br>
+    <small>${money(t.precio,t.moneda)} · ${safe(t.fecha_salida||"")}</small>
+   </div>
+   <div>
+    <button class="btn btn-dark" type="button" onclick="editTicket('${safe(t.id)}')">Editar</button>
+    <button class="btn btn-dark" type="button" onclick="deleteTicket('${safe(t.id)}')">Eliminar</button>
+   </div>
+  </div>
+ `).join("")||'<p class="mini">No hay pasajes cargados.</p>';
+}
+
+function clearTicketForm(){
+ ["ticketId","ticketLabel","ticketOrigin","ticketDestination","ticketDeparture","ticketReturn","ticketPrice","ticketDescription"].forEach(id=>{
+  $(id).value="";
+ });
+
+ $("ticketType").value="Avión";
+ $("ticketCurrency").value="USD";
+}
+
+function editTicket(id){
+ const t=ticketData.find(v=>String(v.id)===String(id));
+ if(!t)return;
+
+ $("ticketId").value=t.id;
+ $("ticketLabel").value=t.etiqueta||"";
+ $("ticketType").value=t.tipo||"Avión";
+ $("ticketOrigin").value=t.origen||"";
+ $("ticketDestination").value=t.destino||"";
+ $("ticketDeparture").value=t.fecha_salida||"";
+ $("ticketReturn").value=t.fecha_regreso||"";
+ $("ticketPrice").value=t.precio;
+ $("ticketCurrency").value=t.moneda||"USD";
+ $("ticketDescription").value=t.descripcion||"";
+
+ $("ticketOrigin").focus();
+}
+
+async function saveTicket(){
+ const id=$("ticketId").value;
+
+ const payload={
+  etiqueta:$("ticketLabel").value.trim(),
+  tipo:$("ticketType").value,
+  origen:$("ticketOrigin").value.trim(),
+  destino:$("ticketDestination").value.trim(),
+  fecha_salida:$("ticketDeparture").value||null,
+  fecha_regreso:$("ticketReturn").value||null,
+  precio:Number($("ticketPrice").value),
+  moneda:$("ticketCurrency").value,
+  descripcion:$("ticketDescription").value.trim(),
+  activo:true
+ };
+
+ if(!payload.origen||!payload.destino||!Number.isFinite(payload.precio)||payload.precio<0){
+  alert("Completa origen, destino y precio.");
+  return;
+ }
+
+ const query=id
+  ?db.from("pasajes").update(payload).eq("id",id)
+  :db.from("pasajes").insert(payload);
+
+ const {error}=await query;
+
+ if(error){
+  alert("No se pudo guardar el pasaje. Comprueba que la tabla pasajes esté creada. "+error.message);
+  return;
+ }
+
+ alert("Pasaje guardado.");
+ clearTicketForm();
+ await loadTickets();
+ renderAdminTickets();
+}
 
 async function deleteTicket(id){
+ if(!confirm("¿Eliminar este pasaje?"))return;
 
-    if(!confirm(
-        "¿Seguro que quieres eliminar este pasaje?"
-    ))
-        return;
+ const {error}=await db.from("pasajes").delete().eq("id",id);
 
+ if(error){
+  alert("No se pudo eliminar: "+error.message);
+  return;
+ }
 
-    try{
-
-        const {error} =
-            await supabaseClient
-                .from("pasajes")
-                .delete()
-                .eq("id",id);
-
-        if(error)
-            throw error;
-
-
-        showToast("Pasaje eliminado.");
-
-        await loadAdminTickets();
-        await loadTickets();
-
-
-    }catch(error){
-
-        console.error(error);
-
-        showToast(
-            "No se pudo eliminar."
-        );
-
-    }
-
+ await loadTickets();
+ renderAdminTickets();
 }
 
+// SOLICITUDES
+async function loadRequests(){
+ const {data,error}=await db.from("solicitudes")
+  .select("*").order("fecha_creacion",{ascending:false}).limit(100);
 
-/* =========================================================
-   ADMIN SOLICITUDES
-========================================================= */
+ if(error){
+  $("adminRequestsList").innerHTML='<p class="mini">No se pudieron cargar las solicitudes.</p>';
+  showError(error);
+  return;
+ }
 
-async function openAdminRequests(){
+ requestData=data||[];
 
-    if(!adminLogged)
-        return;
-
-    document.getElementById("adminContent").innerHTML =
-        `<div class="no-data">
-            Cargando solicitudes...
-        </div>`;
-
-
-    try{
-
-        const {data,error} =
-            await supabaseClient
-                .from("solicitudes")
-                .select("*")
-                .order("fecha_creacion",{ascending:false})
-                .limit(50);
-
-        if(error)
-            throw error;
-
-
-        const requests = data || [];
-
-
-        document.getElementById("adminContent").innerHTML = `
-
-            <h4 style="margin-bottom:15px;">
-                Solicitudes recientes
-            </h4>
-
-            ${
-                requests.length
-                ?
-                requests.map(item=>`
-
-                    <div class="admin-item">
-
-                        <div class="admin-item-content">
-
-                            <strong>
-                                ${esc(item.nombre_cliente)}
-                                ·
-                                ${esc(item.tipo_servicio)}
-                            </strong>
-
-                            <span>
-                                ${esc(item.telefono)}
-                                ·
-                                ${esc(item.destino || "")}
-                                <br>
-                                ${esc(item.detalles || "")}
-                            </span>
-
-                        </div>
-
-
-                        <div class="admin-actions">
-
-                            <button
-                                class="delete"
-                                onclick="deleteRequest(${item.id})">
-
-                                <i class="fa-solid fa-trash"></i>
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                `).join("")
-                :
-                `<div class="no-data">
-                    No hay solicitudes.
-                </div>`
-            }
-
-        `;
-
-    }catch(error){
-
-        console.error(error);
-
-        document.getElementById("adminContent").innerHTML =
-            `<div class="no-data">
-                No se pudieron cargar las solicitudes.
-            </div>`;
-
-    }
-
+ $("adminRequestsList").innerHTML=requestData.map(r=>`
+  <div class="admin-item">
+   <div>
+    <strong>${safe(r.nombre_cliente)}</strong> · ${safe(r.tipo_servicio)}<br>
+    <small>${safe(r.telefono)} · ${safe(r.destino||"Sin destino")} · ${safe(r.estado||"Pendiente")}</small>
+    <p class="mini">${safe(r.detalles||"")}</p>
+   </div>
+   <div>
+    <button class="btn btn-dark" type="button" onclick="completeRequest('${safe(r.id)}')">Completada</button>
+    <button class="btn btn-dark" type="button" onclick="deleteRequest('${safe(r.id)}')">Eliminar</button>
+   </div>
+  </div>
+ `).join("")||'<p class="mini">Todavía no hay solicitudes.</p>';
 }
 
+async function completeRequest(id){
+ const {error}=await db.from("solicitudes")
+  .update({estado:"Completada"}).eq("id",id);
+
+ if(error){
+  alert("No se pudo actualizar: "+error.message);
+  return;
+ }
+
+ await loadRequests();
+}
 
 async function deleteRequest(id){
+ if(!confirm("¿Eliminar solicitud?"))return;
 
-    if(!confirm(
-        "¿Eliminar esta solicitud?"
-    ))
-        return;
+ const {error}=await db.from("solicitudes").delete().eq("id",id);
 
+ if(error){
+  alert("No se pudo eliminar: "+error.message);
+  return;
+ }
 
-    try{
-
-        const {error} =
-            await supabaseClient
-                .from("solicitudes")
-                .delete()
-                .eq("id",id);
-
-        if(error)
-            throw error;
-
-        showToast("Solicitud eliminada.");
-
-        openAdminRequests();
-
-    }catch(error){
-
-        console.error(error);
-
-        showToast(
-            "No se pudo eliminar."
-        );
-
-    }
-
+ await loadRequests();
 }
 
+// GENERADOR DE IMÁGENES PROMOCIONALES
+// Se genera en el navegador, sin guardar imágenes en Supabase.
+function generateAd(){
+ const canvas=$("adCanvas");
+ const ctx=canvas.getContext("2d");
+ const W=canvas.width,H=canvas.height;
 
-/* =========================================================
-   GENERADOR DE IMAGEN
-========================================================= */
+ const grad=ctx.createLinearGradient(0,0,W,H);
+ grad.addColorStop(0,"#101b30");
+ grad.addColorStop(1,"#172b46");
+ ctx.fillStyle=grad;
+ ctx.fillRect(0,0,W,H);
 
-function openAdminGenerator(){
+ ctx.strokeStyle="#d7aa4c";
+ ctx.lineWidth=5;
+ ctx.strokeRect(28,28,W-56,H-56);
+ ctx.strokeStyle="#8d713c";
+ ctx.lineWidth=1;
+ ctx.strokeRect(43,43,W-86,H-86);
 
-    if(!adminLogged)
-        return;
+ ctx.textAlign="center";
+ ctx.fillStyle="#f0c45e";
+ ctx.font="900 43px Montserrat,Arial";
+ ctx.fillText("YOUR BRIDGE HOME",W/2,115);
 
-    closeModal("adminModal");
+ ctx.fillStyle="#c3cede";
+ ctx.font="500 19px Montserrat,Arial";
+ ctx.fillText("TU PUENTE HACIA NUEVAS OPORTUNIDADES",W/2,153);
 
-    document
-        .getElementById("generatorModal")
-        .classList.add("active");
+ ctx.fillStyle="#f5f7fb";
+ ctx.font="900 42px Montserrat,Arial";
+ wrapCanvas(ctx,$("adTitle").value.toUpperCase(),W/2,245,850,55);
 
-    generatePromoImage();
+ let y=365;
 
+ const line=(label,value)=>{
+  if(!value)return;
+
+  ctx.fillStyle="#263a56";
+  roundRect(ctx,105,y-53,870,105,18,true,false);
+
+  ctx.textAlign="left";
+  ctx.fillStyle="#f0c45e";
+  ctx.font="800 24px Montserrat,Arial";
+  ctx.fillText(label,145,y-12);
+
+  ctx.textAlign="right";
+  ctx.fillStyle="#ffffff";
+  ctx.font="800 31px Montserrat,Arial";
+  ctx.fillText(value,930,y+25);
+
+  y+=125;
+ };
+
+ if($("showAdRates").checked){
+  const usd=$("adUSD").value;
+  const eur=$("adEUR").value;
+  const mlc=$("adMLC").value;
+  const rub=$("adRUB").value;
+
+  const vals=[
+   usd&&`USD  ${usd} CUP`,
+   eur&&`EUR  ${eur} CUP`,
+   mlc&&`MLC  ${mlc} CUP`,
+   rub&&`RUB  ${rub} CUP`
+  ].filter(Boolean);
+
+  if(vals.length){
+   ctx.fillStyle="#f0c45e";
+   ctx.textAlign="center";
+   ctx.font="800 26px Montserrat,Arial";
+   ctx.fillText("TASAS DE CAMBIO",W/2,y);
+   y+=45;
+
+   vals.forEach(v=>{
+    ctx.fillStyle="#263a56";
+    roundRect(ctx,145,y-31,790,58,12,true,false);
+    ctx.fillStyle="#fff";
+    ctx.font="700 25px Montserrat,Arial";
+    ctx.fillText(v,W/2,y+7);
+    y+=70;
+   });
+
+   y+=10;
+  }
+ }
+
+ if($("showAdRecharge").checked)line("RECARGAS",$("adRecharge").value);
+ if($("showAdRemittance").checked)line("REMESAS",$("adRemittance").value);
+ if($("showAdTicket").checked)line("PASAJES",$("adTicket").value);
+
+ const note=$("adNote").value||"Consulta disponibilidad y condiciones.";
+
+ ctx.textAlign="center";
+ ctx.fillStyle="#d4dceb";
+ ctx.font="500 22px Montserrat,Arial";
+ wrapCanvas(ctx,note,W/2,Math.min(y+15,1120),850,31);
+
+ ctx.fillStyle="#f0c45e";
+ ctx.font="800 27px Montserrat,Arial";
+ ctx.fillText("WHATSAPP  +7 904 631 95 65",W/2,1220);
+
+ ctx.fillStyle="#d1d8e4";
+ ctx.font="600 20px Montserrat,Arial";
+ ctx.fillText("Daynel Caminero · Administrador",W/2,1260);
+
+ ctx.fillStyle="#9baac0";
+ ctx.font="500 15px Montserrat,Arial";
+ ctx.fillText("Información orientativa · Verifica antes de operar",W/2,1300);
 }
 
-
-function getPromoValue(id){
-
-    return document
-        .getElementById(id)
-        .value
-        .trim();
-
+function roundRect(ctx,x,y,w,h,r,fill,stroke){
+ ctx.beginPath();
+ ctx.moveTo(x+r,y);
+ ctx.arcTo(x+w,y,x+w,y+h,r);
+ ctx.arcTo(x+w,y+h,x,y+h,r);
+ ctx.arcTo(x,y+h,x,y,r);
+ ctx.arcTo(x,y,x+w,y,r);
+ ctx.closePath();
+ if(fill)ctx.fill();
+ if(stroke)ctx.stroke();
 }
 
+function wrapCanvas(ctx,text,x,y,maxWidth,lineHeight){
+ const words=String(text||"").split(/\s+/);
+ let line="",yy=y;
 
-function drawRoundedRect(
-    ctx,
-    x,
-    y,
-    width,
-    height,
-    radius
-){
+ for(let n=0;n<words.length;n++){
+  const test=line+words[n]+" ";
+  if(ctx.measureText(test).width>maxWidth&&n>0){
+   ctx.fillText(line.trim(),x,yy);
+   line=words[n]+" ";
+   yy+=lineHeight;
+  }else{
+   line=test;
+  }
+ }
 
-    ctx.beginPath();
-
-    ctx.moveTo(x + radius,y);
-
-    ctx.lineTo(x + width - radius,y);
-
-    ctx.quadraticCurveTo(
-        x + width,
-        y,
-        x + width,
-        y + radius
-    );
-
-    ctx.lineTo(
-        x + width,
-        y + height - radius
-    );
-
-    ctx.quadraticCurveTo(
-        x + width,
-        y + height,
-        x + width - radius,
-        y + height
-    );
-
-    ctx.lineTo(
-        x + radius,
-        y + height
-    );
-
-    ctx.quadraticCurveTo(
-        x,
-        y + height,
-        x,
-        y + height - radius
-    );
-
-    ctx.lineTo(x,y + radius);
-
-    ctx.quadraticCurveTo(
-        x,
-        y,
-        x + radius,
-        y
-    );
-
-    ctx.closePath();
-
+ if(line.trim())ctx.fillText(line.trim(),x,yy);
+ return yy;
 }
 
+function downloadAd(){
+ const canvas=$("adCanvas");
 
-function fitText(
-    ctx,
-    text,
-    maxWidth,
-    startSize,
-    weight="700"
-){
+ if(!canvas.toDataURL){
+  alert("Primero genera la imagen.");
+  return;
+ }
 
-    let size = startSize;
-
-    while(size > 18){
-
-        ctx.font =
-            `${weight} ${size}px Montserrat, Arial`;
-
-        if(ctx.measureText(text).width <= maxWidth)
-            break;
-
-        size -= 2;
-
-    }
-
-    return size;
-
+ const a=document.createElement("a");
+ a.download="your-bridge-home-anuncio.png";
+ a.href=canvas.toDataURL("image/png");
+ a.click();
 }
 
+function copyAdText(){
+ const lines=[
+  $("adTitle").value,
+  `USD: ${$("adUSD").value||"—"} CUP`,
+  `EUR: ${$("adEUR").value||"—"} CUP`,
+  `MLC: ${$("adMLC").value||"—"} CUP`,
+  `RUB: ${$("adRUB").value||"—"} CUP`,
+  $("adRecharge").value,
+  $("adRemittance").value,
+  $("adTicket").value,
+  $("adNote").value,
+  "YOUR BRIDGE HOME",
+  "WhatsApp: +7 904 631 95 65",
+  "Daynel Caminero · Administrador"
+ ].filter(Boolean);
 
-function drawTextWrapped(
-    ctx,
-    text,
-    x,
-    y,
-    maxWidth,
-    lineHeight,
-    maxLines=3
-){
+ const text=lines.join("\n");
 
-    const words =
-        String(text || "").split(/\s+/);
-
-    let line = "";
-    let lines = [];
-
-    for(let i=0;i<words.length;i++){
-
-        const test =
-            line
-            ? line + " " + words[i]
-            : words[i];
-
-        if(ctx.measureText(test).width > maxWidth && line){
-
-            lines.push(line);
-
-            line = words[i];
-
-            if(lines.length >= maxLines - 1){
-
-                line += " " +
-                    words.slice(i+1).join(" ");
-
-                break;
-
-            }
-
-        }else{
-
-            line = test;
-
-        }
-
-    }
-
-    if(line)
-        lines.push(line);
-
-    lines.slice(0,maxLines).forEach(
-        (current,index)=>{
-
-            ctx.fillText(
-                current,
-                x,
-                y + index * lineHeight
-            );
-
-        }
-    );
-
-    return lines.length;
-
+ if(navigator.clipboard&&navigator.clipboard.writeText){
+  navigator.clipboard.writeText(text)
+   .then(()=>alert("Texto copiado."))
+   .catch(()=>prompt("Copia el texto:",text));
+ }else{
+  prompt("Copia el texto:",text);
+ }
 }
 
-
-function generatePromoImage(){
-
-    const canvas =
-        document.getElementById("promoCanvas");
-
-    if(!canvas)
-        return;
-
-    const ctx =
-        canvas.getContext("2d");
-
-    const W = 1080;
-    const H = 1350;
-
-
-    /* FONDO */
-
-    const gradient =
-        ctx.createLinearGradient(0,0,W,H);
-
-    gradient.addColorStop(0,"#07111f");
-    gradient.addColorStop(.55,"#10213a");
-    gradient.addColorStop(1,"#050c16");
-
-    ctx.fillStyle = gradient;
-
-    ctx.fillRect(0,0,W,H);
-
-
-    /* CÍRCULOS DECORATIVOS */
-
-    ctx.fillStyle =
-        "rgba(245,197,66,.07)";
-
-    ctx.beginPath();
-    ctx.arc(900,100,250,0,Math.PI*2);
-    ctx.fill();
-
-    ctx.beginPath();
-    ctx.arc(40,1270,220,0,Math.PI*2);
-    ctx.fill();
-
-
-    /* CABECERA */
-
-    ctx.fillStyle = "#f5c542";
-
-    ctx.font =
-        "900 28px Montserrat, Arial";
-
-    ctx.fillText(
-        "YOUR BRIDGE HOME",
-        70,
-        75
-    );
-
-
-    ctx.fillStyle = "#ffffff";
-
-    const title =
-        getPromoValue("promoTitle")
-        || "OFERTAS DE HOY";
-
-    const titleSize =
-        fitText(
-            ctx,
-            title,
-            940,
-            70,
-            "900"
-        );
-
-    ctx.font =
-        `900 ${titleSize}px Montserrat, Arial`;
-
-    ctx.fillText(
-        title,
-        70,
-        155
-    );
-
-
-    ctx.fillStyle = "#aab6c7";
-
-    ctx.font =
-        "500 22px Montserrat, Arial";
-
-    drawTextWrapped(
-        ctx,
-        getPromoValue("promoSubtitle"),
-        70,
-        200,
-        900,
-        32,
-        2
-    );
-
-
-    let y = 275;
-
-
-    /* TASAS */
-
-    if(
-        document.getElementById("showRates").checked
-    ){
-
-        drawRoundedRect(
-            ctx,
-            55,
-            y,
-            970,
-            180,
-            24
-        );
-
-        ctx.fillStyle =
-            "rgba(255,255,255,.045)";
-
-        ctx.fill();
-
-
-        ctx.fillStyle = "#f5c542";
-
-        ctx.font =
-            "800 22px Montserrat, Arial";
-
-        ctx.fillText(
-            "TASA INFORMAL DE CUBA",
-            85,
-            y + 38
-        );
-
-
-        const rateItems = [
-
-            ["USD",getPromoValue("promoUSD")],
-            ["EUR",getPromoValue("promoEUR")],
-            ["RUB",getPromoValue("promoRUB")],
-            ["MLC",getPromoValue("promoMLC")]
-
-        ];
-
-
-        rateItems.forEach(
-            (item,index)=>{
-
-                const x =
-                    85 + index * 225;
-
-                ctx.fillStyle =
-                    "#8f9db0";
-
-                ctx.font =
-                    "700 18px Montserrat, Arial";
-
-                ctx.fillText(
-                    item[0] + " → CUP",
-                    x,
-                    y + 88
-                );
-
-                ctx.fillStyle =
-                    "#ffffff";
-
-                ctx.font =
-                    "900 31px Montserrat, Arial";
-
-                ctx.fillText(
-                    item[1] || "—",
-                    x,
-                    y + 128
-                );
-
-            }
-        );
-
-
-        ctx.fillStyle =
-            "#6f7e94";
-
-        ctx.font =
-            "500 14px Montserrat, Arial";
-
-        ctx.fillText(
-            "Actualiza estos valores manualmente antes de generar la imagen.",
-            85,
-            y + 160
-        );
-
-
-        y += 205;
-
-    }
-
-
-    /* RECARGA */
-
-    if(
-        document.getElementById("showRecharge").checked
-    ){
-
-        drawRoundedRect(
-            ctx,
-            55,
-            y,
-            970,
-            145,
-            24
-        );
-
-        ctx.fillStyle =
-            "rgba(245,197,66,.09)";
-
-        ctx.fill();
-
-
-        ctx.fillStyle =
-            "#f5c542";
-
-        ctx.font =
-            "800 18px Montserrat, Arial";
-
-        ctx.fillText(
-            "RECARGA INTERNACIONAL",
-            85,
-            y + 36
-        );
-
-
-        ctx.fillStyle =
-            "#ffffff";
-
-        ctx.font =
-            "900 31px Montserrat, Arial";
-
-        drawTextWrapped(
-            ctx,
-            getPromoValue("promoRecharge"),
-            85,
-            y + 78,
-            900,
-            37,
-            1
-        );
-
-
-        ctx.fillStyle =
-            "#aab6c7";
-
-        ctx.font =
-            "500 18px Montserrat, Arial";
-
-        ctx.fillText(
-            getPromoValue("promoRechargeDetail"),
-            85,
-            y + 115
-        );
-
-
-        y += 170;
-
-    }
-
-
-    /* REMESA */
-
-    if(
-        document.getElementById("showRemittance").checked
-    ){
-
-        drawRoundedRect(
-            ctx,
-            55,
-            y,
-            970,
-            130,
-            24
-        );
-
-        ctx.fillStyle =
-            "rgba(255,255,255,.045)";
-
-        ctx.fill();
-
-
-        ctx.fillStyle =
-            "#f5c542";
-
-        ctx.font =
-            "800 18px Montserrat, Arial";
-
-        ctx.fillText(
-            "REMESAS",
-            85,
-            y + 36
-        );
-
-
-        ctx.fillStyle =
-            "#ffffff";
-
-        ctx.font =
-            "900 30px Montserrat, Arial";
-
-        drawTextWrapped(
-            ctx,
-            getPromoValue("promoRemittance")
-            || "Consulta nuestras opciones de remesas.",
-            85,
-            y + 80,
-            900,
-            35,
-            1
-        );
-
-
-        y += 155;
-
-    }
-
-
-    /* PASAJE */
-
-    if(
-        document.getElementById("showTicket").checked
-    ){
-
-        drawRoundedRect(
-            ctx,
-            55,
-            y,
-            970,
-            145,
-            24
-        );
-
-        ctx.fillStyle =
-            "rgba(59,130,246,.09)";
-
-        ctx.fill();
-
-
-        ctx.fillStyle =
-            "#7db0ff";
-
-        ctx.font =
-            "800 18px Montserrat, Arial";
-
-        ctx.fillText(
-            "PASAJE / VIAJES",
-            85,
-            y + 36
-        );
-
-
-        ctx.fillStyle =
-            "#ffffff";
-
-        ctx.font =
-            "900 28px Montserrat, Arial";
-
-        drawTextWrapped(
-            ctx,
-            getPromoValue("promoTicket")
-            || "Consulta pasajes disponibles.",
-            85,
-            y + 78,
-            900,
-            34,
-            2
-        );
-
-
-        y += 170;
-
-    }
-
-
-    /* EXTRA */
-
-    if(
-        document.getElementById("showExtra").checked &&
-        getPromoValue("promoExtra")
-    ){
-
-        drawRoundedRect(
-            ctx,
-            55,
-            y,
-            970,
-            100,
-            24
-        );
-
-        ctx.fillStyle =
-            "rgba(255,255,255,.035)";
-
-        ctx.fill();
-
-
-        ctx.fillStyle =
-            "#ffffff";
-
-        ctx.font =
-            "700 20px Montserrat, Arial";
-
-        drawTextWrapped(
-            ctx,
-            getPromoValue("promoExtra"),
-            85,
-            y + 55,
-            900,
-            30,
-            2
-        );
-
-
-        y += 125;
-
-    }
-
-
-    /* PIE */
-
-    const footerY =
-        Math.min(y + 25,1170);
-
-
-    ctx.fillStyle =
-        "#6f7e94";
-
-    ctx.font =
-        "500 15px Montserrat, Arial";
-
-    ctx.fillText(
-        new Date().toLocaleDateString("es-ES"),
-        70,
-        footerY
-    );
-
-
-    if(
-        document.getElementById("showContact").checked
-    ){
-
-        ctx.fillStyle =
-            "#25d366";
-
-        ctx.font =
-            "800 21px Montserrat, Arial";
-
-        ctx.fillText(
-            "WhatsApp +7 904 631 95 65",
-            70,
-            footerY + 45
-        );
-
-    }
-
-
-    ctx.fillStyle =
-        "#f5c542";
-
-    ctx.font =
-        "800 15px Montserrat, Arial";
-
-    ctx.fillText(
-        "Daynel Caminero · Administrador",
-        70,
-        footerY + 78
-    );
-
-
-    /* BORDE */
-
-    ctx.strokeStyle =
-        "rgba(245,197,66,.18)";
-
-    ctx.lineWidth = 2;
-
-    ctx.strokeRect(
-        20,
-        20,
-        W - 40,
-        H - 40
-    );
-
-
-    generatePromoMessage();
-
-}
-
-
-function generatePromoMessage(){
-
-    const title =
-        getPromoValue("promoTitle")
-        || "OFERTAS DE HOY";
-
-    let text =
-`${title}
-
-YOUR BRIDGE HOME
-Tu puente hacia nuevas oportunidades.
-
-`;
-
-    if(
-        document.getElementById("showRates").checked
-    ){
-
-        text +=
-`TASA INFORMAL DE CUBA
-USD → CUP: ${getPromoValue("promoUSD") || "—"}
-EUR → CUP: ${getPromoValue("promoEUR") || "—"}
-RUB → CUP: ${getPromoValue("promoRUB") || "—"}
-MLC → CUP: ${getPromoValue("promoMLC") || "—"}
-
-`;
-
-    }
-
-
-    if(
-        document.getElementById("showRecharge").checked
-    ){
-
-        text +=
-`RECARGA
-${getPromoValue("promoRecharge")}
-${getPromoValue("promoRechargeDetail")}
-
-`;
-
-    }
-
-
-    if(
-        document.getElementById("showRemittance").checked
-    ){
-
-        text +=
-`REMESAS
-${getPromoValue("promoRemittance") || "Consulta disponibilidad."}
-
-`;
-
-    }
-
-
-    if(
-        document.getElementById("showTicket").checked
-    ){
-
-        text +=
-`PASAJE
-${getPromoValue("promoTicket") || "Consulta pasajes disponibles."}
-
-`;
-
-    }
-
-
-    if(
-        document.getElementById("showExtra").checked &&
-        getPromoValue("promoExtra")
-    ){
-
-        text +=
-`${getPromoValue("promoExtra")}
-
-`;
-
-    }
-
-
-    if(
-        document.getElementById("showContact").checked
-    ){
-
-        text +=
-`WhatsApp: +7 904 631 95 65
-Daynel Caminero · Administrador`;
-
-    }
-
-
-    document.getElementById("promoMessage")
-        .textContent = text;
-
-}
-
-
-function downloadPromoImage(){
-
-    generatePromoImage();
-
-    const canvas =
-        document.getElementById("promoCanvas");
-
-    const link =
-        document.createElement("a");
-
-    const date =
-        new Date()
-            .toISOString()
-            .slice(0,10);
-
-    link.download =
-        `your-bridge-home-${date}.png`;
-
-    link.href =
-        canvas.toDataURL("image/png");
-
-    link.click();
-
-    showToast(
-        "Imagen generada y lista para guardar."
-    );
-
-}
-
-
-async function copyPromoText(){
-
-    generatePromoMessage();
-
-    const text =
-        document.getElementById("promoMessage")
-            .textContent;
-
-    try{
-
-        await navigator.clipboard.writeText(text);
-
-        showToast(
-            "Texto promocional copiado."
-        );
-
-    }catch(error){
-
-        showToast(
-            "No se pudo copiar automáticamente."
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   ABRIR ADMIN DESDE TECLADO / ACCESO
-========================================================= */
-
-/*
-   Para abrir el administrador:
-
-   Pulsa 5 veces rápidamente sobre el nombre
-   YOUR BRIDGE HOME del encabezado.
-*/
-
-let adminClicks = 0;
-let adminTimer = null;
-
-document
-    .querySelector(".logo-text strong")
-    .addEventListener("click",()=>{
-
-        adminClicks++;
-
-        clearTimeout(adminTimer);
-
-        adminTimer =
-            setTimeout(()=>{
-                adminClicks = 0;
-            },1500);
-
-        if(adminClicks >= 5){
-
-            adminClicks = 0;
-
-            openAdminLogin();
-
-        }
-
-    });
-
-
-/* =========================================================
-   CERRAR MODALES AL TOCAR FUERA
-========================================================= */
-
-document.querySelectorAll(".modal")
-    .forEach(modal=>{
-
-        modal.addEventListener("click",(event)=>{
-
-            if(event.target === modal){
-
-                modal.classList.remove("active");
-
-            }
-
-        });
-
-    });
-
-
+// Dibuja una vista inicial del generador.
+generateAd();
+
+// CARGA INICIAL DE INFORMACIÓN
+loadAll();
 </script>
-
-
-<!-- =========================================================
-   ACCESO ADMINISTRADOR
-=========================================================
-
-   Para abrir tu panel:
-
-   1. Toca 5 veces rápidamente sobre
-      "YOUR BRIDGE HOME" en el encabezado.
-
-   2. Introduce:
-
-      MI_CLAVE_SECRETA
-
-   3. Desde allí podrás entrar al generador
-      de imágenes.
-
-========================================================= -->
-
-
-<!-- =========================================================
-   TABLA SUPABASE PARA PASAJES
-=========================================================
-
-   Ejecuta SOLO UNA VEZ este SQL en Supabase:
-
-CREATE TABLE IF NOT EXISTS public.pasajes (
-    id bigint generated by default as identity primary key,
-    etiqueta text,
-    tipo text default 'Avión',
-    origen text not null,
-    destino text not null,
-    fecha_salida date not null,
-    fecha_regreso date,
-    precio numeric not null default 0,
-    moneda text not null default 'USD',
-    descripcion text,
-    activo boolean not null default true,
-    fecha_creacion timestamptz default now()
-);
-
-   Después debes permitir lectura pública y escritura
-   según las políticas que ya utilices en tu Supabase.
-
-========================================================= -->
-
 </body>
 </html>
