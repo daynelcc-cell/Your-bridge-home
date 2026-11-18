@@ -139,6 +139,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
    <a href="#recargas">RECARGAS</a>
    <a href="#pasajes">PASAJES</a>
    <a href="#remesas">REMESAS</a>
+   <a href="#notas">NOTAS</a>
    <a href="#tasas">TASAS</a>
   </nav>
   <div class="nav-actions">
@@ -209,6 +210,18 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
    <p>Consulta las ofertas disponibles y solicita la tuya.</p>
   </div>
   <div class="grid" id="rechargesList"><div class="empty">Cargando ofertas...</div></div>
+ </div>
+</section>
+
+<!-- NUEVA SECCIÓN DE NOTAS -->
+<section id="notas">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">Mantente informado</div>
+   <h2>Notas y <span class="gold">Avisos</span></h2>
+   <p>Información importante actualizada por nuestro equipo.</p>
+  </div>
+  <div class="grid" id="notesList"><div class="empty">Cargando notas...</div></div>
  </div>
 </section>
 
@@ -365,6 +378,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
    <button type="button" class="active" onclick="showAdminTab('ratesAdmin',this)">Tasas</button>
    <button type="button" onclick="showAdminTab('rechargeAdmin',this)">Recargas</button>
    <button type="button" onclick="showAdminTab('ticketAdmin',this)">Pasajes</button>
+   <button type="button" onclick="showAdminTab('notesAdmin',this)">Notas</button>
    <button type="button" onclick="showAdminTab('requestsAdmin',this)">Solicitudes</button>
    <button type="button" onclick="showAdminTab('generatorAdmin',this)">Crear anuncios</button>
   </div>
@@ -414,7 +428,19 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
    <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveTicket()">Guardar pasaje</button>
    <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearTicketForm()">Nuevo</button>
    <div class="admin-list" id="adminTicketList"></div>
-   <div class="notice">Si la tabla pasajes aún no existe, ejecuta el SQL de instalación que aparece después del código en Supabase → SQL Editor.</div>
+  </div>
+
+  <!-- NUEVA PESTAÑA DE NOTAS EN ADMIN -->
+  <div class="admin-panel" id="notesAdmin">
+   <h3>Crear o editar nota</h3>
+   <input type="hidden" id="noteId">
+   <div class="form-grid">
+    <div class="field full"><label>Título de la nota</label><input id="noteTitle" placeholder="Ej: Actualización de tasas"></div>
+    <div class="field full"><label>Contenido</label><textarea id="noteContent" placeholder="Escribe aquí el aviso o información importante..."></textarea></div>
+   </div>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveNote()">Guardar nota</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearNoteForm()">Nuevo</button>
+   <div class="admin-list" id="adminNoteList"></div>
   </div>
 
   <div class="admin-panel" id="requestsAdmin">
@@ -460,13 +486,12 @@ const SUPABASE_KEY = "sb_publishable_LaA2IPL1J_IWAH0CVMUcBQ_j-BZa2pe";
 const ADMIN_PASSWORD = "MI_CLAVE_SECRETA";
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// Acceso seguro a los elementos HTML por su ID.
-// Evita depender de variables globales creadas automáticamente por el navegador.
 const $ = id => document.getElementById(id);
 
 let rates = {USD:0,EUR:0,RUB:0,MLC:0,GBP:0};
 let rechargeData = [];
 let ticketData = [];
+let noteData = [];
 let requestData = [];
 
 $("year").textContent = new Date().getFullYear();
@@ -483,7 +508,6 @@ document.querySelectorAll(".navlinks a").forEach(a=>{
  });
 });
 
-// Cierra el menú móvil después de pulsar un enlace interno.
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
  a.addEventListener("click",()=>{
   const target = $(a.getAttribute("href").slice(1));
@@ -519,14 +543,12 @@ $("adminPassword").addEventListener("keydown",e=>{
  if(e.key==="Enter")login();
 });
 
-// Cerrar modal al tocar fuera de su contenido.
 ["loginModal","adminModal"].forEach(id=>{
  $(id).addEventListener("click",e=>{
   if(e.target === $(id))closeModal(id);
  });
 });
 
-// Cerrar modal con Escape.
 document.addEventListener("keydown",e=>{
  if(e.key==="Escape"){
   closeModal("loginModal");
@@ -562,7 +584,7 @@ function showError(msg){
 
 // CARGA GENERAL
 async function loadAll(){
- await Promise.all([loadRates(),loadRecharges(),loadTickets()]);
+ await Promise.all([loadRates(),loadRecharges(),loadTickets(),loadNotes()]);
 }
 
 // TASAS
@@ -650,7 +672,6 @@ function calculate(){
   `${amount} ${from} = ${result.toLocaleString("es-ES",{maximumFractionDigits:2})} ${to}`;
 }
 
-// Permite recalcular al cambiar los valores.
 ["calcAmount","calcFrom","calcTo"].forEach(id=>{
  $(id).addEventListener("change",calculate);
 });
@@ -698,6 +719,113 @@ function requestRecharge(index){
  $("clientDetails").value=
   `Estoy interesado en el plan: ${item.nombre_plan}. Precio publicado: ${money(item.precio,item.moneda||"RUB")}.`;
  $("solicitud").scrollIntoView({behavior:"smooth"});
+}
+
+// NOTAS (NUEVO)
+async function loadNotes(){
+ const {data,error}=await db.from("notas")
+  .select("*").eq("activo",true).order("fecha_creacion",{ascending:false});
+
+ if(error){
+  $("notesList").innerHTML='<div class="empty">No se pudieron cargar las notas.</div>';
+  showError(error);
+  return;
+ }
+
+ noteData=data||[];
+ renderNotes();
+}
+
+function renderNotes(){
+ const el=$("notesList");
+
+ if(!noteData.length){
+  el.innerHTML='<div class="empty">No hay notas publicadas en este momento.</div>';
+  return;
+ }
+
+ el.innerHTML=noteData.map(x=>`
+  <article class="card offer-card">
+   <span class="pill" style="background:var(--panel2);color:white">AVISO</span>
+   <h3>${safe(x.titulo)}</h3>
+   <p>${safe(x.contenido)}</p>
+   <p class="mini" style="text-align:right">${new Date(x.fecha_creacion).toLocaleDateString()}</p>
+  </article>
+ `).join("");
+}
+
+function renderAdminNotes(){
+ $("adminNoteList").innerHTML=noteData.map(n=>`
+  <div class="admin-item">
+   <div>
+    <strong>${safe(n.titulo)}</strong><br>
+    <small>${safe(n.contenido.substring(0,50))}...</small>
+   </div>
+   <div>
+    <button class="btn btn-dark" type="button" onclick="editNote('${safe(n.id)}')">Editar</button>
+    <button class="btn btn-dark" type="button" onclick="deleteNote('${safe(n.id)}')">Eliminar</button>
+   </div>
+  </div>
+ `).join("")||'<p class="mini">No hay notas cargadas.</p>';
+}
+
+function clearNoteForm(){
+ $("noteId").value="";
+ $("noteTitle").value="";
+ $("noteContent").value="";
+}
+
+function editNote(id){
+ const n=noteData.find(v=>String(v.id)===String(id));
+ if(!n)return;
+
+ $("noteId").value=n.id;
+ $("noteTitle").value=n.titulo;
+ $("noteContent").value=n.contenido;
+}
+
+async function saveNote(){
+ const id=$("noteId").value;
+ const payload={
+  titulo:$("noteTitle").value.trim(),
+  contenido:$("noteContent").value.trim(),
+  activo:true
+ };
+
+ if(!payload.titulo||!payload.contenido){
+  alert("Completa el título y el contenido.");
+  return;
+ }
+
+ const query=id
+  ?db.from("notas").update(payload).eq("id",id)
+  :db.from("notas").insert(payload);
+
+ const {error}=await query;
+
+ if(error){
+  alert("No se pudo guardar la nota: "+error.message);
+  return;
+ }
+
+ alert("Nota guardada.");
+ clearNoteForm();
+ await loadNotes();
+ renderAdminNotes();
+}
+
+async function deleteNote(id){
+ if(!confirm("¿Eliminar esta nota?"))return;
+
+ const {error}=await db.from("notas").delete().eq("id",id);
+
+ if(error){
+  alert("No se pudo eliminar: "+error.message);
+  return;
+ }
+
+ await loadNotes();
+ renderAdminNotes();
 }
 
 // PASAJES
@@ -756,8 +884,6 @@ function requestTicket(index){
 // FORMULARIO DE SOLICITUD
 function openRequest(service){
  $("clientService").value=service;
-
- // Si se abre desde un botón de servicio, lleva directamente al formulario.
  $("solicitud").scrollIntoView({behavior:"smooth"});
  setTimeout(()=>$("clientName").focus({preventScroll:true}),500);
 }
@@ -794,10 +920,12 @@ async function loadAdminData(){
  await loadRates();
  await loadRecharges();
  await loadTickets();
+ await loadNotes();
  await loadRequests();
 
  renderAdminRecharges();
  renderAdminTickets();
+ renderAdminNotes();
 }
 
 // ADMINISTRAR RECARGAS
@@ -1036,7 +1164,6 @@ async function deleteRequest(id){
 }
 
 // GENERADOR DE IMÁGENES PROMOCIONALES
-// Se genera en el navegador, sin guardar imágenes en Supabase.
 function generateAd(){
  const canvas=$("adCanvas");
  const ctx=canvas.getContext("2d");
