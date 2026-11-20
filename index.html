@@ -7,20 +7,12 @@
 <meta name="theme-color" content="#0759c7">
 <meta name="description" content="YOUR BRIDGE HOME: boletos aéreos, recargas, remesas y servicios internacionales.">
 <title>YOUR BRIDGE HOME | Tu puente al mundo</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
-:root{
- --blue:#0866dc;--blue2:#1685ff;--navy:#09234b;
- --ink:#172b49;--muted:#708098;--light:#f3f7fd;
- --line:#e3ebf5;--white:#fff;--green:#13a66b;
- --shadow:0 12px 35px rgba(20,65,120,.09);
- --radius:22px;
-}
+:root{--blue:#0866dc;--blue2:#1685ff;--navy:#09234b;--ink:#172b49;--muted:#708098;--light:#f3f7fd;--line:#e3ebf5;--white:#fff;--green:#13a66b;--shadow:0 12px 35px rgba(20,65,120,.09);--radius:22px}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:#f6f9fe;color:var(--ink);font-family:Inter,Arial,sans-serif}
@@ -112,543 +104,492 @@ footer a{display:block;color:#dce8f9;font-size:12px;margin:10px 0}
 .request-item p{margin:5px 0;font-size:12px}
 .hidden{display:none!important}
 #toast{position:fixed;left:50%;bottom:25px;transform:translateX(-50%);background:#09234b;color:white;padding:13px 18px;border-radius:12px;z-index:200;display:none;font-size:13px;box-shadow:var(--shadow);max-width:90%}
-@media(max-width:900px){
- .grid-4{grid-template-columns:repeat(2,1fr)}
- .grid{grid-template-columns:repeat(2,1fr)}
- nav{display:none;position:absolute;top:76px;left:0;right:0;background:white;padding:15px 4%;box-shadow:var(--shadow);flex-direction:column;align-items:stretch}
- nav.open{display:flex}
- nav a,.navbtn{text-align:left}
- .menu-toggle{display:block}
-}
-@media(max-width:620px){
- .topbar{height:68px}.hero{margin-top:14px;min-height:510px;border-radius:22px}
- .hero-content{padding:55px 25px}.hero h1{letter-spacing:-1.5px}
- section{padding:43px 0}.grid,.grid-4,.info-grid,.footer-grid{grid-template-columns:1fr}
- .form-row{grid-template-columns:1fr}
- .section-head{align-items:start;flex-direction:column}
- .banner{align-items:start;flex-direction:column}
- .card{padding:19px}
-}
+@media(max-width:900px){.grid-4{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,1fr)}nav{display:none;position:absolute;top:76px;left:0;right:0;background:white;padding:15px 4%;box-shadow:var(--shadow);flex-direction:column;align-items:stretch}nav.open{display:flex}nav a,.navbtn{text-align:left}.menu-toggle{display:block}}
+@media(max-width:620px){.topbar{height:68px}.hero{margin-top:14px;min-height:510px;border-radius:22px}.hero-content{padding:55px 25px}.hero h1{letter-spacing:-1.5px}section{padding:43px 0}.grid,.grid-4,.info-grid,.footer-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.banner{align-items:start;flex-direction:column}.card{padding:19px}}
 </style>
 </head>
-
 <body>
 <header>
- <div class="container topbar">
-  <a class="brand" href="#inicio">
-   <span class="logo">✈</span>
-   <span>YOUR BRIDGE HOME<small>TU PUENTE AL MUNDO</small></span>
-  </a>
-  <button class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
-  <nav>
-   <a href="#inicio">Inicio</a>
-   <a href="#servicios">Servicios</a>
-   <a href="#ofertas">Ofertas</a>
-   <a href="#tasas">Tasas</a>
-   <a href="#destinos">Destinos</a>
-   <a href="#solicitud">Solicitar</a>
-   <a href="#contacto">Contacto</a>
-   <button class="navbtn" onclick="openAdmin()">Administración</button>
-  </nav>
- </div>
+<div class="container topbar">
+<a class="brand" href="#inicio"><span class="logo">✈</span><span>YOUR BRIDGE HOME<small>TU PUENTE AL MUNDO</small></span></a>
+<button class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('open')">☰</button>
+<nav>
+<a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#ofertas">Ofertas</a><a href="#tasas">Tasas</a><a href="#destinos">Destinos</a><a href="#solicitud">Solicitar</a><a href="#contacto">Contacto</a>
+<button class="navbtn" onclick="openAdmin()">Administración</button>
+</nav>
+</div>
 </header>
-
 <main>
 <div class="container" id="inicio">
- <div class="hero">
-  <div class="hero-content">
-   <span class="eyebrow">✦ CONECTAMOS PERSONAS Y DESTINOS</span>
-   <h1 id="heroTitle">Viaja más lejos. Conecta con el mundo.</h1>
-   <p id="heroDescription">Tu plataforma de confianza para boletos aéreos, remesas, recargas y servicios internacionales.</p>
-   <div class="hero-price" id="heroPrice">Boletos desde 135 000 ₽</div>
-   <div class="hero-actions">
-    <a class="btn btn-primary" href="#solicitud">Solicitar servicio →</a>
-    <a class="btn btn-white" href="https://wa.me/79046319565" target="_blank">WhatsApp</a>
-   </div>
-  </div>
- </div>
+<div class="hero"><div class="hero-content">
+<span class="eyebrow">✦ CONECTAMOS PERSONAS Y DESTINOS</span>
+<h1 id="heroTitle">Viaja más lejos. Conecta con el mundo.</h1>
+<p id="heroDescription">Tu plataforma de confianza para boletos aéreos, remesas, recargas y servicios internacionales.</p>
+<div class="hero-price" id="heroPrice">Boletos desde 135 000 ₽</div>
+<div class="hero-actions"><a class="btn btn-primary" href="#solicitud">Solicitar servicio →</a><a class="btn btn-white" href="https://wa.me/79046319565" target="_blank">WhatsApp</a></div>
+</div></div>
 </div>
-
-<section>
- <div class="container grid-4">
-  <div class="card rate-card"><span>🕒 Hora local</span><strong id="clock">--:--</strong><small id="today"></small></div>
-  <div class="card rate-card"><span>🌍 Plataforma internacional</span><strong>Global</strong><small>Conectando destinos</small></div>
-  <div class="card rate-card"><span>🤝 Atención personalizada</span><strong>Directa</strong><small>Consulta por WhatsApp</small></div>
-  <div class="card rate-card"><span>🔒 Solicitudes</span><strong>Seguimiento</strong><small>Consulta el estado de tu pedido</small></div>
- </div>
-</section>
-
-<section id="servicios">
- <div class="container">
-  <div class="section-head"><div><div class="kicker">Qué hacemos</div><h2>Servicios para conectar tu mundo</h2><p>Soluciones prácticas para tus viajes, comunicaciones y envíos.</p></div></div>
-  <div class="grid">
-   <article class="card service-card">
-    <div class="service-icon">✈️</div><div class="mini-label">Viajes internacionales</div>
-    <h3 id="ticketTitle">Boletos aéreos</h3><p id="ticketDescription">Consulta rutas, fechas y disponibilidad para viajar.</p>
-    <div class="price" id="ticketPrice">135 000 ₽</div>
-    <a class="btn btn-primary" href="#solicitud" onclick="chooseService('Boletos aéreos')">Consultar boleto</a>
-   </article>
-   <article class="card service-card">
-    <div class="service-icon">📱</div><div class="mini-label">Conectividad</div>
-    <h3 id="rechargeTitle">INTERNET +</h3><p id="rechargeDescription">2 GB LTE + 300 MB.cu</p>
-    <div class="price" id="rechargePrice">350 ₽</div>
-    <a class="btn btn-primary" href="#solicitud" onclick="chooseService('Recargas')">Solicitar recarga</a>
-   </article>
-   <article class="card service-card">
-    <div class="service-icon">💸</div><div class="mini-label">Envíos internacionales</div>
-    <h3 id="remittanceTitle">Remesas a Cuba</h3><p id="remittanceDescription">Consulta condiciones y disponibilidad.</p>
-    <div class="price" id="remittancePrice">9.80 CUP</div>
-    <a class="btn btn-primary" href="#solicitud" onclick="chooseService('Remesas')">Consultar remesa</a>
-   </article>
-  </div>
- </div>
-</section>
-
-<section id="ofertas" style="background:#edf4fc">
- <div class="container">
-  <div class="section-head"><div><div class="kicker">Oportunidades</div><h2>Ofertas destacadas</h2><p>Promociones y precios destacados de YOUR BRIDGE HOME.</p></div></div>
-  <div class="grid" id="offersGrid"></div>
- </div>
-</section>
-
-<section>
- <div class="container">
-  <div class="banner">
-   <div><h2>Tu próximo destino está más cerca</h2><p>Consulta disponibilidad, precios y opciones para tu próximo viaje.</p></div>
-   <a class="btn btn-white" href="#solicitud">Planificar mi viaje →</a>
-  </div>
- </div>
-</section>
-
-<section id="tasas">
- <div class="container">
-  <div class="section-head"><div><div class="kicker">Referencia informativa</div><h2>Tasas de cambio</h2><p>Valores de referencia publicados por la administración. Confirma la tasa antes de realizar una operación.</p></div></div>
-  <div class="grid-4">
-   <div class="card rate-card"><span>🇺🇸 1 USD</span><strong id="usd">945 CUP</strong><small>Dólar estadounidense</small></div>
-   <div class="card rate-card"><span>🇪🇺 1 EUR</span><strong id="eur">1 016 CUP</strong><small>Euro</small></div>
-   <div class="card rate-card"><span>💳 1 MLC</span><strong id="mlc">848.45 CUP</strong><small>Moneda libremente convertible</small></div>
-   <div class="card rate-card"><span>🇨🇦 1 CAD</span><strong id="cad">590.35 CUP</strong><small>Dólar canadiense</small></div>
-   <div class="card rate-card"><span>🇲🇽 1 MXN</span><strong id="mxn">50.88 CUP</strong><small>Peso mexicano</small></div>
-   <div class="card rate-card"><span>💳 Zelle 1 USD</span><strong id="zelle">918.90 CUP</strong><small>Referencia Zelle</small></div>
-  </div>
- </div>
-</section>
-
-<section id="destinos" style="background:#edf4fc">
- <div class="container">
-  <div class="section-head"><div><div class="kicker">Explora posibilidades</div><h2>Destinos que te acercan</h2><p>Consulta opciones de viaje y servicios internacionales.</p></div></div>
-  <div class="grid-4">
-   <div class="destination" style="background-image:url('https://images.unsplash.com/photo-1500759285222-a95626b934cb?auto=format&fit=crop&w=900&q=85')"><strong>🇨🇺 Cuba</strong></div>
-   <div class="destination" style="background-image:url('https://images.unsplash.com/photo-1513326738677-b86438548c6f?auto=format&fit=crop&w=900&q=85')"><strong>🇷🇺 Rusia</strong></div>
-   <div class="destination" style="background-image:url('https://images.unsplash.com/photo-1512632578888-169bbbc64f33?auto=format&fit=crop&w=900&q=85')"><strong>🇺🇿 Uzbekistán</strong></div>
-   <div class="destination" style="background-image:url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=900&q=85')"><strong>🇪🇸 España</strong></div>
-   <div class="destination" style="background-image:url('https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=900&q=85')"><strong>🇩🇪 Alemania</strong></div>
-   <div class="destination" style="background-image:url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=85')"><strong>🌎 Latinoamérica</strong></div>
-  </div>
- </div>
-</section>
-
-<section id="solicitud">
- <div class="container">
-  <div class="section-head"><div><div class="kicker">Atención al cliente</div><h2>Solicita tu servicio</h2><p>Envíanos tu solicitud. Te proporcionaremos un código para consultar su estado.</p></div></div>
-  <div class="info-grid">
-   <div class="card">
-    <form id="requestForm">
-     <div class="form-row">
-      <div class="field"><label>Nombre y apellidos *</label><input id="customerName" required maxlength="100" placeholder="Tu nombre"></div>
-      <div class="field"><label>WhatsApp o teléfono *</label><input id="customerPhone" required maxlength="40" placeholder="+..."></div>
-     </div>
-     <div class="field"><label>Servicio que necesitas *</label>
-      <select id="serviceType" required>
-       <option value="">Selecciona un servicio</option>
-       <option>Boletos aéreos</option><option>Recargas</option><option>Remesas</option>
-       <option>Publicidad</option><option>Otro servicio</option>
-      </select>
-     </div>
-     <div class="field"><label>Detalles de tu solicitud *</label><textarea id="requestDetails" required maxlength="2000" placeholder="Explícanos qué necesitas, fechas, destino, importe..."></textarea></div>
-     <div class="field"><label>Adjuntar PDF o fotografías (opcional)</label><input id="requestFiles" type="file" multiple accept="image/*,.pdf"></div>
-     <div class="note">Al enviar, recibirás un comprobante con tu código de solicitud. No envíes contraseñas, datos bancarios completos ni documentos que no sean necesarios.</div>
-     <p><button class="btn btn-primary" type="submit" id="sendRequest">Enviar solicitud →</button></p>
-    </form>
-    <div id="receipt" class="note hidden"></div>
-   </div>
-   <div class="card">
-    <div class="service-icon">🔎</div>
-    <h3>Consulta tu solicitud</h3>
-    <p>Introduce el código de seguimiento que aparece en tu comprobante.</p>
-    <div class="field"><label>Código de solicitud</label><input id="trackingCode" placeholder="Ejemplo: YBH-ABC123"></div>
-    <button class="btn btn-primary" onclick="trackRequest()">Consultar estado</button>
-    <div id="trackingResult" style="margin-top:18px"></div>
-    <hr style="border:0;border-top:1px solid var(--line);margin:25px 0">
-    <h3>¿Prefieres atención directa?</h3>
-    <p>Escríbenos por WhatsApp y nuestro equipo te orientará.</p>
-    <a class="btn btn-green" href="https://wa.me/79046319565" target="_blank">Abrir WhatsApp</a>
-   </div>
-  </div>
- </div>
-</section>
-
-<section id="contacto" style="background:#edf4fc">
- <div class="container">
-  <div class="section-head"><div><div class="kicker">Estamos en contacto</div><h2>Tu puente al mundo</h2><p>Atención personalizada para tus consultas y solicitudes.</p></div></div>
-  <div class="grid">
-   <div class="card"><div class="service-icon">👤</div><h3>Daynel Caminero</h3><p>Administrador de YOUR BRIDGE HOME.</p></div>
-   <div class="card"><div class="service-icon">📲</div><h3>WhatsApp</h3><p>+7 904 631 95 65</p><a class="btn btn-green" href="https://wa.me/79046319565" target="_blank">Contactar</a></div>
-   <div class="card"><div class="service-icon">🌐</div><h3>Servicios internacionales</h3><p>Viajes, recargas, remesas y oportunidades para conectar destinos.</p></div>
-  </div>
- </div>
-</section>
+<section><div class="container grid-4">
+<div class="card rate-card"><span>🕒 Hora local</span><strong id="clock">--:--</strong><small id="today"></small></div>
+<div class="card rate-card"><span>🌍 Plataforma internacional</span><strong>Global</strong><small>Conectando destinos</small></div>
+<div class="card rate-card"><span>🤝 Atención personalizada</span><strong>Directa</strong><small>Consulta por WhatsApp</small></div>
+<div class="card rate-card"><span>🔒 Solicitudes</span><strong>Seguimiento</strong><small>Consulta el estado de tu pedido</small></div>
+</div></section>
+<section id="servicios"><div class="container">
+<div class="section-head"><div><div class="kicker">Qué hacemos</div><h2>Servicios para conectar tu mundo</h2><p>Soluciones prácticas para tus viajes, comunicaciones y envíos.</p></div></div>
+<div class="grid">
+<article class="card service-card"><div class="service-icon">✈️</div><div class="mini-label">Viajes internacionales</div><h3 id="ticketTitle">Boletos aéreos</h3><p id="ticketDescription">Consulta rutas, fechas y disponibilidad para viajar.</p><div class="price" id="ticketPrice">135 000 ₽</div><a class="btn btn-primary" href="#solicitud" onclick="chooseService('Boletos aéreos')">Consultar boleto</a></article>
+<article class="card service-card"><div class="service-icon">📱</div><div class="mini-label">Conectividad</div><h3 id="rechargeTitle">INTERNET +</h3><p id="rechargeDescription">2 GB LTE + 300 MB.cu</p><div class="price" id="rechargePrice">350 ₽</div><a class="btn btn-primary" href="#solicitud" onclick="chooseService('Recargas')">Solicitar recarga</a></article>
+<article class="card service-card"><div class="service-icon">💸</div><div class="mini-label">Envíos internacionales</div><h3 id="remittanceTitle">Remesas a Cuba</h3><p id="remittanceDescription">Consulta condiciones y disponibilidad.</p><div class="price" id="remittancePrice">9.80 CUP</div><a class="btn btn-primary" href="#solicitud" onclick="chooseService('Remesas')">Consultar remesa</a></article>
+</div></div></section>
+<section id="ofertas" style="background:#edf4fc"><div class="container">
+<div class="section-head"><div><div class="kicker">Oportunidades</div><h2>Ofertas destacadas</h2><p>Promociones y precios destacados de YOUR BRIDGE HOME.</p></div></div>
+<div class="grid" id="offersGrid"></div>
+</div></section>
+<section><div class="container"><div class="banner"><div><h2>Tu próximo destino está más cerca</h2><p>Consulta disponibilidad, precios y opciones para tu próximo viaje.</p></div><a class="btn btn-white" href="#solicitud">Planificar mi viaje →</a></div></div></section>
+<section id="tasas"><div class="container">
+<div class="section-head"><div><div class="kicker">Referencia informativa</div><h2>Tasas de cambio</h2><p>Valores de referencia publicados por la administración. Confirma la tasa antes de realizar una operación.</p></div></div>
+<div class="grid-4">
+<div class="card rate-card"><span>🇺🇸 1 USD</span><strong id="usd">945 CUP</strong><small>Dólar estadounidense</small></div>
+<div class="card rate-card"><span>🇪🇺 1 EUR</span><strong id="eur">1 016 CUP</strong><small>Euro</small></div>
+<div class="card rate-card"><span>💳 1 MLC</span><strong id="mlc">848.45 CUP</strong><small>Moneda libremente convertible</small></div>
+<div class="card rate-card"><span>🇨🇦 1 CAD</span><strong id="cad">590.35 CUP</strong><small>Dólar canadiense</small></div>
+<div class="card rate-card"><span>🇲🇽 1 MXN</span><strong id="mxn">50.88 CUP</strong><small>Peso mexicano</small></div>
+<div class="card rate-card"><span>💳 Zelle 1 USD</span><strong id="zelle">918.90 CUP</strong><small>Referencia Zelle</small></div>
+</div></div></section>
+<section id="destinos" style="background:#edf4fc"><div class="container">
+<div class="section-head"><div><div class="kicker">Explora posibilidades</div><h2>Destinos que te acercan</h2><p>Consulta opciones de viaje y servicios internacionales.</p></div></div>
+<div class="grid-4">
+<div class="destination" style="background-image:url('https://images.unsplash.com/photo-1500759285222-a95626b934cb?auto=format&fit=crop&w=900&q=85')"><strong>🇨🇺 Cuba</strong></div>
+<div class="destination" style="background-image:url('https://images.unsplash.com/photo-1513326738677-b86438548c6f?auto=format&fit=crop&w=900&q=85')"><strong>🇷🇺 Rusia</strong></div>
+<div class="destination" style="background-image:url('https://images.unsplash.com/photo-1512632578888-169bbbc64f33?auto=format&fit=crop&w=900&q=85')"><strong>🇺🇿 Uzbekistán</strong></div>
+<div class="destination" style="background-image:url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=900&q=85')"><strong>🇪🇸 España</strong></div>
+<div class="destination" style="background-image:url('https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=900&q=85')"><strong>🇩🇪 Alemania</strong></div>
+<div class="destination" style="background-image:url('https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=85')"><strong>🌎 Latinoamérica</strong></div>
+</div></div></section>
+<section id="solicitud"><div class="container">
+<div class="section-head"><div><div class="kicker">Atención al cliente</div><h2>Solicita tu servicio</h2><p>Envíanos tu solicitud. Te proporcionaremos un código para consultar su estado.</p></div></div>
+<div class="info-grid">
+<div class="card">
+<form id="requestForm">
+<div class="form-row">
+<div class="field"><label>Nombre y apellidos *</label><input id="customerName" required maxlength="100" placeholder="Tu nombre"></div>
+<div class="field"><label>WhatsApp o teléfono *</label><input id="customerPhone" required maxlength="40" placeholder="+..."></div>
+</div>
+<div class="field"><label>Servicio que necesitas *</label><select id="serviceType" required><option value="">Selecciona un servicio</option><option>Boletos aéreos</option><option>Recargas</option><option>Remesas</option><option>Publicidad</option><option>Otro servicio</option></select></div>
+<div class="field"><label>Detalles de tu solicitud *</label><textarea id="requestDetails" required maxlength="2000" placeholder="Explícanos qué necesitas, fechas, destino, importe..."></textarea></div>
+<div class="field"><label>Adjuntar PDF o fotografías (opcional)</label><input id="requestFiles" type="file" multiple accept="image/*,.pdf"></div>
+<div class="note">Al enviar, recibirás un comprobante con tu código de solicitud. No envíes contraseñas, datos bancarios completos ni documentos innecesarios.</div>
+<p><button class="btn btn-primary" type="submit" id="sendRequest">Enviar solicitud →</button></p>
+</form>
+<div id="receipt" class="note hidden"></div>
+</div>
+<div class="card">
+<div class="service-icon">🔎</div><h3>Consulta tu solicitud</h3><p>Introduce el código de seguimiento que aparece en tu comprobante.</p>
+<div class="field"><label>Código de solicitud</label><input id="trackingCode" placeholder="Ejemplo: YBH-ABC123"></div>
+<button class="btn btn-primary" onclick="trackRequest()">Consultar estado</button>
+<div id="trackingResult" style="margin-top:18px"></div>
+<hr style="border:0;border-top:1px solid var(--line);margin:25px 0">
+<h3>¿Prefieres atención directa?</h3><p>Escríbenos por WhatsApp y nuestro equipo te orientará.</p>
+<a class="btn btn-green" href="https://wa.me/79046319565" target="_blank">Abrir WhatsApp</a>
+</div>
+</div></div></section>
+<section id="contacto" style="background:#edf4fc"><div class="container">
+<div class="section-head"><div><div class="kicker">Estamos en contacto</div><h2>Tu puente al mundo</h2><p>Atención personalizada para tus consultas y solicitudes.</p></div></div>
+<div class="grid">
+<div class="card"><div class="service-icon">👤</div><h3>Daynel Caminero</h3><p>Administrador de YOUR BRIDGE HOME.</p></div>
+<div class="card"><div class="service-icon">📲</div><h3>WhatsApp</h3><p>+7 904 631 95 65</p><a class="btn btn-green" href="https://wa.me/79046319565" target="_blank">Contactar</a></div>
+<div class="card"><div class="service-icon">🌐</div><h3>Servicios internacionales</h3><p>Viajes, recargas, remesas y oportunidades para conectar destinos.</p></div>
+</div></div></section>
 </main>
-
-<footer>
- <div class="container">
-  <div class="footer-grid">
-   <div><div class="brand" style="color:white"><span class="logo">✈</span><span>YOUR BRIDGE HOME<small style="color:#b8c9e2">TU PUENTE AL MUNDO</small></span></div><p>Conectamos personas, destinos y oportunidades a través de servicios internacionales.</p></div>
-   <div><strong>Explorar</strong><a href="#servicios">Servicios</a><a href="#ofertas">Ofertas</a><a href="#tasas">Tasas</a><a href="#destinos">Destinos</a></div>
-   <div><strong>Contacto</strong><a href="https://wa.me/79046319565">WhatsApp</a><a href="#solicitud">Solicitar servicio</a><a href="#inicio">Volver arriba ↑</a></div>
-  </div>
-  <p style="border-top:1px solid #ffffff22;padding-top:20px;margin-top:30px">© <span id="year"></span> YOUR BRIDGE HOME. Todos los derechos reservados. Los precios y tasas pueden cambiar sin previo aviso.</p>
- </div>
-</footer>
-
+<footer><div class="container">
+<div class="footer-grid">
+<div><div class="brand" style="color:white"><span class="logo">✈</span><span>YOUR BRIDGE HOME<small style="color:#b8c9e2">TU PUENTE AL MUNDO</small></span></div><p>Conectamos personas, destinos y oportunidades a través de servicios internacionales.</p></div>
+<div><strong>Explorar</strong><a href="#servicios">Servicios</a><a href="#ofertas">Ofertas</a><a href="#tasas">Tasas</a><a href="#destinos">Destinos</a></div>
+<div><strong>Contacto</strong><a href="https://wa.me/79046319565">WhatsApp</a><a href="#solicitud">Solicitar servicio</a><a href="#inicio">Volver arriba ↑</a></div>
+</div>
+<p style="border-top:1px solid #ffffff22;padding-top:20px;margin-top:30px">© <span id="year"></span> YOUR BRIDGE HOME. Todos los derechos reservados. Los precios y tasas pueden cambiar sin previo aviso.</p>
+</div></footer>
 <a class="float-wa" href="https://wa.me/79046319565" target="_blank">☏ WhatsApp</a>
 <div id="toast"></div>
 
-<!-- PANEL DE ADMINISTRACIÓN -->
-<div class="modal" id="adminModal">
- <div class="modal-box">
-  <div class="modal-head"><div><div class="kicker">Área privada</div><h2 style="margin:0;color:var(--navy)">Administración</h2></div><button class="close" onclick="closeAdmin()">✕</button></div>
-  <div id="loginArea">
-   <p>Inicia sesión con tu cuenta autorizada de Supabase.</p>
-   <div class="field"><label>Correo electrónico</label><input id="adminEmail" type="email" autocomplete="username"></div>
-   <div class="field"><label>Contraseña</label><input id="adminPassword" type="password" autocomplete="current-password"></div>
-   <button class="btn btn-primary" onclick="adminLogin()">Entrar al panel</button>
-   <p id="loginMessage" class="note"></p>
-  </div>
-  <div id="adminArea" class="hidden">
-   <div class="note">Sesión de administrador autorizada. Los cambios publicados se guardan en Supabase.</div>
-   <div class="tabs">
-    <button class="tab active" onclick="showTab('general',this)">General y precios</button>
-    <button class="tab" onclick="showTab('offersAdmin',this)">Ofertas</button>
-    <button class="tab" onclick="showTab('requestsAdmin',this)">Solicitudes</button>
-   </div>
-   <div id="general" class="tab-panel active">
-    <div class="field"><label>Título principal</label><input id="editHeroTitle"></div>
-    <div class="field"><label>Descripción principal</label><textarea id="editHeroDescription"></textarea></div>
-    <div class="field"><label>Precio destacado del banner</label><input id="editHeroPrice"></div>
-    <hr>
-    <h3>Boletos</h3>
-    <div class="field"><label>Título</label><input id="editTicketTitle"></div>
-    <div class="field"><label>Descripción</label><input id="editTicketDescription"></div>
-    <div class="field"><label>Precio</label><input id="editTicketPrice"></div>
-    <h3>Recargas</h3>
-    <div class="field"><label>Título</label><input id="editRechargeTitle"></div>
-    <div class="field"><label>Descripción</label><input id="editRechargeDescription"></div>
-    <div class="field"><label>Precio</label><input id="editRechargePrice"></div>
-    <h3>Remesas</h3>
-    <div class="field"><label>Título</label><input id="editRemittanceTitle"></div>
-    <div class="field"><label>Descripción</label><input id="editRemittanceDescription"></div>
-    <div class="field"><label>Precio o equivalencia</label><input id="editRemittancePrice"></div>
-    <h3>Tasas de referencia</h3>
-    <div class="form-row"><div class="field"><label>USD</label><input id="editUsd"></div><div class="field"><label>EUR</label><input id="editEur"></div></div>
-    <div class="form-row"><div class="field"><label>MLC</label><input id="editMlc"></div><div class="field"><label>CAD</label><input id="editCad"></div></div>
-    <div class="form-row"><div class="field"><label>MXN</label><input id="editMxn"></div><div class="field"><label>Zelle</label><input id="editZelle"></div></div>
-    <button class="btn btn-primary" onclick="saveGeneral()">Guardar cambios</button>
-   </div>
-   <div id="offersAdmin" class="tab-panel">
-    <h3>Crear una oferta</h3>
-    <div class="field"><label>Título</label><input id="newOfferTitle" placeholder="Ej. Vuelo a Cuba"></div>
-    <div class="field"><label>Descripción</label><textarea id="newOfferDescription"></textarea></div>
-    <div class="field"><label>Precio</label><input id="newOfferPrice" placeholder="135 000 ₽"></div>
-    <div class="field"><label>Imagen (URL pública)</label><input id="newOfferImage" placeholder="https://..."></div>
-    <button class="btn btn-primary" onclick="addOffer()">Publicar oferta</button>
-    <div id="adminOffersList"></div>
-   </div>
-   <div id="requestsAdmin" class="tab-panel">
-    <h3>Solicitudes recibidas</h3>
-    <button class="btn btn-outline" onclick="loadAdminRequests()">Actualizar solicitudes</button>
-    <div id="adminRequestsList"><p>Abre esta sección y pulsa actualizar.</p></div>
-   </div>
-   <p><button class="btn btn-outline" onclick="adminLogout()">Cerrar sesión</button></p>
-  </div>
- </div>
+<div class="modal" id="adminModal"><div class="modal-box">
+<div class="modal-head"><div><div class="kicker">Área privada</div><h2 style="margin:0;color:var(--navy)">Administración</h2></div><button class="close" onclick="closeAdmin()">✕</button></div>
+<div id="loginArea">
+<p>Inicia sesión con tu cuenta autorizada de Supabase.</p>
+<div class="field"><label>Correo electrónico</label><input id="adminEmail" type="email" autocomplete="username"></div>
+<div class="field"><label>Contraseña</label><input id="adminPassword" type="password" autocomplete="current-password"></div>
+<button class="btn btn-primary" onclick="adminLogin()">Entrar al panel</button>
+<p id="loginMessage" class="note"></p>
 </div>
+<div id="adminArea" class="hidden">
+<div class="note">Sesión de administrador autorizada. Los cambios publicados se guardan en Supabase.</div>
+<div class="tabs">
+<button class="tab active" onclick="showTab('general',this)">General y precios</button>
+<button class="tab" onclick="showTab('offersAdmin',this)">Ofertas</button>
+<button class="tab" onclick="showTab('requestsAdmin',this)">Solicitudes</button>
+</div>
+<div id="general" class="tab-panel active">
+<div class="field"><label>Título principal</label><input id="editHeroTitle"></div>
+<div class="field"><label>Descripción principal</label><textarea id="editHeroDescription"></textarea></div>
+<div class="field"><label>Precio destacado del banner</label><input id="editHeroPrice"></div>
+<hr><h3>Boletos</h3>
+<div class="field"><label>Título</label><input id="editTicketTitle"></div>
+<div class="field"><label>Descripción</label><input id="editTicketDescription"></div>
+<div class="field"><label>Precio</label><input id="editTicketPrice"></div>
+<h3>Recargas</h3>
+<div class="field"><label>Título</label><input id="editRechargeTitle"></div>
+<div class="field"><label>Descripción</label><input id="editRechargeDescription"></div>
+<div class="field"><label>Precio</label><input id="editRechargePrice"></div>
+<h3>Remesas</h3>
+<div class="field"><label>Título</label><input id="editRemittanceTitle"></div>
+<div class="field"><label>Descripción</label><input id="editRemittanceDescription"></div>
+<div class="field"><label>Precio o equivalencia</label><input id="editRemittancePrice"></div>
+<h3>Tasas de referencia</h3>
+<div class="form-row"><div class="field"><label>USD</label><input id="editUsd"></div><div class="field"><label>EUR</label><input id="editEur"></div></div>
+<div class="form-row"><div class="field"><label>MLC</label><input id="editMlc"></div><div class="field"><label>CAD</label><input id="editCad"></div></div>
+<div class="form-row"><div class="field"><label>MXN</label><input id="editMxn"></div><div class="field"><label>Zelle</label><input id="editZelle"></div></div>
+<button class="btn btn-primary" onclick="saveGeneral()">Guardar cambios</button>
+</div>
+<div id="offersAdmin" class="tab-panel">
+<h3>Crear una oferta</h3>
+<div class="field"><label>Título</label><input id="newOfferTitle" placeholder="Ej. Vuelo a Cuba"></div>
+<div class="field"><label>Descripción</label><textarea id="newOfferDescription"></textarea></div>
+<div class="field"><label>Precio</label><input id="newOfferPrice" placeholder="135 000 ₽"></div>
+<div class="field"><label>Imagen (URL pública)</label><input id="newOfferImage" placeholder="https://..."></div>
+<button class="btn btn-primary" onclick="addOffer()">Publicar oferta</button>
+<div id="adminOffersList"></div>
+</div>
+<div id="requestsAdmin" class="tab-panel">
+<h3>Solicitudes recibidas</h3>
+<button class="btn btn-outline" onclick="loadAdminRequests()">Actualizar solicitudes</button>
+<div id="adminRequestsList"><p>Abre esta sección y pulsa actualizar.</p></div>
+</div>
+<p><button class="btn btn-outline" onclick="adminLogout()">Cerrar sesión</button></p>
+</div>
+</div></div>
 
 <script>
-/* CONFIGURACIÓN ACTUAL DE YOUR BRIDGE HOME */
-const SUPABASE_URL = "https://lwgeillycitljubenzhv.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_LaA2IPL1J_IWAH0CVMUcBQ_j-BZa2pe";
-const ADMIN_UID = "c0d50bf8-97dc-4dc7-b00e-61d07348ac07";
+/* CONFIGURACIÓN SUPABASE */
+const SUPABASE_URL="https://lwgeillycitljubenzhv.supabase.co";
+const SUPABASE_ANON_KEY="sb_publishable_LaA2IPL1J_IWAH0CVMUcBQ_j-BZa2pe";
 
-/* No colocar aquí una service_role key ni contraseñas. */
-const db = window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+/* UID CORRECTO DEL ADMINISTRADOR */
+const ADMIN_UID="c0d50bf8-97dc-4ede-b00e-61d07348ac07";
 
-const defaults = {
- heroTitle:"Viaja más lejos. Conecta con el mundo.",
- heroDescription:"Tu plataforma de confianza para boletos aéreos, remesas, recargas y servicios internacionales.",
- heroPrice:"135 000 ₽",
- ticketTitle:"Boletos aéreos",
- ticketDescription:"Consulta rutas, fechas y disponibilidad.",
- ticketPrice:"135 000 ₽",
- rechargeTitle:"INTERNET +",
- rechargeDescription:"2 GB LTE + 300 MB.cu",
- rechargePrice:"350 ₽",
- remittanceTitle:"Remesas a Cuba",
- remittanceDescription:"Por cada 1 000 ₽. Consulta condiciones.",
- remittancePrice:"9.80 CUP",
- usd:"945 CUP",eur:"1 016 CUP",mlc:"848.45 CUP",
- cad:"590.35 CUP",mxn:"50.88 CUP",zelle:"918.90 CUP",
- offers:[
-  {title:"INTERNET +",description:"2 GB LTE + 300 MB.cu",price:"350 ₽",image:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85"},
-  {title:"Remesas a Cuba",description:"Por cada 1 000 rublos",price:"9.80 CUP",image:"https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=900&q=85"},
-  {title:"Rusia → Cuba",description:"Consulta fechas y disponibilidad",price:"135 000 ₽",image:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=900&q=85"}
- ]
-};
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 
-let content = structuredClone(defaults);
-let currentUser = null;
-let isAdmin = false;
+const defaults={
+heroTitle:"Viaja más lejos. Conecta con el mundo.",
+heroDescription:"Tu plataforma de confianza para boletos aéreos, remesas, recargas y servicios internacionales.",
+heroPrice:"135 000 ₽",
+ticketTitle:"Boletos aéreos",
+ticketDescription:"Consulta rutas, fechas y disponibilidad.",
+ticketPrice:"135 000 ₽",
+rechargeTitle:"INTERNET +",
+rechargeDescription:"2 GB LTE + 300 MB.cu",
+rechargePrice:"350 ₽",
+remittanceTitle:"Remesas a Cuba",
+remittanceDescription:"Por cada 1 000 ₽. Consulta condiciones.",
+remittancePrice:"9.80 CUP",
+usd:"945 CUP",eur:"1 016 CUP",mlc:"848.45 CUP",cad:"590.35 CUP",mxn:"50.88 CUP",zelle:"918.90 CUP",
+offers:[
+{title:"INTERNET +",description:"2 GB LTE + 300 MB.cu",price:"350 ₽",image:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85"},
+{title:"Remesas a Cuba",description:"Por cada 1 000 rublos",price:"9.80 CUP",image:"https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=900&q=85"},
+{title:"Rusia → Cuba",description:"Consulta fechas y disponibilidad",price:"135 000 ₽",image:"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=900&q=85"}
+]};
+let content=structuredClone(defaults);
+let currentUser=null;
+let isAdmin=false;
 
 function toast(message){
- const el=document.getElementById("toast");
- el.textContent=message;el.style.display="block";
- clearTimeout(window.toastTimer);
- window.toastTimer=setTimeout(()=>el.style.display="none",3500);
+const el=document.getElementById("toast");
+el.textContent=message;el.style.display="block";
+clearTimeout(window.toastTimer);
+window.toastTimer=setTimeout(()=>el.style.display="none",3500);
 }
 function safeText(value){return String(value??"");}
 
 async function loadContent(){
- try{
-  const {data,error}=await db.from("ybh_content").select("content").eq("id",1).maybeSingle();
-  if(error) throw error;
-  if(data && data.content) content={...structuredClone(defaults),...data.content};
- }catch(e){console.warn("Contenido: se muestran los valores locales.",e.message);}
- renderContent();
+try{
+const {data,error}=await db.from("ybh_content").select("content").eq("id",1).maybeSingle();
+if(error)throw error;
+if(data&&data.content)content={...structuredClone(defaults),...data.content};
+}catch(e){console.warn("Contenido: se muestran valores locales.",e.message);}
+renderContent();
 }
 function renderContent(){
- const ids=["heroTitle","heroDescription","heroPrice","ticketTitle","ticketDescription","ticketPrice","rechargeTitle","rechargeDescription","rechargePrice","remittanceTitle","remittanceDescription","remittancePrice","usd","eur","mlc","cad","mxn","zelle"];
- ids.forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=safeText(content[id]??defaults[id]);});
- document.getElementById("heroPrice").textContent="Boletos desde "+content.heroPrice;
- renderOffers();
+const ids=["heroTitle","heroDescription","ticketTitle","ticketDescription","ticketPrice","rechargeTitle","rechargeDescription","rechargePrice","remittanceTitle","remittanceDescription","remittancePrice","usd","eur","mlc","cad","mxn","zelle"];
+ids.forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=safeText(content[id]??defaults[id]);});
+document.getElementById("heroPrice").textContent="Boletos desde "+safeText(content.heroPrice);
+renderOffers();
 }
 function renderOffers(){
- const grid=document.getElementById("offersGrid");
- const offers=Array.isArray(content.offers)?content.offers:[];
- grid.innerHTML="";
- offers.forEach((o,i)=>{
-  const card=document.createElement("article");
-  card.className="card offer-card";
-  const image=document.createElement("div");
-  image.className="offer-image";
-  image.style.backgroundImage=`url("${String(o.image||"").replace(/["\\]/g,"")}")`;
-  const body=document.createElement("div");body.className="offer-body";
-  const tag=document.createElement("span");tag.className="offer-tag";tag.textContent="OFERTA DESTACADA";
-  const h=document.createElement("h3");h.textContent=o.title||"Oferta";
-  const p=document.createElement("p");p.textContent=o.description||"Consulta disponibilidad.";
-  const price=document.createElement("div");price.className="price";price.textContent=o.price||"Consultar";
-  const btn=document.createElement("a");btn.className="btn btn-primary";btn.href="#solicitud";btn.textContent="Me interesa";
-  btn.addEventListener("click",()=>{chooseService("Otro servicio");document.getElementById("requestDetails").value="Estoy interesado en: "+(o.title||"Oferta");});
-  body.append(tag,h,p,price,btn);card.append(image,body);grid.append(card);
- });
+const grid=document.getElementById("offersGrid");
+grid.innerHTML="";
+(Array.isArray(content.offers)?content.offers:[]).forEach(o=>{
+const card=document.createElement("article");card.className="card offer-card";
+const image=document.createElement("div");image.className="offer-image";
+image.style.backgroundImage=`url("${String(o.image||"").replace(/["\\]/g,"")}")`;
+const body=document.createElement("div");body.className="offer-body";
+const tag=document.createElement("span");tag.className="offer-tag";tag.textContent="OFERTA DESTACADA";
+const h=document.createElement("h3");h.textContent=o.title||"Oferta";
+const p=document.createElement("p");p.textContent=o.description||"Consulta disponibilidad.";
+const price=document.createElement("div");price.className="price";price.textContent=o.price||"Consultar";
+const btn=document.createElement("a");btn.className="btn btn-primary";btn.href="#solicitud";btn.textContent="Me interesa";
+btn.addEventListener("click",()=>{chooseService("Otro servicio");document.getElementById("requestDetails").value="Estoy interesado en: "+(o.title||"Oferta");});
+body.append(tag,h,p,price,btn);card.append(image,body);grid.append(card);
+});
 }
 async function saveContent(){
- const {error}=await db.from("ybh_content").upsert({
-  id:1,content:content,updated_at:new Date().toISOString()
- },{onConflict:"id"});
- if(error)throw error;
+const {error}=await db.from("ybh_content").upsert({id:1,content,updated_at:new Date().toISOString()},{onConflict:"id"});
+if(error)throw error;
 }
 function chooseService(name){document.getElementById("serviceType").value=name;}
 function updateClock(){
- const now=new Date();
- document.getElementById("clock").textContent=now.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"});
- document.getElementById("today").textContent=now.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});
+const now=new Date();
+document.getElementById("clock").textContent=now.toLocaleTimeString("es-ES",{hour:"2-digit",minute:"2-digit"});
+document.getElementById("today").textContent=now.toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});
 }
 document.getElementById("year").textContent=new Date().getFullYear();
 updateClock();setInterval(updateClock,30000);
 
+/* SOLICITUDES Y ADJUNTOS */
 document.getElementById("requestForm").addEventListener("submit",async e=>{
- e.preventDefault();
- const button=document.getElementById("sendRequest");
- button.disabled=true;button.textContent="Enviando...";
- try{
-  const name=document.getElementById("customerName").value.trim();
-  const phone=document.getElementById("customerPhone").value.trim();
-  const service=document.getElementById("serviceType").value;
-  const details=document.getElementById("requestDetails").value.trim();
-  const files=[...document.getElementById("requestFiles").files];
-  const code="YBH-"+crypto.randomUUID().replace(/-/g,"").slice(0,8).toUpperCase();
-  let attachments=[];
+e.preventDefault();
+const button=document.getElementById("sendRequest");
+button.disabled=true;button.textContent="Enviando...";
+try{
+const name=document.getElementById("customerName").value.trim();
+const phone=document.getElementById("customerPhone").value.trim();
+const service=document.getElementById("serviceType").value;
+const details=document.getElementById("requestDetails").value.trim();
+const files=[...document.getElementById("requestFiles").files];
 
-  /* Los archivos requieren un bucket privado llamado ybh-files y sus políticas. */
-  for(const file of files){
-   if(file.size>10*1024*1024)throw new Error("Cada archivo debe pesar menos de 10 MB.");
-   const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-   const path=`requests/${code}/${Date.now()}-${safeName}`;
-   const {error:uploadError}=await db.storage.from("ybh-files").upload(path,file,{upsert:false});
-   if(uploadError)throw new Error("No se pudo subir el archivo. Comprueba la configuración del almacenamiento.");
-   attachments.push({path,name:file.name,type:file.type});
-  }
+/* 32 caracteres hexadecimales: 128 bits aleatorios */
+const code="YBH-"+crypto.randomUUID().replace(/-/g,"").toUpperCase();
 
-  /* Tabla adicional y políticas RLS: se entregarán en el SQL complementario. */
-  const {error}=await db.from("ybh_requests").insert({
-   tracking_code:code,customer_name:name,customer_phone:phone,
-   service:service,details:details,status:"Aceptada",attachments:attachments
-  });
-  if(error)throw new Error("No se pudo registrar la solicitud. Es necesario configurar la tabla y las políticas de solicitudes en Supabase.");
+for(const file of files){
+if(file.size>10*1024*1024)throw new Error("Cada archivo debe pesar menos de 10 MB.");
+}
 
-  const receipt=document.getElementById("receipt");
-  receipt.classList.remove("hidden");
-  receipt.innerHTML="";
-  const title=document.createElement("strong");title.textContent="Solicitud recibida";
-  const line=document.createElement("p");line.textContent="Tu código de seguimiento es: "+code;
-  const status=document.createElement("p");status.textContent="Estado inicial: Aceptada";
-  const print=document.createElement("button");print.className="btn btn-outline";print.textContent="Imprimir comprobante";
-  print.onclick=()=>window.print();
-  receipt.append(title,line,status,print);
-  document.getElementById("trackingCode").value=code;
-  document.getElementById("requestForm").reset();
-  toast("Solicitud enviada correctamente.");
- }catch(err){console.error(err);toast(err.message||"No se pudo enviar la solicitud.");}
- finally{button.disabled=false;button.textContent="Enviar solicitud →";}
+const {error}=await db.from("ybh_requests").insert({
+tracking_code:code,
+customer_name:name,
+customer_phone:phone,
+service,
+details,
+status:"Aceptada",
+attachments:[]
+});
+if(error)throw new Error("No se pudo registrar la solicitud: "+error.message);
+
+let attachments=[];
+for(const file of files){
+const safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+const path=`requests/${code}/${Date.now()}-${safeName}`;
+const {error:uploadError}=await db.storage.from("ybh-files").upload(path,file,{upsert:false});
+if(uploadError)throw new Error("La solicitud se registró, pero no se pudo subir un archivo: "+uploadError.message);
+attachments.push({path,name:file.name,type:file.type});
+}
+
+if(attachments.length){
+const {error:attachError}=await db.rpc("ybh_attach_files",{
+p_tracking_code:code,
+p_files:attachments
+});
+if(attachError)throw new Error("La solicitud se registró, pero no se pudieron asociar los archivos: "+attachError.message);
+}
+
+const receipt=document.getElementById("receipt");
+receipt.classList.remove("hidden");
+receipt.innerHTML="";
+const title=document.createElement("strong");title.textContent="Solicitud recibida";
+const line=document.createElement("p");line.textContent="Tu código de seguimiento es: "+code;
+const status=document.createElement("p");status.textContent="Estado inicial: Aceptada";
+const print=document.createElement("button");print.className="btn btn-outline";print.textContent="Imprimir comprobante";
+print.onclick=()=>window.print();
+receipt.append(title,line,status,print);
+document.getElementById("trackingCode").value=code;
+document.getElementById("requestForm").reset();
+toast("Solicitud registrada correctamente.");
+}catch(err){console.error(err);toast(err.message||"No se pudo enviar la solicitud.");}
+finally{button.disabled=false;button.textContent="Enviar solicitud →";}
 });
 
 async function trackRequest(){
- const code=document.getElementById("trackingCode").value.trim().toUpperCase();
- const box=document.getElementById("trackingResult");
- if(!code){box.textContent="Introduce tu código de seguimiento.";return;}
- box.textContent="Consultando...";
- /* La consulta debe pasar por una función RPC segura; no se consulta la tabla pública. */
- const {data,error}=await db.rpc("ybh_track_request",{p_tracking_code:code});
- if(error){box.textContent="El seguimiento requiere configurar la función segura de consulta en Supabase.";return;}
- if(!data||!data.length){box.textContent="No encontramos una solicitud con ese código.";return;}
- const item=Array.isArray(data)?data[0]:data;
- box.innerHTML="";
- const h=document.createElement("h3");h.textContent="Estado de tu solicitud";
- const p=document.createElement("p");p.textContent="Código: "+code;
- const s=document.createElement("span");s.className="status "+(item.status==="Terminada"?"done":item.status==="En proceso"?"progress":"");s.textContent=item.status||"En revisión";
- box.append(h,p,s);
- if(item.updated_at){const date=document.createElement("p");date.textContent="Última actualización: "+new Date(item.updated_at).toLocaleString("es-ES");box.append(date);}
+const code=document.getElementById("trackingCode").value.trim().toUpperCase();
+const box=document.getElementById("trackingResult");
+if(!code){box.textContent="Introduce tu código de seguimiento.";return;}
+box.textContent="Consultando...";
+const {data,error}=await db.rpc("ybh_track_request",{p_tracking_code:code});
+if(error){box.textContent="Error al consultar: "+error.message;return;}
+if(!data||!data.length){box.textContent="No encontramos una solicitud con ese código.";return;}
+const item=Array.isArray(data)?data[0]:data;
+box.innerHTML="";
+const h=document.createElement("h3");h.textContent="Estado de tu solicitud";
+const p=document.createElement("p");p.textContent="Código: "+code;
+const s=document.createElement("span");
+s.className="status "+(item.status==="Terminada"?"done":item.status==="En proceso"?"progress":"");
+s.textContent=item.status||"En revisión";
+box.append(h,p,s);
+if(item.updated_at){const date=document.createElement("p");date.textContent="Última actualización: "+new Date(item.updated_at).toLocaleString("es-ES");box.append(date);}
 }
 
+/* ADMINISTRACIÓN */
 function openAdmin(){document.getElementById("adminModal").classList.add("show");}
 function closeAdmin(){document.getElementById("adminModal").classList.remove("show");}
 function showTab(id,button){
- document.querySelectorAll(".tab-panel").forEach(x=>x.classList.remove("active"));
- document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
- document.getElementById(id).classList.add("active");button.classList.add("active");
-}
-async function adminLogin(){
- const email=document.getElementById("adminEmail").value.trim();
- const password=document.getElementById("adminPassword").value;
- const msg=document.getElementById("loginMessage");
- msg.textContent="Verificando acceso...";
- const {data,error}=await db.auth.signInWithPassword({email,password});
- if(error){msg.textContent="No se pudo iniciar sesión: "+error.message;return;}
- if(!data.user||data.user.id!==ADMIN_UID){
-  await db.auth.signOut();msg.textContent="Esta cuenta no está autorizada como administradora.";return;
- }
- /* Se conserva la comprobación adicional de autorización que utilizaba tu panel anterior. */
- const {data:adminRow,error:adminError}=await db.from("centro_sql_admins").select("*").eq("user_id",ADMIN_UID).maybeSingle();
- if(adminError||!adminRow){
-  await db.auth.signOut();msg.textContent="Tu usuario no aparece autorizado en centro_sql_admins.";return;
- }
- currentUser=data.user;isAdmin=true;
- document.getElementById("loginArea").classList.add("hidden");
- document.getElementById("adminArea").classList.remove("hidden");
- fillAdminFields();renderAdminOffers();toast("Bienvenido al panel de administración.");
-}
-async function adminLogout(){
- await db.auth.signOut();currentUser=null;isAdmin=false;
- document.getElementById("adminArea").classList.add("hidden");
- document.getElementById("loginArea").classList.remove("hidden");
- document.getElementById("adminPassword").value="";
-}
-function fillAdminFields(){
- const fields=["HeroTitle","HeroDescription","HeroPrice","TicketTitle","TicketDescription","TicketPrice","RechargeTitle","RechargeDescription","RechargePrice","RemittanceTitle","RemittanceDescription","RemittancePrice","Usd","Eur","Mlc","Cad","Mxn","Zelle"];
- fields.forEach(name=>{
-  const key=name.charAt(0).toLowerCase()+name.slice(1);
-  const el=document.getElementById("edit"+name);
-  if(el)el.value=content[key]||"";
- });
-}
-async function saveGeneral(){
- if(!isAdmin)return;
- const fields=["HeroTitle","HeroDescription","HeroPrice","TicketTitle","TicketDescription","TicketPrice","RechargeTitle","RechargeDescription","RechargePrice","RemittanceTitle","RemittanceDescription","RemittancePrice","Usd","Eur","Mlc","Cad","Mxn","Zelle"];
- fields.forEach(name=>{
-  const key=name.charAt(0).toLowerCase()+name.slice(1);
-  const el=document.getElementById("edit"+name);
-  if(el)content[key]=el.value.trim();
- });
- try{await saveContent();renderContent();toast("Cambios guardados y publicados.");}
- catch(e){toast("Error al guardar: "+e.message);}
-}
-async function addOffer(){
- if(!isAdmin)return;
- const title=document.getElementById("newOfferTitle").value.trim();
- const description=document.getElementById("newOfferDescription").value.trim();
- const price=document.getElementById("newOfferPrice").value.trim();
- const image=document.getElementById("newOfferImage").value.trim();
- if(!title||!description||!price){toast("Completa título, descripción y precio.");return;}
- if(image&&!/^https:\/\//i.test(image)){toast("La imagen debe usar una dirección HTTPS.");return;}
- content.offers=Array.isArray(content.offers)?content.offers:[];
- content.offers.push({title,description,price,image});
- try{await saveContent();renderContent();renderAdminOffers();
-  ["newOfferTitle","newOfferDescription","newOfferPrice","newOfferImage"].forEach(id=>document.getElementById(id).value="");
-  toast("Oferta publicada.");
- }catch(e){toast("No se pudo guardar la oferta: "+e.message);}
-}
-function renderAdminOffers(){
- const list=document.getElementById("adminOffersList");list.innerHTML="";
- (content.offers||[]).forEach((offer,index)=>{
-  const item=document.createElement("div");item.className="request-item";
-  const h=document.createElement("strong");h.textContent=offer.title+" — "+offer.price;
-  const p=document.createElement("p");p.textContent=offer.description;
-  const b=document.createElement("button");b.className="btn btn-outline";b.textContent="Eliminar oferta";
-  b.onclick=async()=>{
-   if(!confirm("¿Eliminar esta oferta?"))return;
-   content.offers.splice(index,1);
-   try{await saveContent();renderContent();renderAdminOffers();toast("Oferta eliminada.");}
-   catch(e){toast("No se pudo eliminar: "+e.message);}
-  };
-  item.append(h,p,b);list.append(item);
- });
-}
-async function loadAdminRequests(){
- if(!isAdmin)return;
- const list=document.getElementById("adminRequestsList");list.textContent="Cargando...";
- const {data,error}=await db.from("ybh_requests").select("*").order("created_at",{ascending:false}).limit(100);
- if(error){list.textContent="No se pudieron cargar las solicitudes. Comprueba la tabla y las políticas RLS.";return;}
- list.innerHTML="";
- if(!data||!data.length){list.textContent="Todavía no hay solicitudes.";return;}
- data.forEach(req=>{
-  const item=document.createElement("div");item.className="request-item";
-  const h=document.createElement("strong");h.textContent=(req.customer_name||"Cliente")+" — "+(req.tracking_code||"");
-  const p=document.createElement("p");p.textContent=(req.service||"Servicio")+" | "+(req.customer_phone||"");
-  const detail=document.createElement("p");detail.textContent=req.details||"";
-  const select=document.createElement("select");
-  ["Aceptada","En proceso","Terminada"].forEach(value=>{const op=document.createElement("option");op.value=value;op.textContent=value;if(req.status===value)op.selected=true;select.append(op);});
-  const save=document.createElement("button");save.className="btn btn-primary";save.textContent="Actualizar estado";
-  save.onclick=()=>updateRequestStatus(req.id,select.value,save);
-  item.append(h,p,detail,select,document.createTextNode(" "),save);
-  list.append(item);
- });
-}
-async function updateRequestStatus(id,status,button){
- if(!isAdmin)return;
- button.disabled=true;
- const {error}=await db.from("ybh_requests").update({status,updated_at:new Date().toISOString()}).eq("id",id);
- button.disabled=false;
- if(error){toast("No se pudo actualizar el estado: "+error.message);return;}
- toast("Estado actualizado a "+status+".");
- loadAdminRequests();
+document.querySelectorAll(".tab-panel").forEach(x=>x.classList.remove("active"));
+document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+document.getElementById(id).classList.add("active");button.classList.add("active");
 }
 
-/* Restaurar una sesión existente si la hubiera. */
-db.auth.getSession().then(({data})=>{
- if(data.session&&data.session.user.id===ADMIN_UID){
-  currentUser=data.session.user;
-  /* Se exige iniciar sesión desde el panel para validar también la tabla de administradores. */
- }
+/* NUEVA COMPROBACIÓN DE AUTORIZACIÓN */
+async function verificarAdministrador(user){
+if(!user)throw new Error("No hay una sesión iniciada.");
+if(user.id!==ADMIN_UID)throw new Error("Esta cuenta no está autorizada como administradora.");
+
+const {data,error}=await db
+.from("centro_sql_admins")
+.select("user_id")
+.eq("user_id",user.id)
+.maybeSingle();
+
+if(error)throw new Error("Error comprobando centro_sql_admins: "+error.message);
+if(!data)throw new Error("El UID no aparece registrado en centro_sql_admins.");
+return true;
+}
+
+async function adminLogin(){
+const email=document.getElementById("adminEmail").value.trim();
+const password=document.getElementById("adminPassword").value;
+const msg=document.getElementById("loginMessage");
+msg.textContent="Verificando acceso...";
+try{
+const {data,error}=await db.auth.signInWithPassword({email,password});
+if(error)throw new Error("No se pudo iniciar sesión: "+error.message);
+await verificarAdministrador(data.user);
+currentUser=data.user;
+isAdmin=true;
+document.getElementById("loginArea").classList.add("hidden");
+document.getElementById("adminArea").classList.remove("hidden");
+fillAdminFields();renderAdminOffers();
+msg.textContent="";
+toast("Bienvenido al panel de administración.");
+}catch(err){
+await db.auth.signOut();
+currentUser=null;isAdmin=false;
+msg.textContent=err.message;
+}
+}
+
+async function adminLogout(){
+await db.auth.signOut();
+currentUser=null;isAdmin=false;
+document.getElementById("adminArea").classList.add("hidden");
+document.getElementById("loginArea").classList.remove("hidden");
+document.getElementById("adminPassword").value="";
+document.getElementById("loginMessage").textContent="";
+}
+function fillAdminFields(){
+const fields=["HeroTitle","HeroDescription","HeroPrice","TicketTitle","TicketDescription","TicketPrice","RechargeTitle","RechargeDescription","RechargePrice","RemittanceTitle","RemittanceDescription","RemittancePrice","Usd","Eur","Mlc","Cad","Mxn","Zelle"];
+fields.forEach(name=>{
+const key=name.charAt(0).toLowerCase()+name.slice(1);
+const el=document.getElementById("edit"+name);
+if(el)el.value=content[key]||"";
+});
+}
+async function saveGeneral(){
+if(!isAdmin)return;
+const fields=["HeroTitle","HeroDescription","HeroPrice","TicketTitle","TicketDescription","TicketPrice","RechargeTitle","RechargeDescription","RechargePrice","RemittanceTitle","RemittanceDescription","RemittancePrice","Usd","Eur","Mlc","Cad","Mxn","Zelle"];
+fields.forEach(name=>{
+const key=name.charAt(0).toLowerCase()+name.slice(1);
+const el=document.getElementById("edit"+name);
+if(el)content[key]=el.value.trim();
+});
+try{await saveContent();renderContent();toast("Cambios guardados y publicados.");}
+catch(e){toast("Error al guardar: "+e.message);}
+}
+async function addOffer(){
+if(!isAdmin)return;
+const title=document.getElementById("newOfferTitle").value.trim();
+const description=document.getElementById("newOfferDescription").value.trim();
+const price=document.getElementById("newOfferPrice").value.trim();
+const image=document.getElementById("newOfferImage").value.trim();
+if(!title||!description||!price){toast("Completa título, descripción y precio.");return;}
+if(image&&!/^https:\/\//i.test(image)){toast("La imagen debe usar una dirección HTTPS.");return;}
+content.offers=Array.isArray(content.offers)?content.offers:[];
+content.offers.push({title,description,price,image});
+try{
+await saveContent();renderContent();renderAdminOffers();
+["newOfferTitle","newOfferDescription","newOfferPrice","newOfferImage"].forEach(id=>document.getElementById(id).value="");
+toast("Oferta publicada.");
+}catch(e){toast("No se pudo guardar la oferta: "+e.message);}
+}
+function renderAdminOffers(){
+const list=document.getElementById("adminOffersList");list.innerHTML="";
+(content.offers||[]).forEach((offer,index)=>{
+const item=document.createElement("div");item.className="request-item";
+const h=document.createElement("strong");h.textContent=offer.title+" — "+offer.price;
+const p=document.createElement("p");p.textContent=offer.description;
+const b=document.createElement("button");b.className="btn btn-outline";b.textContent="Eliminar oferta";
+b.onclick=async()=>{
+if(!confirm("¿Eliminar esta oferta?"))return;
+content.offers.splice(index,1);
+try{await saveContent();renderContent();renderAdminOffers();toast("Oferta eliminada.");}
+catch(e){toast("No se pudo eliminar: "+e.message);}
+};
+item.append(h,p,b);list.append(item);
+});
+}
+async function loadAdminRequests(){
+if(!isAdmin)return;
+const list=document.getElementById("adminRequestsList");list.textContent="Cargando...";
+const {data,error}=await db.from("ybh_requests").select("*").order("created_at",{ascending:false}).limit(100);
+if(error){list.textContent="No se pudieron cargar las solicitudes: "+error.message;return;}
+list.innerHTML="";
+if(!data||!data.length){list.textContent="Todavía no hay solicitudes.";return;}
+data.forEach(req=>{
+const item=document.createElement("div");item.className="request-item";
+const h=document.createElement("strong");h.textContent=(req.customer_name||"Cliente")+" — "+(req.tracking_code||"");
+const p=document.createElement("p");p.textContent=(req.service||"Servicio")+" | "+(req.customer_phone||"");
+const detail=document.createElement("p");detail.textContent=req.details||"";
+const select=document.createElement("select");
+["Aceptada","En proceso","Terminada"].forEach(value=>{
+const op=document.createElement("option");op.value=value;op.textContent=value;
+if(req.status===value)op.selected=true;select.append(op);
+});
+const save=document.createElement("button");save.className="btn btn-primary";save.textContent="Actualizar estado";
+save.onclick=()=>updateRequestStatus(req.id,select.value,save);
+item.append(h,p,detail,select,document.createTextNode(" "),save);list.append(item);
+});
+}
+async function updateRequestStatus(id,status,button){
+if(!isAdmin)return;
+button.disabled=true;
+const {error}=await db.from("ybh_requests").update({status,updated_at:new Date().toISOString()}).eq("id",id);
+button.disabled=false;
+if(error){toast("No se pudo actualizar el estado: "+error.message);return;}
+toast("Estado actualizado a "+status+".");
+loadAdminRequests();
+}
+
+/* Cargar contenido y mantener sesión */
+db.auth.getSession().then(async({data,error})=>{
+if(error)return;
+if(data.session&&data.session.user){
+try{
+await verificarAdministrador(data.session.user);
+currentUser=data.session.user;
+isAdmin=true;
+document.getElementById("loginArea").classList.add("hidden");
+document.getElementById("adminArea").classList.remove("hidden");
+fillAdminFields();renderAdminOffers();
+}catch(e){
+console.warn("Sesión sin autorización administrativa:",e.message);
+}
+}
 });
 loadContent();
 </script>
