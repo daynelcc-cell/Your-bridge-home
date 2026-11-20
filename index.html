@@ -1,1638 +1,584 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#0b0f19">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#081426">
 <meta name="description" content="YOUR BRIDGE HOME - Recargas, remesas, pasajes y servicios internacionales">
-<title>YOUR BRIDGE HOME | Tu puente hacia nuevas oportunidades</title>
+<title>YOUR BRIDGE HOME</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 :root{
-  --bg:#080b12;
-  --bg2:#0e1420;
-  --card:#111927;
-  --card2:#151f2e;
-  --gold:#d6a84f;
-  --gold2:#f0c96b;
-  --white:#fff;
-  --muted:#9da8b8;
-  --green:#25d366;
-  --red:#ef5350;
-  --blue:#4285f4;
-  --border:rgba(214,168,79,.22);
-  --shadow:0 15px 45px rgba(0,0,0,.28);
+--bg:#071426;
+--panel:#102742;
+--panel2:#142e4c;
+--gold:#d8b66a;
+--gold2:#f1d99b;
+--white:#f7f8fb;
+--muted:#aab8ca;
+--line:rgba(216,182,106,.22);
+--green:#39c98a;
+--red:#ff7777;
 }
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-  font-family:Montserrat,Arial,sans-serif;
-  background:
-    radial-gradient(circle at top right,rgba(214,168,79,.10),transparent 30%),
-    radial-gradient(circle at bottom left,rgba(66,133,244,.08),transparent 30%),
-    var(--bg);
-  color:var(--white);
-  line-height:1.6;
+margin:0;
+background:radial-gradient(ellipse at 85% 0%,#183655 0,transparent 36%),linear-gradient(145deg,#071426,#0a1a2d);
+color:var(--white);
+font-family:"DM Sans",sans-serif
 }
-
-a{
-  color:inherit;
-  text-decoration:none;
+a{text-decoration:none;color:inherit}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.wrap{width:min(1160px,92%);margin:auto}
+.gold{color:var(--gold2)}
+.muted{color:var(--muted)}
+.topline{
+background:#050e1b;
+border-bottom:1px solid var(--line);
+font-size:12px;color:var(--muted);
+padding:10px 0
 }
-
-button,
-input,
-textarea,
-select{
-  font-family:inherit;
+.topline .wrap{
+display:flex;justify-content:space-between;
+gap:10px;flex-wrap:wrap
 }
-
-button{
-  cursor:pointer;
-}
-
-.container{
-  width:min(1180px,92%);
-  margin:auto;
-}
-
-/* HEADER */
-
 header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:rgba(8,11,18,.94);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--border);
+position:sticky;top:0;z-index:20;
+background:rgba(7,20,38,.96);
+backdrop-filter:blur(14px);
+border-bottom:1px solid var(--line)
 }
-
 .nav{
-  min-height:72px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
+min-height:75px;
+display:flex;align-items:center;
+justify-content:space-between;gap:20px
 }
-
-.logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-weight:900;
-  letter-spacing:.5px;
+.brand{display:flex;align-items:center;gap:12px}
+.brandmark{
+width:44px;height:44px;
+border:1px solid var(--gold);
+border-radius:13px;
+display:grid;place-items:center;
+color:var(--gold2);
+font:700 23px "Playfair Display"
 }
-
-.logo-mark{
-  width:42px;
-  height:42px;
-  border-radius:13px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:#101010;
-  font-size:20px;
-  box-shadow:0 8px 25px rgba(214,168,79,.2);
-}
-
-.logo-text span{
-  color:var(--gold2);
-}
-
-.logo-text small{
-  display:block;
-  color:var(--muted);
-  font-size:9px;
-  letter-spacing:2px;
-  font-weight:600;
-}
-
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  flex-wrap:wrap;
-  justify-content:flex-end;
-}
-
-.nav-links a{
-  padding:9px 11px;
-  color:#d8dee8;
-  font-size:13px;
-  font-weight:600;
-  border-radius:9px;
-  transition:.2s;
-}
-
-.nav-links a:hover{
-  color:var(--gold2);
-  background:rgba(214,168,79,.08);
-}
-
-.lang{
-  border:1px solid var(--border);
-  background:transparent;
-  color:var(--gold2);
-  padding:8px 10px;
-  border-radius:9px;
-  font-weight:700;
-}
-
-/* HERO */
-
-.hero{
-  padding:75px 0 45px;
-}
-
-.hero-grid{
-  display:grid;
-  grid-template-columns:1.3fr .7fr;
-  gap:35px;
-  align-items:center;
-}
-
-.badge{
-  display:inline-flex;
-  padding:7px 12px;
-  border-radius:50px;
-  background:rgba(214,168,79,.1);
-  border:1px solid var(--border);
-  color:var(--gold2);
-  font-size:12px;
-  font-weight:700;
-  margin-bottom:18px;
-}
-
-.hero h1{
-  font-size:clamp(38px,6vw,72px);
-  line-height:1.02;
-  letter-spacing:-2px;
-  margin-bottom:20px;
-}
-
-.hero h1 span{
-  color:var(--gold2);
-}
-
-.hero p{
-  color:var(--muted);
-  max-width:700px;
-  font-size:17px;
-}
-
-.hero-actions{
-  display:flex;
-  gap:12px;
-  margin-top:28px;
-  flex-wrap:wrap;
-}
-
+.brand strong{display:block;letter-spacing:1px;font-size:14px}
+.brand small{color:var(--muted);font-size:9px;letter-spacing:1.5px}
+.links{display:flex;gap:16px;flex-wrap:wrap}
+.links a{font-size:11px;color:#d4dce7}
+.links a:hover{color:var(--gold2)}
 .btn{
-  border:none;
-  border-radius:12px;
-  padding:13px 18px;
-  font-weight:800;
-  font-size:13px;
-  transition:.2s;
+border:1px solid var(--gold);
+background:linear-gradient(135deg,#e4c77e,#b58b3e);
+color:#111d2d;padding:11px 17px;
+border-radius:9px;font-weight:800;font-size:12px;
+display:inline-flex;align-items:center;justify-content:center
 }
-
-.btn:hover{
-  transform:translateY(-2px);
+.btn.outline{background:transparent;color:var(--gold2)}
+.btn.dark{background:#132b46;color:white}
+.hero{
+padding:75px 0 48px;
+display:grid;grid-template-columns:1.15fr .85fr;
+gap:35px;align-items:center
 }
-
-.btn-primary{
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:#111;
+.eyebrow{
+color:var(--gold2);font-size:11px;
+letter-spacing:3px;text-transform:uppercase;font-weight:800
 }
-
-.btn-dark{
-  background:#151d2b;
-  border:1px solid var(--border);
-  color:white;
+.hero h1{
+font:800 clamp(40px,5.4vw,66px)/1.04 "Playfair Display";
+margin:18px 0
 }
-
-.btn-green{
-  background:var(--green);
-  color:#06130a;
+.hero h1 span{color:var(--gold2)}
+.hero p{color:#b9c6d6;line-height:1.8}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.hero-card,.card{
+background:linear-gradient(145deg,#132d4a,#0c1d32);
+border:1px solid var(--line);
+border-radius:17px;padding:22px
 }
-
-.hero-card{
-  background:linear-gradient(145deg,#151e2d,#0d131e);
-  border:1px solid var(--border);
-  border-radius:25px;
-  padding:28px;
-  box-shadow:var(--shadow);
-}
-
-.hero-card h3{
-  color:var(--gold2);
-  margin-bottom:8px;
-}
-
-.hero-card p{
-  font-size:13px;
-}
-
-/* OFFER */
-
+.hero-card{box-shadow:0 18px 50px #0004}
+.hero-card h3{font:700 24px "Playfair Display"}
 .offer{
-  margin:15px 0 45px;
+display:flex;justify-content:space-between;
+gap:12px;padding:14px 0;
+border-top:1px solid var(--line)
 }
-
-.offer-box{
-  border:1px solid var(--border);
-  background:linear-gradient(90deg,rgba(214,168,79,.10),rgba(255,255,255,.025));
-  border-radius:18px;
-  padding:20px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
+.offer b{display:block;font-size:14px}
+.offer small{color:var(--muted)}
+.offer strong{color:var(--gold2);white-space:nowrap}
+.ticker{
+border-block:1px solid var(--line);
+background:#0c1d31;padding:14px 0
 }
-
-.offer-label{
-  color:var(--gold2);
-  font-size:11px;
-  text-transform:uppercase;
-  font-weight:900;
-  letter-spacing:2px;
+.ticker .wrap{
+display:flex;gap:22px;justify-content:center;
+flex-wrap:wrap;font-size:12px
 }
-
-.offer-title{
-  font-size:22px;
-  font-weight:900;
-}
-
-.offer-price{
-  color:var(--gold2);
-  font-size:25px;
-  font-weight:900;
-}
-
-/* SECTIONS */
-
-section{
-  padding:55px 0;
-}
-
-.section-head{
-  margin-bottom:25px;
-}
-
-.section-head small{
-  color:var(--gold2);
-  text-transform:uppercase;
-  font-weight:800;
-  letter-spacing:2px;
-  font-size:10px;
-}
-
+section{padding:62px 0;scroll-margin-top:90px}
+.section-head{text-align:center;margin-bottom:30px}
 .section-head h2{
-  font-size:clamp(28px,4vw,42px);
-  margin-top:5px;
+font:700 clamp(27px,4vw,39px) "Playfair Display";
+margin:10px 0
 }
-
-.section-head p{
-  color:var(--muted);
-  margin-top:7px;
+.section-head p{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.card h3{margin:12px 0 8px}
+.card p{color:var(--muted);font-size:12px;line-height:1.7}
+.icon{
+width:42px;height:42px;border-radius:12px;
+background:#d8b66a17;border:1px solid var(--line);
+display:grid;place-items:center;color:var(--gold2);
+font-size:20px
 }
-
-.cards{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:18px;
+.price{font-size:25px;color:var(--gold2);font-weight:800;margin:14px 0 5px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.rate-table{width:100%;border-collapse:collapse;font-size:13px}
+.rate-table th,.rate-table td{
+text-align:left;padding:13px 10px;
+border-bottom:1px solid var(--line)
 }
-
-.card{
-  background:linear-gradient(145deg,var(--card),var(--card2));
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:23px;
-  box-shadow:var(--shadow);
+.rate-table th{color:var(--gold2);font-size:11px}
+.updated{color:var(--muted);font-size:11px;margin-top:13px}
+.field{display:flex;flex-direction:column;gap:7px;margin:10px 0}
+.field label{font-size:11px;color:var(--muted);font-weight:700}
+.field input,.field textarea,.field select{
+width:100%;background:#07182a;
+border:1px solid #29415c;color:white;
+border-radius:9px;padding:12px;outline:none
 }
-
-.card-icon{
-  width:48px;
-  height:48px;
-  border-radius:14px;
-  background:rgba(214,168,79,.1);
-  border:1px solid var(--border);
-  display:grid;
-  place-items:center;
-  font-size:23px;
-  margin-bottom:15px;
-}
-
-.card h3{
-  margin-bottom:7px;
-}
-
-.card p{
-  color:var(--muted);
-  font-size:13px;
-}
-
-.price{
-  margin-top:15px;
-  color:var(--gold2);
-  font-weight:900;
-  font-size:22px;
-}
-
-.meta{
-  color:#8290a3;
-  font-size:11px;
-  margin-top:7px;
-}
-
-/* FILTER */
-
-.filter{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:20px;
-}
-
-.filter button{
-  border:1px solid var(--border);
-  background:#101722;
-  color:#dbe2ed;
-  padding:9px 13px;
-  border-radius:10px;
-  font-size:12px;
-  font-weight:700;
-}
-
-.filter button.active{
-  background:var(--gold);
-  color:#111;
-}
-
-/* CALCULATOR */
-
-.calculator{
-  max-width:750px;
-  background:linear-gradient(145deg,var(--card),#0c131e);
-  border:1px solid var(--border);
-  border-radius:22px;
-  padding:25px;
-}
-
-.form-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-}
-
-.field label{
-  color:#b7c0ce;
-  font-size:11px;
-  font-weight:700;
-}
-
-.field input,
-.field select,
-.field textarea{
-  width:100%;
-  border:1px solid #273244;
-  background:#0b111b;
-  color:white;
-  border-radius:10px;
-  padding:12px;
-  outline:none;
-}
-
-.field textarea{
-  min-height:110px;
-  resize:vertical;
-}
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus{
-  border-color:var(--gold);
-}
-
+.field input:focus,.field textarea:focus{border-color:var(--gold)}
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:15px}
 .result{
-  margin-top:18px;
-  padding:18px;
-  background:rgba(214,168,79,.08);
-  border:1px solid var(--border);
-  border-radius:14px;
+padding:16px;border:1px solid var(--line);
+border-radius:12px;background:#07182a;margin-top:12px
 }
-
-.result strong{
-  color:var(--gold2);
-  font-size:25px;
-}
-
-/* NOTES */
-
+.result strong{font-size:24px;color:var(--gold2)}
 .note{
-  border-left:3px solid var(--gold);
+padding:15px 17px;border-left:3px solid var(--gold);
+background:#d8b66a0d;border-radius:8px;
+margin:10px 0;color:#d9e1eb;font-size:13px;line-height:1.65
 }
-
-/* CONTACT */
-
-.contact-box{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.requestform{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.requestform .wide{grid-column:1/-1}
+footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-size:11px}
+.footerrow{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.wa{
+position:fixed;right:20px;bottom:20px;z-index:30;
+background:#1dbf72;color:#052317;border-radius:50px;
+padding:14px 18px;font-weight:800;
+box-shadow:0 10px 30px #0005;font-size:13px
 }
-
-.contact-item{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:20px;
+.admin{
+background:#091a2c;border:1px solid var(--gold);
+border-radius:18px;padding:22px
 }
-
-.contact-item span{
-  color:var(--muted);
-  display:block;
-  font-size:11px;
-  margin-bottom:4px;
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.admin-list{display:grid;gap:9px;margin-top:15px}
+.admin-item{
+display:flex;justify-content:space-between;
+align-items:center;gap:10px;
+padding:11px;background:#102944;
+border-radius:9px;font-size:12px
 }
-
-/* ADMIN */
-
-#adminSection{
-  display:none;
+.smallbtn{
+border:1px solid var(--line);background:#17314e;
+color:white;padding:7px 10px;border-radius:7px;font-size:11px
 }
-
-.admin-wrap{
-  background:#080c13;
-  border:1px solid var(--border);
-  border-radius:25px;
-  overflow:hidden;
-  box-shadow:var(--shadow);
+.danger{border-color:#8d4545;color:#ffaaaa}
+.status{font-size:11px;color:var(--muted)}
+.ok{color:var(--green)}
+.err{color:var(--red)}
+.hidden{display:none!important}
+.toast{
+position:fixed;left:50%;bottom:24px;
+transform:translateX(-50%);
+padding:12px 18px;border-radius:9px;
+background:#e5c77c;color:#142033;
+font-size:12px;font-weight:800;z-index:50;
+display:none
 }
-
-.admin-header{
-  padding:22px;
-  background:linear-gradient(90deg,#111927,#0c131e);
-  border-bottom:1px solid var(--border);
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  flex-wrap:wrap;
-}
-
-.admin-header h2{
-  color:var(--gold2);
-}
-
-.admin-status{
-  font-size:11px;
-  color:#8e9aaa;
-}
-
-.admin-tabs{
-  display:flex;
-  overflow-x:auto;
-  gap:5px;
-  padding:12px;
-  background:#0b111a;
-  border-bottom:1px solid #202b3a;
-}
-
-.admin-tabs button{
-  white-space:nowrap;
-  border:1px solid #263244;
-  background:#111927;
-  color:#ccd5e2;
-  padding:10px 13px;
-  border-radius:9px;
-  font-size:11px;
-  font-weight:800;
-}
-
-.admin-tabs button.active{
-  background:var(--gold);
-  color:#111;
-}
-
-.admin-content{
-  padding:22px;
-}
-
-.admin-panel{
-  display:none;
-}
-
-.admin-panel.active{
-  display:block;
-}
-
-.admin-form{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-
-.admin-form .full{
-  grid-column:1/-1;
-}
-
-.admin-actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:15px;
-}
-
-.table-wrap{
-  overflow-x:auto;
-  margin-top:20px;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:700px;
-}
-
-th,
-td{
-  padding:11px;
-  border-bottom:1px solid #222d3d;
-  text-align:left;
-  font-size:11px;
-}
-
-th{
-  color:var(--gold2);
-  font-size:10px;
-  text-transform:uppercase;
-}
-
-td{
-  color:#cbd4df;
-}
-
-.status{
-  display:inline-block;
-  padding:4px 8px;
-  border-radius:20px;
-  background:#182334;
-  font-size:10px;
-}
-
-.status.on{
-  color:#6ee7a0;
-}
-
-.status.off{
-  color:#ff8989;
-}
-
-.empty{
-  padding:25px;
-  text-align:center;
-  color:var(--muted);
-  border:1px dashed #273244;
-  border-radius:14px;
-}
-
-.message{
-  padding:12px;
-  border-radius:10px;
-  margin-bottom:15px;
-  font-size:12px;
-  display:none;
-}
-
-.message.success{
-  display:block;
-  background:rgba(37,211,102,.1);
-  border:1px solid rgba(37,211,102,.25);
-  color:#76e5a0;
-}
-
-.message.error{
-  display:block;
-  background:rgba(239,83,80,.1);
-  border:1px solid rgba(239,83,80,.25);
-  color:#ff9290;
-}
-
-.login-box{
-  max-width:420px;
-  margin:auto;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:25px;
-}
-
-.login-box h3{
-  color:var(--gold2);
-  margin-bottom:10px;
-}
-
-.login-box p{
-  color:var(--muted);
-  font-size:12px;
-  margin-bottom:18px;
-}
-
-/* MODAL */
-
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:5000;
-  background:rgba(0,0,0,.75);
-  padding:20px;
-  align-items:center;
-  justify-content:center;
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-box{
-  width:min(500px,100%);
-  background:#101722;
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:25px;
-}
-
-.modal-box h3{
-  color:var(--gold2);
-  margin-bottom:15px;
-}
-
-/* WHATSAPP */
-
-.whatsapp{
-  position:fixed;
-  right:18px;
-  bottom:18px;
-  width:58px;
-  height:58px;
-  border-radius:50%;
-  background:#25d366;
-  color:#06130a;
-  display:grid;
-  place-items:center;
-  font-size:27px;
-  z-index:3000;
-  box-shadow:0 10px 30px rgba(37,211,102,.3);
-}
-
-/* FOOTER */
-
-footer{
-  border-top:1px solid var(--border);
-  padding:35px 0;
-  color:#7f8998;
-  font-size:11px;
-}
-
-.footer-flex{
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  flex-wrap:wrap;
-}
-
-/* RESPONSIVE */
-
+.toast.show{display:block}
 @media(max-width:850px){
-  .hero-grid,
-  .cards,
-  .contact-box{
-    grid-template-columns:1fr;
-  }
-
-  .nav{
-    flex-direction:column;
-    padding:12px 0;
-  }
-
-  .nav-links{
-    justify-content:center;
-  }
-
-  .hero{
-    padding-top:45px;
-  }
+.hero{grid-template-columns:1fr}
+.grid{grid-template-columns:repeat(2,1fr)}
+.contact{grid-template-columns:1fr}
+.nav{padding:12px 0;align-items:flex-start}
 }
-
-@media(max-width:600px){
-  .form-grid,
-  .admin-form{
-    grid-template-columns:1fr;
-  }
-
-  .admin-form .full{
-    grid-column:auto;
-  }
-
-  .offer-box{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .hero h1{
-    letter-spacing:-1px;
-  }
-
-  section{
-    padding:40px 0;
-  }
+@media(max-width:580px){
+.nav{display:block}
+.links{margin-top:13px;overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px}
+.links a{white-space:nowrap}
+.grid,.admin-grid,.calc,.requestform{grid-template-columns:1fr}
+.requestform .wide{grid-column:auto}
+.hero h1{font-size:43px}
+section{padding:45px 0}
 }
 </style>
 </head>
 
 <body>
 
+<div class="topline">
+<div class="wrap">
+<span>✦ SERVICIOS INTERNACIONALES</span>
+<span>Administrador: <b class="gold">Daynel Caminero</b> · <span id="connectionStatus">Conectando...</span></span>
+</div>
+</div>
+
 <header>
-  <div class="container nav">
-
-    <a href="#inicio" class="logo">
-      <div class="logo-mark">YB</div>
-      <div class="logo-text">
-        YOUR <span>BRIDGE</span> HOME
-        <small>TU PUENTE HACIA NUEVAS OPORTUNIDADES</small>
-      </div>
-    </a>
-
-    <nav class="nav-links">
-      <a href="#inicio">Inicio</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#recargas">Recargas</a>
-      <a href="#pasajes">Pasajes</a>
-      <a href="#remesas">Remesas</a>
-      <a href="#tasas">Tasas</a>
-      <a href="#notas">Información</a>
-      <a href="#contacto">Contacto</a>
-      <button class="lang" onclick="openAdmin()">ADMIN</button>
-    </nav>
-
-  </div>
+<div class="wrap nav">
+<a class="brand" href="#inicio">
+<div class="brandmark">YB</div>
+<div>
+<strong>YOUR BRIDGE HOME</strong>
+<small>TU PUENTE HACIA NUEVAS OPORTUNIDADES</small>
+</div>
+</a>
+<nav class="links">
+<a href="#inicio">Inicio</a>
+<a href="#servicios">Servicios</a>
+<a href="#recargas">Recargas</a>
+<a href="#pasajes">Pasajes</a>
+<a href="#remesas">Remesas</a>
+<a href="#tasas">Tasas</a>
+<a href="#informacion">Información</a>
+<a href="#contacto">Contacto</a>
+<a href="#administracion">Administración</a>
+</nav>
+</div>
 </header>
-
 
 <main>
 
-<!-- INICIO -->
+<section class="wrap hero" id="inicio">
+<div>
+<div class="eyebrow">Conectamos personas y destinos</div>
+<h1>Tu mundo,<br><span>más cerca.</span></h1>
+<p>
+Recargas internacionales, envío de remesas y boletos aéreos
+con atención personalizada. Un puente sencillo y confiable
+para conectar con quienes más importan.
+</p>
+<div class="hero-actions">
+<a class="btn" href="#servicios">Explorar servicios</a>
+<a class="btn outline" href="https://wa.me/79046319565" target="_blank">WhatsApp</a>
+</div>
+</div>
 
-<section id="inicio" class="hero">
-  <div class="container hero-grid">
-
-    <div>
-      <div class="badge">SERVICIOS INTERNACIONALES</div>
-
-      <h1>
-        Tu puente hacia
-        <span>nuevas oportunidades.</span>
-      </h1>
-
-      <p>
-        Recargas, remesas, pasajes y soluciones internacionales
-        desde un solo lugar.
-      </p>
-
-      <div class="hero-actions">
-        <a href="#servicios" class="btn btn-primary">Ver servicios</a>
-
-        <a
-          href="https://wa.me/79046319565"
-          target="_blank"
-          class="btn btn-green">
-          WhatsApp
-        </a>
-      </div>
-    </div>
-
-    <div class="hero-card">
-      <div class="card-icon">🌎</div>
-      <h3>YOUR BRIDGE HOME</h3>
-      <p>
-        Conectamos personas, familias y oportunidades
-        entre diferentes países.
-      </p>
-
-      <div class="meta">
-        Administrador: Daynel Caminero
-      </div>
-    </div>
-
-  </div>
+<div class="hero-card">
+<div class="eyebrow">Ofertas destacadas</div>
+<h3>Oportunidades de hoy</h3>
+<div id="featuredOffers">
+<div class="offer">
+<div><b>INTERNET +</b><small>2 GB LTE + 300 MB.cu</small></div>
+<strong>350 ₽</strong>
+</div>
+<div class="offer">
+<div><b>Remesas a Cuba</b><small>Referencia comercial</small></div>
+<strong>9,80 CUP</strong>
+</div>
+<div class="offer">
+<div><b>Boletos aéreos</b><small>Desde</small></div>
+<strong>99.800 ₽</strong>
+</div>
+</div>
+</div>
 </section>
 
-
-<!-- OFERTA -->
-
-<section class="offer">
-  <div class="container">
-
-    <div class="offer-box">
-
-      <div>
-        <div class="offer-label">Oferta destacada</div>
-        <div id="offerTitle" class="offer-title">
-          Cargando oferta...
-        </div>
-      </div>
-
-      <div id="offerPrice" class="offer-price">
-        —
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-<!-- SERVICIOS -->
+<div class="ticker">
+<div class="wrap">
+<span>✦ <b class="gold">Atención personalizada</b></span>
+<span>✦ Recargas internacionales</span>
+<span>✦ Remesas</span>
+<span>✦ Boletos aéreos</span>
+<span>✦ Tasas actualizadas</span>
+</div>
+</div>
 
 <section id="servicios">
-  <div class="container">
-
-    <div class="section-head">
-      <small>Lo que hacemos</small>
-      <h2>Nuestros servicios</h2>
-      <p>
-        Soluciones prácticas para tus operaciones internacionales.
-      </p>
-    </div>
-
-    <div class="cards">
-
-      <div class="card">
-        <div class="card-icon">📱</div>
-        <h3>Recargas</h3>
-        <p>
-          Consulta las ofertas de recargas disponibles.
-        </p>
-        <a href="#recargas" class="btn btn-dark" style="margin-top:15px">
-          Ver recargas
-        </a>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">✈️</div>
-        <h3>Pasajes</h3>
-        <p>
-          Consulta opciones de vuelos y destinos.
-        </p>
-        <a href="#pasajes" class="btn btn-dark" style="margin-top:15px">
-          Ver pasajes
-        </a>
-      </div>
-
-      <div class="card">
-        <div class="card-icon">💸</div>
-        <h3>Remesas</h3>
-        <p>
-          Consulta las opciones disponibles para enviar dinero.
-        </p>
-        <a href="#remesas" class="btn btn-dark" style="margin-top:15px">
-          Ver remesas
-        </a>
-      </div>
-
-    </div>
-
-  </div>
+<div class="wrap">
+<div class="section-head">
+<div class="eyebrow">Qué hacemos</div>
+<h2>Servicios para conectar tu mundo</h2>
+<p>Soluciones prácticas para tus necesidades internacionales.</p>
+</div>
+<div class="grid">
+<div class="card">
+<div class="icon">▣</div>
+<h3>Recargas internacionales</h3>
+<p>Opciones de saldo y paquetes de internet.</p>
+<a class="btn outline" href="#recargas">Ver recargas</a>
+</div>
+<div class="card">
+<div class="icon">⇄</div>
+<h3>Remesas</h3>
+<p>Consulta opciones de envío de dinero.</p>
+<a class="btn outline" href="#remesas">Ver remesas</a>
+</div>
+<div class="card">
+<div class="icon">✈</div>
+<h3>Pasajes aéreos</h3>
+<p>Cotizaciones para Cuba, América Latina, Europa y otros destinos.</p>
+<a class="btn outline" href="#pasajes">Ver pasajes</a>
+</div>
+</div>
+</div>
 </section>
-
-
-<!-- RECARGAS -->
 
 <section id="recargas">
-  <div class="container">
-
-    <div class="section-head">
-      <small>Telefonía</small>
-      <h2>Recargas</h2>
-      <p>
-        Ofertas y planes disponibles.
-      </p>
-    </div>
-
-    <div id="rechargesGrid" class="cards">
-      <div class="empty">Cargando recargas...</div>
-    </div>
-
-  </div>
+<div class="wrap">
+<div class="section-head">
+<div class="eyebrow">Mantente conectado</div>
+<h2>Recargas disponibles</h2>
+<p>Ofertas sujetas a disponibilidad del operador.</p>
+</div>
+<div class="grid" id="rechargesGrid"></div>
+</div>
 </section>
-
-
-<!-- PASAJES -->
 
 <section id="pasajes">
-  <div class="container">
-
-    <div class="section-head">
-      <small>Viajes</small>
-      <h2>Pasajes</h2>
-      <p>
-        Opciones de vuelos y destinos.
-      </p>
-    </div>
-
-    <div id="ticketsGrid" class="cards">
-      <div class="empty">Cargando pasajes...</div>
-    </div>
-
-  </div>
+<div class="wrap">
+<div class="section-head">
+<div class="eyebrow">Viaja sin complicaciones</div>
+<h2>Pasajes aéreos</h2>
+<p>Consulta fechas, equipaje y disponibilidad.</p>
+</div>
+<div class="grid" id="ticketsGrid"></div>
+</div>
 </section>
-
-
-<!-- REMESAS -->
 
 <section id="remesas">
-  <div class="container">
-
-    <div class="section-head">
-      <small>Transferencias</small>
-      <h2>Remesas</h2>
-      <p>
-        Consulta las opciones de envío disponibles.
-      </p>
-    </div>
-
-    <div id="remittancesGrid" class="cards">
-      <div class="empty">Cargando remesas...</div>
-    </div>
-
-  </div>
+<div class="wrap">
+<div class="section-head">
+<div class="eyebrow">Cerca de los tuyos</div>
+<h2>Remesas internacionales</h2>
+<p>Consulta el importe y destino antes de confirmar.</p>
+</div>
+<div class="grid" id="remittancesGrid"></div>
+</div>
 </section>
-
-
-<!-- CALCULADORA -->
 
 <section id="tasas">
-  <div class="container">
+<div class="wrap">
+<div class="section-head">
+<div class="eyebrow">Información de cambio</div>
+<h2>Tasas y calculadora</h2>
+<p>Valores informativos. Confirma la tasa antes de realizar una operación.</p>
+</div>
 
-    <div class="section-head">
-      <small>Conversión</small>
-      <h2>Tasas y calculadora</h2>
-      <p>
-        Calcula una referencia utilizando las tasas publicadas.
-      </p>
-    </div>
+<div class="card">
+<div style="overflow:auto">
+<table class="rate-table">
+<thead>
+<tr><th>Moneda</th><th>Valor</th><th>Referencia</th><th>Actualización</th></tr>
+</thead>
+<tbody id="ratesBody">
+<tr><td colspan="4">Cargando tasas...</td></tr>
+</tbody>
+</table>
+</div>
+<div class="updated" id="ratesUpdated"></div>
+</div>
 
-    <div class="calculator">
-
-      <div class="form-grid">
-
-        <div class="field">
-          <label>Cantidad</label>
-          <input
-            type="number"
-            id="calcAmount"
-            value="1000"
-            min="0"
-            oninput="calculateExchange()">
-        </div>
-
-        <div class="field">
-          <label>Moneda de origen</label>
-
-          <select id="calcFrom" onchange="calculateExchange()">
-            <option value="RUB">RUB - Rublo</option>
-            <option value="USD">USD - Dólar</option>
-            <option value="EUR">EUR - Euro</option>
-            <option value="GBP">GBP - Libra</option>
-            <option value="MLC">MLC</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>Moneda de destino</label>
-
-          <select id="calcTo" onchange="calculateExchange()">
-            <option value="CUP">CUP - Peso cubano</option>
-            <option value="USD">USD - Dólar</option>
-            <option value="EUR">EUR - Euro</option>
-            <option value="RUB">RUB - Rublo</option>
-          </select>
-        </div>
-
-      </div>
-
-      <div class="result">
-        Resultado aproximado:
-        <br>
-        <strong id="calcResult">—</strong>
-      </div>
-
-    </div>
-
-  </div>
+<div class="card" style="margin-top:17px">
+<h3>Calculadora de monedas</h3>
+<div class="calc">
+<div class="field">
+<label>Importe enviado</label>
+<input id="calcAmount" type="number" min="0" value="1000">
+</div>
+<div class="field">
+<label>Tasa de conversión</label>
+<input id="calcRate" type="number" min="0" step="any" value="9.8">
+</div>
+</div>
+<div class="field">
+<label>Descripción</label>
+<input id="calcLabel" value="RUB → CUP">
+</div>
+<div class="result">
+<span class="muted">Resultado estimado</span><br>
+<strong id="calcResult">9.800</strong>
+</div>
+</div>
+</div>
 </section>
 
-
-<!-- NOTAS -->
-
-<section id="notas">
-  <div class="container">
-
-    <div class="section-head">
-      <small>Información</small>
-      <h2>Información importante</h2>
-    </div>
-
-    <div id="notesGrid" class="cards">
-      <div class="empty">Cargando información...</div>
-    </div>
-
-  </div>
+<section id="informacion">
+<div class="wrap">
+<div class="section-head">
+<div class="eyebrow">A tener en cuenta</div>
+<h2>Información importante</h2>
+</div>
+<div id="notesList">
+<div class="note">
+Confirma siempre el precio final, las fechas y la disponibilidad
+antes de realizar un pago.
+</div>
+</div>
+</div>
 </section>
-
-
-<!-- SOLICITUD -->
-
-<section id="solicitud">
-  <div class="container">
-
-    <div class="section-head">
-      <small>Atención personalizada</small>
-      <h2>Solicita un servicio</h2>
-      <p>
-        Déjanos tus datos y nos pondremos en contacto contigo.
-      </p>
-    </div>
-
-    <div class="calculator">
-
-      <div id="requestMessage" class="message"></div>
-
-      <div class="form-grid">
-
-        <div class="field">
-          <label>Nombre</label>
-          <input id="clientName" placeholder="Tu nombre">
-        </div>
-
-        <div class="field">
-          <label>Teléfono / WhatsApp</label>
-          <input id="clientPhone" placeholder="+...">
-        </div>
-
-        <div class="field">
-          <label>Servicio</label>
-
-          <select id="serviceType">
-            <option>Recarga</option>
-            <option>Remesa</option>
-            <option>Pasaje</option>
-            <option>Otro</option>
-          </select>
-
-        </div>
-
-        <div class="field">
-          <label>Destino</label>
-          <input id="clientDestination" placeholder="Cuba, Rusia, Uzbekistán...">
-        </div>
-
-        <div class="field" style="grid-column:1/-1">
-          <label>Detalles</label>
-
-          <textarea
-            id="clientDetails"
-            placeholder="Explícanos lo que necesitas"></textarea>
-        </div>
-
-      </div>
-
-      <div class="admin-actions">
-        <button class="btn btn-primary" onclick="submitRequest()">
-          Enviar solicitud
-        </button>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-<!-- CONTACTO -->
 
 <section id="contacto">
-  <div class="container">
+<div class="wrap">
+<div class="section-head">
+<div class="eyebrow">Estamos para ayudarte</div>
+<h2>Contacto y solicitudes</h2>
+</div>
 
-    <div class="section-head">
-      <small>Estamos para ayudarte</small>
-      <h2>Contacto</h2>
-    </div>
+<div class="contact">
+<div class="card">
+<h3>YOUR BRIDGE HOME</h3>
+<p>Administrador: Daynel Caminero</p>
+<p>WhatsApp: <b class="gold">+7 904 631 95 65</b></p>
+<a class="btn" href="https://wa.me/79046319565" target="_blank">Contactar</a>
+</div>
 
-    <div class="contact-box">
-
-      <div class="contact-item">
-        <span>Administrador</span>
-        <strong>Daynel Caminero</strong>
-      </div>
-
-      <div class="contact-item">
-        <span>WhatsApp</span>
-        <strong>+7 904 631 95 65</strong>
-      </div>
-
-      <div class="contact-item">
-        <span>Empresa</span>
-        <strong>YOUR BRIDGE HOME</strong>
-      </div>
-
-      <div class="contact-item">
-        <span>Atención</span>
-        <strong>Servicios internacionales</strong>
-      </div>
-
-    </div>
-
-  </div>
+<div class="card">
+<h3>Enviar una solicitud</h3>
+<form id="requestForm" class="requestform">
+<div class="field">
+<label>Nombre</label>
+<input name="nombre_cliente" required maxlength="100">
+</div>
+<div class="field">
+<label>Teléfono / WhatsApp</label>
+<input name="telefono" required maxlength="80">
+</div>
+<div class="field wide">
+<label>Servicio</label>
+<select name="tipo_servicio">
+<option>Recarga</option>
+<option>Remesa</option>
+<option>Pasaje aéreo</option>
+<option>Consulta de tasas</option>
+<option>Otro</option>
+</select>
+</div>
+<div class="field wide">
+<label>Destino</label>
+<input name="destino" placeholder="País o ciudad">
+</div>
+<div class="field wide">
+<label>Detalles</label>
+<textarea name="detalles" rows="3"></textarea>
+</div>
+<div class="wide">
+<button class="btn" type="submit">Enviar solicitud</button>
+<span id="requestStatus" class="status"></span>
+</div>
+</form>
+</div>
+</div>
+</div>
 </section>
 
-
-<!-- ADMIN -->
-
-<section id="adminSection">
-
-  <div class="container">
-
-    <div class="admin-wrap">
-
-      <div class="admin-header">
-
-        <div>
-          <h2>Panel administrador</h2>
-          <div class="admin-status">
-            YOUR BRIDGE HOME
-          </div>
-        </div>
-
-        <button class="btn btn-dark" onclick="logoutAdmin()">
-          Cerrar sesión
-        </button>
-
-      </div>
-
-
-      <div class="admin-tabs">
-
-        <button class="active" onclick="showAdminTab('rates',this)">
-          💱 Tasas
-        </button>
-
-        <button onclick="showAdminTab('recharges',this)">
-          📱 Recargas
-        </button>
-
-        <button onclick="showAdminTab('tickets',this)">
-          ✈️ Pasajes
-        </button>
-
-        <button onclick="showAdminTab('remittances',this)">
-          💸 Remesas
-        </button>
-
-        <button onclick="showAdminTab('notes',this)">
-          📝 Notas
-        </button>
-
-        <button onclick="showAdminTab('requests',this)">
-          📋 Solicitudes
-        </button>
-
-      </div>
-
-
-      <div class="admin-content">
-
-        <div id="adminMessage" class="message"></div>
-
-
-        <!-- TASAS -->
-
-        <div id="panel-rates" class="admin-panel active">
-
-          <h3>Editar tasas</h3>
-
-          <p style="color:var(--muted);font-size:12px;margin:7px 0 20px">
-            Modifica las tasas y pulsa Guardar.
-          </p>
-
-          <div class="admin-form">
-
-            <div class="field">
-              <label>USD</label>
-              <input id="rateUSD" type="number" step="0.0001">
-            </div>
-
-            <div class="field">
-              <label>EUR</label>
-              <input id="rateEUR" type="number" step="0.0001">
-            </div>
-
-            <div class="field">
-              <label>RUB</label>
-              <input id="rateRUB" type="number" step="0.0001">
-            </div>
-
-            <div class="field">
-              <label>MLC</label>
-              <input id="rateMLC" type="number" step="0.0001">
-            </div>
-
-            <div class="field">
-              <label>GBP</label>
-              <input id="rateGBP" type="number" step="0.0001">
-            </div>
-
-          </div>
-
-          <div class="admin-actions">
-
-            <button
-              class="btn btn-primary"
-              onclick="saveRates()">
-              Guardar tasas
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- RECARGAS -->
-
-        <div id="panel-recharges" class="admin-panel">
-
-          <h3>Administrar recargas</h3>
-
-          <div class="admin-form" style="margin-top:20px">
-
-            <div class="field">
-              <label>Etiqueta</label>
-              <input id="rechargeLabel" placeholder="Ej. OFERTA">
-            </div>
-
-            <div class="field">
-              <label>Nombre del plan</label>
-              <input id="rechargeName" placeholder="Ej. INTERNET +">
-            </div>
-
-            <div class="field">
-              <label>Precio</label>
-              <input id="rechargePrice" type="number">
-            </div>
-
-            <div class="field">
-              <label>Moneda</label>
-              <input id="rechargeCurrency" value="RUB">
-            </div>
-
-            <div class="field">
-              <label>Descripción 1</label>
-              <input id="rechargeDesc1">
-            </div>
-
-            <div class="field">
-              <label>Descripción 2</label>
-              <input id="rechargeDesc2">
-            </div>
-
-          </div>
-
-          <div class="admin-actions">
-
-            <button
-              class="btn btn-primary"
-              onclick="saveRecharge()">
-              Guardar recarga
-            </button>
-
-            <button
-              class="btn btn-dark"
-              onclick="clearRechargeForm()">
-              Limpiar
-            </button>
-
-          </div>
-
-          <div id="rechargeAdminList" class="table-wrap"></div>
-
-        </div>
-
-
-        <!-- PASAJES -->
-
-        <div id="panel-tickets" class="admin-panel">
-
-          <h3>Administrar pasajes</h3>
-
-          <div class="admin-form" style="margin-top:20px">
-
-            <div class="field">
-              <label>Etiqueta</label>
-              <input id="ticketLabel">
-            </div>
-
-            <div class="field">
-              <label>Tipo</label>
-              <input id="ticketType" placeholder="Ida y vuelta">
-            </div>
-
-            <div class="field">
-              <label>Origen</label>
-              <input id="ticketOrigin">
-            </div>
-
-            <div class="field">
-              <label>Destino</label>
-              <input id="ticketDestination">
-            </div>
-
-            <div class="field">
-              <label>Fecha salida</label>
-              <input id="ticketDeparture" type="date">
-            </div>
-
-            <div class="field">
-              <label>Fecha regreso</label>
-              <input id="ticketReturn" type="date">
-            </div>
-
-            <div class="field">
-              <label>Precio</label>
-              <input id="ticketPrice" type="number">
-            </div>
-
-            <div class="field">
-              <label>Moneda</label>
-              <input id="ticketCurrency" value="RUB">
-            </div>
-
-            <div class="field full">
-              <label>Descripción</label>
-              <textarea id="ticketDescription"></textarea>
-            </div>
-
-          </div>
-
-          <div class="admin-actions">
-
-            <button
-              class="btn btn-primary"
-              onclick="saveTicket()">
-              Guardar pasaje
-            </button>
-
-            <button
-              class="btn btn-dark"
-              onclick="clearTicketForm()">
-              Limpiar
-            </button>
-
-          </div>
-
-          <div id="ticketAdminList" class="table-wrap"></div>
-
-        </div>
-
-
-        <!-- REMESAS -->
-
-        <div id="panel-remittances" class="admin-panel">
-
-          <h3>Administrar remesas</h3>
-
-          <div class="admin-form" style="margin-top:20px">
-
-            <div class="field">
-              <label>Título</label>
-              <input
-                id="remittanceTitle"
-                placeholder="Ej. Remesa a Cuba">
-            </div>
-
-            <div class="field">
-              <label>Descripción</label>
-              <input id="remittanceDescription">
-            </div>
-
-            <div class="field">
-              <label>Monto enviado</label>
-              <input id="remittanceSend" type="number">
-            </div>
-
-            <div class="field">
-              <label>Moneda enviada</label>
-              <input id="remittanceSendCurrency" value="RUB">
-            </div>
-
-            <div class="field">
-              <label>Monto recibido</label>
-              <input id="remittanceReceive" type="number">
-            </div>
-
-            <div class="field">
-              <label>Moneda recibida</label>
-              <input id="remittanceReceiveCurrency" value="CUP">
-            </div>
-
-          </div>
-
-          <div class="admin-actions">
-
-            <button
-              class="btn btn-primary"
-              onclick="saveRemittance()">
-              Guardar remesa
-            </button>
-
-            <button
-              class="btn btn-dark"
-              onclick="clearRemittanceForm()">
-              Limpiar
-            </button>
-
-          </div>
-
-          <div id="remittanceAdminList" class="table-wrap"></div>
-
-        </div>
-
-
-        <!-- NOTAS -->
-
-        <div id="panel-notes" class="admin-panel">
-
-          <h3>Administrar información</h3>
-
-          <div class="admin-form" style="margin-top:20px">
-
-            <div class="field">
-              <label>Título</label>
-              <input id="noteTitle">
-            </div>
-
-            <div class="field full">
-              <label>Contenido</label>
-              <textarea id="noteContent"></textarea>
-            </div>
-
-          </div>
-
-          <div class="admin-actions">
-
-            <button
-              class="btn btn-primary"
-              onclick="saveNote()">
-              Guardar nota
-            </button>
-
-            <button
-              class="btn btn-dark"
-              onclick="clearNoteForm()">
-              Limpiar
-            </button>
-
-          </div>
-
-          <div id="noteAdminList" class="table-wrap"></div>
-
-        </div>
-
-
-        <!-- SOLICITUDES -->
-
-        <div id="panel-requests" class="admin-panel">
-
-          <h3>Solicitudes de clientes</h3>
-
-          <div id="requestsAdminList" class="table-wrap">
-            Cargando...
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
+<section id="administracion">
+<div class="wrap">
+<div class="section-head">
+<div class="eyebrow">Gestión del sitio</div>
+<h2>Panel de administración</h2>
+</div>
+
+<div class="admin">
+<div id="loginBox">
+<h3>Acceso de administrador</h3>
+<div class="field">
+<label>Contraseña</label>
+<input id="adminPassword" type="password" placeholder="Contraseña">
+</div>
+<button class="btn" id="loginBtn" type="button">Entrar al panel</button>
+<span id="loginStatus" class="status"></span>
+</div>
+
+<div id="dashboard" class="hidden">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+<h3>Panel de control</h3>
+<button class="smallbtn" id="logoutBtn">Cerrar sesión</button>
+</div>
+
+<div class="admin-grid">
+
+<div class="card">
+<h3>Editar tasas de cambio</h3>
+<div class="field"><label>USD</label><input id="rate_usd" type="number" step="any"></div>
+<div class="field"><label>EUR</label><input id="rate_eur" type="number" step="any"></div>
+<div class="field"><label>RUB</label><input id="rate_rub" type="number" step="any"></div>
+<div class="field"><label>MLC</label><input id="rate_mlc" type="number" step="any"></div>
+<div class="field"><label>GBP</label><input id="rate_gbp" type="number" step="any"></div>
+<button class="btn" id="saveRates">Guardar tasas</button>
+<span id="rateStatus" class="status"></span>
+</div>
+
+<div class="card">
+<h3>Crear contenido</h3>
+<div class="field">
+<label>Sección</label>
+<select id="itemType">
+<option value="recargas">Recarga</option>
+<option value="pasajes">Pasaje</option>
+<option value="notas">Nota informativa</option>
+<option value="remesas">Remesa</option>
+</select>
+</div>
+<div class="field"><label>Título / etiqueta</label><input id="itemTitle"></div>
+<div class="field"><label>Precio</label><input id="itemPrice"></div>
+<div class="field"><label>Moneda</label><input id="itemCurrency" value="RUB"></div>
+<div class="field"><label>Descripción</label><textarea id="itemDescription" rows="3"></textarea></div>
+<div class="field" id="ticketFields">
+<label>Origen</label><input id="ticketOrigin" placeholder="Rusia">
+<label>Destino</label><input id="ticketDestination" placeholder="Cuba">
+<label>Fecha de salida</label><input id="ticketDeparture" type="date">
+<label>Fecha de regreso</label><input id="ticketReturn" type="date">
+</div>
+<button class="btn" id="saveItem">Guardar contenido</button>
+<button class="smallbtn" id="cancelEdit" type="button">Cancelar edición</button>
+<span id="editorStatus" class="status"></span>
+<input type="hidden" id="editingId">
+</div>
+</div>
+
+<div class="card" style="margin-top:15px">
+<h3>Contenido publicado</h3>
+<div id="adminItems" class="admin-list"></div>
+</div>
+
+<div class="card" style="margin-top:15px">
+<h3>Solicitudes de clientes</h3>
+<div id="adminRequests" class="admin-list"></div>
+</div>
+
+<p class="updated" id="syncStatus"></p>
+</div>
+</div>
+</div>
 </section>
 
 </main>
 
-
 <footer>
-  <div class="container footer-flex">
-
-    <div>
-      © 2026 YOUR BRIDGE HOME
-    </div>
-
-    <div>
-      Daynel Caminero · Administrador
-    </div>
-
-  </div>
+<div class="wrap footerrow">
+<span>© <span id="year"></span> YOUR BRIDGE HOME</span>
+<span>Conectando personas, servicios y destinos.</span>
+</div>
 </footer>
 
-
-<a
-  class="whatsapp"
-  href="https://wa.me/79046319565"
-  target="_blank"
-  aria-label="WhatsApp">
-  ☎
-</a>
-
-
-<!-- LOGIN -->
-
-<div id="loginModal" class="modal">
-
-  <div class="modal-box">
-
-    <div class="login-box">
-
-      <h3>Administrador</h3>
-
-      <p>
-        Introduce la contraseña para acceder al panel.
-      </p>
-
-      <div id="loginMessage" class="message"></div>
-
-      <div class="field">
-
-        <label>Contraseña</label>
-
-        <input
-          id="adminPasswordInput"
-          type="password"
-          placeholder="Contraseña"
-          onkeydown="if(event.key==='Enter')loginAdmin()">
-
-      </div>
-
-      <div class="admin-actions">
-
-        <button
-          class="btn btn-primary"
-          onclick="loginAdmin()">
-          Entrar
-        </button>
-
-        <button
-          class="btn btn-dark"
-          onclick="closeAdmin()">
-          Cancelar
-        </button>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
+<a class="wa" href="https://wa.me/79046319565" target="_blank">☏ WhatsApp</a>
+<div id="toast" class="toast"></div>
 
 <script>
-
-/* =========================================================
-   CONFIGURACIÓN
-========================================================= */
+/* =========================================
+   CONFIGURACIÓN SUPABASE
+========================================= */
 
 const SUPABASE_URL =
 "https://lwgeillycitljubenzhv.supabase.co";
@@ -1640,2013 +586,666 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_LaA2IPL1J_IWAH0CVMUcBQ_j-BZa2pe";
 
-const ADMIN_PASSWORD =
-"MI_CLAVE_SECRETA";
+/*
+ CONTRASEÑA TEMPORAL SOLICITADA.
+ Esta contraseña está visible en el código fuente.
+ No es autenticación segura para producción.
+*/
 
-const db =
-window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+const ADMIN_PASSWORD = "MI_CLAVE_SECRETA";
 
-
-/* =========================================================
-   ESTADO
-========================================================= */
-
-let rates = {
-  USD:0,
-  EUR:0,
-  RUB:0,
-  MLC:0,
-  GBP:0
+const TABLES = {
+ config:"configuracion",
+ recargas:"planes_recargas",
+ pasajes:"pasajes",
+ remesas:"remesas",
+ notas:"notas",
+ solicitudes:"solicitudes"
 };
 
-let recharges = [];
-let tickets = [];
-let remittances = [];
-let notes = [];
-let requests = [];
+const $ = id => document.getElementById(id);
 
-let editingRechargeId = null;
-let editingTicketId = null;
-let editingRemittanceId = null;
-let editingNoteId = null;
+let db = null;
+let admin = false;
+let editing = null;
 
+let data = {
+ config:null,
+ recargas:[],
+ pasajes:[],
+ remesas:[],
+ notas:[],
+ solicitudes:[]
+};
 
-/* =========================================================
-   UTILIDADES
-========================================================= */
-
-function esc(value){
-
-  if(value === null || value === undefined){
-    return "";
-  }
-
-  return String(value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+function escapeHTML(value){
+ return String(value ?? "").replace(/[&<>"']/g, c => ({
+ "&":"&amp;","<":"&lt;",">":"&gt;",
+ '"':"&quot;","'":"&#39;"
+ }[c]));
 }
 
-
-function money(value,currency){
-
-  const n = Number(value || 0);
-
-  return new Intl.NumberFormat(
-    "es-ES",
-    {
-      maximumFractionDigits:2
-    }
-  ).format(n) + " " + (currency || "");
+function notify(message){
+ $("toast").textContent=message;
+ $("toast").classList.add("show");
+ setTimeout(()=>$("toast").classList.remove("show"),3000);
 }
 
-
-function showAdminMessage(text,type="success"){
-
-  const el =
-    document.getElementById("adminMessage");
-
-  el.className =
-    "message " + type;
-
-  el.textContent = text;
-
-  setTimeout(()=>{
-    el.className="message";
-    el.textContent="";
-  },5000);
+function setStatus(message,kind=""){
+ $("connectionStatus").textContent=message;
+ $("connectionStatus").className="status "+kind;
 }
 
-
-function showRequestMessage(text,type="success"){
-
-  const el =
-    document.getElementById("requestMessage");
-
-  el.className =
-    "message " + type;
-
-  el.textContent = text;
+function formatDate(value){
+ if(!value) return "Sin fecha";
+ return new Date(value).toLocaleString("es-ES");
 }
 
-
-/* =========================================================
-   LOGIN ADMIN
-========================================================= */
-
-function openAdmin(){
-
-  document
-    .getElementById("loginModal")
-    .classList.add("show");
-
-  setTimeout(()=>{
-    document
-      .getElementById("adminPasswordInput")
-      .focus();
-  },100);
-
+function waLink(title){
+ return "https://wa.me/79046319565?text="+
+ encodeURIComponent("Hola, deseo información sobre "+title);
 }
 
+/* =========================================
+   CARGA DE DATOS
+========================================= */
 
-function closeAdmin(){
+async function loadConfig(){
+ const {data:rows,error}=await db
+ .from(TABLES.config)
+ .select("*")
+ .order("id",{ascending:true})
+ .limit(1);
 
-  document
-    .getElementById("loginModal")
-    .classList.remove("show");
+ if(error) throw error;
 
+ data.config=rows?.[0] || null;
+ renderRates();
 }
 
+async function loadContent(type){
+ const {data:rows,error}=await db
+ .from(TABLES[type])
+ .select("*")
+ .eq("activo",true)
+ .limit(100);
 
-function loginAdmin(){
+ if(error) throw error;
 
-  const password =
-    document
-      .getElementById("adminPasswordInput")
-      .value;
-
-  if(password !== ADMIN_PASSWORD){
-
-    const el =
-      document.getElementById("loginMessage");
-
-    el.className="message error";
-    el.textContent="Contraseña incorrecta.";
-
-    return;
-  }
-
-  closeAdmin();
-
-  document
-    .getElementById("adminSection")
-    .style.display="block";
-
-  document
-    .getElementById("adminSection")
-    .scrollIntoView({
-      behavior:"smooth"
-    });
-
-  document
-    .getElementById("adminPasswordInput")
-    .value="";
-
-  loadAdminData();
-
+ data[type]=rows || [];
 }
 
+async function refresh(){
+ if(!db)return;
 
-function logoutAdmin(){
+ try{
+ await loadConfig();
 
-  document
-    .getElementById("adminSection")
-    .style.display="none";
+ await Promise.all([
+ loadContent("recargas"),
+ loadContent("pasajes"),
+ loadContent("notas")
+ ]);
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+ /*
+ La tabla remesas es opcional.
+ Si no existe, no interrumpimos las demás secciones.
+ */
+ try{
+ await loadContent("remesas");
+ }catch(e){
+ data.remesas=[];
+ console.warn("Módulo remesas pendiente:",e.message);
+ }
 
+ renderAll();
+
+ setStatus("Supabase conectado","ok");
+
+ if(admin){
+ await loadAdminRequests();
+ renderAdminItems();
+ $("syncStatus").textContent=
+ "Última sincronización: "+new Date().toLocaleTimeString();
+ }
+
+ }catch(error){
+ console.error(error);
+ setStatus("Error de conexión","err");
+ }
 }
 
+/* =========================================
+   PRESENTACIÓN PÚBLICA
+========================================= */
 
-/* =========================================================
-   TABS ADMIN
-========================================================= */
+function cardHTML(item,type){
+ let title=item.nombre_plan ||
+ item.etiqueta ||
+ item.titulo ||
+ item.destino ||
+ item.origen ||
+ "Servicio";
 
-function showAdminTab(name,button){
+ let price=item.precio ?? item.valor ?? "";
+ let currency=item.moneda || "RUB";
 
-  document
-    .querySelectorAll(".admin-panel")
-    .forEach(panel=>{
-      panel.classList.remove("active");
-    });
+ let description=
+ item.descripcion ||
+ [item.descripcion_1,item.descripcion_2].filter(Boolean).join(" · ") ||
+ (item.origen && item.destino ? item.origen+" → "+item.destino : "");
 
-  const target =
-    document.getElementById("panel-"+name);
+ if(type==="pasajes"){
+ title=item.etiqueta ||
+ ((item.origen||"") + " → " + (item.destino||""));
+ description=[
+ item.fecha_salida ? "Salida: "+item.fecha_salida:"",
+ item.fecha_regreso ? "Regreso: "+item.fecha_regreso:"",
+ item.descripcion||""
+ ].filter(Boolean).join(" · ");
+ }
 
-  if(target){
-    target.classList.add("active");
-  }
-
-  document
-    .querySelectorAll(".admin-tabs button")
-    .forEach(btn=>{
-      btn.classList.remove("active");
-    });
-
-  if(button){
-    button.classList.add("active");
-  }
-
+ return `
+ <article class="card">
+ <div class="icon">${type==="pasajes"?"✈":type==="remesas"?"⇄":"▤"}</div>
+ <h3>${escapeHTML(title)}</h3>
+ <div class="price">${escapeHTML(price)} ${escapeHTML(currency)}</div>
+ <p>${escapeHTML(description)}</p>
+ <div class="actions">
+ <a class="btn outline" href="${waLink(title)}" target="_blank">Consultar</a>
+ </div>
+ </article>`;
 }
 
-
-/* =========================================================
-   TASAS
-========================================================= */
-
-async function loadRates(){
-
-  const {data,error} =
-    await db
-      .from("configuracion")
-      .select("*")
-      .eq("id",1)
-      .maybeSingle();
-
-  if(error){
-
-    console.error(error);
-
-    return;
-  }
-
-  if(data){
-
-    rates.USD =
-      Number(data.tasa_usd || 0);
-
-    rates.EUR =
-      Number(data.tasa_eur || 0);
-
-    rates.RUB =
-      Number(data.tasa_rub || 0);
-
-    rates.MLC =
-      Number(data.tasa_mlc || 0);
-
-    rates.GBP =
-      Number(data.tasa_gbp || 0);
-
-    document.getElementById("rateUSD").value =
-      rates.USD;
-
-    document.getElementById("rateEUR").value =
-      rates.EUR;
-
-    document.getElementById("rateRUB").value =
-      rates.RUB;
-
-    document.getElementById("rateMLC").value =
-      rates.MLC;
-
-    document.getElementById("rateGBP").value =
-      rates.GBP;
-
-  }
-
-  calculateExchange();
-
+function renderSection(type,target){
+ const list=data[type]||[];
+ $(target).innerHTML=list.length
+ ?list.map(x=>cardHTML(x,type)).join("")
+ :`<div class="card"><h3>Consulta disponibilidad</h3><p>Contáctanos para conocer las ofertas disponibles.</p></div>`;
 }
 
+function renderRates(){
+ const c=data.config;
 
-async function saveRates(){
+ if(!c){
+ $("ratesBody").innerHTML=
+ '<tr><td colspan="4">No hay tasas configuradas.</td></tr>';
+ return;
+ }
 
-  const payload = {
+ const names={
+ tasa_usd:"USD",
+ tasa_eur:"EUR",
+ tasa_rub:"RUB",
+ tasa_mlc:"MLC",
+ tasa_gbp:"GBP"
+ };
 
-    id:1,
+ $("ratesBody").innerHTML=Object.entries(names).map(([key,name])=>`
+ <tr>
+ <td>${name}</td>
+ <td><b class="gold">${escapeHTML(c[key] ?? "—")}</b></td>
+ <td>Tasa registrada</td>
+ <td>${escapeHTML(formatDate(c.fecha_actualizacion))}</td>
+ </tr>`).join("");
 
-    tasa_usd:
-      Number(document.getElementById("rateUSD").value || 0),
-
-    tasa_eur:
-      Number(document.getElementById("rateEUR").value || 0),
-
-    tasa_rub:
-      Number(document.getElementById("rateRUB").value || 0),
-
-    tasa_mlc:
-      Number(document.getElementById("rateMLC").value || 0),
-
-    tasa_gbp:
-      Number(document.getElementById("rateGBP").value || 0),
-
-    fecha_actualizacion:
-      new Date().toISOString()
-
-  };
-
-  const {error} =
-    await db
-      .from("configuracion")
-      .upsert(payload);
-
-  if(error){
-
-    console.error(error);
-
-    showAdminMessage(
-      "No se pudo guardar: " + error.message,
-      "error"
-    );
-
-    return;
-  }
-
-  rates.USD=payload.tasa_usd;
-  rates.EUR=payload.tasa_eur;
-  rates.RUB=payload.tasa_rub;
-  rates.MLC=payload.tasa_mlc;
-  rates.GBP=payload.tasa_gbp;
-
-  calculateExchange();
-
-  showAdminMessage(
-    "Tasas guardadas correctamente."
-  );
-
+ $("ratesUpdated").textContent=
+ "Última actualización: "+formatDate(c.fecha_actualizacion);
 }
-
-
-/* =========================================================
-   RECARGAS
-========================================================= */
-
-async function loadRecharges(){
-
-  const {data,error} =
-    await db
-      .from("planes_recargas")
-      .select("*")
-      .order("id",{ascending:false});
-
-  if(error){
-
-    console.error(error);
-
-    document.getElementById("rechargesGrid").innerHTML =
-      `<div class="empty">
-        No se pudieron cargar las recargas.
-      </div>`;
-
-    return;
-  }
-
-  recharges =
-    (data || []).filter(x=>x.activo !== false);
-
-  renderRecharges();
-  renderRechargeAdmin();
-
-}
-
-
-function renderRecharges(){
-
-  const grid =
-    document.getElementById("rechargesGrid");
-
-  if(!recharges.length){
-
-    grid.innerHTML =
-      `<div class="empty">
-        No hay recargas publicadas actualmente.
-      </div>`;
-
-    return;
-  }
-
-  grid.innerHTML =
-    recharges.map(item=>`
-
-      <div class="card">
-
-        <div class="card-icon">📱</div>
-
-        <div class="meta">
-          ${esc(item.etiqueta || "RECARGA")}
-        </div>
-
-        <h3>
-          ${esc(item.nombre_plan || "")}
-        </h3>
-
-        <p>
-          ${esc(item.descripcion_1 || "")}
-        </p>
-
-        <p>
-          ${esc(item.descripcion_2 || "")}
-        </p>
-
-        <div class="price">
-          ${money(item.precio,item.moneda)}
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-function renderRechargeAdmin(){
-
-  const el =
-    document.getElementById("rechargeAdminList");
-
-  if(!recharges.length){
-
-    el.innerHTML =
-      `<div class="empty">
-        No hay recargas.
-      </div>`;
-
-    return;
-  }
-
-  el.innerHTML = `
-
-    <table>
-
-      <thead>
-        <tr>
-          <th>Plan</th>
-          <th>Precio</th>
-          <th>Estado</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-
-      <tbody>
-
-        ${
-          recharges.map(item=>`
-
-            <tr>
-
-              <td>
-                ${esc(item.nombre_plan)}
-              </td>
-
-              <td>
-                ${money(item.precio,item.moneda)}
-              </td>
-
-              <td>
-                <span class="status on">
-                  Activa
-                </span>
-              </td>
-
-              <td>
-
-                <button
-                  class="btn btn-dark"
-                  onclick="editRecharge(${item.id})">
-                  Editar
-                </button>
-
-                <button
-                  class="btn btn-dark"
-                  onclick="deleteRecharge(${item.id})">
-                  Eliminar
-                </button>
-
-              </td>
-
-            </tr>
-
-          `).join("")
-        }
-
-      </tbody>
-
-    </table>
-  `;
-
-}
-
-
-async function saveRecharge(){
-
-  const payload = {
-
-    etiqueta:
-      document.getElementById("rechargeLabel").value,
-
-    nombre_plan:
-      document.getElementById("rechargeName").value,
-
-    precio:
-      Number(document.getElementById("rechargePrice").value || 0),
-
-    moneda:
-      document.getElementById("rechargeCurrency").value,
-
-    descripcion_1:
-      document.getElementById("rechargeDesc1").value,
-
-    descripcion_2:
-      document.getElementById("rechargeDesc2").value,
-
-    activo:true
-
-  };
-
-  if(editingRechargeId){
-
-    payload.id=editingRechargeId;
-
-  }
-
-  const {error} =
-    await db
-      .from("planes_recargas")
-      .upsert(payload);
-
-  if(error){
-
-    showAdminMessage(
-      "No se pudo guardar la recarga: " +
-      error.message,
-      "error"
-    );
-
-    return;
-  }
-
-  showAdminMessage(
-    "Recarga guardada correctamente."
-  );
-
-  clearRechargeForm();
-
-  await loadRecharges();
-
-}
-
-
-function editRecharge(id){
-
-  const item =
-    recharges.find(x=>Number(x.id)===Number(id));
-
-  if(!item) return;
-
-  editingRechargeId=id;
-
-  document.getElementById("rechargeLabel").value =
-    item.etiqueta || "";
-
-  document.getElementById("rechargeName").value =
-    item.nombre_plan || "";
-
-  document.getElementById("rechargePrice").value =
-    item.precio || "";
-
-  document.getElementById("rechargeCurrency").value =
-    item.moneda || "";
-
-  document.getElementById("rechargeDesc1").value =
-    item.descripcion_1 || "";
-
-  document.getElementById("rechargeDesc2").value =
-    item.descripcion_2 || "";
-
-  window.scrollTo({
-    top:document
-      .getElementById("panel-recharges")
-      .getBoundingClientRect().top +
-      window.scrollY -
-      100,
-    behavior:"smooth"
-  });
-
-}
-
-
-async function deleteRecharge(id){
-
-  if(!confirm("¿Eliminar esta recarga?")){
-    return;
-  }
-
-  const {error} =
-    await db
-      .from("planes_recargas")
-      .delete()
-      .eq("id",id);
-
-  if(error){
-
-    showAdminMessage(
-      "No se pudo eliminar: "+error.message,
-      "error"
-    );
-
-    return;
-  }
-
-  showAdminMessage(
-    "Recarga eliminada."
-  );
-
-  await loadRecharges();
-
-}
-
-
-function clearRechargeForm(){
-
-  editingRechargeId=null;
-
-  [
-    "rechargeLabel",
-    "rechargeName",
-    "rechargePrice",
-    "rechargeDesc1",
-    "rechargeDesc2"
-  ].forEach(id=>{
-    document.getElementById(id).value="";
-  });
-
-  document.getElementById("rechargeCurrency").value="RUB";
-
-}
-
-
-/* =========================================================
-   PASAJES
-========================================================= */
-
-async function loadTickets(){
-
-  const {data,error} =
-    await db
-      .from("pasajes")
-      .select("*")
-      .order("fecha_salida",{ascending:true});
-
-  if(error){
-
-    console.error(error);
-
-    return;
-  }
-
-  tickets =
-    (data || []).filter(x=>x.activo !== false);
-
-  renderTickets();
-  renderTicketAdmin();
-
-}
-
-
-function renderTickets(){
-
-  const grid =
-    document.getElementById("ticketsGrid");
-
-  if(!tickets.length){
-
-    grid.innerHTML =
-      `<div class="empty">
-        No hay pasajes publicados.
-      </div>`;
-
-    return;
-  }
-
-  grid.innerHTML =
-    tickets.map(item=>`
-
-      <div class="card">
-
-        <div class="card-icon">✈️</div>
-
-        <div class="meta">
-          ${esc(item.etiqueta || "PASAJES")}
-        </div>
-
-        <h3>
-          ${esc(item.origen || "")}
-          →
-          ${esc(item.destino || "")}
-        </h3>
-
-        <p>
-          ${esc(item.descripcion || "")}
-        </p>
-
-        <div class="meta">
-          Salida:
-          ${esc(item.fecha_salida || "—")}
-        </div>
-
-        <div class="meta">
-          Regreso:
-          ${esc(item.fecha_regreso || "—")}
-        </div>
-
-        <div class="price">
-          ${money(item.precio,item.moneda)}
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-function renderTicketAdmin(){
-
-  const el =
-    document.getElementById("ticketAdminList");
-
-  if(!tickets.length){
-
-    el.innerHTML =
-      `<div class="empty">
-        No hay pasajes.
-      </div>`;
-
-    return;
-  }
-
-  el.innerHTML=`
-
-    <table>
-
-      <thead>
-
-        <tr>
-          <th>Ruta</th>
-          <th>Salida</th>
-          <th>Precio</th>
-          <th>Acciones</th>
-        </tr>
-
-      </thead>
-
-      <tbody>
-
-        ${
-          tickets.map(item=>`
-
-            <tr>
-
-              <td>
-                ${esc(item.origen)}
-                →
-                ${esc(item.destino)}
-              </td>
-
-              <td>
-                ${esc(item.fecha_salida || "—")}
-              </td>
-
-              <td>
-                ${money(item.precio,item.moneda)}
-              </td>
-
-              <td>
-
-                <button
-                  class="btn btn-dark"
-                  onclick="editTicket(${item.id})">
-                  Editar
-                </button>
-
-                <button
-                  class="btn btn-dark"
-                  onclick="deleteTicket(${item.id})">
-                  Eliminar
-                </button>
-
-              </td>
-
-            </tr>
-
-          `).join("")
-        }
-
-      </tbody>
-
-    </table>
-  `;
-
-}
-
-
-async function saveTicket(){
-
-  const payload={
-
-    etiqueta:
-      document.getElementById("ticketLabel").value,
-
-    tipo:
-      document.getElementById("ticketType").value,
-
-    origen:
-      document.getElementById("ticketOrigin").value,
-
-    destino:
-      document.getElementById("ticketDestination").value,
-
-    fecha_salida:
-      document.getElementById("ticketDeparture").value || null,
-
-    fecha_regreso:
-      document.getElementById("ticketReturn").value || null,
-
-    precio:
-      Number(document.getElementById("ticketPrice").value || 0),
-
-    moneda:
-      document.getElementById("ticketCurrency").value,
-
-    descripcion:
-      document.getElementById("ticketDescription").value,
-
-    activo:true
-
-  };
-
-  if(editingTicketId){
-    payload.id=editingTicketId;
-  }
-
-  const {error} =
-    await db
-      .from("pasajes")
-      .upsert(payload);
-
-  if(error){
-
-    showAdminMessage(
-      "No se pudo guardar el pasaje: "+
-      error.message,
-      "error"
-    );
-
-    return;
-  }
-
-  showAdminMessage(
-    "Pasaje guardado correctamente."
-  );
-
-  clearTicketForm();
-
-  await loadTickets();
-
-}
-
-
-function editTicket(id){
-
-  const item =
-    tickets.find(x=>Number(x.id)===Number(id));
-
-  if(!item) return;
-
-  editingTicketId=id;
-
-  document.getElementById("ticketLabel").value =
-    item.etiqueta || "";
-
-  document.getElementById("ticketType").value =
-    item.tipo || "";
-
-  document.getElementById("ticketOrigin").value =
-    item.origen || "";
-
-  document.getElementById("ticketDestination").value =
-    item.destino || "";
-
-  document.getElementById("ticketDeparture").value =
-    item.fecha_salida || "";
-
-  document.getElementById("ticketReturn").value =
-    item.fecha_regreso || "";
-
-  document.getElementById("ticketPrice").value =
-    item.precio || "";
-
-  document.getElementById("ticketCurrency").value =
-    item.moneda || "RUB";
-
-  document.getElementById("ticketDescription").value =
-    item.descripcion || "";
-
-}
-
-
-async function deleteTicket(id){
-
-  if(!confirm("¿Eliminar este pasaje?")){
-    return;
-  }
-
-  const {error} =
-    await db
-      .from("pasajes")
-      .delete()
-      .eq("id",id);
-
-  if(error){
-
-    showAdminMessage(
-      "No se pudo eliminar: "+error.message,
-      "error"
-    );
-
-    return;
-  }
-
-  showAdminMessage(
-    "Pasaje eliminado."
-  );
-
-  await loadTickets();
-
-}
-
-
-function clearTicketForm(){
-
-  editingTicketId=null;
-
-  [
-    "ticketLabel",
-    "ticketType",
-    "ticketOrigin",
-    "ticketDestination",
-    "ticketDeparture",
-    "ticketReturn",
-    "ticketPrice",
-    "ticketDescription"
-  ].forEach(id=>{
-    document.getElementById(id).value="";
-  });
-
-  document.getElementById("ticketCurrency").value="RUB";
-
-}
-
-
-/* =========================================================
-   REMESAS
-========================================================= */
-
-async function loadRemittances(){
-
-  const {data,error} =
-    await db
-      .from("remesas")
-      .select("*")
-      .order("id",{ascending:false});
-
-  if(error){
-
-    console.error(error);
-
-    document.getElementById("remittancesGrid").innerHTML =
-      `<div class="empty">
-        No se pudieron cargar las remesas.
-      </div>`;
-
-    return;
-  }
-
-  remittances =
-    (data || []).filter(x=>x.activo !== false);
-
-  renderRemittances();
-  renderRemittanceAdmin();
-
-}
-
-
-function renderRemittances(){
-
-  const grid =
-    document.getElementById("remittancesGrid");
-
-  if(!remittances.length){
-
-    grid.innerHTML =
-      `<div class="empty">
-        No hay remesas publicadas actualmente.
-      </div>`;
-
-    return;
-  }
-
-  grid.innerHTML =
-    remittances.map(item=>`
-
-      <div class="card">
-
-        <div class="card-icon">💸</div>
-
-        <h3>
-          ${esc(item.titulo || "Remesa")}
-        </h3>
-
-        <p>
-          ${esc(item.descripcion || "")}
-        </p>
-
-        <div class="meta">
-          Envías
-        </div>
-
-        <div class="price">
-          ${money(item.monto_envio,item.moneda_envio)}
-        </div>
-
-        <div class="meta">
-          Recibes
-        </div>
-
-        <div class="price">
-          ${money(item.monto_recibido,item.moneda_recibido)}
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-
-function renderRemittanceAdmin(){
-
-  const el =
-    document.getElementById("remittanceAdminList");
-
-  if(!remittances.length){
-
-    el.innerHTML =
-      `<div class="empty">
-        No hay remesas.
-      </div>`;
-
-    return;
-  }
-
-  el.innerHTML=`
-
-    <table>
-
-      <thead>
-
-        <tr>
-          <th>Título</th>
-          <th>Envías</th>
-          <th>Recibes</th>
-          <th>Acciones</th>
-        </tr>
-
-      </thead>
-
-      <tbody>
-
-        ${
-          remittances.map(item=>`
-
-            <tr>
-
-              <td>
-                ${esc(item.titulo)}
-              </td>
-
-              <td>
-                ${money(
-                  item.monto_envio,
-                  item.moneda_envio
-                )}
-              </td>
-
-              <td>
-                ${money(
-                  item.monto_recibido,
-                  item.moneda_recibido
-                )}
-              </td>
-
-              <td>
-
-                <button
-                  class="btn btn-dark"
-                  onclick="editRemittance(${item.id})">
-                  Editar
-                </button>
-
-                <button
-                  class="btn btn-dark"
-                  onclick="deleteRemittance(${item.id})">
-                  Eliminar
-                </button>
-
-              </td>
-
-            </tr>
-
-          `).join("")
-        }
-
-      </tbody>
-
-    </table>
-
-  `;
-
-}
-
-
-async function saveRemittance(){
-
-  const payload={
-
-    titulo:
-      document.getElementById("remittanceTitle").value,
-
-    monto_envio:
-      Number(
-        document.getElementById("remittanceSend").value || 0
-      ),
-
-    moneda_envio:
-      document.getElementById("remittanceSendCurrency").value,
-
-    monto_recibido:
-      Number(
-        document.getElementById("remittanceReceive").value || 0
-      ),
-
-    moneda_recibido:
-      document.getElementById("remittanceReceiveCurrency").value,
-
-    descripcion:
-      document.getElementById("remittanceDescription").value,
-
-    activo:true
-
-  };
-
-  if(editingRemittanceId){
-    payload.id=editingRemittanceId;
-  }
-
-  const {error} =
-    await db
-      .from("remesas")
-      .upsert(payload);
-
-  if(error){
-
-    showAdminMessage(
-      "No se pudo guardar la remesa: "+
-      error.message,
-      "error"
-    );
-
-    return;
-  }
-
-  showAdminMessage(
-    "Remesa guardada correctamente."
-  );
-
-  clearRemittanceForm();
-
-  await loadRemittances();
-
-}
-
-
-function editRemittance(id){
-
-  const item =
-    remittances.find(
-      x=>Number(x.id)===Number(id)
-    );
-
-  if(!item) return;
-
-  editingRemittanceId=id;
-
-  document.getElementById("remittanceTitle").value =
-    item.titulo || "";
-
-  document.getElementById("remittanceSend").value =
-    item.monto_envio || "";
-
-  document.getElementById("remittanceSendCurrency").value =
-    item.moneda_envio || "RUB";
-
-  document.getElementById("remittanceReceive").value =
-    item.monto_recibido || "";
-
-  document.getElementById("remittanceReceiveCurrency").value =
-    item.moneda_recibido || "CUP";
-
-  document.getElementById("remittanceDescription").value =
-    item.descripcion || "";
-
-}
-
-
-async function deleteRemittance(id){
-
-  if(!confirm("¿Eliminar esta remesa?")){
-    return;
-  }
-
-  const {error} =
-    await db
-      .from("remesas")
-      .delete()
-      .eq("id",id);
-
-  if(error){
-
-    showAdminMessage(
-      "No se pudo eliminar: "+
-      error.message,
-      "error"
-    );
-
-    return;
-  }
-
-  showAdminMessage(
-    "Remesa eliminada."
-  );
-
-  await loadRemittances();
-
-}
-
-
-function clearRemittanceForm(){
-
-  editingRemittanceId=null;
-
-  [
-    "remittanceTitle",
-    "remittanceDescription",
-    "remittanceSend",
-    "remittanceReceive"
-  ].forEach(id=>{
-    document.getElementById(id).value="";
-  });
-
-  document.getElementById(
-    "remittanceSendCurrency"
-  ).value="RUB";
-
-  document.getElementById(
-    "remittanceReceiveCurrency"
-  ).value="CUP";
-
-}
-
-
-/* =========================================================
-   NOTAS
-========================================================= */
-
-async function loadNotes(){
-
-  const {data,error} =
-    await db
-      .from("notas")
-      .select("*")
-      .order("id",{ascending:false});
-
-  if(error){
-
-    console.error(error);
-
-    return;
-  }
-
-  notes =
-    (data || []).filter(x=>x.activo !== false);
-
-  renderNotes();
-  renderNoteAdmin();
-
-}
-
 
 function renderNotes(){
+ const list=data.notas||[];
 
-  const grid =
-    document.getElementById("notesGrid");
-
-  if(!notes.length){
-
-    grid.innerHTML =
-      `<div class="empty">
-        No hay información publicada.
-      </div>`;
-
-    return;
-  }
-
-  grid.innerHTML =
-    notes.map(item=>`
-
-      <div class="card note">
-
-        <h3>
-          ${esc(item.titulo || "")}
-        </h3>
-
-        <p>
-          ${esc(item.contenido || "")}
-        </p>
-
-      </div>
-
-    `).join("");
-
+ $("notesList").innerHTML=list.length
+ ?list.map(n=>`
+ <div class="note">
+ <b>${escapeHTML(n.titulo)}</b><br>
+ ${escapeHTML(n.contenido)}
+ <div class="updated">${escapeHTML(formatDate(n.fecha_creacion))}</div>
+ </div>`).join("")
+ :'<div class="note">Confirma siempre precios y disponibilidad antes de realizar una operación.</div>';
 }
 
+function renderOffers(){
+ let offers=[];
 
-function renderNoteAdmin(){
+ const r=data.recargas[0];
+ const p=data.pasajes[0];
+ const m=data.remesas[0];
 
-  const el =
-    document.getElementById("noteAdminList");
+ if(r)offers.push({
+ title:r.nombre_plan||r.etiqueta,
+ desc:r.descripcion_1||r.descripcion_2||r.descripcion||"",
+ price:r.precio+" "+(r.moneda||"RUB")
+ });
 
-  if(!notes.length){
+ if(m)offers.push({
+ title:m.titulo||m.etiqueta||"Remesas",
+ desc:m.descripcion||"",
+ price:m.precio||"Consultar"
+ });
 
-    el.innerHTML =
-      `<div class="empty">
-        No hay notas.
-      </div>`;
+ if(p)offers.push({
+ title:p.etiqueta||"Pasajes",
+ desc:(p.origen||"")+" → "+(p.destino||""),
+ price:p.precio+" "+(p.moneda||"RUB")
+ });
 
-    return;
-  }
-
-  el.innerHTML=`
-
-    <table>
-
-      <thead>
-
-        <tr>
-          <th>Título</th>
-          <th>Acciones</th>
-        </tr>
-
-      </thead>
-
-      <tbody>
-
-        ${
-          notes.map(item=>`
-
-            <tr>
-
-              <td>
-                ${esc(item.titulo)}
-              </td>
-
-              <td>
-
-                <button
-                  class="btn btn-dark"
-                  onclick="editNote(${item.id})">
-                  Editar
-                </button>
-
-                <button
-                  class="btn btn-dark"
-                  onclick="deleteNote(${item.id})">
-                  Eliminar
-                </button>
-
-              </td>
-
-            </tr>
-
-          `).join("")
-        }
-
-      </tbody>
-
-    </table>
-
-  `;
-
+ $("featuredOffers").innerHTML=offers.length
+ ?offers.map(o=>`
+ <div class="offer">
+ <div><b>${escapeHTML(o.title)}</b><small>${escapeHTML(o.desc)}</small></div>
+ <strong>${escapeHTML(o.price)}</strong>
+ </div>`).join("")
+ :'<div class="offer">Consulta nuestras ofertas por WhatsApp.</div>';
 }
 
-
-async function saveNote(){
-
-  const payload={
-
-    titulo:
-      document.getElementById("noteTitle").value,
-
-    contenido:
-      document.getElementById("noteContent").value,
-
-    activo:true
-
-  };
-
-  if(editingNoteId){
-    payload.id=editingNoteId;
-  }
-
-  const {error} =
-    await db
-      .from("notas")
-      .upsert(payload);
-
-  if(error){
-
-    showAdminMessage(
-      "No se pudo guardar la nota: "+
-      error.message,
-      "error"
-    );
-
-    return;
-  }
-
-  showAdminMessage(
-    "Nota guardada correctamente."
-  );
-
-  clearNoteForm();
-
-  await loadNotes();
-
+function renderAll(){
+ renderSection("recargas","rechargesGrid");
+ renderSection("pasajes","ticketsGrid");
+ renderSection("remesas","remittancesGrid");
+ renderRates();
+ renderNotes();
+ renderOffers();
 }
 
-
-function editNote(id){
-
-  const item =
-    notes.find(
-      x=>Number(x.id)===Number(id)
-    );
-
-  if(!item) return;
-
-  editingNoteId=id;
-
-  document.getElementById("noteTitle").value =
-    item.titulo || "";
-
-  document.getElementById("noteContent").value =
-    item.contenido || "";
-
-}
-
-
-async function deleteNote(id){
-
-  if(!confirm("¿Eliminar esta nota?")){
-    return;
-  }
-
-  const {error} =
-    await db
-      .from("notas")
-      .delete()
-      .eq("id",id);
-
-  if(error){
-
-    showAdminMessage(
-      "No se pudo eliminar: "+
-      error.message,
-      "error"
-    );
-
-    return;
-  }
-
-  showAdminMessage(
-    "Nota eliminada."
-  );
-
-  await loadNotes();
-
-}
-
-
-function clearNoteForm(){
-
-  editingNoteId=null;
-
-  document.getElementById("noteTitle").value="";
-  document.getElementById("noteContent").value="";
-
-}
-
-
-/* =========================================================
-   SOLICITUDES
-========================================================= */
-
-async function submitRequest(){
-
-  const name =
-    document.getElementById("clientName").value.trim();
-
-  const phone =
-    document.getElementById("clientPhone").value.trim();
-
-  const service =
-    document.getElementById("serviceType").value;
-
-  const destination =
-    document
-      .getElementById("clientDestination")
-      .value
-      .trim();
-
-  const details =
-    document
-      .getElementById("clientDetails")
-      .value
-      .trim();
-
-  if(!name || !phone){
-
-    showRequestMessage(
-      "Escribe tu nombre y teléfono.",
-      "error"
-    );
-
-    return;
-  }
-
-  const {error} =
-    await db
-      .from("solicitudes")
-      .insert({
-
-        nombre_cliente:name,
-
-        telefono:phone,
-
-        tipo_servicio:service,
-
-        destino:destination,
-
-        detalles:details,
-
-        estado:"Pendiente"
-
-      });
-
-  if(error){
-
-    console.error(error);
-
-    showRequestMessage(
-      "No se pudo enviar la solicitud: "+
-      error.message,
-      "error"
-    );
-
-    return;
-  }
-
-  showRequestMessage(
-    "Solicitud enviada correctamente. Te contactaremos pronto.",
-    "success"
-  );
-
-  document.getElementById("clientName").value="";
-  document.getElementById("clientPhone").value="";
-  document.getElementById("clientDestination").value="";
-  document.getElementById("clientDetails").value="";
-
-}
-
-
-async function loadRequests(){
-
-  const {data,error} =
-    await db
-      .from("solicitudes")
-      .select("*")
-      .order("id",{ascending:false});
-
-  if(error){
-
-    console.error(error);
-
-    document.getElementById("requestsAdminList").innerHTML =
-      `<div class="empty">
-        No se pudieron cargar las solicitudes.
-      </div>`;
-
-    return;
-  }
-
-  requests=data || [];
-
-  renderRequests();
-
-}
-
-
-function renderRequests(){
-
-  const el =
-    document.getElementById("requestsAdminList");
-
-  if(!requests.length){
-
-    el.innerHTML =
-      `<div class="empty">
-        No hay solicitudes.
-      </div>`;
-
-    return;
-  }
-
-  el.innerHTML=`
-
-    <table>
-
-      <thead>
-
-        <tr>
-          <th>Cliente</th>
-          <th>Teléfono</th>
-          <th>Servicio</th>
-          <th>Destino</th>
-          <th>Estado</th>
-          <th>Acciones</th>
-        </tr>
-
-      </thead>
-
-      <tbody>
-
-        ${
-          requests.map(item=>`
-
-            <tr>
-
-              <td>
-                ${esc(item.nombre_cliente)}
-              </td>
-
-              <td>
-                ${esc(item.telefono)}
-              </td>
-
-              <td>
-                ${esc(item.tipo_servicio)}
-              </td>
-
-              <td>
-                ${esc(item.destino)}
-              </td>
-
-              <td>
-                <span class="status">
-                  ${esc(item.estado)}
-                </span>
-              </td>
-
-              <td>
-
-                <button
-                  class="btn btn-dark"
-                  onclick="completeRequest(${item.id})">
-                  Completar
-                </button>
-
-                <button
-                  class="btn btn-dark"
-                  onclick="deleteRequest(${item.id})">
-                  Eliminar
-                </button>
-
-              </td>
-
-            </tr>
-
-          `).join("")
-        }
-
-      </tbody>
-
-    </table>
-
-  `;
-
-}
-
-
-async function completeRequest(id){
-
-  const {error} =
-    await db
-      .from("solicitudes")
-      .update({
-        estado:"Completada"
-      })
-      .eq("id",id);
-
-  if(error){
-
-    showAdminMessage(
-      "No se pudo actualizar: "+
-      error.message,
-      "error"
-    );
-
-    return;
-  }
-
-  await loadRequests();
-
-  showAdminMessage(
-    "Solicitud actualizada."
-  );
-
-}
-
-
-async function deleteRequest(id){
-
-  if(!confirm("¿Eliminar esta solicitud?")){
-    return;
-  }
-
-  const {error} =
-    await db
-      .from("solicitudes")
-      .delete()
-      .eq("id",id);
-
-  if(error){
-
-    showAdminMessage(
-      "No se pudo eliminar: "+
-      error.message,
-      "error"
-    );
-
-    return;
-  }
-
-  await loadRequests();
-
-  showAdminMessage(
-    "Solicitud eliminada."
-  );
-
-}
-
-
-/* =========================================================
+/* =========================================
    CALCULADORA
-========================================================= */
+========================================= */
 
-function calculateExchange(){
+function calculate(){
+ const amount=Number($("calcAmount").value||0);
+ const rate=Number($("calcRate").value||0);
 
-  const amount =
-    Number(
-      document.getElementById("calcAmount").value || 0
-    );
-
-  const from =
-    document.getElementById("calcFrom").value;
-
-  const to =
-    document.getElementById("calcTo").value;
-
-  if(!amount){
-
-    document.getElementById("calcResult")
-      .textContent="—";
-
-    return;
-  }
-
-  /*
-    Las tasas almacenadas se interpretan como
-    valor de cada moneda respecto a CUP.
-  */
-
-  const ratesMap={
-
-    CUP:1,
-
-    RUB:Number(rates.RUB || 0),
-
-    USD:Number(rates.USD || 0),
-
-    EUR:Number(rates.EUR || 0),
-
-    GBP:Number(rates.GBP || 0),
-
-    MLC:Number(rates.MLC || 0)
-
-  };
-
-  if(!ratesMap[from] || !ratesMap[to]){
-
-    document.getElementById("calcResult")
-      .textContent="Tasa no disponible";
-
-    return;
-  }
-
-  const cup =
-    from==="CUP"
-      ? amount
-      : amount*ratesMap[from];
-
-  const result =
-    to==="CUP"
-      ? cup
-      : cup/ratesMap[to];
-
-  document.getElementById("calcResult")
-    .textContent =
-      money(result,to);
-
+ $("calcResult").textContent=
+ (amount*rate).toLocaleString("es-ES",{
+ maximumFractionDigits:4
+ });
 }
 
+/* =========================================
+   ADMINISTRADOR
+========================================= */
 
-/* =========================================================
-   OFERTA PRINCIPAL
-========================================================= */
+function login(){
+ if($("adminPassword").value===ADMIN_PASSWORD){
+ admin=true;
+ $("loginBox").classList.add("hidden");
+ $("dashboard").classList.remove("hidden");
 
-function updateOffer(){
+ loadAdminRequests();
+ renderAdminItems();
+ fillRatesEditor();
 
-  let offer=null;
-
-  if(recharges.length){
-
-    offer =
-      recharges
-        .slice()
-        .sort(
-          (a,b)=>
-            Number(a.precio||0)-
-            Number(b.precio||0)
-        )[0];
-
-    if(offer){
-
-      document.getElementById("offerTitle")
-        .textContent =
-          offer.nombre_plan || "Recarga";
-
-      document.getElementById("offerPrice")
-        .textContent =
-          money(offer.precio,offer.moneda);
-
-      return;
-    }
-
-  }
-
-  if(tickets.length){
-
-    offer =
-      tickets
-        .slice()
-        .sort(
-          (a,b)=>
-            Number(a.precio||0)-
-            Number(b.precio||0)
-        )[0];
-
-    if(offer){
-
-      document.getElementById("offerTitle")
-        .textContent =
-          `${offer.origen || ""} → ${offer.destino || ""}`;
-
-      document.getElementById("offerPrice")
-        .textContent =
-          money(offer.precio,offer.moneda);
-
-      return;
-    }
-
-  }
-
-  document.getElementById("offerTitle")
-    .textContent =
-      "Consulta nuestras ofertas";
-
-  document.getElementById("offerPrice")
-    .textContent =
-      "WhatsApp";
-
+ notify("Acceso concedido");
+ }else{
+ $("loginStatus").textContent="Contraseña incorrecta";
+ $("loginStatus").className="status err";
+ }
 }
 
-
-/* =========================================================
-   ADMIN DATA
-========================================================= */
-
-async function loadAdminData(){
-
-  await Promise.all([
-    loadRates(),
-    loadRecharges(),
-    loadTickets(),
-    loadRemittances(),
-    loadNotes(),
-    loadRequests()
-  ]);
-
+function logout(){
+ admin=false;
+ $("dashboard").classList.add("hidden");
+ $("loginBox").classList.remove("hidden");
+ $("adminPassword").value="";
+ notify("Sesión cerrada");
 }
 
+function fillRatesEditor(){
+ if(!data.config)return;
 
-/* =========================================================
-   CARGA INICIAL
-========================================================= */
-
-async function init(){
-
-  await Promise.all([
-    loadRates(),
-    loadRecharges(),
-    loadTickets(),
-    loadRemittances(),
-    loadNotes()
-  ]);
-
-  updateOffer();
-  calculateExchange();
-
+ $("rate_usd").value=data.config.tasa_usd??"";
+ $("rate_eur").value=data.config.tasa_eur??"";
+ $("rate_rub").value=data.config.tasa_rub??"";
+ $("rate_mlc").value=data.config.tasa_mlc??"";
+ $("rate_gbp").value=data.config.tasa_gbp??"";
 }
 
+async function saveRates(){
+ const c=data.config;
+
+ if(!c){
+ $("rateStatus").textContent="No existe un registro de configuración.";
+ return;
+ }
+
+ const payload={
+ tasa_usd:Number($("rate_usd").value),
+ tasa_eur:Number($("rate_eur").value),
+ tasa_rub:Number($("rate_rub").value),
+ tasa_mlc:Number($("rate_mlc").value),
+ tasa_gbp:Number($("rate_gbp").value),
+ fecha_actualizacion:new Date().toISOString()
+ };
+
+ const {error}=await db.from(TABLES.config)
+ .update(payload).eq("id",c.id);
+
+ if(error){
+ $("rateStatus").textContent=error.message;
+ $("rateStatus").className="status err";
+ return;
+ }
+
+ $("rateStatus").textContent="Tasas guardadas.";
+ $("rateStatus").className="status ok";
+
+ await refresh();
+ notify("Tasas actualizadas");
+}
+
+/* =========================================
+   GUARDAR CONTENIDO
+========================================= */
+
+function getContentPayload(type){
+ const title=$("itemTitle").value.trim();
+ const price=$("itemPrice").value.trim();
+ const description=$("itemDescription").value.trim();
+ const currency=$("itemCurrency").value.trim()||"RUB";
+
+ if(type==="recargas"){
+ return {
+ etiqueta:title,
+ nombre_plan:title,
+ precio:Number(price),
+ moneda:currency,
+ descripcion_1:description,
+ descripcion_2:"",
+ activo:true
+ };
+ }
+
+ if(type==="pasajes"){
+ return {
+ etiqueta:title,
+ tipo:"Internacional",
+ origen:$("ticketOrigin").value.trim(),
+ destino:$("ticketDestination").value.trim(),
+ fecha_salida:$("ticketDeparture").value||null,
+ fecha_regreso:$("ticketReturn").value||null,
+ precio:Number(price),
+ moneda:currency,
+ descripcion:description,
+ activo:true
+ };
+ }
+
+ if(type==="notas"){
+ return {
+ titulo:title,
+ contenido:description,
+ activo:true
+ };
+ }
+
+ /*
+ Para remesas se utiliza una tabla opcional
+ con estos campos si existe en el proyecto.
+ */
+ return {
+ titulo:title,
+ precio:price,
+ moneda:currency,
+ descripcion:description,
+ activo:true
+ };
+}
+
+async function saveItem(){
+ const type=$("itemType").value;
+ const title=$("itemTitle").value.trim();
+
+ if(!title){
+ $("editorStatus").textContent="Escribe un título.";
+ return;
+ }
+
+ const payload=getContentPayload(type);
+ const table=TABLES[type];
+
+ $("editorStatus").textContent="Guardando...";
+
+ let query=db.from(table);
+
+ let result;
+
+ if(editing){
+ result=await query.update(payload).eq("id",editing);
+ }else{
+ result=await query.insert(payload);
+ }
+
+ if(result.error){
+ $("editorStatus").textContent=result.error.message;
+ $("editorStatus").className="status err";
+ return;
+ }
+
+ resetEditor();
+ await refresh();
+
+ $("editorStatus").textContent="Guardado correctamente.";
+ $("editorStatus").className="status ok";
+
+ notify("Contenido actualizado");
+}
+
+function resetEditor(){
+ editing=null;
+ $("editingId").value="";
+ $("itemTitle").value="";
+ $("itemPrice").value="";
+ $("itemDescription").value="";
+ $("ticketOrigin").value="";
+ $("ticketDestination").value="";
+ $("ticketDeparture").value="";
+ $("ticketReturn").value="";
+ $("cancelEdit").textContent="Cancelar edición";
+}
+
+/* =========================================
+   LISTA DEL ADMINISTRADOR
+========================================= */
+
+function getTitle(item,type){
+ return item.nombre_plan ||
+ item.etiqueta ||
+ item.titulo ||
+ item.destino ||
+ "Registro";
+}
+
+function renderAdminItems(){
+ const types=["recargas","pasajes","notas","remesas"];
+
+ const all=types.flatMap(type=>
+ (data[type]||[]).map(item=>({...item,_type:type}))
+ );
+
+ $("adminItems").innerHTML=all.length
+ ?all.map(item=>`
+ <div class="admin-item">
+ <div>
+ <b>${escapeHTML(getTitle(item,item._type))}</b><br>
+ <span class="muted">${escapeHTML(item.precio??"")}</span>
+ </div>
+ <div style="display:flex;gap:5px">
+ <button class="smallbtn" data-edit="${item._type}|${item.id}">Editar</button>
+ <button class="smallbtn danger" data-delete="${item._type}|${item.id}">Eliminar</button>
+ </div>
+ </div>`).join("")
+ :'<span class="muted">No hay registros.</span>';
+}
+
+async function editItem(type,id){
+ const item=(data[type]||[]).find(x=>String(x.id)===String(id));
+ if(!item)return;
+
+ editing=id;
+ $("editingId").value=id;
+ $("itemType").value=type;
+ $("itemTitle").value=getTitle(item,type);
+ $("itemPrice").value=item.precio??"";
+ $("itemDescription").value=
+ item.descripcion||item.contenido||
+ item.descripcion_1||"";
+ $("itemCurrency").value=item.moneda||"RUB";
+
+ $("ticketOrigin").value=item.origen||"";
+ $("ticketDestination").value=item.destino||"";
+ $("ticketDeparture").value=item.fecha_salida||"";
+ $("ticketReturn").value=item.fecha_regreso||"";
+
+ $("editorStatus").textContent="Editando registro.";
+ $("itemType").dispatchEvent(new Event("change"));
+
+ $("itemTitle").scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+async function deleteItem(type,id){
+ if(!confirm("¿Eliminar este registro?"))return;
+
+ const {error}=await db.from(TABLES[type])
+ .delete().eq("id",id);
+
+ if(error){
+ notify("Error: "+error.message);
+ return;
+ }
+
+ await refresh();
+ notify("Registro eliminado");
+}
+
+/* =========================================
+   SOLICITUDES DE CLIENTES
+========================================= */
+
+async function submitRequest(e){
+ e.preventDefault();
+
+ const form=e.currentTarget;
+ const fd=new FormData(form);
+
+ const payload={
+ nombre_cliente:String(fd.get("nombre_cliente")).trim(),
+ telefono:String(fd.get("telefono")).trim(),
+ tipo_servicio:String(fd.get("tipo_servicio")),
+ destino:String(fd.get("destino")||"").trim(),
+ detalles:String(fd.get("detalles")||"").trim(),
+ estado:"pendiente"
+ };
+
+ $("requestStatus").textContent="Enviando...";
+
+ const {error}=await db.from(TABLES.solicitudes)
+ .insert(payload);
+
+ if(error){
+ $("requestStatus").textContent=error.message;
+ $("requestStatus").className="status err";
+ return;
+ }
+
+ form.reset();
+ $("requestStatus").textContent="Solicitud recibida correctamente.";
+ $("requestStatus").className="status ok";
+ notify("Solicitud enviada");
+}
+
+async function loadAdminRequests(){
+ const {data:rows,error}=await db
+ .from(TABLES.solicitudes)
+ .select("*")
+ .order("fecha_creacion",{ascending:false})
+ .limit(50);
+
+ if(error){
+ $("adminRequests").innerHTML=
+ '<span class="err">'+escapeHTML(error.message)+'</span>';
+ return;
+ }
+
+ $("adminRequests").innerHTML=rows.length
+ ?rows.map(r=>`
+ <div class="admin-item">
+ <div>
+ <b>${escapeHTML(r.nombre_cliente)}</b><br>
+ ${escapeHTML(r.tipo_servicio)} · ${escapeHTML(r.telefono)}<br>
+ <span class="muted">${escapeHTML(r.destino||"")} ${escapeHTML(r.detalles||"")}</span><br>
+ <span class="updated">${escapeHTML(formatDate(r.fecha_creacion))}</span>
+ </div>
+ <a class="smallbtn" href="https://wa.me/${String(r.telefono||"").replace(/\D/g,"")}" target="_blank">Responder</a>
+ </div>`).join("")
+ :'<span class="muted">No hay solicitudes todavía.</span>';
+}
+
+/* =========================================
+   INICIALIZACIÓN
+========================================= */
+
+function init(){
+
+ $("year").textContent=new Date().getFullYear();
+
+ $("calcAmount").addEventListener("input",calculate);
+ $("calcRate").addEventListener("input",calculate);
+
+ $("loginBtn").addEventListener("click",login);
+ $("adminPassword").addEventListener("keydown",e=>{
+ if(e.key==="Enter")login();
+ });
+
+ $("logoutBtn").addEventListener("click",logout);
+
+ $("saveRates").addEventListener("click",saveRates);
+ $("saveItem").addEventListener("click",saveItem);
+ $("cancelEdit").addEventListener("click",resetEditor);
+
+ $("requestForm").addEventListener("submit",submitRequest);
+
+ $("itemType").addEventListener("change",()=>{
+ $("ticketFields").classList.toggle(
+ "hidden",$("itemType").value!=="pasajes"
+ );
+ });
+
+ $("adminItems").addEventListener("click",e=>{
+ const edit=e.target.closest("[data-edit]");
+ const del=e.target.closest("[data-delete]");
+
+ if(edit){
+ const [type,id]=edit.dataset.edit.split("|");
+ editItem(type,id);
+ }
+
+ if(del){
+ const [type,id]=del.dataset.delete.split("|");
+ deleteItem(type,id);
+ }
+ });
+
+ if(!window.supabase){
+ setStatus("Error cargando Supabase","err");
+ return;
+ }
+
+ db=window.supabase.createClient(
+ SUPABASE_URL,
+ SUPABASE_KEY
+ );
+
+ refresh();
+
+ /*
+ Actualización automática cada 30 segundos.
+ */
+ setInterval(refresh,30000);
+}
 
 init();
-
-
-/* =========================================================
-   ACTUALIZACIÓN AUTOMÁTICA
-========================================================= */
-
-setInterval(async()=>{
-
-  await Promise.all([
-    loadRates(),
-    loadRecharges(),
-    loadTickets(),
-    loadRemittances(),
-    loadNotes()
-  ]);
-
-  updateOffer();
-  calculateExchange();
-
-},60000);
-
-
-/* =========================================================
-   DETECTAR CAMBIOS DE PESTAÑA
-========================================================= */
-
-document.addEventListener(
-  "visibilitychange",
-  async()=>{
-
-    if(!document.hidden){
-
-      await Promise.all([
-        loadRates(),
-        loadRecharges(),
-        loadTickets(),
-        loadRemittances(),
-        loadNotes()
-      ]);
-
-      updateOffer();
-      calculateExchange();
-
-    }
-
-  }
-);
-
 </script>
-
 </body>
 </html>
