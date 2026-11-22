@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -359,7 +360,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 <div class="overlay" id="adminModal">
  <div class="modal">
   <div class="modal-head"><h2><i class="fa-solid fa-screwdriver-wrench"></i> Panel de administración</h2><button class="close" type="button" onclick="closeModal('adminModal')">✕</button></div>
-  <div class="notice">Este panel facilita la edición desde el navegador. La contraseña escrita en el HTML no constituye seguridad real para datos sensibles. Configura las políticas RLS de Supabase y nunca pongas claves secretas de servicio en esta página.</div>
+  <div class="notice">La contraseña está conservada como solicitaste. Recuerda que una contraseña escrita en HTML puede ser vista por quien inspeccione el código. Configura las políticas RLS de Supabase y nunca pongas claves secretas de servicio en esta página.</div>
 
   <div class="admin-tabs">
    <button type="button" class="active" onclick="showAdminTab('ratesAdmin',this)">Tasas</button>
@@ -414,7 +415,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
    <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveTicket()">Guardar pasaje</button>
    <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearTicketForm()">Nuevo</button>
    <div class="admin-list" id="adminTicketList"></div>
-   <div class="notice">Si la tabla pasajes aún no existe, ejecuta el SQL de instalación que aparece después del código en Supabase → SQL Editor.</div>
+   <div class="notice">Si la tabla pasajes aún no existe, créala en Supabase antes de guardar pasajes.</div>
   </div>
 
   <div class="admin-panel" id="requestsAdmin">
@@ -458,16 +459,22 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 const SUPABASE_URL = "https://lwgeillycitljubenzhv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_LaA2IPL1J_IWAH0CVMUcBQ_j-BZa2pe";
 const ADMIN_PASSWORD = "MI_CLAVE_SECRETA";
+
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-// Acceso seguro a los elementos HTML por su ID.
-// Evita depender de variables globales creadas automáticamente por el navegador.
+// ELEMENTOS HTML
 const $ = id => document.getElementById(id);
 
 let rates = {USD:0,EUR:0,RUB:0,MLC:0,GBP:0};
 let rechargeData = [];
 let ticketData = [];
 let requestData = [];
+
+// CONTROL DE ACTUALIZACIONES AUTOMÁTICAS
+let realtimeChannel = null;
+let pollingTimer = null;
+let refreshInProgress = false;
+let refreshAgain = false;
 
 $("year").textContent = new Date().getFullYear();
 $("adDate").value = new Date().toISOString().slice(0,10);
@@ -483,7 +490,6 @@ document.querySelectorAll(".navlinks a").forEach(a=>{
  });
 });
 
-// Cierra el menú móvil después de pulsar un enlace interno.
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
  a.addEventListener("click",()=>{
   const target = $(a.getAttribute("href").slice(1));
@@ -519,14 +525,12 @@ $("adminPassword").addEventListener("keydown",e=>{
  if(e.key==="Enter")login();
 });
 
-// Cerrar modal al tocar fuera de su contenido.
 ["loginModal","adminModal"].forEach(id=>{
  $(id).addEventListener("click",e=>{
   if(e.target === $(id))closeModal(id);
  });
 });
 
-// Cerrar modal con Escape.
 document.addEventListener("keydown",e=>{
  if(e.key==="Escape"){
   closeModal("loginModal");
@@ -562,12 +566,143 @@ function showError(msg){
 
 // CARGA GENERAL
 async function loadAll(){
- await Promise.all([loadRates(),loadRecharges(),loadTickets()]);
+ await Promise.all([
+  loadRates(),
+  loadRecharges(),
+  loadTickets()
+ ]);
 }
+
+// ACTUALIZACIÓN AUTOMÁTICA
+async function refreshLiveData(){
+ if(refreshInProgress){
+  refreshAgain = true;
+  return;
+ }
+
+ refreshInProgress = true;
+
+ try{
+  await Promise.all([
+   loadRates(),
+   loadRecharges(),
+   loadTickets()
+  ]);
+
+  // Si el panel está abierto, actualiza también sus listas.
+  if($("adminModal").classList.contains("show")){
+   renderAdminRecharges();
+   renderAdminTickets();
+   await loadRequests();
+  }
+
+ }catch(error){
+  console.error("Error actualizando los datos:",error);
+ }finally{
+  refreshInProgress = false;
+
+  if(refreshAgain){
+   refreshAgain = false;
+   refreshLiveData();
+  }
+ }
+}
+
+// CONEXIÓN SUPABASE REALTIME
+function startLiveUpdates(){
+
+ if(realtimeChannel){
+  db.removeChannel(realtimeChannel);
+  realtimeChannel = null;
+ }
+
+ realtimeChannel = db.channel("your-bridge-home-live")
+
+  .on(
+   "postgres_changes",
+   {
+    event:"*",
+    schema:"public",
+    table:"configuracion"
+   },
+   ()=>refreshLiveData()
+  )
+
+  .on(
+   "postgres_changes",
+   {
+    event:"*",
+    schema:"public",
+    table:"planes_recargas"
+   },
+   ()=>refreshLiveData()
+  )
+
+  .on(
+   "postgres_changes",
+   {
+    event:"*",
+    schema:"public",
+    table:"pasajes"
+   },
+   ()=>refreshLiveData()
+  )
+
+  .on(
+   "postgres_changes",
+   {
+    event:"*",
+    schema:"public",
+    table:"solicitudes"
+   },
+   ()=>{
+    if($("adminModal").classList.contains("show")){
+     loadRequests();
+    }
+   }
+  )
+
+  .subscribe(status=>{
+   console.log("Estado Supabase Realtime:",status);
+
+   if(status==="SUBSCRIBED"){
+    console.log("YOUR BRIDGE HOME conectado en tiempo real.");
+   }
+
+   if(status==="CHANNEL_ERROR" || status==="TIMED_OUT"){
+    console.warn("Realtime no está disponible. Se mantiene la actualización automática de respaldo.");
+   }
+  });
+
+ // RESPALDO: CONSULTA CADA 30 SEGUNDOS.
+ if(pollingTimer){
+  clearInterval(pollingTimer);
+ }
+
+ pollingTimer=setInterval(()=>{
+  if(document.visibilityState==="visible"){
+   refreshLiveData();
+  }
+ },30000);
+}
+
+// ACTUALIZAR AL REGRESAR A LA PÁGINA
+document.addEventListener("visibilitychange",()=>{
+ if(document.visibilityState==="visible"){
+  refreshLiveData();
+ }
+});
+
+window.addEventListener("focus",()=>{
+ refreshLiveData();
+});
 
 // TASAS
 async function loadRates(){
- const {data,error}=await db.from("configuracion").select("*").eq("id",1).maybeSingle();
+ const {data,error}=await db.from("configuracion")
+  .select("*")
+  .eq("id",1)
+  .maybeSingle();
 
  if(error){
   showError(error);
@@ -595,6 +730,7 @@ async function loadRates(){
 
 function renderRates(){
  const names=["USD","EUR","RUB","MLC","GBP"];
+
  $("ratesList").innerHTML=names.map(n=>`
   <div class="rate">
    <span>${n}</span>
@@ -602,6 +738,8 @@ function renderRates(){
    <span>CUP</span>
   </div>
  `).join("");
+
+ calculate();
 }
 
 async function saveRates(){
@@ -614,7 +752,8 @@ async function saveRates(){
   fecha_actualizacion:new Date().toISOString()
  };
 
- const {error}=await db.from("configuracion").upsert({id:1,...vals});
+ const {error}=await db.from("configuracion")
+  .upsert({id:1,...vals});
 
  if(error){
   alert("No se pudieron guardar las tasas: "+error.message);
@@ -622,7 +761,7 @@ async function saveRates(){
  }
 
  alert("Tasas actualizadas.");
- await loadRates();
+ await refreshLiveData();
 }
 
 // CALCULADORA
@@ -650,7 +789,6 @@ function calculate(){
   `${amount} ${from} = ${result.toLocaleString("es-ES",{maximumFractionDigits:2})} ${to}`;
 }
 
-// Permite recalcular al cambiar los valores.
 ["calcAmount","calcFrom","calcTo"].forEach(id=>{
  $(id).addEventListener("change",calculate);
 });
@@ -658,7 +796,9 @@ function calculate(){
 // RECARGAS
 async function loadRecharges(){
  const {data,error}=await db.from("planes_recargas")
-  .select("*").eq("activo",true).order("id");
+  .select("*")
+  .eq("activo",true)
+  .order("id");
 
  if(error){
   $("rechargesList").innerHTML='<div class="empty">No se pudieron cargar las recargas.</div>';
@@ -695,15 +835,19 @@ function requestRecharge(index){
  if(!item)return;
 
  openRequest("Recarga");
+
  $("clientDetails").value=
   `Estoy interesado en el plan: ${item.nombre_plan}. Precio publicado: ${money(item.precio,item.moneda||"RUB")}.`;
+
  $("solicitud").scrollIntoView({behavior:"smooth"});
 }
 
 // PASAJES
 async function loadTickets(){
  const {data,error}=await db.from("pasajes")
-  .select("*").eq("activo",true).order("fecha_salida",{ascending:true});
+  .select("*")
+  .eq("activo",true)
+  .order("fecha_salida",{ascending:true});
 
  if(error){
   $("ticketsList").innerHTML='<div class="empty">Los pasajes estarán disponibles cuando se configure la tabla correspondiente en Supabase.</div>';
@@ -747,17 +891,18 @@ function requestTicket(index){
  const service=t.tipo==="Avión"?"Pasaje de avión":"Autobús o tren";
 
  openRequest(service);
+
  $("clientDestination").value=t.destino||"";
+
  $("clientDetails").value=
   `Pasaje: ${t.origen} → ${t.destino}. Tipo: ${t.tipo}. Salida: ${t.fecha_salida||"Por confirmar"}. Regreso: ${t.fecha_regreso||"No indicado"}. Precio publicado: ${money(t.precio,t.moneda)}.`;
+
  $("solicitud").scrollIntoView({behavior:"smooth"});
 }
 
 // FORMULARIO DE SOLICITUD
 function openRequest(service){
  $("clientService").value=service;
-
- // Si se abre desde un botón de servicio, lleva directamente al formulario.
  $("solicitud").scrollIntoView({behavior:"smooth"});
  setTimeout(()=>$("clientName").focus({preventScroll:true}),500);
 }
@@ -820,6 +965,7 @@ function clearRechargeForm(){
  ["rechargeId","rechargeLabel","rechargeName","rechargePrice","rechargeDesc1","rechargeDesc2"].forEach(id=>{
   $(id).value="";
  });
+
  $("rechargeCurrency").value="RUB";
 }
 
@@ -869,21 +1015,23 @@ async function saveRecharge(){
 
  alert("Plan guardado.");
  clearRechargeForm();
- await loadRecharges();
+ await refreshLiveData();
  renderAdminRecharges();
 }
 
 async function deleteRecharge(id){
  if(!confirm("¿Eliminar este plan?"))return;
 
- const {error}=await db.from("planes_recargas").delete().eq("id",id);
+ const {error}=await db.from("planes_recargas")
+  .delete()
+  .eq("id",id);
 
  if(error){
   alert("No se pudo eliminar: "+error.message);
   return;
  }
 
- await loadRecharges();
+ await refreshLiveData();
  renderAdminRecharges();
 }
 
@@ -964,28 +1112,32 @@ async function saveTicket(){
 
  alert("Pasaje guardado.");
  clearTicketForm();
- await loadTickets();
+ await refreshLiveData();
  renderAdminTickets();
 }
 
 async function deleteTicket(id){
  if(!confirm("¿Eliminar este pasaje?"))return;
 
- const {error}=await db.from("pasajes").delete().eq("id",id);
+ const {error}=await db.from("pasajes")
+  .delete()
+  .eq("id",id);
 
  if(error){
   alert("No se pudo eliminar: "+error.message);
   return;
  }
 
- await loadTickets();
+ await refreshLiveData();
  renderAdminTickets();
 }
 
 // SOLICITUDES
 async function loadRequests(){
  const {data,error}=await db.from("solicitudes")
-  .select("*").order("fecha_creacion",{ascending:false}).limit(100);
+  .select("*")
+  .order("fecha_creacion",{ascending:false})
+  .limit(100);
 
  if(error){
   $("adminRequestsList").innerHTML='<p class="mini">No se pudieron cargar las solicitudes.</p>';
@@ -1012,7 +1164,8 @@ async function loadRequests(){
 
 async function completeRequest(id){
  const {error}=await db.from("solicitudes")
-  .update({estado:"Completada"}).eq("id",id);
+  .update({estado:"Completada"})
+  .eq("id",id);
 
  if(error){
   alert("No se pudo actualizar: "+error.message);
@@ -1025,7 +1178,9 @@ async function completeRequest(id){
 async function deleteRequest(id){
  if(!confirm("¿Eliminar solicitud?"))return;
 
- const {error}=await db.from("solicitudes").delete().eq("id",id);
+ const {error}=await db.from("solicitudes")
+  .delete()
+  .eq("id",id);
 
  if(error){
   alert("No se pudo eliminar: "+error.message);
@@ -1036,7 +1191,6 @@ async function deleteRequest(id){
 }
 
 // GENERADOR DE IMÁGENES PROMOCIONALES
-// Se genera en el navegador, sin guardar imágenes en Supabase.
 function generateAd(){
  const canvas=$("adCanvas");
  const ctx=canvas.getContext("2d");
@@ -1164,6 +1318,7 @@ function wrapCanvas(ctx,text,x,y,maxWidth,lineHeight){
 
  for(let n=0;n<words.length;n++){
   const test=line+words[n]+" ";
+
   if(ctx.measureText(test).width>maxWidth&&n>0){
    ctx.fillText(line.trim(),x,yy);
    line=words[n]+" ";
@@ -1218,10 +1373,13 @@ function copyAdText(){
  }
 }
 
-// Dibuja una vista inicial del generador.
+// DIBUJAR VISTA INICIAL DEL GENERADOR
 generateAd();
 
-// CARGA INICIAL DE INFORMACIÓN
+// INICIAR ACTUALIZACIONES AUTOMÁTICAS
+startLiveUpdates();
+
+// CARGA INICIAL
 loadAll();
 </script>
 </body>
