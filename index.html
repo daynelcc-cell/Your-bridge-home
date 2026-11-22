@@ -1,1457 +1,2626 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0759c7">
-<meta name="description" content="YOUR BRIDGE HOME: recargas, remesas, boletos y servicios internacionales.">
+<meta name="description" content="YOUR BRIDGE HOME — Tu puente al mundo. Recargas, remesas, boletos y servicios internacionales.">
 <title>YOUR BRIDGE HOME | Tu puente al mundo</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
-:root {
-  --blue: #0759c7;
-  --navy: #071b38;
-  --gold: #f3bd4b;
-  --white: #ffffff;
-  --bg: #f3f7fc;
-  --text: #15243b;
-  --muted: #68778c;
-  --border: #e3eaf3;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
-button, input, textarea, select {
-  font: inherit;
-}
-button {
-  cursor: pointer;
-  border: 0;
-  border-radius: 10px;
-  padding: 12px 17px;
-  background: var(--blue);
-  color: white;
-  font-weight: bold;
-}
-button:hover { opacity: .9; }
-a { text-decoration: none; }
-
-header {
-  background: linear-gradient(120deg, var(--navy), var(--blue));
-  color: white;
-  padding: 17px 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.logo {
-  font-size: 23px;
-  font-weight: 900;
-}
-.logo span { color: var(--gold); }
-.header-contact { font-size: 14px; }
-
-nav {
-  background: white;
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-}
-.nav-inner {
-  max-width: 1150px;
-  margin: auto;
-  padding: 9px 15px;
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-}
-.nav-inner button {
-  background: transparent;
-  color: var(--text);
-  white-space: nowrap;
-}
-.nav-inner button.active {
-  background: #eaf2ff;
-  color: var(--blue);
+:root{
+  --primary:#0759c7;
+  --primary2:#0b7cff;
+  --dark:#06101f;
+  --dark2:#0b1930;
+  --gold:#f4c542;
+  --white:#fff;
+  --text:#172033;
+  --muted:#697386;
+  --bg:#f4f7fb;
+  --card:#fff;
+  --border:#e4eaf2;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --shadow:0 12px 35px rgba(7,32,70,.10);
+  --radius:20px;
 }
 
-main {
-  max-width: 1150px;
-  margin: 25px auto;
-  padding: 0 16px;
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
-.hero {
-  background: linear-gradient(120deg, #071b38ee, #0759c7dd);
-  color: white;
-  border-radius: 23px;
-  padding: 35px 27px;
-  min-height: 245px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.hero h1 {
-  font-size: clamp(28px, 5vw, 45px);
-  margin: 10px 0;
-}
-.hero p {
-  max-width: 650px;
-  line-height: 1.6;
-  font-size: 17px;
-}
-.gold { color: var(--gold); }
 
-.section-title {
-  margin: 30px 0 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
+html{
+  scroll-behavior:smooth;
 }
-.section-title h2 { margin: 0; }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 16px;
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
 }
-.card {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 17px;
-  overflow: hidden;
-  box-shadow: 0 6px 22px #102d500c;
-}
-.card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-}
-.card-body { padding: 17px; }
-.card h3 { margin-top: 0; }
-.price {
-  color: var(--blue);
-  font-size: 24px;
-  font-weight: 900;
-  margin: 12px 0;
-}
-.tag {
-  display: inline-block;
-  background: #eaf2ff;
-  color: var(--blue);
-  padding: 6px 10px;
-  border-radius: 30px;
-  font-size: 12px;
-  font-weight: bold;
-}
-.promo {
-  background: #fff7e5;
-  border: 1px solid #f3d99b;
-  border-radius: 15px;
-  padding: 17px;
-  margin-top: 20px;
-}
-.panel {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 17px;
-  padding: 20px;
-  margin: 18px 0;
-}
-.field {
-  display: grid;
-  gap: 7px;
-  margin: 12px 0;
-}
-.field label {
-  font-size: 13px;
-  font-weight: bold;
-}
-.field input, .field textarea, .field select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #cfd9e6;
-  border-radius: 9px;
-  background: white;
-}
-.field textarea { min-height: 95px; }
-.row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
-}
-.hidden { display: none !important; }
-.notice {
-  padding: 13px;
-  border-radius: 10px;
-  margin: 12px 0;
-  background: #eef5ff;
-}
-.error { background: #fff0ef; color: #9c241c; }
-.success { background: #eaf8f0; color: #176b3c; }
 
-footer {
-  background: var(--navy);
-  color: white;
-  text-align: center;
-  padding: 28px 15px;
-  margin-top: 45px;
+button,
+input,
+textarea,
+select{
+  font:inherit;
 }
-.whatsapp {
-  position: fixed;
-  right: 17px;
-  bottom: 17px;
-  z-index: 20;
-  background: #168b55;
-  color: white;
-  padding: 14px 18px;
-  border-radius: 40px;
-  font-weight: bold;
-  box-shadow: 0 5px 18px #0003;
+
+button{
+  cursor:pointer;
 }
-@media(max-width:600px) {
-  header { align-items: flex-start; }
-  .hero { padding: 25px 19px; }
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+  background:#031021;
+  color:#fff;
+  padding:8px 20px;
+  font-size:13px;
+}
+
+.topbar-inner{
+  max-width:1250px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.top-contact{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+.languages{
+  display:flex;
+  gap:5px;
+}
+
+.languages button{
+  border:1px solid rgba(255,255,255,.25);
+  background:transparent;
+  color:#fff;
+  padding:4px 9px;
+  border-radius:7px;
+  font-size:12px;
+}
+
+.languages button.active{
+  background:var(--primary2);
+  border-color:var(--primary2);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+
+.navbar{
+  max-width:1250px;
+  margin:auto;
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:10px 20px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:max-content;
+}
+
+.logo{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:linear-gradient(135deg,var(--primary),var(--primary2));
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:22px;
+  font-weight:900;
+  box-shadow:0 8px 20px rgba(7,89,199,.25);
+}
+
+.brand-text strong{
+  display:block;
+  font-size:17px;
+  letter-spacing:.5px;
+}
+
+.brand-text span{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+}
+
+nav{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+nav a{
+  padding:10px 12px;
+  border-radius:10px;
+  font-size:14px;
+  font-weight:700;
+  color:#344054;
+}
+
+nav a:hover,
+nav a.active{
+  color:var(--primary);
+  background:#eef5ff;
+}
+
+.menu-btn{
+  display:none;
+  border:0;
+  background:#eef5ff;
+  color:var(--primary);
+  padding:10px 13px;
+  border-radius:10px;
+  font-size:20px;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 80% 20%,rgba(11,124,255,.35),transparent 30%),
+    linear-gradient(135deg,#041226,#0759c7 65%,#0b7cff);
+  color:#fff;
+}
+
+.hero-inner{
+  max-width:1250px;
+  margin:auto;
+  min-height:540px;
+  padding:70px 20px;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  align-items:center;
+  gap:50px;
+}
+
+.hero h1{
+  font-size:clamp(38px,6vw,72px);
+  line-height:.98;
+  margin-bottom:22px;
+  letter-spacing:-2px;
+}
+
+.hero h1 span{
+  color:var(--gold);
+}
+
+.hero p{
+  font-size:18px;
+  max-width:650px;
+  color:rgba(255,255,255,.88);
+  margin-bottom:30px;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.btn{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  border:0;
+  padding:13px 20px;
+  border-radius:12px;
+  font-weight:800;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.btn-primary{
+  background:var(--gold);
+  color:#111827;
+}
+
+.btn-white{
+  background:#fff;
+  color:var(--primary);
+}
+
+.btn-blue{
+  background:var(--primary);
+  color:#fff;
+}
+
+.btn-danger{
+  background:var(--danger);
+  color:#fff;
+}
+
+.btn-success{
+  background:var(--success);
+  color:#fff;
+}
+
+.hero-card{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.2);
+  backdrop-filter:blur(15px);
+  border-radius:26px;
+  padding:25px;
+  box-shadow:0 25px 60px rgba(0,0,0,.2);
+}
+
+.hero-card h3{
+  margin-bottom:18px;
+}
+
+.hero-stat{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 0;
+  border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.hero-stat:last-child{
+  border-bottom:0;
+}
+
+.hero-stat strong{
+  font-size:20px;
+  color:var(--gold);
+}
+
+/* =========================
+   ANNOUNCEMENT
+========================= */
+
+.announcement{
+  background:#fff;
+  border-bottom:1px solid var(--border);
+}
+
+.announcement-inner{
+  max-width:1250px;
+  margin:auto;
+  padding:15px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  text-align:center;
+}
+
+.announcement-label{
+  background:var(--primary);
+  color:#fff;
+  padding:6px 10px;
+  border-radius:8px;
+  font-size:11px;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+#announcementText{
+  font-weight:800;
+  color:#182230;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section{
+  padding:75px 20px;
+}
+
+.container{
+  max-width:1250px;
+  margin:auto;
+}
+
+.section-head{
+  text-align:center;
+  max-width:760px;
+  margin:0 auto 40px;
+}
+
+.section-head .eyebrow{
+  color:var(--primary);
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:1.5px;
+  font-weight:900;
+}
+
+.section-head h2{
+  font-size:clamp(28px,4vw,44px);
+  margin:8px 0 12px;
+}
+
+.section-head p{
+  color:var(--muted);
+}
+
+/* =========================
+   SERVICES
+========================= */
+
+.services-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.service-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:25px;
+  box-shadow:var(--shadow);
+  transition:.25s;
+}
+
+.service-card:hover{
+  transform:translateY(-5px);
+  border-color:#c9dcfa;
+}
+
+.service-icon{
+  width:54px;
+  height:54px;
+  display:grid;
+  place-items:center;
+  border-radius:15px;
+  background:#edf5ff;
+  font-size:27px;
+  margin-bottom:17px;
+}
+
+.service-card h3{
+  margin-bottom:7px;
+}
+
+.service-card p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* =========================
+   OFFERS
+========================= */
+
+.offers{
+  background:#eef4fb;
+}
+
+.offer-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+.offer-card{
+  position:relative;
+  background:#fff;
+  border-radius:24px;
+  overflow:hidden;
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+}
+
+.offer-top{
+  padding:25px;
+  background:linear-gradient(135deg,#0759c7,#0b7cff);
+  color:#fff;
+}
+
+.offer-card:nth-child(2) .offer-top{
+  background:linear-gradient(135deg,#111827,#243b64);
+}
+
+.offer-card:nth-child(3) .offer-top{
+  background:linear-gradient(135deg,#a86c00,#e5a817);
+}
+
+.offer-icon{
+  font-size:35px;
+  margin-bottom:10px;
+}
+
+.offer-top h3{
+  font-size:23px;
+}
+
+.offer-body{
+  padding:23px;
+}
+
+.offer-price{
+  font-size:30px;
+  font-weight:900;
+  color:var(--primary);
+  margin:10px 0;
+}
+
+.offer-detail{
+  color:var(--muted);
+  margin-bottom:18px;
+  min-height:48px;
+}
+
+.offer-btn{
+  width:100%;
+}
+
+/* =========================
+   DESTINATIONS
+========================= */
+
+.destination-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.destination{
+  min-height:230px;
+  border-radius:20px;
+  padding:22px;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  overflow:hidden;
+  position:relative;
+  background:linear-gradient(135deg,#0759c7,#0b7cff);
+}
+
+.destination::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(transparent,rgba(0,0,0,.65));
+}
+
+.destination > *{
+  position:relative;
+  z-index:1;
+}
+
+.destination h3{
+  font-size:23px;
+}
+
+/* =========================
+   INFORMATION
+========================= */
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.info-card{
+  background:#fff;
+  border:1px solid var(--border);
+  padding:25px;
+  border-radius:20px;
+  box-shadow:var(--shadow);
+}
+
+.info-card h3{
+  margin-bottom:10px;
+}
+
+.info-card p,
+.info-card li{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.info-card ul{
+  padding-left:20px;
+}
+
+/* =========================
+   FEEDBACK
+========================= */
+
+.feedback{
+  background:#06101f;
+  color:#fff;
+}
+
+.feedback .section-head p{
+  color:#b9c5d7;
+}
+
+.feedback-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
+
+.form-card{
+  background:#fff;
+  color:var(--text);
+  padding:25px;
+  border-radius:22px;
+}
+
+.form-group{
+  margin-bottom:15px;
+}
+
+.form-group label{
+  display:block;
+  font-weight:700;
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px;
+  outline:none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px rgba(7,89,199,.1);
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+/* =========================
+   ADMIN
+========================= */
+
+.admin-section{
+  background:#eef4fb;
+}
+
+.admin-login{
+  max-width:520px;
+  margin:auto;
+  background:#fff;
+  padding:30px;
+  border-radius:22px;
+  box-shadow:var(--shadow);
+}
+
+.admin-panel{
+  display:none;
+}
+
+.admin-panel.active{
+  display:block;
+}
+
+.admin-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
+
+.admin-box{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:22px;
+}
+
+.admin-box.full{
+  grid-column:1/-1;
+}
+
+.admin-box h3{
+  margin-bottom:15px;
+}
+
+.admin-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.edit-list{
+  display:grid;
+  gap:12px;
+}
+
+.edit-row{
+  display:grid;
+  grid-template-columns:170px 1fr;
+  gap:10px;
+  align-items:center;
+}
+
+.edit-row label{
+  font-weight:700;
+  font-size:13px;
+}
+
+.edit-row input,
+.edit-row textarea{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:9px;
+  padding:10px;
+}
+
+.small-note{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:10px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+  background:#020914;
+  color:#fff;
+  padding:50px 20px 25px;
+}
+
+.footer-grid{
+  max-width:1250px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:35px;
+}
+
+footer h3,
+footer h4{
+  margin-bottom:12px;
+}
+
+footer p,
+footer li{
+  color:#aab6c8;
+  font-size:14px;
+}
+
+footer ul{
+  list-style:none;
+  display:grid;
+  gap:8px;
+}
+
+.footer-bottom{
+  max-width:1250px;
+  margin:35px auto 0;
+  padding-top:20px;
+  border-top:1px solid rgba(255,255,255,.1);
+  color:#8290a5;
+  font-size:12px;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+
+/* =========================
+   WHATSAPP
+========================= */
+
+.whatsapp{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:#25d366;
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:30px;
+  z-index:1100;
+  box-shadow:0 10px 25px rgba(37,211,102,.35);
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,120px);
+  background:#111827;
+  color:#fff;
+  padding:13px 20px;
+  border-radius:12px;
+  z-index:3000;
+  transition:.3s;
+  opacity:0;
+}
+
+.toast.show{
+  transform:translate(-50%,0);
+  opacity:1;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.65);
+  z-index:2500;
+  padding:20px;
+  overflow:auto;
+}
+
+.modal.active{
+  display:grid;
+  place-items:center;
+}
+
+.modal-box{
+  background:#fff;
+  width:min(700px,100%);
+  border-radius:22px;
+  padding:25px;
+  position:relative;
+}
+
+.close-modal{
+  position:absolute;
+  right:15px;
+  top:15px;
+  border:0;
+  background:#eef2f7;
+  border-radius:50%;
+  width:35px;
+  height:35px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+  .services-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .destination-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .footer-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero-inner{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:760px){
+  .top-contact{
+    display:none;
+  }
+
+  .navbar{
+    min-height:65px;
+  }
+
+  nav{
+    display:none;
+    position:absolute;
+    top:65px;
+    left:0;
+    right:0;
+    background:#fff;
+    border-bottom:1px solid var(--border);
+    padding:10px 20px;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  nav.open{
+    display:flex;
+  }
+
+  nav a{
+    text-align:center;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .services-grid,
+  .offer-grid,
+  .destination-grid,
+  .info-grid,
+  .feedback-grid,
+  .admin-grid{
+    grid-template-columns:1fr;
+  }
+
+  .admin-box.full{
+    grid-column:auto;
+  }
+
+  .edit-row{
+    grid-template-columns:1fr;
+  }
+
+  .footer-grid{
+    grid-template-columns:1fr;
+  }
+
+  section{
+    padding:55px 16px;
+  }
+
+  .hero-inner{
+    padding:55px 16px;
+  }
+
+  .hero h1{
+    font-size:44px;
+  }
+
+  .announcement-inner{
+    flex-direction:column;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div>
-    <div class="logo">YOUR <span>BRIDGE</span> HOME</div>
-    <div>Tu puente al mundo</div>
+<!-- =========================
+     TOP BAR
+========================= -->
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="top-contact">
+      <span>📞 <span id="topPhone">+7904-631-95-65</span></span>
+      <span>👤 Daynel Caminero — Administrador</span>
+    </div>
+
+    <div class="languages">
+      <button class="active" onclick="setLanguage('es')">ES</button>
+      <button onclick="setLanguage('en')">EN</button>
+      <button onclick="setLanguage('ru')">RU</button>
+    </div>
   </div>
-  <div class="header-contact">
-    Daynel Caminero · Administrador<br>
-    WhatsApp: +7 904 631 95 65
+</div>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+  <div class="navbar">
+
+    <a href="#inicio" class="brand">
+      <div class="logo">YB</div>
+
+      <div class="brand-text">
+        <strong id="brandName">YOUR BRIDGE HOME</strong>
+        <span id="brandSlogan">Tu puente al mundo</span>
+      </div>
+    </a>
+
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <nav id="mainNav">
+      <a href="#inicio">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#ofertas">Ofertas</a>
+      <a href="#destinos">Destinos</a>
+      <a href="#informacion">Información</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#administracion">Administración</a>
+    </nav>
+
   </div>
 </header>
 
-<nav>
-  <div class="nav-inner" id="navigation">
-    <button class="active" data-page="inicio">Inicio</button>
-    <button data-page="servicios">Servicios</button>
-    <button data-page="tasas">Tasas</button>
-    <button data-page="solicitud">Solicitar servicio</button>
-    <button data-page="seguimiento">Seguimiento</button>
-    <button data-page="administracion">Administración</button>
+<!-- =========================
+     ANNOUNCEMENT
+========================= -->
+
+<div class="announcement">
+  <div class="announcement-inner">
+    <span class="announcement-label">Oferta</span>
+    <span id="announcementText">
+      🔥 Internet + desde 350 ₽ — 2 GB LTE + 300 MB.cu
+    </span>
   </div>
-</nav>
+</div>
 
-<main>
-  <div id="message" class="notice hidden"></div>
+<!-- =========================
+     HERO
+========================= -->
 
-  <section id="inicio">
-    <div class="hero" id="hero">
-      <span class="tag">SERVICIOS INTERNACIONALES</span>
-      <h1 id="heroTitle">Conectamos tus planes con el mundo</h1>
-      <p id="heroText">
-        Recargas, remesas, boletos aéreos y soluciones para tu familia.
-      </p>
-      <div>
-        <a class="tag" href="https://wa.me/79046319565"
-           target="_blank" rel="noopener">Contactar por WhatsApp</a>
+<section class="hero" id="inicio">
+
+  <div class="hero-inner">
+
+    <div>
+      <div class="eyebrow" style="color:#f4c542;font-weight:900;margin-bottom:12px;">
+        YOUR BRIDGE HOME
       </div>
-    </div>
 
-    <div class="promo">
-      <strong>OFERTAS DESTACADAS</strong>
-      <p id="promoText">Consulta nuestras ofertas disponibles.</p>
-    </div>
+      <h1>
+        Tu puente<br>
+        <span>al mundo.</span>
+      </h1>
 
-    <div class="section-title">
-      <h2>Ofertas y servicios</h2>
-    </div>
-    <div class="grid" id="homeCards"></div>
-  </section>
+      <p id="heroDescription">
+        Recargas, remesas, boletos aéreos y soluciones internacionales
+        en un solo lugar.
+      </p>
 
-  <section id="servicios" class="hidden">
-    <div class="section-title"><h2>Nuestros servicios</h2></div>
-    <div class="grid" id="serviceCards"></div>
-  </section>
+      <div class="hero-actions">
+        <a href="#ofertas" class="btn btn-primary">
+          Ver ofertas
+        </a>
 
-  <section id="tasas" class="hidden">
-    <div class="section-title"><h2>Tasas de referencia</h2></div>
-    <div class="grid" id="rateCards"></div>
-  </section>
-
-  <section id="solicitud" class="hidden">
-    <div class="panel">
-      <h2>Solicitar un servicio</h2>
-      <p>Completa tus datos para enviar una solicitud.</p>
-      <form id="requestForm">
-        <div class="row">
-          <div class="field">
-            <label>Nombre</label>
-            <input name="name" required maxlength="100">
-          </div>
-          <div class="field">
-            <label>Teléfono / WhatsApp</label>
-            <input name="phone" required maxlength="40">
-          </div>
-        </div>
-        <div class="field">
-          <label>Servicio</label>
-          <select name="service" required>
-            <option value="">Selecciona un servicio</option>
-            <option>Recarga</option>
-            <option>Remesa</option>
-            <option>Boleto aéreo</option>
-            <option>Otro servicio</option>
-          </select>
-        </div>
-        <div class="field">
-          <label>Detalles</label>
-          <textarea name="details" required></textarea>
-        </div>
-        <div class="field">
-          <label>Adjuntar fotos o PDF (opcional)</label>
-          <input name="files" type="file" accept="image/*,.pdf" multiple>
-        </div>
-        <button type="submit">Enviar solicitud</button>
-      </form>
-      <div id="requestResult"></div>
-    </div>
-  </section>
-
-  <section id="seguimiento" class="hidden">
-    <div class="panel">
-      <h2>Seguimiento de solicitud</h2>
-      <form id="trackForm">
-        <div class="field">
-          <label>Código de seguimiento</label>
-          <input name="code" required placeholder="YBH-XXXXXXXX">
-        </div>
-        <button>Consultar estado</button>
-      </form>
-      <div id="trackResult"></div>
-    </div>
-  </section>
-
-  <section id="administracion" class="hidden">
-    <div class="panel" id="loginPanel">
-      <h2>Administración</h2>
-      <form id="loginForm">
-        <div class="field">
-          <label>Correo electrónico</label>
-          <input name="email" type="email" required>
-        </div>
-        <div class="field">
-          <label>Contraseña</label>
-          <input name="password" type="password" required>
-        </div>
-        <button>Iniciar sesión</button>
-      </form>
-    </div>
-    <div class="panel hidden" id="adminPanel">
-      <div id="adminMenu"></div>
-      <div id="adminEditor"></div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <strong>YOUR BRIDGE HOME</strong>
-  <p>Daynel Caminero · Administrador</p>
-  <p>Confirma precios y disponibilidad antes de realizar pagos.</p>
-</footer>
-
-<a class="whatsapp" href="https://wa.me/79046319565"
-   target="_blank" rel="noopener">WhatsApp</a>
-</body>
-</html>
-
-<script>
-"use strict";
-
-/* =========================================
-   CONFIGURACIÓN DE SUPABASE
-========================================= */
-
-const SUPABASE_URL =
-  "https://lwgeillycitljubenzhv.supabase.co";
-
-const SUPABASE_ANON_KEY =
-  "sb_publishable_LaA2IPL1J_IWAH0CVMUcBQ_j-BZa2pe";
-
-const ADMIN_UID =
-  "c0d50bf8-97dc-4ede-b00e-61d07348ac07";
-
-const db = window.supabase
-  ? window.supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_ANON_KEY
-    )
-  : null;
-
-/* =========================================
-   CONTENIDO INICIAL
-========================================= */
-
-const defaults = {
-  heroTitle: "Conectamos tus planes con el mundo",
-  heroText:
-    "Recargas, remesas, boletos aéreos y soluciones para tu familia.",
-  heroImage: "",
-  promo: "Consulta nuestras ofertas disponibles.",
-
-  services: [
-    {
-      title: "Recarga INTERNET +",
-      description: "2 GB LTE + 300 MB.cu",
-      price: "350 ₽",
-      image: "",
-      active: true
-    },
-    {
-      title: "Remesas a Cuba",
-      description: "Envíos internacionales.",
-      price: "Consultar",
-      image: "",
-      active: true
-    },
-    {
-      title: "Boletos aéreos",
-      description:
-        "Rusia, Cuba, América Latina, Europa y otros destinos.",
-      price: "Desde 135 000 ₽",
-      image: "",
-      active: true
-    }
-  ],
-
-  rates: [
-    { name: "USD", value: "945 CUP" },
-    { name: "EUR", value: "1 016 CUP" },
-    { name: "MLC", value: "848.45 CUP" },
-    { name: "CAD", value: "590.35 CUP" },
-    { name: "MXN", value: "50.88 CUP" },
-    { name: "Zelle", value: "918.90 CUP" }
-  ]
-};
-
-let site = structuredClone(defaults);
-let currentUser = null;
-let adminSection = "general";
-
-/* =========================================
-   UTILIDADES
-========================================= */
-
-const $ = selector =>
-  document.querySelector(selector);
-
-function escapeHTML(value) {
-  return String(value ?? "").replace(
-    /[&<>"']/g,
-    char => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    })[char]
-  );
-}
-
-function showMessage(message, type = "") {
-  const box = $("#message");
-
-  box.textContent = message;
-  box.className = "notice " + type;
-
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-}
-
-function showPage(page) {
-  document.querySelectorAll("main > section")
-    .forEach(section => {
-      section.classList.toggle(
-        "hidden",
-        section.id !== page
-      );
-    });
-
-  document.querySelectorAll("#navigation button")
-    .forEach(button => {
-      button.classList.toggle(
-        "active",
-        button.dataset.page === page
-      );
-    });
-
-  $("#message").classList.add("hidden");
-}
-
-$("#navigation").addEventListener("click", event => {
-  const button = event.target.closest("[data-page]");
-
-  if (!button) return;
-
-  showPage(button.dataset.page);
-});
-
-/* =========================================
-   TARJETAS Y PÁGINA PRINCIPAL
-========================================= */
-
-function serviceCard(service) {
-  const image = service.image
-    ? `<img src="${escapeHTML(service.image)}" alt="">`
-    : "";
-
-  const message =
-    "Hola, deseo información sobre " + service.title;
-
-  return `
-    <article class="card">
-      ${image}
-
-      <div class="card-body">
-        <span class="tag">YOUR BRIDGE HOME</span>
-
-        <h3>${escapeHTML(service.title)}</h3>
-
-        <p>${escapeHTML(service.description)}</p>
-
-        <div class="price">
-          ${escapeHTML(service.price)}
-        </div>
-
-        <a class="tag"
-           href="https://wa.me/79046319565?text=${encodeURIComponent(message)}"
-           target="_blank"
-           rel="noopener">
-           Consultar
+        <a href="#servicios" class="btn btn-white">
+          Ver servicios
         </a>
       </div>
-    </article>
-  `;
-}
+    </div>
 
-function renderSite() {
-  $("#heroTitle").textContent =
-    site.heroTitle || defaults.heroTitle;
+    <div class="hero-card">
 
-  $("#heroText").textContent =
-    site.heroText || defaults.heroText;
+      <h3>⚡ Ofertas destacadas</h3>
 
-  $("#promoText").textContent =
-    site.promo || defaults.promo;
+      <div class="hero-stat">
+        <span>📱 Internet +</span>
+        <strong id="heroRecharge">350 ₽</strong>
+      </div>
 
-  $("#hero").style.backgroundImage =
-    site.heroImage
-      ? `linear-gradient(120deg,#071b38dd,#0759c7dd),url("${site.heroImage}")`
-      : "linear-gradient(120deg,#071b38,#0759c7)";
+      <div class="hero-stat">
+        <span>💸 Remesa</span>
+        <strong id="heroRemittance">1.000 ₽</strong>
+      </div>
 
-  const activeServices = site.services.filter(
-    item => item.active !== false
-  );
+      <div class="hero-stat">
+        <span>✈️ Ticket desde</span>
+        <strong id="heroTicket">99.800 ₽</strong>
+      </div>
 
-  $("#homeCards").innerHTML =
-    activeServices.slice(0, 3).map(serviceCard).join("");
+      <div class="hero-stat">
+        <span>📞 Atención</span>
+        <strong style="font-size:14px;" id="heroPhone">
+          +7904-631-95-65
+        </strong>
+      </div>
 
-  $("#serviceCards").innerHTML =
-    activeServices.map(serviceCard).join("");
+    </div>
 
-  $("#rateCards").innerHTML =
-    site.rates.map(rate => `
-      <article class="card">
-        <div class="card-body">
-          <span class="tag">TASA DE REFERENCIA</span>
-          <h3>${escapeHTML(rate.name)}</h3>
-          <div class="price">
-            ${escapeHTML(rate.value)}
+  </div>
+</section>
+
+<!-- =========================
+     SERVICES
+========================= -->
+
+<section id="servicios">
+
+  <div class="container">
+
+    <div class="section-head">
+      <div class="eyebrow">Nuestros servicios</div>
+      <h2>Todo lo que necesitas</h2>
+      <p>
+        Una plataforma para conectar servicios, personas y oportunidades
+        entre diferentes países.
+      </p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon">📱</div>
+        <h3>Recargas</h3>
+        <p>
+          Recargas internacionales y opciones de conectividad.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">💸</div>
+        <h3>Remesas</h3>
+        <p>
+          Envío de dinero y soluciones para familiares.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">✈️</div>
+        <h3>Boletos</h3>
+        <p>
+          Búsqueda y gestión de vuelos hacia diferentes destinos.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🌎</div>
+        <h3>Servicios internacionales</h3>
+        <p>
+          Conecta con negocios, destinos y oportunidades.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     OFFERS
+========================= -->
+
+<section class="offers" id="ofertas">
+
+  <div class="container">
+
+    <div class="section-head">
+      <div class="eyebrow">Ofertas</div>
+      <h2>Las ofertas más económicas</h2>
+      <p>
+        Los valores de estas tarjetas pueden modificarse desde
+        Administración.
+      </p>
+    </div>
+
+    <div class="offer-grid">
+
+      <!-- RECARGA -->
+
+      <article class="offer-card">
+
+        <div class="offer-top">
+          <div class="offer-icon">📱</div>
+          <h3 id="rechargeTitle">Internet +</h3>
+        </div>
+
+        <div class="offer-body">
+
+          <div class="offer-price" id="rechargePrice">
+            350 ₽
           </div>
+
+          <div class="offer-detail" id="rechargeDetail">
+            2 GB LTE + 300 MB.cu
+          </div>
+
+          <button
+            class="btn btn-blue offer-btn"
+            onclick="requestService('Recarga Internet +')">
+            Solicitar
+          </button>
+
         </div>
       </article>
-    `).join("");
-}
 
-/* =========================================
-   CARGAR CONTENIDO DE SUPABASE
-========================================= */
+      <!-- REMESA -->
 
-function mergeDefaults(data) {
-  return {
-    ...structuredClone(defaults),
-    ...(data || {}),
+      <article class="offer-card">
 
-    services: Array.isArray(data?.services)
-      ? data.services
-      : structuredClone(defaults.services),
+        <div class="offer-top">
+          <div class="offer-icon">💸</div>
+          <h3 id="remittanceTitle">Remesas</h3>
+        </div>
 
-    rates: Array.isArray(data?.rates)
-      ? data.rates
-      : structuredClone(defaults.rates)
-  };
-}
+        <div class="offer-body">
 
-async function loadSite() {
-  if (!db) {
-    showMessage(
-      "No se pudo cargar Supabase. Comprueba tu conexión.",
-      "error"
-    );
-
-    renderSite();
-    return;
-  }
-
-  try {
-    const { data, error } = await db
-      .from("ybh_content")
-      .select("content")
-      .eq("id", 1)
-      .maybeSingle();
-
-    if (error) throw error;
-
-    if (data && data.content) {
-      site = mergeDefaults(data.content);
-    }
-
-  } catch (error) {
-    console.error(error);
-
-    showMessage(
-      "Error cargando contenido: " + error.message,
-      "error"
-    );
-  }
-
-  renderSite();
-}
-
-/* =========================================
-   GUARDAR CONTENIDO
-========================================= */
-
-async function saveSite() {
-  if (!db) {
-    throw new Error("Supabase no está disponible.");
-  }
-
-  const { error } = await db
-    .from("ybh_content")
-    .upsert({
-      id: 1,
-      content: site,
-      updated_at: new Date().toISOString()
-    });
-
-  if (error) throw error;
-
-  renderSite();
-
-  showMessage(
-    "Los cambios se guardaron correctamente.",
-    "success"
-  );
-}
-
-/* =========================================
-   SUBIR FOTOS
-========================================= */
-
-async function uploadImage(file) {
-  if (!file) return "";
-
-  if (!file.type.startsWith("image/")) {
-    throw new Error("Selecciona una imagen.");
-  }
-
-  if (file.size > 8 * 1024 * 1024) {
-    throw new Error("La imagen supera 8 MB.");
-  }
-
-  const extension =
-    file.name.split(".").pop().replace(/[^a-z0-9]/gi, "");
-
-  const path =
-    Date.now() + "-" +
-    Math.random().toString(36).slice(2) +
-    "." + extension;
-
-  const { error } = await db.storage
-    .from("ybh-media")
-    .upload(path, file, {
-      upsert: false,
-      contentType: file.type
-    });
-
-  if (error) throw error;
-
-  const { data } = db.storage
-    .from("ybh-media")
-    .getPublicUrl(path);
-
-  return data.publicUrl;
-}
-
-/* =========================================
-   PANEL DE ADMINISTRACIÓN
-========================================= */
-
-function adminInput(label, key, value) {
-  return `
-    <div class="field">
-      <label>${label}</label>
-      <input
-        data-key="${key}"
-        value="${escapeHTML(value)}"
-      >
-    </div>
-  `;
-}
-
-function adminTextarea(label, key, value) {
-  return `
-    <div class="field">
-      <label>${label}</label>
-      <textarea data-key="${key}">${escapeHTML(value)}</textarea>
-    </div>
-  `;
-}
-
-function renderAdminMenu() {
-  $("#adminMenu").innerHTML = `
-    <div class="section-title">
-      <h2>Panel de administración</h2>
-    </div>
-
-    <div class="row">
-      <button data-admin="general">Inicio y banner</button>
-      <button data-admin="services">Servicios y ofertas</button>
-      <button data-admin="rates">Tasas</button>
-      <button data-admin="requests">Solicitudes</button>
-      <button data-admin="save">Guardar cambios</button>
-      <button data-admin="logout">Cerrar sesión</button>
-    </div>
-  `;
-}
-
-function renderAdminEditor() {
-  const editor = $("#adminEditor");
-
-  if (adminSection === "general") {
-    editor.innerHTML = `
-      <h3>Editar página principal</h3>
-
-      ${adminInput(
-        "Título principal",
-        "heroTitle",
-        site.heroTitle
-      )}
-
-      ${adminTextarea(
-        "Texto principal",
-        "heroText",
-        site.heroText
-      )}
-
-      ${adminTextarea(
-        "Texto del anuncio",
-        "promo",
-        site.promo
-      )}
-
-      ${adminInput(
-        "URL de imagen principal",
-        "heroImage",
-        site.heroImage
-      )}
-
-      <div class="field">
-        <label>Subir foto del banner</label>
-        <input id="heroFile" type="file" accept="image/*">
-      </div>
-    `;
-  }
-
-  if (adminSection === "services") {
-    editor.innerHTML = `
-      <h3>Servicios y ofertas</h3>
-
-      <div id="serviceEditor">
-        ${site.services.map((item, index) => `
-          <div class="panel" data-index="${index}">
-            <div class="row">
-
-              ${adminInput("Nombre","title",item.title)}
-
-              ${adminInput("Precio","price",item.price)}
-
-              ${adminTextarea(
-                "Descripción",
-                "description",
-                item.description
-              )}
-
-              ${adminInput(
-                "URL de imagen",
-                "image",
-                item.image || ""
-              )}
-
-            </div>
-
-            <div class="field">
-              <label>Subir imagen</label>
-              <input type="file"
-                     class="serviceImage"
-                     accept="image/*">
-            </div>
-
-            <label>
-              <input type="checkbox"
-                     class="serviceActive"
-                     ${item.active !== false ? "checked" : ""}>
-              Publicar este servicio
-            </label>
-
-            <button class="removeService"
-                    data-index="${index}"
-                    type="button">
-              Eliminar servicio
-            </button>
+          <div class="offer-price" id="remittancePrice">
+            1.000 ₽
           </div>
-        `).join("")}
-      </div>
 
-      <button id="addService" type="button">
-        + Añadir servicio
-      </button>
-    `;
-  }
-
-  if (adminSection === "rates") {
-    editor.innerHTML = `
-      <h3>Editar tasas</h3>
-
-      <div id="rateEditor">
-        ${site.rates.map((rate, index) => `
-          <div class="panel row" data-index="${index}">
-            ${adminInput("Moneda","name",rate.name)}
-            ${adminInput("Equivalencia","value",rate.value)}
-            <button class="removeRate"
-                    data-index="${index}"
-                    type="button">
-              Eliminar
-            </button>
+          <div class="offer-detail" id="remittanceDetail">
+            Recibe 9.80 CUP en Cuba
           </div>
-        `).join("")}
+
+          <button
+            class="btn btn-blue offer-btn"
+            onclick="requestService('Remesa')">
+            Solicitar
+          </button>
+
+        </div>
+      </article>
+
+      <!-- TICKET -->
+
+      <article class="offer-card">
+
+        <div class="offer-top">
+          <div class="offer-icon">✈️</div>
+          <h3 id="ticketTitle">Ticket de avión</h3>
+        </div>
+
+        <div class="offer-body">
+
+          <div class="offer-price" id="ticketPrice">
+            99.800 ₽
+          </div>
+
+          <div class="offer-detail" id="ticketDetail">
+            Rusia → Cuba · Noviembre
+          </div>
+
+          <button
+            class="btn btn-blue offer-btn"
+            onclick="requestService('Ticket de avión')">
+            Solicitar
+          </button>
+
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     DESTINATIONS
+========================= -->
+
+<section id="destinos">
+
+  <div class="container">
+
+    <div class="section-head">
+      <div class="eyebrow">Destinos</div>
+      <h2>Explora nuevos lugares</h2>
+      <p>
+        Pregunta por vuelos y servicios disponibles hacia diferentes
+        destinos.
+      </p>
+    </div>
+
+    <div class="destination-grid">
+
+      <div class="destination">
+        <h3>🇨🇺 Cuba</h3>
+        <p>Vuelos y servicios</p>
       </div>
 
-      <button id="addRate" type="button">
-        + Añadir moneda
-      </button>
-    `;
-  }
-
-  if (adminSection === "requests") {
-    editor.innerHTML = `
-      <h3>Solicitudes de clientes</h3>
-      <div id="requestsList">Cargando solicitudes...</div>
-    `;
-
-    loadRequests();
-  }
-}
-
-/* =========================================
-   RECOPILAR CAMBIOS DEL EDITOR
-========================================= */
-
-function collectAdminChanges() {
-  if (adminSection === "general") {
-    document.querySelectorAll(
-      "#adminEditor [data-key]"
-    ).forEach(input => {
-      site[input.dataset.key] = input.value;
-    });
-  }
-
-  if (adminSection === "services") {
-    document.querySelectorAll(
-      "#serviceEditor [data-index]"
-    ).forEach(box => {
-      const index = Number(box.dataset.index);
-
-      box.querySelectorAll("[data-key]").forEach(input => {
-        site.services[index][input.dataset.key] =
-          input.value;
-      });
-
-      site.services[index].active =
-        box.querySelector(".serviceActive").checked;
-    });
-  }
-
-  if (adminSection === "rates") {
-    document.querySelectorAll(
-      "#rateEditor [data-index]"
-    ).forEach(box => {
-      const index = Number(box.dataset.index);
-
-      box.querySelectorAll("[data-key]").forEach(input => {
-        site.rates[index][input.dataset.key] =
-          input.value;
-      });
-    });
-  }
-}
-</script>
-
-
-<script>
-/* =========================================
-   INICIO DE SESIÓN DEL ADMINISTRADOR
-========================================= */
-
-$("#loginForm").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  if (!db) {
-    showMessage("Supabase no está disponible.", "error");
-    return;
-  }
-
-  const form = new FormData(event.target);
-
-  try {
-    const { data, error } = await db.auth.signInWithPassword({
-      email: form.get("email"),
-      password: form.get("password")
-    });
-
-    if (error) throw error;
-
-    if (data.user.id !== ADMIN_UID) {
-      await db.auth.signOut();
-      throw new Error(
-        "Este usuario no está autorizado como administrador."
-      );
-    }
-
-    const { data: admin, error: adminError } = await db
-      .from("centro_sql_admins")
-      .select("user_id")
-      .eq("user_id", data.user.id)
-      .maybeSingle();
-
-    if (adminError) throw adminError;
-
-    if (!admin) {
-      await db.auth.signOut();
-      throw new Error(
-        "El UID no está registrado en centro_sql_admins."
-      );
-    }
-
-    currentUser = data.user;
-
-    $("#loginPanel").classList.add("hidden");
-    $("#adminPanel").classList.remove("hidden");
-
-    renderAdminMenu();
-    renderAdminEditor();
-
-    showMessage(
-      "Sesión de administrador iniciada.",
-      "success"
-    );
-
-  } catch (error) {
-    console.error(error);
-    showMessage(
-      "Error de acceso: " + error.message,
-      "error"
-    );
-  }
-});
-
-/* =========================================
-   BOTONES DEL PANEL
-========================================= */
-
-$("#adminMenu").addEventListener("click", async event => {
-  const button = event.target.closest("[data-admin]");
-  if (!button) return;
-
-  const action = button.dataset.admin;
-
-  if (action === "logout") {
-    await db.auth.signOut();
-
-    currentUser = null;
-
-    $("#adminPanel").classList.add("hidden");
-    $("#loginPanel").classList.remove("hidden");
-
-    showMessage("Sesión cerrada.");
-    return;
-  }
-
-  if (action === "save") {
-    try {
-      collectAdminChanges();
-      await saveSite();
-      return;
-    } catch (error) {
-      showMessage(
-        "Error guardando: " + error.message,
-        "error"
-      );
-      return;
-    }
-  }
-
-  collectAdminChanges();
-
-  adminSection = action;
-  renderAdminEditor();
-});
-
-/* =========================================
-   AÑADIR Y ELIMINAR SERVICIOS Y TASAS
-========================================= */
-
-$("#adminEditor").addEventListener("click", event => {
-  const button = event.target.closest("button");
-  if (!button) return;
-
-  if (button.id === "addService") {
-    collectAdminChanges();
-
-    site.services.push({
-      title: "Nuevo servicio",
-      description: "Descripción del servicio",
-      price: "Consultar",
-      image: "",
-      active: true
-    });
-
-    renderAdminEditor();
-  }
-
-  if (button.classList.contains("removeService")) {
-    collectAdminChanges();
-
-    const index = Number(button.dataset.index);
-
-    if (confirm("¿Eliminar este servicio?")) {
-      site.services.splice(index, 1);
-      renderAdminEditor();
-    }
-  }
-
-  if (button.id === "addRate") {
-    collectAdminChanges();
-
-    site.rates.push({
-      name: "Nueva moneda",
-      value: "Consultar"
-    });
-
-    renderAdminEditor();
-  }
-
-  if (button.classList.contains("removeRate")) {
-    collectAdminChanges();
-
-    const index = Number(button.dataset.index);
-
-    if (confirm("¿Eliminar esta tasa?")) {
-      site.rates.splice(index, 1);
-      renderAdminEditor();
-    }
-  }
-});
-
-/* =========================================
-   SUBIR IMÁGENES DESDE EL TELÉFONO
-========================================= */
-
-$("#adminEditor").addEventListener("change", async event => {
-  const input = event.target;
-
-  try {
-    if (input.id === "heroFile" && input.files[0]) {
-      const url = await uploadImage(input.files[0]);
-
-      site.heroImage = url;
-
-      showMessage(
-        "Imagen del banner subida. Pulsa Guardar cambios.",
-        "success"
-      );
-
-      renderAdminEditor();
-    }
-
-    if (
-      input.classList.contains("serviceImage") &&
-      input.files[0]
-    ) {
-      collectAdminChanges();
-
-      const box = input.closest("[data-index]");
-      const index = Number(box.dataset.index);
-
-      const url = await uploadImage(input.files[0]);
-
-      site.services[index].image = url;
-
-      box.querySelector('[data-key="image"]').value = url;
-
-      showMessage(
-        "Imagen subida. Pulsa Guardar cambios.",
-        "success"
-      );
-    }
-
-  } catch (error) {
-    console.error(error);
-
-    showMessage(
-      "Error subiendo imagen: " + error.message,
-      "error"
-    );
-  }
-});
-
-/* =========================================
-   SOLICITUDES DE CLIENTES
-========================================= */
-
-$("#requestForm").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  const result = $("#requestResult");
-  result.textContent = "Enviando solicitud...";
-
-  try {
-    if (!db) {
-      throw new Error("Supabase no está disponible.");
-    }
-
-    const form = new FormData(event.target);
-
-    const trackingCode =
-      "YBH-" +
-      crypto.randomUUID()
-        .replace(/-/g, "")
-        .substring(0, 8)
-        .toUpperCase();
-
-    const request = {
-      tracking_code: trackingCode,
-      name: form.get("name"),
-      phone: form.get("phone"),
-      service: form.get("service"),
-      details: form.get("details"),
-      status: "Aceptada"
-    };
-
-    const { error } = await db
-      .from("ybh_requests")
-      .insert(request);
-
-    if (error) throw error;
-
-    const files = form
-      .getAll("files")
-      .filter(file => file && file.size > 0);
-
-    const attachments = [];
-
-    for (const file of files) {
-      if (file.size > 8 * 1024 * 1024) {
-        throw new Error(
-          "El archivo " + file.name + " supera 8 MB."
-        );
-      }
-
-      const extension =
-        file.name.split(".").pop()
-          .replace(/[^a-z0-9]/gi, "");
-
-      const path =
-        "requests/" + trackingCode + "/" +
-        Date.now() + "-" + Math.random()
-          .toString(36).substring(2) +
-        "." + extension;
-
-      const { error: uploadError } = await db.storage
-        .from("ybh-files")
-        .upload(path, file, {
-          upsert: false,
-          contentType: file.type
-        });
-
-      if (uploadError) throw uploadError;
-
-      attachments.push({
-        name: file.name,
-        path: path,
-        type: file.type
-      });
-    }
-
-    if (attachments.length > 0) {
-      const { error: attachmentError } = await db.rpc(
-        "ybh_attach_files",
-        {
-          p_tracking_code: trackingCode,
-          p_files: attachments
-        }
-      );
-
-      if (attachmentError) throw attachmentError;
-    }
-
-    result.innerHTML = `
-      <div class="notice success">
-        <h3>¡Solicitud recibida!</h3>
-        <p>Estado inicial: <strong>Aceptada</strong></p>
-        <p>Tu código de seguimiento es:</p>
-        <h2>${escapeHTML(trackingCode)}</h2>
-        <p>Guarda este código para consultar tu solicitud.</p>
+      <div class="destination">
+        <h3>🇺🇿 Uzbekistán</h3>
+        <p>Boletos y conexiones</p>
       </div>
-    `;
 
-    event.target.reset();
-
-  } catch (error) {
-    console.error(error);
-
-    result.innerHTML = `
-      <div class="notice error">
-        No se pudo enviar la solicitud:
-        ${escapeHTML(error.message)}
+      <div class="destination">
+        <h3>🇪🇸 España</h3>
+        <p>Europa y conexiones</p>
       </div>
-    `;
-  }
-});
 
-/* =========================================
-   CONSULTAR ESTADO DE SOLICITUD
-========================================= */
+      <div class="destination">
+        <h3>🌎 Latinoamérica</h3>
+        <p>Destinos internacionales</p>
+      </div>
 
-$("#trackForm").addEventListener("submit", async event => {
-  event.preventDefault();
+    </div>
 
-  const form = new FormData(event.target);
-  const code = form.get("code").trim().toUpperCase();
+  </div>
+</section>
 
-  const result = $("#trackResult");
-  result.textContent = "Consultando...";
+<!-- =========================
+     INFORMATION
+========================= -->
 
-  try {
-    const { data, error } = await db.rpc(
-      "ybh_track_request",
-      { p_code: code }
-    );
+<section id="informacion" style="background:#eef4fb;">
 
-    if (error) throw error;
+  <div class="container">
 
-    const request = Array.isArray(data)
-      ? data[0]
-      : data;
+    <div class="section-head">
+      <div class="eyebrow">Información</div>
+      <h2>Información importante</h2>
+      <p>
+        Herramientas y recursos para ayudarte antes de viajar o solicitar
+        un servicio.
+      </p>
+    </div>
 
-    if (!request) {
-      result.textContent =
-        "No encontramos una solicitud con ese código.";
-      return;
-    }
+    <div class="info-grid">
 
-    result.innerHTML = `
-      <div class="notice">
-        <h3>Solicitud ${escapeHTML(request.tracking_code)}</h3>
-        <p>Servicio: ${escapeHTML(request.service)}</p>
-        <p>Estado:
-          <strong>${escapeHTML(request.status)}</strong>
-        </p>
-        <p>Última actualización:
-          ${new Date(
-            request.updated_at || request.created_at
-          ).toLocaleString("es")}
+      <div class="info-card">
+        <h3>💱 Tasas</h3>
+        <p>
+          Consulta siempre la tasa vigente antes de realizar una operación.
         </p>
       </div>
-    `;
 
-  } catch (error) {
-    result.textContent =
-      "Error consultando: " + error.message;
-  }
-});
+      <div class="info-card">
+        <h3>🛂 VISA Index</h3>
+        <p>
+          Revisa los requisitos migratorios correspondientes al destino
+          antes de comprar un boleto.
+        </p>
 
-/* =========================================
-   ADMINISTRACIÓN DE SOLICITUDES
-========================================= */
+        <br>
 
-async function loadRequests() {
-  const container = $("#requestsList");
+        <a
+          href="https://www.passportindex.org/"
+          target="_blank"
+          class="btn btn-blue">
+          Consultar VISA
+        </a>
+      </div>
 
-  try {
-    const { data, error } = await db
-      .from("ybh_requests")
-      .select(
-        "id,tracking_code,name,phone,service,details,status,created_at"
-      )
-      .order("created_at", { ascending: false })
-      .limit(100);
+      <div class="info-card">
+        <h3>☁️ Solicitudes</h3>
+        <p>
+          Puedes solicitar información sobre recargas, remesas, vuelos
+          y nuevos servicios.
+        </p>
+      </div>
 
-    if (error) throw error;
+    </div>
 
-    container.innerHTML = (data || []).map(request => `
-      <div class="panel">
-        <h3>${escapeHTML(request.tracking_code)}</h3>
+  </div>
+</section>
 
-        <p><strong>${escapeHTML(request.name)}</strong></p>
-        <p>${escapeHTML(request.phone)}</p>
-        <p>${escapeHTML(request.service)}</p>
-        <p>${escapeHTML(request.details)}</p>
+<!-- =========================
+     FEEDBACK
+========================= -->
 
-        <div class="field">
-          <label>Estado de la solicitud</label>
+<section class="feedback" id="opiniones">
 
-          <select data-request="${escapeHTML(request.id)}">
-            <option ${request.status === "Aceptada" ? "selected" : ""}>
-              Aceptada
-            </option>
+  <div class="container">
 
-            <option ${request.status === "En proceso" ? "selected" : ""}>
-              En proceso
-            </option>
+    <div class="section-head">
+      <div class="eyebrow" style="color:#f4c542;">
+        Tu opinión importa
+      </div>
 
-            <option ${request.status === "Terminada" ? "selected" : ""}>
-              Terminada
-            </option>
-          </select>
+      <h2>
+        Ayúdanos a mejorar
+      </h2>
+
+      <p>
+        ¿Qué servicio o negocio te gustaría encontrar en YOUR BRIDGE HOME?
+      </p>
+    </div>
+
+    <div class="feedback-grid">
+
+      <div class="form-card">
+
+        <h3 style="margin-bottom:18px;">
+          💬 Enviar sugerencia
+        </h3>
+
+        <div class="form-group">
+          <label>Nombre</label>
+          <input id="feedbackName" placeholder="Tu nombre">
+        </div>
+
+        <div class="form-group">
+          <label>WhatsApp</label>
+          <input id="feedbackPhone" placeholder="Tu número">
+        </div>
+
+        <div class="form-group">
+          <label>Mensaje</label>
+          <textarea
+            id="feedbackMessage"
+            placeholder="Escribe tu opinión o servicio que deseas..."></textarea>
         </div>
 
         <button
-          class="updateRequest"
-          data-id="${escapeHTML(request.id)}">
-          Actualizar estado
+          class="btn btn-blue"
+          onclick="sendFeedback()">
+          Enviar por WhatsApp
         </button>
+
       </div>
-    `).join("") || "<p>No hay solicitudes todavía.</p>";
 
-  } catch (error) {
-    container.textContent =
-      "Error cargando solicitudes: " + error.message;
-  }
-}
+      <div style="display:flex;align-items:center;">
 
-$("#adminEditor").addEventListener("click", async event => {
-  const button = event.target.closest(".updateRequest");
-  if (!button) return;
+        <div>
 
-  const id = button.dataset.id;
+          <h2 style="font-size:36px;margin-bottom:15px;">
+            ¿No encuentras lo que buscas?
+          </h2>
 
-  const select = document.querySelector(
-    `[data-request="${CSS.escape(id)}"]`
-  );
+          <p style="color:#b9c5d7;margin-bottom:20px;">
+            Puedes proponernos nuevos negocios, servicios, destinos,
+            promociones o ideas para hacer crecer la plataforma.
+          </p>
 
-  try {
-    const { error } = await db
-      .from("ybh_requests")
-      .update({
-        status: select.value,
-        updated_at: new Date().toISOString()
-      })
-      .eq("id", id);
+          <button
+            class="btn btn-primary"
+            onclick="requestService('Nuevo servicio / negocio')">
+            Proponer un servicio
+          </button>
 
-    if (error) throw error;
+        </div>
 
-    showMessage(
-      "Estado actualizado correctamente.",
-      "success"
-    );
+      </div>
 
-    await loadRequests();
+    </div>
 
-  } catch (error) {
-    showMessage(
-      "Error actualizando: " + error.message,
-      "error"
-    );
-  }
-});
+  </div>
+</section>
 
-/* =========================================
-   INICIAR LA PÁGINA
-========================================= */
+<!-- =========================
+     ADMINISTRATION
+========================= -->
 
-async function initializeApp() {
-  if (!db) {
-    showMessage(
-      "No se pudo cargar la librería de Supabase. Comprueba Internet.",
-      "error"
-    );
-    renderSite();
-    return;
-  }
+<section class="admin-section" id="administracion">
 
-  await loadSite();
+  <div class="container">
 
-  try {
-    const { data, error } = await db.auth.getSession();
+    <div class="section-head">
 
-    if (error) throw error;
+      <div class="eyebrow">
+        Administración
+      </div>
 
-    const sessionUser = data.session?.user;
+      <h2>
+        Control de la página
+      </h2>
 
-    if (sessionUser && sessionUser.id === ADMIN_UID) {
-      const { data: admin, error: adminError } = await db
-        .from("centro_sql_admins")
-        .select("user_id")
-        .eq("user_id", ADMIN_UID)
-        .maybeSingle();
+      <p>
+        Modifica precios, textos, teléfono y ofertas directamente desde
+        este panel.
+      </p>
 
-      if (adminError) throw adminError;
+    </div>
 
-      if (admin) {
-        currentUser = sessionUser;
+    <!-- LOGIN -->
 
-        $("#loginPanel").classList.add("hidden");
-        $("#adminPanel").classList.remove("hidden");
+    <div class="admin-login" id="adminLogin">
 
-        renderAdminMenu();
-        renderAdminEditor();
-      }
+      <h3 style="margin-bottom:10px;">
+        🔐 Acceso administrativo
+      </h3>
+
+      <p class="small-note" style="margin-bottom:20px;">
+        Este acceso funciona localmente en este navegador.
+      </p>
+
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input
+          type="password"
+          id="adminPassword"
+          placeholder="Contraseña">
+      </div>
+
+      <button
+        class="btn btn-blue"
+        onclick="loginAdmin()">
+        Entrar
+      </button>
+
+      <p class="small-note">
+        Contraseña inicial: <strong>ybh2026</strong>
+      </p>
+
+    </div>
+
+    <!-- PANEL -->
+
+    <div class="admin-panel" id="adminPanel">
+
+      <div class="admin-grid">
+
+        <!-- GENERAL -->
+
+        <div class="admin-box">
+
+          <h3>⚙️ Información general</h3>
+
+          <div class="edit-list">
+
+            <div class="edit-row">
+              <label>Nombre</label>
+              <input id="editBrand">
+            </div>
+
+            <div class="edit-row">
+              <label>Eslogan</label>
+              <input id="editSlogan">
+            </div>
+
+            <div class="edit-row">
+              <label>Teléfono</label>
+              <input id="editPhone">
+            </div>
+
+            <div class="edit-row">
+              <label>Administrador</label>
+              <input id="editAdmin">
+            </div>
+
+            <div class="edit-row">
+              <label>Descripción</label>
+              <textarea id="editHeroDescription"></textarea>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- RECARGA -->
+
+        <div class="admin-box">
+
+          <h3>📱 Recarga</h3>
+
+          <div class="edit-list">
+
+            <div class="edit-row">
+              <label>Título</label>
+              <input id="editRechargeTitle">
+            </div>
+
+            <div class="edit-row">
+              <label>Precio</label>
+              <input id="editRechargePrice">
+            </div>
+
+            <div class="edit-row">
+              <label>Descripción</label>
+              <textarea id="editRechargeDetail"></textarea>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- REMESA -->
+
+        <div class="admin-box">
+
+          <h3>💸 Remesa</h3>
+
+          <div class="edit-list">
+
+            <div class="edit-row">
+              <label>Título</label>
+              <input id="editRemittanceTitle">
+            </div>
+
+            <div class="edit-row">
+              <label>Precio</label>
+              <input id="editRemittancePrice">
+            </div>
+
+            <div class="edit-row">
+              <label>Descripción</label>
+              <textarea id="editRemittanceDetail"></textarea>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- TICKET -->
+
+        <div class="admin-box">
+
+          <h3>✈️ Ticket</h3>
+
+          <div class="edit-list">
+
+            <div class="edit-row">
+              <label>Título</label>
+              <input id="editTicketTitle">
+            </div>
+
+            <div class="edit-row">
+              <label>Precio</label>
+              <input id="editTicketPrice">
+            </div>
+
+            <div class="edit-row">
+              <label>Descripción</label>
+              <textarea id="editTicketDetail"></textarea>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ANUNCIO -->
+
+        <div class="admin-box full">
+
+          <h3>📢 Anuncio superior</h3>
+
+          <div class="edit-row">
+
+            <label>Texto del anuncio</label>
+
+            <textarea
+              id="editAnnouncement"
+              style="min-height:80px;"></textarea>
+
+          </div>
+
+        </div>
+
+        <!-- BOTONES -->
+
+        <div class="admin-box full">
+
+          <h3>💾 Guardar cambios</h3>
+
+          <div class="admin-actions">
+
+            <button
+              class="btn btn-success"
+              onclick="saveChanges()">
+              💾 Guardar
+            </button>
+
+            <button
+              class="btn btn-blue"
+              onclick="loadAdminData()">
+              🔄 Recargar
+            </button>
+
+            <button
+              class="btn btn-danger"
+              onclick="resetData()">
+              ♻️ Restaurar valores
+            </button>
+
+            <button
+              class="btn"
+              style="background:#111827;color:#fff;"
+              onclick="logoutAdmin()">
+              🔒 Salir
+            </button>
+
+          </div>
+
+          <p class="small-note">
+            Los cambios quedan guardados en el navegador mediante
+            almacenamiento local. No necesitas modificar el código para
+            cambiar estos valores.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <div class="footer-grid">
+
+    <div>
+
+      <div class="brand" style="margin-bottom:15px;">
+
+        <div class="logo">YB</div>
+
+        <div class="brand-text">
+          <strong style="color:#fff;">
+            YOUR BRIDGE HOME
+          </strong>
+
+          <span style="color:#8290a5;">
+            Tu puente al mundo
+          </span>
+        </div>
+
+      </div>
+
+      <p>
+        Recargas, remesas, boletos y servicios internacionales.
+      </p>
+
+    </div>
+
+    <div>
+
+      <h4>Servicios</h4>
+
+      <ul>
+        <li><a href="#ofertas">Recargas</a></li>
+        <li><a href="#ofertas">Remesas</a></li>
+        <li><a href="#ofertas">Boletos</a></li>
+        <li><a href="#destinos">Destinos</a></li>
+      </ul>
+
+    </div>
+
+    <div>
+
+      <h4>Información</h4>
+
+      <ul>
+        <li><a href="#informacion">Información importante</a></li>
+        <li><a href="#opiniones">Opiniones</a></li>
+        <li><a href="https://www.passportindex.org/" target="_blank">VISA Index</a></li>
+      </ul>
+
+    </div>
+
+    <div>
+
+      <h4>Contacto</h4>
+
+      <ul>
+        <li id="footerPhone">+7904-631-95-65</li>
+        <li>Daynel Caminero</li>
+        <li>Administrador</li>
+      </ul>
+
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+
+    <span>
+      © <span id="year"></span> YOUR BRIDGE HOME
+    </span>
+
+    <span>
+      Todos los derechos reservados.
+    </span>
+
+  </div>
+
+</footer>
+
+<!-- =========================
+     WHATSAPP
+========================= -->
+
+<a
+  class="whatsapp"
+  id="whatsappButton"
+  href="#"
+  onclick="openWhatsApp(event)"
+  aria-label="WhatsApp">
+  ☎
+</a>
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div class="modal" id="requestModal">
+
+  <div class="modal-box">
+
+    <button
+      class="close-modal"
+      onclick="closeModal()">
+      ✕
+    </button>
+
+    <h2 id="modalTitle">
+      Solicitar servicio
+    </h2>
+
+    <p
+      id="modalDescription"
+      style="color:#697386;margin:8px 0 20px;">
+      Completa los datos para enviar tu solicitud.
+    </p>
+
+    <div class="form-group">
+
+      <label>Nombre</label>
+
+      <input
+        id="requestName"
+        placeholder="Tu nombre">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>WhatsApp</label>
+
+      <input
+        id="requestPhone"
+        placeholder="Tu número">
+
+    </div>
+
+    <div class="form-group">
+
+      <label>Detalles</label>
+
+      <textarea
+        id="requestDetails"
+        placeholder="Escribe los detalles de tu solicitud"></textarea>
+
+    </div>
+
+    <button
+      class="btn btn-success"
+      style="width:100%;"
+      onclick="sendRequest()">
+      Enviar solicitud por WhatsApp
+    </button>
+
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+
+/* =========================================================
+   CONFIGURACIÓN PRINCIPAL
+========================================================= */
+
+const DEFAULT_DATA = {
+
+  brand:
+    "YOUR BRIDGE HOME",
+
+  slogan:
+    "Tu puente al mundo",
+
+  phone:
+    "+7904-631-95-65",
+
+  admin:
+    "Daynel Caminero — Administrador",
+
+  heroDescription:
+    "Recargas, remesas, boletos aéreos y soluciones internacionales en un solo lugar.",
+
+  rechargeTitle:
+    "Internet +",
+
+  rechargePrice:
+    "350 ₽",
+
+  rechargeDetail:
+    "2 GB LTE + 300 MB.cu",
+
+  remittanceTitle:
+    "Remesas",
+
+  remittancePrice:
+    "1.000 ₽",
+
+  remittanceDetail:
+    "Recibe 9.80 CUP en Cuba",
+
+  ticketTitle:
+    "Ticket de avión",
+
+  ticketPrice:
+    "99.800 ₽",
+
+  ticketDetail:
+    "Rusia → Cuba · Noviembre",
+
+  announcement:
+    "🔥 Internet + desde 350 ₽ — 2 GB LTE + 300 MB.cu"
+
+};
+
+let DATA = {};
+
+let selectedService = "";
+
+const STORAGE_KEY = "YBH_SITE_DATA_V1";
+
+const ADMIN_SESSION_KEY = "YBH_ADMIN_SESSION_V1";
+
+const ADMIN_PASSWORD = "ybh2026";
+
+
+/* =========================================================
+   CARGAR DATOS
+========================================================= */
+
+function loadData(){
+
+  try{
+
+    const saved =
+      localStorage.getItem(STORAGE_KEY);
+
+    if(saved){
+
+      DATA = {
+        ...DEFAULT_DATA,
+        ...JSON.parse(saved)
+      };
+
+    }else{
+
+      DATA = {
+        ...DEFAULT_DATA
+      };
+
     }
 
-  } catch (error) {
-    console.error(error);
+  }catch(error){
 
-    showMessage(
-      "Error comprobando administrador: " + error.message,
-      "error"
-    );
+    DATA = {
+      ...DEFAULT_DATA
+    };
+
   }
+
+  renderData();
+
 }
 
-initializeApp();
+
+/* =========================================================
+   RENDERIZAR DATOS
+========================================================= */
+
+function renderData(){
+
+  document.getElementById("brandName").textContent =
+    DATA.brand;
+
+  document.getElementById("brandSlogan").textContent =
+    DATA.slogan;
+
+  document.getElementById("topPhone").textContent =
+    DATA.phone;
+
+  document.getElementById("heroPhone").textContent =
+    DATA.phone;
+
+  document.getElementById("footerPhone").textContent =
+    DATA.phone;
+
+  document.getElementById("heroDescription").textContent =
+    DATA.heroDescription;
+
+
+  document.getElementById("rechargeTitle").textContent =
+    DATA.rechargeTitle;
+
+  document.getElementById("rechargePrice").textContent =
+    DATA.rechargePrice;
+
+  document.getElementById("rechargeDetail").textContent =
+    DATA.rechargeDetail;
+
+
+  document.getElementById("remittanceTitle").textContent =
+    DATA.remittanceTitle;
+
+  document.getElementById("remittancePrice").textContent =
+    DATA.remittancePrice;
+
+  document.getElementById("remittanceDetail").textContent =
+    DATA.remittanceDetail;
+
+
+  document.getElementById("ticketTitle").textContent =
+    DATA.ticketTitle;
+
+  document.getElementById("ticketPrice").textContent =
+    DATA.ticketPrice;
+
+  document.getElementById("ticketDetail").textContent =
+    DATA.ticketDetail;
+
+
+  document.getElementById("heroRecharge").textContent =
+    DATA.rechargePrice;
+
+  document.getElementById("heroRemittance").textContent =
+    DATA.remittancePrice;
+
+  document.getElementById("heroTicket").textContent =
+    DATA.ticketPrice;
+
+
+  document.getElementById("announcementText").textContent =
+    DATA.announcement;
+
+
+  updateWhatsApp();
+
+}
+
+
+/* =========================================================
+   ADMIN LOGIN
+========================================================= */
+
+function loginAdmin(){
+
+  const password =
+    document.getElementById("adminPassword").value;
+
+  if(password === ADMIN_PASSWORD){
+
+    sessionStorage.setItem(
+      ADMIN_SESSION_KEY,
+      "true"
+    );
+
+    document.getElementById("adminLogin").style.display =
+      "none";
+
+    document.getElementById("adminPanel").classList.add(
+      "active"
+    );
+
+    loadAdminData();
+
+    showToast(
+      "Acceso administrativo concedido."
+    );
+
+  }else{
+
+    showToast(
+      "Contraseña incorrecta."
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   CARGAR PANEL
+========================================================= */
+
+function loadAdminData(){
+
+  document.getElementById("editBrand").value =
+    DATA.brand;
+
+  document.getElementById("editSlogan").value =
+    DATA.slogan;
+
+  document.getElementById("editPhone").value =
+    DATA.phone;
+
+  document.getElementById("editAdmin").value =
+    DATA.admin;
+
+  document.getElementById("editHeroDescription").value =
+    DATA.heroDescription;
+
+
+  document.getElementById("editRechargeTitle").value =
+    DATA.rechargeTitle;
+
+  document.getElementById("editRechargePrice").value =
+    DATA.rechargePrice;
+
+  document.getElementById("editRechargeDetail").value =
+    DATA.rechargeDetail;
+
+
+  document.getElementById("editRemittanceTitle").value =
+    DATA.remittanceTitle;
+
+  document.getElementById("editRemittancePrice").value =
+    DATA.remittancePrice;
+
+  document.getElementById("editRemittanceDetail").value =
+    DATA.remittanceDetail;
+
+
+  document.getElementById("editTicketTitle").value =
+    DATA.ticketTitle;
+
+  document.getElementById("editTicketPrice").value =
+    DATA.ticketPrice;
+
+  document.getElementById("editTicketDetail").value =
+    DATA.ticketDetail;
+
+
+  document.getElementById("editAnnouncement").value =
+    DATA.announcement;
+
+}
+
+
+/* =========================================================
+   GUARDAR CAMBIOS
+========================================================= */
+
+function saveChanges(){
+
+  DATA = {
+
+    brand:
+      document.getElementById("editBrand").value,
+
+    slogan:
+      document.getElementById("editSlogan").value,
+
+    phone:
+      document.getElementById("editPhone").value,
+
+    admin:
+      document.getElementById("editAdmin").value,
+
+    heroDescription:
+      document.getElementById("editHeroDescription").value,
+
+    rechargeTitle:
+      document.getElementById("editRechargeTitle").value,
+
+    rechargePrice:
+      document.getElementById("editRechargePrice").value,
+
+    rechargeDetail:
+      document.getElementById("editRechargeDetail").value,
+
+    remittanceTitle:
+      document.getElementById("editRemittanceTitle").value,
+
+    remittancePrice:
+      document.getElementById("editRemittancePrice").value,
+
+    remittanceDetail:
+      document.getElementById("editRemittanceDetail").value,
+
+    ticketTitle:
+      document.getElementById("editTicketTitle").value,
+
+    ticketPrice:
+      document.getElementById("editTicketPrice").value,
+
+    ticketDetail:
+      document.getElementById("editTicketDetail").value,
+
+    announcement:
+      document.getElementById("editAnnouncement").value
+
+  };
+
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(DATA)
+  );
+
+
+  renderData();
+
+  showToast(
+    "Cambios guardados correctamente."
+  );
+
+}
+
+
+/* =========================================================
+   RESTAURAR
+========================================================= */
+
+function resetData(){
+
+  if(
+    !confirm(
+      "¿Restaurar todos los valores originales?"
+    )
+  ){
+
+    return;
+
+  }
+
+  DATA = {
+    ...DEFAULT_DATA
+  };
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(DATA)
+  );
+
+  renderData();
+
+  loadAdminData();
+
+  showToast(
+    "Valores restaurados."
+  );
+
+}
+
+
+/* =========================================================
+   CERRAR SESIÓN
+========================================================= */
+
+function logoutAdmin(){
+
+  sessionStorage.removeItem(
+    ADMIN_SESSION_KEY
+  );
+
+  document.getElementById("adminPanel")
+    .classList.remove("active");
+
+  document.getElementById("adminLogin")
+    .style.display = "block";
+
+  document.getElementById("adminPassword")
+    .value = "";
+
+}
+
+
+/* =========================================================
+   WHATSAPP
+========================================================= */
+
+function updateWhatsApp(){
+
+  const number =
+    DATA.phone.replace(/\D/g,"");
+
+  const message =
+    encodeURIComponent(
+      "Hola YOUR BRIDGE HOME. Quiero información sobre sus servicios."
+    );
+
+  document.getElementById("whatsappButton").href =
+    "https://wa.me/" + number +
+    "?text=" + message;
+
+}
+
+
+/* =========================================================
+   SOLICITAR SERVICIO
+========================================================= */
+
+function requestService(service){
+
+  selectedService =
+    service;
+
+  document.getElementById("modalTitle").textContent =
+    "Solicitar: " + service;
+
+  document.getElementById("requestDetails").value =
+    "Servicio solicitado: " + service + "\n\n";
+
+  document.getElementById("requestModal")
+    .classList.add("active");
+
+}
+
+
+/* =========================================================
+   ENVIAR SOLICITUD
+========================================================= */
+
+function sendRequest(){
+
+  const name =
+    document.getElementById("requestName").value.trim();
+
+  const phone =
+    document.getElementById("requestPhone").value.trim();
+
+  const details =
+    document.getElementById("requestDetails").value.trim();
+
+  if(!name){
+
+    showToast(
+      "Escribe tu nombre."
+    );
+
+    return;
+
+  }
+
+  if(!details){
+
+    showToast(
+      "Escribe los detalles de la solicitud."
+    );
+
+    return;
+
+  }
+
+  const message =
+
+`Hola YOUR BRIDGE HOME.
+
+Quiero solicitar:
+${selectedService}
+
+Nombre: ${name}
+WhatsApp: ${phone}
+
+Detalles:
+${details}`;
+
+  const url =
+    "https://wa.me/" +
+    DATA.phone.replace(/\D/g,"") +
+    "?text=" +
+    encodeURIComponent(message);
+
+  window.open(
+    url,
+    "_blank"
+  );
+
+}
+
+
+/* =========================================================
+   FEEDBACK
+========================================================= */
+
+function sendFeedback(){
+
+  const name =
+    document.getElementById("feedbackName").value.trim();
+
+  const phone =
+    document.getElementById("feedbackPhone").value.trim();
+
+  const message =
+    document.getElementById("feedbackMessage").value.trim();
+
+  if(!message){
+
+    showToast(
+      "Escribe tu opinión o sugerencia."
+    );
+
+    return;
+
+  }
+
+  const text =
+
+`Hola YOUR BRIDGE HOME.
+
+Nueva opinión / sugerencia.
+
+Nombre: ${name}
+WhatsApp: ${phone}
+
+Mensaje:
+${message}`;
+
+  const url =
+    "https://wa.me/" +
+    DATA.phone.replace(/\D/g,"") +
+    "?text=" +
+    encodeURIComponent(text);
+
+  window.open(
+    url,
+    "_blank"
+  );
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function closeModal(){
+
+  document.getElementById("requestModal")
+    .classList.remove("active");
+
+}
+
+
+/* =========================================================
+   MENÚ MÓVIL
+========================================================= */
+
+function toggleMenu(){
+
+  document.getElementById("mainNav")
+    .classList.toggle("open");
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent =
+    message;
+
+  toast.classList.add("show");
+
+  setTimeout(
+    () => {
+      toast.classList.remove("show");
+    },
+    3000
+  );
+
+}
+
+
+/* =========================================================
+   IDIOMAS
+========================================================= */
+
+const translations = {
+
+  es: {
+    home:"Inicio",
+    services:"Servicios",
+    offers:"Ofertas",
+    destinations:"Destinos",
+    information:"Información",
+    opinions:"Opiniones",
+    administration:"Administración"
+  },
+
+  en: {
+    home:"Home",
+    services:"Services",
+    offers:"Offers",
+    destinations:"Destinations",
+    information:"Information",
+    opinions:"Reviews",
+    administration:"Administration"
+  },
+
+  ru: {
+    home:"Главная",
+    services:"Услуги",
+    offers:"Предложения",
+    destinations:"Направления",
+    information:"Информация",
+    opinions:"Отзывы",
+    administration:"Администрирование"
+  }
+
+};
+
+
+function setLanguage(language){
+
+  const t =
+    translations[language];
+
+  const links =
+    document.querySelectorAll("#mainNav a");
+
+  if(links.length >= 7){
+
+    links[0].textContent =
+      t.home;
+
+    links[1].textContent =
+      t.services;
+
+    links[2].textContent =
+      t.offers;
+
+    links[3].textContent =
+      t.destinations;
+
+    links[4].textContent =
+      t.information;
+
+    links[5].textContent =
+      t.opinions;
+
+    links[6].textContent =
+      t.administration;
+
+  }
+
+  document
+    .querySelectorAll(".languages button")
+    .forEach(btn => {
+      btn.classList.remove("active");
+    });
+
+  event.target.classList.add("active");
+
+}
+
+
+/* =========================================================
+   ANUNCIO ROTATIVO
+========================================================= */
+
+let announcementIndex = 0;
+
+function rotateAnnouncement(){
+
+  const offers = [
+
+    "🔥 " +
+    DATA.rechargeTitle +
+    " desde " +
+    DATA.rechargePrice +
+    " — " +
+    DATA.rechargeDetail,
+
+    "💸 Remesas: " +
+    DATA.remittancePrice +
+    " → " +
+    DATA.remittanceDetail,
+
+    "✈️ Ticket desde " +
+    DATA.ticketPrice +
+    " — " +
+    DATA.ticketDetail,
+
+    "📞 Atención: " +
+    DATA.phone
+
+  ];
+
+  announcementIndex++;
+
+  if(
+    announcementIndex >=
+    offers.length
+  ){
+
+    announcementIndex = 0;
+
+  }
+
+  document.getElementById(
+    "announcementText"
+  ).textContent =
+    offers[announcementIndex];
+
+}
+
+
+/* =========================================================
+   CERRAR MODAL AL HACER CLICK FUERA
+========================================================= */
+
+document
+  .getElementById("requestModal")
+  .addEventListener(
+    "click",
+    function(e){
+
+      if(e.target === this){
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   INICIALIZACIÓN
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    loadData();
+
+    document.getElementById("year")
+      .textContent =
+      new Date().getFullYear();
+
+    if(
+      sessionStorage.getItem(
+        ADMIN_SESSION_KEY
+      ) === "true"
+    ){
+
+      document.getElementById("adminLogin")
+        .style.display = "none";
+
+      document.getElementById("adminPanel")
+        .classList.add("active");
+
+      loadAdminData();
+
+    }
+
+    setInterval(
+      rotateAnnouncement,
+      7000
+    );
+
+  }
+);
 
 </script>
+
 </body>
 </html>
