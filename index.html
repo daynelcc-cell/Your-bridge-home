@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
 :root{--bg:#0f172a;--panel:#17243a;--panel2:#1d2c44;--gold:#e8b84d;--gold2:#ffd978;--white:#f8fafc;--muted:#aab6c8;--line:#33445f;--green:#25d366;--red:#ef6464}
 *{box-sizing:border-box}
@@ -31,6 +29,7 @@ header{position:sticky;top:0;z-index:50;background:#0b1425ed;border-bottom:1px s
 .btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#182235}
 .btn-dark{background:#253650;color:white;border:1px solid var(--line)}
 .btn-green{background:var(--green);color:#082515}
+.btn-red{background:var(--red);color:white}
 .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
 .menu-btn{display:none;background:none;border:0;color:white;font-size:23px}
 .hero{padding:76px 0 55px;background:radial-gradient(ellipse at 80% 10%,#b7892924,transparent 40%),linear-gradient(140deg,#101a2d,#14243a)}
@@ -70,6 +69,7 @@ section{padding:58px 0}
 .result{background:#0d192b;border:1px solid var(--gold);border-radius:10px;padding:12px;color:var(--gold);font-weight:900;min-height:44px}
 .offer-card{position:relative}
 .offer-card .price{margin:8px 0}
+.offer-card img{width:100%;height:150px;object-fit:cover;border-radius:10px;margin-bottom:12px;background:#0b1425}
 .empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;grid-column:1/-1}
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .contact-box{overflow:hidden;min-width:0;overflow-wrap:anywhere}
@@ -98,9 +98,16 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 .notice{background:#302b1e;border:1px solid #80652e;color:#f4d994;padding:12px;border-radius:10px;font-size:11px;margin:12px 0}
 .generator-preview{width:100%;max-width:420px;margin:15px auto;display:block;border-radius:12px;border:1px solid var(--line);background:#0b1425}
 .checks{display:flex;gap:15px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
-.checks label{display:flex;gap:6px;align-items:center}
-.hidden{display:none!important}
-button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.checks label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.checks input[type="checkbox"]{accent-color:var(--gold);width:16px;height:16px}
+.diagnostic{background:#0d192b;border:1px solid var(--line);border-radius:12px;padding:15px;margin:12px 0;font-size:12px;max-height:300px;overflow:auto}
+.diagnostic h4{color:var(--gold);margin:0 0 10px 0;font-size:13px}
+.diag-line{padding:6px 10px;margin:4px 0;border-radius:6px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.diag-ok{background:#0f3d1f;color:#a8f0c0}
+.diag-err{background:#3d0f0f;color:#f0a8a8}
+.diag-info{background:#1a2744;color:#c0d0eb}
+.diag-line i{font-size:14px}
+.img-preview{max-width:80px;max-height:80px;border-radius:8px;border:1px solid var(--line);margin-top:5px}
 @media(max-width:850px){
  .navlinks{display:none;position:absolute;top:74px;left:0;right:0;background:#0b1425;padding:18px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
  .navlinks.open{display:flex}
@@ -294,16 +301,18 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
     <div class="form-grid">
      <div class="field"><label>Nombre completo</label><input id="clientName" required maxlength="100" placeholder="Tu nombre"></div>
      <div class="field"><label>Teléfono / WhatsApp</label><input id="clientPhone" required maxlength="40" placeholder="Tu número de contacto"></div>
-     <div class="field">
-      <label>Servicio</label>
-      <select id="clientService">
-       <option>Recarga</option>
-       <option>Remesa</option>
-       <option>Consulta general</option>
-       <option>Pasaje de avión</option>
-       <option>Autobús o tren</option>
-      </select>
+     
+     <div class="field full">
+      <label>Servicios de interés (puedes seleccionar más de uno)</label>
+      <div class="checks" style="margin-top:8px; gap:12px;">
+       <label><input type="checkbox" class="service-check" value="Recarga"> Recargas</label>
+       <label><input type="checkbox" class="service-check" value="Remesa"> Remesas</label>
+       <label><input type="checkbox" class="service-check" value="Pasaje de avión"> Pasaje de avión</label>
+       <label><input type="checkbox" class="service-check" value="Autobús o tren"> Autobús o tren</label>
+       <label><input type="checkbox" class="service-check" value="Consulta general"> Consulta general</label>
+      </div>
      </div>
+
      <div class="field"><label>Destino</label><input id="clientDestination" maxlength="100" placeholder="País o ciudad"></div>
      <div class="field full"><label>Detalles de tu solicitud</label><textarea id="clientDetails" maxlength="1500" placeholder="Cuéntanos qué necesitas, fechas, cantidad o cualquier detalle importante."></textarea></div>
      <div class="full"><button class="btn btn-gold" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar solicitud</button></div>
@@ -337,7 +346,11 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 
 <footer>
  <div class="container footer-inner">
-  <div><strong class="gold">YOUR BRIDGE HOME</strong><br>Tu puente hacia nuevas oportunidades.</div>
+  <div>
+   <strong class="gold">YOUR BRIDGE HOME</strong><br>
+   Tu puente hacia nuevas oportunidades.
+   <div class="mini" style="margin-top:8px;"><i class="fa-solid fa-eye gold"></i> <span id="visitorCount">...</span> visitantes</div>
+  </div>
   <div>Daynel Caminero · Administrador<br>WhatsApp: +7 904 631 95 65</div>
   <div>© <span id="year"></span> YOUR BRIDGE HOME</div>
  </div>
@@ -345,7 +358,7 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 
 <a class="floating" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> ATENCIÓN DIRECTA</a>
 
-<!-- ACCESO ADMINISTRADOR -->
+<!-- LOGIN -->
 <div class="overlay" id="loginModal">
  <div class="modal" style="max-width:400px">
   <div class="modal-head"><h2>Administración</h2><button class="close" type="button" onclick="closeModal('loginModal')">✕</button></div>
@@ -360,7 +373,12 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 <div class="overlay" id="adminModal">
  <div class="modal">
   <div class="modal-head"><h2><i class="fa-solid fa-screwdriver-wrench"></i> Panel de administración</h2><button class="close" type="button" onclick="closeModal('adminModal')">✕</button></div>
-  <div class="notice">La contraseña está conservada como solicitaste. Recuerda que una contraseña escrita en HTML puede ser vista por quien inspeccione el código. Configura las políticas RLS de Supabase y nunca pongas claves secretas de servicio en esta página.</div>
+
+  <!-- PANEL DE DIAGNÓSTICO VISIBLE -->
+  <div class="diagnostic" id="diagnosticPanel">
+   <h4><i class="fa-solid fa-stethoscope"></i> Diagnóstico del sistema</h4>
+   <div id="diagnosticContent">Cargando diagnóstico...</div>
+  </div>
 
   <div class="admin-tabs">
    <button type="button" class="active" onclick="showAdminTab('ratesAdmin',this)">Tasas</button>
@@ -392,6 +410,11 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
     <div class="field"><label>Moneda</label><select id="rechargeCurrency"><option>RUB</option><option>USD</option><option>EUR</option><option>CUP</option><option>MLC</option></select></div>
     <div class="field full"><label>Descripción 1</label><input id="rechargeDesc1" placeholder="2 GB LTE"></div>
     <div class="field full"><label>Descripción 2</label><input id="rechargeDesc2" placeholder="300 MB.cu"></div>
+    <div class="field full">
+     <label>Imagen del plan (opcional)</label>
+     <input id="rechargeImage" type="file" accept="image/*">
+     <div id="rechargeImagePreview"></div>
+    </div>
    </div>
    <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveRecharge()">Guardar plan</button>
    <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearRechargeForm()">Nuevo</button>
@@ -411,11 +434,15 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
     <div class="field"><label>Precio</label><input id="ticketPrice" type="number" min="0" step="0.01"></div>
     <div class="field"><label>Moneda</label><select id="ticketCurrency"><option>USD</option><option>MLC</option><option>CUP</option><option>EUR</option><option>RUB</option></select></div>
     <div class="field full"><label>Descripción adicional</label><textarea id="ticketDescription" placeholder="Equipaje, condiciones, escalas u otros detalles"></textarea></div>
+    <div class="field full">
+     <label>Imagen del pasaje (opcional)</label>
+     <input id="ticketImage" type="file" accept="image/*">
+     <div id="ticketImagePreview"></div>
+    </div>
    </div>
    <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveTicket()">Guardar pasaje</button>
    <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearTicketForm()">Nuevo</button>
    <div class="admin-list" id="adminTicketList"></div>
-   <div class="notice">Si la tabla pasajes aún no existe, créala en Supabase antes de guardar pasajes.</div>
   </div>
 
   <div class="admin-panel" id="requestsAdmin">
@@ -426,10 +453,10 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
 
   <div class="admin-panel" id="generatorAdmin">
    <h3><i class="fa-solid fa-image gold"></i> Generador privado de anuncios</h3>
-   <p class="mini">Crea imágenes promocionales para compartir en WhatsApp y redes sociales. Los valores se introducen manualmente.</p>
+   <p class="mini">Crea imágenes promocionales para compartir en WhatsApp y redes sociales.</p>
    <div class="form-grid">
     <div class="field full"><label>Título del anuncio</label><input id="adTitle" value="TASA INFORMAL HOY EN CUBA"></div>
-    <div class="field"><label>USD en CUP</label><input id="adUSD" type="number" step="0.01" placeholder="Valor de hoy"></div>
+    <div class="field"><label>USD en CUP</label><input id="adUSD" type="number" step="0.01"></div>
     <div class="field"><label>EUR en CUP</label><input id="adEUR" type="number" step="0.01"></div>
     <div class="field"><label>MLC en CUP</label><input id="adMLC" type="number" step="0.01"></div>
     <div class="field"><label>RUB en CUP</label><input id="adRUB" type="number" step="0.01"></div>
@@ -449,7 +476,6 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offse
    <button class="btn btn-dark" type="button" onclick="downloadAd()"><i class="fa-solid fa-download"></i> Descargar PNG</button>
    <button class="btn btn-dark" type="button" onclick="copyAdText()"><i class="fa-regular fa-copy"></i> Copiar texto</button>
    <canvas id="adCanvas" class="generator-preview" width="1080" height="1350"></canvas>
-   <p class="mini">La imagen se genera localmente en tu navegador. No ocupa espacio de almacenamiento de Supabase.</p>
   </div>
  </div>
 </div>
@@ -460,44 +486,115 @@ const SUPABASE_URL = "https://lwgeillycitljubenzhv.supabase.co";
 const SUPABASE_KEY = "sb_publishable_LaA2IPL1J_IWAH0CVMUcBQ_j-BZa2pe";
 const ADMIN_PASSWORD = "MI_CLAVE_SECRETA";
 
-const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// NOMBRES DE TABLAS Y COLUMNAS (ajusta si los tuyos son diferentes)
+const CONFIG = {
+ tablaConfig: "configuracion",
+ tablaRecargas: "planes_recargas",
+ tablaPasajes: "pasajes",
+ tablaSolicitudes: "solicitudes",
+ tablaContador: "contador_visitas",
+ bucketFotos: "imagenes",
+ columnaImagen: "imagen_url"
+};
 
-// ELEMENTOS HTML
+const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const $ = id => document.getElementById(id);
 
 let rates = {USD:0,EUR:0,RUB:0,MLC:0,GBP:0};
 let rechargeData = [];
 let ticketData = [];
 let requestData = [];
-
-// CONTROL DE ACTUALIZACIONES AUTOMÁTICAS
 let realtimeChannel = null;
 let pollingTimer = null;
 let refreshInProgress = false;
 let refreshAgain = false;
+let diagnosticLog = [];
 
 $("year").textContent = new Date().getFullYear();
 $("adDate").value = new Date().toISOString().slice(0,10);
 
-// NAVEGACIÓN
-function toggleMenu(){
- $("navlinks").classList.toggle("open");
+// SISTEMA DE DIAGNÓSTICO VISIBLE
+function diag(type, msg) {
+ diagnosticLog.push({type, msg});
+ renderDiagnostic();
 }
 
-document.querySelectorAll(".navlinks a").forEach(a=>{
- a.addEventListener("click",()=>{
-  $("navlinks").classList.remove("open");
- });
-});
+function renderDiagnostic() {
+ const el = $("diagnosticContent");
+ if (!el) return;
+ el.innerHTML = diagnosticLog.map(d => {
+  const cls = d.type === "ok" ? "diag-ok" : d.type === "err" ? "diag-err" : "diag-info";
+  const icon = d.type === "ok" ? "fa-circle-check" : d.type === "err" ? "fa-circle-xmark" : "fa-circle-info";
+  return `<div class="diag-line ${cls}"><i class="fa-solid ${icon}"></i> ${d.msg}</div>`;
+ }).join("");
+}
 
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
- a.addEventListener("click",()=>{
-  const target = $(a.getAttribute("href").slice(1));
-  if(target){
-   $("navlinks").classList.remove("open");
+function clearDiag() {
+ diagnosticLog = [];
+ renderDiagnostic();
+}
+
+// CONTADOR DE VISITANTES
+async function trackVisitor() {
+ if (sessionStorage.getItem('isAdmin') === 'true') {
+  diag("info", "👤 Eres el administrador. No se cuenta tu visita.");
+  // Leer el total igualmente para mostrarlo
+  const { data, error } = await db.from(CONFIG.tablaContador).select('total').eq('id', 1).maybeSingle();
+  if (error) {
+   diag("err", "❌ Contador: " + error.message);
+   $("visitorCount").textContent = "—";
+  } else if (data) {
+   $("visitorCount").textContent = data.total;
+   diag("ok", "✅ Contador cargado: " + data.total + " visitas");
   }
- });
-});
+  return;
+ }
+ 
+ if (sessionStorage.getItem('counted')) {
+  diag("info", "✅ Visita ya contada en esta sesión");
+ } else {
+  // Intentar incrementar con RPC primero, luego con update directo
+  try {
+   const { error: rpcError } = await db.rpc('incrementar_visita');
+   if (rpcError) {
+    diag("info", "⚠️ RPC no disponible, usando método alternativo...");
+    // Método alternativo: leer, sumar, actualizar
+    const { data: current } = await db.from(CONFIG.tablaContador).select('total').eq('id', 1).maybeSingle();
+    const newTotal = (current?.total || 0) + 1;
+    const { error: updateError } = await db.from(CONFIG.tablaContador).update({total: newTotal}).eq('id', 1);
+    if (updateError) {
+     diag("err", "❌ Contador: " + updateError.message);
+    } else {
+     sessionStorage.setItem('counted', 'true');
+     diag("ok", "✅ Visita registrada (total: " + newTotal + ")");
+    }
+   } else {
+    sessionStorage.setItem('counted', 'true');
+    diag("ok", "✅ Visita registrada correctamente");
+   }
+  } catch(e) {
+   diag("err", "❌ Error contador: " + e.message);
+  }
+ }
+ 
+ const { data, error } = await db.from(CONFIG.tablaContador).select('total').eq('id', 1).maybeSingle();
+ if (error) {
+  diag("err", "❌ Leyendo contador: " + error.message);
+  $("visitorCount").textContent = "—";
+ } else if (data) {
+  $("visitorCount").textContent = data.total;
+ } else {
+  $("visitorCount").textContent = "0";
+ }
+}
+
+// NAVEGACIÓN
+function toggleMenu(){ $("navlinks").classList.toggle("open"); }
+document.querySelectorAll(".navlinks a").forEach(a=> a.addEventListener("click",()=> $("navlinks").classList.remove("open")));
+document.querySelectorAll('a[href^="#"]').forEach(a=> a.addEventListener("click",()=> {
+ const target = $(a.getAttribute("href").slice(1));
+ if(target) $("navlinks").classList.remove("open");
+}));
 
 // MODALES
 function openLogin(){
@@ -505,15 +602,16 @@ function openLogin(){
  $("loginModal").classList.add("show");
  setTimeout(()=>$("adminPassword").focus(),100);
 }
-
-function closeModal(id){
- $(id).classList.remove("show");
-}
+function closeModal(id){ $(id).classList.remove("show"); }
 
 function login(){
  if($("adminPassword").value === ADMIN_PASSWORD){
   closeModal("loginModal");
   $("adminModal").classList.add("show");
+  sessionStorage.setItem('isAdmin', 'true');
+  clearDiag();
+  diag("info", "🔐 Sesión de administrador iniciada");
+  runDiagnostics();
   loadAdminData();
   $("adminPassword").value="";
  }else{
@@ -521,399 +619,252 @@ function login(){
  }
 }
 
-$("adminPassword").addEventListener("keydown",e=>{
- if(e.key==="Enter")login();
-});
+$("adminPassword").addEventListener("keydown",e=>{ if(e.key==="Enter")login(); });
+["loginModal","adminModal"].forEach(id=>{ $(id).addEventListener("click",e=>{ if(e.target === $(id))closeModal(id); }); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ closeModal("loginModal"); closeModal("adminModal"); } });
 
-["loginModal","adminModal"].forEach(id=>{
- $(id).addEventListener("click",e=>{
-  if(e.target === $(id))closeModal(id);
- });
-});
-
-document.addEventListener("keydown",e=>{
- if(e.key==="Escape"){
-  closeModal("loginModal");
-  closeModal("adminModal");
- }
-});
-
-// PESTAÑAS DE ADMINISTRACIÓN
 function showAdminTab(id,btn){
  document.querySelectorAll(".admin-panel").forEach(p=>p.classList.remove("active"));
  document.querySelectorAll(".admin-tabs button").forEach(b=>b.classList.remove("active"));
  const panel=$(id);
- if(panel){
-  panel.classList.add("active");
-  btn.classList.add("active");
- }
+ if(panel){ panel.classList.add("active"); btn.classList.add("active"); }
+}
+
+// DIAGNÓSTICO COMPLETO DEL SISTEMA
+async function runDiagnostics() {
+ diag("info", "🔍 Verificando conexión con Supabase...");
+ 
+ // 1. Verificar tabla configuracion
+ try {
+  const { data, error } = await db.from(CONFIG.tablaConfig).select('*').limit(1);
+  if (error) diag("err", "❌ Tabla '" + CONFIG.tablaConfig + "': " + error.message);
+  else diag("ok", "✅ Tabla '" + CONFIG.tablaConfig + "' accesible");
+ } catch(e) { diag("err", "❌ Error tabla config: " + e.message); }
+ 
+ // 2. Verificar tabla planes_recargas y columna imagen
+ try {
+  const { data, error } = await db.from(CONFIG.tablaRecargas).select('*').limit(1);
+  if (error) diag("err", "❌ Tabla '" + CONFIG.tablaRecargas + "': " + error.message);
+  else {
+   diag("ok", "✅ Tabla '" + CONFIG.tablaRecargas + "' accesible (" + (data?.length || 0) + " registros)");
+   if (data && data[0] && CONFIG.columnaImagen in data[0]) {
+    diag("ok", "✅ Columna '" + CONFIG.columnaImagen + "' existe en recargas");
+   } else {
+    diag("err", "❌ Falta columna '" + CONFIG.columnaImagen + "' en recargas");
+   }
+  }
+ } catch(e) { diag("err", "❌ Error recargas: " + e.message); }
+ 
+ // 3. Verificar tabla pasajes y columna imagen
+ try {
+  const { data, error } = await db.from(CONFIG.tablaPasajes).select('*').limit(1);
+  if (error) diag("err", "❌ Tabla '" + CONFIG.tablaPasajes + "': " + error.message);
+  else {
+   diag("ok", "✅ Tabla '" + CONFIG.tablaPasajes + "' accesible (" + (data?.length || 0) + " registros)");
+   if (data && data[0] && CONFIG.columnaImagen in data[0]) {
+    diag("ok", "✅ Columna '" + CONFIG.columnaImagen + "' existe en pasajes");
+   } else {
+    diag("err", "❌ Falta columna '" + CONFIG.columnaImagen + "' en pasajes");
+   }
+  }
+ } catch(e) { diag("err", "❌ Error pasajes: " + e.message); }
+ 
+ // 4. Verificar tabla solicitudes
+ try {
+  const { data, error } = await db.from(CONFIG.tablaSolicitudes).select('*').limit(1);
+  if (error) diag("err", "❌ Tabla '" + CONFIG.tablaSolicitudes + "': " + error.message);
+  else diag("ok", "✅ Tabla '" + CONFIG.tablaSolicitudes + "' accesible");
+ } catch(e) { diag("err", "❌ Error solicitudes: " + e.message); }
+ 
+ // 5. Verificar tabla contador
+ try {
+  const { data, error } = await db.from(CONFIG.tablaContador).select('*').eq('id', 1).maybeSingle();
+  if (error) diag("err", "❌ Tabla '" + CONFIG.tablaContador + "': " + error.message);
+  else if (data) diag("ok", "✅ Contador: " + data.total + " visitas totales");
+  else diag("err", "❌ Contador: no existe registro con id=1");
+ } catch(e) { diag("err", "❌ Error contador: " + e.message); }
+ 
+ // 6. Verificar bucket de Storage
+ try {
+  const { data, error } = await db.storage.getBucket(CONFIG.bucketFotos);
+  if (error) diag("err", "❌ Bucket '" + CONFIG.bucketFotos + "': " + error.message);
+  else {
+   diag("ok", "✅ Bucket '" + CONFIG.bucketFotos + "' existe");
+   if (data.public) diag("ok", "✅ Bucket es público (las fotos se verán)");
+   else diag("err", "❌ Bucket NO es público. Activa 'Public bucket' en Supabase");
+  }
+ } catch(e) { diag("err", "❌ Error bucket: " + e.message); }
+ 
+ diag("info", "🏁 Diagnóstico completado");
 }
 
 // UTILIDADES
-function safe(v){
- return String(v??"").replace(/[&<>"']/g,c=>({
-  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- }[c]));
-}
-
-function money(v,c){
- return `${Number(v||0).toLocaleString("es-ES",{maximumFractionDigits:2})} ${safe(c||"")}`;
-}
-
-function showError(msg){
- console.error(msg);
-}
+function safe(v){ return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+function money(v,c){ return `${Number(v||0).toLocaleString("es-ES",{maximumFractionDigits:2})} ${safe(c||"")}`; }
 
 // CARGA GENERAL
 async function loadAll(){
- await Promise.all([
-  loadRates(),
-  loadRecharges(),
-  loadTickets()
- ]);
+ await Promise.all([ loadRates(), loadRecharges(), loadTickets(), trackVisitor() ]);
 }
 
-// ACTUALIZACIÓN AUTOMÁTICA
 async function refreshLiveData(){
- if(refreshInProgress){
-  refreshAgain = true;
-  return;
- }
-
+ if(refreshInProgress){ refreshAgain = true; return; }
  refreshInProgress = true;
-
  try{
-  await Promise.all([
-   loadRates(),
-   loadRecharges(),
-   loadTickets()
-  ]);
-
-  // Si el panel está abierto, actualiza también sus listas.
+  await Promise.all([ loadRates(), loadRecharges(), loadTickets() ]);
   if($("adminModal").classList.contains("show")){
-   renderAdminRecharges();
-   renderAdminTickets();
-   await loadRequests();
+   renderAdminRecharges(); renderAdminTickets(); await loadRequests();
   }
-
- }catch(error){
-  console.error("Error actualizando los datos:",error);
- }finally{
+ }catch(error){ console.error("Error actualizando:",error); }
+ finally{
   refreshInProgress = false;
-
-  if(refreshAgain){
-   refreshAgain = false;
-   refreshLiveData();
-  }
+  if(refreshAgain){ refreshAgain = false; refreshLiveData(); }
  }
 }
 
-// CONEXIÓN SUPABASE REALTIME
 function startLiveUpdates(){
-
- if(realtimeChannel){
-  db.removeChannel(realtimeChannel);
-  realtimeChannel = null;
- }
-
+ if(realtimeChannel) db.removeChannel(realtimeChannel);
  realtimeChannel = db.channel("your-bridge-home-live")
-
-  .on(
-   "postgres_changes",
-   {
-    event:"*",
-    schema:"public",
-    table:"configuracion"
-   },
-   ()=>refreshLiveData()
-  )
-
-  .on(
-   "postgres_changes",
-   {
-    event:"*",
-    schema:"public",
-    table:"planes_recargas"
-   },
-   ()=>refreshLiveData()
-  )
-
-  .on(
-   "postgres_changes",
-   {
-    event:"*",
-    schema:"public",
-    table:"pasajes"
-   },
-   ()=>refreshLiveData()
-  )
-
-  .on(
-   "postgres_changes",
-   {
-    event:"*",
-    schema:"public",
-    table:"solicitudes"
-   },
-   ()=>{
-    if($("adminModal").classList.contains("show")){
-     loadRequests();
-    }
-   }
-  )
-
-  .subscribe(status=>{
-   console.log("Estado Supabase Realtime:",status);
-
-   if(status==="SUBSCRIBED"){
-    console.log("YOUR BRIDGE HOME conectado en tiempo real.");
-   }
-
-   if(status==="CHANNEL_ERROR" || status==="TIMED_OUT"){
-    console.warn("Realtime no está disponible. Se mantiene la actualización automática de respaldo.");
-   }
-  });
-
- // RESPALDO: CONSULTA CADA 30 SEGUNDOS.
- if(pollingTimer){
-  clearInterval(pollingTimer);
- }
-
- pollingTimer=setInterval(()=>{
-  if(document.visibilityState==="visible"){
-   refreshLiveData();
-  }
- },30000);
+  .on("postgres_changes",{event:"*",schema:"public",table:CONFIG.tablaConfig},()=>refreshLiveData())
+  .on("postgres_changes",{event:"*",schema:"public",table:CONFIG.tablaRecargas},()=>refreshLiveData())
+  .on("postgres_changes",{event:"*",schema:"public",table:CONFIG.tablaPasajes},()=>refreshLiveData())
+  .on("postgres_changes",{event:"*",schema:"public",table:CONFIG.tablaSolicitudes},()=>{ if($("adminModal").classList.contains("show")) loadRequests(); })
+  .subscribe(status=>{ if(status==="SUBSCRIBED") console.log("Conectado en tiempo real."); });
+ 
+ if(pollingTimer) clearInterval(pollingTimer);
+ pollingTimer=setInterval(()=>{ if(document.visibilityState==="visible") refreshLiveData(); },30000);
 }
 
-// ACTUALIZAR AL REGRESAR A LA PÁGINA
-document.addEventListener("visibilitychange",()=>{
- if(document.visibilityState==="visible"){
-  refreshLiveData();
- }
-});
-
-window.addEventListener("focus",()=>{
- refreshLiveData();
-});
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="visible") refreshLiveData(); });
+window.addEventListener("focus",()=>{ refreshLiveData(); });
 
 // TASAS
 async function loadRates(){
- const {data,error}=await db.from("configuracion")
-  .select("*")
-  .eq("id",1)
-  .maybeSingle();
-
- if(error){
-  showError(error);
-  return;
- }
-
+ const {data,error}=await db.from(CONFIG.tablaConfig).select("*").eq("id",1).maybeSingle();
+ if(error) return;
  if(data){
-  rates={
-   USD:Number(data.tasa_usd||0),
-   EUR:Number(data.tasa_eur||0),
-   RUB:Number(data.tasa_rub||0),
-   MLC:Number(data.tasa_mlc||0),
-   GBP:Number(data.tasa_gbp||0)
-  };
-
-  $("rateUSD").value=rates.USD;
-  $("rateEUR").value=rates.EUR;
-  $("rateRUB").value=rates.RUB;
-  $("rateMLC").value=rates.MLC;
-  $("rateGBP").value=rates.GBP;
-
+  rates={USD:Number(data.tasa_usd||0),EUR:Number(data.tasa_eur||0),RUB:Number(data.tasa_rub||0),MLC:Number(data.tasa_mlc||0),GBP:Number(data.tasa_gbp||0)};
+  $("rateUSD").value=rates.USD; $("rateEUR").value=rates.EUR; $("rateRUB").value=rates.RUB; $("rateMLC").value=rates.MLC; $("rateGBP").value=rates.GBP;
   renderRates();
  }
 }
 
 function renderRates(){
  const names=["USD","EUR","RUB","MLC","GBP"];
-
- $("ratesList").innerHTML=names.map(n=>`
-  <div class="rate">
-   <span>${n}</span>
-   <strong>${rates[n]?rates[n].toLocaleString("es-ES"):"—"}</strong>
-   <span>CUP</span>
-  </div>
- `).join("");
-
+ $("ratesList").innerHTML=names.map(n=>`<div class="rate"><span>${n}</span><strong>${rates[n]?rates[n].toLocaleString("es-ES"):"—"}</strong><span>CUP</span></div>`).join("");
  calculate();
 }
 
 async function saveRates(){
- const vals={
-  tasa_usd:Number($("rateUSD").value)||0,
-  tasa_eur:Number($("rateEUR").value)||0,
-  tasa_rub:Number($("rateRUB").value)||0,
-  tasa_mlc:Number($("rateMLC").value)||0,
-  tasa_gbp:Number($("rateGBP").value)||0,
-  fecha_actualizacion:new Date().toISOString()
- };
-
- const {error}=await db.from("configuracion")
-  .upsert({id:1,...vals});
-
- if(error){
-  alert("No se pudieron guardar las tasas: "+error.message);
-  return;
- }
-
+ const vals={tasa_usd:Number($("rateUSD").value)||0,tasa_eur:Number($("rateEUR").value)||0,tasa_rub:Number($("rateRUB").value)||0,tasa_mlc:Number($("rateMLC").value)||0,tasa_gbp:Number($("rateGBP").value)||0,fecha_actualizacion:new Date().toISOString()};
+ const {error}=await db.from(CONFIG.tablaConfig).upsert({id:1,...vals});
+ if(error){ alert("No se pudieron guardar las tasas: "+error.message); return; }
  alert("Tasas actualizadas.");
  await refreshLiveData();
 }
 
-// CALCULADORA
 function calculate(){
  const amount=Number($("calcAmount").value);
  const from=$("calcFrom").value;
  const to=$("calcTo").value;
-
- if(!Number.isFinite(amount)||amount<0){
-  $("calcResult").textContent="Introduce una cantidad válida.";
-  return;
- }
-
+ if(!Number.isFinite(amount)||amount<0){ $("calcResult").textContent="Introduce una cantidad válida."; return; }
  const fromRate=from==="CUP"?1:rates[from];
  const toRate=to==="CUP"?1:rates[to];
-
- if(!fromRate||!toRate){
-  $("calcResult").textContent="Faltan tasas para realizar este cálculo.";
-  return;
- }
-
+ if(!fromRate||!toRate){ $("calcResult").textContent="Faltan tasas para realizar este cálculo."; return; }
  const result=amount*fromRate/toRate;
-
- $("calcResult").textContent=
-  `${amount} ${from} = ${result.toLocaleString("es-ES",{maximumFractionDigits:2})} ${to}`;
+ $("calcResult").textContent=`${amount} ${from} = ${result.toLocaleString("es-ES",{maximumFractionDigits:2})} ${to}`;
 }
-
-["calcAmount","calcFrom","calcTo"].forEach(id=>{
- $(id).addEventListener("change",calculate);
-});
+["calcAmount","calcFrom","calcTo"].forEach(id=>{ $(id).addEventListener("change",calculate); });
 
 // RECARGAS
 async function loadRecharges(){
- const {data,error}=await db.from("planes_recargas")
-  .select("*")
-  .eq("activo",true)
-  .order("id");
-
- if(error){
-  $("rechargesList").innerHTML='<div class="empty">No se pudieron cargar las recargas.</div>';
-  showError(error);
-  return;
- }
-
+ const {data,error}=await db.from(CONFIG.tablaRecargas).select("*").eq("activo",true).order("id");
+ if(error){ $("rechargesList").innerHTML='<div class="empty">No se pudieron cargar las recargas.</div>'; return; }
  rechargeData=data||[];
  renderRecharges();
 }
 
 function renderRecharges(){
  const el=$("rechargesList");
-
- if(!rechargeData.length){
-  el.innerHTML='<div class="empty">Próximamente publicaremos nuevas ofertas de recarga.</div>';
-  return;
- }
-
- el.innerHTML=rechargeData.map((x,i)=>`
+ if(!rechargeData.length){ el.innerHTML='<div class="empty">Próximamente publicaremos nuevas ofertas de recarga.</div>'; return; }
+ el.innerHTML=rechargeData.map((x,i)=>{
+  const imgHtml = x[CONFIG.columnaImagen] ? `<img src="${safe(x[CONFIG.columnaImagen])}" alt="Plan">` : '';
+  return `
   <article class="card offer-card">
+   ${imgHtml}
    <span class="pill">${safe(x.etiqueta||"RECARGA")}</span>
    <h3>${safe(x.nombre_plan)}</h3>
    <div class="price">${money(x.precio,x.moneda||"RUB")}</div>
    <p>${safe(x.descripcion_1||"")}</p>
    <p>${safe(x.descripcion_2||"")}</p>
    <button class="btn btn-gold" type="button" onclick="requestRecharge(${i})">Solicitar recarga</button>
-  </article>
- `).join("");
+  </article>`;
+ }).join("");
 }
 
 function requestRecharge(index){
  const item=rechargeData[index];
  if(!item)return;
-
  openRequest("Recarga");
-
- $("clientDetails").value=
-  `Estoy interesado en el plan: ${item.nombre_plan}. Precio publicado: ${money(item.precio,item.moneda||"RUB")}.`;
-
+ $("clientDetails").value=`Estoy interesado en el plan: ${item.nombre_plan}. Precio publicado: ${money(item.precio,item.moneda||"RUB")}.`;
  $("solicitud").scrollIntoView({behavior:"smooth"});
 }
 
 // PASAJES
 async function loadTickets(){
- const {data,error}=await db.from("pasajes")
-  .select("*")
-  .eq("activo",true)
-  .order("fecha_salida",{ascending:true});
-
- if(error){
-  $("ticketsList").innerHTML='<div class="empty">Los pasajes estarán disponibles cuando se configure la tabla correspondiente en Supabase.</div>';
-  showError(error);
-  return;
- }
-
+ const {data,error}=await db.from(CONFIG.tablaPasajes).select("*").eq("activo",true).order("fecha_salida",{ascending:true});
+ if(error){ $("ticketsList").innerHTML='<div class="empty">No hay pasajes publicados en este momento.</div>'; return; }
  ticketData=data||[];
  renderTickets();
 }
 
 function renderTickets(){
  const el=$("ticketsList");
-
- if(!ticketData.length){
-  el.innerHTML='<div class="empty">No hay pasajes publicados en este momento. Consulta nuevas opciones por WhatsApp.</div>';
-  return;
- }
-
- el.innerHTML=ticketData.map((t,i)=>`
+ if(!ticketData.length){ el.innerHTML='<div class="empty">No hay pasajes publicados en este momento.</div>'; return; }
+ el.innerHTML=ticketData.map((t,i)=>{
+  const imgHtml = t[CONFIG.columnaImagen] ? `<img src="${safe(t[CONFIG.columnaImagen])}" alt="Pasaje">` : '';
+  return `
   <article class="card offer-card">
+   ${imgHtml}
    <span class="pill">${safe(t.etiqueta||t.tipo||"PASAJES")}</span>
-   <h3>
-    <i class="fa-solid fa-${t.tipo==="Avión"?"plane":"train"} gold"></i>
-    ${safe(t.origen)} → ${safe(t.destino)}
-   </h3>
+   <h3><i class="fa-solid fa-${t.tipo==="Avión"?"plane":"train"} gold"></i> ${safe(t.origen)} → ${safe(t.destino)}</h3>
    <p>${safe(t.tipo||"Transporte")}</p>
    <p><strong>Salida:</strong> ${safe(t.fecha_salida||"Por confirmar")}</p>
    <p><strong>Regreso:</strong> ${safe(t.fecha_regreso||"No indicado")}</p>
    <div class="price">${money(t.precio,t.moneda)}</div>
    <p>${safe(t.descripcion||"Consulta condiciones y disponibilidad.")}</p>
    <button class="btn btn-gold" type="button" onclick="requestTicket(${i})">Consultar este pasaje</button>
-  </article>
- `).join("");
+  </article>`;
+ }).join("");
 }
 
 function requestTicket(index){
  const t=ticketData[index];
  if(!t)return;
-
  const service=t.tipo==="Avión"?"Pasaje de avión":"Autobús o tren";
-
  openRequest(service);
-
  $("clientDestination").value=t.destino||"";
-
- $("clientDetails").value=
-  `Pasaje: ${t.origen} → ${t.destino}. Tipo: ${t.tipo}. Salida: ${t.fecha_salida||"Por confirmar"}. Regreso: ${t.fecha_regreso||"No indicado"}. Precio publicado: ${money(t.precio,t.moneda)}.`;
-
+ $("clientDetails").value=`Pasaje: ${t.origen} → ${t.destino}. Tipo: ${t.tipo}. Salida: ${t.fecha_salida||"Por confirmar"}. Precio: ${money(t.precio,t.moneda)}.`;
  $("solicitud").scrollIntoView({behavior:"smooth"});
 }
 
-// FORMULARIO DE SOLICITUD
 function openRequest(service){
- $("clientService").value=service;
+ document.querySelectorAll('.service-check').forEach(cb => {
+  if (cb.value === service) cb.checked = true;
+ });
  $("solicitud").scrollIntoView({behavior:"smooth"});
  setTimeout(()=>$("clientName").focus({preventScroll:true}),500);
 }
 
 async function submitRequest(e){
  e.preventDefault();
+ const checkedServices = Array.from(document.querySelectorAll('.service-check:checked')).map(cb => cb.value);
+ const tipo_servicio = checkedServices.length > 0 ? checkedServices.join(', ') : 'No especificado';
 
  const payload={
   nombre_cliente:$("clientName").value.trim(),
   telefono:$("clientPhone").value.trim(),
-  tipo_servicio:$("clientService").value,
+  tipo_servicio: tipo_servicio,
   destino:$("clientDestination").value.trim(),
   detalles:$("clientDetails").value.trim(),
   estado:"Pendiente"
@@ -921,232 +872,190 @@ async function submitRequest(e){
 
  const status=$("requestStatus");
  status.textContent="Enviando solicitud...";
-
- const {error}=await db.from("solicitudes").insert(payload);
-
+ const {error}=await db.from(CONFIG.tablaSolicitudes).insert(payload);
  if(error){
   status.textContent="No se pudo enviar. Inténtalo por WhatsApp: +7 904 631 95 65.";
-  showError(error);
   return;
  }
-
  status.textContent="¡Solicitud enviada! Gracias por contactar con YOUR BRIDGE HOME.";
  $("requestForm").reset();
+ document.querySelectorAll('.service-check').forEach(cb => cb.checked = false);
 }
 
-// ADMINISTRACIÓN
+// ADMIN
 async function loadAdminData(){
- await loadRates();
- await loadRecharges();
- await loadTickets();
- await loadRequests();
-
- renderAdminRecharges();
- renderAdminTickets();
+ await loadRates(); await loadRecharges(); await loadTickets(); await loadRequests();
+ renderAdminRecharges(); renderAdminTickets();
 }
 
-// ADMINISTRAR RECARGAS
 function renderAdminRecharges(){
- $("adminRechargeList").innerHTML=rechargeData.map(x=>`
+ $("adminRechargeList").innerHTML=rechargeData.map(x=>{
+  const imgHtml = x[CONFIG.columnaImagen] ? `<img src="${safe(x[CONFIG.columnaImagen])}" class="img-preview">` : '';
+  return `
   <div class="admin-item">
    <div>
     <strong>${safe(x.nombre_plan)}</strong><br>
     <small>${money(x.precio,x.moneda||"RUB")}</small>
+    ${imgHtml}
    </div>
    <div>
     <button class="btn btn-dark" type="button" onclick="editRecharge('${safe(x.id)}')">Editar</button>
     <button class="btn btn-dark" type="button" onclick="deleteRecharge('${safe(x.id)}')">Eliminar</button>
    </div>
-  </div>
- `).join("")||'<p class="mini">No hay planes cargados.</p>';
+  </div>`;
+ }).join("")||'<p class="mini">No hay planes cargados.</p>';
 }
 
 function clearRechargeForm(){
- ["rechargeId","rechargeLabel","rechargeName","rechargePrice","rechargeDesc1","rechargeDesc2"].forEach(id=>{
-  $(id).value="";
- });
-
+ ["rechargeId","rechargeLabel","rechargeName","rechargePrice","rechargeDesc1","rechargeDesc2"].forEach(id=>{ $(id).value=""; });
  $("rechargeCurrency").value="RUB";
+ $("rechargeImage").value="";
+ $("rechargeImagePreview").innerHTML="";
 }
 
 function editRecharge(id){
  const x=rechargeData.find(v=>String(v.id)===String(id));
  if(!x)return;
-
- $("rechargeId").value=x.id;
- $("rechargeLabel").value=x.etiqueta||"";
- $("rechargeName").value=x.nombre_plan||"";
- $("rechargePrice").value=x.precio;
- $("rechargeCurrency").value=x.moneda||"RUB";
- $("rechargeDesc1").value=x.descripcion_1||"";
- $("rechargeDesc2").value=x.descripcion_2||"";
-
+ $("rechargeId").value=x.id; $("rechargeLabel").value=x.etiqueta||""; $("rechargeName").value=x.nombre_plan||"";
+ $("rechargePrice").value=x.precio; $("rechargeCurrency").value=x.moneda||"RUB";
+ $("rechargeDesc1").value=x.descripcion_1||""; $("rechargeDesc2").value=x.descripcion_2||"";
+ $("rechargeImage").value="";
+ const preview = x[CONFIG.columnaImagen] ? `<img src="${safe(x[CONFIG.columnaImagen])}" class="img-preview">` : '';
+ $("rechargeImagePreview").innerHTML = preview ? `<small>Imagen actual:</small><br>${preview}` : '';
  $("rechargeName").focus();
 }
 
 async function saveRecharge(){
  const id=$("rechargeId").value;
+ const fileInput = $("rechargeImage");
+ let imagen_url = null;
+
+ if (fileInput.files.length > 0) {
+  diag("info", "📤 Subiendo imagen de recarga...");
+  const file = fileInput.files[0];
+  const fileName = `recargas/${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
+  const { error: uploadError } = await db.storage.from(CONFIG.bucketFotos).upload(fileName, file, {upsert: true});
+  if (uploadError) { 
+   diag("err", "❌ Error subiendo imagen: " + uploadError.message);
+   alert("Error al subir la imagen: " + uploadError.message); 
+   return; 
+  }
+  const { data: { publicUrl } } = db.storage.from(CONFIG.bucketFotos).getPublicUrl(fileName);
+  imagen_url = publicUrl;
+  diag("ok", "✅ Imagen subida correctamente");
+ }
 
  const payload={
-  etiqueta:$("rechargeLabel").value.trim(),
-  nombre_plan:$("rechargeName").value.trim(),
-  precio:Number($("rechargePrice").value),
-  moneda:$("rechargeCurrency").value,
-  descripcion_1:$("rechargeDesc1").value.trim(),
-  descripcion_2:$("rechargeDesc2").value.trim(),
-  activo:true
+  etiqueta:$("rechargeLabel").value.trim(), nombre_plan:$("rechargeName").value.trim(),
+  precio:Number($("rechargePrice").value), moneda:$("rechargeCurrency").value,
+  descripcion_1:$("rechargeDesc1").value.trim(), descripcion_2:$("rechargeDesc2").value.trim(), activo:true
  };
+ if (imagen_url) payload[CONFIG.columnaImagen] = imagen_url;
 
- if(!payload.nombre_plan||!Number.isFinite(payload.precio)||payload.precio<0){
-  alert("Completa el nombre y un precio válido.");
-  return;
- }
+ if(!payload.nombre_plan||!Number.isFinite(payload.precio)||payload.precio<0){ alert("Completa el nombre y un precio válido."); return; }
 
- const query=id
-  ?db.from("planes_recargas").update(payload).eq("id",id)
-  :db.from("planes_recargas").insert(payload);
-
+ const query=id ? db.from(CONFIG.tablaRecargas).update(payload).eq("id",id) : db.from(CONFIG.tablaRecargas).insert(payload);
  const {error}=await query;
-
- if(error){
-  alert("No se pudo guardar el plan: "+error.message);
-  return;
- }
-
- alert("Plan guardado.");
- clearRechargeForm();
- await refreshLiveData();
- renderAdminRecharges();
+ if(error){ alert("No se pudo guardar el plan: "+error.message); return; }
+ 
+ alert("Plan guardado."); clearRechargeForm(); await refreshLiveData(); renderAdminRecharges();
 }
 
 async function deleteRecharge(id){
  if(!confirm("¿Eliminar este plan?"))return;
-
- const {error}=await db.from("planes_recargas")
-  .delete()
-  .eq("id",id);
-
- if(error){
-  alert("No se pudo eliminar: "+error.message);
-  return;
- }
-
- await refreshLiveData();
- renderAdminRecharges();
+ const {error}=await db.from(CONFIG.tablaRecargas).delete().eq("id",id);
+ if(error){ alert("No se pudo eliminar: "+error.message); return; }
+ await refreshLiveData(); renderAdminRecharges();
 }
 
-// ADMINISTRAR PASAJES
 function renderAdminTickets(){
- $("adminTicketList").innerHTML=ticketData.map(t=>`
+ $("adminTicketList").innerHTML=ticketData.map(t=>{
+  const imgHtml = t[CONFIG.columnaImagen] ? `<img src="${safe(t[CONFIG.columnaImagen])}" class="img-preview">` : '';
+  return `
   <div class="admin-item">
    <div>
     <strong>${safe(t.origen)} → ${safe(t.destino)}</strong><br>
     <small>${money(t.precio,t.moneda)} · ${safe(t.fecha_salida||"")}</small>
+    ${imgHtml}
    </div>
    <div>
     <button class="btn btn-dark" type="button" onclick="editTicket('${safe(t.id)}')">Editar</button>
     <button class="btn btn-dark" type="button" onclick="deleteTicket('${safe(t.id)}')">Eliminar</button>
    </div>
-  </div>
- `).join("")||'<p class="mini">No hay pasajes cargados.</p>';
+  </div>`;
+ }).join("")||'<p class="mini">No hay pasajes cargados.</p>';
 }
 
 function clearTicketForm(){
- ["ticketId","ticketLabel","ticketOrigin","ticketDestination","ticketDeparture","ticketReturn","ticketPrice","ticketDescription"].forEach(id=>{
-  $(id).value="";
- });
-
- $("ticketType").value="Avión";
- $("ticketCurrency").value="USD";
+ ["ticketId","ticketLabel","ticketOrigin","ticketDestination","ticketDeparture","ticketReturn","ticketPrice","ticketDescription"].forEach(id=>{ $(id).value=""; });
+ $("ticketType").value="Avión"; $("ticketCurrency").value="USD";
+ $("ticketImage").value="";
+ $("ticketImagePreview").innerHTML="";
 }
 
 function editTicket(id){
  const t=ticketData.find(v=>String(v.id)===String(id));
  if(!t)return;
-
- $("ticketId").value=t.id;
- $("ticketLabel").value=t.etiqueta||"";
- $("ticketType").value=t.tipo||"Avión";
- $("ticketOrigin").value=t.origen||"";
- $("ticketDestination").value=t.destino||"";
- $("ticketDeparture").value=t.fecha_salida||"";
- $("ticketReturn").value=t.fecha_regreso||"";
- $("ticketPrice").value=t.precio;
- $("ticketCurrency").value=t.moneda||"USD";
+ $("ticketId").value=t.id; $("ticketLabel").value=t.etiqueta||""; $("ticketType").value=t.tipo||"Avión";
+ $("ticketOrigin").value=t.origen||""; $("ticketDestination").value=t.destino||"";
+ $("ticketDeparture").value=t.fecha_salida||""; $("ticketReturn").value=t.fecha_regreso||"";
+ $("ticketPrice").value=t.precio; $("ticketCurrency").value=t.moneda||"USD";
  $("ticketDescription").value=t.descripcion||"";
-
+ $("ticketImage").value="";
+ const preview = t[CONFIG.columnaImagen] ? `<img src="${safe(t[CONFIG.columnaImagen])}" class="img-preview">` : '';
+ $("ticketImagePreview").innerHTML = preview ? `<small>Imagen actual:</small><br>${preview}` : '';
  $("ticketOrigin").focus();
 }
 
 async function saveTicket(){
  const id=$("ticketId").value;
+ const fileInput = $("ticketImage");
+ let imagen_url = null;
+
+ if (fileInput.files.length > 0) {
+  diag("info", "📤 Subiendo imagen de pasaje...");
+  const file = fileInput.files[0];
+  const fileName = `pasajes/${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
+  const { error: uploadError } = await db.storage.from(CONFIG.bucketFotos).upload(fileName, file, {upsert: true});
+  if (uploadError) { 
+   diag("err", "❌ Error subiendo imagen: " + uploadError.message);
+   alert("Error al subir la imagen: " + uploadError.message); 
+   return; 
+  }
+  const { data: { publicUrl } } = db.storage.from(CONFIG.bucketFotos).getPublicUrl(fileName);
+  imagen_url = publicUrl;
+  diag("ok", "✅ Imagen subida correctamente");
+ }
 
  const payload={
-  etiqueta:$("ticketLabel").value.trim(),
-  tipo:$("ticketType").value,
-  origen:$("ticketOrigin").value.trim(),
-  destino:$("ticketDestination").value.trim(),
-  fecha_salida:$("ticketDeparture").value||null,
-  fecha_regreso:$("ticketReturn").value||null,
-  precio:Number($("ticketPrice").value),
-  moneda:$("ticketCurrency").value,
-  descripcion:$("ticketDescription").value.trim(),
-  activo:true
+  etiqueta:$("ticketLabel").value.trim(), tipo:$("ticketType").value, origen:$("ticketOrigin").value.trim(),
+  destino:$("ticketDestination").value.trim(), fecha_salida:$("ticketDeparture").value||null,
+  fecha_regreso:$("ticketReturn").value||null, precio:Number($("ticketPrice").value),
+  moneda:$("ticketCurrency").value, descripcion:$("ticketDescription").value.trim(), activo:true
  };
+ if (imagen_url) payload[CONFIG.columnaImagen] = imagen_url;
 
- if(!payload.origen||!payload.destino||!Number.isFinite(payload.precio)||payload.precio<0){
-  alert("Completa origen, destino y precio.");
-  return;
- }
+ if(!payload.origen||!payload.destino||!Number.isFinite(payload.precio)||payload.precio<0){ alert("Completa origen, destino y precio."); return; }
 
- const query=id
-  ?db.from("pasajes").update(payload).eq("id",id)
-  :db.from("pasajes").insert(payload);
-
+ const query=id ? db.from(CONFIG.tablaPasajes).update(payload).eq("id",id) : db.from(CONFIG.tablaPasajes).insert(payload);
  const {error}=await query;
-
- if(error){
-  alert("No se pudo guardar el pasaje. Comprueba que la tabla pasajes esté creada. "+error.message);
-  return;
- }
-
- alert("Pasaje guardado.");
- clearTicketForm();
- await refreshLiveData();
- renderAdminTickets();
+ if(error){ alert("No se pudo guardar el pasaje: "+error.message); return; }
+ 
+ alert("Pasaje guardado."); clearTicketForm(); await refreshLiveData(); renderAdminTickets();
 }
 
 async function deleteTicket(id){
  if(!confirm("¿Eliminar este pasaje?"))return;
-
- const {error}=await db.from("pasajes")
-  .delete()
-  .eq("id",id);
-
- if(error){
-  alert("No se pudo eliminar: "+error.message);
-  return;
- }
-
- await refreshLiveData();
- renderAdminTickets();
+ const {error}=await db.from(CONFIG.tablaPasajes).delete().eq("id",id);
+ if(error){ alert("No se pudo eliminar: "+error.message); return; }
+ await refreshLiveData(); renderAdminTickets();
 }
 
 // SOLICITUDES
 async function loadRequests(){
- const {data,error}=await db.from("solicitudes")
-  .select("*")
-  .order("fecha_creacion",{ascending:false})
-  .limit(100);
-
- if(error){
-  $("adminRequestsList").innerHTML='<p class="mini">No se pudieron cargar las solicitudes.</p>';
-  showError(error);
-  return;
- }
-
+ const {data,error}=await db.from(CONFIG.tablaSolicitudes).select("*").order("fecha_creacion",{ascending:false}).limit(100);
+ if(error){ $("adminRequestsList").innerHTML='<p class="mini">No se pudieron cargar las solicitudes.</p>'; return; }
  requestData=data||[];
-
  $("adminRequestsList").innerHTML=requestData.map(r=>`
   <div class="admin-item">
    <div>
@@ -1158,228 +1067,90 @@ async function loadRequests(){
     <button class="btn btn-dark" type="button" onclick="completeRequest('${safe(r.id)}')">Completada</button>
     <button class="btn btn-dark" type="button" onclick="deleteRequest('${safe(r.id)}')">Eliminar</button>
    </div>
-  </div>
- `).join("")||'<p class="mini">Todavía no hay solicitudes.</p>';
+  </div>`).join("")||'<p class="mini">Todavía no hay solicitudes.</p>';
 }
 
 async function completeRequest(id){
- const {error}=await db.from("solicitudes")
-  .update({estado:"Completada"})
-  .eq("id",id);
-
- if(error){
-  alert("No se pudo actualizar: "+error.message);
-  return;
- }
-
+ const {error}=await db.from(CONFIG.tablaSolicitudes).update({estado:"Completada"}).eq("id",id);
+ if(error){ alert("No se pudo actualizar: "+error.message); return; }
  await loadRequests();
 }
 
 async function deleteRequest(id){
  if(!confirm("¿Eliminar solicitud?"))return;
-
- const {error}=await db.from("solicitudes")
-  .delete()
-  .eq("id",id);
-
- if(error){
-  alert("No se pudo eliminar: "+error.message);
-  return;
- }
-
+ const {error}=await db.from(CONFIG.tablaSolicitudes).delete().eq("id",id);
+ if(error){ alert("No se pudo eliminar: "+error.message); return; }
  await loadRequests();
 }
 
-// GENERADOR DE IMÁGENES PROMOCIONALES
+// GENERADOR DE ANUNCIOS
 function generateAd(){
- const canvas=$("adCanvas");
- const ctx=canvas.getContext("2d");
- const W=canvas.width,H=canvas.height;
-
- const grad=ctx.createLinearGradient(0,0,W,H);
- grad.addColorStop(0,"#101b30");
- grad.addColorStop(1,"#172b46");
- ctx.fillStyle=grad;
- ctx.fillRect(0,0,W,H);
-
- ctx.strokeStyle="#d7aa4c";
- ctx.lineWidth=5;
- ctx.strokeRect(28,28,W-56,H-56);
- ctx.strokeStyle="#8d713c";
- ctx.lineWidth=1;
- ctx.strokeRect(43,43,W-86,H-86);
-
- ctx.textAlign="center";
- ctx.fillStyle="#f0c45e";
- ctx.font="900 43px Montserrat,Arial";
+ const canvas=$("adCanvas"); const ctx=canvas.getContext("2d"); const W=canvas.width,H=canvas.height;
+ const grad=ctx.createLinearGradient(0,0,W,H); grad.addColorStop(0,"#101b30"); grad.addColorStop(1,"#172b46");
+ ctx.fillStyle=grad; ctx.fillRect(0,0,W,H);
+ ctx.strokeStyle="#d7aa4c"; ctx.lineWidth=5; ctx.strokeRect(28,28,W-56,H-56);
+ ctx.strokeStyle="#8d713c"; ctx.lineWidth=1; ctx.strokeRect(43,43,W-86,H-86);
+ ctx.textAlign="center"; ctx.fillStyle="#f0c45e"; ctx.font="900 43px Montserrat,Arial";
  ctx.fillText("YOUR BRIDGE HOME",W/2,115);
-
- ctx.fillStyle="#c3cede";
- ctx.font="500 19px Montserrat,Arial";
- ctx.fillText("TU PUENTE HACIA NUEVAS OPORTUNIDADES",W/2,153);
-
- ctx.fillStyle="#f5f7fb";
- ctx.font="900 42px Montserrat,Arial";
- wrapCanvas(ctx,$("adTitle").value.toUpperCase(),W/2,245,850,55);
-
+ ctx.fillStyle="#c3cede"; ctx.font="500 19px Montserrat,Arial"; ctx.fillText("TU PUENTE HACIA NUEVAS OPORTUNIDADES",W/2,153);
+ ctx.fillStyle="#f5f7fb"; ctx.font="900 42px Montserrat,Arial"; wrapCanvas(ctx,$("adTitle").value.toUpperCase(),W/2,245,850,55);
  let y=365;
-
  const line=(label,value)=>{
   if(!value)return;
-
-  ctx.fillStyle="#263a56";
-  roundRect(ctx,105,y-53,870,105,18,true,false);
-
-  ctx.textAlign="left";
-  ctx.fillStyle="#f0c45e";
-  ctx.font="800 24px Montserrat,Arial";
-  ctx.fillText(label,145,y-12);
-
-  ctx.textAlign="right";
-  ctx.fillStyle="#ffffff";
-  ctx.font="800 31px Montserrat,Arial";
-  ctx.fillText(value,930,y+25);
-
+  ctx.fillStyle="#263a56"; roundRect(ctx,105,y-53,870,105,18,true,false);
+  ctx.textAlign="left"; ctx.fillStyle="#f0c45e"; ctx.font="800 24px Montserrat,Arial"; ctx.fillText(label,145,y-12);
+  ctx.textAlign="right"; ctx.fillStyle="#ffffff"; ctx.font="800 31px Montserrat,Arial"; ctx.fillText(value,930,y+25);
   y+=125;
  };
-
  if($("showAdRates").checked){
-  const usd=$("adUSD").value;
-  const eur=$("adEUR").value;
-  const mlc=$("adMLC").value;
-  const rub=$("adRUB").value;
-
-  const vals=[
-   usd&&`USD  ${usd} CUP`,
-   eur&&`EUR  ${eur} CUP`,
-   mlc&&`MLC  ${mlc} CUP`,
-   rub&&`RUB  ${rub} CUP`
-  ].filter(Boolean);
-
+  const vals=[ $("adUSD").value&&`USD  ${$("adUSD").value} CUP`, $("adEUR").value&&`EUR  ${$("adEUR").value} CUP`, $("adMLC").value&&`MLC  ${$("adMLC").value} CUP`, $("adRUB").value&&`RUB  ${$("adRUB").value} CUP` ].filter(Boolean);
   if(vals.length){
-   ctx.fillStyle="#f0c45e";
-   ctx.textAlign="center";
-   ctx.font="800 26px Montserrat,Arial";
-   ctx.fillText("TASAS DE CAMBIO",W/2,y);
-   y+=45;
-
-   vals.forEach(v=>{
-    ctx.fillStyle="#263a56";
-    roundRect(ctx,145,y-31,790,58,12,true,false);
-    ctx.fillStyle="#fff";
-    ctx.font="700 25px Montserrat,Arial";
-    ctx.fillText(v,W/2,y+7);
-    y+=70;
-   });
-
+   ctx.fillStyle="#f0c45e"; ctx.textAlign="center"; ctx.font="800 26px Montserrat,Arial"; ctx.fillText("TASAS DE CAMBIO",W/2,y); y+=45;
+   vals.forEach(v=>{ ctx.fillStyle="#263a56"; roundRect(ctx,145,y-31,790,58,12,true,false); ctx.fillStyle="#fff"; ctx.font="700 25px Montserrat,Arial"; ctx.fillText(v,W/2,y+7); y+=70; });
    y+=10;
   }
  }
-
  if($("showAdRecharge").checked)line("RECARGAS",$("adRecharge").value);
  if($("showAdRemittance").checked)line("REMESAS",$("adRemittance").value);
  if($("showAdTicket").checked)line("PASAJES",$("adTicket").value);
-
  const note=$("adNote").value||"Consulta disponibilidad y condiciones.";
-
- ctx.textAlign="center";
- ctx.fillStyle="#d4dceb";
- ctx.font="500 22px Montserrat,Arial";
- wrapCanvas(ctx,note,W/2,Math.min(y+15,1120),850,31);
-
- ctx.fillStyle="#f0c45e";
- ctx.font="800 27px Montserrat,Arial";
- ctx.fillText("WHATSAPP  +7 904 631 95 65",W/2,1220);
-
- ctx.fillStyle="#d1d8e4";
- ctx.font="600 20px Montserrat,Arial";
- ctx.fillText("Daynel Caminero · Administrador",W/2,1260);
-
- ctx.fillStyle="#9baac0";
- ctx.font="500 15px Montserrat,Arial";
- ctx.fillText("Información orientativa · Verifica antes de operar",W/2,1300);
+ ctx.textAlign="center"; ctx.fillStyle="#d4dceb"; ctx.font="500 22px Montserrat,Arial"; wrapCanvas(ctx,note,W/2,Math.min(y+15,1120),850,31);
+ ctx.fillStyle="#f0c45e"; ctx.font="800 27px Montserrat,Arial"; ctx.fillText("WHATSAPP  +7 904 631 95 65",W/2,1220);
+ ctx.fillStyle="#d1d8e4"; ctx.font="600 20px Montserrat,Arial"; ctx.fillText("Daynel Caminero · Administrador",W/2,1260);
+ ctx.fillStyle="#9baac0"; ctx.font="500 15px Montserrat,Arial"; ctx.fillText("Información orientativa · Verifica antes de operar",W/2,1300);
 }
 
 function roundRect(ctx,x,y,w,h,r,fill,stroke){
- ctx.beginPath();
- ctx.moveTo(x+r,y);
- ctx.arcTo(x+w,y,x+w,y+h,r);
- ctx.arcTo(x+w,y+h,x,y+h,r);
- ctx.arcTo(x,y+h,x,y,r);
- ctx.arcTo(x,y,x+w,y,r);
- ctx.closePath();
- if(fill)ctx.fill();
- if(stroke)ctx.stroke();
+ ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+ ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+ if(fill)ctx.fill(); if(stroke)ctx.stroke();
 }
 
 function wrapCanvas(ctx,text,x,y,maxWidth,lineHeight){
- const words=String(text||"").split(/\s+/);
- let line="",yy=y;
-
+ const words=String(text||"").split(/\s+/); let line="",yy=y;
  for(let n=0;n<words.length;n++){
   const test=line+words[n]+" ";
-
-  if(ctx.measureText(test).width>maxWidth&&n>0){
-   ctx.fillText(line.trim(),x,yy);
-   line=words[n]+" ";
-   yy+=lineHeight;
-  }else{
-   line=test;
-  }
+  if(ctx.measureText(test).width>maxWidth&&n>0){ ctx.fillText(line.trim(),x,yy); line=words[n]+" "; yy+=lineHeight; }
+  else{ line=test; }
  }
-
- if(line.trim())ctx.fillText(line.trim(),x,yy);
- return yy;
+ if(line.trim())ctx.fillText(line.trim(),x,yy); return yy;
 }
 
 function downloadAd(){
  const canvas=$("adCanvas");
-
- if(!canvas.toDataURL){
-  alert("Primero genera la imagen.");
-  return;
- }
-
- const a=document.createElement("a");
- a.download="your-bridge-home-anuncio.png";
- a.href=canvas.toDataURL("image/png");
- a.click();
+ if(!canvas.toDataURL){ alert("Primero genera la imagen."); return; }
+ const a=document.createElement("a"); a.download="your-bridge-home-anuncio.png"; a.href=canvas.toDataURL("image/png"); a.click();
 }
 
 function copyAdText(){
- const lines=[
-  $("adTitle").value,
-  `USD: ${$("adUSD").value||"—"} CUP`,
-  `EUR: ${$("adEUR").value||"—"} CUP`,
-  `MLC: ${$("adMLC").value||"—"} CUP`,
-  `RUB: ${$("adRUB").value||"—"} CUP`,
-  $("adRecharge").value,
-  $("adRemittance").value,
-  $("adTicket").value,
-  $("adNote").value,
-  "YOUR BRIDGE HOME",
-  "WhatsApp: +7 904 631 95 65",
-  "Daynel Caminero · Administrador"
- ].filter(Boolean);
-
+ const lines=[$("adTitle").value,`USD: ${$("adUSD").value||"—"} CUP`,`EUR: ${$("adEUR").value||"—"} CUP`,`MLC: ${$("adMLC").value||"—"} CUP`,`RUB: ${$("adRUB").value||"—"} CUP`,$("adRecharge").value,$("adRemittance").value,$("adTicket").value,$("adNote").value,"YOUR BRIDGE HOME","WhatsApp: +7 904 631 95 65","Daynel Caminero · Administrador"].filter(Boolean);
  const text=lines.join("\n");
-
- if(navigator.clipboard&&navigator.clipboard.writeText){
-  navigator.clipboard.writeText(text)
-   .then(()=>alert("Texto copiado."))
-   .catch(()=>prompt("Copia el texto:",text));
- }else{
-  prompt("Copia el texto:",text);
- }
+ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(()=>alert("Texto copiado.")).catch(()=>prompt("Copia el texto:",text)); }
+ else{ prompt("Copia el texto:",text); }
 }
 
-// DIBUJAR VISTA INICIAL DEL GENERADOR
 generateAd();
-
-// INICIAR ACTUALIZACIONES AUTOMÁTICAS
 startLiveUpdates();
-
-// CARGA INICIAL
 loadAll();
 </script>
 </body>
