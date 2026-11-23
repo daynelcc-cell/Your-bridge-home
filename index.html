@@ -58,7 +58,6 @@ section{padding:58px 0}
 .section-head p{color:var(--muted);font-size:13px}
 .gold{color:var(--gold)}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
 .service-icon{width:48px;height:48px;border-radius:14px;background:#e8b84d1c;color:var(--gold);display:grid;place-items:center;font-size:21px}
 .card h3{margin:14px 0 7px;overflow-wrap:anywhere}
 .card p{color:var(--muted);font-size:13px;margin:5px 0;overflow-wrap:anywhere}
@@ -90,6 +89,28 @@ section{padding:58px 0}
 .official-link i{font-size:24px;color:var(--gold);flex-shrink:0}
 .official-link strong{display:block;color:var(--white);font-size:13px;margin-bottom:3px}
 .official-link small{color:var(--muted);font-size:10px}
+
+/* GALERÍA DE FOTOS Y PDFs EN SERVICIOS */
+.servicio-galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:15px}
+.galeria-item{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--line);aspect-ratio:1;background:#0b1425;cursor:pointer;transition:.2s}
+.galeria-item:hover{transform:scale(1.03);border-color:var(--gold)}
+.galeria-item img{width:100%;height:100%;object-fit:cover}
+.galeria-item.pdf-item{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;padding:15px;text-align:center}
+.galeria-item.pdf-item i{font-size:32px;color:var(--gold)}
+.galeria-item.pdf-item small{font-size:9px;color:var(--muted);line-height:1.2}
+.galeria-item .tipo-badge{position:absolute;top:6px;right:6px;background:var(--gold);color:#182235;font-size:9px;font-weight:800;padding:3px 7px;border-radius:10px}
+
+/* LIGHTBOX PARA VER FOTOS/PDF */
+.lightbox{display:none;position:fixed;inset:0;background:#000000e6;z-index:200;align-items:center;justify-content:center;padding:20px}
+.lightbox.show{display:flex}
+.lightbox-content{max-width:90vw;max-height:90vh;position:relative}
+.lightbox-content img{max-width:100%;max-height:85vh;border-radius:12px;border:2px solid var(--gold)}
+.lightbox-content iframe{width:85vw;height:85vh;border-radius:12px;border:2px solid var(--gold);background:white}
+.lightbox-close{position:absolute;top:-15px;right:-15px;background:var(--red);color:white;border:0;width:40px;height:40px;border-radius:50%;font-size:20px;cursor:pointer;z-index:10}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);background:var(--gold);color:#182235;border:0;width:45px;height:45px;border-radius:50%;font-size:18px;cursor:pointer}
+.lightbox-prev{left:-25px}
+.lightbox-next{right:-25px}
+
 footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:12px}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .floating{position:fixed;right:16px;bottom:16px;z-index:60;background:var(--green);color:#082515;border-radius:50px;padding:13px 18px;font-size:12px;font-weight:900;box-shadow:0 8px 25px #0005;max-width:calc(100% - 32px);box-sizing:border-box}
@@ -118,14 +139,20 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 .diag-info{background:#1a2744;color:#c0d0eb}
 .diag-line i{font-size:14px}
 .img-preview{max-width:80px;max-height:80px;border-radius:8px;border:1px solid var(--line);margin-top:5px}
+.archivo-item-admin{display:flex;align-items:center;gap:10px;padding:8px;background:#1a2744;border-radius:8px;margin-top:6px}
+.archivo-item-admin img{width:50px;height:50px;object-fit:cover;border-radius:6px}
+.archivo-item-admin i{font-size:24px;color:var(--gold)}
+.archivo-item-admin .archivo-info{flex:1;min-width:0}
+.archivo-item-admin .archivo-info small{display:block;color:var(--muted);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media(max-width:850px){
  .navlinks{display:none;position:absolute;top:74px;left:0;right:0;background:#0b1425;padding:18px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
  .navlinks.open{display:flex}
  .menu-btn{display:block}
  .hero-grid{grid-template-columns:1fr}
- .grid,.grid-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
  .rates{grid-template-columns:repeat(3,minmax(0,1fr))}
  .clock-widget{min-width:110px}
+ .lightbox-nav{display:none}
 }
 @media(max-width:600px){
  .container{width:calc(100% - 24px)}
@@ -136,7 +163,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  .nav-actions .btn{padding:9px;font-size:10px}
  .hero{padding:48px 0 38px}
  section{padding:42px 0}
- .grid,.grid-4,.info-grid{grid-template-columns:1fr}
+ .grid,.info-grid{grid-template-columns:1fr}
  .rates{grid-template-columns:repeat(2,minmax(0,1fr))}
  .calculator{grid-template-columns:1fr 1fr}
  .form-grid{grid-template-columns:1fr}
@@ -172,14 +199,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   </nav>
   <div class="nav-actions">
    <div class="clock-widget">
-    <div>
-     <div class="clock-label" data-i18n="clock_cuba">🇨🇺 Cuba</div>
-     <div class="clock-time" id="clockCuba">--:--:--</div>
-    </div>
-    <div>
-     <div class="clock-label" data-i18n="clock_local">🌍 Local</div>
-     <div class="clock-time" id="clockLocal">--:--:--</div>
-    </div>
+    <div><div class="clock-label" data-i18n="clock_cuba">🇨🇺 Cuba</div><div class="clock-time" id="clockCuba">--:--:--</div></div>
+    <div><div class="clock-label" data-i18n="clock_local">🌍 Local</div><div class="clock-time" id="clockLocal">--:--:--</div></div>
    </div>
    <select class="lang-select" id="langSelector" onchange="changeLanguage(this.value)">
     <option value="es">🇪🇸 ES</option>
@@ -187,7 +208,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
     <option value="ru">🇷🇺 RU</option>
    </select>
    <button class="btn btn-dark" type="button" onclick="openLogin()"><i class="fa-solid fa-lock"></i> Admin</button>
-   <button class="menu-btn" type="button" onclick="toggleMenu()" aria-label="Abrir menú"><i class="fa-solid fa-bars"></i></button>
+   <button class="menu-btn" type="button" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
   </div>
  </div>
 </header>
@@ -283,8 +304,6 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   </div>
  </div>
 </section>
-
-<!-- NUEVA SECCIÓN: SITIOS OFICIALES -->
 <section id="oficiales">
  <div class="container">
   <div class="section-head">
@@ -293,66 +312,17 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    <p data-i18n="official_desc">Acceso directo a los portales gubernamentales y servicios oficiales.</p>
   </div>
   <div class="official-links">
-   <a href="https://www.bc.gob.cu/" target="_blank" rel="noopener" class="official-link">
-    <i class="fa-solid fa-landmark"></i>
-    <div>
-     <strong data-i18n="off_banco">Banco Central de Cuba</strong>
-     <small data-i18n="off_banco_desc">Tasas oficiales y regulaciones</small>
-    </div>
-   </a>
-   <a href="https://www.etecsa.cu/" target="_blank" rel="noopener" class="official-link">
-    <i class="fa-solid fa-signal"></i>
-    <div>
-     <strong>ETECSA</strong>
-     <small data-i18n="off_etecsa_desc">Telecomunicaciones y recargas</small>
-    </div>
-   </a>
-   <a href="https://www.aduana.gob.cu/" target="_blank" rel="noopener" class="official-link">
-    <i class="fa-solid fa-ship"></i>
-    <div>
-     <strong data-i18n="off_aduana">Aduana General</strong>
-     <small data-i18n="off_aduana_desc">Normativas y declaraciones</small>
-    </div>
-   </a>
-   <a href="https://www.mintur.gob.cu/" target="_blank" rel="noopener" class="official-link">
-    <i class="fa-solid fa-umbrella-beach"></i>
-    <div>
-     <strong data-i18n="off_mintur">Ministerio de Turismo</strong>
-     <small data-i18n="off_mintur_desc">Información turística oficial</small>
-    </div>
-   </a>
-   <a href="https://www.cubatravel.cu/" target="_blank" rel="noopener" class="official-link">
-    <i class="fa-solid fa-plane-departure"></i>
-    <div>
-     <strong>CubaTravel</strong>
-     <small data-i18n="off_cubatravel_desc">Portal oficial de turismo</small>
-    </div>
-   </a>
-   <a href="https://www.visaindex.com/" target="_blank" rel="noopener" class="official-link">
-    <i class="fa-solid fa-passport"></i>
-    <div>
-     <strong>Visa Index</strong>
-     <small data-i18n="off_visa_desc">Requisitos de visados mundiales</small>
-    </div>
-   </a>
-   <a href="https://www.cubadebate.cu/" target="_blank" rel="noopener" class="official-link">
-    <i class="fa-solid fa-newspaper"></i>
-    <div>
-     <strong>CubaDebate</strong>
-     <small data-i18n="off_cubadebate_desc">Noticias oficiales</small>
-    </div>
-   </a>
-   <a href="https://www.cubaconsulados.cu/" target="_blank" rel="noopener" class="official-link">
-    <i class="fa-solid fa-building-columns"></i>
-    <div>
-     <strong data-i18n="off_consulados">Consulados de Cuba</strong>
-     <small data-i18n="off_consulados_desc">Embajadas y consulados</small>
-    </div>
-   </a>
+   <a href="https://www.bc.gob.cu/" target="_blank" rel="noopener" class="official-link"><i class="fa-solid fa-landmark"></i><div><strong data-i18n="off_banco">Banco Central de Cuba</strong><small data-i18n="off_banco_desc">Tasas oficiales y regulaciones</small></div></a>
+   <a href="https://www.etecsa.cu/" target="_blank" rel="noopener" class="official-link"><i class="fa-solid fa-signal"></i><div><strong>ETECSA</strong><small data-i18n="off_etecsa_desc">Telecomunicaciones y recargas</small></div></a>
+   <a href="https://www.aduana.gob.cu/" target="_blank" rel="noopener" class="official-link"><i class="fa-solid fa-ship"></i><div><strong data-i18n="off_aduana">Aduana General</strong><small data-i18n="off_aduana_desc">Normativas y declaraciones</small></div></a>
+   <a href="https://www.mintur.gob.cu/" target="_blank" rel="noopener" class="official-link"><i class="fa-solid fa-umbrella-beach"></i><div><strong data-i18n="off_mintur">Ministerio de Turismo</strong><small data-i18n="off_mintur_desc">Información turística oficial</small></div></a>
+   <a href="https://www.cubatravel.cu/" target="_blank" rel="noopener" class="official-link"><i class="fa-solid fa-plane-departure"></i><div><strong>CubaTravel</strong><small data-i18n="off_cubatravel_desc">Portal oficial de turismo</small></div></a>
+   <a href="https://www.visaindex.com/" target="_blank" rel="noopener" class="official-link"><i class="fa-solid fa-passport"></i><div><strong>Visa Index</strong><small data-i18n="off_visa_desc">Requisitos de visados mundiales</small></div></a>
+   <a href="https://www.cubadebate.cu/" target="_blank" rel="noopener" class="official-link"><i class="fa-solid fa-newspaper"></i><div><strong>CubaDebate</strong><small data-i18n="off_cubadebate_desc">Noticias oficiales</small></div></a>
+   <a href="https://www.cubaconsulados.cu/" target="_blank" rel="noopener" class="official-link"><i class="fa-solid fa-building-columns"></i><div><strong data-i18n="off_consulados">Consulados de Cuba</strong><small data-i18n="off_consulados_desc">Embajadas y consulados</small></div></a>
   </div>
  </div>
 </section>
-
 <section id="solicitud">
  <div class="container">
   <div class="section-head">
@@ -405,15 +375,22 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 </main>
 <footer>
  <div class="container footer-inner">
-  <div>
-   <strong class="gold">YOUR BRIDGE HOME</strong><br>
-   <span data-i18n="footer_slogan">Tu puente al mundo.</span>
-  </div>
+  <div><strong class="gold">YOUR BRIDGE HOME</strong><br><span data-i18n="footer_slogan">Tu puente al mundo.</span></div>
   <div>Daynel Caminero · <span data-i18n="admin_role">Administrador</span><br>WhatsApp: +7 904 631 95 65</div>
   <div>© <span id="year"></span> YOUR BRIDGE HOME</div>
  </div>
 </footer>
 <a class="floating" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="floating_btn">ATENCIÓN DIRECTA</span></a>
+
+<!-- LIGHTBOX PARA VER FOTOS Y PDFs -->
+<div class="lightbox" id="lightbox">
+ <div class="lightbox-content">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+  <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)"><i class="fa-solid fa-chevron-right"></i></button>
+  <div id="lightboxBody"></div>
+ </div>
+</div>
 
 <!-- LOGIN -->
 <div class="overlay" id="loginModal">
@@ -521,6 +498,32 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    </div>
    <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveServicio()" data-i18n="save_btn">💾 Guardar servicio</button>
    <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearServicioForm()" data-i18n="new_btn">➕ Nuevo</button>
+   
+   <!-- SECCIÓN DE ARCHIVOS DEL SERVICIO -->
+   <div style="margin-top:25px;padding-top:20px;border-top:1px solid var(--line)">
+    <h4 style="color:var(--gold);margin:0 0 10px 0"><i class="fa-solid fa-images"></i> <span data-i18n="archivos_titulo">Fotos y PDFs del servicio</span></h4>
+    <p class="mini" data-i18n="archivos_desc">Sube fotos y documentos PDF asociados a este servicio. Primero guarda el servicio para poder agregar archivos.</p>
+    <div class="form-grid" style="margin-top:12px">
+     <div class="field">
+      <label data-i18n="archivos_tipo">Tipo de archivo</label>
+      <select id="archivoTipo">
+       <option value="foto">📷 Foto</option>
+       <option value="pdf">📄 PDF</option>
+      </select>
+     </div>
+     <div class="field">
+      <label data-i18n="archivos_nombre">Nombre / Descripción</label>
+      <input id="archivoDescripcion" placeholder="Ej: Lista de precios 2026">
+     </div>
+     <div class="field full">
+      <label data-i18n="archivos_subir">Seleccionar archivo</label>
+      <input id="archivoInput" type="file" accept="image/*,application/pdf">
+     </div>
+    </div>
+    <button class="btn btn-gold" style="margin-top:10px" type="button" onclick="subirArchivoServicio()" data-i18n="archivos_subir_btn">⬆️ Subir archivo</button>
+    <div id="archivosServicioList" style="margin-top:15px"></div>
+   </div>
+   
    <div class="admin-list" id="adminServicioList"></div>
   </div>
   <div class="admin-panel" id="requestsAdmin">
@@ -542,208 +545,182 @@ const SUPABASE_KEY = "sb_publishable_LaA2IPL1J_IWAH0CVMUcBQ_j-BZa2pe";
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const $ = id => document.getElementById(id);
 
-let tasasData = [], recargasData = [], boletosData = [], remesasData = [], destinosData = [], serviciosData = [], solicitudesData = [], opinionesData = [];
+let tasasData=[], recargasData=[], boletosData=[], remesasData=[], destinosData=[], serviciosData=[], solicitudesData=[], opinionesData=[];
+let archivosServicioActual = [];
+let servicioEditandoId = null;
+let lightboxItems = [], lightboxIndex = 0;
 let diagnosticLog = [];
 let currentLang = 'es';
 
 $("year").textContent = new Date().getFullYear();
 
-// ============ RELOJ EN TIEMPO REAL ============
-function updateClocks() {
+// RELOJ
+function updateClocks(){
  const now = new Date();
- 
- // Hora de Cuba (UTC-5)
- const cubaOptions = { timeZone: 'America/Havana', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
- const cubaTime = now.toLocaleTimeString('es-ES', cubaOptions);
- $("clockCuba").textContent = cubaTime;
- 
- // Hora local del usuario
- const localOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
- const localTime = now.toLocaleTimeString('es-ES', localOptions);
- $("clockLocal").textContent = localTime;
+ $("clockCuba").textContent = now.toLocaleTimeString('es-ES',{timeZone:'America/Havana',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+ $("clockLocal").textContent = now.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
 }
-setInterval(updateClocks, 1000);
-updateClocks();
+setInterval(updateClocks,1000); updateClocks();
 
-// ============ SISTEMA DE TRADUCCIÓN COMPLETO ============
+// TRADUCCIONES
 const translations = {
  es: {
-  banner1: "🎉 ¡Las mejores ofertas en recargas internacionales!",
-  banner2: "✈️ Vuelos económicos a los mejores destinos",
-  banner3: "💸 Remesas con las mejores tasas del mercado",
-  brand_sub: "TU PUENTE AL MUNDO",
-  nav_home: "INICIO", nav_services: "SERVICIOS", nav_recharges: "RECARGAS", nav_tickets: "BOLETOS", nav_remesas: "REMESAS", nav_destinations: "DESTINOS", nav_rates: "TASAS", nav_official: "OFICIALES",
-  clock_cuba: "🇨🇺 Cuba", clock_local: "🌍 Local",
-  hero_eyebrow: "Conectamos oportunidades",
-  hero_title: "Tu puente hacia <span>nuevas oportunidades</span>",
-  hero_desc: "Recargas internacionales, envío de remesas, pasajes y orientación para tus viajes.",
-  hero_btn1: "Explorar servicios <i class='fa-solid fa-arrow-right'></i>",
-  hero_btn2: "Contactar ahora",
-  hero_card_pill: "ATENCIÓN PERSONALIZADA",
-  hero_card_title: "Estamos para ayudarte",
-  hero_card_desc: "Consulta precios, solicita información y encuentra opciones para tus necesidades.",
-  admin_role: "Administrador",
-  services_eyebrow: "Lo que hacemos", services_title: "Nuestros <span class='gold'>servicios</span>", services_desc: "Soluciones para mantenerte conectado y acercarte a tus destinos.",
-  recharges_eyebrow: "Conectividad", recharges_title: "Planes de <span class='gold'>recargas</span>", recharges_desc: "Consulta las ofertas disponibles y solicita la tuya.",
-  tickets_eyebrow: "Tu próximo viaje", tickets_title: "Boletos de <span class='gold'>avión y transporte</span>", tickets_desc: "Precios, destinos y fechas publicados por administración.",
-  remesas_eyebrow: "Conectamos familias", remesas_title: "Servicio de <span class='gold'>remesas</span>", remesas_desc: "Solicita información sobre disponibilidad, destinos y condiciones.",
-  dest_eyebrow: "Explora el mundo", dest_title: "Destinos <span class='gold'>disponibles</span>", dest_desc: "Viajes y servicios a los mejores destinos.",
-  rates_eyebrow: "Información financiera", rates_title: "Tasas de <span class='gold'>cambio</span>", rates_desc: "Valores configurados por administración. Confirma la tasa antes de realizar cualquier operación.",
-  calc_title: "Calculadora de monedas", calc_amount: "Cantidad", calc_from: "De", calc_to: "A", calc_btn: "Calcular", calc_result: "Introduce una cantidad para calcular.",
-  official_eyebrow: "Enlaces oficiales", official_title: "Sitios <span class='gold'>Oficiales de Cuba</span>", official_desc: "Acceso directo a los portales gubernamentales y servicios oficiales.",
-  off_banco: "Banco Central de Cuba", off_banco_desc: "Tasas oficiales y regulaciones",
-  off_etecsa_desc: "Telecomunicaciones y recargas",
-  off_aduana: "Aduana General", off_aduana_desc: "Normativas y declaraciones",
-  off_mintur: "Ministerio de Turismo", off_mintur_desc: "Información turística oficial",
-  off_cubatravel_desc: "Portal oficial de turismo",
-  off_visa_desc: "Requisitos de visados mundiales",
-  off_cubadebate_desc: "Noticias oficiales",
-  off_consulados: "Consulados de Cuba", off_consulados_desc: "Embajadas y consulados",
-  req_eyebrow: "Estamos para ayudarte", req_title: "Solicita <span class='gold'>información</span>", req_desc: "Completa tus datos y nos pondremos en contacto contigo.",
-  req_name: "Nombre completo", req_phone: "Teléfono / WhatsApp", req_services: "Servicios de interés",
-  req_opt1: "Recargas", req_opt2: "Remesas", req_opt3: "Boleto de avión", req_opt4: "Consulta general",
-  req_dest: "Destino", req_details: "Detalles de tu solicitud", req_submit: "Enviar solicitud",
-  contact_title: "Atención personalizada", contact_desc: "Recibe orientación directa para encontrar la opción que mejor se adapte a tus necesidades.",
-  admin_label: "Administrador:", contact_btn: "Contactar directamente",
-  info_title: "Información importante", info_desc1: "Los precios y las tasas pueden cambiar según la disponibilidad y las condiciones del servicio.", info_desc2: "Confirma siempre el importe final, las fechas y los requisitos antes de realizar un pago.",
-  footer_slogan: "Tu puente al mundo.",
-  floating_btn: "ATENCIÓN DIRECTA",
-  admin_title: "Administración", admin_desc: "Acceso reservado al administrador.", admin_pass: "Contraseña", admin_enter: "Entrar",
-  panel_title: "Panel de administración", diag_title: "Diagnóstico del sistema",
-  tab_rates: "💱 Tasas", tab_recharges: "📱 Recargas", tab_tickets: "✈️ Boletos", tab_remesas: "💸 Remesas", tab_destinos: "🌍 Destinos", tab_servicios: "⭐ Servicios", tab_requests: "📋 Solicitudes", tab_opiniones: "💬 Opiniones",
-  rates_admin_title: "Tasas de cambio (valor en CUP)", recharge_admin_title: "Crear o editar plan de recarga", ticket_admin_title: "Crear o editar boleto", remesa_admin_title: "Crear o editar remesa", destinos_admin_title: "Crear o editar destino", servicios_admin_title: "Crear o editar servicio", requests_admin_title: "Solicitudes recibidas", opiniones_admin_title: "Opiniones de clientes",
-  field_label: "Etiqueta", field_name: "Nombre", field_price: "Precio", field_currency: "Moneda", field_desc1: "Descripción 1", field_desc2: "Descripción 2", field_type: "Tipo de transporte", field_origin: "Origen", field_dest: "Destino", field_departure: "Fecha de salida", field_return: "Fecha de regreso", field_desc: "Descripción", field_category: "Categoría", field_order: "Orden", field_icon: "Icono (emoji)", field_amount_orig: "Monto origen", field_currency_orig: "Moneda origen", field_amount_dest: "Monto destino", field_currency_dest: "Moneda destino",
-  save_btn: "💾 Guardar", new_btn: "➕ Nuevo", refresh_btn: "🔄 Actualizar",
-  loading: "Cargando..."
+  banner1:"🎉 ¡Las mejores ofertas en recargas internacionales!",banner2:"✈️ Vuelos económicos a los mejores destinos",banner3:"💸 Remesas con las mejores tasas del mercado",
+  brand_sub:"TU PUENTE AL MUNDO",nav_home:"INICIO",nav_services:"SERVICIOS",nav_recharges:"RECARGAS",nav_tickets:"BOLETOS",nav_remesas:"REMESAS",nav_destinations:"DESTINOS",nav_rates:"TASAS",nav_official:"OFICIALES",
+  clock_cuba:"🇨🇺 Cuba",clock_local:"🌍 Local",
+  hero_eyebrow:"Conectamos oportunidades",hero_title:'Tu puente hacia <span>nuevas oportunidades</span>',hero_desc:"Recargas internacionales, envío de remesas, pasajes y orientación para tus viajes.",
+  hero_btn1:'Explorar servicios <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Contactar ahora",
+  hero_card_pill:"ATENCIÓN PERSONALIZADA",hero_card_title:"Estamos para ayudarte",hero_card_desc:"Consulta precios, solicita información y encuentra opciones para tus necesidades.",
+  admin_role:"Administrador",
+  services_eyebrow:"Lo que hacemos",services_title:'Nuestros <span class="gold">servicios</span>',services_desc:"Soluciones para mantenerte conectado y acercarte a tus destinos.",
+  recharges_eyebrow:"Conectividad",recharges_title:'Planes de <span class="gold">recargas</span>',recharges_desc:"Consulta las ofertas disponibles y solicita la tuya.",
+  tickets_eyebrow:"Tu próximo viaje",tickets_title:'Boletos de <span class="gold">avión y transporte</span>',tickets_desc:"Precios, destinos y fechas publicados por administración.",
+  remesas_eyebrow:"Conectamos familias",remesas_title:'Servicio de <span class="gold">remesas</span>',remesas_desc:"Solicita información sobre disponibilidad, destinos y condiciones.",
+  dest_eyebrow:"Explora el mundo",dest_title:'Destinos <span class="gold">disponibles</span>',dest_desc:"Viajes y servicios a los mejores destinos.",
+  rates_eyebrow:"Información financiera",rates_title:'Tasas de <span class="gold">cambio</span>',rates_desc:"Valores configurados por administración. Confirma la tasa antes de realizar cualquier operación.",
+  calc_title:"Calculadora de monedas",calc_amount:"Cantidad",calc_from:"De",calc_to:"A",calc_btn:"Calcular",calc_result:"Introduce una cantidad para calcular.",
+  official_eyebrow:"Enlaces oficiales",official_title:'Sitios <span class="gold">Oficiales de Cuba</span>',official_desc:"Acceso directo a los portales gubernamentales y servicios oficiales.",
+  off_banco:"Banco Central de Cuba",off_banco_desc:"Tasas oficiales y regulaciones",off_etecsa_desc:"Telecomunicaciones y recargas",
+  off_aduana:"Aduana General",off_aduana_desc:"Normativas y declaraciones",off_mintur:"Ministerio de Turismo",off_mintur_desc:"Información turística oficial",
+  off_cubatravel_desc:"Portal oficial de turismo",off_visa_desc:"Requisitos de visados mundiales",off_cubadebate_desc:"Noticias oficiales",
+  off_consulados:"Consulados de Cuba",off_consulados_desc:"Embajadas y consulados",
+  req_eyebrow:"Estamos para ayudarte",req_title:'Solicita <span class="gold">información</span>',req_desc:"Completa tus datos y nos pondremos en contacto contigo.",
+  req_name:"Nombre completo",req_phone:"Teléfono / WhatsApp",req_services:"Servicios de interés",
+  req_opt1:"Recargas",req_opt2:"Remesas",req_opt3:"Boleto de avión",req_opt4:"Consulta general",
+  req_dest:"Destino",req_details:"Detalles de tu solicitud",req_submit:"Enviar solicitud",
+  contact_title:"Atención personalizada",contact_desc:"Recibe orientación directa para encontrar la opción que mejor se adapte a tus necesidades.",
+  admin_label:"Administrador:",contact_btn:"Contactar directamente",
+  info_title:"Información importante",info_desc1:"Los precios y las tasas pueden cambiar según la disponibilidad y las condiciones del servicio.",
+  info_desc2:"Confirma siempre el importe final, las fechas y los requisitos antes de realizar un pago.",
+  footer_slogan:"Tu puente al mundo.",floating_btn:"ATENCIÓN DIRECTA",
+  admin_title:"Administración",admin_desc:"Acceso reservado al administrador.",admin_pass:"Contraseña",admin_enter:"Entrar",
+  panel_title:"Panel de administración",diag_title:"Diagnóstico del sistema",
+  tab_rates:"💱 Tasas",tab_recharges:"📱 Recargas",tab_tickets:"✈️ Boletos",tab_remesas:"💸 Remesas",tab_destinos:"🌍 Destinos",tab_servicios:"⭐ Servicios",tab_requests:"📋 Solicitudes",tab_opiniones:"💬 Opiniones",
+  rates_admin_title:"Tasas de cambio (valor en CUP)",recharge_admin_title:"Crear o editar plan de recarga",ticket_admin_title:"Crear o editar boleto",
+  remesa_admin_title:"Crear o editar remesa",destinos_admin_title:"Crear o editar destino",servicios_admin_title:"Crear o editar servicio",
+  requests_admin_title:"Solicitudes recibidas",opiniones_admin_title:"Opiniones de clientes",
+  field_label:"Etiqueta",field_name:"Nombre",field_price:"Precio",field_currency:"Moneda",field_desc1:"Descripción 1",field_desc2:"Descripción 2",
+  field_type:"Tipo de transporte",field_origin:"Origen",field_dest:"Destino",field_departure:"Fecha de salida",field_return:"Fecha de regreso",field_desc:"Descripción",
+  field_category:"Categoría",field_order:"Orden",field_icon:"Icono (emoji)",
+  field_amount_orig:"Monto origen",field_currency_orig:"Moneda origen",field_amount_dest:"Monto destino",field_currency_dest:"Moneda destino",
+  save_btn:"💾 Guardar",new_btn:"➕ Nuevo",refresh_btn:"🔄 Actualizar",loading:"Cargando...",
+  archivos_titulo:"Fotos y PDFs del servicio",archivos_desc:"Sube fotos y documentos PDF asociados a este servicio. Primero guarda el servicio para poder agregar archivos.",
+  archivos_tipo:"Tipo de archivo",archivos_nombre:"Nombre / Descripción",archivos_subir:"Seleccionar archivo",archivos_subir_btn:"⬆️ Subir archivo",
+  ver_pdf:"Ver PDF",descargar:"Descargar",foto:"FOTO",pdf:"PDF"
  },
  en: {
-  banner1: "🎉 Best offers on international recharges!",
-  banner2: "✈️ Economical flights to the best destinations",
-  banner3: "💸 Remittances with the best market rates",
-  brand_sub: "YOUR BRIDGE TO THE WORLD",
-  nav_home: "HOME", nav_services: "SERVICES", nav_recharges: "RECHARGES", nav_tickets: "TICKETS", nav_remesas: "REMITTANCES", nav_destinations: "DESTINATIONS", nav_rates: "RATES", nav_official: "OFFICIAL",
-  clock_cuba: "🇨🇺 Cuba", clock_local: "🌍 Local",
-  hero_eyebrow: "We connect opportunities",
-  hero_title: "Your bridge to <span>new opportunities</span>",
-  hero_desc: "International recharges, remittances, tickets and travel guidance.",
-  hero_btn1: "Explore services <i class='fa-solid fa-arrow-right'></i>",
-  hero_btn2: "Contact now",
-  hero_card_pill: "PERSONALIZED ATTENTION",
-  hero_card_title: "We are here to help you",
-  hero_card_desc: "Check prices, request information and find options for your needs.",
-  admin_role: "Administrator",
-  services_eyebrow: "What we do", services_title: "Our <span class='gold'>services</span>", services_desc: "Solutions to keep you connected and bring you closer to your destinations.",
-  recharges_eyebrow: "Connectivity", recharges_title: "<span class='gold'>Recharge</span> plans", recharges_desc: "Check available offers and request yours.",
-  tickets_eyebrow: "Your next trip", tickets_title: "<span class='gold'>Flight and transport</span> tickets", tickets_desc: "Prices, destinations and dates published by administration.",
-  remesas_eyebrow: "We connect families", remesas_title: "<span class='gold'>Remittance</span> service", remesas_desc: "Request information on availability, destinations and conditions.",
-  dest_eyebrow: "Explore the world", dest_title: "Available <span class='gold'>destinations</span>", dest_desc: "Travel and services to the best destinations.",
-  rates_eyebrow: "Financial information", rates_title: "Exchange <span class='gold'>rates</span>", rates_desc: "Values configured by administration. Confirm the rate before any operation.",
-  calc_title: "Currency calculator", calc_amount: "Amount", calc_from: "From", calc_to: "To", calc_btn: "Calculate", calc_result: "Enter an amount to calculate.",
-  official_eyebrow: "Official links", official_title: "Official <span class='gold'>Cuba Sites</span>", official_desc: "Direct access to government portals and official services.",
-  off_banco: "Central Bank of Cuba", off_banco_desc: "Official rates and regulations",
-  off_etecsa_desc: "Telecommunications and recharges",
-  off_aduana: "General Customs", off_aduana_desc: "Regulations and declarations",
-  off_mintur: "Ministry of Tourism", off_mintur_desc: "Official tourist information",
-  off_cubatravel_desc: "Official tourism portal",
-  off_visa_desc: "Worldwide visa requirements",
-  off_cubadebate_desc: "Official news",
-  off_consulados: "Cuba Consulates", off_consulados_desc: "Embassies and consulates",
-  req_eyebrow: "We are here to help you", req_title: "Request <span class='gold'>information</span>", req_desc: "Fill in your details and we will contact you.",
-  req_name: "Full name", req_phone: "Phone / WhatsApp", req_services: "Services of interest",
-  req_opt1: "Recharges", req_opt2: "Remittances", req_opt3: "Flight ticket", req_opt4: "General inquiry",
-  req_dest: "Destination", req_details: "Details of your request", req_submit: "Send request",
-  contact_title: "Personalized attention", contact_desc: "Receive direct guidance to find the option that best suits your needs.",
-  admin_label: "Administrator:", contact_btn: "Contact directly",
-  info_title: "Important information", info_desc1: "Prices and rates may change depending on service availability and conditions.", info_desc2: "Always confirm the final amount, dates and requirements before making a payment.",
-  footer_slogan: "Your bridge to the world.",
-  floating_btn: "DIRECT ATTENTION",
-  admin_title: "Administration", admin_desc: "Access reserved for the administrator.", admin_pass: "Password", admin_enter: "Enter",
-  panel_title: "Administration panel", diag_title: "System diagnostics",
-  tab_rates: "💱 Rates", tab_recharges: "📱 Recharges", tab_tickets: "✈️ Tickets", tab_remesas: "💸 Remittances", tab_destinos: "🌍 Destinations", tab_servicios: "⭐ Services", tab_requests: "📋 Requests", tab_opiniones: "💬 Opinions",
-  rates_admin_title: "Exchange rates (value in CUP)", recharge_admin_title: "Create or edit recharge plan", ticket_admin_title: "Create or edit ticket", remesa_admin_title: "Create or edit remittance", destinos_admin_title: "Create or edit destination", servicios_admin_title: "Create or edit service", requests_admin_title: "Received requests", opiniones_admin_title: "Customer opinions",
-  field_label: "Label", field_name: "Name", field_price: "Price", field_currency: "Currency", field_desc1: "Description 1", field_desc2: "Description 2", field_type: "Transport type", field_origin: "Origin", field_dest: "Destination", field_departure: "Departure date", field_return: "Return date", field_desc: "Description", field_category: "Category", field_order: "Order", field_icon: "Icon (emoji)", field_amount_orig: "Origin amount", field_currency_orig: "Origin currency", field_amount_dest: "Destination amount", field_currency_dest: "Destination currency",
-  save_btn: "💾 Save", new_btn: "➕ New", refresh_btn: "🔄 Refresh",
-  loading: "Loading..."
+  banner1:"🎉 Best offers on international recharges!",banner2:"✈️ Economical flights to the best destinations",banner3:"💸 Remittances with the best market rates",
+  brand_sub:"YOUR BRIDGE TO THE WORLD",nav_home:"HOME",nav_services:"SERVICES",nav_recharges:"RECHARGES",nav_tickets:"TICKETS",nav_remesas:"REMITTANCES",nav_destinations:"DESTINATIONS",nav_rates:"RATES",nav_official:"OFFICIAL",
+  clock_cuba:"🇨🇺 Cuba",clock_local:"🌍 Local",
+  hero_eyebrow:"We connect opportunities",hero_title:'Your bridge to <span>new opportunities</span>',hero_desc:"International recharges, remittances, tickets and travel guidance.",
+  hero_btn1:'Explore services <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Contact now",
+  hero_card_pill:"PERSONALIZED ATTENTION",hero_card_title:"We are here to help you",hero_card_desc:"Check prices, request information and find options for your needs.",
+  admin_role:"Administrator",
+  services_eyebrow:"What we do",services_title:'Our <span class="gold">services</span>',services_desc:"Solutions to keep you connected and bring you closer to your destinations.",
+  recharges_eyebrow:"Connectivity",recharges_title:'<span class="gold">Recharge</span> plans',recharges_desc:"Check available offers and request yours.",
+  tickets_eyebrow:"Your next trip",tickets_title:'<span class="gold">Flight and transport</span> tickets',tickets_desc:"Prices, destinations and dates published by administration.",
+  remesas_eyebrow:"We connect families",remesas_title:'<span class="gold">Remittance</span> service',remesas_desc:"Request information on availability, destinations and conditions.",
+  dest_eyebrow:"Explore the world",dest_title:'Available <span class="gold">destinations</span>',dest_desc:"Travel and services to the best destinations.",
+  rates_eyebrow:"Financial information",rates_title:'Exchange <span class="gold">rates</span>',rates_desc:"Values configured by administration. Confirm the rate before any operation.",
+  calc_title:"Currency calculator",calc_amount:"Amount",calc_from:"From",calc_to:"To",calc_btn:"Calculate",calc_result:"Enter an amount to calculate.",
+  official_eyebrow:"Official links",official_title:'Official <span class="gold">Cuba Sites</span>',official_desc:"Direct access to government portals and official services.",
+  off_banco:"Central Bank of Cuba",off_banco_desc:"Official rates and regulations",off_etecsa_desc:"Telecommunications and recharges",
+  off_aduana:"General Customs",off_aduana_desc:"Regulations and declarations",off_mintur:"Ministry of Tourism",off_mintur_desc:"Official tourist information",
+  off_cubatravel_desc:"Official tourism portal",off_visa_desc:"Worldwide visa requirements",off_cubadebate_desc:"Official news",
+  off_consulados:"Cuba Consulates",off_consulados_desc:"Embassies and consulates",
+  req_eyebrow:"We are here to help you",req_title:'Request <span class="gold">information</span>',req_desc:"Fill in your details and we will contact you.",
+  req_name:"Full name",req_phone:"Phone / WhatsApp",req_services:"Services of interest",
+  req_opt1:"Recharges",req_opt2:"Remittances",req_opt3:"Flight ticket",req_opt4:"General inquiry",
+  req_dest:"Destination",req_details:"Details of your request",req_submit:"Send request",
+  contact_title:"Personalized attention",contact_desc:"Receive direct guidance to find the option that best suits your needs.",
+  admin_label:"Administrator:",contact_btn:"Contact directly",
+  info_title:"Important information",info_desc1:"Prices and rates may change depending on service availability and conditions.",
+  info_desc2:"Always confirm the final amount, dates and requirements before making a payment.",
+  footer_slogan:"Your bridge to the world.",floating_btn:"DIRECT ATTENTION",
+  admin_title:"Administration",admin_desc:"Access reserved for the administrator.",admin_pass:"Password",admin_enter:"Enter",
+  panel_title:"Administration panel",diag_title:"System diagnostics",
+  tab_rates:"💱 Rates",tab_recharges:"📱 Recharges",tab_tickets:"✈️ Tickets",tab_remesas:"💸 Remittances",tab_destinos:"🌍 Destinations",tab_servicios:"⭐ Services",tab_requests:"📋 Requests",tab_opiniones:"💬 Opinions",
+  rates_admin_title:"Exchange rates (value in CUP)",recharge_admin_title:"Create or edit recharge plan",ticket_admin_title:"Create or edit ticket",
+  remesa_admin_title:"Create or edit remittance",destinos_admin_title:"Create or edit destination",servicios_admin_title:"Create or edit service",
+  requests_admin_title:"Received requests",opiniones_admin_title:"Customer opinions",
+  field_label:"Label",field_name:"Name",field_price:"Price",field_currency:"Currency",field_desc1:"Description 1",field_desc2:"Description 2",
+  field_type:"Transport type",field_origin:"Origin",field_dest:"Destination",field_departure:"Departure date",field_return:"Return date",field_desc:"Description",
+  field_category:"Category",field_order:"Order",field_icon:"Icon (emoji)",
+  field_amount_orig:"Origin amount",field_currency_orig:"Origin currency",field_amount_dest:"Destination amount",field_currency_dest:"Destination currency",
+  save_btn:"💾 Save",new_btn:"➕ New",refresh_btn:"🔄 Refresh",loading:"Loading...",
+  archivos_titulo:"Service photos and PDFs",archivos_desc:"Upload photos and PDF documents associated with this service. First save the service to be able to add files.",
+  archivos_tipo:"File type",archivos_nombre:"Name / Description",archivos_subir:"Select file",archivos_subir_btn:"⬆️ Upload file",
+  ver_pdf:"View PDF",descargar:"Download",foto:"PHOTO",pdf:"PDF"
  },
  ru: {
-  banner1: "🎉 Лучшие предложения на международное пополнение!",
-  banner2: "✈️ Экономичные рейсы в лучшие направления",
-  banner3: "💸 Денежные переводы по лучшим рыночным курсам",
-  brand_sub: "ВАШ МОСТ В МИР",
-  nav_home: "ГЛАВНАЯ", nav_services: "УСЛУГИ", nav_recharges: "ПОПОЛНЕНИЕ", nav_tickets: "БИЛЕТЫ", nav_remesas: "ПЕРЕВОДЫ", nav_destinations: "НАПРАВЛЕНИЯ", nav_rates: "КУРСЫ", nav_official: "ОФИЦИАЛЬНЫЕ",
-  clock_cuba: "🇨🇺 Куба", clock_local: "🌍 Местное",
-  hero_eyebrow: "Мы соединяем возможности",
-  hero_title: "Ваш мост к <span>новым возможностям</span>",
-  hero_desc: "Международное пополнение, денежные переводы, билеты и рекомендации для путешествий.",
-  hero_btn1: "Изучить услуги <i class='fa-solid fa-arrow-right'></i>",
-  hero_btn2: "Связаться сейчас",
-  hero_card_pill: "ИНДИВИДУАЛЬНЫЙ ПОДХОД",
-  hero_card_title: "Мы здесь, чтобы помочь вам",
-  hero_card_desc: "Узнайте цены, запросите информацию и найдите варианты для ваших нужд.",
-  admin_role: "Администратор",
-  services_eyebrow: "Что мы делаем", services_title: "Наши <span class='gold'>услуги</span>", services_desc: "Решения, чтобы оставаться на связи и приблизиться к вашим направлениям.",
-  recharges_eyebrow: "Связь", recharges_title: "Планы <span class='gold'>пополнения</span>", recharges_desc: "Проверьте доступные предложения и запросите свое.",
-  tickets_eyebrow: "Ваше следующее путешествие", tickets_title: "Билеты на <span class='gold'>самолет и транспорт</span>", tickets_desc: "Цены, направления и даты, опубликованные администрацией.",
-  remesas_eyebrow: "Мы соединяем семьи", remesas_title: "Услуга <span class='gold'>денежных переводов</span>", remesas_desc: "Запросите информацию о доступности, направлениях и условиях.",
-  dest_eyebrow: "Исследуйте мир", dest_title: "Доступные <span class='gold'>направления</span>", dest_desc: "Путешествия и услуги в лучшие направления.",
-  rates_eyebrow: "Финансовая информация", rates_title: "Обменные <span class='gold'>курсы</span>", rates_desc: "Значения, настроенные администрацией. Подтвердите курс перед любой операцией.",
-  calc_title: "Калькулятор валют", calc_amount: "Сумма", calc_from: "Из", calc_to: "В", calc_btn: "Рассчитать", calc_result: "Введите сумму для расчета.",
-  official_eyebrow: "Официальные ссылки", official_title: "Официальные <span class='gold'>сайты Кубы</span>", official_desc: "Прямой доступ к государственным порталам и официальным услугам.",
-  off_banco: "Центральный банк Кубы", off_banco_desc: "Официальные курсы и регулирование",
-  off_etecsa_desc: "Телекоммуникации и пополнение",
-  off_aduana: "Главная таможня", off_aduana_desc: "Нормативы и декларации",
-  off_mintur: "Министерство туризма", off_mintur_desc: "Официальная туристическая информация",
-  off_cubatravel_desc: "Официальный туристический портал",
-  off_visa_desc: "Требования к визам по всему миру",
-  off_cubadebate_desc: "Официальные новости",
-  off_consulados: "Консульства Кубы", off_consulados_desc: "Посольства и консульства",
-  req_eyebrow: "Мы здесь, чтобы помочь вам", req_title: "Запросить <span class='gold'>информацию</span>", req_desc: "Заполните свои данные, и мы свяжемся с вами.",
-  req_name: "Полное имя", req_phone: "Телефон / WhatsApp", req_services: "Интересующие услуги",
-  req_opt1: "Пополнение", req_opt2: "Переводы", req_opt3: "Авиабилет", req_opt4: "Общий запрос",
-  req_dest: "Назначение", req_details: "Детали вашего запроса", req_submit: "Отправить запрос",
-  contact_title: "Индивидуальный подход", contact_desc: "Получите прямые рекомендации, чтобы найти вариант, который лучше всего соответствует вашим потребностям.",
-  admin_label: "Администратор:", contact_btn: "Связаться напрямую",
-  info_title: "Важная информация", info_desc1: "Цены и курсы могут меняться в зависимости от доступности и условий обслуживания.", info_desc2: "Всегда подтверждайте окончательную сумму, даты и требования перед оплатой.",
-  footer_slogan: "Ваш мост к новым возможностям.",
-  floating_btn: "ПРЯМОЕ ВНИМАНИЕ",
-  admin_title: "Администрирование", admin_desc: "Доступ зарезервирован для администратора.", admin_pass: "Пароль", admin_enter: "Войти",
-  panel_title: "Панель администрирования", diag_title: "Диагностика системы",
-  tab_rates: "💱 Курсы", tab_recharges: "📱 Пополнения", tab_tickets: "✈️ Билеты", tab_remesas: "💸 Переводы", tab_destinos: "🌍 Направления", tab_servicios: "⭐ Услуги", tab_requests: "📋 Запросы", tab_opiniones: "💬 Отзывы",
-  rates_admin_title: "Обменные курсы (значение в CUP)", recharge_admin_title: "Создать или изменить план пополнения", ticket_admin_title: "Создать или изменить билет", remesa_admin_title: "Создать или изменить перевод", destinos_admin_title: "Создать или изменить направление", servicios_admin_title: "Создать или изменить услугу", requests_admin_title: "Полученные запросы", opiniones_admin_title: "Отзывы клиентов",
-  field_label: "Метка", field_name: "Название", field_price: "Цена", field_currency: "Валюта", field_desc1: "Описание 1", field_desc2: "Описание 2", field_type: "Тип транспорта", field_origin: "Отправление", field_dest: "Назначение", field_departure: "Дата отправления", field_return: "Дата возвращения", field_desc: "Описание", field_category: "Категория", field_order: "Порядок", field_icon: "Иконка (эмодзи)", field_amount_orig: "Сумма отправления", field_currency_orig: "Валюта отправления", field_amount_dest: "Сумма назначения", field_currency_dest: "Валюта назначения",
-  save_btn: "💾 Сохранить", new_btn: "➕ Новый", refresh_btn: "🔄 Обновить",
-  loading: "Загрузка..."
+  banner1:"🎉 Лучшие предложения на международное пополнение!",banner2:"✈️ Экономичные рейсы в лучшие направления",banner3:"💸 Денежные переводы по лучшим рыночным курсам",
+  brand_sub:"ВАШ МОСТ В МИР",nav_home:"ГЛАВНАЯ",nav_services:"УСЛУГИ",nav_recharges:"ПОПОЛНЕНИЕ",nav_tickets:"БИЛЕТЫ",nav_remesas:"ПЕРЕВОДЫ",nav_destinations:"НАПРАВЛЕНИЯ",nav_rates:"КУРСЫ",nav_official:"ОФИЦИАЛЬНЫЕ",
+  clock_cuba:"🇨🇺 Куба",clock_local:"🌍 Местное",
+  hero_eyebrow:"Мы соединяем возможности",hero_title:'Ваш мост к <span>новым возможностям</span>',hero_desc:"Международное пополнение, денежные переводы, билеты и рекомендации для путешествий.",
+  hero_btn1:'Изучить услуги <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Связаться сейчас",
+  hero_card_pill:"ИНДИВИДУАЛЬНЫЙ ПОДХОД",hero_card_title:"Мы здесь, чтобы помочь вам",hero_card_desc:"Узнайте цены, запросите информацию и найдите варианты для ваших нужд.",
+  admin_role:"Администратор",
+  services_eyebrow:"Что мы делаем",services_title:'Наши <span class="gold">услуги</span>',services_desc:"Решения, чтобы оставаться на связи и приблизиться к вашим направлениям.",
+  recharges_eyebrow:"Связь",recharges_title:'Планы <span class="gold">пополнения</span>',recharges_desc:"Проверьте доступные предложения и запросите свое.",
+  tickets_eyebrow:"Ваше следующее путешествие",tickets_title:'Билеты на <span class="gold">самолет и транспорт</span>',tickets_desc:"Цены, направления и даты, опубликованные администрацией.",
+  remesas_eyebrow:"Мы соединяем семьи",remesas_title:'Услуга <span class="gold">денежных переводов</span>',remesas_desc:"Запросите информацию о доступности, направлениях и условиях.",
+  dest_eyebrow:"Исследуйте мир",dest_title:'Доступные <span class="gold">направления</span>',dest_desc:"Путешествия и услуги в лучшие направления.",
+  rates_eyebrow:"Финансовая информация",rates_title:'Обменные <span class="gold">курсы</span>',rates_desc:"Значения, настроенные администрацией. Подтвердите курс перед любой операцией.",
+  calc_title:"Калькулятор валют",calc_amount:"Сумма",calc_from:"Из",calc_to:"В",calc_btn:"Рассчитать",calc_result:"Введите сумму для расчета.",
+  official_eyebrow:"Официальные ссылки",official_title:'Официальные <span class="gold">сайты Кубы</span>',official_desc:"Прямой доступ к государственным порталам и официальным услугам.",
+  off_banco:"Центральный банк Кубы",off_banco_desc:"Официальные курсы и регулирование",off_etecsa_desc:"Телекоммуникации и пополнение",
+  off_aduana:"Главная таможня",off_aduana_desc:"Нормативы и декларации",off_mintur:"Министерство туризма",off_mintur_desc:"Официальная туристическая информация",
+  off_cubatravel_desc:"Официальный туристический портал",off_visa_desc:"Требования к визам по всему миру",off_cubadebate_desc:"Официальные новости",
+  off_consulados:"Консульства Кубы",off_consulados_desc:"Посольства и консульства",
+  req_eyebrow:"Мы здесь, чтобы помочь вам",req_title:'Запросить <span class="gold">информацию</span>',req_desc:"Заполните свои данные, и мы свяжемся с вами.",
+  req_name:"Полное имя",req_phone:"Телефон / WhatsApp",req_services:"Интересующие услуги",
+  req_opt1:"Пополнение",req_opt2:"Переводы",req_opt3:"Авиабилет",req_opt4:"Общий запрос",
+  req_dest:"Назначение",req_details:"Детали вашего запроса",req_submit:"Отправить запрос",
+  contact_title:"Индивидуальный подход",contact_desc:"Получите прямые рекомендации, чтобы найти вариант, который лучше всего соответствует вашим потребностям.",
+  admin_label:"Администратор:",contact_btn:"Связаться напрямую",
+  info_title:"Важная информация",info_desc1:"Цены и курсы могут меняться в зависимости от доступности и условий обслуживания.",
+  info_desc2:"Всегда подтверждайте окончательную сумму, даты и требования перед оплатой.",
+  footer_slogan:"Ваш мост к новым возможностям.",floating_btn:"ПРЯМОЕ ВНИМАНИЕ",
+  admin_title:"Администрирование",admin_desc:"Доступ зарезервирован для администратора.",admin_pass:"Пароль",admin_enter:"Войти",
+  panel_title:"Панель администрирования",diag_title:"Диагностика системы",
+  tab_rates:"💱 Курсы",tab_recharges:"📱 Пополнения",tab_tickets:"✈️ Билеты",tab_remesas:"💸 Переводы",tab_destinos:"🌍 Направления",tab_servicios:"⭐ Услуги",tab_requests:"📋 Запросы",tab_opiniones:"💬 Отзывы",
+  rates_admin_title:"Обменные курсы (значение в CUP)",recharge_admin_title:"Создать или изменить план пополнения",ticket_admin_title:"Создать или изменить билет",
+  remesa_admin_title:"Создать или изменить перевод",destinos_admin_title:"Создать или изменить направление",servicios_admin_title:"Создать или изменить услугу",
+  requests_admin_title:"Полученные запросы",opiniones_admin_title:"Отзывы клиентов",
+  field_label:"Метка",field_name:"Название",field_price:"Цена",field_currency:"Валюта",field_desc1:"Описание 1",field_desc2:"Описание 2",
+  field_type:"Тип транспорта",field_origin:"Отправление",field_dest:"Назначение",field_departure:"Дата отправления",field_return:"Дата возвращения",field_desc:"Описание",
+  field_category:"Категория",field_order:"Порядок",field_icon:"Иконка (эмодзи)",
+  field_amount_orig:"Сумма отправления",field_currency_orig:"Валюта отправления",field_amount_dest:"Сумма назначения",field_currency_dest:"Валюта назначения",
+  save_btn:"💾 Сохранить",new_btn:"➕ Новый",refresh_btn:"🔄 Обновить",loading:"Загрузка...",
+  archivos_titulo:"Фото и PDF услуги",archivos_desc:"Загрузите фото и PDF-документы, связанные с этой услугой. Сначала сохраните услугу, чтобы добавлять файлы.",
+  archivos_tipo:"Тип файла",archivos_nombre:"Название / Описание",archivos_subir:"Выбрать файл",archivos_subir_btn:"⬆️ Загрузить файл",
+  ver_pdf:"Смотреть PDF",descargar:"Скачать",foto:"ФОТО",pdf:"PDF"
  }
 };
 
-function changeLanguage(lang) {
+function changeLanguage(lang){
  currentLang = lang;
  document.documentElement.lang = lang;
  document.querySelectorAll('[data-i18n]').forEach(el => {
   const key = el.getAttribute('data-i18n');
   if (translations[lang] && translations[lang][key]) {
    const value = translations[lang][key];
-   if (value.includes('<')) {
-    el.innerHTML = value;
-   } else {
-    el.textContent = value;
-   }
+   if (value.includes('<')) el.innerHTML = value; else el.textContent = value;
   }
  });
 }
 
-// ============ RESTO DEL CÓDIGO (igual que antes) ============
-function diag(type, msg) { diagnosticLog.push({type, msg}); renderDiagnostic(); }
-function renderDiagnostic() {
- const el = $("diagnosticContent");
- if (!el) return;
+// DIAGNÓSTICO
+function diag(type, msg){ diagnosticLog.push({type, msg}); renderDiagnostic(); }
+function renderDiagnostic(){
+ const el = $("diagnosticContent"); if (!el) return;
  el.innerHTML = diagnosticLog.map(d => {
   const cls = d.type === "ok" ? "diag-ok" : d.type === "err" ? "diag-err" : "diag-info";
   const icon = d.type === "ok" ? "fa-circle-check" : d.type === "err" ? "fa-circle-xmark" : "fa-circle-info";
   return `<div class="diag-line ${cls}"><i class="fa-solid ${icon}"></i> ${d.msg}</div>`;
  }).join("");
 }
-function clearDiag() { diagnosticLog = []; renderDiagnostic(); }
+function clearDiag(){ diagnosticLog = []; renderDiagnostic(); }
 
 function toggleMenu(){ $("navlinks").classList.toggle("open"); }
 document.querySelectorAll(".navlinks a").forEach(a=> a.addEventListener("click",()=> $("navlinks").classList.remove("open")));
@@ -751,17 +728,13 @@ document.querySelectorAll(".navlinks a").forEach(a=> a.addEventListener("click",
 function openLogin(){ $("loginError").textContent=""; $("loginModal").classList.add("show"); }
 function closeModal(id){ $(id).classList.remove("show"); }
 async function login(){
- const email = $("adminEmail").value.trim();
- const password = $("adminPassword").value;
+ const email = $("adminEmail").value.trim(); const password = $("adminPassword").value;
  if(!email || !password){ $("loginError").textContent="Completa email y contraseña."; return; }
  const { data, error } = await db.auth.signInWithPassword({ email, password });
  if(error){ $("loginError").textContent="Credenciales incorrectas."; return; }
- closeModal("loginModal");
- $("adminModal").classList.add("show");
- clearDiag();
- diag("info", "🔐 Sesión de administrador iniciada");
- runDiagnostics();
- loadAdminData();
+ closeModal("loginModal"); $("adminModal").classList.add("show");
+ clearDiag(); diag("info", "🔐 Sesión de administrador iniciada");
+ runDiagnostics(); loadAdminData();
  $("adminEmail").value=""; $("adminPassword").value="";
 }
 $("adminPassword").addEventListener("keydown",e=>{ if(e.key==="Enter")login(); });
@@ -771,19 +744,15 @@ document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ closeModal("login
 function showAdminTab(id,btn){
  document.querySelectorAll(".admin-panel").forEach(p=>p.classList.remove("active"));
  document.querySelectorAll(".admin-tabs button").forEach(b=>b.classList.remove("active"));
- const panel=$(id);
- if(panel){ panel.classList.add("active"); btn.classList.add("active"); }
+ const panel=$(id); if(panel){ panel.classList.add("active"); btn.classList.add("active"); }
 }
 
-async function runDiagnostics() {
+async function runDiagnostics(){
  diag("info", "🔍 Verificando conexión con Supabase...");
- const tablas = ['tasas','recargas','boletos','remesas','destinos','servicios','solicitudes','opiniones','configuracion'];
+ const tablas = ['tasas','recargas','boletos','remesas','destinos','servicios','servicios_archivos','solicitudes','opiniones','configuracion'];
  for (const t of tablas) {
-  try {
-   const { error } = await db.from(t).select('*').limit(1);
-   if (error) diag("err", "❌ Tabla '" + t + "': " + error.message);
-   else diag("ok", "✅ Tabla '" + t + "' accesible");
-  } catch(e) { diag("err", "❌ Error tabla " + t + ": " + e.message); }
+  try { const { error } = await db.from(t).select('*').limit(1); if (error) diag("err", "❌ Tabla '" + t + "': " + error.message); else diag("ok", "✅ Tabla '" + t + "' accesible"); }
+  catch(e) { diag("err", "❌ Error tabla " + t + ": " + e.message); }
  }
  diag("info", "🏁 Diagnóstico completado");
 }
@@ -793,11 +762,10 @@ function money(v,c){ return `${Number(v||0).toLocaleString("es-ES",{maximumFract
 
 async function loadAll(){ await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios() ]); }
 
+// TASAS
 async function loadTasas(){
  const {data,error}=await db.from('tasas').select("*").eq("activo",true).order("codigo");
- if(error) return;
- tasasData = data || [];
- renderTasas();
+ if(error) return; tasasData = data || []; renderTasas();
  if($("adminModal").classList.contains("show")) renderAdminTasas();
 }
 function renderTasas(){
@@ -806,8 +774,7 @@ function renderTasas(){
 }
 function populateCalculatorSelects(){
  const options = tasasData.map(t => `<option value="${safe(t.codigo)}">${safe(t.codigo)} - ${safe(t.moneda)}</option>`).join("");
- $("calcFrom").innerHTML = options;
- $("calcTo").innerHTML = options;
+ $("calcFrom").innerHTML = options; $("calcTo").innerHTML = options;
 }
 function renderAdminTasas(){
  $("ratesAdminList").innerHTML = tasasData.map(t => `
@@ -817,24 +784,21 @@ function renderAdminTasas(){
   </div>`).join("") || '<p class="mini">No hay tasas.</p>';
 }
 function editTasa(id){
- const t = tasasData.find(v=>String(v.id)===String(id));
- if(!t) return;
+ const t = tasasData.find(v=>String(v.id)===String(id)); if(!t) return;
  const nuevoValor = prompt(`Nueva tasa para ${t.moneda} (${t.codigo}) en CUP:`, t.valor_cup);
- if(nuevoValor === null) return;
- updateTasa(id, parseFloat(nuevoValor));
+ if(nuevoValor === null) return; updateTasa(id, parseFloat(nuevoValor));
 }
 async function updateTasa(id, valor){
  const {error} = await db.from('tasas').update({valor_cup: valor}).eq('id', id);
  if(error){ alert("Error: " + error.message); return; }
- alert("✅ Tasa actualizada");
- await loadTasas();
+ alert("✅ Tasa actualizada"); await loadTasas();
 }
 
+// RECARGAS
 async function loadRecargas(){
  const {data,error}=await db.from('recargas').select("*").eq("activo",true).order("id");
  if(error){ $("rechargesList").innerHTML='<div class="empty">No se pudieron cargar las recargas.</div>'; return; }
- recargasData=data||[];
- renderRecargas();
+ recargasData=data||[]; renderRecargas();
 }
 function renderRecargas(){
  const el=$("rechargesList");
@@ -843,8 +807,7 @@ function renderRecargas(){
 }
 function requestRecharge(index){
  const item=recargasData[index]; if(!item)return;
- openRequest("Recarga");
- $("clientDetails").value=`Estoy interesado en el plan: ${item.nombre}. Precio publicado: ${money(item.precio,item.moneda||"RUB")}.`;
+ openRequest("Recarga"); $("clientDetails").value=`Estoy interesado en el plan: ${item.nombre}. Precio publicado: ${money(item.precio,item.moneda||"RUB")}.`;
  $("solicitud").scrollIntoView({behavior:"smooth"});
 }
 function clearRechargeForm(){ ["rechargeId","rechargeLabel","rechargeName","rechargePrice","rechargeDesc1","rechargeDesc2"].forEach(id=>{ $(id).value=""; }); $("rechargeCurrency").value="RUB"; }
@@ -859,8 +822,7 @@ async function saveRecharge(){
  const payload={ etiqueta:$("rechargeLabel").value.trim(), nombre:$("rechargeName").value.trim(), precio:Number($("rechargePrice").value), moneda:$("rechargeCurrency").value, descripcion1:$("rechargeDesc1").value.trim(), descripcion2:$("rechargeDesc2").value.trim(), activo:true };
  if(!payload.nombre||!Number.isFinite(payload.precio)||payload.precio<0){ alert("Completa el nombre y un precio válido."); return; }
  const query=id ? db.from('recargas').update(payload).eq("id",id) : db.from('recargas').insert(payload);
- const {error}=await query;
- if(error){ alert("Error: "+error.message); return; }
+ const {error}=await query; if(error){ alert("Error: "+error.message); return; }
  clearRechargeForm(); await loadRecargas(); renderAdminRecharges();
 }
 async function deleteRecharge(id){ if(!confirm("¿Eliminar este plan?"))return; await db.from('recargas').delete().eq("id",id); await loadRecargas(); renderAdminRecharges(); }
@@ -868,11 +830,11 @@ function renderAdminRecharges(){
  $("adminRechargeList").innerHTML=recargasData.map(x=>`<div class="admin-item"><div><strong>${safe(x.nombre)}</strong><br><small>${money(x.precio,x.moneda||"RUB")}</small></div><div><button class="btn btn-dark" type="button" onclick="editRecharge('${safe(x.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteRecharge('${safe(x.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay planes cargados.</p>';
 }
 
+// BOLETOS
 async function loadBoletos(){
  const {data,error}=await db.from('boletos').select("*").eq("activo",true).order("fecha_salida",{ascending:true});
  if(error){ $("ticketsList").innerHTML='<div class="empty">No hay boletos publicados.</div>'; return; }
- boletosData=data||[];
- renderBoletos();
+ boletosData=data||[]; renderBoletos();
 }
 function renderBoletos(){
  const el=$("ticketsList");
@@ -881,8 +843,7 @@ function renderBoletos(){
 }
 function requestTicket(index){
  const t=boletosData[index]; if(!t)return;
- openRequest("Boleto de avión");
- $("clientDestination").value=t.destino||"";
+ openRequest("Boleto de avión"); $("clientDestination").value=t.destino||"";
  $("clientDetails").value=`Boleto: ${t.origen} → ${t.destino}. Tipo: ${t.transporte}. Salida: ${t.fecha_salida||"Por confirmar"}. Precio: ${money(t.precio,t.moneda)}.`;
  $("solicitud").scrollIntoView({behavior:"smooth"});
 }
@@ -900,8 +861,7 @@ async function saveTicket(){
  const payload={ etiqueta:$("ticketLabel").value.trim(), transporte:$("ticketType").value, origen:$("ticketOrigin").value.trim(), destino:$("ticketDestination").value.trim(), fecha_salida:$("ticketDeparture").value||null, fecha_regreso:$("ticketReturn").value||null, precio:Number($("ticketPrice").value), moneda:$("ticketCurrency").value, descripcion:$("ticketDescription").value.trim(), activo:true };
  if(!payload.origen||!payload.destino||!Number.isFinite(payload.precio)||payload.precio<0){ alert("Completa origen, destino y precio."); return; }
  const query=id ? db.from('boletos').update(payload).eq("id",id) : db.from('boletos').insert(payload);
- const {error}=await query;
- if(error){ alert("Error: "+error.message); return; }
+ const {error}=await query; if(error){ alert("Error: "+error.message); return; }
  clearTicketForm(); await loadBoletos(); renderAdminTickets();
 }
 async function deleteTicket(id){ if(!confirm("¿Eliminar este boleto?"))return; await db.from('boletos').delete().eq("id",id); await loadBoletos(); renderAdminTickets(); }
@@ -909,11 +869,11 @@ function renderAdminTickets(){
  $("adminTicketList").innerHTML=boletosData.map(t=>`<div class="admin-item"><div><strong>${safe(t.origen)} → ${safe(t.destino)}</strong><br><small>${money(t.precio,t.moneda)} · ${safe(t.fecha_salida||"")}</small></div><div><button class="btn btn-dark" type="button" onclick="editTicket('${safe(t.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteTicket('${safe(t.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay boletos cargados.</p>';
 }
 
+// REMESAS
 async function loadRemesas(){
  const {data,error}=await db.from('remesas').select("*").eq("activo",true).order("id");
  if(error){ $("remesasList").innerHTML='<div class="empty">No hay remesas publicadas.</div>'; return; }
- remesasData=data||[];
- renderRemesas();
+ remesasData=data||[]; renderRemesas();
 }
 function renderRemesas(){
  const el=$("remesasList");
@@ -922,8 +882,7 @@ function renderRemesas(){
 }
 function requestRemesa(index){
  const r=remesasData[index]; if(!r)return;
- openRequest("Remesa");
- $("clientDestination").value=r.destino||"";
+ openRequest("Remesa"); $("clientDestination").value=r.destino||"";
  $("clientDetails").value=`Remesa: ${r.origen} → ${r.destino}. Envío: ${money(r.monto_origen,r.moneda_origen)}. Reciben: ${money(r.monto_destino,r.moneda_destino)}.`;
  $("solicitud").scrollIntoView({behavior:"smooth"});
 }
@@ -940,8 +899,7 @@ async function saveRemesa(){
  const payload={ origen:$("remesaOrigen").value.trim(), destino:$("remesaDestino").value.trim(), monto_origen:Number($("remesaMontoOrigen").value), moneda_origen:$("remesaMonedaOrigen").value, monto_destino:Number($("remesaMontoDestino").value), moneda_destino:$("remesaMonedaDestino").value, descripcion:$("remesaDescripcion").value.trim(), activo:true };
  if(!payload.origen||!payload.destino||!Number.isFinite(payload.monto_origen)||payload.monto_origen<0){ alert("Completa origen, destino y monto."); return; }
  const query=id ? db.from('remesas').update(payload).eq("id",id) : db.from('remesas').insert(payload);
- const {error}=await query;
- if(error){ alert("Error: "+error.message); return; }
+ const {error}=await query; if(error){ alert("Error: "+error.message); return; }
  clearRemesaForm(); await loadRemesas(); renderAdminRemesas();
 }
 async function deleteRemesa(id){ if(!confirm("¿Eliminar esta remesa?"))return; await db.from('remesas').delete().eq("id",id); await loadRemesas(); renderAdminRemesas(); }
@@ -949,11 +907,11 @@ function renderAdminRemesas(){
  $("adminRemesaList").innerHTML=remesasData.map(r=>`<div class="admin-item"><div><strong>${safe(r.origen)} → ${safe(r.destino)}</strong><br><small>${money(r.monto_origen,r.moneda_origen)} → ${money(r.monto_destino,r.moneda_destino)}</small></div><div><button class="btn btn-dark" type="button" onclick="editRemesa('${safe(r.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteRemesa('${safe(r.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay remesas cargadas.</p>';
 }
 
+// DESTINOS
 async function loadDestinos(){
  const {data,error}=await db.from('destinos').select("*").eq("activo",true).order("nombre");
  if(error){ $("destinosList").innerHTML='<div class="empty">No hay destinos publicados.</div>'; return; }
- destinosData=data||[];
- renderDestinos();
+ destinosData=data||[]; renderDestinos();
 }
 function renderDestinos(){
  const el=$("destinosList");
@@ -970,8 +928,7 @@ async function saveDestino(){
  const payload={ nombre:$("destinoNombre").value.trim(), categoria:$("destinoCategoria").value.trim(), descripcion:$("destinoDescripcion").value.trim(), activo:true };
  if(!payload.nombre){ alert("El nombre es obligatorio."); return; }
  const query=id ? db.from('destinos').update(payload).eq("id",id) : db.from('destinos').insert(payload);
- const {error}=await query;
- if(error){ alert("Error: "+error.message); return; }
+ const {error}=await query; if(error){ alert("Error: "+error.message); return; }
  clearDestinoForm(); await loadDestinos(); renderAdminDestinos();
 }
 async function deleteDestino(id){ if(!confirm("¿Eliminar este destino?"))return; await db.from('destinos').delete().eq("id",id); await loadDestinos(); renderAdminDestinos(); }
@@ -979,36 +936,194 @@ function renderAdminDestinos(){
  $("adminDestinoList").innerHTML=destinosData.map(d=>`<div class="admin-item"><div><strong>${safe(d.nombre)}</strong><br><small>${safe(d.categoria||"")}</small></div><div><button class="btn btn-dark" type="button" onclick="editDestino('${safe(d.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteDestino('${safe(d.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay destinos cargados.</p>';
 }
 
+// SERVICIOS CON ARCHIVOS (FOTOS Y PDFs)
 async function loadServicios(){
  const {data,error}=await db.from('servicios').select("*").eq("activo",true).order("orden");
  if(error){ $("serviciosList").innerHTML='<div class="empty">No hay servicios publicados.</div>'; return; }
  serviciosData=data||[];
+ // Cargar archivos de todos los servicios
+ if(serviciosData.length > 0){
+  const ids = serviciosData.map(s => s.id);
+  const {data: archivos} = await db.from('servicios_archivos').select("*").in('servicio_id', ids).eq('activo', true).order('orden');
+  serviciosData.forEach(s => { s.archivos = (archivos || []).filter(a => a.servicio_id === s.id); });
+ } else {
+  serviciosData.forEach(s => { s.archivos = []; });
+ }
  renderServicios();
 }
 function renderServicios(){
  const el=$("serviciosList");
  if(!serviciosData.length){ el.innerHTML='<div class="empty">No hay servicios publicados en este momento.</div>'; return; }
- el.innerHTML=serviciosData.map(s=>`<article class="card"><div class="service-icon">${safe(s.icono||"⭐")}</div><h3>${safe(s.nombre)}</h3><p>${safe(s.descripcion||"")}</p></article>`).join("");
+ el.innerHTML=serviciosData.map(s=>{
+  const fotos = (s.archivos || []).filter(a => a.tipo_archivo === 'foto');
+  const pdfs = (s.archivos || []).filter(a => a.tipo_archivo === 'pdf');
+  let galeriaHtml = '';
+  if(fotos.length > 0 || pdfs.length > 0){
+   galeriaHtml = '<div class="servicio-galeria">';
+   fotos.forEach((f, idx) => {
+    galeriaHtml += `<div class="galeria-item" onclick="openLightbox('${safe(s.id)}','foto',${idx})"><img src="${safe(f.url_archivo)}" alt="${safe(f.nombre_original||'')}"><span class="tipo-badge">${translations[currentLang].foto}</span></div>`;
+   });
+   pdfs.forEach((p, idx) => {
+    galeriaHtml += `<div class="galeria-item pdf-item" onclick="openLightbox('${safe(s.id)}','pdf',${idx})"><i class="fa-solid fa-file-pdf"></i><small>${safe(p.nombre_original || translations[currentLang].pdf)}</small><span class="tipo-badge">${translations[currentLang].pdf}</span></div>`;
+   });
+   galeriaHtml += '</div>';
+  }
+  return `<article class="card"><div class="service-icon">${safe(s.icono||"⭐")}</div><h3>${safe(s.nombre)}</h3><p>${safe(s.descripcion||"")}</p>${galeriaHtml}</article>`;
+ }).join("");
 }
-function clearServicioForm(){ ["servicioId","servicioNombre","servicioDescripcion","servicioIcono"].forEach(id=>{ $(id).value=""; }); $("servicioOrden").value="1"; }
+
+// LIGHTBOX
+function openLightbox(servicioId, tipo, index){
+ const servicio = serviciosData.find(s => s.id === servicioId);
+ if(!servicio) return;
+ const archivos = (servicio.archivos || []).filter(a => a.tipo_archivo === tipo);
+ if(archivos.length === 0) return;
+ lightboxItems = archivos;
+ lightboxIndex = index;
+ renderLightbox();
+ $("lightbox").classList.add("show");
+}
+function renderLightbox(){
+ const item = lightboxItems[lightboxIndex];
+ const body = $("lightboxBody");
+ if(item.tipo_archivo === 'foto'){
+  body.innerHTML = `<img src="${safe(item.url_archivo)}" alt="${safe(item.nombre_original||'')}">`;
+ } else {
+  body.innerHTML = `<iframe src="${safe(item.url_archivo)}#toolbar=1&navpanes=0" type="application/pdf"></iframe>`;
+ }
+}
+function navLightbox(dir){
+ lightboxIndex = (lightboxIndex + dir + lightboxItems.length) % lightboxItems.length;
+ renderLightbox();
+}
+function closeLightbox(){ $("lightbox").classList.remove("show"); $("lightboxBody").innerHTML = ""; }
+
+// SUBIR ARCHIVOS AL SERVICIO (ADMIN)
+async function subirArchivoServicio(){
+ if(!servicioEditandoId){ alert("Primero guarda el servicio antes de subir archivos."); return; }
+ const fileInput = $("archivoInput");
+ if(fileInput.files.length === 0){ alert("Selecciona un archivo."); return; }
+ const file = fileInput.files[0];
+ const tipo = $("archivoTipo").value;
+ const descripcion = $("archivoDescripcion").value.trim();
+ 
+ // Validar tipo
+ if(tipo === 'foto' && !file.type.startsWith('image/')){ alert("El archivo debe ser una imagen."); return; }
+ if(tipo === 'pdf' && file.type !== 'application/pdf'){ alert("El archivo debe ser un PDF."); return; }
+ 
+ const fileName = `servicios/${servicioEditandoId}/${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
+ const { error: uploadError } = await db.storage.from('imagenes').upload(fileName, file, {upsert: true});
+ if(uploadError){ alert("Error al subir: " + uploadError.message); return; }
+ const { data: { publicUrl } } = db.storage.from('imagenes').getPublicUrl(fileName);
+ 
+ const payload = {
+  servicio_id: servicioEditandoId,
+  tipo_archivo: tipo,
+  url_archivo: publicUrl,
+  nombre_original: file.name,
+  descripcion: descripcion,
+  orden: archivosServicioActual.length,
+  activo: true
+ };
+ const {error} = await db.from('servicios_archivos').insert(payload);
+ if(error){ alert("Error al guardar: " + error.message); return; }
+ 
+ $("archivoInput").value = "";
+ $("archivoDescripcion").value = "";
+ await cargarArchivosServicio(servicioEditandoId);
+}
+
+async function cargarArchivosServicio(servicioId){
+ const {data} = await db.from('servicios_archivos').select("*").eq('servicio_id', servicioId).eq('activo', true).order('orden');
+ archivosServicioActual = data || [];
+ renderArchivosAdmin();
+}
+
+function renderArchivosAdmin(){
+ const t = translations[currentLang];
+ $("archivosServicioList").innerHTML = archivosServicioActual.length === 0 
+  ? '<p class="mini">No hay archivos subidos para este servicio.</p>'
+  : archivosServicioActual.map(a => `
+   <div class="archivo-item-admin">
+    ${a.tipo_archivo === 'foto' ? `<img src="${safe(a.url_archivo)}">` : `<i class="fa-solid fa-file-pdf"></i>`}
+    <div class="archivo-info">
+     <strong>${a.tipo_archivo === 'foto' ? '📷' : '📄'} ${safe(a.nombre_original || 'Sin nombre')}</strong>
+     <small>${safe(a.descripcion || '')}</small>
+    </div>
+    <button class="btn btn-dark" type="button" onclick="window.open('${safe(a.url_archivo)}','_blank')">${a.tipo_archivo === 'pdf' ? t.ver_pdf : '👁️'}</button>
+    <button class="btn btn-red" type="button" onclick="eliminarArchivo('${safe(a.id)}')">🗑️</button>
+   </div>`).join("");
+}
+
+async function eliminarArchivo(archivoId){
+ if(!confirm("¿Eliminar este archivo?")) return;
+ const archivo = archivosServicioActual.find(a => a.id === archivoId);
+ if(archivo){
+  // Eliminar del storage
+  const ruta = archivo.url_archivo.split('/imagenes/')[1];
+  if(ruta) await db.storage.from('imagenes').remove([ruta]);
+ }
+ await db.from('servicios_archivos').delete().eq('id', archivoId);
+ await cargarArchivosServicio(servicioEditandoId);
+}
+
+function clearServicioForm(){ 
+ ["servicioId","servicioNombre","servicioDescripcion","servicioIcono"].forEach(id=>{ $(id).value=""; }); 
+ $("servicioOrden").value="1"; 
+ servicioEditandoId = null;
+ archivosServicioActual = [];
+ $("archivosServicioList").innerHTML = '';
+}
 function editServicio(id){
  const s=serviciosData.find(v=>String(v.id)===String(id)); if(!s)return;
- $("servicioId").value=s.id; $("servicioNombre").value=s.nombre||""; $("servicioDescripcion").value=s.descripcion||""; $("servicioIcono").value=s.icono||""; $("servicioOrden").value=s.orden||1;
+ $("servicioId").value=s.id; $("servicioNombre").value=s.nombre||""; $("servicioDescripcion").value=s.descripcion||""; 
+ $("servicioIcono").value=s.icono||""; $("servicioOrden").value=s.orden||1;
+ servicioEditandoId = s.id;
+ cargarArchivosServicio(s.id);
 }
 async function saveServicio(){
  const id=$("servicioId").value;
  const payload={ nombre:$("servicioNombre").value.trim(), descripcion:$("servicioDescripcion").value.trim(), icono:$("servicioIcono").value.trim(), orden:Number($("servicioOrden").value)||1, activo:true };
  if(!payload.nombre){ alert("El nombre es obligatorio."); return; }
- const query=id ? db.from('servicios').update(payload).eq("id",id) : db.from('servicios').insert(payload);
- const {error}=await query;
+ const query=id ? db.from('servicios').update(payload).eq("id",id) : db.from('servicios').insert(payload).select();
+ const {data, error}=await query;
  if(error){ alert("Error: "+error.message); return; }
- clearServicioForm(); await loadServicios(); renderAdminServicios();
+ 
+ // Si es nuevo, obtener el ID
+ if(!id && data && data[0]){
+  servicioEditandoId = data[0].id;
+  $("servicioId").value = data[0].id;
+ }
+ 
+ clearServicioForm();
+ await loadServicios();
+ renderAdminServicios();
+ if(servicioEditandoId) cargarArchivosServicio(servicioEditandoId);
 }
-async function deleteServicio(id){ if(!confirm("¿Eliminar este servicio?"))return; await db.from('servicios').delete().eq("id",id); await loadServicios(); renderAdminServicios(); }
+async function deleteServicio(id){ 
+ if(!confirm("¿Eliminar este servicio? (también se eliminarán sus archivos)"))return; 
+ // Eliminar archivos asociados
+ const {data: archivos} = await db.from('servicios_archivos').select('url_archivo').eq('servicio_id', id);
+ if(archivos){
+  for(const a of archivos){
+   const ruta = a.url_archivo.split('/imagenes/')[1];
+   if(ruta) await db.storage.from('imagenes').remove([ruta]);
+  }
+  await db.from('servicios_archivos').delete().eq('servicio_id', id);
+ }
+ await db.from('servicios').delete().eq("id",id); 
+ await loadServicios(); renderAdminServicios();
+ servicioEditandoId = null; archivosServicioActual = [];
+ $("archivosServicioList").innerHTML = '';
+}
 function renderAdminServicios(){
- $("adminServicioList").innerHTML=serviciosData.map(s=>`<div class="admin-item"><div><strong>${safe(s.icono||"")} ${safe(s.nombre)}</strong><br><small>${safe(s.descripcion||"").substring(0,60)}...</small></div><div><button class="btn btn-dark" type="button" onclick="editServicio('${safe(s.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteServicio('${safe(s.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay servicios cargados.</p>';
+ $("adminServicioList").innerHTML=serviciosData.map(s=>{
+  const numArchivos = (s.archivos || []).length;
+  return `<div class="admin-item"><div><strong>${safe(s.icono||"")} ${safe(s.nombre)}</strong><br><small>${safe(s.descripcion||"").substring(0,60)}... · ${numArchivos} archivo(s)</small></div><div><button class="btn btn-dark" type="button" onclick="editServicio('${safe(s.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteServicio('${safe(s.id)}')">🗑️ Eliminar</button></div></div>`;
+ }).join("")||'<p class="mini">No hay servicios cargados.</p>';
 }
 
+// SOLICITUDES
 function openRequest(service){
  document.querySelectorAll('.service-check').forEach(cb => { if (cb.value === service) cb.checked = true; });
  $("solicitud").scrollIntoView({behavior:"smooth"});
@@ -1047,8 +1162,7 @@ async function deleteOpinion(id){ if(!confirm("¿Eliminar opinión?"))return; aw
 
 function calculate(){
  const amount=Number($("calcAmount").value);
- const fromCode=$("calcFrom").value;
- const toCode=$("calcTo").value;
+ const fromCode=$("calcFrom").value; const toCode=$("calcTo").value;
  if(!Number.isFinite(amount)||amount<0){ $("calcResult").textContent="Introduce una cantidad válida."; return; }
  const fromRate = tasasData.find(t=>t.codigo===fromCode);
  const toRate = tasasData.find(t=>t.codigo===toCode);
@@ -1064,7 +1178,6 @@ async function loadAdminData(){
  renderAdminRemesas(); renderAdminDestinos(); renderAdminServicios();
 }
 
-// INICIALIZACIÓN
 loadAll();
 changeLanguage('es');
 </script>
