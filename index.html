@@ -1,862 +1,166 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YOUR BRIDGE HOME | Tu puente al mundo</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>
-:root{--bg:#0f172a;--panel:#17243a;--panel2:#1d2c44;--gold:#e8b84d;--gold2:#ffd978;--white:#f8fafc;--muted:#aab6c8;--line:#33445f;--green:#25d366;--red:#ef6464}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:90px}
-body{margin:0;background:var(--bg);color:var(--white);font-family:Montserrat,Arial,sans-serif;line-height:1.6;overflow-x:hidden}
-a{color:inherit;text-decoration:none}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-.container{width:min(1160px,calc(100% - 32px));margin:auto}
-.top-banner{background:linear-gradient(90deg,#1a2941,#142238);border-bottom:1px solid var(--line);overflow:hidden}
-.banner-carousel{display:flex;animation:slideBanner 20s infinite}
-.banner-item{min-width:100%;text-align:center;padding:10px 0;font-size:12px;font-weight:700;color:var(--gold);white-space:nowrap}
-@keyframes slideBanner{0%,33%{transform:translateX(0)}36%,66%{transform:translateX(-100%)}69%,100%{transform:translateX(-200%)}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 🔥 ANTI-CACHÉ: Obliga a los navegadores de los clientes a descargar la versión nueva -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <title>Mi Sitio Web - Datos en Vivo</title>
+    
+    <style>
+        /* Estilos limpios y modernos en un solo lugar */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; }
+        body { background-color: #f1f5f9; color: #1e293b; padding: 2rem; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        header { text-align: center; margin-bottom: 2rem; }
+        h1 { color: #0f172a; font-size: 2rem; margin-bottom: 0.5rem; }
+        .subtitle { color: #64748b; }
+        
+        /* Estados de carga y error */
+        #estado { text-align: center; padding: 2rem; font-size: 1.1rem; border-radius: 8px; margin-bottom: 1rem; }
+        .cargando { background: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd; }
+        .error { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+        .exito { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; display: none; text-align: center; margin-bottom: 1rem;}
+        
+        /* Grid de tarjetas */
+        .grid-datos { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+        .tarjeta { 
+            background: white; 
+            padding: 1.5rem; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); 
+            border: 1px solid #e2e8f0; 
+            transition: transform 0.2s;
+        }
+        .tarjeta:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
+        .tarjeta h3 { color: #2563eb; margin-bottom: 0.75rem; font-size: 1.25rem; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.5rem; }
+        .tarjeta p { color: #475569; margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .tarjeta strong { color: #334155; }
 
-/* BANNER HORA MUNDIAL */
-.world-clock-banner{background:#0b1425;border-bottom:1px solid var(--line);padding:8px 0;overflow:hidden}
-.ticker-wrap{width:100%;overflow:hidden;white-space:nowrap}
-.ticker{display:inline-block;animation:ticker 35s linear infinite}
-.ticker-item{display:inline-block;padding:0 25px;font-size:12px;font-weight:700;color:var(--white)}
-.ticker-item span{color:var(--gold);font-family:'Courier New',monospace;margin-left:6px}
-@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
-
-header{position:sticky;top:0;z-index:50;background:#0b1425ed;border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
-.nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px}
-.brand{font-weight:900;letter-spacing:1px;color:var(--gold);font-size:19px;white-space:nowrap}
-.brand small{display:block;font-size:9px;color:var(--muted);letter-spacing:2px}
-.navlinks{display:flex;align-items:center;gap:20px}
-.navlinks a{font-size:12px;font-weight:700;color:#e5eaf2}
-.navlinks a:hover{color:var(--gold)}
-.nav-actions{display:flex;align-items:center;gap:8px}
-.clock-widget{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:11px;font-weight:700;color:var(--gold);display:flex;flex-direction:column;gap:2px;min-width:130px}
-.clock-widget .clock-label{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
-.clock-widget .clock-time{font-size:13px;font-weight:900;font-family:'Courier New',monospace}
-.btn{border:0;border-radius:10px;padding:11px 16px;font-weight:800;font-size:12px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s;cursor:pointer}
-.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#182235}
-.btn-dark{background:#253650;color:white;border:1px solid var(--line)}
-.btn-green{background:var(--green);color:#082515}
-.btn-red{background:var(--red);color:white}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
-.menu-btn{display:none;background:none;border:0;color:white;font-size:23px}
-.lang-select{background:#253650;color:white;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:11px;font-weight:800;cursor:pointer}
-.hero{padding:76px 0 55px;background:radial-gradient(ellipse at 80% 10%,#b7892924,transparent 40%),linear-gradient(140deg,#101a2d,#14243a)}
-.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:34px;align-items:center}
-.eyebrow{color:var(--gold);font-weight:800;font-size:11px;letter-spacing:3px;text-transform:uppercase}
-h1{font-size:clamp(34px,5vw,58px);line-height:1.12;margin:14px 0}
-h1 span{color:var(--gold)}
-.hero p{color:#c0cada;max-width:650px;font-size:15px}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-.hero-card,.card{background:linear-gradient(145deg,#1a2941,#142238);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 12px 35px #0002;min-width:0;overflow:hidden}
-.hero-card{border-color:#8f713c66}
-.hero-card h3{color:var(--gold);margin-top:0}
-.hero-card .big{font-size:28px;font-weight:900;overflow-wrap:anywhere}
-.hero-card p{font-size:12px;overflow-wrap:anywhere}
-section{padding:58px 0}
-.section-head{text-align:center;margin-bottom:30px}
-.section-head h2{font-size:clamp(24px,4vw,34px);margin:5px 0 8px}
-.section-head p{color:var(--muted);font-size:13px}
-.gold{color:var(--gold)}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-.service-icon{width:48px;height:48px;border-radius:14px;background:#e8b84d1c;color:var(--gold);display:grid;place-items:center;font-size:21px}
-.card h3{margin:14px 0 7px;overflow-wrap:anywhere}
-.card p{color:var(--muted);font-size:13px;margin:5px 0;overflow-wrap:anywhere}
-.price{font-size:25px;font-weight:900;color:var(--gold);margin:12px 0}
-.mini{font-size:11px;color:var(--muted)}
-.pill{display:inline-block;padding:5px 9px;border-radius:20px;background:#e8b84d1b;color:var(--gold);font-size:10px;font-weight:800}
-.rates{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
-.rate{padding:17px 10px;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;min-width:0}
-.rate strong{display:block;font-size:22px;color:var(--gold);overflow-wrap:anywhere}
-.rate span{font-size:11px;color:var(--muted)}
-.calculator{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end}
-.field{min-width:0}
-.field label{display:block;font-size:11px;color:#d5deeb;font-weight:700;margin-bottom:6px}
-.field input,.field select,.field textarea{width:100%;min-width:0;background:#0d192b;color:white;border:1px solid #40516a;border-radius:9px;padding:11px;outline:none}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold)}
-.field textarea{min-height:85px;resize:vertical}
-.result{background:#0d192b;border:1px solid var(--gold);border-radius:10px;padding:12px;color:var(--gold);font-weight:900;min-height:44px}
-.offer-card{position:relative}
-.offer-card .price{margin:8px 0}
-.empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;grid-column:1/-1}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.contact-box{overflow:hidden;min-width:0;overflow-wrap:anywhere}
-.contact-box a{overflow-wrap:anywhere;max-width:100%}
-.contact-box .btn{white-space:normal;text-align:center;max-width:100%}
-footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:12px}
-.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.floating{position:fixed;right:16px;bottom:16px;z-index:60;background:var(--green);color:#082515;border-radius:50px;padding:13px 18px;font-size:12px;font-weight:900;box-shadow:0 8px 25px #0005;max-width:calc(100% - 32px);box-sizing:border-box}
-.overlay{display:none;position:fixed;inset:0;background:#020817d9;z-index:100;align-items:center;justify-content:center;padding:14px}
-.overlay.show{display:flex}
-.modal{width:min(900px,100%);max-height:92vh;overflow:auto;background:#142238;border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 20px 70px #0009}
-.modal h2{margin-top:0;color:var(--gold)}
-.modal-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.close{background:#2b3c55;color:white;border:0;border-radius:8px;padding:8px 12px}
-.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
-.form-grid .full{grid-column:1/-1}
-.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
-.admin-tabs button{background:#263852;color:white;border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:11px;font-weight:800;cursor:pointer}
-.admin-tabs button.active{background:var(--gold);color:#172238}
-.admin-panel{display:none}
-.admin-panel.active{display:block}
-.admin-list{display:grid;gap:9px;margin-top:15px}
-.admin-item{padding:12px;background:#0e1b2e;border:1px solid var(--line);border-radius:10px;display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;min-width:0}
-.admin-item small{color:var(--muted)}
-.admin-item button{margin:2px}
-@media(max-width:850px){
- .navlinks{display:none;position:absolute;top:74px;left:0;right:0;background:#0b1425;padding:18px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
- .navlinks.open{display:flex}
- .menu-btn{display:block}
- .hero-grid{grid-template-columns:1fr}
- .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
- .rates{grid-template-columns:repeat(3,minmax(0,1fr))}
- .clock-widget{min-width:110px}
-}
-@media(max-width:600px){
- .container{width:calc(100% - 24px)}
- .nav{min-height:66px}
- .brand{font-size:16px;white-space:normal;line-height:1.3}
- .brand small{font-size:8px;letter-spacing:1px}
- .navlinks{top:66px}
- .nav-actions .btn{padding:9px;font-size:10px}
- .hero{padding:48px 0 38px}
- section{padding:42px 0}
- .grid,.info-grid{grid-template-columns:1fr}
- .rates{grid-template-columns:repeat(2,minmax(0,1fr))}
- .calculator{grid-template-columns:1fr 1fr}
- .form-grid{grid-template-columns:1fr}
- .form-grid .full{grid-column:auto}
- .modal{padding:15px}
- .floating{right:10px;bottom:10px;padding:11px 14px;font-size:11px}
- .hero-card .big{font-size:24px}
- .clock-widget{min-width:100px;padding:5px 10px}
- .clock-widget .clock-time{font-size:12px}
-}
-</style>
+        /* Botón de emergencia por si el caché es muy terco */
+        .btn-forzar { display: block; margin: 2rem auto 0; padding: 0.75rem 1.5rem; background: #0f172a; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; }
+        .btn-forzar:hover { background: #334155; }
+    </style>
 </head>
 <body>
 
-<div class="top-banner">
- <div class="banner-carousel">
-  <div class="banner-item">🎉 ¡Las mejores ofertas en recargas internacionales!</div>
-  <div class="banner-item">✈️ Vuelos económicos a los mejores destinos</div>
-  <div class="banner-item">💸 Remesas con las mejores tasas del mercado</div>
- </div>
-</div>
+    <div class="container">
+        <header>
+            <h1>Panel de Datos</h1>
+            <p class="subtitle">Conectado a Supabase en tiempo real</p>
+        </header>
 
-<!-- BANNER HORA MUNDIAL -->
-<div class="world-clock-banner">
- <div class="ticker-wrap">
-  <div class="ticker">
-   <div class="ticker-item">🇨🇺 La Habana <span id="wc-havana">--:--</span></div>
-   <div class="ticker-item">🇷🇺 Moscú <span id="wc-moscow">--:--</span></div>
-   <div class="ticker-item">🇪🇸 Madrid <span id="wc-madrid">--:--</span></div>
-   <div class="ticker-item">🇺🇸 Miami <span id="wc-miami">--:--</span></div>
-   <div class="ticker-item">🇲🇽 Ciudad de México <span id="wc-mexico">--:--</span></div>
-   <div class="ticker-item">🇦🇷 Buenos Aires <span id="wc-buenosaires">--:--</span></div>
-   <div class="ticker-item">🇨🇺 La Habana <span id="wc-havana2">--:--</span></div>
-   <div class="ticker-item">🇷🇺 Moscú <span id="wc-moscow2">--:--</span></div>
-  </div>
- </div>
-</div>
+        <div id="estado" class="cargando">⏳ Conectando con la base de datos y cargando datos...</div>
+        <div id="exito-msg" class="exito">✅ Datos actualizados correctamente.</div>
+        
+        <div id="contenedor-datos" class="grid-datos">
+            <!-- Aquí se inyectarán las tarjetas automáticamente -->
+        </div>
 
-<header>
- <div class="container nav">
-  <a class="brand" href="#inicio">YOUR BRIDGE HOME<small data-i18n="brand_sub">TU PUENTE AL MUNDO</small></a>
-  <nav class="navlinks" id="navlinks">
-   <a href="#inicio" data-i18n="nav_home">INICIO</a>
-   <a href="#servicios" data-i18n="nav_services">SERVICIOS</a>
-   <a href="#recargas" data-i18n="nav_recharges">RECARGAS</a>
-   <a href="#boletos" data-i18n="nav_tickets">BOLETOS</a>
-   <a href="#remesas" data-i18n="nav_remesas">REMESAS</a>
-   <a href="#destinos" data-i18n="nav_destinations">DESTINOS</a>
-   <a href="#tasas" data-i18n="nav_rates">TASAS</a>
-  </nav>
-  <div class="nav-actions">
-   <div class="clock-widget">
-    <div><div class="clock-label" data-i18n="clock_cuba">🇨🇺 Cuba</div><div class="clock-time" id="clockCuba">--:--:--</div></div>
-    <div><div class="clock-label" data-i18n="clock_local">🌍 Local</div><div class="clock-time" id="clockLocal">--:--:--</div></div>
-   </div>
-   <select class="lang-select" id="langSelector" onchange="changeLanguage(this.value)">
-    <option value="es">🇪🇸 ES</option>
-    <option value="en">🇺🇸 EN</option>
-    <option value="ru">🇷🇺 RU</option>
-   </select>
-   <button class="btn btn-dark" type="button" onclick="openLogin()"><i class="fa-solid fa-lock"></i> Admin</button>
-   <button class="menu-btn" type="button" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
-  </div>
- </div>
-</header>
-
-<main>
-<section class="hero" id="inicio">
- <div class="container hero-grid">
-  <div>
-   <div class="eyebrow" data-i18n="hero_eyebrow">Conectamos oportunidades</div>
-   <h1 data-i18n="hero_title">Tu puente hacia <span>nuevas oportunidades</span></h1>
-   <p data-i18n="hero_desc">Recargas internacionales, envío de remesas, pasajes y orientación para tus viajes.</p>
-   <div class="hero-actions">
-    <a class="btn btn-gold" href="#servicios" data-i18n="hero_btn1">Explorar servicios <i class="fa-solid fa-arrow-right"></i></a>
-    <a class="btn btn-dark" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="hero_btn2">Contactar ahora</span></a>
-   </div>
-  </div>
-  <div class="hero-card">
-   <span class="pill" data-i18n="hero_card_pill">ATENCIÓN PERSONALIZADA</span>
-   <h3 data-i18n="hero_card_title">Estamos para ayudarte</h3>
-   <div class="big">YOUR BRIDGE HOME</div>
-   <p data-i18n="hero_card_desc">Consulta precios, solicita información y encuentra opciones para tus necesidades.</p>
-   <p><i class="fa-brands fa-whatsapp gold"></i> +7 904 631 95 65</p>
-   <p><strong>Daynel Caminero</strong><br><span class="mini" data-i18n="admin_role">Administrador</span></p>
-  </div>
- </div>
-</section>
-
-<section id="servicios">
- <div class="container">
-  <div class="section-head">
-   <div class="eyebrow" data-i18n="services_eyebrow">Lo que hacemos</div>
-   <h2 data-i18n="services_title">Nuestros <span class="gold">servicios</span></h2>
-   <p data-i18n="services_desc">Soluciones para mantenerte conectado y acercarte a tus destinos.</p>
-  </div>
-  <div class="grid" id="serviciosList"><div class="empty">⏳ <span data-i18n="loading">Cargando...</span></div></div>
- </div>
-</section>
-
-<section id="recargas" style="background:#0b1425">
- <div class="container">
-  <div class="section-head">
-   <div class="eyebrow" data-i18n="recharges_eyebrow">Conectividad</div>
-   <h2 data-i18n="recharges_title">Planes de <span class="gold">recargas</span></h2>
-   <p data-i18n="recharges_desc">Consulta las ofertas disponibles y solicita la tuya.</p>
-  </div>
-  <div class="grid" id="rechargesList"><div class="empty">⏳ <span data-i18n="loading">Cargando...</span></div></div>
- </div>
-</section>
-
-<section id="boletos">
- <div class="container">
-  <div class="section-head">
-   <div class="eyebrow" data-i18n="tickets_eyebrow">Tu próximo viaje</div>
-   <h2 data-i18n="tickets_title">Boletos de <span class="gold">avión y transporte</span></h2>
-   <p data-i18n="tickets_desc">Precios, destinos y fechas publicados por administración.</p>
-  </div>
-  <div class="grid" id="ticketsList"><div class="empty">⏳ <span data-i18n="loading">Cargando...</span></div></div>
- </div>
-</section>
-
-<section id="remesas" style="background:#0b1425">
- <div class="container">
-  <div class="section-head">
-   <div class="eyebrow" data-i18n="remesas_eyebrow">Conectamos familias</div>
-   <h2 data-i18n="remesas_title">Servicio de <span class="gold">remesas</span></h2>
-   <p data-i18n="remesas_desc">Solicita información sobre disponibilidad, destinos y condiciones.</p>
-  </div>
-  <div class="grid" id="remesasList"><div class="empty">⏳ <span data-i18n="loading">Cargando...</span></div></div>
- </div>
-</section>
-
-<section id="destinos">
- <div class="container">
-  <div class="section-head">
-   <div class="eyebrow" data-i18n="dest_eyebrow">Explora el mundo</div>
-   <h2 data-i18n="dest_title">Destinos <span class="gold">disponibles</span></h2>
-   <p data-i18n="dest_desc">Viajes y servicios a los mejores destinos.</p>
-  </div>
-  <div class="grid" id="destinosList"><div class="empty">⏳ <span data-i18n="loading">Cargando...</span></div></div>
- </div>
-</section>
-
-<section id="tasas" style="background:#0b1425">
- <div class="container">
-  <div class="section-head">
-   <div class="eyebrow" data-i18n="rates_eyebrow">Información financiera</div>
-   <h2 data-i18n="rates_title">Tasas de <span class="gold">cambio</span></h2>
-   <p data-i18n="rates_desc">Valores configurados por administración.</p>
-  </div>
-  <div class="rates" id="ratesList"><div class="empty">⏳ <span data-i18n="loading">Cargando...</span></div></div>
- </div>
-</section>
-
-<section id="solicitud">
- <div class="container">
-  <div class="section-head">
-   <div class="eyebrow" data-i18n="req_eyebrow">Estamos para ayudarte</div>
-   <h2 data-i18n="req_title">Solicita <span class="gold">información</span></h2>
-   <p data-i18n="req_desc">Completa tus datos y nos pondremos en contacto contigo.</p>
-  </div>
-  <div class="card">
-   <form id="requestForm" onsubmit="submitRequest(event)">
-    <div class="form-grid">
-     <div class="field"><label data-i18n="req_name">Nombre completo</label><input id="clientName" required maxlength="100" placeholder="Tu nombre"></div>
-     <div class="field"><label data-i18n="req_phone">Teléfono / WhatsApp</label><input id="clientPhone" required maxlength="40" placeholder="Tu número de contacto"></div>
-     <div class="field full"><label data-i18n="req_details">Detalles de tu solicitud</label><textarea id="clientDetails" maxlength="1500" placeholder="Cuéntanos qué necesitas..."></textarea></div>
-     <div class="full"><button class="btn btn-gold" type="submit"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="req_submit">Enviar solicitud</span></button></div>
+        <button class="btn-forzar" onclick="window.location.reload(true)">🔄 Forzar actualización de página</button>
     </div>
-   </form>
-   <p class="mini" id="requestStatus" aria-live="polite"></p>
-  </div>
- </div>
-</section>
 
-<section>
- <div class="container info-grid">
-  <div class="card contact-box">
-   <div class="service-icon"><i class="fa-solid fa-headset"></i></div>
-   <h3 data-i18n="contact_title">Atención personalizada</h3>
-   <p data-i18n="contact_desc">Recibe orientación directa para encontrar la opción que mejor se adapte a tus necesidades.</p>
-   <p><strong data-i18n="admin_label">Administrador:</strong> Daynel Caminero</p>
-   <p><strong>WhatsApp:</strong> <a class="gold" href="https://wa.me/79046319565" target="_blank" rel="noopener">+7 904 631 95 65</a></p>
-   <a class="btn btn-green" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="contact_btn">Contactar directamente</span></a>
-  </div>
-  <div class="card contact-box">
-   <div class="service-icon"><i class="fa-solid fa-circle-info"></i></div>
-   <h3 data-i18n="info_title">Información importante</h3>
-   <p data-i18n="info_desc1">Los precios y las tasas pueden cambiar según la disponibilidad y las condiciones del servicio.</p>
-   <p data-i18n="info_desc2">Confirma siempre el importe final, las fechas y los requisitos antes de realizar un pago.</p>
-   <p class="mini">YOUR BRIDGE HOME — Tu puente al mundo.</p>
-  </div>
- </div>
-</section>
-</main>
+    <!-- 🔥 CONEXIÓN A SUPABASE (Versión 2 vía CDN, no requiere instalación) -->
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-<footer>
- <div class="container footer-inner">
-  <div><strong class="gold">YOUR BRIDGE HOME</strong><br><span data-i18n="footer_slogan">Tu puente al mundo.</span></div>
-  <div>Daynel Caminero · <span data-i18n="admin_role">Administrador</span><br>WhatsApp: +7 904 631 95 65</div>
-  <div>© <span id="year"></span> YOUR BRIDGE HOME</div>
- </div>
-</footer>
-<a class="floating" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="floating_btn">ATENCIÓN DIRECTA</span></a>
+        // =====================================================================
+        // ⚙️ CONFIGURACIÓN: SOLO TIENES QUE CAMBIAR ESTAS 2 LÍNEAS
+        // =====================================================================
+        
+        const supabaseUrl = 'https://lwgeillycitljubenzhv.supabase.co';
+        
+        // 1. PEGA AQUÍ TU CLAVE "anon public" (La encuentras en Supabase > Settings > API)
+        const supabaseKey = 'PEGA_AQUI_TU_CLAVE_ANON_PUBLICA'; 
+        
+        // 2. ESCRIBE AQUÍ EL NOMBRE EXACTO DE TU TABLA (ej: 'productos', 'clientes', 'posts')
+        const nombreTabla = 'NOMBRE_DE_TU_TABLA'; 
 
-<div class="overlay" id="loginModal">
- <div class="modal" style="max-width:400px">
-  <div class="modal-head"><h2 data-i18n="admin_title">Administración</h2><button class="close" type="button" onclick="closeModal('loginModal')">✕</button></div>
-  <p class="mini" data-i18n="admin_desc">Acceso reservado al administrador.</p>
-  <div class="field"><label>Email</label><input type="email" id="adminEmail" placeholder="tu@email.com"></div>
-  <div class="field"><label data-i18n="admin_pass">Contraseña</label><input type="password" id="adminPassword" placeholder="Contraseña"></div>
-  <p id="loginError" style="color:#ff8b8b;font-size:12px"></p>
-  <button class="btn btn-gold" style="width:100%" type="button" onclick="login()" data-i18n="admin_enter">Entrar</button>
- </div>
-</div>
+        // =====================================================================
 
-<div class="overlay" id="adminModal">
- <div class="modal">
-  <div class="modal-head"><h2><i class="fa-solid fa-screwdriver-wrench"></i> <span data-i18n="panel_title">Panel de administración</span></h2><button class="close" type="button" onclick="closeModal('adminModal')">✕</button></div>
-  <div class="admin-tabs">
-   <button type="button" class="active" onclick="showAdminTab('ratesAdmin',this)" data-i18n="tab_rates">💱 Tasas</button>
-   <button type="button" onclick="showAdminTab('recargasAdmin',this)" data-i18n="tab_recharges">📱 Recargas</button>
-   <button type="button" onclick="showAdminTab('boletosAdmin',this)" data-i18n="tab_tickets">✈️ Boletos</button>
-   <button type="button" onclick="showAdminTab('remesasAdmin',this)" data-i18n="tab_remesas">💸 Remesas</button>
-   <button type="button" onclick="showAdminTab('destinosAdmin',this)" data-i18n="tab_destinos">🌍 Destinos</button>
-   <button type="button" onclick="showAdminTab('serviciosAdmin',this)" data-i18n="tab_servicios">⭐ Servicios</button>
-   <button type="button" onclick="showAdminTab('requestsAdmin',this)" data-i18n="tab_requests">📋 Solicitudes</button>
-  </div>
-  <div class="admin-panel active" id="ratesAdmin">
-   <h3 data-i18n="rates_admin_title">Tasas de cambio (valor en CUP)</h3>
-   <div id="ratesAdminList"></div>
-  </div>
-  <div class="admin-panel" id="recargasAdmin">
-   <h3 data-i18n="recharge_admin_title">Crear o editar plan de recarga</h3>
-   <input type="hidden" id="rechargeId">
-   <div class="form-grid">
-    <div class="field"><label data-i18n="field_label">Etiqueta</label><input id="rechargeLabel" placeholder="OFERTA ESPECIAL"></div>
-    <div class="field"><label data-i18n="field_name">Nombre del plan</label><input id="rechargeName" placeholder="INTERNET +"></div>
-    <div class="field"><label data-i18n="field_price">Precio</label><input id="rechargePrice" type="number" step="0.01"></div>
-    <div class="field"><label data-i18n="field_currency">Moneda</label><select id="rechargeCurrency"><option>RUB</option><option>USD</option><option>EUR</option><option>CUP</option></select></div>
-    <div class="field full"><label data-i18n="field_desc1">Descripción 1</label><input id="rechargeDesc1" placeholder="2 GB LTE"></div>
-    <div class="field full"><label data-i18n="field_desc2">Descripción 2</label><input id="rechargeDesc2" placeholder="300 MB.cu"></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveRecharge()" data-i18n="save_btn">💾 Guardar plan</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearRechargeForm()" data-i18n="new_btn">➕ Nuevo</button>
-   <div class="admin-list" id="adminRechargeList"></div>
-  </div>
-  <div class="admin-panel" id="boletosAdmin">
-   <h3 data-i18n="ticket_admin_title">Crear o editar boleto</h3>
-   <input type="hidden" id="ticketId">
-   <div class="form-grid">
-    <div class="field"><label data-i18n="field_label">Etiqueta</label><input id="ticketLabel" placeholder="OFERTA"></div>
-    <div class="field"><label data-i18n="field_type">Tipo de transporte</label><select id="ticketType"><option>avion</option><option>autobus</option><option>tren</option></select></div>
-    <div class="field"><label data-i18n="field_origin">Origen</label><input id="ticketOrigin" placeholder="Rusia"></div>
-    <div class="field"><label data-i18n="field_dest">Destino</label><input id="ticketDestination" placeholder="Cuba"></div>
-    <div class="field"><label data-i18n="field_departure">Fecha de salida</label><input id="ticketDeparture" type="date"></div>
-    <div class="field"><label data-i18n="field_return">Fecha de regreso</label><input id="ticketReturn" type="date"></div>
-    <div class="field"><label data-i18n="field_price">Precio</label><input id="ticketPrice" type="number" min="0" step="0.01"></div>
-    <div class="field"><label data-i18n="field_currency">Moneda</label><select id="ticketCurrency"><option>RUB</option><option>USD</option><option>EUR</option><option>CUP</option></select></div>
-    <div class="field full"><label data-i18n="field_desc">Descripción</label><textarea id="ticketDescription"></textarea></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveTicket()" data-i18n="save_btn">💾 Guardar boleto</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearTicketForm()" data-i18n="new_btn">➕ Nuevo</button>
-   <div class="admin-list" id="adminTicketList"></div>
-  </div>
-  <div class="admin-panel" id="remesasAdmin">
-   <h3 data-i18n="remesa_admin_title">Crear o editar remesa</h3>
-   <input type="hidden" id="remesaId">
-   <div class="form-grid">
-    <div class="field"><label data-i18n="field_origin">Origen</label><input id="remesaOrigen" placeholder="Rusia"></div>
-    <div class="field"><label data-i18n="field_dest">Destino</label><input id="remesaDestino" placeholder="Cuba"></div>
-    <div class="field"><label data-i18n="field_amount_orig">Monto origen</label><input id="remesaMontoOrigen" type="number" step="0.01"></div>
-    <div class="field"><label data-i18n="field_currency_orig">Moneda origen</label><select id="remesaMonedaOrigen"><option>RUB</option><option>USD</option><option>EUR</option></select></div>
-    <div class="field"><label data-i18n="field_amount_dest">Monto destino</label><input id="remesaMontoDestino" type="number" step="0.01"></div>
-    <div class="field"><label data-i18n="field_currency_dest">Moneda destino</label><select id="remesaMonedaDestino"><option>CUP</option><option>USD</option><option>EUR</option></select></div>
-    <div class="field full"><label data-i18n="field_desc">Descripción</label><textarea id="remesaDescripcion"></textarea></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveRemesa()" data-i18n="save_btn">💾 Guardar remesa</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearRemesaForm()" data-i18n="new_btn">➕ Nuevo</button>
-   <div class="admin-list" id="adminRemesaList"></div>
-  </div>
-  <div class="admin-panel" id="destinosAdmin">
-   <h3 data-i18n="destinos_admin_title">Crear o editar destino</h3>
-   <input type="hidden" id="destinoId">
-   <div class="form-grid">
-    <div class="field"><label data-i18n="field_name">Nombre</label><input id="destinoNombre" placeholder="Cuba"></div>
-    <div class="field"><label data-i18n="field_category">Categoría</label><input id="destinoCategoria" placeholder="Caribe"></div>
-    <div class="field full"><label data-i18n="field_desc">Descripción</label><textarea id="destinoDescripcion"></textarea></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveDestino()" data-i18n="save_btn">💾 Guardar destino</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearDestinoForm()" data-i18n="new_btn">➕ Nuevo</button>
-   <div class="admin-list" id="adminDestinoList"></div>
-  </div>
-  <div class="admin-panel" id="serviciosAdmin">
-   <h3 data-i18n="servicios_admin_title">Crear o editar servicio</h3>
-   <input type="hidden" id="servicioId">
-   <div class="form-grid">
-    <div class="field"><label data-i18n="field_name">Nombre</label><input id="servicioNombre" placeholder="Remesas"></div>
-    <div class="field"><label data-i18n="field_order">Orden</label><input id="servicioOrden" type="number" value="1"></div>
-    <div class="field"><label data-i18n="field_icon">Icono (emoji)</label><input id="servicioIcono" placeholder="💰"></div>
-    <div class="field full"><label data-i18n="field_desc">Descripción</label><textarea id="servicioDescripcion"></textarea></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveServicio()" data-i18n="save_btn">💾 Guardar servicio</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearServicioForm()" data-i18n="new_btn">➕ Nuevo</button>
-   <div class="admin-list" id="adminServicioList"></div>
-  </div>
-  <div class="admin-panel" id="requestsAdmin">
-   <h3 data-i18n="requests_admin_title">Solicitudes recibidas</h3>
-   <button class="btn btn-dark" type="button" onclick="loadRequests()" data-i18n="refresh_btn">🔄 Actualizar</button>
-   <div class="admin-list" id="adminRequestsList"></div>
-  </div>
- </div>
-</div>
+        const supabase = createClient(supabaseUrl, supabaseKey, {
+            global: {
+                headers: {
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache'
+                }
+            }
+        });
 
-<script>
-const SUPABASE_URL = "https://lwgeillycitljubenzhv.supabase.co";
-const SUPABASE_KEY = "sb_publishable_LaA2IPL1J_IWAH0CVMUcBQ_j-BZa2pe";
-const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-const $ = id => document.getElementById(id);
+        async function cargarDatos() {
+            const estadoDiv = document.getElementById('estado');
+            const contenedor = document.getElementById('contenedor-datos');
+            const exitoMsg = document.getElementById('exito-msg');
 
-let tasasData=[], recargasData=[], boletosData=[], remesasData=[], destinosData=[], serviciosData=[], solicitudesData=[];
-let currentLang = 'es';
+            try {
+                // Petición a la tabla, ordenada por lo más reciente primero (asumiendo que existe 'id' o 'created_at')
+                const { data, error } = await supabase
+                    .from(nombreTabla)
+                    .select('*')
+                    .order('id', { ascending: false }) // Si tu tabla no tiene 'id', cámbialo por 'created_at'
 
-$("year").textContent = new Date().getFullYear();
+                if (error) {
+                    throw error;
+                }
 
-// ============ TRADUCCIONES ============
-const translations = {
- es: {
-  brand_sub:"TU PUENTE AL MUNDO",
-  nav_home:"INICIO",nav_services:"SERVICIOS",nav_recharges:"RECARGAS",nav_tickets:"BOLETOS",nav_remesas:"REMESAS",nav_destinations:"DESTINOS",nav_rates:"TASAS",
-  clock_cuba:"🇨🇺 Cuba",clock_local:"🌍 Local",
-  hero_eyebrow:"Conectamos oportunidades",hero_title:'Tu puente hacia <span>nuevas oportunidades</span>',hero_desc:"Recargas internacionales, envío de remesas, pasajes y orientación para tus viajes.",
-  hero_btn1:'Explorar servicios <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Contactar ahora",
-  hero_card_pill:"ATENCIÓN PERSONALIZADA",hero_card_title:"Estamos para ayudarte",hero_card_desc:"Consulta precios, solicita información y encuentra opciones para tus necesidades.",
-  admin_role:"Administrador",
-  services_eyebrow:"Lo que hacemos",services_title:'Nuestros <span class="gold">servicios</span>',services_desc:"Soluciones para mantenerte conectado y acercarte a tus destinos.",
-  recharges_eyebrow:"Conectividad",recharges_title:'Planes de <span class="gold">recargas</span>',recharges_desc:"Consulta las ofertas disponibles y solicita la tuya.",
-  tickets_eyebrow:"Tu próximo viaje",tickets_title:'Boletos de <span class="gold">avión y transporte</span>',tickets_desc:"Precios, destinos y fechas publicados por administración.",
-  remesas_eyebrow:"Conectamos familias",remesas_title:'Servicio de <span class="gold">remesas</span>',remesas_desc:"Solicita información sobre disponibilidad, destinos y condiciones.",
-  dest_eyebrow:"Explora el mundo",dest_title:'Destinos <span class="gold">disponibles</span>',dest_desc:"Viajes y servicios a los mejores destinos.",
-  rates_eyebrow:"Información financiera",rates_title:'Tasas de <span class="gold">cambio</span>',rates_desc:"Valores configurados por administración.",
-  req_eyebrow:"Estamos para ayudarte",req_title:'Solicita <span class="gold">información</span>',req_desc:"Completa tus datos y nos pondremos en contacto contigo.",
-  req_name:"Nombre completo",req_phone:"Teléfono / WhatsApp",req_details:"Detalles de tu solicitud",req_submit:"Enviar solicitud",
-  contact_title:"Atención personalizada",contact_desc:"Recibe orientación directa para encontrar la opción que mejor se adapte a tus necesidades.",
-  admin_label:"Administrador:",contact_btn:"Contactar directamente",
-  info_title:"Información importante",info_desc1:"Los precios y las tasas pueden cambiar según la disponibilidad y las condiciones del servicio.",
-  info_desc2:"Confirma siempre el importe final, las fechas y los requisitos antes de realizar un pago.",
-  footer_slogan:"Tu puente al mundo.",floating_btn:"ATENCIÓN DIRECTA",
-  admin_title:"Administración",admin_desc:"Acceso reservado al administrador.",admin_pass:"Contraseña",admin_enter:"Entrar",
-  panel_title:"Panel de administración",
-  tab_rates:"💱 Tasas",tab_recharges:"📱 Recargas",tab_tickets:"✈️ Boletos",tab_remesas:"💸 Remesas",tab_destinos:"🌍 Destinos",tab_servicios:"⭐ Servicios",tab_requests:"📋 Solicitudes",
-  rates_admin_title:"Tasas de cambio (valor en CUP)",
-  recharge_admin_title:"Crear o editar plan de recarga",ticket_admin_title:"Crear o editar boleto",
-  remesa_admin_title:"Crear o editar remesa",destinos_admin_title:"Crear o editar destino",servicios_admin_title:"Crear o editar servicio",
-  requests_admin_title:"Solicitudes recibidas",
-  field_label:"Etiqueta",field_name:"Nombre",field_price:"Precio",field_currency:"Moneda",field_desc1:"Descripción 1",field_desc2:"Descripción 2",
-  field_type:"Tipo de transporte",field_origin:"Origen",field_dest:"Destino",field_departure:"Fecha de salida",field_return:"Fecha de regreso",field_desc:"Descripción",
-  field_category:"Categoría",field_order:"Orden",field_icon:"Icono (emoji)",
-  field_amount_orig:"Monto origen",field_currency_orig:"Moneda origen",field_amount_dest:"Monto destino",field_currency_dest:"Moneda destino",
-  save_btn:"💾 Guardar",new_btn:"➕ Nuevo",refresh_btn:"🔄 Actualizar",loading:"Cargando..."
- },
- en: {
-  brand_sub:"YOUR BRIDGE TO THE WORLD",
-  nav_home:"HOME",nav_services:"SERVICES",nav_recharges:"RECHARGES",nav_tickets:"TICKETS",nav_remesas:"REMITTANCES",nav_destinations:"DESTINATIONS",nav_rates:"RATES",
-  clock_cuba:"🇨🇺 Cuba",clock_local:"🌍 Local",
-  hero_eyebrow:"We connect opportunities",hero_title:'Your bridge to <span>new opportunities</span>',hero_desc:"International recharges, remittances, tickets and travel guidance.",
-  hero_btn1:'Explore services <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Contact now",
-  hero_card_pill:"PERSONALIZED ATTENTION",hero_card_title:"We are here to help you",hero_card_desc:"Check prices, request information and find options for your needs.",
-  admin_role:"Administrator",
-  services_eyebrow:"What we do",services_title:'Our <span class="gold">services</span>',services_desc:"Solutions to keep you connected and bring you closer to your destinations.",
-  recharges_eyebrow:"Connectivity",recharges_title:'<span class="gold">Recharge</span> plans',recharges_desc:"Check available offers and request yours.",
-  tickets_eyebrow:"Your next trip",tickets_title:'<span class="gold">Flight and transport</span> tickets',tickets_desc:"Prices, destinations and dates published by administration.",
-  remesas_eyebrow:"We connect families",remesas_title:'<span class="gold">Remittance</span> service',remesas_desc:"Request information on availability, destinations and conditions.",
-  dest_eyebrow:"Explore the world",dest_title:'Available <span class="gold">destinations</span>',dest_desc:"Travel and services to the best destinations.",
-  rates_eyebrow:"Financial information",rates_title:'Exchange <span class="gold">rates</span>',rates_desc:"Values configured by administration.",
-  req_eyebrow:"We are here to help you",req_title:'Request <span class="gold">information</span>',req_desc:"Fill in your details and we will contact you.",
-  req_name:"Full name",req_phone:"Phone / WhatsApp",req_details:"Details of your request",req_submit:"Send request",
-  contact_title:"Personalized attention",contact_desc:"Receive direct guidance to find the option that best suits your needs.",
-  admin_label:"Administrator:",contact_btn:"Contact directly",
-  info_title:"Important information",info_desc1:"Prices and rates may change depending on service availability and conditions.",
-  info_desc2:"Always confirm the final amount, dates and requirements before making a payment.",
-  footer_slogan:"Your bridge to the world.",floating_btn:"DIRECT ATTENTION",
-  admin_title:"Administration",admin_desc:"Access reserved for the administrator.",admin_pass:"Password",admin_enter:"Enter",
-  panel_title:"Administration panel",
-  tab_rates:"💱 Rates",tab_recharges:"📱 Recharges",tab_tickets:"✈️ Tickets",tab_remesas:"💸 Remittances",tab_destinos:"🌍 Destinations",tab_servicios:"⭐ Services",tab_requests:"📋 Requests",
-  rates_admin_title:"Exchange rates (value in CUP)",
-  recharge_admin_title:"Create or edit recharge plan",ticket_admin_title:"Create or edit ticket",
-  remesa_admin_title:"Create or edit remittance",destinos_admin_title:"Create or edit destination",servicios_admin_title:"Create or edit service",
-  requests_admin_title:"Received requests",
-  field_label:"Label",field_name:"Name",field_price:"Price",field_currency:"Currency",field_desc1:"Description 1",field_desc2:"Description 2",
-  field_type:"Transport type",field_origin:"Origin",field_dest:"Destination",field_departure:"Departure date",field_return:"Return date",field_desc:"Description",
-  field_category:"Category",field_order:"Order",field_icon:"Icon (emoji)",
-  field_amount_orig:"Origin amount",field_currency_orig:"Origin currency",field_amount_dest:"Destination amount",field_currency_dest:"Destination currency",
-  save_btn:"💾 Save",new_btn:"➕ New",refresh_btn:"🔄 Refresh",loading:"Loading..."
- },
- ru: {
-  brand_sub:"ВАШ МОСТ В МИР",
-  nav_home:"ГЛАВНАЯ",nav_services:"УСЛУГИ",nav_recharges:"ПОПОЛНЕНИЕ",nav_tickets:"БИЛЕТЫ",nav_remesas:"ПЕРЕВОДЫ",nav_destinations:"НАПРАВЛЕНИЯ",nav_rates:"КУРСЫ",
-  clock_cuba:"🇨🇺 Куба",clock_local:"🌍 Местное",
-  hero_eyebrow:"Мы соединяем возможности",hero_title:'Ваш мост к <span>новым возможностям</span>',hero_desc:"Международное пополнение, денежные переводы, билеты и рекомендации для путешествий.",
-  hero_btn1:'Изучить услуги <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Связаться сейчас",
-  hero_card_pill:"ИНДИВИДУАЛЬНЫЙ ПОДХОД",hero_card_title:"Мы здесь, чтобы помочь вам",hero_card_desc:"Узнайте цены, запросите информацию и найдите варианты для ваших нужд.",
-  admin_role:"Администратор",
-  services_eyebrow:"Что мы делаем",services_title:'Наши <span class="gold">услуги</span>',services_desc:"Решения, чтобы оставаться на связи и приблизиться к вашим направлениям.",
-  recharges_eyebrow:"Связь",recharges_title:'Планы <span class="gold">пополнения</span>',recharges_desc:"Проверьте доступные предложения и запросите свое.",
-  tickets_eyebrow:"Ваше следующее путешествие",tickets_title:'Билеты на <span class="gold">самолет и транспорт</span>',tickets_desc:"Цены, направления и даты, опубликованные администрацией.",
-  remesas_eyebrow:"Мы соединяем семьи",remesas_title:'Услуга <span class="gold">денежных переводов</span>',remesas_desc:"Запросите информацию о доступности, направлениях и условиях.",
-  dest_eyebrow:"Исследуйте мир",dest_title:'Доступные <span class="gold">направления</span>',dest_desc:"Путешествия и услуги в лучшие направления.",
-  rates_eyebrow:"Финансовая информация",rates_title:'Обменные <span class="gold">курсы</span>',rates_desc:"Значения, настроенные администрацией.",
-  req_eyebrow:"Мы здесь, чтобы помочь вам",req_title:'Запросить <span class="gold">информацию</span>',req_desc:"Заполните свои данные, и мы свяжемся с вами.",
-  req_name:"Полное имя",req_phone:"Телефон / WhatsApp",req_details:"Детали вашего запроса",req_submit:"Отправить запрос",
-  contact_title:"Индивидуальный подход",contact_desc:"Получите прямые рекомендации, чтобы найти вариант, который лучше всего соответствует вашим потребностям.",
-  admin_label:"Администратор:",contact_btn:"Связаться напрямую",
-  info_title:"Важная информация",info_desc1:"Цены и курсы могут меняться в зависимости от доступности и условий обслуживания.",
-  info_desc2:"Всегда подтверждайте окончательную сумму, даты и требования перед оплатой.",
-  footer_slogan:"Ваш мост к новым возможностям.",floating_btn:"ПРЯМОЕ ВНИМАНИЕ",
-  admin_title:"Администрирование",admin_desc:"Доступ зарезервирован для администратора.",admin_pass:"Пароль",admin_enter:"Войти",
-  panel_title:"Панель администрирования",
-  tab_rates:"💱 Курсы",tab_recharges:"📱 Пополнения",tab_tickets:"✈️ Билеты",tab_remesas:"💸 Переводы",tab_destinos:"🌍 Направления",tab_servicios:"⭐ Услуги",tab_requests:"📋 Запросы",
-  rates_admin_title:"Обменные курсы (значение в CUP)",
-  recharge_admin_title:"Создать или изменить план пополнения",ticket_admin_title:"Создать или изменить билет",
-  remesa_admin_title:"Создать или изменить перевод",destinos_admin_title:"Создать или изменить направление",servicios_admin_title:"Создать или изменить услугу",
-  requests_admin_title:"Полученные запросы",
-  field_label:"Метка",field_name:"Название",field_price:"Цена",field_currency:"Валюта",field_desc1:"Описание 1",field_desc2:"Описание 2",
-  field_type:"Тип транспорта",field_origin:"Отправление",field_dest:"Назначение",field_departure:"Дата отправления",field_return:"Дата возвращения",field_desc:"Описание",
-  field_category:"Категория",field_order:"Порядок",field_icon:"Иконка (эмодзи)",
-  field_amount_orig:"Сумма отправления",field_currency_orig:"Валюта отправления",field_amount_dest:"Сумма назначения",field_currency_dest:"Валюта назначения",
-  save_btn:"💾 Сохранить",new_btn:"➕ Новый",refresh_btn:"🔄 Обновить",loading:"Загрузка..."
- }
-};
+                if (!data || data.length === 0) {
+                    estadoDiv.className = 'error';
+                    estadoDiv.innerHTML = '⚠️ La tabla existe, pero está vacía. Agrega datos en Supabase.';
+                    return;
+                }
 
-// ============ FUNCIÓN DE IDIOMA ============
-function changeLanguage(lang){
- currentLang = lang;
- document.documentElement.lang = lang;
- document.querySelectorAll('[data-i18n]').forEach(el => {
-  const key = el.getAttribute('data-i18n');
-  if (translations[lang] && translations[lang][key]) {
-   const value = translations[lang][key];
-   if (value.includes('<')) el.innerHTML = value; else el.textContent = value;
-  }
- });
-}
+                // ¡Éxito! Ocultamos carga y mostramos mensaje de éxito
+                estadoDiv.style.display = 'none';
+                exitoMsg.style.display = 'block';
 
-// ============ RELOJES (WIDGET + TICKER MUNDIAL) ============
-function updateClocks(){
- const now = new Date();
- 
- // Widget pequeño en header (Cuba y Local)
- $("clockCuba").textContent = now.toLocaleTimeString('es-ES',{timeZone:'America/Havana',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
- $("clockLocal").textContent = now.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
- 
- // Ticker mundial (banner animado)
- const fmt = {hour:'2-digit',minute:'2-digit',hour12:false};
- const setT = (id, tz) => { const el = $(id); if(el) el.textContent = now.toLocaleTimeString('es-ES',{...fmt, timeZone:tz}); };
- setT('wc-havana','America/Havana'); setT('wc-havana2','America/Havana');
- setT('wc-moscow','Europe/Moscow'); setT('wc-moscow2','Europe/Moscow');
- setT('wc-madrid','Europe/Madrid');
- setT('wc-miami','America/New_York');
- setT('wc-mexico','America/Mexico_City');
- setT('wc-buenosaires','America/Argentina/Buenos_Aires');
-}
-setInterval(updateClocks,1000); updateClocks();
+                // Renderizar cada fila de la base de datos
+                data.forEach(item => {
+                    const tarjeta = document.createElement('div');
+                    tarjeta.className = 'tarjeta';
+                    
+                    // Lógica inteligente: Busca columnas comunes para el título, o usa la primera que encuentre
+                    const titulo = item.nombre || item.titulo || item.producto || item.mensaje || 'Registro';
+                    
+                    // Generar el resto de los campos dinámicamente para garantizar que "algo aparezca"
+                    let contenidoHTML = `<h3>${titulo}</h3>`;
+                    for (const [key, value] of Object.entries(item)) {
+                        // Omitimos id y created_at del cuerpo para que se vea más limpio (ya los usamos para ordenar)
+                        if (key !== 'id' && key !== 'created_at' && key !== 'updated_at') {
+                            // Si el valor es el mismo que el título, no lo repetimos
+                            if (value !== titulo) {
+                                contenidoHTML += `<p><strong>${key}:</strong> ${value}</p>`;
+                            }
+                        }
+                    }
+                    
+                    tarjeta.innerHTML = contenidoHTML;
+                    contenedor.appendChild(tarjeta);
+                });
 
-// ============ UTILIDADES ============
-function toggleMenu(){ $("navlinks").classList.toggle("open"); }
-document.querySelectorAll(".navlinks a").forEach(a=> a.addEventListener("click",()=> $("navlinks").classList.remove("open")));
+                console.log('✅ Datos cargados exitosamente:', data);
 
-function openLogin(){ $("loginError").textContent=""; $("loginModal").classList.add("show"); }
-function closeModal(id){ $(id).classList.remove("show"); }
-async function login(){
- const email = $("adminEmail").value.trim(); const password = $("adminPassword").value;
- if(!email || !password){ $("loginError").textContent="Completa email y contraseña."; return; }
- const { data, error } = await db.auth.signInWithPassword({ email, password });
- if(error){ $("loginError").textContent="Credenciales incorrectas."; return; }
- closeModal("loginModal"); $("adminModal").classList.add("show");
- loadAdminData();
- $("adminEmail").value=""; $("adminPassword").value="";
-}
-$("adminPassword").addEventListener("keydown",e=>{ if(e.key==="Enter")login(); });
-["loginModal","adminModal"].forEach(id=>{ $(id).addEventListener("click",e=>{ if(e.target === $(id))closeModal(id); }); });
-document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ closeModal("loginModal"); closeModal("adminModal"); } });
+            } catch (err) {
+                console.error('❌ Error de Supabase:', err);
+                estadoDiv.className = 'error';
+                estadoDiv.innerHTML = `
+                    ❌ <strong>Error al conectar:</strong> ${err.message}<br><br>
+                    <small>
+                        <strong>Posibles causas:</strong><br>
+                        1. La clave "anon public" está mal copiada.<br>
+                        2. El nombre de la tabla ('${nombreTabla}') está mal escrito (revisa mayúsculas/minúsculas).<br>
+                        3. Las políticas RLS (Row Level Security) en Supabase bloquean la lectura pública.
+                    </small>
+                `;
+            }
+        }
 
-function showAdminTab(id,btn){
- document.querySelectorAll(".admin-panel").forEach(p=>p.classList.remove("active"));
- document.querySelectorAll(".admin-tabs button").forEach(b=>b.classList.remove("active"));
- const panel=$(id); if(panel){ panel.classList.add("active"); btn.classList.add("active"); }
-}
-
-function safe(v){ return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
-function money(v,c){ return `${Number(v||0).toLocaleString("es-ES",{maximumFractionDigits:2})} ${safe(c||"")}`; }
-
-// ============ CARGA AUTOMÁTICA ============
-async function loadAll(){ 
- console.log('🚀 Cargando datos...');
- await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios() ]);
- console.log('✅ Carga completa');
-}
-
-// ============ TASAS ============
-async function loadTasas(){
- const {data,error}=await db.from('tasas').select("*").eq("activo",true).order("codigo");
- if(error){ console.error('Error tasas:', error); return; }
- tasasData = data || []; renderTasas();
- if($("adminModal").classList.contains("show")) renderAdminTasas();
-}
-function renderTasas(){
- if(tasasData.length === 0){ $("ratesList").innerHTML='<div class="empty">No hay tasas disponibles</div>'; return; }
- $("ratesList").innerHTML = tasasData.map(t => `<div class="rate"><span>${safe(t.codigo)}</span><strong>${Number(t.valor_cup).toLocaleString("es-ES",{maximumFractionDigits:2})}</strong><span>CUP</span></div>`).join("");
-}
-function renderAdminTasas(){
- $("ratesAdminList").innerHTML = tasasData.map(t => `<div class="admin-item"><div><strong>${safe(t.moneda)} (${safe(t.codigo)})</strong><br><small>Valor: ${Number(t.valor_cup).toLocaleString("es-ES",{maximumFractionDigits:2})} CUP</small></div><div><button class="btn btn-dark" type="button" onclick="editTasa('${safe(t.id)}')">✏️ Editar</button></div></div>`).join("") || '<p class="mini">No hay tasas.</p>';
-}
-function editTasa(id){
- const t = tasasData.find(v=>String(v.id)===String(id)); if(!t) return;
- const nuevoValor = prompt(`Nueva tasa para ${t.moneda} (${t.codigo}) en CUP:`, t.valor_cup);
- if(nuevoValor === null) return; updateTasa(id, parseFloat(nuevoValor));
-}
-async function updateTasa(id, valor){
- const {error} = await db.from('tasas').update({valor_cup: valor}).eq('id', id);
- if(error){ alert("Error: " + error.message); return; }
- alert("✅ Tasa actualizada"); await loadTasas(); renderAdminTasas();
-}
-
-// ============ RECARGAS ============
-async function loadRecargas(){
- const {data,error}=await db.from('recargas').select("*").eq("activo",true).order("id");
- if(error){ console.error('Error recargas:', error); return; }
- recargasData=data||[]; renderRecargas();
- if($("adminModal").classList.contains("show")) renderAdminRecharges();
-}
-function renderRecargas(){
- const el=$("rechargesList");
- if(!recargasData.length){ el.innerHTML='<div class="empty">Próximamente publicaremos nuevas ofertas de recarga.</div>'; return; }
- el.innerHTML=recargasData.map((x,i)=>`<article class="card offer-card"><span class="pill">${safe(x.etiqueta||"RECARGA")}</span><h3>${safe(x.nombre)}</h3><div class="price">${money(x.precio,x.moneda||"RUB")}</div><p>${safe(x.descripcion1||"")}</p><p>${safe(x.descripcion2||"")}</p><button class="btn btn-gold" type="button" onclick="requestRecharge(${i})">Solicitar recarga</button></article>`).join("");
-}
-function requestRecharge(index){
- const item=recargasData[index]; if(!item)return;
- $("solicitud").scrollIntoView({behavior:"smooth"});
-}
-function clearRechargeForm(){ ["rechargeId","rechargeLabel","rechargeName","rechargePrice","rechargeDesc1","rechargeDesc2"].forEach(id=>{ $(id).value=""; }); $("rechargeCurrency").value="RUB"; }
-function editRecharge(id){
- const x=recargasData.find(v=>String(v.id)===String(id)); if(!x)return;
- $("rechargeId").value=x.id; $("rechargeLabel").value=x.etiqueta||""; $("rechargeName").value=x.nombre||"";
- $("rechargePrice").value=x.precio; $("rechargeCurrency").value=x.moneda||"RUB";
- $("rechargeDesc1").value=x.descripcion1||""; $("rechargeDesc2").value=x.descripcion2||"";
-}
-async function saveRecharge(){
- const id=$("rechargeId").value;
- const payload={ etiqueta:$("rechargeLabel").value.trim(), nombre:$("rechargeName").value.trim(), precio:Number($("rechargePrice").value), moneda:$("rechargeCurrency").value, descripcion1:$("rechargeDesc1").value.trim(), descripcion2:$("rechargeDesc2").value.trim(), activo:true };
- if(!payload.nombre||!Number.isFinite(payload.precio)||payload.precio<0){ alert("Completa el nombre y un precio válido."); return; }
- const query=id ? db.from('recargas').update(payload).eq("id",id) : db.from('recargas').insert(payload);
- const {error}=await query; if(error){ alert("Error: "+error.message); return; }
- clearRechargeForm(); await loadRecargas(); renderAdminRecharges();
-}
-async function deleteRecharge(id){ if(!confirm("¿Eliminar este plan?"))return; await db.from('recargas').delete().eq("id",id); await loadRecargas(); renderAdminRecharges(); }
-function renderAdminRecharges(){
- $("adminRechargeList").innerHTML=recargasData.map(x=>`<div class="admin-item"><div><strong>${safe(x.nombre)}</strong><br><small>${money(x.precio,x.moneda||"RUB")}</small></div><div><button class="btn btn-dark" type="button" onclick="editRecharge('${safe(x.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteRecharge('${safe(x.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay planes cargados.</p>';
-}
-
-// ============ BOLETOS ============
-async function loadBoletos(){
- const {data,error}=await db.from('boletos').select("*").eq("activo",true).order("fecha_salida",{ascending:true});
- if(error){ console.error('Error boletos:', error); return; }
- boletosData=data||[]; renderBoletos();
- if($("adminModal").classList.contains("show")) renderAdminTickets();
-}
-function renderBoletos(){
- const el=$("ticketsList");
- if(!boletosData.length){ el.innerHTML='<div class="empty">No hay boletos publicados en este momento.</div>'; return; }
- el.innerHTML=boletosData.map((t,i)=>`<article class="card offer-card"><span class="pill">${safe(t.etiqueta||t.transporte||"BOLETO")}</span><h3><i class="fa-solid fa-${t.transporte==="avion"?"plane":"bus"} gold"></i> ${safe(t.origen)} → ${safe(t.destino)}</h3><p>${safe(t.transporte||"Transporte")}</p><p><strong>Salida:</strong> ${safe(t.fecha_salida||"Por confirmar")}</p><p><strong>Regreso:</strong> ${safe(t.fecha_regreso||"No indicado")}</p><div class="price">${money(t.precio,t.moneda)}</div><p>${safe(t.descripcion||"Consulta condiciones y disponibilidad.")}</p><button class="btn btn-gold" type="button" onclick="requestTicket(${i})">Consultar este boleto</button></article>`).join("");
-}
-function requestTicket(index){
- const t=boletosData[index]; if(!t)return;
- $("solicitud").scrollIntoView({behavior:"smooth"});
-}
-function clearTicketForm(){ ["ticketId","ticketLabel","ticketOrigin","ticketDestination","ticketDeparture","ticketReturn","ticketPrice","ticketDescription"].forEach(id=>{ $(id).value=""; }); $("ticketType").value="avion"; $("ticketCurrency").value="RUB"; }
-function editTicket(id){
- const t=boletosData.find(v=>String(v.id)===String(id)); if(!t)return;
- $("ticketId").value=t.id; $("ticketLabel").value=t.etiqueta||""; $("ticketType").value=t.transporte||"avion";
- $("ticketOrigin").value=t.origen||""; $("ticketDestination").value=t.destino||"";
- $("ticketDeparture").value=t.fecha_salida||""; $("ticketReturn").value=t.fecha_regreso||"";
- $("ticketPrice").value=t.precio; $("ticketCurrency").value=t.moneda||"RUB";
- $("ticketDescription").value=t.descripcion||"";
-}
-async function saveTicket(){
- const id=$("ticketId").value;
- const payload={ etiqueta:$("ticketLabel").value.trim(), transporte:$("ticketType").value, origen:$("ticketOrigin").value.trim(), destino:$("ticketDestination").value.trim(), fecha_salida:$("ticketDeparture").value||null, fecha_regreso:$("ticketReturn").value||null, precio:Number($("ticketPrice").value), moneda:$("ticketCurrency").value, descripcion:$("ticketDescription").value.trim(), activo:true };
- if(!payload.origen||!payload.destino||!Number.isFinite(payload.precio)||payload.precio<0){ alert("Completa origen, destino y precio."); return; }
- const query=id ? db.from('boletos').update(payload).eq("id",id) : db.from('boletos').insert(payload);
- const {error}=await query; if(error){ alert("Error: "+error.message); return; }
- clearTicketForm(); await loadBoletos(); renderAdminTickets();
-}
-async function deleteTicket(id){ if(!confirm("¿Eliminar este boleto?"))return; await db.from('boletos').delete().eq("id",id); await loadBoletos(); renderAdminTickets(); }
-function renderAdminTickets(){
- $("adminTicketList").innerHTML=boletosData.map(t=>`<div class="admin-item"><div><strong>${safe(t.origen)} → ${safe(t.destino)}</strong><br><small>${money(t.precio,t.moneda)} · ${safe(t.fecha_salida||"")}</small></div><div><button class="btn btn-dark" type="button" onclick="editTicket('${safe(t.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteTicket('${safe(t.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay boletos cargados.</p>';
-}
-
-// ============ REMESAS ============
-async function loadRemesas(){
- const {data,error}=await db.from('remesas').select("*").eq("activo",true).order("id");
- if(error){ console.error('Error remesas:', error); return; }
- remesasData=data||[]; renderRemesas();
- if($("adminModal").classList.contains("show")) renderAdminRemesas();
-}
-function renderRemesas(){
- const el=$("remesasList");
- if(!remesasData.length){ el.innerHTML='<div class="empty">Próximamente publicaremos nuevas opciones de remesa.</div>'; return; }
- el.innerHTML=remesasData.map((r,i)=>`<article class="card offer-card"><h3><i class="fa-solid fa-money-bill-transfer gold"></i> ${safe(r.origen)} → ${safe(r.destino)}</h3><p><strong>Envías:</strong> ${money(r.monto_origen,r.moneda_origen)}</p><p><strong>Reciben:</strong> ${money(r.monto_destino,r.moneda_destino)}</p><p>${safe(r.descripcion||"Consulta condiciones y disponibilidad.")}</p><button class="btn btn-gold" type="button" onclick="requestRemesa(${i})">Solicitar remesa</button></article>`).join("");
-}
-function requestRemesa(index){
- const r=remesasData[index]; if(!r)return;
- $("solicitud").scrollIntoView({behavior:"smooth"});
-}
-function clearRemesaForm(){ ["remesaId","remesaOrigen","remesaDestino","remesaMontoOrigen","remesaMontoDestino","remesaDescripcion"].forEach(id=>{ $(id).value=""; }); $("remesaMonedaOrigen").value="RUB"; $("remesaMonedaDestino").value="CUP"; }
-function editRemesa(id){
- const r=remesasData.find(v=>String(v.id)===String(id)); if(!r)return;
- $("remesaId").value=r.id; $("remesaOrigen").value=r.origen||""; $("remesaDestino").value=r.destino||"";
- $("remesaMontoOrigen").value=r.monto_origen; $("remesaMonedaOrigen").value=r.moneda_origen||"RUB";
- $("remesaMontoDestino").value=r.monto_destino; $("remesaMonedaDestino").value=r.moneda_destino||"CUP";
- $("remesaDescripcion").value=r.descripcion||"";
-}
-async function saveRemesa(){
- const id=$("remesaId").value;
- const payload={ origen:$("remesaOrigen").value.trim(), destino:$("remesaDestino").value.trim(), monto_origen:Number($("remesaMontoOrigen").value), moneda_origen:$("remesaMonedaOrigen").value, monto_destino:Number($("remesaMontoDestino").value), moneda_destino:$("remesaMonedaDestino").value, descripcion:$("remesaDescripcion").value.trim(), activo:true };
- if(!payload.origen||!payload.destino||!Number.isFinite(payload.monto_origen)||payload.monto_origen<0){ alert("Completa origen, destino y monto."); return; }
- const query=id ? db.from('remesas').update(payload).eq("id",id) : db.from('remesas').insert(payload);
- const {error}=await query; if(error){ alert("Error: "+error.message); return; }
- clearRemesaForm(); await loadRemesas(); renderAdminRemesas();
-}
-async function deleteRemesa(id){ if(!confirm("¿Eliminar esta remesa?"))return; await db.from('remesas').delete().eq("id",id); await loadRemesas(); renderAdminRemesas(); }
-function renderAdminRemesas(){
- $("adminRemesaList").innerHTML=remesasData.map(r=>`<div class="admin-item"><div><strong>${safe(r.origen)} → ${safe(r.destino)}</strong><br><small>${money(r.monto_origen,r.moneda_origen)} → ${money(r.monto_destino,r.moneda_destino)}</small></div><div><button class="btn btn-dark" type="button" onclick="editRemesa('${safe(r.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteRemesa('${safe(r.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay remesas cargadas.</p>';
-}
-
-// ============ DESTINOS ============
-async function loadDestinos(){
- const {data,error}=await db.from('destinos').select("*").eq("activo",true).order("nombre");
- if(error){ console.error('Error destinos:', error); return; }
- destinosData=data||[]; renderDestinos();
- if($("adminModal").classList.contains("show")) renderAdminDestinos();
-}
-function renderDestinos(){
- const el=$("destinosList");
- if(!destinosData.length){ el.innerHTML='<div class="empty">No hay destinos publicados en este momento.</div>'; return; }
- el.innerHTML=destinosData.map(d=>`<article class="card offer-card"><span class="pill">${safe(d.categoria||"DESTINO")}</span><h3>${safe(d.nombre)}</h3><p>${safe(d.descripcion||"")}</p></article>`).join("");
-}
-function clearDestinoForm(){ ["destinoId","destinoNombre","destinoCategoria","destinoDescripcion"].forEach(id=>{ $(id).value=""; }); }
-function editDestino(id){
- const d=destinosData.find(v=>String(v.id)===String(id)); if(!d)return;
- $("destinoId").value=d.id; $("destinoNombre").value=d.nombre||""; $("destinoCategoria").value=d.categoria||""; $("destinoDescripcion").value=d.descripcion||"";
-}
-async function saveDestino(){
- const id=$("destinoId").value;
- const payload={ nombre:$("destinoNombre").value.trim(), categoria:$("destinoCategoria").value.trim(), descripcion:$("destinoDescripcion").value.trim(), activo:true };
- if(!payload.nombre){ alert("El nombre es obligatorio."); return; }
- const query=id ? db.from('destinos').update(payload).eq("id",id) : db.from('destinos').insert(payload);
- const {error}=await query; if(error){ alert("Error: "+error.message); return; }
- clearDestinoForm(); await loadDestinos(); renderAdminDestinos();
-}
-async function deleteDestino(id){ if(!confirm("¿Eliminar este destino?"))return; await db.from('destinos').delete().eq("id",id); await loadDestinos(); renderAdminDestinos(); }
-function renderAdminDestinos(){
- $("adminDestinoList").innerHTML=destinosData.map(d=>`<div class="admin-item"><div><strong>${safe(d.nombre)}</strong><br><small>${safe(d.categoria||"")}</small></div><div><button class="btn btn-dark" type="button" onclick="editDestino('${safe(d.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteDestino('${safe(d.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay destinos cargados.</p>';
-}
-
-// ============ SERVICIOS ============
-async function loadServicios(){
- const {data,error}=await db.from('servicios').select("*").eq("activo",true).order("orden");
- if(error){ console.error('Error servicios:', error); return; }
- serviciosData=data||[]; renderServicios();
- if($("adminModal").classList.contains("show")) renderAdminServicios();
-}
-function renderServicios(){
- const el=$("serviciosList");
- if(!serviciosData.length){ el.innerHTML='<div class="empty">No hay servicios publicados en este momento.</div>'; return; }
- el.innerHTML=serviciosData.map(s=>`<article class="card"><div class="service-icon">${safe(s.icono||"⭐")}</div><h3>${safe(s.nombre)}</h3><p>${safe(s.descripcion||"")}</p></article>`).join("");
-}
-function clearServicioForm(){ ["servicioId","servicioNombre","servicioDescripcion","servicioIcono"].forEach(id=>{ $(id).value=""; }); $("servicioOrden").value="1"; }
-function editServicio(id){
- const s=serviciosData.find(v=>String(v.id)===String(id)); if(!s)return;
- $("servicioId").value=s.id; $("servicioNombre").value=s.nombre||""; $("servicioDescripcion").value=s.descripcion||""; 
- $("servicioIcono").value=s.icono||""; $("servicioOrden").value=s.orden||1;
-}
-async function saveServicio(){
- const id=$("servicioId").value;
- const payload={ nombre:$("servicioNombre").value.trim(), descripcion:$("servicioDescripcion").value.trim(), icono:$("servicioIcono").value.trim(), orden:Number($("servicioOrden").value)||1, activo:true };
- if(!payload.nombre){ alert("El nombre es obligatorio."); return; }
- const query=id ? db.from('servicios').update(payload).eq("id",id) : db.from('servicios').insert(payload);
- const {error}=await query; if(error){ alert("Error: "+error.message); return; }
- clearServicioForm(); await loadServicios(); renderAdminServicios();
-}
-async function deleteServicio(id){ if(!confirm("¿Eliminar este servicio?"))return; await db.from('servicios').delete().eq("id",id); await loadServicios(); renderAdminServicios(); }
-function renderAdminServicios(){
- $("adminServicioList").innerHTML=serviciosData.map(s=>`<div class="admin-item"><div><strong>${safe(s.icono||"")} ${safe(s.nombre)}</strong><br><small>${safe(s.descripcion||"").substring(0,60)}...</small></div><div><button class="btn btn-dark" type="button" onclick="editServicio('${safe(s.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteServicio('${safe(s.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay servicios cargados.</p>';
-}
-
-// ============ SOLICITUDES ============
-async function submitRequest(e){
- e.preventDefault();
- const payload={ nombre_cliente:$("clientName").value.trim(), telefono:$("clientPhone").value.trim(), tipo_servicio: 'General', destino:'', detalles:$("clientDetails").value.trim(), estado:"pendiente" };
- const status=$("requestStatus");
- status.textContent="Enviando solicitud...";
- const {error}=await db.from('solicitudes').insert(payload);
- if(error){ status.textContent="No se pudo enviar. Inténtalo por WhatsApp: +7 904 631 95 65."; return; }
- status.textContent="✅ ¡Solicitud enviada! Gracias por contactar con YOUR BRIDGE HOME.";
- $("requestForm").reset();
-}
-async function loadRequests(){
- const {data,error}=await db.from('solicitudes').select("*").order("created_at",{ascending:false}).limit(100);
- if(error){ $("adminRequestsList").innerHTML='<p class="mini">No se pudieron cargar las solicitudes.</p>'; return; }
- solicitudesData=data||[];
- $("adminRequestsList").innerHTML=solicitudesData.map(r=>`<div class="admin-item"><div><strong>${safe(r.nombre_cliente)}</strong><br><small>${safe(r.telefono)} · ${safe(r.estado||"pendiente")}</small><p class="mini">${safe(r.detalles||"")}</p></div><div><button class="btn btn-dark" type="button" onclick="completeRequest('${safe(r.id)}')">✅ Completada</button><button class="btn btn-red" type="button" onclick="deleteRequest('${safe(r.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">Todavía no hay solicitudes.</p>';
-}
-async function completeRequest(id){ await db.from('solicitudes').update({estado:"completada"}).eq("id",id); await loadRequests(); }
-async function deleteRequest(id){ if(!confirm("¿Eliminar solicitud?"))return; await db.from('solicitudes').delete().eq("id",id); await loadRequests(); }
-
-// ============ ADMIN DATA ============
-async function loadAdminData(){
- await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), loadRequests() ]);
- renderAdminTasas(); renderAdminRecharges(); renderAdminTickets();
- renderAdminRemesas(); renderAdminDestinos(); renderAdminServicios();
-}
-
-// ============ INICIALIZACIÓN ============
-console.log('🚀 Página cargada, iniciando...');
-loadAll();
-changeLanguage('es');
-</script>
+        // Ejecutar al cargar el documento
+        document.addEventListener('DOMContentLoaded', cargarDatos);
+    </script>
 </body>
 </html>
