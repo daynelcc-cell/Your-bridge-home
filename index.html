@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0f172a">
 <title>YOUR BRIDGE HOME | Tu puente al mundo</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-:root{--bg:#0f172a;--panel:#17243a;--panel2:#1d2c44;--gold:#e8b84d;--gold2:#ffd978;--white:#f8fafc;--muted:#aab6c8;--line:#33445f;--green:#25d366;--red:#ef6464;--orange:#ff6b35}
+:root{--bg:#0f172a;--panel:#17243a;--panel2:#1d2c44;--gold:#e8b84d;--gold2:#ffd978;--white:#f8fafc;--muted:#aab6c8;--line:#33445f;--green:#25d366;--red:#ef6464}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:90px}
 body{margin:0;background:var(--bg);color:var(--white);font-family:Montserrat,Arial,sans-serif;line-height:1.6;overflow-x:hidden}
@@ -90,7 +89,6 @@ section{padding:58px 0}
 .result{background:#0d192b;border:1px solid var(--gold);border-radius:10px;padding:12px;color:var(--gold);font-weight:900;min-height:44px}
 .offer-card{position:relative}
 .offer-card .price{margin:8px 0}
-.offer-card img{width:100%;height:150px;object-fit:cover;border-radius:10px;margin-bottom:12px;background:#0b1425}
 .empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;grid-column:1/-1}
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .contact-box{overflow:hidden;min-width:0;overflow-wrap:anywhere}
@@ -263,14 +261,14 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  <div class="container nav">
   <a class="brand" href="#inicio">YOUR BRIDGE HOME<small>TU PUENTE AL MUNDO</small></a>
   <nav class="navlinks" id="navlinks">
-   <a href="#inicio">INICIO</a>
-   <a href="#servicios">SERVICIOS</a>
-   <a href="#equipaje">EQUIPAJE</a>
-   <a href="#guias">GUÍAS</a>
-   <a href="#rastreador">RASTREADOR</a>
-   <a href="#notas">NOTAS</a>
-   <a href="#tasas">TASAS</a>
-   <a href="#clima">CLIMA</a>
+   <a href="#inicio" data-i18n="nav_home">INICIO</a>
+   <a href="#servicios" data-i18n="nav_services">SERVICIOS</a>
+   <a href="#recargas" data-i18n="nav_recharges">RECARGAS</a>
+   <a href="#boletos" data-i18n="nav_tickets">BOLETOS</a>
+   <a href="#remesas" data-i18n="nav_remesas">REMESAS</a>
+   <a href="#destinos" data-i18n="nav_destinations">DESTINOS</a>
+   <a href="#tasas" data-i18n="nav_rates">TASAS</a>
+   <a href="#clima" data-i18n="nav_weather">CLIMA</a>
   </nav>
   <div class="nav-actions">
    <div class="clock-widget">
@@ -292,21 +290,21 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 <section class="hero" id="inicio">
  <div class="container hero-grid">
   <div>
-   <div class="eyebrow" id="heroEyebrow">Conectamos oportunidades</div>
-   <h1 id="heroTitle">Tu puente hacia <span>nuevas oportunidades</span></h1>
-   <p id="heroDesc">Recargas internacionales, envío de remesas, pasajes y orientación para tus viajes.</p>
+   <div class="eyebrow" data-i18n="hero_eyebrow">Conectamos oportunidades</div>
+   <h1 data-i18n="hero_title">Tu puente hacia <span>nuevas oportunidades</span></h1>
+   <p data-i18n="hero_desc">Recargas internacionales, envío de remesas, pasajes y orientación para tus viajes.</p>
    <div class="hero-actions">
-    <a class="btn btn-gold" href="#servicios" id="heroBtn1">Explorar servicios <i class="fa-solid fa-arrow-right"></i></a>
-    <a class="btn btn-dark" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span id="heroBtn2">Contactar ahora</span></a>
+    <a class="btn btn-gold" href="#servicios" data-i18n="hero_btn1">Explorar servicios <i class="fa-solid fa-arrow-right"></i></a>
+    <a class="btn btn-dark" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="hero_btn2">Contactar ahora</span></a>
    </div>
   </div>
   <div class="hero-card">
-   <span class="pill" id="heroCardPill">ATENCIÓN PERSONALIZADA</span>
-   <h3 id="heroCardTitle">Estamos para ayudarte</h3>
+   <span class="pill" data-i18n="hero_card_pill">ATENCIÓN PERSONALIZADA</span>
+   <h3 data-i18n="hero_card_title">Estamos para ayudarte</h3>
    <div class="big">YOUR BRIDGE HOME</div>
-   <p id="heroCardDesc">Consulta precios, solicita información y encuentra opciones para tus necesidades.</p>
+   <p data-i18n="hero_card_desc">Consulta precios, solicita información y encuentra opciones para tus necesidades.</p>
    <p><i class="fa-brands fa-whatsapp gold"></i> +7 904 631 95 65</p>
-   <p><strong>Daynel Caminero</strong><br><span class="mini">Administrador</span></p>
+   <p><strong>Daynel Caminero</strong><br><span class="mini" data-i18n="admin_role">Administrador</span></p>
   </div>
  </div>
 </section>
@@ -314,85 +312,75 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 <section id="servicios">
  <div class="container">
   <div class="section-head">
-   <div class="eyebrow">Lo que hacemos</div>
-   <h2>Nuestros <span class="gold">servicios</span></h2>
-   <p>Soluciones para mantenerte conectado y acercarte a tus destinos.</p>
+   <div class="eyebrow" data-i18n="services_eyebrow">Lo que hacemos</div>
+   <h2 data-i18n="services_title">Nuestros <span class="gold">servicios</span></h2>
+   <p data-i18n="services_desc">Soluciones para mantenerte conectado y acercarte a tus destinos.</p>
   </div>
-  <div class="grid" id="serviciosList"><div class="empty">Cargando...</div></div>
+  <div class="grid" id="serviciosList"><div class="empty" data-i18n="loading">Cargando...</div></div>
  </div>
 </section>
 
-<section id="equipaje" style="background:#0b1425">
+<section id="recargas" style="background:#0b1425">
  <div class="container">
   <div class="section-head">
-   <div class="eyebrow">✈️ Herramienta útil</div>
-   <h2>Calculadora de <span class="gold">Equipaje</span></h2>
-   <p>Consulta las reglas de equipaje de las principales aerolíneas</p>
+   <div class="eyebrow" data-i18n="recharges_eyebrow">Conectividad</div>
+   <h2 data-i18n="recharges_title">Planes de <span class="gold">recargas</span></h2>
+   <p data-i18n="recharges_desc">Consulta las ofertas disponibles y solicita la tuya.</p>
   </div>
-  <div class="equipaje-selector">
-   <div class="form-grid">
-    <div class="field"><label>Aerolínea</label><select id="equipajeAerolinea" onchange="calcularEquipaje()"><option value="">Selecciona una aerolínea</option></select></div>
-    <div class="field"><label>Ruta</label><select id="equipajeRuta" onchange="calcularEquipaje()"><option value="">Primero selecciona aerolínea</option></select></div>
-   </div>
-  </div>
-  <div id="equipajeResult"></div>
+  <div class="grid" id="rechargesList"><div class="empty" data-i18n="loading">Cargando...</div></div>
  </div>
 </section>
 
-<section id="guias">
+<section id="boletos">
  <div class="container">
   <div class="section-head">
-   <div class="eyebrow">📚 Información oficial</div>
-   <h2>Guías de <span class="gold">Aduana y Migración</span></h2>
-   <p>Información actualizada sobre regulaciones y requisitos</p>
+   <div class="eyebrow" data-i18n="tickets_eyebrow">Tu próximo viaje</div>
+   <h2 data-i18n="tickets_title">Boletos de <span class="gold">avión y transporte</span></h2>
+   <p data-i18n="tickets_desc">Precios, destinos y fechas publicados por administración.</p>
   </div>
-  <div id="guiasList"><div class="empty">Cargando guías...</div></div>
+  <div class="grid" id="ticketsList"><div class="empty" data-i18n="loading">Cargando...</div></div>
  </div>
 </section>
 
-<section id="rastreador" style="background:#0b1425">
+<section id="remesas" style="background:#0b1425">
  <div class="container">
   <div class="section-head">
-   <div class="eyebrow">📍 Seguimiento</div>
-   <h2>Rastreador de <span class="gold">Pedidos</span></h2>
-   <p>Consulta el estado de tu envío o trámite</p>
+   <div class="eyebrow" data-i18n="remesas_eyebrow">Conectamos familias</div>
+   <h2 data-i18n="remesas_title">Servicio de <span class="gold">remesas</span></h2>
+   <p data-i18n="remesas_desc">Solicita información sobre disponibilidad, destinos y condiciones.</p>
   </div>
-  <div class="rastreador-form">
-   <div class="field"><label>Código de seguimiento</label><input id="rastreadorCodigo" placeholder="Ej: YBH-2026-001"></div>
-   <button class="btn btn-gold" style="width:100%;margin-top:15px" onclick="buscarPedido()">🔍 Buscar pedido</button>
-  </div>
-  <div id="rastreadorResult"></div>
+  <div class="grid" id="remesasList"><div class="empty" data-i18n="loading">Cargando...</div></div>
  </div>
 </section>
 
-<section id="notas">
+<section id="destinos">
  <div class="container">
   <div class="section-head">
-   <div class="eyebrow">📰 Noticias y avisos</div>
-   <h2>Notas <span class="gold">Importantes</span></h2>
-   <p>Mantente informado sobre novedades y actualizaciones</p>
+   <div class="eyebrow" data-i18n="dest_eyebrow">Explora el mundo</div>
+   <h2 data-i18n="dest_title">Destinos <span class="gold">disponibles</span></h2>
+   <p data-i18n="dest_desc">Viajes y servicios a los mejores destinos.</p>
   </div>
-  <div class="notas-grid" id="notasList"><div class="empty">Cargando notas...</div></div>
+  <div class="grid" id="destinosList"><div class="empty" data-i18n="loading">Cargando...</div></div>
  </div>
 </section>
 
 <section id="tasas" style="background:#0b1425">
  <div class="container">
   <div class="section-head">
-   <div class="eyebrow">Información financiera</div>
-   <h2>Tasas de <span class="gold">cambio</span></h2>
-   <p>Valores configurados por administración.</p>
+   <div class="eyebrow" data-i18n="rates_eyebrow">Información financiera</div>
+   <h2 data-i18n="rates_title">Tasas de <span class="gold">cambio</span></h2>
+   <p data-i18n="rates_desc">Valores configurados por administración.</p>
   </div>
   <div class="rates" id="ratesList"></div>
   <div class="card" style="margin-top:20px">
-   <h3><i class="fa-solid fa-calculator gold"></i> Calculadora de monedas</h3>
+   <h3><i class="fa-solid fa-calculator gold"></i> <span data-i18n="calc_title">Calculadora de monedas</span></h3>
    <div class="calculator">
-    <div class="field"><label>Cantidad</label><input id="calcAmount" type="number" min="0" value="100"></div>
-    <div class="field"><label>De</label><select id="calcFrom"></select></div>
-    <div class="field"><label>A</label><select id="calcTo"></select></div>
-    <button class="btn btn-gold" type="button" onclick="calculate()">Calcular</button>
+    <div class="field"><label data-i18n="calc_amount">Cantidad</label><input id="calcAmount" type="number" min="0" value="100"></div>
+    <div class="field"><label data-i18n="calc_from">De</label><select id="calcFrom"></select></div>
+    <div class="field"><label data-i18n="calc_to">A</label><select id="calcTo"></select></div>
+    <button class="btn btn-gold" type="button" onclick="calculate()" data-i18n="calc_btn">Calcular</button>
    </div>
-   <div class="result" id="calcResult" style="margin-top:14px">Introduce una cantidad para calcular.</div>
+   <div class="result" id="calcResult" style="margin-top:14px" data-i18n="calc_result">Introduce una cantidad para calcular.</div>
   </div>
  </div>
 </section>
@@ -400,38 +388,38 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 <section id="clima">
  <div class="container">
   <div class="section-head">
-   <div class="eyebrow">En tiempo real</div>
-   <h2>Meteorología <span class="gold">Mundial</span></h2>
-   <p>Consulta el clima actual en las ciudades más importantes.</p>
+   <div class="eyebrow" data-i18n="weather_eyebrow">En tiempo real</div>
+   <h2 data-i18n="weather_title">Meteorología <span class="gold">Mundial</span></h2>
+   <p data-i18n="weather_desc">Consulta el clima actual en las ciudades más importantes.</p>
   </div>
-  <div class="weather-grid" id="weatherGrid"><div class="empty">Cargando clima...</div></div>
+  <div class="weather-grid" id="weatherGrid"><div class="empty" data-i18n="loading">Cargando clima...</div></div>
  </div>
 </section>
 
 <section id="solicitud">
  <div class="container">
   <div class="section-head">
-   <div class="eyebrow">Estamos para ayudarte</div>
-   <h2>Solicita <span class="gold">información</span></h2>
-   <p>Completa tus datos y nos pondremos en contacto contigo.</p>
+   <div class="eyebrow" data-i18n="req_eyebrow">Estamos para ayudarte</div>
+   <h2 data-i18n="req_title">Solicita <span class="gold">información</span></h2>
+   <p data-i18n="req_desc">Completa tus datos y nos pondremos en contacto contigo.</p>
   </div>
   <div class="card">
    <form id="requestForm" onsubmit="submitRequest(event)">
     <div class="form-grid">
-     <div class="field"><label>Nombre completo</label><input id="clientName" required maxlength="100" placeholder="Tu nombre"></div>
-     <div class="field"><label>Teléfono / WhatsApp</label><input id="clientPhone" required maxlength="40" placeholder="Tu número de contacto"></div>
+     <div class="field"><label data-i18n="req_name">Nombre completo</label><input id="clientName" required maxlength="100" placeholder="Tu nombre"></div>
+     <div class="field"><label data-i18n="req_phone">Teléfono / WhatsApp</label><input id="clientPhone" required maxlength="40" placeholder="Tu número de contacto"></div>
      <div class="field full">
-      <label>Servicios de interés</label>
+      <label data-i18n="req_services">Servicios de interés</label>
       <div style="margin-top:8px;gap:12px;display:flex;flex-wrap:wrap">
-       <label><input type="checkbox" class="service-check" value="Recarga"> Recargas</label>
-       <label><input type="checkbox" class="service-check" value="Remesa"> Remesas</label>
-       <label><input type="checkbox" class="service-check" value="Boleto de avión"> Boleto de avión</label>
-       <label><input type="checkbox" class="service-check" value="Consulta general"> Consulta general</label>
+       <label><input type="checkbox" class="service-check" value="Recarga"> <span data-i18n="req_opt1">Recargas</span></label>
+       <label><input type="checkbox" class="service-check" value="Remesa"> <span data-i18n="req_opt2">Remesas</span></label>
+       <label><input type="checkbox" class="service-check" value="Boleto de avión"> <span data-i18n="req_opt3">Boleto de avión</span></label>
+       <label><input type="checkbox" class="service-check" value="Consulta general"> <span data-i18n="req_opt4">Consulta general</span></label>
       </div>
      </div>
-     <div class="field"><label>Destino</label><input id="clientDestination" maxlength="100" placeholder="País o ciudad"></div>
-     <div class="field full"><label>Detalles de tu solicitud</label><textarea id="clientDetails" maxlength="1500" placeholder="Cuéntanos qué necesitas..."></textarea></div>
-     <div class="full"><button class="btn btn-gold" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar solicitud</button></div>
+     <div class="field"><label data-i18n="req_dest">Destino</label><input id="clientDestination" maxlength="100" placeholder="País o ciudad"></div>
+     <div class="field full"><label data-i18n="req_details">Detalles de tu solicitud</label><textarea id="clientDetails" maxlength="1500" placeholder="Cuéntanos qué necesitas..."></textarea></div>
+     <div class="full"><button class="btn btn-gold" type="submit"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="req_submit">Enviar solicitud</span></button></div>
     </div>
    </form>
    <p class="mini" id="requestStatus" aria-live="polite"></p>
@@ -443,17 +431,17 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  <div class="container info-grid">
   <div class="card contact-box">
    <div class="service-icon"><i class="fa-solid fa-headset"></i></div>
-   <h3>Atención personalizada</h3>
-   <p>Recibe orientación directa para encontrar la opción que mejor se adapte a tus necesidades.</p>
-   <p><strong>Administrador:</strong> Daynel Caminero</p>
+   <h3 data-i18n="contact_title">Atención personalizada</h3>
+   <p data-i18n="contact_desc">Recibe orientación directa para encontrar la opción que mejor se adapte a tus necesidades.</p>
+   <p><strong data-i18n="admin_label">Administrador:</strong> Daynel Caminero</p>
    <p><strong>WhatsApp:</strong> <a class="gold" href="https://wa.me/79046319565" target="_blank" rel="noopener">+7 904 631 95 65</a></p>
-   <a class="btn btn-green" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Contactar directamente</a>
+   <a class="btn btn-green" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="contact_btn">Contactar directamente</span></a>
   </div>
   <div class="card contact-box">
    <div class="service-icon"><i class="fa-solid fa-circle-info"></i></div>
-   <h3>Información importante</h3>
-   <p>Los precios y las tasas pueden cambiar según la disponibilidad y las condiciones del servicio.</p>
-   <p>Confirma siempre el importe final, las fechas y los requisitos antes de realizar un pago.</p>
+   <h3 data-i18n="info_title">Información importante</h3>
+   <p data-i18n="info_desc1">Los precios y las tasas pueden cambiar según la disponibilidad y las condiciones del servicio.</p>
+   <p data-i18n="info_desc2">Confirma siempre el importe final, las fechas y los requisitos antes de realizar un pago.</p>
    <p class="mini">YOUR BRIDGE HOME — Tu puente al mundo.</p>
   </div>
  </div>
@@ -462,38 +450,29 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 
 <footer>
  <div class="container footer-inner">
-  <div><strong class="gold">YOUR BRIDGE HOME</strong><br>Tu puente al mundo.</div>
-  <div>Daynel Caminero · Administrador<br>WhatsApp: +7 904 631 95 65</div>
+  <div><strong class="gold">YOUR BRIDGE HOME</strong><br><span data-i18n="footer_slogan">Tu puente al mundo.</span></div>
+  <div>Daynel Caminero · <span data-i18n="admin_role">Administrador</span><br>WhatsApp: +7 904 631 95 65</div>
   <div>© <span id="year"></span> YOUR BRIDGE HOME</div>
  </div>
 </footer>
-<a class="floating" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> ATENCIÓN DIRECTA</a>
-
-<div class="lightbox" id="lightbox">
- <div class="lightbox-content">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-  <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)"><i class="fa-solid fa-chevron-right"></i></button>
-  <div id="lightboxBody"></div>
- </div>
-</div>
+<a class="floating" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="floating_btn">ATENCIÓN DIRECTA</span></a>
 
 <div class="overlay" id="loginModal">
  <div class="modal" style="max-width:400px">
-  <div class="modal-head"><h2>Administración</h2><button class="close" type="button" onclick="closeModal('loginModal')">✕</button></div>
-  <p class="mini">Acceso reservado al administrador.</p>
+  <div class="modal-head"><h2 data-i18n="admin_title">Administración</h2><button class="close" type="button" onclick="closeModal('loginModal')">✕</button></div>
+  <p class="mini" data-i18n="admin_desc">Acceso reservado al administrador.</p>
   <div class="field"><label>Email</label><input type="email" id="adminEmail" placeholder="tu@email.com"></div>
-  <div class="field"><label>Contraseña</label><input type="password" id="adminPassword" placeholder="Contraseña"></div>
+  <div class="field"><label data-i18n="admin_pass">Contraseña</label><input type="password" id="adminPassword" placeholder="Contraseña"></div>
   <p id="loginError" style="color:#ff8b8b;font-size:12px"></p>
-  <button class="btn btn-gold" style="width:100%" type="button" onclick="login()">Entrar</button>
+  <button class="btn btn-gold" style="width:100%" type="button" onclick="login()" data-i18n="admin_enter">Entrar</button>
  </div>
 </div>
 
 <div class="overlay" id="adminModal">
  <div class="modal">
-  <div class="modal-head"><h2><i class="fa-solid fa-screwdriver-wrench"></i> Panel de administración</h2><button class="close" type="button" onclick="closeModal('adminModal')">✕</button></div>
+  <div class="modal-head"><h2><i class="fa-solid fa-screwdriver-wrench"></i> <span data-i18n="panel_title">Panel de administración</span></h2><button class="close" type="button" onclick="closeModal('adminModal')">✕</button></div>
   <div class="diagnostic" id="diagnosticPanel">
-   <h4><i class="fa-solid fa-stethoscope"></i> Diagnóstico del sistema</h4>
+   <h4><i class="fa-solid fa-stethoscope"></i> <span data-i18n="diag_title">Diagnóstico del sistema</span></h4>
    <div id="diagnosticContent">Cargando diagnóstico...</div>
   </div>
   <div class="admin-tabs">
@@ -502,200 +481,91 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    <button type="button" onclick="showAdminTab('boletosAdmin',this)">✈️ Boletos</button>
    <button type="button" onclick="showAdminTab('remesasAdmin',this)">💸 Remesas</button>
    <button type="button" onclick="showAdminTab('destinosAdmin',this)">🌍 Destinos</button>
-   <button type="button" onclick="showAdminTab('equipajeAdmin',this)">🧳 Equipaje</button>
-   <button type="button" onclick="showAdminTab('guiasAdmin',this)">📚 Guías</button>
-   <button type="button" onclick="showAdminTab('rastreadorAdmin',this)">📍 Rastreador</button>
-   <button type="button" onclick="showAdminTab('ofertasAdmin',this)">🔥 Ofertas</button>
-   <button type="button" onclick="showAdminTab('notasAdmin',this)">📰 Notas</button>
    <button type="button" onclick="showAdminTab('serviciosAdmin',this)">⭐ Servicios</button>
    <button type="button" onclick="showAdminTab('requestsAdmin',this)">📋 Solicitudes</button>
-   <button type="button" onclick="showAdminTab('opinionesAdmin',this)">💬 Opiniones</button>
   </div>
   <div class="admin-panel active" id="ratesAdmin">
-   <h3>Tasas de cambio (valor en CUP)</h3>
+   <h3 data-i18n="rates_admin_title">Tasas de cambio (valor en CUP)</h3>
    <div id="ratesAdminList"></div>
   </div>
   <div class="admin-panel" id="recargasAdmin">
-   <h3>Crear o editar plan de recarga</h3>
+   <h3 data-i18n="recharge_admin_title">Crear o editar plan de recarga</h3>
    <input type="hidden" id="rechargeId">
    <div class="form-grid">
-    <div class="field"><label>Etiqueta</label><input id="rechargeLabel" placeholder="OFERTA ESPECIAL"></div>
-    <div class="field"><label>Nombre del plan</label><input id="rechargeName" placeholder="INTERNET +"></div>
-    <div class="field"><label>Precio</label><input id="rechargePrice" type="number" step="0.01"></div>
-    <div class="field"><label>Moneda</label><select id="rechargeCurrency"><option>RUB</option><option>USD</option><option>EUR</option><option>CUP</option></select></div>
-    <div class="field full"><label>Descripción 1</label><input id="rechargeDesc1" placeholder="2 GB LTE"></div>
-    <div class="field full"><label>Descripción 2</label><input id="rechargeDesc2" placeholder="300 MB.cu"></div>
+    <div class="field"><label data-i18n="field_label">Etiqueta</label><input id="rechargeLabel" placeholder="OFERTA ESPECIAL"></div>
+    <div class="field"><label data-i18n="field_name">Nombre del plan</label><input id="rechargeName" placeholder="INTERNET +"></div>
+    <div class="field"><label data-i18n="field_price">Precio</label><input id="rechargePrice" type="number" step="0.01"></div>
+    <div class="field"><label data-i18n="field_currency">Moneda</label><select id="rechargeCurrency"><option>RUB</option><option>USD</option><option>EUR</option><option>CUP</option></select></div>
+    <div class="field full"><label data-i18n="field_desc1">Descripción 1</label><input id="rechargeDesc1" placeholder="2 GB LTE"></div>
+    <div class="field full"><label data-i18n="field_desc2">Descripción 2</label><input id="rechargeDesc2" placeholder="300 MB.cu"></div>
    </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveRecharge()">💾 Guardar plan</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearRechargeForm()">➕ Nuevo</button>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveRecharge()" data-i18n="save_btn">💾 Guardar plan</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearRechargeForm()" data-i18n="new_btn">➕ Nuevo</button>
    <div class="admin-list" id="adminRechargeList"></div>
   </div>
   <div class="admin-panel" id="boletosAdmin">
-   <h3>Crear o editar boleto</h3>
+   <h3 data-i18n="ticket_admin_title">Crear o editar boleto</h3>
    <input type="hidden" id="ticketId">
    <div class="form-grid">
-    <div class="field"><label>Etiqueta</label><input id="ticketLabel" placeholder="OFERTA"></div>
-    <div class="field"><label>Tipo de transporte</label><select id="ticketType"><option>avion</option><option>autobus</option><option>tren</option></select></div>
-    <div class="field"><label>Origen</label><input id="ticketOrigin" placeholder="Rusia"></div>
-    <div class="field"><label>Destino</label><input id="ticketDestination" placeholder="Cuba"></div>
-    <div class="field"><label>Fecha de salida</label><input id="ticketDeparture" type="date"></div>
-    <div class="field"><label>Fecha de regreso</label><input id="ticketReturn" type="date"></div>
-    <div class="field"><label>Precio</label><input id="ticketPrice" type="number" min="0" step="0.01"></div>
-    <div class="field"><label>Moneda</label><select id="ticketCurrency"><option>RUB</option><option>USD</option><option>EUR</option><option>CUP</option></select></div>
-    <div class="field full"><label>Descripción</label><textarea id="ticketDescription"></textarea></div>
+    <div class="field"><label data-i18n="field_label">Etiqueta</label><input id="ticketLabel" placeholder="OFERTA"></div>
+    <div class="field"><label data-i18n="field_type">Tipo de transporte</label><select id="ticketType"><option>avion</option><option>autobus</option><option>tren</option></select></div>
+    <div class="field"><label data-i18n="field_origin">Origen</label><input id="ticketOrigin" placeholder="Rusia"></div>
+    <div class="field"><label data-i18n="field_dest">Destino</label><input id="ticketDestination" placeholder="Cuba"></div>
+    <div class="field"><label data-i18n="field_departure">Fecha de salida</label><input id="ticketDeparture" type="date"></div>
+    <div class="field"><label data-i18n="field_return">Fecha de regreso</label><input id="ticketReturn" type="date"></div>
+    <div class="field"><label data-i18n="field_price">Precio</label><input id="ticketPrice" type="number" min="0" step="0.01"></div>
+    <div class="field"><label data-i18n="field_currency">Moneda</label><select id="ticketCurrency"><option>RUB</option><option>USD</option><option>EUR</option><option>CUP</option></select></div>
+    <div class="field full"><label data-i18n="field_desc">Descripción</label><textarea id="ticketDescription"></textarea></div>
    </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveTicket()">💾 Guardar boleto</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearTicketForm()">➕ Nuevo</button>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveTicket()" data-i18n="save_btn">💾 Guardar boleto</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearTicketForm()" data-i18n="new_btn">➕ Nuevo</button>
    <div class="admin-list" id="adminTicketList"></div>
   </div>
   <div class="admin-panel" id="remesasAdmin">
-   <h3>Crear o editar remesa</h3>
+   <h3 data-i18n="remesa_admin_title">Crear o editar remesa</h3>
    <input type="hidden" id="remesaId">
    <div class="form-grid">
-    <div class="field"><label>Origen</label><input id="remesaOrigen" placeholder="Rusia"></div>
-    <div class="field"><label>Destino</label><input id="remesaDestino" placeholder="Cuba"></div>
-    <div class="field"><label>Monto origen</label><input id="remesaMontoOrigen" type="number" step="0.01"></div>
-    <div class="field"><label>Moneda origen</label><select id="remesaMonedaOrigen"><option>RUB</option><option>USD</option><option>EUR</option></select></div>
-    <div class="field"><label>Monto destino</label><input id="remesaMontoDestino" type="number" step="0.01"></div>
-    <div class="field"><label>Moneda destino</label><select id="remesaMonedaDestino"><option>CUP</option><option>USD</option><option>EUR</option></select></div>
-    <div class="field full"><label>Descripción</label><textarea id="remesaDescripcion"></textarea></div>
+    <div class="field"><label data-i18n="field_origin">Origen</label><input id="remesaOrigen" placeholder="Rusia"></div>
+    <div class="field"><label data-i18n="field_dest">Destino</label><input id="remesaDestino" placeholder="Cuba"></div>
+    <div class="field"><label data-i18n="field_amount_orig">Monto origen</label><input id="remesaMontoOrigen" type="number" step="0.01"></div>
+    <div class="field"><label data-i18n="field_currency_orig">Moneda origen</label><select id="remesaMonedaOrigen"><option>RUB</option><option>USD</option><option>EUR</option></select></div>
+    <div class="field"><label data-i18n="field_amount_dest">Monto destino</label><input id="remesaMontoDestino" type="number" step="0.01"></div>
+    <div class="field"><label data-i18n="field_currency_dest">Moneda destino</label><select id="remesaMonedaDestino"><option>CUP</option><option>USD</option><option>EUR</option></select></div>
+    <div class="field full"><label data-i18n="field_desc">Descripción</label><textarea id="remesaDescripcion"></textarea></div>
    </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveRemesa()">💾 Guardar remesa</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearRemesaForm()">➕ Nuevo</button>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveRemesa()" data-i18n="save_btn">💾 Guardar remesa</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearRemesaForm()" data-i18n="new_btn">➕ Nuevo</button>
    <div class="admin-list" id="adminRemesaList"></div>
   </div>
   <div class="admin-panel" id="destinosAdmin">
-   <h3>Crear o editar destino</h3>
+   <h3 data-i18n="destinos_admin_title">Crear o editar destino</h3>
    <input type="hidden" id="destinoId">
    <div class="form-grid">
-    <div class="field"><label>Nombre</label><input id="destinoNombre" placeholder="Cuba"></div>
-    <div class="field"><label>Categoría</label><input id="destinoCategoria" placeholder="Caribe"></div>
-    <div class="field full"><label>Descripción</label><textarea id="destinoDescripcion"></textarea></div>
+    <div class="field"><label data-i18n="field_name">Nombre</label><input id="destinoNombre" placeholder="Cuba"></div>
+    <div class="field"><label data-i18n="field_category">Categoría</label><input id="destinoCategoria" placeholder="Caribe"></div>
+    <div class="field full"><label data-i18n="field_desc">Descripción</label><textarea id="destinoDescripcion"></textarea></div>
    </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveDestino()">💾 Guardar destino</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearDestinoForm()">➕ Nuevo</button>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveDestino()" data-i18n="save_btn">💾 Guardar destino</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearDestinoForm()" data-i18n="new_btn">➕ Nuevo</button>
    <div class="admin-list" id="adminDestinoList"></div>
   </div>
-  <div class="admin-panel" id="equipajeAdmin">
-   <h3>Gestionar reglas de equipaje</h3>
-   <input type="hidden" id="equipajeId">
-   <div class="form-grid">
-    <div class="field"><label>Aerolínea</label><input id="equipajeAerolineaInput" placeholder="Aeroflot"></div>
-    <div class="field"><label>Ruta</label><input id="equipajeRutaInput" placeholder="Moscú - La Habana"></div>
-    <div class="field"><label>Peso cabina</label><input id="equipajeCabinaPeso" placeholder="8 kg"></div>
-    <div class="field"><label>Dimensiones cabina</label><input id="equipajeCabinaDim" placeholder="55x40x20 cm"></div>
-    <div class="field"><label>Peso bodega</label><input id="equipajeBodegaPeso" placeholder="23 kg"></div>
-    <div class="field"><label>Cantidad bodega</label><input id="equipajeBodegaCantidad" type="number" value="1"></div>
-    <div class="field full"><label>Precio exceso</label><input id="equipajeExceso" placeholder="$50 USD por kg extra"></div>
-    <div class="field full"><label>Notas adicionales</label><textarea id="equipajeNotas"></textarea></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveEquipaje()">💾 Guardar</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearEquipajeForm()">➕ Nuevo</button>
-   <div class="admin-list" id="adminEquipajeList"></div>
-  </div>
-  <div class="admin-panel" id="guiasAdmin">
-   <h3>Gestionar guías de aduana</h3>
-   <input type="hidden" id="guiaId">
-   <div class="form-grid">
-    <div class="field full"><label>Título</label><input id="guiaTitulo" placeholder="Requisitos de visado para Cuba"></div>
-    <div class="field"><label>Categoría</label><select id="guiaCategoria"><option>aduanas</option><option>migracion</option><option>visados</option><option>general</option></select></div>
-    <div class="field"><label>Icono</label><input id="guiaIcono" placeholder="fa-book" value="fa-book"></div>
-    <div class="field full"><label>Contenido</label><textarea id="guiaContenido" style="min-height:150px"></textarea></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveGuia()">💾 Guardar</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearGuiaForm()">➕ Nuevo</button>
-   <div class="admin-list" id="adminGuiasList"></div>
-  </div>
-  <div class="admin-panel" id="rastreadorAdmin">
-   <h3>Gestionar pedidos</h3>
-   <input type="hidden" id="pedidoId">
-   <div class="form-grid">
-    <div class="field"><label>Código de seguimiento</label><input id="pedidoCodigo" placeholder="YBH-2026-001"></div>
-    <div class="field"><label>Nombre del cliente</label><input id="pedidoCliente"></div>
-    <div class="field"><label>Tipo de servicio</label><input id="pedidoTipo" placeholder="Remesa, Boleto, etc."></div>
-    <div class="field"><label>Estado</label><select id="pedidoEstado"><option>pendiente</option><option>proceso</option><option>completado</option></select></div>
-    <div class="field full"><label>Descripción</label><textarea id="pedidoDescripcion"></textarea></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="savePedido()">💾 Guardar</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearPedidoForm()">➕ Nuevo</button>
-   <div class="admin-list" id="adminPedidosList"></div>
-  </div>
-  <div class="admin-panel" id="ofertasAdmin">
-   <h3>Gestionar ofertas flash</h3>
-   <input type="hidden" id="ofertaId">
-   <div class="form-grid">
-    <div class="field full"><label>Título</label><input id="ofertaTitulo" placeholder="🔥 50% DE DESCUENTO"></div>
-    <div class="field full"><label>Descripción</label><input id="ofertaDescripcion" placeholder="En todos los envíos de remesas"></div>
-    <div class="field"><label>Descuento</label><input id="ofertaDescuento" placeholder="50%"></div>
-    <div class="field"><label>Fecha fin</label><input id="ofertaFechaFin" type="datetime-local"></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveOferta()">💾 Guardar</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearOfertaForm()">➕ Nuevo</button>
-   <div class="admin-list" id="adminOfertasList"></div>
-  </div>
-  <div class="admin-panel" id="notasAdmin">
-   <h3>Gestionar notas importantes</h3>
-   <input type="hidden" id="notaId">
-   <div class="form-grid">
-    <div class="field full"><label>Título</label><input id="notaTitulo"></div>
-    <div class="field"><label>Categoría</label><select id="notaCategoria"><option>general</option><option>urgente</option><option>noticia</option><option>oferta</option></select></div>
-    <div class="field"><label><input type="checkbox" id="notaDestacado"> Destacada</label></div>
-    <div class="field full"><label>Contenido</label><textarea id="notaContenido" style="min-height:120px"></textarea></div>
-    <div class="field full"><label>Imagen (URL de ImgBB o subir local)</label>
-     <input id="notaImagenURL" type="url" placeholder="https://i.ibb.co/...">
-     <input id="notaImagenFile" type="file" accept="image/*" style="margin-top:10px">
-     <div id="notaImagenPreview"></div>
-    </div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveNota()">💾 Guardar</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearNotaForm()">➕ Nuevo</button>
-   <div class="admin-list" id="adminNotasList"></div>
-  </div>
   <div class="admin-panel" id="serviciosAdmin">
-   <h3>Crear o editar servicio</h3>
+   <h3 data-i18n="servicios_admin_title">Crear o editar servicio</h3>
    <input type="hidden" id="servicioId">
    <div class="form-grid">
-    <div class="field"><label>Nombre</label><input id="servicioNombre" placeholder="Remesas"></div>
-    <div class="field"><label>Orden</label><input id="servicioOrden" type="number" value="1"></div>
-    <div class="field"><label>Icono (emoji)</label><input id="servicioIcono" placeholder="💰"></div>
-    <div class="field full"><label>Descripción</label><textarea id="servicioDescripcion"></textarea></div>
+    <div class="field"><label data-i18n="field_name">Nombre</label><input id="servicioNombre" placeholder="Remesas"></div>
+    <div class="field"><label data-i18n="field_order">Orden</label><input id="servicioOrden" type="number" value="1"></div>
+    <div class="field"><label data-i18n="field_icon">Icono (emoji)</label><input id="servicioIcono" placeholder="💰"></div>
+    <div class="field full"><label data-i18n="field_desc">Descripción</label><textarea id="servicioDescripcion"></textarea></div>
    </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveServicio()">💾 Guardar servicio</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearServicioForm()">➕ Nuevo</button>
-   <div style="margin-top:25px;padding-top:20px;border-top:1px solid var(--line)">
-    <h4 style="color:var(--gold);margin:0 0 10px 0"><i class="fa-solid fa-images"></i> Fotos y PDFs del servicio</h4>
-    <p class="mini">Primero guarda el servicio para poder agregar archivos.</p>
-    <div class="upload-box">
-     <h5><i class="fa-solid fa-upload"></i> Opción 1: Subir archivo local</h5>
-     <div class="form-grid">
-      <div class="field"><label>Tipo</label><select id="archivoTipo"><option value="foto">📷 Foto</option><option value="pdf">📄 PDF</option></select></div>
-      <div class="field"><label>Descripción</label><input id="archivoDescripcion" placeholder="Ej: Lista de precios"></div>
-      <div class="field full"><label>Archivo</label><input id="archivoInput" type="file" accept="image/*,application/pdf"></div>
-     </div>
-     <button class="btn btn-gold" style="margin-top:10px" type="button" onclick="subirArchivoServicio()">⬆️ Subir local</button>
-    </div>
-    <div class="upload-box" style="margin-top:12px">
-     <h5><i class="fa-solid fa-link"></i> Opción 2: URL de ImgBB</h5>
-     <div class="form-grid">
-      <div class="field"><label>Tipo</label><select id="archivoTipoURL"><option value="foto">📷 Foto</option></select></div>
-      <div class="field"><label>Descripción</label><input id="archivoDescripcionURL" placeholder="Ej: Foto principal"></div>
-      <div class="field full"><label>URL de ImgBB</label><input id="archivoURL" type="url" placeholder="https://i.ibb.co/xxxxx/foto.jpg"><p class="mini" style="margin-top:5px">💡 <a href="https://imgbb.com/" target="_blank" style="color:var(--gold)">Sube tu imagen a ImgBB</a> y pega el enlace directo aquí.</p></div>
-     </div>
-     <button class="btn btn-gold" style="margin-top:10px" type="button" onclick="agregarArchivoURL()">🔗 Agregar desde URL</button>
-    </div>
-    <div id="archivosServicioList" style="margin-top:15px"></div>
-   </div>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveServicio()" data-i18n="save_btn">💾 Guardar servicio</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearServicioForm()" data-i18n="new_btn">➕ Nuevo</button>
    <div class="admin-list" id="adminServicioList" style="margin-top:20px"></div>
   </div>
   <div class="admin-panel" id="requestsAdmin">
-   <h3>Solicitudes recibidas</h3>
-   <button class="btn btn-dark" type="button" onclick="loadRequests()">🔄 Actualizar</button>
+   <h3 data-i18n="requests_admin_title">Solicitudes recibidas</h3>
+   <button class="btn btn-dark" type="button" onclick="loadRequests()" data-i18n="refresh_btn">🔄 Actualizar</button>
    <div class="admin-list" id="adminRequestsList"></div>
-  </div>
-  <div class="admin-panel" id="opinionesAdmin">
-   <h3>Opiniones de clientes</h3>
-   <button class="btn btn-dark" type="button" onclick="loadOpiniones()">🔄 Actualizar</button>
-   <div class="admin-list" id="adminOpinionesList"></div>
   </div>
  </div>
 </div>
@@ -706,16 +576,146 @@ const SUPABASE_KEY = "sb_publishable_LaA2IPL1J_IWAH0CVMUcBQ_j-BZa2pe";
 const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const $ = id => document.getElementById(id);
 
-let tasasData=[], recargasData=[], boletosData=[], remesasData=[], destinosData=[], serviciosData=[], solicitudesData=[], opinionesData=[];
-let equipajeData=[], guiasData=[], pedidosData=[], ofertasData=[], notasData=[];
-let archivosServicioActual = [];
-let servicioEditandoId = null;
+let tasasData=[], recargasData=[], boletosData=[], remesasData=[], destinosData=[], serviciosData=[], solicitudesData=[];
 let lightboxItems = [], lightboxIndex = 0;
 let diagnosticLog = [];
 let currentLang = 'es';
 
 $("year").textContent = new Date().getFullYear();
 
+// ============ TRADUCCIONES COMPLETAS ============
+const translations = {
+ es: {
+  nav_home:"INICIO",nav_services:"SERVICIOS",nav_recharges:"RECARGAS",nav_tickets:"BOLETOS",nav_remesas:"REMESAS",nav_destinations:"DESTINOS",nav_rates:"TASAS",nav_weather:"CLIMA",
+  hero_eyebrow:"Conectamos oportunidades",hero_title:'Tu puente hacia <span>nuevas oportunidades</span>',hero_desc:"Recargas internacionales, envío de remesas, pasajes y orientación para tus viajes.",
+  hero_btn1:'Explorar servicios <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Contactar ahora",
+  hero_card_pill:"ATENCIÓN PERSONALIZADA",hero_card_title:"Estamos para ayudarte",hero_card_desc:"Consulta precios, solicita información y encuentra opciones para tus necesidades.",
+  admin_role:"Administrador",
+  services_eyebrow:"Lo que hacemos",services_title:'Nuestros <span class="gold">servicios</span>',services_desc:"Soluciones para mantenerte conectado y acercarte a tus destinos.",
+  recharges_eyebrow:"Conectividad",recharges_title:'Planes de <span class="gold">recargas</span>',recharges_desc:"Consulta las ofertas disponibles y solicita la tuya.",
+  tickets_eyebrow:"Tu próximo viaje",tickets_title:'Boletos de <span class="gold">avión y transporte</span>',tickets_desc:"Precios, destinos y fechas publicados por administración.",
+  remesas_eyebrow:"Conectamos familias",remesas_title:'Servicio de <span class="gold">remesas</span>',remesas_desc:"Solicita información sobre disponibilidad, destinos y condiciones.",
+  dest_eyebrow:"Explora el mundo",dest_title:'Destinos <span class="gold">disponibles</span>',dest_desc:"Viajes y servicios a los mejores destinos.",
+  rates_eyebrow:"Información financiera",rates_title:'Tasas de <span class="gold">cambio</span>',rates_desc:"Valores configurados por administración.",
+  calc_title:"Calculadora de monedas",calc_amount:"Cantidad",calc_from:"De",calc_to:"A",calc_btn:"Calcular",calc_result:"Introduce una cantidad para calcular.",
+  weather_eyebrow:"En tiempo real",weather_title:'Meteorología <span class="gold">Mundial</span>',weather_desc:"Consulta el clima actual en las ciudades más importantes.",
+  req_eyebrow:"Estamos para ayudarte",req_title:'Solicita <span class="gold">información</span>',req_desc:"Completa tus datos y nos pondremos en contacto contigo.",
+  req_name:"Nombre completo",req_phone:"Teléfono / WhatsApp",req_services:"Servicios de interés",
+  req_opt1:"Recargas",req_opt2:"Remesas",req_opt3:"Boleto de avión",req_opt4:"Consulta general",
+  req_dest:"Destino",req_details:"Detalles de tu solicitud",req_submit:"Enviar solicitud",
+  contact_title:"Atención personalizada",contact_desc:"Recibe orientación directa para encontrar la opción que mejor se adapte a tus necesidades.",
+  admin_label:"Administrador:",contact_btn:"Contactar directamente",
+  info_title:"Información importante",info_desc1:"Los precios y las tasas pueden cambiar según la disponibilidad y las condiciones del servicio.",
+  info_desc2:"Confirma siempre el importe final, las fechas y los requisitos antes de realizar un pago.",
+  footer_slogan:"Tu puente al mundo.",floating_btn:"ATENCIÓN DIRECTA",
+  admin_title:"Administración",admin_desc:"Acceso reservado al administrador.",admin_pass:"Contraseña",admin_enter:"Entrar",
+  panel_title:"Panel de administración",diag_title:"Diagnóstico del sistema",
+  rates_admin_title:"Tasas de cambio (valor en CUP)",
+  recharge_admin_title:"Crear o editar plan de recarga",
+  ticket_admin_title:"Crear o editar boleto",
+  remesa_admin_title:"Crear o editar remesa",
+  destinos_admin_title:"Crear o editar destino",
+  servicios_admin_title:"Crear o editar servicio",
+  requests_admin_title:"Solicitudes recibidas",
+  field_label:"Etiqueta",field_name:"Nombre",field_price:"Precio",field_currency:"Moneda",field_desc1:"Descripción 1",field_desc2:"Descripción 2",
+  field_type:"Tipo de transporte",field_origin:"Origen",field_dest:"Destino",field_departure:"Fecha de salida",field_return:"Fecha de regreso",field_desc:"Descripción",
+  field_category:"Categoría",field_order:"Orden",field_icon:"Icono (emoji)",
+  field_amount_orig:"Monto origen",field_currency_orig:"Moneda origen",field_amount_dest:"Monto destino",field_currency_dest:"Moneda destino",
+  save_btn:"💾 Guardar",new_btn:"➕ Nuevo",refresh_btn:"🔄 Actualizar",loading:"Cargando..."
+ },
+ en: {
+  nav_home:"HOME",nav_services:"SERVICES",nav_recharges:"RECHARGES",nav_tickets:"TICKETS",nav_remesas:"REMITTANCES",nav_destinations:"DESTINATIONS",nav_rates:"RATES",nav_weather:"WEATHER",
+  hero_eyebrow:"We connect opportunities",hero_title:'Your bridge to <span>new opportunities</span>',hero_desc:"International recharges, remittances, tickets and travel guidance.",
+  hero_btn1:'Explore services <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Contact now",
+  hero_card_pill:"PERSONALIZED ATTENTION",hero_card_title:"We are here to help you",hero_card_desc:"Check prices, request information and find options for your needs.",
+  admin_role:"Administrator",
+  services_eyebrow:"What we do",services_title:'Our <span class="gold">services</span>',services_desc:"Solutions to keep you connected and bring you closer to your destinations.",
+  recharges_eyebrow:"Connectivity",recharges_title:'<span class="gold">Recharge</span> plans',recharges_desc:"Check available offers and request yours.",
+  tickets_eyebrow:"Your next trip",tickets_title:'<span class="gold">Flight and transport</span> tickets',tickets_desc:"Prices, destinations and dates published by administration.",
+  remesas_eyebrow:"We connect families",remesas_title:'<span class="gold">Remittance</span> service',remesas_desc:"Request information on availability, destinations and conditions.",
+  dest_eyebrow:"Explore the world",dest_title:'Available <span class="gold">destinations</span>',dest_desc:"Travel and services to the best destinations.",
+  rates_eyebrow:"Financial information",rates_title:'Exchange <span class="gold">rates</span>',rates_desc:"Values configured by administration.",
+  calc_title:"Currency calculator",calc_amount:"Amount",calc_from:"From",calc_to:"To",calc_btn:"Calculate",calc_result:"Enter an amount to calculate.",
+  weather_eyebrow:"Real-time",weather_title:'World <span class="gold">Weather</span>',weather_desc:"Check current weather in the most important cities.",
+  req_eyebrow:"We are here to help you",req_title:'Request <span class="gold">information</span>',req_desc:"Fill in your details and we will contact you.",
+  req_name:"Full name",req_phone:"Phone / WhatsApp",req_services:"Services of interest",
+  req_opt1:"Recharges",req_opt2:"Remittances",req_opt3:"Flight ticket",req_opt4:"General inquiry",
+  req_dest:"Destination",req_details:"Details of your request",req_submit:"Send request",
+  contact_title:"Personalized attention",contact_desc:"Receive direct guidance to find the option that best suits your needs.",
+  admin_label:"Administrator:",contact_btn:"Contact directly",
+  info_title:"Important information",info_desc1:"Prices and rates may change depending on service availability and conditions.",
+  info_desc2:"Always confirm the final amount, dates and requirements before making a payment.",
+  footer_slogan:"Your bridge to the world.",floating_btn:"DIRECT ATTENTION",
+  admin_title:"Administration",admin_desc:"Access reserved for the administrator.",admin_pass:"Password",admin_enter:"Enter",
+  panel_title:"Administration panel",diag_title:"System diagnostics",
+  rates_admin_title:"Exchange rates (value in CUP)",
+  recharge_admin_title:"Create or edit recharge plan",
+  ticket_admin_title:"Create or edit ticket",
+  remesa_admin_title:"Create or edit remittance",
+  destinos_admin_title:"Create or edit destination",
+  servicios_admin_title:"Create or edit service",
+  requests_admin_title:"Received requests",
+  field_label:"Label",field_name:"Name",field_price:"Price",field_currency:"Currency",field_desc1:"Description 1",field_desc2:"Description 2",
+  field_type:"Transport type",field_origin:"Origin",field_dest:"Destination",field_departure:"Departure date",field_return:"Return date",field_desc:"Description",
+  field_category:"Category",field_order:"Order",field_icon:"Icon (emoji)",
+  field_amount_orig:"Origin amount",field_currency_orig:"Origin currency",field_amount_dest:"Destination amount",field_currency_dest:"Destination currency",
+  save_btn:"💾 Save",new_btn:"➕ New",refresh_btn:"🔄 Refresh",loading:"Loading..."
+ },
+ ru: {
+  nav_home:"ГЛАВНАЯ",nav_services:"УСЛУГИ",nav_recharges:"ПОПОЛНЕНИЕ",nav_tickets:"БИЛЕТЫ",nav_remesas:"ПЕРЕВОДЫ",nav_destinations:"НАПРАВЛЕНИЯ",nav_rates:"КУРСЫ",nav_weather:"ПОГОДА",
+  hero_eyebrow:"Мы соединяем возможности",hero_title:'Ваш мост к <span>новым возможностям</span>',hero_desc:"Международное пополнение, денежные переводы, билеты и рекомендации для путешествий.",
+  hero_btn1:'Изучить услуги <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Связаться сейчас",
+  hero_card_pill:"ИНДИВИДУАЛЬНЫЙ ПОДХОД",hero_card_title:"Мы здесь, чтобы помочь вам",hero_card_desc:"Узнайте цены, запросите информацию и найдите варианты для ваших нужд.",
+  admin_role:"Администратор",
+  services_eyebrow:"Что мы делаем",services_title:'Наши <span class="gold">услуги</span>',services_desc:"Решения, чтобы оставаться на связи и приблизиться к вашим направлениям.",
+  recharges_eyebrow:"Связь",recharges_title:'Планы <span class="gold">пополнения</span>',recharges_desc:"Проверьте доступные предложения и запросите свое.",
+  tickets_eyebrow:"Ваше следующее путешествие",tickets_title:'Билеты на <span class="gold">самолет и транспорт</span>',tickets_desc:"Цены, направления и даты, опубликованные администрацией.",
+  remesas_eyebrow:"Мы соединяем семьи",remesas_title:'Услуга <span class="gold">денежных переводов</span>',remesas_desc:"Запросите информацию о доступности, направлениях и условиях.",
+  dest_eyebrow:"Исследуйте мир",dest_title:'Доступные <span class="gold">направления</span>',dest_desc:"Путешествия и услуги в лучшие направления.",
+  rates_eyebrow:"Финансовая информация",rates_title:'Обменные <span class="gold">курсы</span>',rates_desc:"Значения, настроенные администрацией.",
+  calc_title:"Калькулятор валют",calc_amount:"Сумма",calc_from:"Из",calc_to:"В",calc_btn:"Рассчитать",calc_result:"Введите сумму для расчета.",
+  weather_eyebrow:"В реальном времени",weather_title:'Мировая <span class="gold">Погода</span>',weather_desc:"Узнайте текущую погоду в самых важных городах.",
+  req_eyebrow:"Мы здесь, чтобы помочь вам",req_title:'Запросить <span class="gold">информацию</span>',req_desc:"Заполните свои данные, и мы свяжемся с вами.",
+  req_name:"Полное имя",req_phone:"Телефон / WhatsApp",req_services:"Интересующие услуги",
+  req_opt1:"Пополнение",req_opt2:"Переводы",req_opt3:"Авиабилет",req_opt4:"Общий запрос",
+  req_dest:"Назначение",req_details:"Детали вашего запроса",req_submit:"Отправить запрос",
+  contact_title:"Индивидуальный подход",contact_desc:"Получите прямые рекомендации, чтобы найти вариант, который лучше всего соответствует вашим потребностям.",
+  admin_label:"Администратор:",contact_btn:"Связаться напрямую",
+  info_title:"Важная информация",info_desc1:"Цены и курсы могут меняться в зависимости от доступности и условий обслуживания.",
+  info_desc2:"Всегда подтверждайте окончательную сумму, даты и требования перед оплатой.",
+  footer_slogan:"Ваш мост к новым возможностям.",floating_btn:"ПРЯМОЕ ВНИМАНИЕ",
+  admin_title:"Администрирование",admin_desc:"Доступ зарезервирован для администратора.",admin_pass:"Пароль",admin_enter:"Войти",
+  panel_title:"Панель администрирования",diag_title:"Диагностика системы",
+  rates_admin_title:"Обменные курсы (значение в CUP)",
+  recharge_admin_title:"Создать или изменить план пополнения",
+  ticket_admin_title:"Создать или изменить билет",
+  remesa_admin_title:"Создать или изменить перевод",
+  destinos_admin_title:"Создать или изменить направление",
+  servicios_admin_title:"Создать или изменить услугу",
+  requests_admin_title:"Полученные запросы",
+  field_label:"Метка",field_name:"Название",field_price:"Цена",field_currency:"Валюта",field_desc1:"Описание 1",field_desc2:"Описание 2",
+  field_type:"Тип транспорта",field_origin:"Отправление",field_dest:"Назначение",field_departure:"Дата отправления",field_return:"Дата возвращения",field_desc:"Описание",
+  field_category:"Категория",field_order:"Порядок",field_icon:"Иконка (эмодзи)",
+  field_amount_orig:"Сумма отправления",field_currency_orig:"Валюта отправления",field_amount_dest:"Сумма назначения",field_currency_dest:"Валюта назначения",
+  save_btn:"💾 Сохранить",new_btn:"➕ Новый",refresh_btn:"🔄 Обновить",loading:"Загрузка..."
+ }
+};
+
+// ============ FUNCIÓN DE IDIOMA COMPLETA ============
+function changeLanguage(lang){
+ currentLang = lang;
+ document.documentElement.lang = lang;
+ document.querySelectorAll('[data-i18n]').forEach(el => {
+  const key = el.getAttribute('data-i18n');
+  if (translations[lang] && translations[lang][key]) {
+   const value = translations[lang][key];
+   if (value.includes('<')) el.innerHTML = value; else el.textContent = value;
+  }
+ });
+ loadWeather();
+}
+
+// ============ RELOJES ============
 function updateClocks(){
  const now = new Date();
  $("clockCuba").textContent = now.toLocaleTimeString('es-ES',{timeZone:'America/Havana',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
@@ -731,27 +731,7 @@ function updateClocks(){
 }
 setInterval(updateClocks,1000); updateClocks();
 
-function updateFlashCountdown(){
- const oferta = ofertasData.find(o => o.activo && new Date(o.fecha_fin) > new Date());
- if(!oferta){ $("flashBanner").classList.remove('active'); return; }
- $("flashBanner").classList.add('active');
- $("flashTitle").textContent = oferta.titulo;
- $("flashDesc").textContent = oferta.descripcion || '';
- const now = new Date();
- const end = new Date(oferta.fecha_fin);
- const diff = end - now;
- if(diff <= 0){ $("flashBanner").classList.remove('active'); return; }
- const days = Math.floor(diff / (1000 * 60 * 60 * 24));
- const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
- const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
- const seconds = Math.floor((diff % (1000 * 60)) / 1000);
- $("flashDays").textContent = String(days).padStart(2, '0');
- $("flashHours").textContent = String(hours).padStart(2, '0');
- $("flashMinutes").textContent = String(minutes).padStart(2, '0');
- $("flashSeconds").textContent = String(seconds).padStart(2, '0');
-}
-setInterval(updateFlashCountdown, 1000);
-
+// ============ CLIMA ============
 async function loadWeather(){
  const cities = [
   { name: 'La Habana', nameEn: 'Havana', nameRu: 'Гавана', lat: 23.1136, lon: -82.3666, flag: '🇨🇺' },
@@ -782,23 +762,7 @@ async function loadWeather(){
  }
 }
 
-function changeLanguage(lang){
- currentLang = lang;
- document.documentElement.lang = lang;
- loadWeather();
-}
-
-function diag(type, msg){ diagnosticLog.push({type, msg}); renderDiagnostic(); }
-function renderDiagnostic(){
- const el = $("diagnosticContent"); if (!el) return;
- el.innerHTML = diagnosticLog.map(d => {
-  const cls = d.type === "ok" ? "diag-ok" : d.type === "err" ? "diag-err" : "diag-info";
-  const icon = d.type === "ok" ? "fa-circle-check" : d.type === "err" ? "fa-circle-xmark" : "fa-circle-info";
-  return `<div class="diag-line ${cls}"><i class="fa-solid ${icon}"></i> ${d.msg}</div>`;
- }).join("");
-}
-function clearDiag(){ diagnosticLog = []; renderDiagnostic(); }
-
+// ============ UTILIDADES ============
 function toggleMenu(){ $("navlinks").classList.toggle("open"); }
 document.querySelectorAll(".navlinks a").forEach(a=> a.addEventListener("click",()=> $("navlinks").classList.remove("open")));
 
@@ -810,8 +774,7 @@ async function login(){
  const { data, error } = await db.auth.signInWithPassword({ email, password });
  if(error){ $("loginError").textContent="Credenciales incorrectas."; return; }
  closeModal("loginModal"); $("adminModal").classList.add("show");
- clearDiag(); diag("info", "🔐 Sesión de administrador iniciada");
- runDiagnostics(); loadAdminData();
+ loadAdminData();
  $("adminEmail").value=""; $("adminPassword").value="";
 }
 $("adminPassword").addEventListener("keydown",e=>{ if(e.key==="Enter")login(); });
@@ -824,27 +787,18 @@ function showAdminTab(id,btn){
  const panel=$(id); if(panel){ panel.classList.add("active"); btn.classList.add("active"); }
 }
 
-async function runDiagnostics(){
- diag("info", "🔍 Verificando conexión con Supabase...");
- const tablas = ['tasas','recargas','boletos','remesas','destinos','servicios','servicios_archivos','solicitudes','opiniones','configuracion','equipaje_aerolineas','guias_aduana','rastreador_pedidos','ofertas_flash','notas_importantes'];
- for (const t of tablas) {
-  try { const { error } = await db.from(t).select('*').limit(1); if (error) diag("err", "❌ Tabla '" + t + "': " + error.message); else diag("ok", "✅ Tabla '" + t + "' accesible"); }
-  catch(e) { diag("err", "❌ Error tabla " + t + ": " + e.message); }
- }
- diag("info", "🏁 Diagnóstico completado");
-}
-
 function safe(v){ return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 function money(v,c){ return `${Number(v||0).toLocaleString("es-ES",{maximumFractionDigits:2})} ${safe(c||"")}`; }
 
+// ============ CARGA INICIAL ============
 async function loadAll(){ 
  await Promise.all([ 
   loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), 
-  loadWeather(), loadEquipaje(), loadGuias(), loadPedidos(), loadOfertas(), loadNotas() 
+  loadWeather()
  ]);
- updateFlashCountdown();
 }
 
+// ============ TASAS ============
 async function loadTasas(){
  const {data,error}=await db.from('tasas').select("*").eq("activo",true).order("codigo");
  if(error) return; tasasData = data || []; renderTasas();
@@ -876,6 +830,7 @@ async function updateTasa(id, valor){
  alert("✅ Tasa actualizada"); await loadTasas();
 }
 
+// ============ RECARGAS ============
 async function loadRecargas(){
  const {data,error}=await db.from('recargas').select("*").eq("activo",true).order("id");
  if(error){ $("rechargesList").innerHTML='<div class="empty">No se pudieron cargar las recargas.</div>'; return; }
@@ -912,6 +867,7 @@ function renderAdminRecharges(){
  $("adminRechargeList").innerHTML=recargasData.map(x=>`<div class="admin-item"><div><strong>${safe(x.nombre)}</strong><br><small>${money(x.precio,x.moneda||"RUB")}</small></div><div><button class="btn btn-dark" type="button" onclick="editRecharge('${safe(x.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteRecharge('${safe(x.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay planes cargados.</p>';
 }
 
+// ============ BOLETOS ============
 async function loadBoletos(){
  const {data,error}=await db.from('boletos').select("*").eq("activo",true).order("fecha_salida",{ascending:true});
  if(error){ $("ticketsList").innerHTML='<div class="empty">No hay boletos publicados.</div>'; return; }
@@ -951,6 +907,7 @@ function renderAdminTickets(){
  $("adminTicketList").innerHTML=boletosData.map(t=>`<div class="admin-item"><div><strong>${safe(t.origen)} → ${safe(t.destino)}</strong><br><small>${money(t.precio,t.moneda)} · ${safe(t.fecha_salida||"")}</small></div><div><button class="btn btn-dark" type="button" onclick="editTicket('${safe(t.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteTicket('${safe(t.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay boletos cargados.</p>';
 }
 
+// ============ REMESAS ============
 async function loadRemesas(){
  const {data,error}=await db.from('remesas').select("*").eq("activo",true).order("id");
  if(error){ $("remesasList").innerHTML='<div class="empty">No hay remesas publicadas.</div>'; return; }
@@ -989,6 +946,7 @@ function renderAdminRemesas(){
  $("adminRemesaList").innerHTML=remesasData.map(r=>`<div class="admin-item"><div><strong>${safe(r.origen)} → ${safe(r.destino)}</strong><br><small>${money(r.monto_origen,r.moneda_origen)} → ${money(r.monto_destino,r.moneda_destino)}</small></div><div><button class="btn btn-dark" type="button" onclick="editRemesa('${safe(r.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteRemesa('${safe(r.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay remesas cargadas.</p>';
 }
 
+// ============ DESTINOS ============
 async function loadDestinos(){
  const {data,error}=await db.from('destinos').select("*").eq("activo",true).order("nombre");
  if(error){ $("destinosList").innerHTML='<div class="empty">No hay destinos publicados.</div>'; return; }
@@ -1018,405 +976,39 @@ function renderAdminDestinos(){
  $("adminDestinoList").innerHTML=destinosData.map(d=>`<div class="admin-item"><div><strong>${safe(d.nombre)}</strong><br><small>${safe(d.categoria||"")}</small></div><div><button class="btn btn-dark" type="button" onclick="editDestino('${safe(d.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteDestino('${safe(d.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay destinos cargados.</p>';
 }
 
+// ============ SERVICIOS ============
 async function loadServicios(){
  const {data,error}=await db.from('servicios').select("*").eq("activo",true).order("orden");
  if(error){ $("serviciosList").innerHTML='<div class="empty">No hay servicios publicados.</div>'; return; }
  serviciosData=data||[];
- if(serviciosData.length > 0){
-  const ids = serviciosData.map(s => s.id);
-  const {data: archivos} = await db.from('servicios_archivos').select("*").in('servicio_id', ids).eq('activo', true).order('orden');
-  serviciosData.forEach(s => { s.archivos = (archivos || []).filter(a => String(a.servicio_id) === String(s.id)); });
- } else {
-  serviciosData.forEach(s => { s.archivos = []; });
- }
  renderServicios();
  if($("adminModal").classList.contains("show")) renderAdminServicios();
 }
 function renderServicios(){
  const el=$("serviciosList");
  if(!serviciosData.length){ el.innerHTML='<div class="empty">No hay servicios publicados en este momento.</div>'; return; }
- el.innerHTML=serviciosData.map(s=>{
-  const fotos = (s.archivos || []).filter(a => a.tipo_archivo === 'foto');
-  const pdfs = (s.archivos || []).filter(a => a.tipo_archivo === 'pdf');
-  let galeriaHtml = '';
-  if(fotos.length > 0 || pdfs.length > 0){
-   galeriaHtml = '<div class="servicio-galeria">';
-   fotos.forEach((f, idx) => {
-    galeriaHtml += `<div class="galeria-item" onclick="openLightbox('${safe(s.id)}','foto',${idx})"><img src="${safe(f.url_archivo)}" alt="${safe(f.nombre_original||'')}"><span class="tipo-badge">FOTO</span></div>`;
-   });
-   pdfs.forEach((p, idx) => {
-    galeriaHtml += `<div class="galeria-item pdf-item" onclick="openLightbox('${safe(s.id)}','pdf',${idx})"><i class="fa-solid fa-file-pdf"></i><small>${safe(p.nombre_original || 'PDF')}</small><span class="tipo-badge">PDF</span></div>`;
-   });
-   galeriaHtml += '</div>';
-  }
-  return `<article class="card"><div class="service-icon">${safe(s.icono||"⭐")}</div><h3>${safe(s.nombre)}</h3><p>${safe(s.descripcion||"")}</p>${galeriaHtml}</article>`;
- }).join("");
+ el.innerHTML=serviciosData.map(s=>`<article class="card"><div class="service-icon">${safe(s.icono||"⭐")}</div><h3>${safe(s.nombre)}</h3><p>${safe(s.descripcion||"")}</p></article>`).join("");
 }
-
-function openLightbox(servicioId, tipo, index){
- const servicio = serviciosData.find(s => String(s.id) === String(servicioId));
- if(!servicio) return;
- const archivos = (servicio.archivos || []).filter(a => a.tipo_archivo === tipo);
- if(archivos.length === 0) return;
- lightboxItems = archivos;
- lightboxIndex = index;
- renderLightbox();
- $("lightbox").classList.add("show");
-}
-function renderLightbox(){
- const item = lightboxItems[lightboxIndex];
- const body = $("lightboxBody");
- if(item.tipo_archivo === 'foto'){
-  body.innerHTML = `<img src="${safe(item.url_archivo)}" alt="${safe(item.nombre_original||'')}">`;
- } else {
-  body.innerHTML = `<iframe src="${safe(item.url_archivo)}#toolbar=1&navpanes=0" type="application/pdf"></iframe>`;
- }
-}
-function navLightbox(dir){
- lightboxIndex = (lightboxIndex + dir + lightboxItems.length) % lightboxItems.length;
- renderLightbox();
-}
-function closeLightbox(){ $("lightbox").classList.remove("show"); $("lightboxBody").innerHTML = ""; }
-
-async function subirArchivoServicio(){
- if(!servicioEditandoId){ alert("Primero guarda el servicio antes de subir archivos."); return; }
- const fileInput = $("archivoInput");
- if(fileInput.files.length === 0){ alert("Selecciona un archivo."); return; }
- const file = fileInput.files[0];
- const tipo = $("archivoTipo").value;
- const descripcion = $("archivoDescripcion").value.trim();
- if(tipo === 'foto' && !file.type.startsWith('image/')){ alert("El archivo debe ser una imagen."); return; }
- if(tipo === 'pdf' && file.type !== 'application/pdf'){ alert("El archivo debe ser un PDF."); return; }
- const fileName = `servicios/${servicioEditandoId}/${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
- const { error: uploadError } = await db.storage.from('imagenes').upload(fileName, file, {upsert: true});
- if(uploadError){ alert("Error al subir: " + uploadError.message); return; }
- const { data: { publicUrl } } = db.storage.from('imagenes').getPublicUrl(fileName);
- const payload = { servicio_id: servicioEditandoId, tipo_archivo: tipo, url_archivo: publicUrl, nombre_original: file.name, descripcion: descripcion, orden: archivosServicioActual.length, activo: true };
- const {error} = await db.from('servicios_archivos').insert(payload);
- if(error){ alert("Error al guardar: " + error.message); return; }
- $("archivoInput").value = ""; $("archivoDescripcion").value = "";
- await cargarArchivosServicio(servicioEditandoId);
-}
-
-async function agregarArchivoURL(){
- if(!servicioEditandoId){ alert("Primero guarda el servicio antes de agregar archivos."); return; }
- const url = $("archivoURL").value.trim();
- const tipo = $("archivoTipoURL").value;
- const descripcion = $("archivoDescripcionURL").value.trim();
- if(!url){ alert("Pega la URL de ImgBB."); return; }
- if(!url.startsWith('http')){ alert("La URL debe comenzar con http:// o https://"); return; }
- const payload = { servicio_id: servicioEditandoId, tipo_archivo: tipo, url_archivo: url, nombre_original: url.split('/').pop() || 'imagen.jpg', descripcion: descripcion, orden: archivosServicioActual.length, activo: true };
- const {error} = await db.from('servicios_archivos').insert(payload);
- if(error){ alert("Error al guardar: " + error.message); return; }
- $("archivoURL").value = ""; $("archivoDescripcionURL").value = "";
- await cargarArchivosServicio(servicioEditandoId);
-}
-
-async function cargarArchivosServicio(servicioId){
- const {data} = await db.from('servicios_archivos').select("*").eq('servicio_id', servicioId).eq('activo', true).order('orden');
- archivosServicioActual = data || [];
- renderArchivosAdmin();
-}
-
-function renderArchivosAdmin(){
- $("archivosServicioList").innerHTML = archivosServicioActual.length === 0 
-  ? '<p class="mini">No hay archivos subidos para este servicio.</p>'
-  : archivosServicioActual.map(a => `
-   <div class="archivo-item-admin">
-    ${a.tipo_archivo === 'foto' ? `<img src="${safe(a.url_archivo)}">` : `<i class="fa-solid fa-file-pdf"></i>`}
-    <div class="archivo-info">
-     <strong>${a.tipo_archivo === 'foto' ? '📷' : '📄'} ${safe(a.nombre_original || 'Sin nombre')}</strong>
-     <small>${safe(a.descripcion || '')}</small>
-    </div>
-    <button class="btn btn-dark" type="button" onclick="window.open('${safe(a.url_archivo)}','_blank')">👁️</button>
-    <button class="btn btn-red" type="button" onclick="eliminarArchivo('${safe(a.id)}')">🗑️</button>
-   </div>`).join("");
-}
-
-async function eliminarArchivo(archivoId){
- if(!confirm("¿Eliminar este archivo?")) return;
- const archivo = archivosServicioActual.find(a => a.id === archivoId);
- if(archivo && archivo.url_archivo.includes('imagenes/')){
-  const ruta = archivo.url_archivo.split('/imagenes/')[1];
-  if(ruta) await db.storage.from('imagenes').remove([ruta]);
- }
- await db.from('servicios_archivos').delete().eq('id', archivoId);
- await cargarArchivosServicio(servicioEditandoId);
-}
-
-function clearServicioForm(){ 
- ["servicioId","servicioNombre","servicioDescripcion","servicioIcono"].forEach(id=>{ $(id).value=""; }); 
- $("servicioOrden").value="1"; 
- servicioEditandoId = null;
- archivosServicioActual = [];
- $("archivosServicioList").innerHTML = '';
-}
+function clearServicioForm(){ ["servicioId","servicioNombre","servicioDescripcion","servicioIcono"].forEach(id=>{ $(id).value=""; }); $("servicioOrden").value="1"; }
 function editServicio(id){
  const s=serviciosData.find(v=>String(v.id)===String(id)); if(!s)return;
  $("servicioId").value=s.id; $("servicioNombre").value=s.nombre||""; $("servicioDescripcion").value=s.descripcion||""; 
  $("servicioIcono").value=s.icono||""; $("servicioOrden").value=s.orden||1;
- servicioEditandoId = s.id;
- cargarArchivosServicio(s.id);
 }
 async function saveServicio(){
  const id=$("servicioId").value;
  const payload={ nombre:$("servicioNombre").value.trim(), descripcion:$("servicioDescripcion").value.trim(), icono:$("servicioIcono").value.trim(), orden:Number($("servicioOrden").value)||1, activo:true };
  if(!payload.nombre){ alert("El nombre es obligatorio."); return; }
- const query=id ? db.from('servicios').update(payload).eq("id",id) : db.from('servicios').insert(payload).select();
- const {data, error}=await query;
- if(error){ alert("Error: "+error.message); return; }
- if(!id && data && data[0]){
-  servicioEditandoId = data[0].id;
-  $("servicioId").value = data[0].id;
- }
- await loadServicios();
- renderAdminServicios();
- if(servicioEditandoId) cargarArchivosServicio(servicioEditandoId);
+ const query=id ? db.from('servicios').update(payload).eq("id",id) : db.from('servicios').insert(payload);
+ const {error}=await query; if(error){ alert("Error: "+error.message); return; }
+ clearServicioForm(); await loadServicios(); renderAdminServicios();
 }
-async function deleteServicio(id){ 
- if(!confirm("¿Eliminar este servicio? (también se eliminarán sus archivos)"))return; 
- const {data: archivos} = await db.from('servicios_archivos').select('url_archivo').eq('servicio_id', id);
- if(archivos){
-  for(const a of archivos){
-   if(a.url_archivo.includes('imagenes/')){
-    const ruta = a.url_archivo.split('/imagenes/')[1];
-    if(ruta) await db.storage.from('imagenes').remove([ruta]);
-   }
-  }
-  await db.from('servicios_archivos').delete().eq('servicio_id', id);
- }
- await db.from('servicios').delete().eq("id",id); 
- await loadServicios(); renderAdminServicios();
- servicioEditandoId = null; archivosServicioActual = [];
- $("archivosServicioList").innerHTML = '';
-}
+async function deleteServicio(id){ if(!confirm("¿Eliminar este servicio?"))return; await db.from('servicios').delete().eq("id",id); await loadServicios(); renderAdminServicios(); }
 function renderAdminServicios(){
- $("adminServicioList").innerHTML=serviciosData.map(s=>{
-  const numArchivos = (s.archivos || []).length;
-  return `<div class="admin-item"><div><strong>${safe(s.icono||"")} ${safe(s.nombre)}</strong><br><small>${safe(s.descripcion||"").substring(0,60)}... · ${numArchivos} archivo(s)</small></div><div><button class="btn btn-dark" type="button" onclick="editServicio('${safe(s.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteServicio('${safe(s.id)}')">🗑️ Eliminar</button></div></div>`;
- }).join("")||'<p class="mini">No hay servicios cargados.</p>';
+ $("adminServicioList").innerHTML=serviciosData.map(s=>`<div class="admin-item"><div><strong>${safe(s.icono||"")} ${safe(s.nombre)}</strong><br><small>${safe(s.descripcion||"").substring(0,60)}...</small></div><div><button class="btn btn-dark" type="button" onclick="editServicio('${safe(s.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteServicio('${safe(s.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay servicios cargados.</p>';
 }
 
-async function loadEquipaje(){
- const {data,error}=await db.from('equipaje_aerolineas').select("*").eq("activo",true).order("aerolinea");
- if(error) return;
- equipajeData = data || [];
- renderEquipajeSelector();
- if($("adminModal").classList.contains("show")) renderAdminEquipaje();
-}
-function renderEquipajeSelector(){
- const aerolineas = [...new Set(equipajeData.map(e => e.aerolinea))];
- $("equipajeAerolinea").innerHTML = '<option value="">Selecciona una aerolínea</option>' + 
-  aerolineas.map(a => `<option value="${safe(a)}">${safe(a)}</option>`).join("");
-}
-function calcularEquipaje(){
- const aerolinea = $("equipajeAerolinea").value;
- const ruta = $("equipajeRuta").value;
- if(!aerolinea){
-  $("equipajeRuta").innerHTML = '<option value="">Primero selecciona aerolínea</option>';
-  $("equipajeResult").innerHTML = '';
-  return;
- }
- const rutas = [...new Set(equipajeData.filter(e => e.aerolinea === aerolinea).map(e => e.ruta))];
- $("equipajeRuta").innerHTML = '<option value="">Selecciona una ruta</option>' + 
-  rutas.map(r => `<option value="${safe(r)}">${safe(r)}</option>`).join("");
- if(!ruta){ $("equipajeResult").innerHTML = ''; return; }
- const regla = equipajeData.find(e => e.aerolinea === aerolinea && e.ruta === ruta);
- if(!regla){ $("equipajeResult").innerHTML = '<div class="empty">No hay información para esta ruta.</div>'; return; }
- $("equipajeResult").innerHTML = `
-  <div class="equipaje-result">
-   <h4><i class="fa-solid fa-plane"></i> ${safe(regla.aerolinea)} - ${safe(regla.ruta)}</h4>
-   <div class="equipaje-details">
-    <div class="equipaje-item"><strong>👜 Maleta de Cabina</strong>Peso: ${safe(regla.maleta_cabina_peso || 'No especificado')}<br>Dimensiones: ${safe(regla.maleta_cabina_dimensiones || 'No especificado')}</div>
-    <div class="equipaje-item"><strong>🧳 Maleta de Bodega</strong>Peso: ${safe(regla.maleta_bodega_peso || 'No especificado')}<br>Cantidad: ${regla.maleta_bodega_cantidad || 1} maleta(s)</div>
-    <div class="equipaje-item"><strong>💰 Exceso de Equipaje</strong>${safe(regla.exceso_precio || 'Consultar')}</div>
-   </div>
-   ${regla.notas ? `<p style="margin-top:15px;color:var(--muted);font-size:12px"><strong>📝 Notas:</strong> ${safe(regla.notas)}</p>` : ''}
-  </div>`;
-}
-function clearEquipajeForm(){ ["equipajeId","equipajeAerolineaInput","equipajeRutaInput","equipajeCabinaPeso","equipajeCabinaDim","equipajeBodegaPeso","equipajeExceso","equipajeNotas"].forEach(id=>{ $(id).value=""; }); $("equipajeBodegaCantidad").value="1"; }
-function editEquipaje(id){
- const e=equipajeData.find(v=>String(v.id)===String(id)); if(!e)return;
- $("equipajeId").value=e.id; $("equipajeAerolineaInput").value=e.aerolinea||""; $("equipajeRutaInput").value=e.ruta||"";
- $("equipajeCabinaPeso").value=e.maleta_cabina_peso||""; $("equipajeCabinaDim").value=e.maleta_cabina_dimensiones||"";
- $("equipajeBodegaPeso").value=e.maleta_bodega_peso||""; $("equipajeBodegaCantidad").value=e.maleta_bodega_cantidad||1;
- $("equipajeExceso").value=e.exceso_precio||""; $("equipajeNotas").value=e.notas||"";
-}
-async function saveEquipaje(){
- const id=$("equipajeId").value;
- const payload={ aerolinea:$("equipajeAerolineaInput").value.trim(), ruta:$("equipajeRutaInput").value.trim(), maleta_cabina_peso:$("equipajeCabinaPeso").value.trim(), maleta_cabina_dimensiones:$("equipajeCabinaDim").value.trim(), maleta_bodega_peso:$("equipajeBodegaPeso").value.trim(), maleta_bodega_cantidad:Number($("equipajeBodegaCantidad").value)||1, exceso_precio:$("equipajeExceso").value.trim(), notas:$("equipajeNotas").value.trim(), activo:true };
- if(!payload.aerolinea||!payload.ruta){ alert("Completa aerolínea y ruta."); return; }
- const query=id ? db.from('equipaje_aerolineas').update(payload).eq("id",id) : db.from('equipaje_aerolineas').insert(payload);
- const {error}=await query; if(error){ alert("Error: "+error.message); return; }
- clearEquipajeForm(); await loadEquipaje(); renderAdminEquipaje();
-}
-async function deleteEquipaje(id){ if(!confirm("¿Eliminar esta regla?"))return; await db.from('equipaje_aerolineas').delete().eq("id",id); await loadEquipaje(); renderAdminEquipaje(); }
-function renderAdminEquipaje(){
- $("adminEquipajeList").innerHTML=equipajeData.map(e=>`<div class="admin-item"><div><strong>${safe(e.aerolinea)}</strong><br><small>${safe(e.ruta)}</small></div><div><button class="btn btn-dark" type="button" onclick="editEquipaje('${safe(e.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteEquipaje('${safe(e.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay reglas de equipaje.</p>';
-}
-
-async function loadGuias(){
- const {data,error}=await db.from('guias_aduana').select("*").eq("activo",true).order("orden");
- if(error) return;
- guiasData = data || [];
- renderGuias();
- if($("adminModal").classList.contains("show")) renderAdminGuias();
-}
-function renderGuias(){
- if(!guiasData.length){ $("guiasList").innerHTML='<div class="empty">No hay guías disponibles.</div>'; return; }
- $("guiasList").innerHTML = guiasData.map(g => `
-  <div class="guia-card" onclick="this.classList.toggle('active')">
-   <h3><i class="fa-solid ${safe(g.icono||'fa-book')}"></i> ${safe(g.titulo)}</h3>
-   <div class="guia-content">${safe(g.contenido).replace(/\n/g, '<br>')}</div>
-  </div>`).join("");
-}
-function clearGuiaForm(){ ["guiaId","guiaTitulo","guiaContenido"].forEach(id=>{ $(id).value=""; }); $("guiaCategoria").value="aduanas"; $("guiaIcono").value="fa-book"; }
-function editGuia(id){
- const g=guiasData.find(v=>String(v.id)===String(id)); if(!g)return;
- $("guiaId").value=g.id; $("guiaTitulo").value=g.titulo||""; $("guiaCategoria").value=g.categoria||"aduanas";
- $("guiaIcono").value=g.icono||"fa-book"; $("guiaContenido").value=g.contenido||"";
-}
-async function saveGuia(){
- const id=$("guiaId").value;
- const payload={ titulo:$("guiaTitulo").value.trim(), categoria:$("guiaCategoria").value, icono:$("guiaIcono").value.trim(), contenido:$("guiaContenido").value.trim(), activo:true };
- if(!payload.titulo||!payload.contenido){ alert("Completa título y contenido."); return; }
- const query=id ? db.from('guias_aduana').update(payload).eq("id",id) : db.from('guias_aduana').insert(payload);
- const {error}=await query; if(error){ alert("Error: "+error.message); return; }
- clearGuiaForm(); await loadGuias(); renderAdminGuias();
-}
-async function deleteGuia(id){ if(!confirm("¿Eliminar esta guía?"))return; await db.from('guias_aduana').delete().eq("id",id); await loadGuias(); renderAdminGuias(); }
-function renderAdminGuias(){
- $("adminGuiasList").innerHTML=guiasData.map(g=>`<div class="admin-item"><div><strong>${safe(g.titulo)}</strong><br><small>${safe(g.categoria)}</small></div><div><button class="btn btn-dark" type="button" onclick="editGuia('${safe(g.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteGuia('${safe(g.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay guías.</p>';
-}
-
-async function loadPedidos(){
- const {data,error}=await db.from('rastreador_pedidos').select("*").order("created_at",{ascending:false});
- if(error) return;
- pedidosData = data || [];
- if($("adminModal").classList.contains("show")) renderAdminPedidos();
-}
-function buscarPedido(){
- const codigo = $("rastreadorCodigo").value.trim();
- if(!codigo){ alert("Ingresa un código de seguimiento."); return; }
- const pedido = pedidosData.find(p => p.codigo_seguimiento.toLowerCase() === codigo.toLowerCase());
- if(!pedido){
-  $("rastreadorResult").innerHTML = '<div class="rastreador-result"><p style="color:var(--red)">❌ No se encontró ningún pedido con ese código.</p></div>';
-  return;
- }
- const estadoClass = `estado-${pedido.estado}`;
- const estadoText = {pendiente:'Pendiente',proceso:'En Proceso',completado:'Completado'}[pedido.estado] || pedido.estado;
- $("rastreadorResult").innerHTML = `
-  <div class="rastreador-result">
-   <h4 style="color:var(--gold);margin-top:0">📦 Pedido: ${safe(pedido.codigo_seguimiento)}</h4>
-   <p><strong>Cliente:</strong> ${safe(pedido.nombre_cliente)}</p>
-   <p><strong>Servicio:</strong> ${safe(pedido.tipo_servicio)}</p>
-   <p><strong>Descripción:</strong> ${safe(pedido.descripcion || 'Sin descripción')}</p>
-   <span class="estado-badge ${estadoClass}">${estadoText}</span>
-   <p style="margin-top:15px;font-size:11px;color:var(--muted)">Última actualización: ${new Date(pedido.fecha_actualizacion).toLocaleString('es-ES')}</p>
-  </div>`;
-}
-function clearPedidoForm(){ ["pedidoId","pedidoCodigo","pedidoCliente","pedidoTipo","pedidoDescripcion"].forEach(id=>{ $(id).value=""; }); $("pedidoEstado").value="pendiente"; }
-function editPedido(id){
- const p=pedidosData.find(v=>String(v.id)===String(id)); if(!p)return;
- $("pedidoId").value=p.id; $("pedidoCodigo").value=p.codigo_seguimiento||""; $("pedidoCliente").value=p.nombre_cliente||"";
- $("pedidoTipo").value=p.tipo_servicio||""; $("pedidoEstado").value=p.estado||"pendiente"; $("pedidoDescripcion").value=p.descripcion||"";
-}
-async function savePedido(){
- const id=$("pedidoId").value;
- const payload={ codigo_seguimiento:$("pedidoCodigo").value.trim(), nombre_cliente:$("pedidoCliente").value.trim(), tipo_servicio:$("pedidoTipo").value.trim(), estado:$("pedidoEstado").value, descripcion:$("pedidoDescripcion").value.trim(), fecha_actualizacion:new Date().toISOString() };
- if(!payload.codigo_seguimiento||!payload.nombre_cliente){ alert("Completa código y nombre del cliente."); return; }
- const query=id ? db.from('rastreador_pedidos').update(payload).eq("id",id) : db.from('rastreador_pedidos').insert(payload);
- const {error}=await query; if(error){ alert("Error: "+error.message); return; }
- clearPedidoForm(); await loadPedidos(); renderAdminPedidos();
-}
-async function deletePedido(id){ if(!confirm("¿Eliminar este pedido?"))return; await db.from('rastreador_pedidos').delete().eq("id",id); await loadPedidos(); renderAdminPedidos(); }
-function renderAdminPedidos(){
- $("adminPedidosList").innerHTML=pedidosData.map(p=>`<div class="admin-item"><div><strong>${safe(p.codigo_seguimiento)}</strong><br><small>${safe(p.nombre_cliente)} · ${safe(p.estado)}</small></div><div><button class="btn btn-dark" type="button" onclick="editPedido('${safe(p.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deletePedido('${safe(p.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay pedidos.</p>';
-}
-
-async function loadOfertas(){
- const {data,error}=await db.from('ofertas_flash').select("*").eq("activo",true).order("fecha_fin");
- if(error) return;
- ofertasData = data || [];
- if($("adminModal").classList.contains("show")) renderAdminOfertas();
- updateFlashCountdown();
-}
-function clearOfertaForm(){ ["ofertaId","ofertaTitulo","ofertaDescripcion","ofertaDescuento","ofertaFechaFin"].forEach(id=>{ $(id).value=""; }); }
-function editOferta(id){
- const o=ofertasData.find(v=>String(v.id)===String(id)); if(!o)return;
- $("ofertaId").value=o.id; $("ofertaTitulo").value=o.titulo||""; $("ofertaDescripcion").value=o.descripcion||"";
- $("ofertaDescuento").value=o.descuento||""; $("ofertaFechaFin").value=o.fecha_fin?o.fecha_fin.slice(0,16):"";
-}
-async function saveOferta(){
- const id=$("ofertaId").value;
- const payload={ titulo:$("ofertaTitulo").value.trim(), descripcion:$("ofertaDescripcion").value.trim(), descuento:$("ofertaDescuento").value.trim(), fecha_fin:$("ofertaFechaFin").value, activo:true };
- if(!payload.titulo||!payload.fecha_fin){ alert("Completa título y fecha fin."); return; }
- const query=id ? db.from('ofertas_flash').update(payload).eq("id",id) : db.from('ofertas_flash').insert(payload);
- const {error}=await query; if(error){ alert("Error: "+error.message); return; }
- clearOfertaForm(); await loadOfertas(); renderAdminOfertas();
-}
-async function deleteOferta(id){ if(!confirm("¿Eliminar esta oferta?"))return; await db.from('ofertas_flash').delete().eq("id",id); await loadOfertas(); renderAdminOfertas(); }
-function renderAdminOfertas(){
- $("adminOfertasList").innerHTML=ofertasData.map(o=>`<div class="admin-item"><div><strong>${safe(o.titulo)}</strong><br><small>${safe(o.fecha_fin)}</small></div><div><button class="btn btn-dark" type="button" onclick="editOferta('${safe(o.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteOferta('${safe(o.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay ofertas.</p>';
-}
-
-async function loadNotas(){
- const {data,error}=await db.from('notas_importantes').select("*").eq("activo",true).order("created_at",{ascending:false});
- if(error) return;
- notasData = data || [];
- renderNotas();
- if($("adminModal").classList.contains("show")) renderAdminNotas();
-}
-function renderNotas(){
- if(!notasData.length){ $("notasList").innerHTML='<div class="empty">No hay notas publicadas.</div>'; return; }
- $("notasList").innerHTML = notasData.map(n => {
-  const imgHtml = n.imagen_url ? `<img src="${safe(n.imagen_url)}" alt="${safe(n.titulo)}">` : '';
-  const destacada = n.destacado ? 'nota-destacada' : '';
-  const date = new Date(n.created_at).toLocaleDateString('es-ES');
-  return `
-   <div class="nota-card ${destacada}">
-    ${imgHtml}
-    <div class="nota-content">
-     <h3>${safe(n.titulo)}</h3>
-     <div class="nota-date">📅 ${date} · ${safe(n.categoria)}</div>
-     <p>${safe(n.contenido).substring(0, 200)}${n.contenido.length > 200 ? '...' : ''}</p>
-    </div>
-   </div>`;
- }).join("");
-}
-function clearNotaForm(){ ["notaId","notaTitulo","notaContenido","notaImagenURL"].forEach(id=>{ $(id).value=""; }); $("notaCategoria").value="general"; $("notaDestacado").checked=false; $("notaImagenFile").value=""; $("notaImagenPreview").innerHTML=""; }
-function editNota(id){
- const n=notasData.find(v=>String(v.id)===String(id)); if(!n)return;
- $("notaId").value=n.id; $("notaTitulo").value=n.titulo||""; $("notaCategoria").value=n.categoria||"general";
- $("notaDestacado").checked=n.destacado||false; $("notaContenido").value=n.contenido||"";
- $("notaImagenURL").value=n.imagen_url||""; $("notaImagenFile").value="";
- const preview = n.imagen_url ? `<img src="${safe(n.imagen_url)}" style="max-width:100px;border-radius:8px;margin-top:10px">` : '';
- $("notaImagenPreview").innerHTML = preview ? `<small>Imagen actual:</small><br>${preview}` : '';
-}
-async function saveNota(){
- const id=$("notaId").value;
- let imagen_url = $("notaImagenURL").value.trim();
- const fileInput = $("notaImagenFile");
- if(fileInput.files.length > 0){
-  const file = fileInput.files[0];
-  const fileName = `notas/${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
-  const { error: uploadError } = await db.storage.from('imagenes').upload(fileName, file, {upsert: true});
-  if(uploadError){ alert("Error al subir imagen: " + uploadError.message); return; }
-  const { data: { publicUrl } } = db.storage.from('imagenes').getPublicUrl(fileName);
-  imagen_url = publicUrl;
- }
- const payload={ titulo:$("notaTitulo").value.trim(), categoria:$("notaCategoria").value, destacado:$("notaDestacado").checked, contenido:$("notaContenido").value.trim(), activo:true };
- if(imagen_url) payload.imagen_url = imagen_url;
- if(!payload.titulo||!payload.contenido){ alert("Completa título y contenido."); return; }
- const query=id ? db.from('notas_importantes').update(payload).eq("id",id) : db.from('notas_importantes').insert(payload);
- const {error}=await query; if(error){ alert("Error: "+error.message); return; }
- clearNotaForm(); await loadNotas(); renderAdminNotas();
-}
-async function deleteNota(id){ if(!confirm("¿Eliminar esta nota?"))return; await db.from('notas_importantes').delete().eq("id",id); await loadNotas(); renderAdminNotas(); }
-function renderAdminNotas(){
- $("adminNotasList").innerHTML=notasData.map(n=>`<div class="admin-item"><div><strong>${safe(n.titulo)} ${n.destacado?'⭐':''}</strong><br><small>${safe(n.categoria)}</small></div><div><button class="btn btn-dark" type="button" onclick="editNota('${safe(n.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteNota('${safe(n.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay notas.</p>';
-}
-
+// ============ SOLICITUDES ============
 function openRequest(service){
  document.querySelectorAll('.service-check').forEach(cb => { if (cb.value === service) cb.checked = true; });
  $("solicitud").scrollIntoView({behavior:"smooth"});
@@ -1444,15 +1036,7 @@ async function loadRequests(){
 async function completeRequest(id){ await db.from('solicitudes').update({estado:"completada"}).eq("id",id); await loadRequests(); }
 async function deleteRequest(id){ if(!confirm("¿Eliminar solicitud?"))return; await db.from('solicitudes').delete().eq("id",id); await loadRequests(); }
 
-async function loadOpiniones(){
- const {data,error}=await db.from('opiniones').select("*").order("created_at",{ascending:false}).limit(100);
- if(error){ $("adminOpinionesList").innerHTML='<p class="mini">No se pudieron cargar las opiniones.</p>'; return; }
- opinionesData=data||[];
- $("adminOpinionesList").innerHTML=opinionesData.map(o=>`<div class="admin-item"><div><strong>${safe(o.nombre_cliente)}</strong><br><small>${safe(o.telefono||"Sin teléfono")}</small><p class="mini">${safe(o.mensaje||"")}</p><small>Estado: ${o.aprobado?'✅ Aprobado':'⏳ Pendiente'}</small></div><div>${!o.aprobado?`<button class="btn btn-dark" type="button" onclick="approveOpinion('${safe(o.id)}')">✅ Aprobar</button>`:''}<button class="btn btn-red" type="button" onclick="deleteOpinion('${safe(o.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">Todavía no hay opiniones.</p>';
-}
-async function approveOpinion(id){ await db.from('opiniones').update({aprobado:true}).eq("id",id); await loadOpiniones(); }
-async function deleteOpinion(id){ if(!confirm("¿Eliminar opinión?"))return; await db.from('opiniones').delete().eq("id",id); await loadOpiniones(); }
-
+// ============ CALCULADORA ============
 function calculate(){
  const amount=Number($("calcAmount").value);
  const fromCode=$("calcFrom").value; const toCode=$("calcTo").value;
@@ -1465,13 +1049,14 @@ function calculate(){
 }
 ["calcAmount","calcFrom","calcTo"].forEach(id=>{ $(id).addEventListener("change",calculate); });
 
+// ============ ADMIN DATA ============
 async function loadAdminData(){
- await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), loadRequests(), loadOpiniones(), loadEquipaje(), loadGuias(), loadPedidos(), loadOfertas(), loadNotas() ]);
+ await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), loadRequests() ]);
  renderAdminTasas(); renderAdminRecharges(); renderAdminTickets();
  renderAdminRemesas(); renderAdminDestinos(); renderAdminServicios();
- renderAdminEquipaje(); renderAdminGuias(); renderAdminPedidos(); renderAdminOfertas(); renderAdminNotas();
 }
 
+// ============ INICIALIZACIÓN ============
 loadAll();
 changeLanguage('es');
 </script>
