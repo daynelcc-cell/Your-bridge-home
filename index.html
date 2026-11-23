@@ -21,6 +21,15 @@ button{cursor:pointer}
 .banner-carousel{display:flex;animation:slideBanner 20s infinite}
 .banner-item{min-width:100%;text-align:center;padding:10px 0;font-size:12px;font-weight:700;color:var(--gold);white-space:nowrap}
 @keyframes slideBanner{0%,33%{transform:translateX(0)}36%,66%{transform:translateX(-100%)}69%,100%{transform:translateX(-200%)}}
+
+/* BANNER HORA MUNDIAL */
+.world-clock-banner{background:#0b1425;border-bottom:1px solid var(--line);padding:8px 0;overflow:hidden}
+.ticker-wrap{width:100%;overflow:hidden;white-space:nowrap}
+.ticker{display:inline-block;animation:ticker 35s linear infinite}
+.ticker-item{display:inline-block;padding:0 25px;font-size:12px;font-weight:700;color:var(--white)}
+.ticker-item span{color:var(--gold);font-family:'Courier New',monospace;margin-left:6px}
+@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+
 header{position:sticky;top:0;z-index:50;background:#0b1425ed;border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
 .nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px}
 .brand{font-weight:900;letter-spacing:1px;color:var(--gold);font-size:19px;white-space:nowrap}
@@ -90,7 +99,17 @@ section{padding:58px 0}
 .official-link strong{display:block;color:var(--white);font-size:13px;margin-bottom:3px}
 .official-link small{color:var(--muted);font-size:10px}
 
-/* GALERÍA DE FOTOS Y PDFs EN SERVICIOS */
+/* CLIMA */
+.weather-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
+.weather-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;text-align:center;transition:.2s}
+.weather-card:hover{border-color:var(--gold);transform:translateY(-3px)}
+.weather-card .city-flag{font-size:28px;margin-bottom:5px}
+.weather-card .city-name{font-size:13px;font-weight:800;color:var(--white);margin-bottom:8px}
+.weather-card .weather-icon{font-size:32px;color:var(--gold);margin:8px 0}
+.weather-card .temp{font-size:26px;font-weight:900;color:var(--gold2)}
+.weather-card .desc{font-size:11px;color:var(--muted);margin-top:5px;text-transform:capitalize}
+
+/* GALERÍA */
 .servicio-galeria{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:15px}
 .galeria-item{position:relative;border-radius:10px;overflow:hidden;border:1px solid var(--line);aspect-ratio:1;background:#0b1425;cursor:pointer;transition:.2s}
 .galeria-item:hover{transform:scale(1.03);border-color:var(--gold)}
@@ -99,8 +118,6 @@ section{padding:58px 0}
 .galeria-item.pdf-item i{font-size:32px;color:var(--gold)}
 .galeria-item.pdf-item small{font-size:9px;color:var(--muted);line-height:1.2}
 .galeria-item .tipo-badge{position:absolute;top:6px;right:6px;background:var(--gold);color:#182235;font-size:9px;font-weight:800;padding:3px 7px;border-radius:10px}
-
-/* LIGHTBOX PARA VER FOTOS/PDF */
 .lightbox{display:none;position:fixed;inset:0;background:#000000e6;z-index:200;align-items:center;justify-content:center;padding:20px}
 .lightbox.show{display:flex}
 .lightbox-content{max-width:90vw;max-height:90vh;position:relative}
@@ -138,12 +155,13 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 .diag-err{background:#3d0f0f;color:#f0a8a8}
 .diag-info{background:#1a2744;color:#c0d0eb}
 .diag-line i{font-size:14px}
-.img-preview{max-width:80px;max-height:80px;border-radius:8px;border:1px solid var(--line);margin-top:5px}
 .archivo-item-admin{display:flex;align-items:center;gap:10px;padding:8px;background:#1a2744;border-radius:8px;margin-top:6px}
 .archivo-item-admin img{width:50px;height:50px;object-fit:cover;border-radius:6px}
 .archivo-item-admin i{font-size:24px;color:var(--gold)}
 .archivo-item-admin .archivo-info{flex:1;min-width:0}
 .archivo-item-admin .archivo-info small{display:block;color:var(--muted);font-size:10px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.upload-box{background:#1a2744;padding:15px;border-radius:10px;margin-top:12px;border:1px dashed var(--line)}
+.upload-box h5{color:var(--gold);margin:0 0 10px 0;font-size:13px}
 @media(max-width:850px){
  .navlinks{display:none;position:absolute;top:74px;left:0;right:0;background:#0b1425;padding:18px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
  .navlinks.open{display:flex}
@@ -177,6 +195,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 </style>
 </head>
 <body>
+
 <div class="top-banner">
  <div class="banner-carousel">
   <div class="banner-item" data-i18n="banner1">🎉 ¡Las mejores ofertas en recargas internacionales!</div>
@@ -184,6 +203,23 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   <div class="banner-item" data-i18n="banner3">💸 Remesas con las mejores tasas del mercado</div>
  </div>
 </div>
+
+<!-- BANNER HORA MUNDIAL -->
+<div class="world-clock-banner">
+ <div class="ticker-wrap">
+  <div class="ticker" id="worldClockTicker">
+   <div class="ticker-item">🇨🇺 La Habana <span id="wc-havana">--:--</span></div>
+   <div class="ticker-item">🇷🇺 Moscú <span id="wc-moscow">--:--</span></div>
+   <div class="ticker-item">🇪🇸 Madrid <span id="wc-madrid">--:--</span></div>
+   <div class="ticker-item">🇺🇸 Miami <span id="wc-miami">--:--</span></div>
+   <div class="ticker-item">🇲🇽 Ciudad de México <span id="wc-mexico">--:--</span></div>
+   <div class="ticker-item">🇦🇷 Buenos Aires <span id="wc-buenosaires">--:--</span></div>
+   <div class="ticker-item">🇨🇺 La Habana <span id="wc-havana2">--:--</span></div>
+   <div class="ticker-item">🇷🇺 Moscú <span id="wc-moscow2">--:--</span></div>
+  </div>
+ </div>
+</div>
+
 <header>
  <div class="container nav">
   <a class="brand" href="#inicio">YOUR BRIDGE HOME<small data-i18n="brand_sub">TU PUENTE AL MUNDO</small></a>
@@ -195,6 +231,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    <a href="#remesas" data-i18n="nav_remesas">REMESAS</a>
    <a href="#destinos" data-i18n="nav_destinations">DESTINOS</a>
    <a href="#tasas" data-i18n="nav_rates">TASAS</a>
+   <a href="#clima" data-i18n="nav_weather">CLIMA</a>
    <a href="#oficiales" data-i18n="nav_official">OFICIALES</a>
   </nav>
   <div class="nav-actions">
@@ -212,6 +249,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   </div>
  </div>
 </header>
+
 <main>
 <section class="hero" id="inicio">
  <div class="container hero-grid">
@@ -234,6 +272,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   </div>
  </div>
 </section>
+
 <section id="servicios">
  <div class="container">
   <div class="section-head">
@@ -244,6 +283,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   <div class="grid" id="serviciosList"><div class="empty" data-i18n="loading">Cargando...</div></div>
  </div>
 </section>
+
 <section id="recargas">
  <div class="container">
   <div class="section-head">
@@ -254,6 +294,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   <div class="grid" id="rechargesList"><div class="empty" data-i18n="loading">Cargando...</div></div>
  </div>
 </section>
+
 <section id="boletos" style="background:#0b1425">
  <div class="container">
   <div class="section-head">
@@ -264,6 +305,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   <div class="grid" id="ticketsList"><div class="empty" data-i18n="loading">Cargando...</div></div>
  </div>
 </section>
+
 <section id="remesas">
  <div class="container">
   <div class="section-head">
@@ -274,6 +316,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   <div class="grid" id="remesasList"><div class="empty" data-i18n="loading">Cargando...</div></div>
  </div>
 </section>
+
 <section id="destinos">
  <div class="container">
   <div class="section-head">
@@ -284,6 +327,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   <div class="grid" id="destinosList"><div class="empty" data-i18n="loading">Cargando...</div></div>
  </div>
 </section>
+
 <section id="tasas" style="background:#0b1425">
  <div class="container">
   <div class="section-head">
@@ -304,7 +348,22 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   </div>
  </div>
 </section>
-<section id="oficiales">
+
+<!-- SECCIÓN CLIMA -->
+<section id="clima">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow" data-i18n="weather_eyebrow">En tiempo real</div>
+   <h2 data-i18n="weather_title">Meteorología <span class="gold">Mundial</span></h2>
+   <p data-i18n="weather_desc">Consulta el clima actual en las ciudades más importantes para nuestra comunidad.</p>
+  </div>
+  <div class="weather-grid" id="weatherGrid">
+   <div class="empty" data-i18n="loading">Cargando clima...</div>
+  </div>
+ </div>
+</section>
+
+<section id="oficiales" style="background:#0b1425">
  <div class="container">
   <div class="section-head">
    <div class="eyebrow" data-i18n="official_eyebrow">Enlaces oficiales</div>
@@ -323,6 +382,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   </div>
  </div>
 </section>
+
 <section id="solicitud">
  <div class="container">
   <div class="section-head">
@@ -353,6 +413,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   </div>
  </div>
 </section>
+
 <section>
  <div class="container info-grid">
   <div class="card contact-box">
@@ -373,6 +434,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  </div>
 </section>
 </main>
+
 <footer>
  <div class="container footer-inner">
   <div><strong class="gold">YOUR BRIDGE HOME</strong><br><span data-i18n="footer_slogan">Tu puente al mundo.</span></div>
@@ -382,7 +444,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 </footer>
 <a class="floating" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="floating_btn">ATENCIÓN DIRECTA</span></a>
 
-<!-- LIGHTBOX PARA VER FOTOS Y PDFs -->
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
  <div class="lightbox-content">
   <button class="lightbox-close" onclick="closeLightbox()">✕</button>
@@ -499,32 +561,34 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveServicio()" data-i18n="save_btn">💾 Guardar servicio</button>
    <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearServicioForm()" data-i18n="new_btn">➕ Nuevo</button>
    
-   <!-- SECCIÓN DE ARCHIVOS DEL SERVICIO -->
+   <!-- ARCHIVOS (LOCAL + IMGBB) -->
    <div style="margin-top:25px;padding-top:20px;border-top:1px solid var(--line)">
     <h4 style="color:var(--gold);margin:0 0 10px 0"><i class="fa-solid fa-images"></i> <span data-i18n="archivos_titulo">Fotos y PDFs del servicio</span></h4>
-    <p class="mini" data-i18n="archivos_desc">Sube fotos y documentos PDF asociados a este servicio. Primero guarda el servicio para poder agregar archivos.</p>
-    <div class="form-grid" style="margin-top:12px">
-     <div class="field">
-      <label data-i18n="archivos_tipo">Tipo de archivo</label>
-      <select id="archivoTipo">
-       <option value="foto">📷 Foto</option>
-       <option value="pdf">📄 PDF</option>
-      </select>
+    <p class="mini" data-i18n="archivos_desc">Primero guarda el servicio para poder agregar archivos.</p>
+    
+    <div class="upload-box">
+     <h5><i class="fa-solid fa-upload"></i> Opción 1: Subir archivo local</h5>
+     <div class="form-grid">
+      <div class="field"><label data-i18n="archivos_tipo">Tipo</label><select id="archivoTipo"><option value="foto">📷 Foto</option><option value="pdf">📄 PDF</option></select></div>
+      <div class="field"><label data-i18n="archivos_nombre">Descripción</label><input id="archivoDescripcion" placeholder="Ej: Lista de precios"></div>
+      <div class="field full"><label data-i18n="archivos_subir">Archivo</label><input id="archivoInput" type="file" accept="image/*,application/pdf"></div>
      </div>
-     <div class="field">
-      <label data-i18n="archivos_nombre">Nombre / Descripción</label>
-      <input id="archivoDescripcion" placeholder="Ej: Lista de precios 2026">
-     </div>
-     <div class="field full">
-      <label data-i18n="archivos_subir">Seleccionar archivo</label>
-      <input id="archivoInput" type="file" accept="image/*,application/pdf">
-     </div>
+     <button class="btn btn-gold" style="margin-top:10px" type="button" onclick="subirArchivoServicio()" data-i18n="archivos_subir_btn">⬆️ Subir local</button>
     </div>
-    <button class="btn btn-gold" style="margin-top:10px" type="button" onclick="subirArchivoServicio()" data-i18n="archivos_subir_btn">⬆️ Subir archivo</button>
+
+    <div class="upload-box" style="margin-top:12px">
+     <h5><i class="fa-solid fa-link"></i> Opción 2: URL de ImgBB (Recomendado, no consume espacio)</h5>
+     <div class="form-grid">
+      <div class="field"><label>Tipo</label><select id="archivoTipoURL"><option value="foto">📷 Foto</option></select></div>
+      <div class="field"><label>Descripción</label><input id="archivoDescripcionURL" placeholder="Ej: Foto principal"></div>
+      <div class="field full"><label>URL de ImgBB</label><input id="archivoURL" type="url" placeholder="https://i.ibb.co/xxxxx/foto.jpg"><p class="mini" style="margin-top:5px">💡 <a href="https://imgbb.com/" target="_blank" style="color:var(--gold)">Sube tu imagen a ImgBB</a> y pega el enlace directo aquí.</p></div>
+     </div>
+     <button class="btn btn-gold" style="margin-top:10px" type="button" onclick="agregarArchivoURL()">🔗 Agregar desde URL</button>
+    </div>
     <div id="archivosServicioList" style="margin-top:15px"></div>
    </div>
    
-   <div class="admin-list" id="adminServicioList"></div>
+   <div class="admin-list" id="adminServicioList" style="margin-top:20px"></div>
   </div>
   <div class="admin-panel" id="requestsAdmin">
    <h3 data-i18n="requests_admin_title">Solicitudes recibidas</h3>
@@ -554,19 +618,61 @@ let currentLang = 'es';
 
 $("year").textContent = new Date().getFullYear();
 
-// RELOJ
+// RELOJES
 function updateClocks(){
  const now = new Date();
  $("clockCuba").textContent = now.toLocaleTimeString('es-ES',{timeZone:'America/Havana',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
  $("clockLocal").textContent = now.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+ 
+ // Banner mundial
+ const fmt = {hour:'2-digit',minute:'2-digit',hour12:false};
+ const setT = (id, tz) => { const el = $(id); if(el) el.textContent = now.toLocaleTimeString('es-ES',{...fmt, timeZone:tz}); };
+ setT('wc-havana','America/Havana'); setT('wc-havana2','America/Havana');
+ setT('wc-moscow','Europe/Moscow'); setT('wc-moscow2','Europe/Moscow');
+ setT('wc-madrid','Europe/Madrid');
+ setT('wc-miami','America/New_York');
+ setT('wc-mexico','America/Mexico_City');
+ setT('wc-buenosaires','America/Argentina/Buenos_Aires');
 }
 setInterval(updateClocks,1000); updateClocks();
+
+// CLIMA (Open-Meteo API - Gratis, sin clave)
+async function loadWeather(){
+ const cities = [
+  { name: 'La Habana', nameEn: 'Havana', nameRu: 'Гавана', lat: 23.1136, lon: -82.3666, flag: '🇨🇺' },
+  { name: 'Moscú', nameEn: 'Moscow', nameRu: 'Москва', lat: 55.7558, lon: 37.6173, flag: '🇷🇺' },
+  { name: 'Madrid', nameEn: 'Madrid', nameRu: 'Мадрид', lat: 40.4168, lon: -3.7038, flag: '🇪🇸' },
+  { name: 'Miami', nameEn: 'Miami', nameRu: 'Майами', lat: 25.7617, lon: -80.1918, flag: '🇺🇸' },
+  { name: 'Ciudad de México', nameEn: 'Mexico City', nameRu: 'Мехико', lat: 19.4326, lon: -99.1332, flag: '🇲🇽' }
+ ];
+ const weatherCodes = {0:'fa-sun',1:'fa-sun',2:'fa-cloud-sun',3:'fa-cloud',45:'fa-smog',48:'fa-smog',51:'fa-cloud-rain',53:'fa-cloud-rain',55:'fa-cloud-showers-heavy',61:'fa-cloud-rain',63:'fa-cloud-rain',65:'fa-cloud-showers-heavy',71:'fa-snowflake',73:'fa-snowflake',75:'fa-snowflake',77:'fa-snowflake',80:'fa-cloud-showers-heavy',81:'fa-cloud-showers-heavy',82:'fa-cloud-showers-heavy',95:'fa-bolt',96:'fa-bolt',99:'fa-bolt'};
+ const weatherDesc = {0:'Despejado',1:'Mayormente despejado',2:'Parcialmente nublado',3:'Nublado',45:'Niebla',48:'Niebla con escarcha',51:'Llovizna ligera',53:'Llovizna moderada',55:'Llovizna densa',61:'Lluvia ligera',63:'Lluvia moderada',65:'Lluvia fuerte',71:'Nevada ligera',73:'Nevada moderada',75:'Nevada fuerte',77:'Granizo',80:'Chubascos ligeros',81:'Chubascos moderados',82:'Chubascos violentos',95:'Tormenta',96:'Tormenta con granizo',99:'Tormenta severa'};
+ const weatherDescEn = {0:'Clear',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',48:'Rime fog',51:'Light drizzle',53:'Moderate drizzle',55:'Dense drizzle',61:'Slight rain',63:'Moderate rain',65:'Heavy rain',71:'Slight snow',73:'Moderate snow',75:'Heavy snow',77:'Snow grains',80:'Slight rain showers',81:'Moderate rain showers',82:'Violent rain showers',95:'Thunderstorm',96:'Thunderstorm with hail',99:'Thunderstorm with heavy hail'};
+ const weatherDescRu = {0:'Ясно',1:'Преим. ясно',2:'Переменная облачность',3:'Пасмурно',45:'Туман',48:'Изморозь',51:'Лёгкая морось',53:'Морось',55:'Сильная морось',61:'Лёгкий дождь',63:'Дождь',65:'Сильный дождь',71:'Лёгкий снег',73:'Снег',75:'Сильный снег',77:'Крупа',80:'Лёгкий ливень',81:'Ливень',82:'Сильный ливень',95:'Гроза',96:'Гроза с градом',99:'Сильная гроза'};
+
+ try {
+  const promises = cities.map(c => fetch(`https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current_weather=true`).then(r => r.json()).then(data => ({...c, w: data.current_weather})).catch(() => null));
+  const results = await Promise.all(promises);
+  const valid = results.filter(r => r && r.w);
+  
+  $("weatherGrid").innerHTML = valid.map(c => {
+   const icon = weatherCodes[c.w.weathercode] || 'fa-cloud';
+   let desc = weatherDesc[c.w.weathercode] || 'Desconocido';
+   if(currentLang === 'en') desc = weatherDescEn[c.w.weathercode] || 'Unknown';
+   if(currentLang === 'ru') desc = weatherDescRu[c.w.weathercode] || 'Неизвестно';
+   const cityName = currentLang === 'en' ? c.nameEn : currentLang === 'ru' ? c.nameRu : c.name;
+   return `<div class="weather-card"><div class="city-flag">${c.flag}</div><div class="city-name">${cityName}</div><i class="fa-solid ${icon} weather-icon"></i><div class="temp">${Math.round(c.w.temperature)}°C</div><div class="desc">${desc} · 💨 ${c.w.windspeed} km/h</div></div>`;
+  }).join("");
+ } catch(e) {
+  $("weatherGrid").innerHTML = '<div class="empty">No se pudo cargar el clima.</div>';
+ }
+}
 
 // TRADUCCIONES
 const translations = {
  es: {
   banner1:"🎉 ¡Las mejores ofertas en recargas internacionales!",banner2:"✈️ Vuelos económicos a los mejores destinos",banner3:"💸 Remesas con las mejores tasas del mercado",
-  brand_sub:"TU PUENTE AL MUNDO",nav_home:"INICIO",nav_services:"SERVICIOS",nav_recharges:"RECARGAS",nav_tickets:"BOLETOS",nav_remesas:"REMESAS",nav_destinations:"DESTINOS",nav_rates:"TASAS",nav_official:"OFICIALES",
+  brand_sub:"TU PUENTE AL MUNDO",nav_home:"INICIO",nav_services:"SERVICIOS",nav_recharges:"RECARGAS",nav_tickets:"BOLETOS",nav_remesas:"REMESAS",nav_destinations:"DESTINOS",nav_rates:"TASAS",nav_weather:"CLIMA",nav_official:"OFICIALES",
   clock_cuba:"🇨🇺 Cuba",clock_local:"🌍 Local",
   hero_eyebrow:"Conectamos oportunidades",hero_title:'Tu puente hacia <span>nuevas oportunidades</span>',hero_desc:"Recargas internacionales, envío de remesas, pasajes y orientación para tus viajes.",
   hero_btn1:'Explorar servicios <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Contactar ahora",
@@ -579,6 +685,7 @@ const translations = {
   dest_eyebrow:"Explora el mundo",dest_title:'Destinos <span class="gold">disponibles</span>',dest_desc:"Viajes y servicios a los mejores destinos.",
   rates_eyebrow:"Información financiera",rates_title:'Tasas de <span class="gold">cambio</span>',rates_desc:"Valores configurados por administración. Confirma la tasa antes de realizar cualquier operación.",
   calc_title:"Calculadora de monedas",calc_amount:"Cantidad",calc_from:"De",calc_to:"A",calc_btn:"Calcular",calc_result:"Introduce una cantidad para calcular.",
+  weather_eyebrow:"En tiempo real",weather_title:'Meteorología <span class="gold">Mundial</span>',weather_desc:"Consulta el clima actual en las ciudades más importantes para nuestra comunidad.",
   official_eyebrow:"Enlaces oficiales",official_title:'Sitios <span class="gold">Oficiales de Cuba</span>',official_desc:"Acceso directo a los portales gubernamentales y servicios oficiales.",
   off_banco:"Banco Central de Cuba",off_banco_desc:"Tasas oficiales y regulaciones",off_etecsa_desc:"Telecomunicaciones y recargas",
   off_aduana:"Aduana General",off_aduana_desc:"Normativas y declaraciones",off_mintur:"Ministerio de Turismo",off_mintur_desc:"Información turística oficial",
@@ -604,13 +711,13 @@ const translations = {
   field_category:"Categoría",field_order:"Orden",field_icon:"Icono (emoji)",
   field_amount_orig:"Monto origen",field_currency_orig:"Moneda origen",field_amount_dest:"Monto destino",field_currency_dest:"Moneda destino",
   save_btn:"💾 Guardar",new_btn:"➕ Nuevo",refresh_btn:"🔄 Actualizar",loading:"Cargando...",
-  archivos_titulo:"Fotos y PDFs del servicio",archivos_desc:"Sube fotos y documentos PDF asociados a este servicio. Primero guarda el servicio para poder agregar archivos.",
-  archivos_tipo:"Tipo de archivo",archivos_nombre:"Nombre / Descripción",archivos_subir:"Seleccionar archivo",archivos_subir_btn:"⬆️ Subir archivo",
+  archivos_titulo:"Fotos y PDFs del servicio",archivos_desc:"Primero guarda el servicio para poder agregar archivos.",
+  archivos_tipo:"Tipo",archivos_nombre:"Descripción",archivos_subir:"Archivo",archivos_subir_btn:"⬆️ Subir local",
   ver_pdf:"Ver PDF",descargar:"Descargar",foto:"FOTO",pdf:"PDF"
  },
  en: {
   banner1:"🎉 Best offers on international recharges!",banner2:"✈️ Economical flights to the best destinations",banner3:"💸 Remittances with the best market rates",
-  brand_sub:"YOUR BRIDGE TO THE WORLD",nav_home:"HOME",nav_services:"SERVICES",nav_recharges:"RECHARGES",nav_tickets:"TICKETS",nav_remesas:"REMITTANCES",nav_destinations:"DESTINATIONS",nav_rates:"RATES",nav_official:"OFFICIAL",
+  brand_sub:"YOUR BRIDGE TO THE WORLD",nav_home:"HOME",nav_services:"SERVICES",nav_recharges:"RECHARGES",nav_tickets:"TICKETS",nav_remesas:"REMITTANCES",nav_destinations:"DESTINATIONS",nav_rates:"RATES",nav_weather:"WEATHER",nav_official:"OFFICIAL",
   clock_cuba:"🇨🇺 Cuba",clock_local:"🌍 Local",
   hero_eyebrow:"We connect opportunities",hero_title:'Your bridge to <span>new opportunities</span>',hero_desc:"International recharges, remittances, tickets and travel guidance.",
   hero_btn1:'Explore services <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Contact now",
@@ -623,6 +730,7 @@ const translations = {
   dest_eyebrow:"Explore the world",dest_title:'Available <span class="gold">destinations</span>',dest_desc:"Travel and services to the best destinations.",
   rates_eyebrow:"Financial information",rates_title:'Exchange <span class="gold">rates</span>',rates_desc:"Values configured by administration. Confirm the rate before any operation.",
   calc_title:"Currency calculator",calc_amount:"Amount",calc_from:"From",calc_to:"To",calc_btn:"Calculate",calc_result:"Enter an amount to calculate.",
+  weather_eyebrow:"Real-time",weather_title:'World <span class="gold">Weather</span>',weather_desc:"Check current weather in the most important cities for our community.",
   official_eyebrow:"Official links",official_title:'Official <span class="gold">Cuba Sites</span>',official_desc:"Direct access to government portals and official services.",
   off_banco:"Central Bank of Cuba",off_banco_desc:"Official rates and regulations",off_etecsa_desc:"Telecommunications and recharges",
   off_aduana:"General Customs",off_aduana_desc:"Regulations and declarations",off_mintur:"Ministry of Tourism",off_mintur_desc:"Official tourist information",
@@ -648,13 +756,13 @@ const translations = {
   field_category:"Category",field_order:"Order",field_icon:"Icon (emoji)",
   field_amount_orig:"Origin amount",field_currency_orig:"Origin currency",field_amount_dest:"Destination amount",field_currency_dest:"Destination currency",
   save_btn:"💾 Save",new_btn:"➕ New",refresh_btn:"🔄 Refresh",loading:"Loading...",
-  archivos_titulo:"Service photos and PDFs",archivos_desc:"Upload photos and PDF documents associated with this service. First save the service to be able to add files.",
-  archivos_tipo:"File type",archivos_nombre:"Name / Description",archivos_subir:"Select file",archivos_subir_btn:"⬆️ Upload file",
+  archivos_titulo:"Service photos and PDFs",archivos_desc:"First save the service to be able to add files.",
+  archivos_tipo:"Type",archivos_nombre:"Description",archivos_subir:"File",archivos_subir_btn:"⬆️ Upload local",
   ver_pdf:"View PDF",descargar:"Download",foto:"PHOTO",pdf:"PDF"
  },
  ru: {
   banner1:"🎉 Лучшие предложения на международное пополнение!",banner2:"✈️ Экономичные рейсы в лучшие направления",banner3:"💸 Денежные переводы по лучшим рыночным курсам",
-  brand_sub:"ВАШ МОСТ В МИР",nav_home:"ГЛАВНАЯ",nav_services:"УСЛУГИ",nav_recharges:"ПОПОЛНЕНИЕ",nav_tickets:"БИЛЕТЫ",nav_remesas:"ПЕРЕВОДЫ",nav_destinations:"НАПРАВЛЕНИЯ",nav_rates:"КУРСЫ",nav_official:"ОФИЦИАЛЬНЫЕ",
+  brand_sub:"ВАШ МОСТ В МИР",nav_home:"ГЛАВНАЯ",nav_services:"УСЛУГИ",nav_recharges:"ПОПОЛНЕНИЕ",nav_tickets:"БИЛЕТЫ",nav_remesas:"ПЕРЕВОДЫ",nav_destinations:"НАПРАВЛЕНИЯ",nav_rates:"КУРСЫ",nav_weather:"ПОГОДА",nav_official:"ОФИЦИАЛЬНЫЕ",
   clock_cuba:"🇨🇺 Куба",clock_local:"🌍 Местное",
   hero_eyebrow:"Мы соединяем возможности",hero_title:'Ваш мост к <span>новым возможностям</span>',hero_desc:"Международное пополнение, денежные переводы, билеты и рекомендации для путешествий.",
   hero_btn1:'Изучить услуги <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Связаться сейчас",
@@ -667,6 +775,7 @@ const translations = {
   dest_eyebrow:"Исследуйте мир",dest_title:'Доступные <span class="gold">направления</span>',dest_desc:"Путешествия и услуги в лучшие направления.",
   rates_eyebrow:"Финансовая информация",rates_title:'Обменные <span class="gold">курсы</span>',rates_desc:"Значения, настроенные администрацией. Подтвердите курс перед любой операцией.",
   calc_title:"Калькулятор валют",calc_amount:"Сумма",calc_from:"Из",calc_to:"В",calc_btn:"Рассчитать",calc_result:"Введите сумму для расчета.",
+  weather_eyebrow:"В реальном времени",weather_title:'Мировая <span class="gold">Погода</span>',weather_desc:"Узнайте текущую погоду в самых важных городах для нашего сообщества.",
   official_eyebrow:"Официальные ссылки",official_title:'Официальные <span class="gold">сайты Кубы</span>',official_desc:"Прямой доступ к государственным порталам и официальным услугам.",
   off_banco:"Центральный банк Кубы",off_banco_desc:"Официальные курсы и регулирование",off_etecsa_desc:"Телекоммуникации и пополнение",
   off_aduana:"Главная таможня",off_aduana_desc:"Нормативы и декларации",off_mintur:"Министерство туризма",off_mintur_desc:"Официальная туристическая информация",
@@ -692,8 +801,8 @@ const translations = {
   field_category:"Категория",field_order:"Порядок",field_icon:"Иконка (эмодзи)",
   field_amount_orig:"Сумма отправления",field_currency_orig:"Валюта отправления",field_amount_dest:"Сумма назначения",field_currency_dest:"Валюта назначения",
   save_btn:"💾 Сохранить",new_btn:"➕ Новый",refresh_btn:"🔄 Обновить",loading:"Загрузка...",
-  archivos_titulo:"Фото и PDF услуги",archivos_desc:"Загрузите фото и PDF-документы, связанные с этой услугой. Сначала сохраните услугу, чтобы добавлять файлы.",
-  archivos_tipo:"Тип файла",archivos_nombre:"Название / Описание",archivos_subir:"Выбрать файл",archivos_subir_btn:"⬆️ Загрузить файл",
+  archivos_titulo:"Фото и PDF услуги",archivos_desc:"Сначала сохраните услугу, чтобы добавлять файлы.",
+  archivos_tipo:"Тип",archivos_nombre:"Описание",archivos_subir:"Файл",archivos_subir_btn:"⬆️ Загрузить локально",
   ver_pdf:"Смотреть PDF",descargar:"Скачать",foto:"ФОТО",pdf:"PDF"
  }
 };
@@ -708,6 +817,7 @@ function changeLanguage(lang){
    if (value.includes('<')) el.innerHTML = value; else el.textContent = value;
   }
  });
+ loadWeather(); // Recargar clima con idioma actualizado
 }
 
 // DIAGNÓSTICO
@@ -760,7 +870,7 @@ async function runDiagnostics(){
 function safe(v){ return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 function money(v,c){ return `${Number(v||0).toLocaleString("es-ES",{maximumFractionDigits:2})} ${safe(c||"")}`; }
 
-async function loadAll(){ await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios() ]); }
+async function loadAll(){ await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), loadWeather() ]); }
 
 // TASAS
 async function loadTasas(){
@@ -936,16 +1046,15 @@ function renderAdminDestinos(){
  $("adminDestinoList").innerHTML=destinosData.map(d=>`<div class="admin-item"><div><strong>${safe(d.nombre)}</strong><br><small>${safe(d.categoria||"")}</small></div><div><button class="btn btn-dark" type="button" onclick="editDestino('${safe(d.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteDestino('${safe(d.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay destinos cargados.</p>';
 }
 
-// SERVICIOS CON ARCHIVOS (FOTOS Y PDFs)
+// SERVICIOS CON ARCHIVOS
 async function loadServicios(){
  const {data,error}=await db.from('servicios').select("*").eq("activo",true).order("orden");
  if(error){ $("serviciosList").innerHTML='<div class="empty">No hay servicios publicados.</div>'; return; }
  serviciosData=data||[];
- // Cargar archivos de todos los servicios
  if(serviciosData.length > 0){
   const ids = serviciosData.map(s => s.id);
   const {data: archivos} = await db.from('servicios_archivos').select("*").in('servicio_id', ids).eq('activo', true).order('orden');
-  serviciosData.forEach(s => { s.archivos = (archivos || []).filter(a => a.servicio_id === s.id); });
+  serviciosData.forEach(s => { s.archivos = (archivos || []).filter(a => String(a.servicio_id) === String(s.id)); });
  } else {
   serviciosData.forEach(s => { s.archivos = []; });
  }
@@ -974,7 +1083,7 @@ function renderServicios(){
 
 // LIGHTBOX
 function openLightbox(servicioId, tipo, index){
- const servicio = serviciosData.find(s => s.id === servicioId);
+ const servicio = serviciosData.find(s => String(s.id) === String(servicioId));
  if(!servicio) return;
  const archivos = (servicio.archivos || []).filter(a => a.tipo_archivo === tipo);
  if(archivos.length === 0) return;
@@ -998,7 +1107,7 @@ function navLightbox(dir){
 }
 function closeLightbox(){ $("lightbox").classList.remove("show"); $("lightboxBody").innerHTML = ""; }
 
-// SUBIR ARCHIVOS AL SERVICIO (ADMIN)
+// SUBIR ARCHIVOS (LOCAL)
 async function subirArchivoServicio(){
  if(!servicioEditandoId){ alert("Primero guarda el servicio antes de subir archivos."); return; }
  const fileInput = $("archivoInput");
@@ -1007,7 +1116,6 @@ async function subirArchivoServicio(){
  const tipo = $("archivoTipo").value;
  const descripcion = $("archivoDescripcion").value.trim();
  
- // Validar tipo
  if(tipo === 'foto' && !file.type.startsWith('image/')){ alert("El archivo debe ser una imagen."); return; }
  if(tipo === 'pdf' && file.type !== 'application/pdf'){ alert("El archivo debe ser un PDF."); return; }
  
@@ -1030,6 +1138,33 @@ async function subirArchivoServicio(){
  
  $("archivoInput").value = "";
  $("archivoDescripcion").value = "";
+ await cargarArchivosServicio(servicioEditandoId);
+}
+
+// SUBIR ARCHIVOS (IMGBB URL)
+async function agregarArchivoURL(){
+ if(!servicioEditandoId){ alert("Primero guarda el servicio antes de agregar archivos."); return; }
+ const url = $("archivoURL").value.trim();
+ const tipo = $("archivoTipoURL").value;
+ const descripcion = $("archivoDescripcionURL").value.trim();
+ 
+ if(!url){ alert("Pega la URL de ImgBB."); return; }
+ if(!url.startsWith('http')){ alert("La URL debe comenzar con http:// o https://"); return; }
+ 
+ const payload = {
+  servicio_id: servicioEditandoId,
+  tipo_archivo: tipo,
+  url_archivo: url,
+  nombre_original: url.split('/').pop() || 'imagen.jpg',
+  descripcion: descripcion,
+  orden: archivosServicioActual.length,
+  activo: true
+ };
+ const {error} = await db.from('servicios_archivos').insert(payload);
+ if(error){ alert("Error al guardar: " + error.message); return; }
+ 
+ $("archivoURL").value = "";
+ $("archivoDescripcionURL").value = "";
  await cargarArchivosServicio(servicioEditandoId);
 }
 
@@ -1058,8 +1193,7 @@ function renderArchivosAdmin(){
 async function eliminarArchivo(archivoId){
  if(!confirm("¿Eliminar este archivo?")) return;
  const archivo = archivosServicioActual.find(a => a.id === archivoId);
- if(archivo){
-  // Eliminar del storage
+ if(archivo && archivo.url_archivo.includes('imagenes/')){
   const ruta = archivo.url_archivo.split('/imagenes/')[1];
   if(ruta) await db.storage.from('imagenes').remove([ruta]);
  }
@@ -1089,25 +1223,24 @@ async function saveServicio(){
  const {data, error}=await query;
  if(error){ alert("Error: "+error.message); return; }
  
- // Si es nuevo, obtener el ID
  if(!id && data && data[0]){
   servicioEditandoId = data[0].id;
   $("servicioId").value = data[0].id;
  }
  
- clearServicioForm();
  await loadServicios();
  renderAdminServicios();
  if(servicioEditandoId) cargarArchivosServicio(servicioEditandoId);
 }
 async function deleteServicio(id){ 
  if(!confirm("¿Eliminar este servicio? (también se eliminarán sus archivos)"))return; 
- // Eliminar archivos asociados
  const {data: archivos} = await db.from('servicios_archivos').select('url_archivo').eq('servicio_id', id);
  if(archivos){
   for(const a of archivos){
-   const ruta = a.url_archivo.split('/imagenes/')[1];
-   if(ruta) await db.storage.from('imagenes').remove([ruta]);
+   if(a.url_archivo.includes('imagenes/')){
+    const ruta = a.url_archivo.split('/imagenes/')[1];
+    if(ruta) await db.storage.from('imagenes').remove([ruta]);
+   }
   }
   await db.from('servicios_archivos').delete().eq('servicio_id', id);
  }
