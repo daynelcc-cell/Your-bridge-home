@@ -20,6 +20,15 @@ button{cursor:pointer}
 .banner-carousel{display:flex;animation:slideBanner 20s infinite}
 .banner-item{min-width:100%;text-align:center;padding:10px 0;font-size:12px;font-weight:700;color:var(--gold);white-space:nowrap}
 @keyframes slideBanner{0%,33%{transform:translateX(0)}36%,66%{transform:translateX(-100%)}69%,100%{transform:translateX(-200%)}}
+
+/* BANNER HORA MUNDIAL */
+.world-clock-banner{background:#0b1425;border-bottom:1px solid var(--line);padding:8px 0;overflow:hidden}
+.ticker-wrap{width:100%;overflow:hidden;white-space:nowrap}
+.ticker{display:inline-block;animation:ticker 35s linear infinite}
+.ticker-item{display:inline-block;padding:0 25px;font-size:12px;font-weight:700;color:var(--white)}
+.ticker-item span{color:var(--gold);font-family:'Courier New',monospace;margin-left:6px}
+@keyframes ticker{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+
 header{position:sticky;top:0;z-index:50;background:#0b1425ed;border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}
 .nav{min-height:74px;display:flex;align-items:center;justify-content:space-between;gap:18px}
 .brand{font-weight:900;letter-spacing:1px;color:var(--gold);font-size:19px;white-space:nowrap}
@@ -139,6 +148,22 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   <div class="banner-item">🎉 ¡Las mejores ofertas en recargas internacionales!</div>
   <div class="banner-item">✈️ Vuelos económicos a los mejores destinos</div>
   <div class="banner-item">💸 Remesas con las mejores tasas del mercado</div>
+ </div>
+</div>
+
+<!-- BANNER HORA MUNDIAL -->
+<div class="world-clock-banner">
+ <div class="ticker-wrap">
+  <div class="ticker">
+   <div class="ticker-item">🇨🇺 La Habana <span id="wc-havana">--:--</span></div>
+   <div class="ticker-item">🇷🇺 Moscú <span id="wc-moscow">--:--</span></div>
+   <div class="ticker-item">🇪🇸 Madrid <span id="wc-madrid">--:--</span></div>
+   <div class="ticker-item">🇺🇸 Miami <span id="wc-miami">--:--</span></div>
+   <div class="ticker-item">🇲🇽 Ciudad de México <span id="wc-mexico">--:--</span></div>
+   <div class="ticker-item">🇦🇷 Buenos Aires <span id="wc-buenosaires">--:--</span></div>
+   <div class="ticker-item">🇨🇺 La Habana <span id="wc-havana2">--:--</span></div>
+   <div class="ticker-item">🇷🇺 Moscú <span id="wc-moscow2">--:--</span></div>
+  </div>
  </div>
 </div>
 
@@ -549,11 +574,23 @@ function changeLanguage(lang){
  });
 }
 
-// ============ RELOJES ============
+// ============ RELOJES (WIDGET + TICKER MUNDIAL) ============
 function updateClocks(){
  const now = new Date();
+ 
+ // Widget pequeño en header (Cuba y Local)
  $("clockCuba").textContent = now.toLocaleTimeString('es-ES',{timeZone:'America/Havana',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
  $("clockLocal").textContent = now.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+ 
+ // Ticker mundial (banner animado)
+ const fmt = {hour:'2-digit',minute:'2-digit',hour12:false};
+ const setT = (id, tz) => { const el = $(id); if(el) el.textContent = now.toLocaleTimeString('es-ES',{...fmt, timeZone:tz}); };
+ setT('wc-havana','America/Havana'); setT('wc-havana2','America/Havana');
+ setT('wc-moscow','Europe/Moscow'); setT('wc-moscow2','Europe/Moscow');
+ setT('wc-madrid','Europe/Madrid');
+ setT('wc-miami','America/New_York');
+ setT('wc-mexico','America/Mexico_City');
+ setT('wc-buenosaires','America/Argentina/Buenos_Aires');
 }
 setInterval(updateClocks,1000); updateClocks();
 
