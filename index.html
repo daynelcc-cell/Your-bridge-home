@@ -300,53 +300,18 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  </div>
 </section>
 
-<!-- SECCIÓN: ÚLTIMA HORA Y AVISOS IMPORTANTES -->
+<!-- SECCIÓN: ÚLTIMA HORA Y AVISOS IMPORTANTES (Conectada a GitHub) -->
 <style>
-  .alert-container {
-    max-width: 1000px; margin: 30px auto; padding: 0 20px; font-family: 'Segoe UI', Arial, sans-serif;
-  }
-  /* Barra de Última Hora */
-  .breaking-news {
-    background: linear-gradient(90deg, #b30000 0%, #800000 100%);
-    color: white; padding: 12px 20px; border-radius: 8px;
-    display: flex; align-items: center; gap: 15px;
-    box-shadow: 0 4px 10px rgba(179, 0, 0, 0.3); margin-bottom: 25px;
-  }
-  .breaking-badge {
-    background: #FFD700; color: #800000; font-weight: 900; font-size: 12px;
-    padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px;
-    display: flex; align-items: center; gap: 6px;
-  }
-  .pulse-dot {
-    width: 8px; height: 8px; background: #800000; border-radius: 50%;
-    animation: pulse 1.5s infinite;
-  }
-  @keyframes pulse {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(128, 0, 0, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(128, 0, 0, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(128, 0, 0, 0); }
-  }
+  .alert-container { max-width: 1000px; margin: 30px auto; padding: 0 20px; font-family: 'Segoe UI', Arial, sans-serif; }
+  .breaking-news { background: linear-gradient(90deg, #b30000 0%, #800000 100%); color: white; padding: 12px 20px; border-radius: 8px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 10px rgba(179, 0, 0, 0.3); margin-bottom: 25px; }
+  .breaking-badge { background: #FFD700; color: #800000; font-weight: 900; font-size: 12px; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
+  .pulse-dot { width: 8px; height: 8px; background: #800000; border-radius: 50%; animation: pulse 1.5s infinite; }
+  @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(128, 0, 0, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(128, 0, 0, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(128, 0, 0, 0); } }
   .breaking-text { font-size: 15px; font-weight: 500; }
-  
-  /* Título de la sección */
-  .section-title {
-    text-align: center; color: #003366; font-size: 26px; font-weight: 800; margin-bottom: 20px;
-    position: relative;
-  }
-  .section-title::after {
-    content: ''; display: block; width: 60px; height: 4px; background: #FFD700;
-    margin: 8px auto 0; border-radius: 2px;
-  }
-
-  /* Cuadrícula de notas */
-  .notes-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;
-  }
-  .note-card {
-    background: white; border-radius: 10px; padding: 20px;
-    border-left: 5px solid #FFD700; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    transition: transform 0.2s ease;
-  }
+  .section-title { text-align: center; color: #003366; font-size: 26px; font-weight: 800; margin-bottom: 20px; position: relative; }
+  .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: #FFD700; margin: 8px auto 0; border-radius: 2px; }
+  .notes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .note-card { background: white; border-radius: 10px; padding: 20px; border-left: 5px solid #FFD700; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s ease; }
   .note-card:hover { transform: translateY(-5px); }
   .note-icon { font-size: 28px; margin-bottom: 10px; }
   .note-title { color: #003366; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
@@ -355,45 +320,54 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 </style>
 
 <div class="alert-container">
-  
-  <!-- Barra de Última Hora (Urgente) -->
+  <!-- Barra de Última Hora -->
   <div class="breaking-news">
     <div class="breaking-badge"><div class="pulse-dot"></div> ÚLTIMA HORA</div>
-    <div class="breaking-text">🚨 ¡Nuevos vuelos directos La Habana – Caracas disponibles los jueves! Reserva tu cupo ahora.</div>
+    <div class="breaking-text" id="breakingText">Cargando anuncios...</div>
   </div>
 
   <h2 class="section-title">📢 Avisos y Notas Importantes</h2>
 
   <!-- Cuadrícula de Notas -->
-  <div class="notes-grid">
-    
-    <!-- Nota 1 -->
-    <div class="note-card">
-      <div class="note-icon">🛂</div>
-      <div class="note-title">Actualización: Visa de Italia</div>
-      <div class="note-desc">Se requiere llevar el pago consular de 90 euros en efectivo el día de la cita en la embajada. ¡No lo olvides!</div>
-      <div class="note-date">📅 Publicado: 25 Nov 2026</div>
-    </div>
-
-    <!-- Nota 2 -->
-    <div class="note-card">
-      <div class="note-icon">💱</div>
-      <div class="note-title">Nuevas Tasas de Cambio</div>
-      <div class="note-desc">Hemos actualizado las tasas del ZELLE y el USD. Consulta la calculadora en la sección de Tasas para más detalles.</div>
-      <div class="note-date">📅 Publicado: 24 Nov 2026</div>
-    </div>
-
-    <!-- Nota 3 -->
-    <div class="note-card">
-      <div class="note-icon">🇵🇱</div>
-      <div class="note-title">Oportunidad Laboral en Polonia</div>
-      <div class="note-desc">Abierto el proceso para fábricas de industria cárnica y costura. Contrato mínimo de 6 meses en zona Schengen.</div>
-      <div class="note-date">📅 Publicado: 23 Nov 2026</div>
-    </div>
-
+  <div class="notes-grid" id="notesGrid">
+    <!-- Las notas se cargarán aquí automáticamente desde GitHub -->
   </div>
 </div>
 
+<!-- Script para leer el archivo noticias.json -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    fetch('noticias.json')
+      .then(response => response.json())
+      .then(data => {
+        // Actualizar la barra roja de Última Hora
+        if(data.ultimaHora) {
+          document.getElementById('breakingText').innerText = data.ultimaHora;
+        }
+        
+        // Generar las tarjetas de notas
+        const notesContainer = document.getElementById('notesGrid');
+        notesContainer.innerHTML = ''; // Limpiar contenido por defecto
+        
+        data.notas.forEach(nota => {
+          const cardHTML = `
+            <div class="note-card">
+              <div class="note-icon">${nota.icono}</div>
+              <div class="note-title">${nota.titulo}</div>
+              <div class="note-desc">${nota.descripcion}</div>
+              <div class="note-date">📅 Publicado: ${nota.fecha}</div>
+            </div>
+          `;
+          notesContainer.innerHTML += cardHTML;
+        });
+      })
+      .catch(error => {
+        console.error('Error al cargar las notas:', error);
+        document.getElementById('breakingText').innerText = "Bienvenido a Your Bridge Home.";
+      });
+  });
+</script>
+  
 <!-- SERVICIOS -->
 <section id="servicios"><div class="container"><div class="section-head"><div class="eyebrow" data-i18n="services_eyebrow">Lo que hacemos</div><h2 data-i18n="services_title">Nuestros <span class="gold">servicios</span></h2><p data-i18n="services_desc">Soluciones para mantenerte conectado y acercarte a tus destinos.</p></div><div class="grid" id="serviciosList"><div class="empty">⏳ <span data-i18n="loading">Cargando...</span></div></div></div></section>
 
