@@ -4,39 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0f172a">
-
-<!-- SEO -->
-<meta name="description" content="Your Bridge Home - Recargas internacionales a Cuba, envío de remesas, boletos de avión Rusia-Cuba, tasas de cambio en tiempo real. Servicio profesional de Daynel Caminero.">
-<meta name="keywords" content="recargas Cuba, remesas Cuba, boletos Rusia Cuba, tasas de cambio Cuba, enviar dinero Cuba, recargas Cubacel, boletos Moscú La Habana, Your Bridge Home, Daynel Caminero">
-<meta name="author" content="Daynel Caminero">
-<meta name="robots" content="index, follow">
-
-<!-- Open Graph -->
-<meta property="og:title" content="YOUR BRIDGE HOME | Tu puente al mundo">
-<meta property="og:description" content="Recargas internacionales, remesas, boletos y tasas de cambio en tiempo real.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://yourbridgehome.com">
-
-<!-- Schema.org -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Your Bridge Home",
-  "description": "Servicios de recargas internacionales, remesas y boletos para cubanos en el exterior",
-  "founder": "Daynel Caminero",
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+7-904-631-95-65",
-    "contactType": "customer service"
-  }
-}
-</script>
-
+<meta name="description" content="Your Bridge Home - Recargas, remesas, boletos, visas, ofertas y tasas de cambio en tiempo real. Servicio profesional de Daynel Caminero.">
 <title>YOUR BRIDGE HOME | Tu puente al mundo</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2?v=20261124"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 :root{--bg:#0f172a;--panel:#17243a;--panel2:#1d2c44;--gold:#e8b84d;--gold2:#ffd978;--white:#f8fafc;--muted:#aab6c8;--line:#33445f;--green:#25d366;--red:#ef6464}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -53,14 +26,12 @@ button{cursor:pointer}
 .banner-item{min-width:100%;text-align:center;padding:10px 0;font-size:12px;font-weight:700;color:var(--gold);white-space:nowrap}
 @keyframes slideBanner{0%,33%{transform:translateX(0)}36%,66%{transform:translateX(-100%)}69%,100%{transform:translateX(-200%)}}
 
-/* BANNER GALERÍA CARRUSEL */
 .banner-galeria{position:relative;width:100%;height:400px;overflow:hidden;background:#000}
 .banner-galeria .slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease-in-out}
 .banner-galeria .slide.active{opacity:1}
 .banner-galeria .slide img{width:100%;height:100%;object-fit:cover}
 .banner-galeria .slide-overlay{position:absolute;bottom:0;left:0;right:0;padding:30px;background:linear-gradient(transparent,rgba(0,0,0,0.8));color:white}
 .banner-galeria .slide-overlay h3{font-size:24px;color:var(--gold);margin-bottom:8px}
-.banner-galeria .slide-overlay p{font-size:14px;color:var(--muted)}
 .banner-galeria .nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(232,184,77,0.8);color:#182235;border:0;width:45px;height:45px;border-radius:50%;font-size:18px;cursor:pointer;z-index:10;transition:.2s}
 .banner-galeria .nav-btn:hover{background:var(--gold);transform:translateY(-50%) scale(1.1)}
 .banner-galeria .nav-prev{left:20px}
@@ -137,27 +108,35 @@ section{padding:58px 0}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold)}
 .field textarea{min-height:85px;resize:vertical}
 .result{background:#0d192b;border:1px solid var(--gold);border-radius:10px;padding:12px;color:var(--gold);font-weight:900;min-height:44px}
-.offer-card{position:relative}
+
+/* OFERTAS CARD */
+.offer-card{position:relative; overflow: hidden;}
 .offer-card .price{margin:8px 0}
 .offer-card img{width:100%;height:150px;object-fit:cover;border-radius:10px;margin-bottom:12px;background:#0b1425}
+.discount-badge{position:absolute;top:15px;right:15px;background:var(--red);color:white;padding:6px 12px;border-radius:20px;font-weight:900;font-size:14px;box-shadow:0 4px 10px rgba(239,100,100,0.4);z-index:2;transform:rotate(3deg);}
 .empty{padding:25px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;grid-column:1/-1}
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .contact-box{overflow:hidden;min-width:0;overflow-wrap:anywhere}
 .contact-box a{overflow-wrap:anywhere;max-width:100%}
-.contact-box .btn{white-space:normal;text-align:center;max-width:100%}
 
-/* GUÍAS */
-.guia-aviso{margin-top:20px;padding:15px;background:var(--panel);border-left:4px solid var(--gold);border-radius:8px}
-.guia-aviso p{color:var(--gold);font-weight:700;margin:0 0 8px 0}
-.guia-aviso p:last-child{color:var(--muted);font-size:13px;margin:0}
+/* TRACKING */
+.tracker-box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:20px}
+.tracker-steps{display:flex;justify-content:space-between;position:relative;margin:20px 0}
+.tracker-steps::before{content:'';position:absolute;top:15px;left:0;right:0;height:3px;background:var(--line);z-index:0}
+.step{position:relative;z-index:1;text-align:center;flex:1}
+.step-circle{width:32px;height:32px;border-radius:50%;background:var(--line);color:var(--muted);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-weight:700;font-size:12px;border:2px solid var(--bg)}
+.step.active .step-circle{background:var(--gold);color:#182235}
+.step.completed .step-circle{background:var(--green);color:white}
+.step-label{font-size:11px;color:var(--muted);font-weight:700}
+.step.active .step-label{color:var(--gold)}
 
-/* ALERTAS Y NOTICIAS */
-.alert-container { max-width: 1000px; margin: 30px auto; padding: 0 20px; font-family: 'Segoe UI', Arial, sans-serif; }
-.breaking-news { background: linear-gradient(90deg, #b30000 0%, #800000 100%); color: white; padding: 12px 20px; border-radius: 8px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 10px rgba(179, 0, 0, 0.3); margin-bottom: 25px; }
-.breaking-badge { background: #FFD700; color: #800000; font-weight: 900; font-size: 12px; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
+/* ALERTAS */
+.alert-container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+.breaking-news { background: linear-gradient(90deg, #b30000 0%, #800000 100%); color: white; padding: 12px 20px; border-radius: 8px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 10px rgba(179, 0, 0, 0.3); margin-bottom: 25px; min-height: 48px; }
+.breaking-badge { background: #FFD700; color: #800000; font-weight: 900; font-size: 12px; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; white-space: nowrap; }
 .pulse-dot { width: 8px; height: 8px; background: #800000; border-radius: 50%; animation: pulse 1.5s infinite; }
 @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(128, 0, 0, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(128, 0, 0, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(128, 0, 0, 0); } }
-.breaking-text { font-size: 15px; font-weight: 500; }
+.breaking-text { font-size: 15px; font-weight: 500; transition: opacity 0.5s ease; }
 .section-title-alert { text-align: center; color: var(--gold); font-size: 26px; font-weight: 800; margin-bottom: 20px; position: relative; }
 .section-title-alert::after { content: ''; display: block; width: 60px; height: 4px; background: var(--gold); margin: 8px auto 0; border-radius: 2px; }
 .notes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
@@ -167,6 +146,14 @@ section{padding:58px 0}
 .note-title { color: var(--white); font-size: 18px; font-weight: 700; margin-bottom: 8px; }
 .note-desc { color: var(--muted); font-size: 14px; line-height: 1.5; margin-bottom: 12px; }
 .note-date { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; opacity: 0.7; }
+
+/* VISA TABLE */
+.visa-table{width:100%;border-collapse:collapse;margin-top:15px;font-size:13px}
+.visa-table th,.visa-table td{padding:12px;text-align:left;border-bottom:1px solid var(--line)}
+.visa-table th{color:var(--gold);font-weight:700;text-transform:uppercase;font-size:11px;letter-spacing:1px}
+.visa-table tr:hover{background:#1a2941}
+.badge-yes{background:#ef646433;color:#ef6464;padding:3px 8px;border-radius:12px;font-size:11px;font-weight:700}
+.badge-no{background:#25d36633;color:#25d366;padding:3px 8px;border-radius:12px;font-size:11px;font-weight:700}
 
 /* FOOTER */
 footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:12px}
@@ -182,8 +169,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 .close{background:#2b3c55;color:white;border:0;border-radius:8px;padding:8px 12px}
 .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
 .form-grid .full{grid-column:1/-1}
-.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
-.admin-tabs button{background:#263852;color:white;border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:11px;font-weight:800;cursor:pointer}
+.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0; overflow-x: auto; padding-bottom: 5px;}
+.admin-tabs button{background:#263852;color:white;border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:11px;font-weight:800;cursor:pointer; white-space: nowrap;}
 .admin-tabs button.active{background:var(--gold);color:#172238}
 .admin-panel{display:none}
 .admin-panel.active{display:block}
@@ -193,7 +180,20 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 .admin-item button{margin:2px}
 .preview-img{max-width:100px;max-height:100px;border-radius:8px;margin-top:10px}
 
-/* RESPONSIVE */
+/* COMPROBANTE */
+.receipt-box{background:white;color:#182235;padding:30px;border-radius:12px;text-align:center;border:2px dashed var(--gold)}
+.receipt-box h2{color:#182235;margin-bottom:10px}
+.receipt-box .tracking{font-size:28px;font-weight:900;color:#b30000;letter-spacing:2px;margin:15px 0}
+.receipt-box p{margin:8px 0;font-size:14px}
+.receipt-box .stamp{margin-top:20px;font-size:12px;color:#666;border-top:1px solid #ddd;padding-top:15px}
+
+@media print {
+  body * { visibility: hidden; }
+  #receiptModal, #receiptModal * { visibility: visible; }
+  #receiptModal { position: absolute; left: 0; top: 0; width: 100%; background: white; color: black; }
+  .no-print { display: none !important; }
+}
+
 @media(max-width:850px){
  .navlinks{display:none;position:absolute;top:74px;left:0;right:0;background:#0b1425;padding:18px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
  .navlinks.open{display:flex}
@@ -203,6 +203,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  .rates{grid-template-columns:repeat(3,minmax(0,1fr))}
  .clock-widget{min-width:110px}
  .banner-galeria{height:250px}
+ .tracker-steps{flex-direction:column;gap:15px}
+ .tracker-steps::before{display:none}
 }
 @media(max-width:600px){
  .container{width:calc(100% - 24px)}
@@ -210,7 +212,6 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  .brand{font-size:16px;white-space:normal;line-height:1.3}
  .brand small{font-size:8px;letter-spacing:1px}
  .navlinks{top:66px}
- .nav-actions .btn{padding:9px;font-size:10px}
  .hero{padding:48px 0 38px}
  section{padding:42px 0}
  .grid,.info-grid{grid-template-columns:1fr}
@@ -222,15 +223,12 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  .floating{right:10px;bottom:10px;padding:11px 14px;font-size:11px}
  .hero-card .big{font-size:24px}
  .clock-widget{min-width:100px;padding:5px 10px}
- .clock-widget .clock-time{font-size:12px}
  .banner-galeria{height:200px}
- .banner-galeria .slide-overlay h3{font-size:18px}
 }
 </style>
 </head>
 <body>
 
-<!-- BANNER SUPERIOR -->
 <div class="top-banner">
  <div class="banner-carousel">
   <div class="banner-item">🎉 ¡Las mejores ofertas en recargas internacionales!</div>
@@ -239,7 +237,6 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  </div>
 </div>
 
-<!-- BANNER GALERÍA CARRUSEL -->
 <div class="banner-galeria" id="bannerGaleria">
  <div id="bannerSlides"></div>
  <button class="nav-btn nav-prev" onclick="bannerNav(-1)"><i class="fa-solid fa-chevron-left"></i></button>
@@ -247,7 +244,6 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  <div class="dots" id="bannerDots"></div>
 </div>
 
-<!-- HORA MUNDIAL -->
 <div class="world-clock-banner">
  <div class="ticker-wrap">
   <div class="ticker">
@@ -256,31 +252,30 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    <div class="ticker-item">🇪🇸 Madrid <span id="wc-madrid">--:--</span></div>
    <div class="ticker-item">🇺🇸 Miami <span id="wc-miami">--:--</span></div>
    <div class="ticker-item">🇲🇽 C. México <span id="wc-mexico">--:--</span></div>
-   <div class="ticker-item">🇦🇷 B. Aires <span id="wc-buenosaires">--:--</span></div>
    <div class="ticker-item">🇨🇺 La Habana <span id="wc-havana2">--:--</span></div>
-   <div class="ticker-item">🇷🇺 Moscú <span id="wc-moscow2">--:--</span></div>
   </div>
  </div>
 </div>
 
-<!-- HEADER -->
 <header>
  <div class="container nav">
-  <a class="brand" href="#inicio">YOUR BRIDGE HOME<small data-i18n="brand_sub">TU PUENTE AL MUNDO</small></a>
+  <a class="brand" href="#inicio">YOUR BRIDGE HOME<small>TU PUENTE AL MUNDO</small></a>
   <nav class="navlinks" id="navlinks">
-   <a href="#inicio" data-i18n="nav_home">INICIO</a>
-   <a href="#servicios" data-i18n="nav_services">SERVICIOS</a>
-   <a href="#recargas" data-i18n="nav_recharges">RECARGAS</a>
-   <a href="#boletos" data-i18n="nav_tickets">BOLETOS</a>
-   <a href="#remesas" data-i18n="nav_remesas">REMESAS</a>
-   <a href="#destinos" data-i18n="nav_destinations">DESTINOS</a>
-   <a href="#guias" style="color:var(--gold)">📚 GUÍAS</a>
-   <a href="#tasas" data-i18n="nav_rates">TASAS</a>
+   <a href="#inicio">INICIO</a>
+   <a href="#ofertas" style="color:var(--red);font-weight:900">🔥 OFERTAS</a>
+   <a href="#servicios">SERVICIOS</a>
+   <a href="#recargas">RECARGAS</a>
+   <a href="#boletos">BOLETOS</a>
+   <a href="#remesas">REMESAS</a>
+   <a href="#destinos">DESTINOS</a>
+   <a href="#visas" style="color:var(--gold)">🛂 VISAS</a>
+   <a href="#seguimiento" style="color:var(--gold)">🔍 SEGUIMIENTO</a>
+   <a href="#tasas">TASAS</a>
   </nav>
   <div class="nav-actions">
    <div class="clock-widget">
-    <div><div class="clock-label" data-i18n="clock_cuba">🇨🇺 Cuba</div><div class="clock-time" id="clockCuba">--:--:--</div></div>
-    <div><div class="clock-label" data-i18n="clock_local">🌍 Local</div><div class="clock-time" id="clockLocal">--:--:--</div></div>
+    <div><div class="clock-label">🇨🇺 Cuba</div><div class="clock-time" id="clockCuba">--:--:--</div></div>
+    <div><div class="clock-label">🌍 Local</div><div class="clock-time" id="clockLocal">--:--:--</div></div>
    </div>
    <select class="lang-select" id="langSelector" onchange="changeLanguage(this.value)">
     <option value="es">🇪🇸 ES</option>
@@ -294,291 +289,204 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
 </header>
 
 <main>
-<!-- HERO -->
 <section class="hero" id="inicio">
  <div class="container hero-grid">
   <div>
-   <div class="eyebrow" data-i18n="hero_eyebrow">Conectamos oportunidades</div>
-   <h1 data-i18n="hero_title">Tu puente hacia <span>nuevas oportunidades</span></h1>
-   <p data-i18n="hero_desc">Recargas internacionales, envío de remesas, pasajes y orientación para tus viajes.</p>
+   <div class="eyebrow">Conectamos oportunidades</div>
+   <h1>Tu puente hacia <span>nuevas oportunidades</span></h1>
+   <p>Recargas internacionales, envío de remesas, pasajes, gestión de visas y orientación para tus viajes con seguimiento en tiempo real.</p>
    <div class="hero-actions">
-    <a class="btn btn-gold" href="#servicios" data-i18n="hero_btn1">Explorar servicios <i class="fa-solid fa-arrow-right"></i></a>
-    <a class="btn btn-dark" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="hero_btn2">Contactar ahora</span></a>
+    <a class="btn btn-gold" href="#ofertas">Ver Ofertas Flash <i class="fa-solid fa-fire"></i></a>
+    <a class="btn btn-dark" href="#seguimiento"><i class="fa-solid fa-magnifying-glass"></i> Consultar mi trámite</a>
    </div>
   </div>
   <div class="hero-card">
-   <span class="pill" data-i18n="hero_card_pill">ATENCIÓN PERSONALIZADA</span>
-   <h3 data-i18n="hero_card_title">Estamos para ayudarte</h3>
+   <span class="pill">ATENCIÓN PERSONALIZADA</span>
+   <h3>Estamos para ayudarte</h3>
    <div class="big">YOUR BRIDGE HOME</div>
-   <p data-i18n="hero_card_desc">Consulta precios, solicita información y encuentra opciones para tus necesidades.</p>
+   <p>Consulta precios, solicita información y encuentra opciones para tus necesidades.</p>
    <p><i class="fa-brands fa-whatsapp gold"></i> +7 904 631 95 65</p>
-   <p><strong>Daynel Caminero</strong><br><span class="mini" data-i18n="admin_role">Administrador</span></p>
+   <p><strong>Daynel Caminero</strong><br><span class="mini">Administrador</span></p>
   </div>
  </div>
 </section>
 
-<!-- SECCIÓN: ÚLTIMA HORA Y AVISOS IMPORTANTES -->
 <div class="alert-container">
   <div class="breaking-news">
     <div class="breaking-badge"><div class="pulse-dot"></div> ÚLTIMA HORA</div>
     <div class="breaking-text" id="breakingText">Cargando anuncios...</div>
   </div>
-
   <h2 class="section-title-alert">📢 Avisos y Notas Importantes</h2>
-
   <div class="notes-grid" id="notesGrid">
     <div class="empty">⏳ Cargando noticias...</div>
   </div>
 </div>
-  
-<!-- SERVICIOS -->
-<section id="servicios"><div class="container"><div class="section-head"><div class="eyebrow" data-i18n="services_eyebrow">Lo que hacemos</div><h2 data-i18n="services_title">Nuestros <span class="gold">servicios</span></h2><p data-i18n="services_desc">Soluciones para mantenerte conectado y acercarte a tus destinos.</p></div><div class="grid" id="serviciosList"><div class="empty">⏳ <span data-i18n="loading">Cargando...</span></div></div></div></section>
 
-<!-- RECARGAS -->
-<section id="recargas" style="background:#0b1425"><div class="container"><div class="section-head"><div class="eyebrow" data-i18n="recharges_eyebrow">Conectividad</div><h2 data-i18n="recharges_title">Planes de <span class="gold">recargas</span></h2><p data-i18n="recharges_desc">Consulta las ofertas disponibles y solicita la tuya.</p></div><div class="grid" id="rechargesList"><div class="empty">⏳ <span data-i18n="loading">Cargando...</span></div></div></div></section>
-
-<!-- BOLETOS -->
-<section id="boletos"><div class="container"><div class="section-head"><div class="eyebrow" data-i18n="tickets_eyebrow">Tu próximo viaje</div><h2 data-i18n="tickets_title">Boletos de <span class="gold">avión y transporte</span></h2><p data-i18n="tickets_desc">Precios, destinos y fechas publicados por administración.</p></div><div class="grid" id="ticketsList"><div class="empty">⏳ <span data-i18n="loading">Cargando...</span></div></div></div></section>
-
-<!-- REMESAS -->
-<section id="remesas" style="background:#0b1425"><div class="container"><div class="section-head"><div class="eyebrow" data-i18n="remesas_eyebrow">Conectamos familias</div><h2 data-i18n="remesas_title">Servicio de <span class="gold">remesas</span></h2><p data-i18n="remesas_desc">Solicita información sobre disponibilidad, destinos y condiciones.</p></div><div class="grid" id="remesasList"><div class="empty">⏳ <span data-i18n="loading">Cargando...</span></div></div></div></section>
-
-<!-- DESTINOS -->
-<section id="destinos"><div class="container"><div class="section-head"><div class="eyebrow" data-i18n="dest_eyebrow">Explora el mundo</div><h2 data-i18n="dest_title">Destinos <span class="gold">disponibles</span></h2><p data-i18n="dest_desc">Viajes y servicios a los mejores destinos.</p></div><div class="grid" id="destinosList"><div class="empty">⏳ <span data-i18n="loading">Cargando...</span></div></div></div></section>
-
-<!-- GUÍAS ADUANA -->
-<section id="guias" style="background:#0b1425">
+<!-- SECCIÓN OFERTAS FLASH -->
+<section id="ofertas" style="background:#0b1425">
  <div class="container">
   <div class="section-head">
-   <div class="eyebrow">📚 Información oficial</div>
-   <h2>Guías de <span class="gold">Aduana y Migración</span></h2>
-   <p>Información actualizada sobre regulaciones y requisitos para viajeros a Cuba</p>
+   <div class="eyebrow" style="color:var(--red)">⏰ Tiempo limitado</div>
+   <h2>Ofertas <span style="color:var(--red)">Flash</span> y Descuentos</h2>
+   <p>Aprovecha nuestros porcentajes de descuento exclusivos antes de que se agoten.</p>
   </div>
-  <div class="card" style="max-width:850px;margin:0 auto;text-align:left">
-   <h3 style="color:var(--gold);margin-bottom:15px"><i class="fa-solid fa-suitcase-rolling"></i> Regulaciones Aduaneras para Viajeros a Cuba (2026)</h3>
-   <h4 style="color:var(--gold);margin:18px 0 10px 0"><i class="fa-solid fa-suitcase"></i> 1. Equipaje Personal y Límites de Valor</h4>
-   <ul style="color:var(--muted);padding-left:20px;line-height:1.8">
-    <li>Cada pasajero puede introducir hasta <strong style="color:var(--white)">25 kg</strong> de efectos personales libres de pago.</li>
-    <li>El valor total de las mercancías importadas sin carácter comercial no debe superar los <strong style="color:var(--white)">1,000 USD</strong>.</li>
-   </ul>
-   <h4 style="color:var(--gold);margin:18px 0 10px 0"><i class="fa-solid fa-pills"></i> 2. Alimentos, Medicamentos y Aseo</h4>
-   <ul style="color:var(--muted);padding-left:20px;line-height:1.8">
-    <li>Actualmente <strong style="color:var(--white)">exentos de aranceles</strong> en cantidades razonables para consumo personal.</li>
-    <li>Recomendación: Traerlos en bultos separados del equipaje de ropa.</li>
-   </ul>
-   <h4 style="color:var(--gold);margin:18px 0 10px 0"><i class="fa-solid fa-money-bill-wave"></i> 3. Divisas y Efectivo</h4>
-   <ul style="color:var(--muted);padding-left:20px;line-height:1.8">
-    <li>No existe límite máximo para ingresar dinero en efectivo.</li>
-    <li><strong style="color:var(--white)">Obligatorio declarar</strong> cantidades que superen los 5,000 USD.</li>
-   </ul>
-   <h4 style="color:var(--gold);margin:18px 0 10px 0"><i class="fa-solid fa-ban"></i> 4. Artículos Prohibidos</h4>
-   <ul style="color:var(--muted);padding-left:20px;line-height:1.8">
-    <li>Drogas y estupefacientes.</li>
-    <li>Sustancias psicotrópicas o alucinógenas.</li>
-    <li>Materiales pornográficos.</li>
-    <li>Armas de fuego sin autorización.</li>
-   </ul>
-   <h4 style="color:var(--gold);margin:18px 0 10px 0"><i class="fa-solid fa-box-open"></i> 5. Equipaje No Acompañado</h4>
-   <ul style="color:var(--muted);padding-left:20px;line-height:1.8">
-    <li>Los envíos por paquetería tienen regulaciones diferentes.</li>
-    <li>Consulte siempre con su agencia de envíos.</li>
-   </ul>
-   <h4 style="color:var(--gold);margin:18px 0 10px 0"><i class="fa-solid fa-passport"></i> 6. Documentación para el Viaje</h4>
-   <ul style="color:var(--muted);padding-left:20px;line-height:1.8">
-    <li>Pasaporte vigente (mínimo 6 meses).</li>
-    <li>Tarjeta de turista o visado según nacionalidad.</li>
-    <li>Seguro médico con cobertura en Cuba (obligatorio).</li>
-   </ul>
-   <div class="guia-aviso">
-    <p><i class="fa-solid fa-triangle-exclamation"></i> AVISO IMPORTANTE</p>
-    <p>Las regulaciones pueden cambiar. Verifique en <a href="https://www.aduana.gob.cu/" target="_blank" style="color:var(--gold);text-decoration:underline">www.aduana.gob.cu</a></p>
+  <div class="grid" id="ofertasList">
+   <div class="empty">⏳ Cargando ofertas...</div>
+  </div>
+ </div>
+</section>
+  
+<section id="servicios"><div class="container"><div class="section-head"><div class="eyebrow">Lo que hacemos</div><h2>Nuestros <span class="gold">servicios</span></h2><p>Soluciones para mantenerte conectado y acercarte a tus destinos.</p></div><div class="grid" id="serviciosList"><div class="empty">⏳ Cargando...</div></div></div></section>
+
+<section id="recargas"><div class="container"><div class="section-head"><div class="eyebrow">Conectividad</div><h2>Planes de <span class="gold">recargas</span></h2><p>Consulta las ofertas disponibles y solicita la tuya.</p></div><div class="grid" id="rechargesList"><div class="empty">⏳ Cargando...</div></div></div></section>
+
+<section id="boletos" style="background:#0b1425"><div class="container"><div class="section-head"><div class="eyebrow">Tu próximo viaje</div><h2>Boletos de <span class="gold">avión y transporte</span></h2><p>Precios, destinos y fechas publicados por administración.</p></div><div class="grid" id="ticketsList"><div class="empty">⏳ Cargando...</div></div></div></section>
+
+<section id="remesas"><div class="container"><div class="section-head"><div class="eyebrow">Conectamos familias</div><h2>Servicio de <span class="gold">remesas</span></h2><p>Solicita información sobre disponibilidad, destinos y condiciones.</p></div><div class="grid" id="remesasList"><div class="empty">⏳ Cargando...</div></div></div></section>
+
+<section id="destinos" style="background:#0b1425"><div class="container"><div class="section-head"><div class="eyebrow">Explora el mundo</div><h2>Destinos <span class="gold">disponibles</span></h2><p>Viajes y servicios a los mejores destinos.</p></div><div class="grid" id="destinosList"><div class="empty">⏳ Cargando...</div></div></div></section>
+
+<section id="visas">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">🛂 Requisitos de Entrada</div>
+   <h2>Índice de <span class="gold">Visas</span> para Cuba</h2>
+   <p>Información actualizada sobre requisitos de visado según el país de origen.</p>
+  </div>
+  <div class="card" style="overflow-x:auto">
+   <table class="visa-table">
+    <thead>
+     <tr><th>País de Origen</th><th>Destino</th><th>¿Requiere Visa?</th><th>Tipo de Documento</th><th>Estancia Máx.</th><th>Notas</th></tr>
+    </thead>
+    <tbody id="visasTableBody">
+     <tr><td colspan="6" class="empty">Cargando índice de visas...</td></tr>
+    </tbody>
+   </table>
+  </div>
+ </div>
+</section>
+
+<section id="seguimiento" style="background:#0b1425">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">🔍 Transparencia total</div>
+   <h2>Seguimiento de <span class="gold">Operaciones</span></h2>
+   <p>Introduce tu número de tracking para ver el estado actual de tu trámite.</p>
+  </div>
+  <div class="card" style="max-width:600px;margin:0 auto">
+   <div class="field" style="margin-bottom:15px">
+    <label>Número de Seguimiento (Tracking ID)</label>
+    <div style="display:flex;gap:10px">
+     <input id="trackingInput" placeholder="Ej: YBH-839201" style="text-transform:uppercase">
+     <button class="btn btn-gold" type="button" onclick="checkTracking()">Buscar</button>
+    </div>
+   </div>
+   <div id="trackingResult" style="display:none">
+    <div class="tracker-box">
+     <h3 style="color:var(--gold);margin-bottom:5px">Estado del Trámite</h3>
+     <p class="mini" id="trackIdDisplay" style="margin-bottom:15px"></p>
+     <div class="tracker-steps" id="trackerSteps"></div>
+     <div id="trackDetails" style="margin-top:15px;padding-top:15px;border-top:1px solid var(--line)"></div>
+     <div id="trackPdfLink" style="margin-top:15px"></div>
+    </div>
    </div>
   </div>
  </div>
 </section>
 
-<!-- TASAS -->
-<section id="tasas" style="background:#0b1425"><div class="container"><div class="section-head"><div class="eyebrow" data-i18n="rates_eyebrow">Información financiera</div><h2 data-i18n="rates_title">Tasas de <span class="gold">cambio</span></h2><p data-i18n="rates_desc">Valores configurados por administración.</p></div><div class="rates" id="ratesList"><div class="empty">⏳ <span data-i18n="loading">Cargando...</span></div></div><div class="card" style="margin-top:20px"><h3><i class="fa-solid fa-calculator gold"></i> <span data-i18n="calc_title">Calculadora de monedas</span></h3><div class="calculator"><div class="field"><label data-i18n="calc_amount">Cantidad</label><input id="calcAmount" type="number" min="0" value="100"></div><div class="field"><label data-i18n="calc_from">De</label><select id="calcFrom"></select></div><div class="field"><label data-i18n="calc_to">A</label><select id="calcTo"></select></div><button class="btn btn-gold" type="button" onclick="calculate()" data-i18n="calc_btn">Calcular</button></div><div class="result" id="calcResult" style="margin-top:14px" data-i18n="calc_result">Introduce una cantidad para calcular.</div></div></div></section>
+<section id="tasas"><div class="container"><div class="section-head"><div class="eyebrow">Información financiera</div><h2>Tasas de <span class="gold">cambio</span></h2><p>Valores configurados por administración.</p></div><div class="rates" id="ratesList"><div class="empty">⏳ Cargando...</div></div><div class="card" style="margin-top:20px"><h3><i class="fa-solid fa-calculator gold"></i> Calculadora de monedas</h3><div class="calculator"><div class="field"><label>Cantidad</label><input id="calcAmount" type="number" min="0" value="100"></div><div class="field"><label>De</label><select id="calcFrom"></select></div><div class="field"><label>A</label><select id="calcTo"></select></div><button class="btn btn-gold" type="button" onclick="calculate()">Calcular</button></div><div class="result" id="calcResult" style="margin-top:14px">Introduce una cantidad para calcular.</div></div></div></section>
 
-<!-- SOLICITUD -->
-<section id="solicitud"><div class="container"><div class="section-head"><div class="eyebrow" data-i18n="req_eyebrow">Estamos para ayudarte</div><h2 data-i18n="req_title">Solicita <span class="gold">información</span></h2><p data-i18n="req_desc">Completa tus datos y nos pondremos en contacto contigo.</p></div><div class="card"><form id="requestForm" onsubmit="submitRequest(event)"><div class="form-grid"><div class="field"><label data-i18n="req_name">Nombre completo</label><input id="clientName" required maxlength="100" placeholder="Tu nombre"></div><div class="field"><label data-i18n="req_phone">Teléfono / WhatsApp</label><input id="clientPhone" required maxlength="40" placeholder="Tu número de contacto"></div><div class="field full"><label data-i18n="req_details">Detalles de tu solicitud</label><textarea id="clientDetails" maxlength="1500" placeholder="Cuéntanos qué necesitas..."></textarea></div><div class="full"><button class="btn btn-gold" type="submit"><i class="fa-solid fa-paper-plane"></i> <span data-i18n="req_submit">Enviar solicitud</span></button></div></div></form><p class="mini" id="requestStatus" aria-live="polite"></p></div></div></section>
+<section id="solicitud" style="background:#0b1425"><div class="container"><div class="section-head"><div class="eyebrow">Estamos para ayudarte</div><h2>Solicita <span class="gold">información</span></h2><p>Completa tus datos y nos pondremos en contacto contigo. Recibirás un comprobante con número de seguimiento.</p></div><div class="card"><form id="requestForm" onsubmit="submitRequest(event)"><div class="form-grid"><div class="field"><label>Nombre completo</label><input id="clientName" required maxlength="100" placeholder="Tu nombre"></div><div class="field"><label>Teléfono / WhatsApp</label><input id="clientPhone" required maxlength="40" placeholder="Tu número de contacto"></div><div class="field"><label>Tipo de Servicio</label><select id="clientService"><option>Recarga</option><option>Remesa</option><option>Boleto</option><option>Visa/Trámite</option><option>Oferta Flash</option><option>Otro</option></select></div><div class="field"><label>Destino (País)</label><input id="clientDestino" placeholder="Ej: Cuba"></div><div class="field full"><label>Detalles de tu solicitud</label><textarea id="clientDetails" maxlength="1500" placeholder="Cuéntanos qué necesitas..."></textarea></div><div class="full"><button class="btn btn-gold" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar solicitud y generar comprobante</button></div></div></form><p class="mini" id="requestStatus" aria-live="polite"></p></div></div></section>
 
-<!-- INFO -->
-<section><div class="container info-grid"><div class="card contact-box"><div class="service-icon"><i class="fa-solid fa-headset"></i></div><h3 data-i18n="contact_title">Atención personalizada</h3><p data-i18n="contact_desc">Recibe orientación directa para encontrar la opción que mejor se adapte a tus necesidades.</p><p><strong data-i18n="admin_label">Administrador:</strong> Daynel Caminero</p><p><strong>WhatsApp:</strong> <a class="gold" href="https://wa.me/79046319565" target="_blank" rel="noopener">+7 904 631 95 65</a></p><a class="btn btn-green" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="contact_btn">Contactar directamente</span></a></div><div class="card contact-box"><div class="service-icon"><i class="fa-solid fa-circle-info"></i></div><h3 data-i18n="info_title">Información importante</h3><p data-i18n="info_desc1">Los precios y las tasas pueden cambiar según la disponibilidad y las condiciones del servicio.</p><p data-i18n="info_desc2">Confirma siempre el importe final, las fechas y los requisitos antes de realizar un pago.</p><p class="mini">YOUR BRIDGE HOME -- Tu puente al mundo.</p></div></div></section>
+<section><div class="container info-grid"><div class="card contact-box"><div class="service-icon"><i class="fa-solid fa-headset"></i></div><h3>Atención personalizada</h3><p>Recibe orientación directa para encontrar la opción que mejor se adapte a tus necesidades.</p><p><strong>Administrador:</strong> Daynel Caminero</p><p><strong>WhatsApp:</strong> <a class="gold" href="https://wa.me/79046319565" target="_blank" rel="noopener">+7 904 631 95 65</a></p><a class="btn btn-green" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> Contactar directamente</a></div><div class="card contact-box"><div class="service-icon"><i class="fa-solid fa-circle-info"></i></div><h3>Información importante</h3><p>Los precios y las tasas pueden cambiar según la disponibilidad y las condiciones del servicio.</p><p>Confirma siempre el importe final, las fechas y los requisitos antes de realizar un pago.</p><p class="mini">YOUR BRIDGE HOME -- Tu puente al mundo.</p></div></div></section>
 </main>
 
-<footer><div class="container footer-inner"><div><strong class="gold">YOUR BRIDGE HOME</strong><br><span data-i18n="footer_slogan">Tu puente al mundo.</span></div><div>Daynel Caminero · <span data-i18n="admin_role">Administrador</span><br>WhatsApp: +7 904 631 95 65</div><div>© <span id="year"></span> YOUR BRIDGE HOME</div></div></footer>
-<a class="floating" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> <span data-i18n="floating_btn">ATENCIÓN DIRECTA</span></a>
+<footer><div class="container footer-inner"><div><strong class="gold">YOUR BRIDGE HOME</strong><br>Tu puente al mundo.</div><div>Daynel Caminero · Administrador<br>WhatsApp: +7 904 631 95 65</div><div>© <span id="year"></span> YOUR BRIDGE HOME</div></div></footer>
+<a class="floating" href="https://wa.me/79046319565" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> ATENCIÓN DIRECTA</a>
 
 <!-- LOGIN MODAL -->
-<div class="overlay" id="loginModal"><div class="modal" style="max-width:400px"><div class="modal-head"><h2 data-i18n="admin_title">Administración</h2><button class="close" type="button" onclick="closeModal('loginModal')">✕</button></div><p class="mini" data-i18n="admin_desc">Acceso reservado al administrador.</p><div class="field"><label>Email</label><input type="email" id="adminEmail" placeholder="tu@email.com"></div><div class="field"><label data-i18n="admin_pass">Contraseña</label><input type="password" id="adminPassword" placeholder="Contraseña"></div><p id="loginError" style="color:#ff8b8b;font-size:12px"></p><button class="btn btn-gold" style="width:100%" type="button" onclick="login()" data-i18n="admin_enter">Entrar</button></div></div>
+<div class="overlay" id="loginModal"><div class="modal" style="max-width:400px"><div class="modal-head"><h2>Administración</h2><button class="close" type="button" onclick="closeModal('loginModal')">✕</button></div><p class="mini">Acceso reservado al administrador.</p><div class="field"><label>Email</label><input type="email" id="adminEmail" placeholder="tu@email.com"></div><div class="field"><label>Contraseña</label><input type="password" id="adminPassword" placeholder="Contraseña"></div><p id="loginError" style="color:#ff8b8b;font-size:12px"></p><button class="btn btn-gold" style="width:100%" type="button" onclick="login()">Entrar</button></div></div>
+
+<!-- COMPROBANTE MODAL -->
+<div class="overlay" id="receiptModal">
+ <div class="modal" style="max-width:500px">
+  <div class="receipt-box" id="receiptContent">
+   <h2><i class="fa-solid fa-check-circle" style="color:var(--green)"></i> ¡Solicitud Recibida!</h2>
+   <p>Gracias por contactar con YOUR BRIDGE HOME.</p>
+   <p>Su número de seguimiento único es:</p>
+   <div class="tracking" id="receiptTrackingId">YBH-000000</div>
+   <p><strong>Nombre:</strong> <span id="receiptName"></span></p>
+   <p><strong>Servicio:</strong> <span id="receiptService"></span></p>
+   <p><strong>Fecha:</strong> <span id="receiptDate"></span></p>
+   <p class="stamp">Guarde este número para consultar el estado de su trámite en la sección "Seguimiento".<br>Este documento sirve como comprobante inicial de su solicitud.</p>
+  </div>
+  <div style="margin-top:15px;display:flex;gap:10px;justify-content:center" class="no-print">
+   <button class="btn btn-gold" onclick="window.print()"><i class="fa-solid fa-print"></i> Imprimir / Guardar PDF</button>
+   <button class="btn btn-dark" onclick="closeModal('receiptModal')">Cerrar</button>
+  </div>
+ </div>
+</div>
 
 <!-- ADMIN MODAL -->
 <div class="overlay" id="adminModal">
  <div class="modal">
-  <div class="modal-head"><h2><i class="fa-solid fa-screwdriver-wrench"></i> <span data-i18n="panel_title">Panel de administración</span></h2><button class="close" type="button" onclick="closeModal('adminModal')">✕</button></div>
+  <div class="modal-head"><h2><i class="fa-solid fa-screwdriver-wrench"></i> Panel de administración</h2><button class="close" type="button" onclick="closeModal('adminModal')">✕</button></div>
   <div class="admin-tabs">
-   <button type="button" class="active" onclick="showAdminTab('ratesAdmin',this)">💱 Tasas</button>
+   <button type="button" class="active" onclick="showAdminTab('requestsAdmin',this)">📋 Solicitudes</button>
+   <button type="button" onclick="showAdminTab('ofertasAdmin',this)">🔥 Ofertas %</button>
+   <button type="button" onclick="showAdminTab('visasAdmin',this)">🛂 Visas</button>
+   <button type="button" onclick="showAdminTab('noticiasAdmin',this)">📢 Noticias</button>
+   <button type="button" onclick="showAdminTab('ratesAdmin',this)">💱 Tasas</button>
    <button type="button" onclick="showAdminTab('recargasAdmin',this)">📱 Recargas</button>
    <button type="button" onclick="showAdminTab('boletosAdmin',this)">✈️ Boletos</button>
    <button type="button" onclick="showAdminTab('remesasAdmin',this)">💸 Remesas</button>
    <button type="button" onclick="showAdminTab('destinosAdmin',this)">🌍 Destinos</button>
-   <button type="button" onclick="showAdminTab('guiasAdmin',this)">📚 Guías</button>
-   <button type="button" onclick="showAdminTab('ofertasAdmin',this)">🔥 Ofertas</button>
    <button type="button" onclick="showAdminTab('serviciosAdmin',this)">⭐ Servicios</button>
-   <button type="button" onclick="showAdminTab('bannerAdmin',this)">🖼️ Banner Galería</button>
-   <button type="button" onclick="showAdminTab('requestsAdmin',this)">📋 Solicitudes</button>
-   <button type="button" onclick="showAdminTab('noticiasAdmin',this)">📢 Noticias</button>
+   <button type="button" onclick="showAdminTab('bannerAdmin',this)">🖼️ Banner</button>
   </div>
   
-  <div class="admin-panel active" id="ratesAdmin"><h3 data-i18n="rates_admin_title">Tasas de cambio (valor en CUP)</h3><div id="ratesAdminList"></div></div>
-  
-  <div class="admin-panel" id="recargasAdmin">
-   <h3 data-i18n="recharge_admin_title">Crear o editar plan de recarga</h3>
-   <input type="hidden" id="rechargeId">
-   <div class="form-grid">
-    <div class="field"><label data-i18n="field_label">Etiqueta</label><input id="rechargeLabel" placeholder="OFERTA ESPECIAL"></div>
-    <div class="field"><label data-i18n="field_name">Nombre del plan</label><input id="rechargeName" placeholder="INTERNET +"></div>
-    <div class="field"><label data-i18n="field_price">Precio</label><input id="rechargePrice" type="number" step="0.01"></div>
-    <div class="field"><label data-i18n="field_currency">Moneda</label><select id="rechargeCurrency"><option>RUB</option><option>USD</option><option>EUR</option><option>CUP</option></select></div>
-    <div class="field full"><label data-i18n="field_desc1">Descripción 1</label><input id="rechargeDesc1" placeholder="2 GB LTE"></div>
-    <div class="field full"><label data-i18n="field_desc2">Descripción 2</label><input id="rechargeDesc2" placeholder="300 MB.cu"></div>
-    <div class="field full"><label>Imagen (URL de ImgBB)</label><input id="rechargeImagen" type="url" placeholder="https://i.ibb.co/..."><img id="rechargeImagenPreview" class="preview-img" style="display:none"></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveRecharge()" data-i18n="save_btn">💾 Guardar plan</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearRechargeForm()" data-i18n="new_btn">➕ Nuevo</button>
-   <div class="admin-list" id="adminRechargeList"></div>
-  </div>
-
-  <div class="admin-panel" id="boletosAdmin">
-   <h3 data-i18n="ticket_admin_title">Crear o editar boleto</h3>
-   <input type="hidden" id="ticketId">
-   <div class="form-grid">
-    <div class="field"><label data-i18n="field_label">Etiqueta</label><input id="ticketLabel" placeholder="OFERTA"></div>
-    <div class="field"><label data-i18n="field_type">Tipo de transporte</label><select id="ticketType"><option>avion</option><option>autobus</option><option>tren</option></select></div>
-    <div class="field"><label data-i18n="field_origin">Origen</label><input id="ticketOrigin" placeholder="Rusia"></div>
-    <div class="field"><label data-i18n="field_dest">Destino</label><input id="ticketDestination" placeholder="Cuba"></div>
-    <div class="field"><label data-i18n="field_departure">Fecha de salida</label><input id="ticketDeparture" type="date"></div>
-    <div class="field"><label data-i18n="field_return">Fecha de regreso</label><input id="ticketReturn" type="date"></div>
-    <div class="field"><label data-i18n="field_price">Precio</label><input id="ticketPrice" type="number" min="0" step="0.01"></div>
-    <div class="field"><label data-i18n="field_currency">Moneda</label><select id="ticketCurrency"><option>RUB</option><option>USD</option><option>EUR</option><option>CUP</option></select></div>
-    <div class="field full"><label data-i18n="field_desc">Descripción</label><textarea id="ticketDescription"></textarea></div>
-    <div class="field full"><label>Imagen (URL de ImgBB)</label><input id="ticketImagen" type="url" placeholder="https://i.ibb.co/..."><img id="ticketImagenPreview" class="preview-img" style="display:none"></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveTicket()" data-i18n="save_btn">💾 Guardar boleto</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearTicketForm()" data-i18n="new_btn">➕ Nuevo</button>
-   <div class="admin-list" id="adminTicketList"></div>
-  </div>
-
-  <div class="admin-panel" id="remesasAdmin">
-   <h3 data-i18n="remesa_admin_title">Crear o editar remesa</h3>
-   <input type="hidden" id="remesaId">
-   <div class="form-grid">
-    <div class="field"><label data-i18n="field_origin">Origen</label><input id="remesaOrigen" placeholder="Rusia"></div>
-    <div class="field"><label data-i18n="field_dest">Destino</label><input id="remesaDestino" placeholder="Cuba"></div>
-    <div class="field"><label data-i18n="field_amount_orig">Monto origen</label><input id="remesaMontoOrigen" type="number" step="0.01"></div>
-    <div class="field"><label data-i18n="field_currency_orig">Moneda origen</label><select id="remesaMonedaOrigen"><option>RUB</option><option>USD</option><option>EUR</option></select></div>
-    <div class="field"><label data-i18n="field_amount_dest">Monto destino</label><input id="remesaMontoDestino" type="number" step="0.01"></div>
-    <div class="field"><label data-i18n="field_currency_dest">Moneda destino</label><select id="remesaMonedaDestino"><option>CUP</option><option>USD</option><option>EUR</option></select></div>
-    <div class="field full"><label data-i18n="field_desc">Descripción</label><textarea id="remesaDescripcion"></textarea></div>
-    <div class="field full"><label>Imagen (URL de ImgBB)</label><input id="remesaImagen" type="url" placeholder="https://i.ibb.co/..."><img id="remesaImagenPreview" class="preview-img" style="display:none"></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveRemesa()" data-i18n="save_btn">💾 Guardar remesa</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearRemesaForm()" data-i18n="new_btn">➕ Nuevo</button>
-   <div class="admin-list" id="adminRemesaList"></div>
-  </div>
-
-  <div class="admin-panel" id="destinosAdmin">
-   <h3 data-i18n="destinos_admin_title">Crear o editar destino</h3>
-   <input type="hidden" id="destinoId">
-   <div class="form-grid">
-    <div class="field"><label data-i18n="field_name">Nombre</label><input id="destinoNombre" placeholder="Cuba"></div>
-    <div class="field"><label data-i18n="field_category">Categoría</label><input id="destinoCategoria" placeholder="Caribe"></div>
-    <div class="field full"><label data-i18n="field_desc">Descripción</label><textarea id="destinoDescripcion"></textarea></div>
-    <div class="field full"><label>Imagen (URL de ImgBB)</label><input id="destinoImagen" type="url" placeholder="https://i.ibb.co/..."><img id="destinoImagenPreview" class="preview-img" style="display:none"></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveDestino()" data-i18n="save_btn">💾 Guardar destino</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearDestinoForm()" data-i18n="new_btn">➕ Nuevo</button>
-   <div class="admin-list" id="adminDestinoList"></div>
-  </div>
-
-  <div class="admin-panel" id="guiasAdmin">
-   <h3>Gestionar guías de aduana</h3>
-   <input type="hidden" id="guiaId">
-   <div class="form-grid">
-    <div class="field full"><label>Título</label><input id="guiaTitulo" placeholder="Requisitos de visado para Cuba"></div>
-    <div class="field"><label>Categoría</label><select id="guiaCategoria"><option>aduanas</option><option>migracion</option><option>visados</option><option>general</option></select></div>
-    <div class="field"><label>Icono</label><input id="guiaIcono" placeholder="fa-book" value="fa-book"></div>
-    <div class="field full"><label>Imagen (URL de ImgBB)</label><input id="guiaImagen" type="url" placeholder="https://i.ibb.co/..."><img id="guiaImagenPreview" class="preview-img" style="display:none"></div>
-    <div class="field full"><label>Contenido</label><textarea id="guiaContenido" style="min-height:150px"></textarea></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveGuia()">💾 Guardar</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearGuiaForm()">➕ Nuevo</button>
-   <div class="admin-list" id="adminGuiasList"></div>
+  <div class="admin-panel active" id="requestsAdmin">
+   <h3>Solicitudes recibidas</h3>
+   <button class="btn btn-dark" type="button" onclick="loadRequests()" style="margin-bottom:10px">🔄 Actualizar</button>
+   <div class="admin-list" id="adminRequestsList"></div>
   </div>
 
   <div class="admin-panel" id="ofertasAdmin">
-   <h3>Gestionar ofertas flash</h3>
+   <h3>🔥 Gestionar Ofertas Flash (Descuentos)</h3>
    <input type="hidden" id="ofertaId">
    <div class="form-grid">
-    <div class="field full"><label>Título</label><input id="ofertaTitulo" placeholder="🔥 50% DE DESCUENTO"></div>
-    <div class="field full"><label>Descripción</label><input id="ofertaDescripcion" placeholder="En todos los envíos de remesas"></div>
-    <div class="field"><label>Descuento</label><input id="ofertaDescuento" placeholder="50%"></div>
-    <div class="field"><label>Fecha fin</label><input id="ofertaFechaFin" type="datetime-local"></div>
-    <div class="field full"><label>Imagen (URL de ImgBB)</label><input id="ofertaImagen" type="url" placeholder="https://i.ibb.co/..."><img id="ofertaImagenPreview" class="preview-img" style="display:none"></div>
+    <div class="field full"><label>Título de la Oferta</label><input id="ofertaTitulo" placeholder="Ej: 50% DE DESCUENTO EN REMESAS"></div>
+    <div class="field full"><label>Descripción</label><input id="ofertaDescripcion" placeholder="Ej: Válido solo para envíos a La Habana"></div>
+    <div class="field"><label>Porcentaje de Descuento</label><input id="ofertaDescuento" placeholder="Ej: 50%"></div>
+    <div class="field"><label>Fecha de Expiración</label><input id="ofertaFechaFin" type="datetime-local"></div>
+    <div class="field full"><label>Imagen (URL)</label><input id="ofertaImagen" type="url" placeholder="https://..."><img id="ofertaImagenPreview" class="preview-img" style="display:none"></div>
    </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveOferta()">💾 Guardar</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearOfertaForm()">➕ Nuevo</button>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveOferta()">💾 Guardar Oferta</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearOfertaForm()">➕ Nueva</button>
    <div class="admin-list" id="adminOfertasList"></div>
   </div>
 
-  <div class="admin-panel" id="serviciosAdmin">
-   <h3 data-i18n="servicios_admin_title">Crear o editar servicio</h3>
-   <input type="hidden" id="servicioId">
+  <div class="admin-panel" id="visasAdmin">
+   <h3>Gestionar Índice de Visas</h3>
+   <input type="hidden" id="visaId">
    <div class="form-grid">
-    <div class="field"><label data-i18n="field_name">Nombre</label><input id="servicioNombre" placeholder="Remesas"></div>
-    <div class="field"><label data-i18n="field_order">Orden</label><input id="servicioOrden" type="number" value="1"></div>
-    <div class="field"><label data-i18n="field_icon">Icono (emoji)</label><input id="servicioIcono" placeholder="💰"></div>
-    <div class="field full"><label data-i18n="field_desc">Descripción</label><textarea id="servicioDescripcion"></textarea></div>
+    <div class="field"><label>País de Origen</label><input id="visaOrigen" placeholder="Ej: Rusia"></div>
+    <div class="field"><label>País Destino</label><input id="visaDestino" placeholder="Ej: Cuba"></div>
+    <div class="field"><label>¿Requiere Visa?</label><select id="visaRequiere"><option value="false">No</option><option value="true">Sí</option></select></div>
+    <div class="field"><label>Tipo de Documento</label><input id="visaTipo" placeholder="Ej: Tarjeta de Turista"></div>
+    <div class="field"><label>Días Máximos</label><input id="visaDias" type="number" placeholder="30"></div>
+    <div class="field full"><label>Notas</label><input id="visaNotas" placeholder="Requisitos adicionales"></div>
    </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveServicio()" data-i18n="save_btn">💾 Guardar servicio</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearServicioForm()" data-i18n="new_btn">➕ Nuevo</button>
-   <div class="admin-list" id="adminServicioList" style="margin-top:20px"></div>
-  </div>
-
-  <div class="admin-panel" id="bannerAdmin">
-   <h3>🖼️ Gestionar Banner Galería (Carrusel)</h3>
-   <p class="mini" style="margin-bottom:15px">Agrega imágenes de ImgBB para el carrusel principal de la web</p>
-   <input type="hidden" id="bannerId">
-   <div class="form-grid">
-    <div class="field full"><label>Título (opcional)</label><input id="bannerTitulo" placeholder="Ej: Boleto Rusia-Cuba"></div>
-    <div class="field full"><label>URL de ImgBB (obligatorio)</label><input id="bannerImagen" type="url" placeholder="https://i.ibb.co/xxxxx/foto.jpg"><img id="bannerImagenPreview" class="preview-img" style="display:none"></div>
-    <div class="field full"><label>Enlace al hacer clic (opcional)</label><input id="bannerEnlace" type="url" placeholder="https://wa.me/79046319565"></div>
-    <div class="field"><label>Orden</label><input id="bannerOrden" type="number" value="0"></div>
-    <div class="field"><label><input type="checkbox" id="bannerActivo" checked> Activo</label></div>
-   </div>
-   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveBanner()">💾 Guardar imagen</button>
-   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearBannerForm()">➕ Nueva</button>
-   <div class="admin-list" id="adminBannerList"></div>
-  </div>
-
-  <div class="admin-panel" id="requestsAdmin">
-   <h3 data-i18n="requests_admin_title">Solicitudes recibidas</h3>
-   <button class="btn btn-dark" type="button" onclick="loadRequests()" data-i18n="refresh_btn">🔄 Actualizar</button>
-   <div class="admin-list" id="adminRequestsList"></div>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveVisa()">💾 Guardar Visa</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearVisaForm()">➕ Nuevo</button>
+   <div class="admin-list" id="adminVisasList"></div>
   </div>
 
   <div class="admin-panel" id="noticiasAdmin">
    <h3>📢 Gestionar Última Hora y Notas</h3>
    <input type="hidden" id="noticiaId">
    <div class="form-grid">
-    <div class="field">
-     <label>Tipo</label>
-     <select id="noticiaTipo">
-      <option value="nota">📝 Nota Informativa</option>
-      <option value="ultima_hora">🚨 Barra de Última Hora (Urgente)</option>
-     </select>
-    </div>
+    <div class="field"><label>Tipo</label><select id="noticiaTipo"><option value="nota">📝 Nota Informativa</option><option value="ultima_hora">🚨 Barra de Última Hora</option></select></div>
     <div class="field"><label>Ícono (Emoji)</label><input id="noticiaIcono" placeholder="Ej: ✈️" maxlength="2"></div>
     <div class="field"><label>Título</label><input id="noticiaTitulo" placeholder="Título de la nota"></div>
     <div class="field"><label>Fecha</label><input id="noticiaFecha" placeholder="Ej: 25 Nov 2026"></div>
@@ -591,6 +499,106 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    <div class="admin-list" id="adminNoticiasList" style="margin-top:20px"></div>
   </div>
 
+  <div class="admin-panel" id="ratesAdmin"><h3>Tasas de cambio (valor en CUP)</h3><div id="ratesAdminList"></div></div>
+  
+  <div class="admin-panel" id="recargasAdmin">
+   <h3>Crear o editar plan de recarga</h3>
+   <input type="hidden" id="rechargeId">
+   <div class="form-grid">
+    <div class="field"><label>Etiqueta</label><input id="rechargeLabel" placeholder="OFERTA"></div>
+    <div class="field"><label>Nombre del plan</label><input id="rechargeName" placeholder="INTERNET +"></div>
+    <div class="field"><label>Precio</label><input id="rechargePrice" type="number" step="0.01"></div>
+    <div class="field"><label>Moneda</label><select id="rechargeCurrency"><option>RUB</option><option>USD</option><option>EUR</option><option>CUP</option></select></div>
+    <div class="field full"><label>Descripción 1</label><input id="rechargeDesc1" placeholder="2 GB LTE"></div>
+    <div class="field full"><label>Descripción 2</label><input id="rechargeDesc2" placeholder="300 MB.cu"></div>
+    <div class="field full"><label>Imagen (URL)</label><input id="rechargeImagen" type="url" placeholder="https://..."><img id="rechargeImagenPreview" class="preview-img" style="display:none"></div>
+   </div>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveRecharge()">💾 Guardar plan</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearRechargeForm()">➕ Nuevo</button>
+   <div class="admin-list" id="adminRechargeList"></div>
+  </div>
+
+  <div class="admin-panel" id="boletosAdmin">
+   <h3>Crear o editar boleto</h3>
+   <input type="hidden" id="ticketId">
+   <div class="form-grid">
+    <div class="field"><label>Etiqueta</label><input id="ticketLabel" placeholder="OFERTA"></div>
+    <div class="field"><label>Tipo</label><select id="ticketType"><option>avion</option><option>autobus</option><option>tren</option></select></div>
+    <div class="field"><label>Origen</label><input id="ticketOrigin" placeholder="Rusia"></div>
+    <div class="field"><label>Destino</label><input id="ticketDestination" placeholder="Cuba"></div>
+    <div class="field"><label>Fecha de salida</label><input id="ticketDeparture" type="date"></div>
+    <div class="field"><label>Fecha de regreso</label><input id="ticketReturn" type="date"></div>
+    <div class="field"><label>Precio</label><input id="ticketPrice" type="number" min="0" step="0.01"></div>
+    <div class="field"><label>Moneda</label><select id="ticketCurrency"><option>RUB</option><option>USD</option><option>EUR</option><option>CUP</option></select></div>
+    <div class="field full"><label>Descripción</label><textarea id="ticketDescription"></textarea></div>
+    <div class="field full"><label>Imagen (URL)</label><input id="ticketImagen" type="url" placeholder="https://..."><img id="ticketImagenPreview" class="preview-img" style="display:none"></div>
+   </div>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveTicket()">💾 Guardar boleto</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearTicketForm()">➕ Nuevo</button>
+   <div class="admin-list" id="adminTicketList"></div>
+  </div>
+
+  <div class="admin-panel" id="remesasAdmin">
+   <h3>Crear o editar remesa</h3>
+   <input type="hidden" id="remesaId">
+   <div class="form-grid">
+    <div class="field"><label>Origen</label><input id="remesaOrigen" placeholder="Rusia"></div>
+    <div class="field"><label>Destino</label><input id="remesaDestino" placeholder="Cuba"></div>
+    <div class="field"><label>Monto origen</label><input id="remesaMontoOrigen" type="number" step="0.01"></div>
+    <div class="field"><label>Moneda origen</label><select id="remesaMonedaOrigen"><option>RUB</option><option>USD</option><option>EUR</option></select></div>
+    <div class="field"><label>Monto destino</label><input id="remesaMontoDestino" type="number" step="0.01"></div>
+    <div class="field"><label>Moneda destino</label><select id="remesaMonedaDestino"><option>CUP</option><option>USD</option><option>EUR</option></select></div>
+    <div class="field full"><label>Descripción</label><textarea id="remesaDescripcion"></textarea></div>
+    <div class="field full"><label>Imagen (URL)</label><input id="remesaImagen" type="url" placeholder="https://..."><img id="remesaImagenPreview" class="preview-img" style="display:none"></div>
+   </div>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveRemesa()">💾 Guardar remesa</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearRemesaForm()">➕ Nuevo</button>
+   <div class="admin-list" id="adminRemesaList"></div>
+  </div>
+
+  <div class="admin-panel" id="destinosAdmin">
+   <h3>Crear o editar destino</h3>
+   <input type="hidden" id="destinoId">
+   <div class="form-grid">
+    <div class="field"><label>Nombre</label><input id="destinoNombre" placeholder="Cuba"></div>
+    <div class="field"><label>Categoría</label><input id="destinoCategoria" placeholder="Caribe"></div>
+    <div class="field full"><label>Descripción</label><textarea id="destinoDescripcion"></textarea></div>
+    <div class="field full"><label>Imagen (URL)</label><input id="destinoImagen" type="url" placeholder="https://..."><img id="destinoImagenPreview" class="preview-img" style="display:none"></div>
+   </div>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveDestino()">💾 Guardar destino</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearDestinoForm()">➕ Nuevo</button>
+   <div class="admin-list" id="adminDestinoList"></div>
+  </div>
+
+  <div class="admin-panel" id="serviciosAdmin">
+   <h3>Crear o editar servicio</h3>
+   <input type="hidden" id="servicioId">
+   <div class="form-grid">
+    <div class="field"><label>Nombre</label><input id="servicioNombre" placeholder="Remesas"></div>
+    <div class="field"><label>Orden</label><input id="servicioOrden" type="number" value="1"></div>
+    <div class="field"><label>Icono (emoji)</label><input id="servicioIcono" placeholder="💰"></div>
+    <div class="field full"><label>Descripción</label><textarea id="servicioDescripcion"></textarea></div>
+   </div>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveServicio()">💾 Guardar servicio</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearServicioForm()">➕ Nuevo</button>
+   <div class="admin-list" id="adminServicioList" style="margin-top:20px"></div>
+  </div>
+
+  <div class="admin-panel" id="bannerAdmin">
+   <h3>🖼️ Gestionar Banner Galería</h3>
+   <input type="hidden" id="bannerId">
+   <div class="form-grid">
+    <div class="field full"><label>Título</label><input id="bannerTitulo" placeholder="Ej: Boleto Rusia-Cuba"></div>
+    <div class="field full"><label>URL de Imagen</label><input id="bannerImagen" type="url" placeholder="https://..."><img id="bannerImagenPreview" class="preview-img" style="display:none"></div>
+    <div class="field full"><label>Enlace al hacer clic</label><input id="bannerEnlace" type="url" placeholder="https://wa.me/..."></div>
+    <div class="field"><label>Orden</label><input id="bannerOrden" type="number" value="0"></div>
+    <div class="field"><label><input type="checkbox" id="bannerActivo" checked> Activo</label></div>
+   </div>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveBanner()">💾 Guardar imagen</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearBannerForm()">➕ Nueva</button>
+   <div class="admin-list" id="adminBannerList"></div>
+  </div>
+
  </div>
 </div>
 
@@ -601,329 +609,264 @@ const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const $ = id => document.getElementById(id);
 
 let tasasData=[], recargasData=[], boletosData=[], remesasData=[], destinosData=[], serviciosData=[], solicitudesData=[];
-let guiasData=[], ofertasData=[], bannerData=[], noticiasData=[];
+let visasData=[], bannerData=[], noticiasData=[], ofertasData=[];
 let currentLang = 'es';
 let bannerIndex = 0;
-let bannerInterval;
+let bannerInterval, breakingInterval;
 
 $("year").textContent = new Date().getFullYear();
 
-// TRADUCCIONES
 const translations = {
- es: { brand_sub:"TU PUENTE AL MUNDO", nav_home:"INICIO",nav_services:"SERVICIOS",nav_recharges:"RECARGAS",nav_tickets:"BOLETOS",nav_remesas:"REMESAS",nav_destinations:"DESTINOS",nav_rates:"TASAS", clock_cuba:"🇨🇺 Cuba",clock_local:"🌍 Local", hero_eyebrow:"Conectamos oportunidades",hero_title:'Tu puente hacia <span>nuevas oportunidades</span>',hero_desc:"Recargas internacionales, envío de remesas, pasajes y orientación para tus viajes.", hero_btn1:'Explorar servicios <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Contactar ahora", hero_card_pill:"ATENCIÓN PERSONALIZADA",hero_card_title:"Estamos para ayudarte",hero_card_desc:"Consulta precios, solicita información y encuentra opciones para tus necesidades.", admin_role:"Administrador", services_eyebrow:"Lo que hacemos",services_title:'Nuestros <span class="gold">servicios</span>',services_desc:"Soluciones para mantenerte conectado y acercarte a tus destinos.", recharges_eyebrow:"Conectividad",recharges_title:'Planes de <span class="gold">recargas</span>',recharges_desc:"Consulta las ofertas disponibles y solicita la tuya.", tickets_eyebrow:"Tu próximo viaje",tickets_title:'Boletos de <span class="gold">avión y transporte</span>',tickets_desc:"Precios, destinos y fechas publicados por administración.", remesas_eyebrow:"Conectamos familias",remesas_title:'Servicio de <span class="gold">remesas</span>',remesas_desc:"Solicita información sobre disponibilidad, destinos y condiciones.", dest_eyebrow:"Explora el mundo",dest_title:'Destinos <span class="gold">disponibles</span>',dest_desc:"Viajes y servicios a los mejores destinos.", rates_eyebrow:"Información financiera",rates_title:'Tasas de <span class="gold">cambio</span>',rates_desc:"Valores configurados por administración.", calc_title:"Calculadora de monedas",calc_amount:"Cantidad",calc_from:"De",calc_to:"A",calc_btn:"Calcular",calc_result:"Introduce una cantidad para calcular.", req_eyebrow:"Estamos para ayudarte",req_title:'Solicita <span class="gold">información</span>',req_desc:"Completa tus datos y nos pondremos en contacto contigo.", req_name:"Nombre completo",req_phone:"Teléfono / WhatsApp",req_details:"Detalles de tu solicitud",req_submit:"Enviar solicitud", contact_title:"Atención personalizada",contact_desc:"Recibe orientación directa para encontrar la opción que mejor se adapte a tus necesidades.", admin_label:"Administrador:",contact_btn:"Contactar directamente", info_title:"Información importante",info_desc1:"Los precios y las tasas pueden cambiar según la disponibilidad y las condiciones del servicio.", info_desc2:"Confirma siempre el importe final, las fechas y los requisitos antes de realizar un pago.", footer_slogan:"Tu puente al mundo.",floating_btn:"ATENCIÓN DIRECTA", admin_title:"Administración",admin_desc:"Acceso reservado al administrador.",admin_pass:"Contraseña",admin_enter:"Entrar", panel_title:"Panel de administración", tab_rates:"💱 Tasas",tab_recharges:"📱 Recargas",tab_tickets:"✈️ Boletos",tab_remesas:"💸 Remesas",tab_destinos:"🌍 Destinos",tab_servicios:"⭐ Servicios",tab_requests:"📋 Solicitudes", rates_admin_title:"Tasas de cambio (valor en CUP)", recharge_admin_title:"Crear o editar plan de recarga",ticket_admin_title:"Crear o editar boleto", remesa_admin_title:"Crear o editar remesa",destinos_admin_title:"Crear o editar destino",servicios_admin_title:"Crear o editar servicio", requests_admin_title:"Solicitudes recibidas", field_label:"Etiqueta",field_name:"Nombre",field_price:"Precio",field_currency:"Moneda",field_desc1:"Descripción 1",field_desc2:"Descripción 2", field_type:"Tipo de transporte",field_origin:"Origen",field_dest:"Destino",field_departure:"Fecha de salida",field_return:"Fecha de regreso",field_desc:"Descripción", field_category:"Categoría",field_order:"Orden",field_icon:"Icono (emoji)", field_amount_orig:"Monto origen",field_currency_orig:"Moneda origen",field_amount_dest:"Monto destino",field_currency_dest:"Moneda destino", save_btn:"💾 Guardar",new_btn:"➕ Nuevo",refresh_btn:"🔄 Actualizar",loading:"Cargando..." },
- en: { brand_sub:"YOUR BRIDGE TO THE WORLD", nav_home:"HOME",nav_services:"SERVICES",nav_recharges:"RECHARGES",nav_tickets:"TICKETS",nav_remesas:"REMITTANCES",nav_destinations:"DESTINATIONS",nav_rates:"RATES", clock_cuba:"🇨🇺 Cuba",clock_local:"🌍 Local", hero_eyebrow:"We connect opportunities",hero_title:'Your bridge to <span>new opportunities</span>',hero_desc:"International recharges, remittances, tickets and travel guidance.", hero_btn1:'Explore services <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Contact now", hero_card_pill:"PERSONALIZED ATTENTION",hero_card_title:"We are here to help you",hero_card_desc:"Check prices, request information and find options for your needs.", admin_role:"Administrator", services_eyebrow:"What we do",services_title:'Our <span class="gold">services</span>',services_desc:"Solutions to keep you connected and bring you closer to your destinations.", recharges_eyebrow:"Connectivity",recharges_title:'<span class="gold">Recharge</span> plans',recharges_desc:"Check available offers and request yours.", tickets_eyebrow:"Your next trip",tickets_title:'<span class="gold">Flight and transport</span> tickets',tickets_desc:"Prices, destinations and dates published by administration.", remesas_eyebrow:"We connect families",remesas_title:'<span class="gold">Remittance</span> service',remesas_desc:"Request information on availability, destinations and conditions.", dest_eyebrow:"Explore the world",dest_title:'Available <span class="gold">destinations</span>',dest_desc:"Travel and services to the best destinations.", rates_eyebrow:"Financial information",rates_title:'Exchange <span class="gold">rates</span>',rates_desc:"Values configured by administration.", calc_title:"Currency calculator",calc_amount:"Amount",calc_from:"From",calc_to:"To",calc_btn:"Calculate",calc_result:"Enter an amount to calculate.", req_eyebrow:"We are here to help you",req_title:'Request <span class="gold">information</span>',req_desc:"Fill in your details and we will contact you.", req_name:"Full name",req_phone:"Phone / WhatsApp",req_details:"Details of your request",req_submit:"Send request", contact_title:"Personalized attention",contact_desc:"Receive direct guidance to find the option that best suits your needs.", admin_label:"Administrator:",contact_btn:"Contact directly", info_title:"Important information",info_desc1:"Prices and rates may change depending on service availability and conditions.", info_desc2:"Always confirm the final amount, dates and requirements before making a payment.", footer_slogan:"Your bridge to the world.",floating_btn:"DIRECT ATTENTION", admin_title:"Administration",admin_desc:"Access reserved for the administrator.",admin_pass:"Password",admin_enter:"Enter", panel_title:"Administration panel", tab_rates:"💱 Rates",tab_recharges:"📱 Recharges",tab_tickets:"✈️ Tickets",tab_remesas:"💸 Remittances",tab_destinos:"🌍 Destinations",tab_servicios:"⭐ Services",tab_requests:"📋 Requests", rates_admin_title:"Exchange rates (value in CUP)", recharge_admin_title:"Create or edit recharge plan",ticket_admin_title:"Create or edit ticket", remesa_admin_title:"Create or edit remittance",destinos_admin_title:"Create or edit destination",servicios_admin_title:"Create or edit service", requests_admin_title:"Received requests", field_label:"Label",field_name:"Name",field_price:"Price",field_currency:"Currency",field_desc1:"Description 1",field_desc2:"Description 2", field_type:"Transport type",field_origin:"Origin",field_dest:"Destination",field_departure:"Departure date",field_return:"Return date",field_desc:"Description", field_category:"Category",field_order:"Order",field_icon:"Icon (emoji)", field_amount_orig:"Origin amount",field_currency_orig:"Origin currency",field_amount_dest:"Destination amount",field_currency_dest:"Destination currency", save_btn:"💾 Save",new_btn:"➕ New",refresh_btn:"🔄 Refresh",loading:"Loading..." },
- ru: { brand_sub:"ВАШ МОСТ В МИР", nav_home:"ГЛАВНАЯ",nav_services:"УСЛУГИ",nav_recharges:"ПОПОЛНЕНИЕ",nav_tickets:"БИЛЕТЫ",nav_remesas:"ПЕРЕВОДЫ",nav_destinations:"НАПРАВЛЕНИЯ",nav_rates:"КУРСЫ", clock_cuba:"🇨🇺 Куба",clock_local:"🌍 Местное", hero_eyebrow:"Мы соединяем возможности",hero_title:'Ваш мост к <span>новым возможностям</span>',hero_desc:"Международное пополнение, денежные переводы, билеты и рекомендации для путешествий.", hero_btn1:'Изучить услуги <i class="fa-solid fa-arrow-right"></i>',hero_btn2:"Связаться сейчас", hero_card_pill:"ИНДИВИДУАЛЬНЫЙ ПОДХОД",hero_card_title:"Мы здесь, чтобы помочь вам",hero_card_desc:"Узнайте цены, запросите информацию и найдите варианты для ваших нужд.", admin_role:"Администратор", services_eyebrow:"Что мы делаем",services_title:'Наши <span class="gold">услуги</span>',services_desc:"Решения, чтобы оставаться на связи и приблизиться к вашим направлениям.", recharges_eyebrow:"Связь",recharges_title:'Планы <span class="gold">пополнения</span>',recharges_desc:"Проверьте доступные предложения и запросите свое.", tickets_eyebrow:"Ваше следующее путешествие",tickets_title:'Билеты на <span class="gold">самолет и транспорт</span>',tickets_desc:"Цены, направления и даты, опубликованные администрацией.", remesas_eyebrow:"Мы соединяем семьи",remesas_title:'Услуга <span class="gold">денежных переводов</span>',remesas_desc:"Запросите информацию о доступности, направлениях и условиях.", dest_eyebrow:"Исследуйте мир",dest_title:'Доступные <span class="gold">направления</span>',dest_desc:"Путешествия и услуги в лучшие направления.", rates_eyebrow:"Финансовая информация",rates_title:'Обменные <span class="gold">курсы</span>',rates_desc:"Значения, настроенные администрацией.", calc_title:"Калькулятор валют",calc_amount:"Сумма",calc_from:"Из",calc_to:"В",calc_btn:"Рассчитать",calc_result:"Введите сумму для расчета.", req_eyebrow:"Мы здесь, чтобы помочь вам",req_title:'Запросить <span class="gold">информацию</span>',req_desc:"Заполните свои данные, и мы свяжемся с вами.", req_name:"Полное имя",req_phone:"Телефон / WhatsApp",req_details:"Детали вашего запроса",req_submit:"Отправить запрос", contact_title:"Индивидуальный подход",contact_desc:"Получите прямые рекомендации, чтобы найти вариант, который лучше всего соответствует вашим потребностям.", admin_label:"Администратор:",contact_btn:"Связаться напрямую", info_title:"Важная информация",info_desc1:"Цены и курсы могут меняться в зависимости от доступности и условий обслуживания.", info_desc2:"Всегда подтверждайте окончательную сумму, даты и требования перед оплатой.", footer_slogan:"Ваш мост к новым возможностям.",floating_btn:"ПРЯМОЕ ВНИМАНИЕ", admin_title:"Администрирование",admin_desc:"Доступ зарезервирован для администратора.",admin_pass:"Пароль",admin_enter:"Войти", panel_title:"Панель администрирования", tab_rates:"💱 Курсы",tab_recharges:"📱 Пополнения",tab_tickets:"✈️ Билеты",tab_remesas:"💸 Переводы",tab_destinos:"🌍 Направления",tab_servicios:"⭐ Услуги",tab_requests:"📋 Запросы", rates_admin_title:"Обменные курсы (значение в CUP)", recharge_admin_title:"Создать или изменить план пополнения",ticket_admin_title:"Создать или изменить билет", remesa_admin_title:"Создать или изменить перевод",destinos_admin_title:"Создать или изменить направление",servicios_admin_title:"Создать или изменить услугу", requests_admin_title:"Полученные запросы", field_label:"Метка",field_name:"Название",field_price:"Цена",field_currency:"Валюта",field_desc1:"Описание 1",field_desc2:"Описание 2", field_type:"Тип транспорта",field_origin:"Отправление",field_dest:"Назначение",field_departure:"Дата отправления",field_return:"Дата возвращения",field_desc:"Описание", field_category:"Категория",field_order:"Порядок",field_icon:"Иконка (эмодзи)", field_amount_orig:"Сумма отправления",field_currency_orig:"Валюта отправления",field_amount_dest:"Сумма назначения",field_currency_dest:"Валюта назначения", save_btn:"💾 Сохранить",new_btn:"➕ Новый",refresh_btn:"🔄 Обновить",loading:"Загрузка..." }
+ es: { brand_sub:"TU PUENTE AL MUNDO", hero_title:'Tu puente hacia <span>nuevas oportunidades</span>' },
+ en: { brand_sub:"YOUR BRIDGE TO THE WORLD", hero_title:'Your bridge to <span>new opportunities</span>' },
+ ru: { brand_sub:"ВАШ МОСТ В МИР", hero_title:'Ваш мост к <span>новым возможностям</span>' }
 };
 
-function changeLanguage(lang){ currentLang = lang; document.documentElement.lang = lang; document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (translations[lang] && translations[lang][key]) { const value = translations[lang][key]; if (value.includes('<')) el.innerHTML = value; else el.textContent = value; } }); }
+function changeLanguage(lang){ 
+ currentLang = lang; 
+ document.documentElement.lang = lang; 
+ document.querySelectorAll('[data-i18n]').forEach(el => { 
+  const key = el.getAttribute('data-i18n'); 
+  if (translations[lang] && translations[lang][key]) { 
+   const value = translations[lang][key]; 
+   if (value.includes('<')) el.innerHTML = value; else el.textContent = value; 
+  } 
+ }); 
+}
 
-// RELOJES
-function updateClocks(){ const now = new Date(); $("clockCuba").textContent = now.toLocaleTimeString('es-ES',{timeZone:'America/Havana',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}); $("clockLocal").textContent = now.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}); const fmt = {hour:'2-digit',minute:'2-digit',hour12:false}; const setT = (id, tz) => { const el = $(id); if(el) el.textContent = now.toLocaleTimeString('es-ES',{...fmt, timeZone:tz}); }; setT('wc-havana','America/Havana'); setT('wc-havana2','America/Havana'); setT('wc-moscow','Europe/Moscow'); setT('wc-moscow2','Europe/Moscow'); setT('wc-madrid','Europe/Madrid'); setT('wc-miami','America/New_York'); setT('wc-mexico','America/Mexico_City'); setT('wc-buenosaires','America/Argentina/Buenos_Aires'); }
+function updateClocks(){ 
+ const now = new Date(); 
+ $("clockCuba").textContent = now.toLocaleTimeString('es-ES',{timeZone:'America/Havana',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}); 
+ $("clockLocal").textContent = now.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}); 
+ const fmt = {hour:'2-digit',minute:'2-digit',hour12:false}; 
+ const setT = (id, tz) => { const el = $(id); if(el) el.textContent = now.toLocaleTimeString('es-ES',{...fmt, timeZone:tz}); }; 
+ setT('wc-havana','America/Havana'); setT('wc-havana2','America/Havana'); setT('wc-moscow','Europe/Moscow'); setT('wc-madrid','Europe/Madrid'); setT('wc-miami','America/New_York'); setT('wc-mexico','America/Mexico_City'); 
+}
 setInterval(updateClocks,1000); updateClocks();
 
-// UTILIDADES
 function toggleMenu(){ $("navlinks").classList.toggle("open"); }
 document.querySelectorAll(".navlinks a").forEach(a=> a.addEventListener("click",()=> $("navlinks").classList.remove("open")));
 function openLogin(){ $("loginError").textContent=""; $("loginModal").classList.add("show"); }
 function closeModal(id){ $(id).classList.remove("show"); }
-async function login(){ const email = $("adminEmail").value.trim(); const password = $("adminPassword").value; if(!email || !password){ $("loginError").textContent="Completa email y contraseña."; return; } const { data, error } = await db.auth.signInWithPassword({ email, password }); if(error){ $("loginError").textContent="Credenciales incorrectas."; return; } closeModal("loginModal"); $("adminModal").classList.add("show"); loadAdminData(); $("adminEmail").value=""; $("adminPassword").value=""; }
+async function login(){ 
+ const email = $("adminEmail").value.trim(); const password = $("adminPassword").value; 
+ if(!email || !password){ $("loginError").textContent="Completa email y contraseña."; return; } 
+ const { data, error } = await db.auth.signInWithPassword({ email, password }); 
+ if(error){ $("loginError").textContent="Credenciales incorrectas."; return; } 
+ closeModal("loginModal"); $("adminModal").classList.add("show"); loadAdminData(); $("adminEmail").value=""; $("adminPassword").value=""; 
+}
 $("adminPassword").addEventListener("keydown",e=>{ if(e.key==="Enter")login(); });
-["loginModal","adminModal"].forEach(id=>{ $(id).addEventListener("click",e=>{ if(e.target === $(id))closeModal(id); }); });
-document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ closeModal("loginModal"); closeModal("adminModal"); } });
+["loginModal","adminModal","receiptModal"].forEach(id=>{ if($(id)) $(id).addEventListener("click",e=>{ if(e.target === $(id))closeModal(id); }); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape"){ closeModal("loginModal"); closeModal("adminModal"); closeModal("receiptModal"); } });
 function showAdminTab(id,btn){ document.querySelectorAll(".admin-panel").forEach(p=>p.classList.remove("active")); document.querySelectorAll(".admin-tabs button").forEach(b=>b.classList.remove("active")); const panel=$(id); if(panel){ panel.classList.add("active"); btn.classList.add("active"); } }
 function safe(v){ return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
 function money(v,c){ return `${Number(v||0).toLocaleString("es-ES",{maximumFractionDigits:2})} ${safe(c||"")}`; }
 
-// CARGA AUTOMÁTICA
-async function loadAll(){ console.log('🚀 Cargando datos...'); await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), cargarBanner(), loadNoticias() ]); console.log('✅ Carga completa'); }
+async function loadAll(){ await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), cargarBanner(), loadNoticias(), loadVisas(), loadOfertas() ]); }
 
-// TASAS
-async function loadTasas(){ const {data,error}=await db.from('tasas').select("*").eq("activo",true).order("codigo"); if(error){ console.error('Error tasas:', error); return; } tasasData = data || []; renderTasas(); if($("adminModal").classList.contains("show")) renderAdminTasas(); }
-function renderTasas(){ if(tasasData.length === 0){ $("ratesList").innerHTML='<div class="empty">No hay tasas disponibles</div>'; return; } $("ratesList").innerHTML = tasasData.map(t => `<div class="rate"><span>${safe(t.codigo)}</span><strong>${Number(t.valor_cup).toLocaleString("es-ES",{maximumFractionDigits:2})}</strong><span>CUP</span></div>`).join(""); populateCalculatorSelects(); }
-function populateCalculatorSelects(){ const options = tasasData.map(t => `<option value="${safe(t.codigo)}">${safe(t.codigo)} - ${safe(t.moneda)}</option>`).join(""); $("calcFrom").innerHTML = options; $("calcTo").innerHTML = options; }
-function renderAdminTasas(){ $("ratesAdminList").innerHTML = tasasData.map(t => `<div class="admin-item"><div><strong>${safe(t.moneda)} (${safe(t.codigo)})</strong><br><small>Valor: ${Number(t.valor_cup).toLocaleString("es-ES",{maximumFractionDigits:2})} CUP</small></div><div><button class="btn btn-dark" type="button" onclick="editTasa('${safe(t.id)}')">✏️ Editar</button></div></div>`).join("") || '<p class="mini">No hay tasas.</p>'; }
-function editTasa(id){ const t = tasasData.find(v=>String(v.id)===String(id)); if(!t) return; const nuevoValor = prompt(`Nueva tasa para ${t.moneda} (${t.codigo}) en CUP:`, t.valor_cup); if(nuevoValor === null) return; updateTasa(id, parseFloat(nuevoValor)); }
-async function updateTasa(id, valor){ const {error} = await db.from('tasas').update({valor_cup: valor}).eq('id', id); if(error){ alert("Error: " + error.message); return; } alert("✅ Tasa actualizada"); await loadTasas(); renderAdminTasas(); }
+// --- OFERTAS FLASH ---
+async function loadOfertas(){ const {data}=await db.from('ofertas').select("*").eq("activo",true).order("id"); ofertasData=data||[]; renderOfertas(); if($("adminModal")&&$("adminModal").classList.contains("show")) renderAdminOfertas(); }
+function renderOfertas(){ const el=$("ofertasList"); if(!ofertasData.length){el.innerHTML='<div class="empty">No hay ofertas flash activas en este momento. ¡Vuelve pronto!</div>';return;} el.innerHTML=ofertasData.map((o,i)=>`<article class="card offer-card">${o.imagen_url?`<img src="${safe(o.imagen_url)}" alt="${safe(o.titulo)}">`:''}<div class="discount-badge">-${safe(o.descuento)}</div><span class="pill" style="background:var(--red);color:white">⏰ OFERTA FLASH</span><h3>${safe(o.titulo)}</h3><p>${safe(o.descripcion||"")}</p><p class="mini"><i class="fa-solid fa-clock"></i> Expira: ${safe(o.fecha_fin||"Pronto")}</p><button class="btn btn-gold" type="button" onclick="requestOferta(${i})" style="margin-top:10px;width:100%">Aprovechar Oferta</button></article>`).join(""); }
+function requestOferta(i){ const o=ofertasData[i]; if(!o)return; $("clientService").value="Oferta Flash"; $("clientDetails").value=`Me interesa la oferta: ${o.titulo} (${o.descuento} de descuento)`; $("solicitud").scrollIntoView({behavior:"smooth"}); }
+function clearOfertaForm(){ ["ofertaId","ofertaTitulo","ofertaDescripcion","ofertaDescuento","ofertaFechaFin","ofertaImagen"].forEach(id=>{if($(id))$(id).value="";}); if($("ofertaImagenPreview"))$("ofertaImagenPreview").style.display="none"; }
+function editOferta(id){ const o=ofertasData.find(v=>String(v.id)===String(id)); if(!o)return; $("ofertaId").value=o.id; $("ofertaTitulo").value=o.titulo||""; $("ofertaDescripcion").value=o.descripcion||""; $("ofertaDescuento").value=o.descuento||""; $("ofertaFechaFin").value=o.fecha_fin||""; $("ofertaImagen").value=o.imagen_url||""; if(o.imagen_url&&$("ofertaImagenPreview")){$("ofertaImagenPreview").src=o.imagen_url;$("ofertaImagenPreview").style.display="block";} }
+async function saveOferta(){ const id=$("ofertaId").value; const payload={titulo:$("ofertaTitulo").value.trim(),descripcion:$("ofertaDescripcion").value.trim(),descuento:$("ofertaDescuento").value.trim(),fecha_fin:$("ofertaFechaFin").value||null,imagen_url:$("ofertaImagen").value.trim(),activo:true}; if(!payload.titulo||!payload.descuento){alert("El título y el porcentaje de descuento son obligatorios.");return;} const query=id?db.from('ofertas').update(payload).eq("id",id):db.from('ofertas').insert(payload); const {error}=await query; if(error){alert("Error: "+error.message);return;} clearOfertaForm(); await loadOfertas(); renderAdminOfertas(); }
+async function deleteOferta(id){ if(!confirm("¿Eliminar esta oferta?"))return; await db.from('ofertas').delete().eq("id",id); await loadOfertas(); renderAdminOfertas(); }
+function renderAdminOfertas(){ if(!$("adminOfertasList"))return; $("adminOfertasList").innerHTML=ofertasData.map(o=>`<div class="admin-item"><div><strong>🔥 ${safe(o.titulo)}</strong><br><small>Descuento: ${safe(o.descuento)} · Expira: ${safe(o.fecha_fin||"No definida")}</small></div><div><button class="btn btn-dark" type="button" onclick="editOferta('${safe(o.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteOferta('${safe(o.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay ofertas cargadas.</p>'; }
 
-// RECARGAS
-async function loadRecargas(){ const {data,error}=await db.from('recargas').select("*").eq("activo",true).order("id"); if(error){ console.error('Error recargas:', error); return; } recargasData=data||[]; renderRecargas(); if($("adminModal").classList.contains("show")) renderAdminRecharges(); }
-function renderRecargas(){ const el=$("rechargesList"); if(!recargasData.length){ el.innerHTML='<div class="empty">Próximamente publicaremos nuevas ofertas de recarga.</div>'; return; } el.innerHTML=recargasData.map((x,i)=>`<article class="card offer-card">${x.imagen_url ? `<img src="${safe(x.imagen_url)}" alt="${safe(x.nombre)}">` : ''}<span class="pill">${safe(x.etiqueta||"RECARGA")}</span><h3>${safe(x.nombre)}</h3><div class="price">${money(x.precio,x.moneda||"RUB")}</div><p>${safe(x.descripcion1||"")}</p><p>${safe(x.descripcion2||"")}</p><button class="btn btn-gold" type="button" onclick="requestRecharge(${i})">Solicitar recarga</button></article>`).join(""); }
-function requestRecharge(index){ const item=recargasData[index]; if(!item)return; $("solicitud").scrollIntoView({behavior:"smooth"}); }
-function clearRechargeForm(){ ["rechargeId","rechargeLabel","rechargeName","rechargePrice","rechargeDesc1","rechargeDesc2","rechargeImagen"].forEach(id=>{ $(id).value=""; }); $("rechargeCurrency").value="RUB"; $("rechargeImagenPreview").style.display="none"; }
-function editRecharge(id){ const x=recargasData.find(v=>String(v.id)===String(id)); if(!x)return; $("rechargeId").value=x.id; $("rechargeLabel").value=x.etiqueta||""; $("rechargeName").value=x.nombre||""; $("rechargePrice").value=x.precio; $("rechargeCurrency").value=x.moneda||"RUB"; $("rechargeDesc1").value=x.descripcion1||""; $("rechargeDesc2").value=x.descripcion2||""; $("rechargeImagen").value=x.imagen_url||""; if(x.imagen_url){ $("rechargeImagenPreview").src=x.imagen_url; $("rechargeImagenPreview").style.display="block"; } }
-async function saveRecharge(){ const id=$("rechargeId").value; const payload={ etiqueta:$("rechargeLabel").value.trim(), nombre:$("rechargeName").value.trim(), precio:Number($("rechargePrice").value), moneda:$("rechargeCurrency").value, descripcion1:$("rechargeDesc1").value.trim(), descripcion2:$("rechargeDesc2").value.trim(), imagen_url:$("rechargeImagen").value.trim(), activo:true }; if(!payload.nombre||!Number.isFinite(payload.precio)||payload.precio<0){ alert("Completa el nombre y un precio válido."); return; } const query=id ? db.from('recargas').update(payload).eq("id",id) : db.from('recargas').insert(payload); const {error}=await query; if(error){ alert("Error: "+error.message); return; } clearRechargeForm(); await loadRecargas(); renderAdminRecharges(); }
-async function deleteRecharge(id){ if(!confirm("¿Eliminar este plan?"))return; await db.from('recargas').delete().eq("id",id); await loadRecargas(); renderAdminRecharges(); }
-function renderAdminRecharges(){ $("adminRechargeList").innerHTML=recargasData.map(x=>`<div class="admin-item"><div><strong>${safe(x.nombre)}</strong><br><small>${money(x.precio,x.moneda||"RUB")}</small></div><div><button class="btn btn-dark" type="button" onclick="editRecharge('${safe(x.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteRecharge('${safe(x.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay planes cargados.</p>'; }
+// --- VISAS ---
+async function loadVisas(){ const {data, error}=await db.from('visas').select("*").eq("activo",true).order("pais_origen"); if(error) return; visasData=data||[]; renderVisas(); if($("adminModal") && $("adminModal").classList.contains("show")) renderAdminVisas(); }
+function renderVisas(){ const tbody=$("visasTableBody"); if(!visasData.length){ tbody.innerHTML='<tr><td colspan="6" class="empty">No hay información de visas disponible.</td></tr>'; return; } tbody.innerHTML=visasData.map(v=>`<tr><td><strong>${safe(v.pais_origen)}</strong></td><td>${safe(v.pais_destino)}</td><td>${v.requiere_visa ? '<span class="badge-yes">Sí</span>' : '<span class="badge-no">No</span>'}</td><td>${safe(v.tipo_visa||"N/A")}</td><td>${v.dias_maximos || "N/A"} días</td><td class="mini">${safe(v.notas||"")}</td></tr>`).join(""); }
+function clearVisaForm(){ ["visaId","visaOrigen","visaDestino","visaTipo","visaDias","visaNotas"].forEach(id => { if($(id)) $(id).value=""; }); if($("visaRequiere")) $("visaRequiere").value="false"; }
+function editVisa(id){ const v=visasData.find(x=>String(x.id)===String(id)); if(!v)return; $("visaId").value=v.id; $("visaOrigen").value=v.pais_origen||""; $("visaDestino").value=v.pais_destino||""; $("visaRequiere").value=String(v.requiere_visa); $("visaTipo").value=v.tipo_visa||""; $("visaDias").value=v.dias_maximos||""; $("visaNotas").value=v.notas||""; }
+async function saveVisa(){ const id=$("visaId").value; const payload={ pais_origen:$("visaOrigen").value.trim(), pais_destino:$("visaDestino").value.trim(), requiere_visa:$("visaRequiere").value==="true", tipo_visa:$("visaTipo").value.trim(), dias_maximos:Number($("visaDias").value)||null, notas:$("visaNotas").value.trim(), activo:true }; if(!payload.pais_origen||!payload.pais_destino){ alert("Origen y destino son obligatorios."); return; } const query=id ? db.from('visas').update(payload).eq("id",id) : db.from('visas').insert(payload); const {error}=await query; if(error){ alert("Error: "+error.message); return; } clearVisaForm(); await loadVisas(); renderAdminVisas(); }
+async function deleteVisa(id){ if(!confirm("¿Eliminar esta visa?"))return; await db.from('visas').delete().eq("id",id); await loadVisas(); renderAdminVisas(); }
+function renderAdminVisas(){ if(!$("adminVisasList")) return; $("adminVisasList").innerHTML=visasData.map(v=>`<div class="admin-item"><div><strong>${safe(v.pais_origen)} → ${safe(v.pais_destino)}</strong><br><small>${v.requiere_visa?'Requiere Visa':'No requiere'}</small></div><div><button class="btn btn-dark" type="button" onclick="editVisa('${safe(v.id)}')">✏️</button><button class="btn btn-red" type="button" onclick="deleteVisa('${safe(v.id)}')">🗑️</button></div></div>`).join("")||'<p class="mini">No hay visas cargadas.</p>'; }
 
-// BOLETOS
-async function loadBoletos(){ const {data,error}=await db.from('boletos').select("*").eq("activo",true).order("fecha_salida",{ascending:true}); if(error){ console.error('Error boletos:', error); return; } boletosData=data||[]; renderBoletos(); if($("adminModal").classList.contains("show")) renderAdminTickets(); }
-function renderBoletos(){ const el=$("ticketsList"); if(!boletosData.length){ el.innerHTML='<div class="empty">No hay boletos publicados en este momento.</div>'; return; } el.innerHTML=boletosData.map((t,i)=>`<article class="card offer-card">${t.imagen_url ? `<img src="${safe(t.imagen_url)}" alt="${safe(t.origen)}">` : ''}<span class="pill">${safe(t.etiqueta||t.transporte||"BOLETO")}</span><h3><i class="fa-solid fa-${t.transporte==="avion"?"plane":"bus"} gold"></i> ${safe(t.origen)} → ${safe(t.destino)}</h3><p>${safe(t.transporte||"Transporte")}</p><p><strong>Salida:</strong> ${safe(t.fecha_salida||"Por confirmar")}</p><p><strong>Regreso:</strong> ${safe(t.fecha_regreso||"No indicado")}</p><div class="price">${money(t.precio,t.moneda)}</div><p>${safe(t.descripcion||"Consulta condiciones y disponibilidad.")}</p><button class="btn btn-gold" type="button" onclick="requestTicket(${i})">Consultar este boleto</button></article>`).join(""); }
-function requestTicket(index){ const t=boletosData[index]; if(!t)return; $("solicitud").scrollIntoView({behavior:"smooth"}); }
-function clearTicketForm(){ ["ticketId","ticketLabel","ticketOrigin","ticketDestination","ticketDeparture","ticketReturn","ticketPrice","ticketDescription","ticketImagen"].forEach(id=>{ $(id).value=""; }); $("ticketType").value="avion"; $("ticketCurrency").value="RUB"; $("ticketImagenPreview").style.display="none"; }
-function editTicket(id){ const t=boletosData.find(v=>String(v.id)===String(id)); if(!t)return; $("ticketId").value=t.id; $("ticketLabel").value=t.etiqueta||""; $("ticketType").value=t.transporte||"avion"; $("ticketOrigin").value=t.origen||""; $("ticketDestination").value=t.destino||""; $("ticketDeparture").value=t.fecha_salida||""; $("ticketReturn").value=t.fecha_regreso||""; $("ticketPrice").value=t.precio; $("ticketCurrency").value=t.moneda||"RUB"; $("ticketDescription").value=t.descripcion||""; $("ticketImagen").value=t.imagen_url||""; if(t.imagen_url){ $("ticketImagenPreview").src=t.imagen_url; $("ticketImagenPreview").style.display="block"; } }
-async function saveTicket(){ const id=$("ticketId").value; const payload={ etiqueta:$("ticketLabel").value.trim(), transporte:$("ticketType").value, origen:$("ticketOrigin").value.trim(), destino:$("ticketDestination").value.trim(), fecha_salida:$("ticketDeparture").value||null, fecha_regreso:$("ticketReturn").value||null, precio:Number($("ticketPrice").value), moneda:$("ticketCurrency").value, descripcion:$("ticketDescription").value.trim(), imagen_url:$("ticketImagen").value.trim(), activo:true }; if(!payload.origen||!payload.destino||!Number.isFinite(payload.precio)||payload.precio<0){ alert("Completa origen, destino y precio."); return; } const query=id ? db.from('boletos').update(payload).eq("id",id) : db.from('boletos').insert(payload); const {error}=await query; if(error){ alert("Error: "+error.message); return; } clearTicketForm(); await loadBoletos(); renderAdminTickets(); }
-async function deleteTicket(id){ if(!confirm("¿Eliminar este boleto?"))return; await db.from('boletos').delete().eq("id",id); await loadBoletos(); renderAdminTickets(); }
-function renderAdminTickets(){ $("adminTicketList").innerHTML=boletosData.map(t=>`<div class="admin-item"><div><strong>${safe(t.origen)} → ${safe(t.destino)}</strong><br><small>${money(t.precio,t.moneda)} · ${safe(t.fecha_salida||"")}</small></div><div><button class="btn btn-dark" type="button" onclick="editTicket('${safe(t.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteTicket('${safe(t.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay boletos cargados.</p>'; }
-
-// REMESAS
-async function loadRemesas(){ const {data,error}=await db.from('remesas').select("*").eq("activo",true).order("id"); if(error){ console.error('Error remesas:', error); return; } remesasData=data||[]; renderRemesas(); if($("adminModal").classList.contains("show")) renderAdminRemesas(); }
-function renderRemesas(){ const el=$("remesasList"); if(!remesasData.length){ el.innerHTML='<div class="empty">Próximamente publicaremos nuevas opciones de remesa.</div>'; return; } el.innerHTML=remesasData.map((r,i)=>`<article class="card offer-card">${r.imagen_url ? `<img src="${safe(r.imagen_url)}" alt="${safe(r.origen)}">` : ''}<h3><i class="fa-solid fa-money-bill-transfer gold"></i> ${safe(r.origen)} → ${safe(r.destino)}</h3><p><strong>Envías:</strong> ${money(r.monto_origen,r.moneda_origen)}</p><p><strong>Reciben:</strong> ${money(r.monto_destino,r.moneda_destino)}</p><p>${safe(r.descripcion||"Consulta condiciones y disponibilidad.")}</p><button class="btn btn-gold" type="button" onclick="requestRemesa(${i})">Solicitar remesa</button></article>`).join(""); }
-function requestRemesa(index){ const r=remesasData[index]; if(!r)return; $("solicitud").scrollIntoView({behavior:"smooth"}); }
-function clearRemesaForm(){ ["remesaId","remesaOrigen","remesaDestino","remesaMontoOrigen","remesaMontoDestino","remesaDescripcion","remesaImagen"].forEach(id=>{ $(id).value=""; }); $("remesaMonedaOrigen").value="RUB"; $("remesaMonedaDestino").value="CUP"; $("remesaImagenPreview").style.display="none"; }
-function editRemesa(id){ const r=remesasData.find(v=>String(v.id)===String(id)); if(!r)return; $("remesaId").value=r.id; $("remesaOrigen").value=r.origen||""; $("remesaDestino").value=r.destino||""; $("remesaMontoOrigen").value=r.monto_origen; $("remesaMonedaOrigen").value=r.moneda_origen||"RUB"; $("remesaMontoDestino").value=r.monto_destino; $("remesaMonedaDestino").value=r.moneda_destino||"CUP"; $("remesaDescripcion").value=r.descripcion||""; $("remesaImagen").value=r.imagen_url||""; if(r.imagen_url){ $("remesaImagenPreview").src=r.imagen_url; $("remesaImagenPreview").style.display="block"; } }
-async function saveRemesa(){ const id=$("remesaId").value; const payload={ origen:$("remesaOrigen").value.trim(), destino:$("remesaDestino").value.trim(), monto_origen:Number($("remesaMontoOrigen").value), moneda_origen:$("remesaMonedaOrigen").value, monto_destino:Number($("remesaMontoDestino").value), moneda_destino:$("remesaMonedaDestino").value, descripcion:$("remesaDescripcion").value.trim(), imagen_url:$("remesaImagen").value.trim(), activo:true }; if(!payload.origen||!payload.destino||!Number.isFinite(payload.monto_origen)||payload.monto_origen<0){ alert("Completa origen, destino y monto."); return; } const query=id ? db.from('remesas').update(payload).eq("id",id) : db.from('remesas').insert(payload); const {error}=await query; if(error){ alert("Error: "+error.message); return; } clearRemesaForm(); await loadRemesas(); renderAdminRemesas(); }
-async function deleteRemesa(id){ if(!confirm("¿Eliminar esta remesa?"))return; await db.from('remesas').delete().eq("id",id); await loadRemesas(); renderAdminRemesas(); }
-function renderAdminRemesas(){ $("adminRemesaList").innerHTML=remesasData.map(r=>`<div class="admin-item"><div><strong>${safe(r.origen)} → ${safe(r.destino)}</strong><br><small>${money(r.monto_origen,r.moneda_origen)} → ${money(r.monto_destino,r.moneda_destino)}</small></div><div><button class="btn btn-dark" type="button" onclick="editRemesa('${safe(r.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteRemesa('${safe(r.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay remesas cargadas.</p>'; }
-
-// DESTINOS
-async function loadDestinos(){ const {data,error}=await db.from('destinos').select("*").eq("activo",true).order("nombre"); if(error){ console.error('Error destinos:', error); return; } destinosData=data||[]; renderDestinos(); if($("adminModal").classList.contains("show")) renderAdminDestinos(); }
-function renderDestinos(){ const el=$("destinosList"); if(!destinosData.length){ el.innerHTML='<div class="empty">No hay destinos publicados en este momento.</div>'; return; } el.innerHTML=destinosData.map(d=>`<article class="card offer-card">${d.imagen_url ? `<img src="${safe(d.imagen_url)}" alt="${safe(d.nombre)}">` : ''}<span class="pill">${safe(d.categoria||"DESTINO")}</span><h3>${safe(d.nombre)}</h3><p>${safe(d.descripcion||"")}</p></article>`).join(""); }
-function clearDestinoForm(){ ["destinoId","destinoNombre","destinoCategoria","destinoDescripcion","destinoImagen"].forEach(id=>{ $(id).value=""; }); $("destinoImagenPreview").style.display="none"; }
-function editDestino(id){ const d=destinosData.find(v=>String(v.id)===String(id)); if(!d)return; $("destinoId").value=d.id; $("destinoNombre").value=d.nombre||""; $("destinoCategoria").value=d.categoria||""; $("destinoDescripcion").value=d.descripcion||""; $("destinoImagen").value=d.imagen_url||""; if(d.imagen_url){ $("destinoImagenPreview").src=d.imagen_url; $("destinoImagenPreview").style.display="block"; } }
-async function saveDestino(){ const id=$("destinoId").value; const payload={ nombre:$("destinoNombre").value.trim(), categoria:$("destinoCategoria").value.trim(), descripcion:$("destinoDescripcion").value.trim(), imagen_url:$("destinoImagen").value.trim(), activo:true }; if(!payload.nombre){ alert("El nombre es obligatorio."); return; } const query=id ? db.from('destinos').update(payload).eq("id",id) : db.from('destinos').insert(payload); const {error}=await query; if(error){ alert("Error: "+error.message); return; } clearDestinoForm(); await loadDestinos(); renderAdminDestinos(); }
-async function deleteDestino(id){ if(!confirm("¿Eliminar este destino?"))return; await db.from('destinos').delete().eq("id",id); await loadDestinos(); renderAdminDestinos(); }
-function renderAdminDestinos(){ $("adminDestinoList").innerHTML=destinosData.map(d=>`<div class="admin-item"><div><strong>${safe(d.nombre)}</strong><br><small>${safe(d.categoria||"")}</small></div><div><button class="btn btn-dark" type="button" onclick="editDestino('${safe(d.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteDestino('${safe(d.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay destinos cargados.</p>'; }
-
-// SERVICIOS
-async function loadServicios(){ const {data,error}=await db.from('servicios').select("*").eq("activo",true).order("orden"); if(error){ console.error('Error servicios:', error); return; } serviciosData=data||[]; renderServicios(); if($("adminModal").classList.contains("show")) renderAdminServicios(); }
-function renderServicios(){ const el=$("serviciosList"); if(!serviciosData.length){ el.innerHTML='<div class="empty">No hay servicios publicados en este momento.</div>'; return; } el.innerHTML=serviciosData.map(s=>`<article class="card"><div class="service-icon">${safe(s.icono||"⭐")}</div><h3>${safe(s.nombre)}</h3><p>${safe(s.descripcion||"")}</p></article>`).join(""); }
-function clearServicioForm(){ ["servicioId","servicioNombre","servicioDescripcion","servicioIcono"].forEach(id=>{ $(id).value=""; }); $("servicioOrden").value="1"; }
-function editServicio(id){ const s=serviciosData.find(v=>String(v.id)===String(id)); if(!s)return; $("servicioId").value=s.id; $("servicioNombre").value=s.nombre||""; $("servicioDescripcion").value=s.descripcion||""; $("servicioIcono").value=s.icono||""; $("servicioOrden").value=s.orden||1; }
-async function saveServicio(){ const id=$("servicioId").value; const payload={ nombre:$("servicioNombre").value.trim(), descripcion:$("servicioDescripcion").value.trim(), icono:$("servicioIcono").value.trim(), orden:Number($("servicioOrden").value)||1, activo:true }; if(!payload.nombre){ alert("El nombre es obligatorio."); return; } const query=id ? db.from('servicios').update(payload).eq("id",id) : db.from('servicios').insert(payload); const {error}=await query; if(error){ alert("Error: "+error.message); return; } clearServicioForm(); await loadServicios(); renderAdminServicios(); }
-async function deleteServicio(id){ if(!confirm("¿Eliminar este servicio?"))return; await db.from('servicios').delete().eq("id",id); await loadServicios(); renderAdminServicios(); }
-function renderAdminServicios(){ $("adminServicioList").innerHTML=serviciosData.map(s=>`<div class="admin-item"><div><strong>${safe(s.icono||"")} ${safe(s.nombre)}</strong><br><small>${safe(s.descripcion||"").substring(0,60)}...</small></div><div><button class="btn btn-dark" type="button" onclick="editServicio('${safe(s.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteServicio('${safe(s.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay servicios cargados.</p>'; }
-
-// SOLICITUDES
-async function submitRequest(e){ e.preventDefault(); const payload={ nombre_cliente:$("clientName").value.trim(), telefono:$("clientPhone").value.trim(), tipo_servicio: 'General', destino:'', detalles:$("clientDetails").value.trim(), estado:"pendiente" }; const status=$("requestStatus"); status.textContent="Enviando solicitud..."; const {error}=await db.from('solicitudes').insert(payload); if(error){ status.textContent="No se pudo enviar. Inténtalo por WhatsApp: +7 904 631 95 65."; return; } status.textContent="✅ ¡Solicitud enviada! Gracias por contactar con YOUR BRIDGE HOME."; $("requestForm").reset(); }
-async function loadRequests(){ const {data,error}=await db.from('solicitudes').select("*").order("created_at",{ascending:false}).limit(100); if(error){ $("adminRequestsList").innerHTML='<p class="mini">No se pudieron cargar las solicitudes.</p>'; return; } solicitudesData=data||[]; $("adminRequestsList").innerHTML=solicitudesData.map(r=>`<div class="admin-item"><div><strong>${safe(r.nombre_cliente)}</strong><br><small>${safe(r.telefono)} · ${safe(r.estado||"pendiente")}</small><p class="mini">${safe(r.detalles||"")}</p></div><div><button class="btn btn-dark" type="button" onclick="completeRequest('${safe(r.id)}')">✅ Completada</button><button class="btn btn-red" type="button" onclick="deleteRequest('${safe(r.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">Todavía no hay solicitudes.</p>'; }
-async function completeRequest(id){ await db.from('solicitudes').update({estado:"completada"}).eq("id",id); await loadRequests(); }
-async function deleteRequest(id){ if(!confirm("¿Eliminar solicitud?"))return; await db.from('solicitudes').delete().eq("id",id); await loadRequests(); }
-
-// CALCULADORA
-function calculate(){ const amount=Number($("calcAmount").value); const fromCode=$("calcFrom").value; const toCode=$("calcTo").value; if(!Number.isFinite(amount)||amount<0){ $("calcResult").textContent="Introduce una cantidad válida."; return; } const fromRate = tasasData.find(t=>t.codigo===fromCode); const toRate = tasasData.find(t=>t.codigo===toCode); if(!fromRate||!toRate){ $("calcResult").textContent="Faltan tasas para realizar este cálculo."; return; } const result=amount*fromRate.valor_cup/toRate.valor_cup; $("calcResult").textContent=`${amount} ${fromCode} = ${result.toLocaleString("es-ES",{maximumFractionDigits:2})} ${toCode}`; }
-["calcAmount","calcFrom","calcTo"].forEach(id=>{ $(id).addEventListener("change",calculate); });
-
-// ADMIN DATA
-async function loadAdminData(){ await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), loadRequests(), cargarBanner(), loadNoticias() ]); renderAdminTasas(); renderAdminRecharges(); renderAdminTickets(); renderAdminRemesas(); renderAdminDestinos(); renderAdminServicios(); renderAdminBanner(); renderAdminNoticias(); }
-
-// BANNER GALERÍA
-async function cargarBanner(){ const { data, error } = await db.from('ybh_banner').select('*').eq('activo', true).order('orden'); if(error){ console.error(error); return; } bannerData = data || []; renderBanner(); }
-
-function renderBanner(){
- const slides = $("bannerSlides");
- const dots = $("bannerDots");
- if(!slides || !dots) return;
- 
- if(bannerData.length === 0){
-  $("bannerGaleria").style.display = "none";
-  return;
- }
- 
- $("bannerGaleria").style.display = "block";
- slides.innerHTML = bannerData.map((b, i) => `
-  <div class="slide ${i === 0 ? 'active' : ''}" ${b.enlace ? `onclick="window.open('${safe(b.enlace)}','_blank')"` : ''} style="cursor:${b.enlace ? 'pointer' : 'default'}">
-   <img src="${safe(b.imagen_url)}" alt="${safe(b.titulo || '')}">
-   ${b.titulo ? `<div class="slide-overlay"><h3>${safe(b.titulo)}</h3></div>` : ''}
-  </div>
- `).join('');
- 
- dots.innerHTML = bannerData.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}" onclick="bannerGoTo(${i})"></div>`).join('');
- 
- bannerIndex = 0;
- clearInterval(bannerInterval);
- bannerInterval = setInterval(() => bannerNav(1), 5000);
-}
-
-function bannerNav(dir){
- if(bannerData.length === 0) return;
- bannerIndex = (bannerIndex + dir + bannerData.length) % bannerData.length;
- bannerGoTo(bannerIndex);
-}
-
-function bannerGoTo(index){
- bannerIndex = index;
- document.querySelectorAll('.banner-galeria .slide').forEach((s, i) => s.classList.toggle('active', i === index));
- document.querySelectorAll('.banner-galeria .dot').forEach((d, i) => d.classList.toggle('active', i === index));
- clearInterval(bannerInterval);
- bannerInterval = setInterval(() => bannerNav(1), 5000);
-}
-
-async function saveBanner(){
- const id = $("bannerId").value;
- const payload = {
-  titulo: $("bannerTitulo").value.trim(),
-  imagen_url: $("bannerImagen").value.trim(),
-  enlace: $("bannerEnlace").value.trim(),
-  orden: Number($("bannerOrden").value) || 0,
-  activo: $("bannerActivo").checked
- };
- if(!payload.imagen_url){ alert("La URL de la imagen es obligatoria"); return; }
- const query = id ? db.from('ybh_banner').update(payload).eq('id', id) : db.from('ybh_banner').insert(payload);
- const { error } = await query;
- if(error){ alert("Error: " + error.message); return; }
- clearBannerForm();
- await cargarBanner();
- renderAdminBanner();
-}
-
-async function deleteBanner(id){
- if(!confirm("¿Eliminar esta imagen del banner?")) return;
- await db.from('ybh_banner').delete().eq('id', id);
- await cargarBanner();
- renderAdminBanner();
-}
-
-function editBanner(id){
- const b = bannerData.find(v => String(v.id) === String(id));
- if(!b) return;
- $("bannerId").value = b.id;
- $("bannerTitulo").value = b.titulo || "";
- $("bannerImagen").value = b.imagen_url || "";
- $("bannerEnlace").value = b.enlace || "";
- $("bannerOrden").value = b.orden || 0;
- $("bannerActivo").checked = b.activo !== false;
- if(b.imagen_url){ $("bannerImagenPreview").src = b.imagen_url; $("bannerImagenPreview").style.display = "block"; }
-}
-
-function clearBannerForm(){
- ["bannerId","bannerTitulo","bannerImagen","bannerEnlace"].forEach(id => { $(id).value = ""; });
- $("bannerOrden").value = "0";
- $("bannerActivo").checked = true;
- $("bannerImagenPreview").style.display = "none";
-}
-
-function renderAdminBanner(){
- $("adminBannerList").innerHTML = bannerData.map(b => `
-  <div class="admin-item">
-   <div style="display:flex;align-items:center;gap:10px">
-    ${b.imagen_url ? `<img src="${safe(b.imagen_url)}" style="width:60px;height:60px;object-fit:cover;border-radius:8px">` : ''}
-    <div><strong>${safe(b.titulo || 'Sin título')}</strong><br><small>Orden: ${b.orden} · ${b.activo ? '✅ Activo' : '❌ Inactivo'}</small></div>
-   </div>
-   <div>
-    <button class="btn btn-dark" type="button" onclick="editBanner('${safe(b.id)}')">✏️ Editar</button>
-    <button class="btn btn-red" type="button" onclick="deleteBanner('${safe(b.id)}')">🗑️ Eliminar</button>
-   </div>
-  </div>
- `).join("") || '<p class="mini">No hay imágenes en el banner.</p>';
-}
-
-// ==========================================
-// GESTIÓN DE NOTICIAS Y ÚLTIMA HORA (SUPABASE)
-// ==========================================
-async function loadNoticias() {
-  const { data, error } = await db.from('noticias').select('*').eq('activo', true).order('orden', { ascending: true });
-  if (error) { console.error('Error noticias:', error); return; }
-  noticiasData = data || [];
-  renderNoticiasFrontend();
-  if ($("adminModal").classList.contains("show")) renderAdminNoticias();
-}
-
+// --- NOTICIAS ---
+async function loadNoticias() { const { data, error } = await db.from('noticias').select('*').eq('activo', true).order('orden', { ascending: true }); if (error) return; noticiasData = data || []; renderNoticiasFrontend(); if ($("adminModal") && $("adminModal").classList.contains("show")) renderAdminNoticias(); }
 function renderNoticiasFrontend() {
-  const ultimaHora = noticiasData.find(n => n.tipo === 'ultima_hora');
-  if (ultimaHora && $("breakingText")) {
-    $("breakingText").innerText = (ultimaHora.icono ? ultimaHora.icono + ' ' : '') + ultimaHora.descripcion;
-  } else if ($("breakingText")) {
-    $("breakingText").innerText = "Bienvenido a Your Bridge Home. Consulta nuestras ofertas.";
-  }
-
+  const ultimasHoras = noticiasData.filter(n => n.tipo === 'ultima_hora');
+  const breakingTextEl = $("breakingText");
+  if (ultimasHoras.length > 0 && breakingTextEl) {
+    let currentBreaking = 0;
+    const updateBreaking = () => {
+      const n = ultimasHoras[currentBreaking];
+      breakingTextEl.style.opacity = 0;
+      setTimeout(() => { breakingTextEl.innerText = (n.icono ? n.icono + ' ' : '') + n.descripcion; breakingTextEl.style.opacity = 1; }, 500);
+      currentBreaking = (currentBreaking + 1) % ultimasHoras.length;
+    };
+    updateBreaking();
+    if (breakingInterval) clearInterval(breakingInterval);
+    breakingInterval = setInterval(updateBreaking, 6000);
+  } else if (breakingTextEl) { breakingTextEl.innerText = "Bienvenido a Your Bridge Home. Consulta nuestras ofertas."; }
   const notas = noticiasData.filter(n => n.tipo === 'nota');
   const notesContainer = $("notesGrid");
   if (notesContainer) {
     notesContainer.innerHTML = '';
-    if (notas.length === 0) {
-      notesContainer.innerHTML = '<div class="empty">No hay avisos importantes en este momento.</div>';
-    } else {
-      notas.forEach(nota => {
-        notesContainer.innerHTML += `
-          <div class="note-card">
-            <div class="note-icon">${nota.icono || '📌'}</div>
-            <div class="note-title">${safe(nota.titulo)}</div>
-            <div class="note-desc">${safe(nota.descripcion)}</div>
-            <div class="note-date">📅 Publicado: ${safe(nota.fecha)}</div>
-          </div>
-        `;
-      });
-    }
+    if (notas.length === 0) { notesContainer.innerHTML = '<div class="empty">No hay avisos importantes en este momento.</div>'; } 
+    else { notas.forEach(nota => { notesContainer.innerHTML += `<div class="note-card"><div class="note-icon">${nota.icono || '📌'}</div><div class="note-title">${safe(nota.titulo)}</div><div class="note-desc">${safe(nota.descripcion)}</div><div class="note-date">📅 Publicado: ${safe(nota.fecha)}</div></div>`; }); }
   }
 }
+function clearNoticiaForm() { ["noticiaId", "noticiaIcono", "noticiaTitulo", "noticiaFecha", "noticiaDescripcion"].forEach(id => { if($(id)) $(id).value = ""; }); if($("noticiaTipo")) $("noticiaTipo").value = "nota"; if($("noticiaOrden")) $("noticiaOrden").value = "0"; if($("noticiaActivo")) $("noticiaActivo").checked = true; }
+function editNoticia(id) { const n = noticiasData.find(v => String(v.id) === String(id)); if (!n) return; $("noticiaId").value = n.id; $("noticiaTipo").value = n.tipo; $("noticiaIcono").value = n.icono || ""; $("noticiaTitulo").value = n.titulo || ""; $("noticiaFecha").value = n.fecha || ""; $("noticiaDescripcion").value = n.descripcion || ""; $("noticiaOrden").value = n.orden || 0; $("noticiaActivo").checked = n.activo; }
+async function saveNoticia() { const id = $("noticiaId").value; const payload = { tipo: $("noticiaTipo").value, icono: $("noticiaIcono").value.trim(), titulo: $("noticiaTitulo").value.trim(), fecha: $("noticiaFecha").value.trim(), descripcion: $("noticiaDescripcion").value.trim(), orden: Number($("noticiaOrden").value) || 0, activo: $("noticiaActivo").checked }; if (!payload.descripcion) { alert("La descripción es obligatoria."); return; } const query = id ? db.from('noticias').update(payload).eq("id", id) : db.from('noticias').insert(payload); const { error } = await query; if (error) { alert("Error: " + error.message); return; } clearNoticiaForm(); await loadNoticias(); renderAdminNoticias(); }
+async function deleteNoticia(id) { if (!confirm("¿Eliminar esta noticia?")) return; await db.from('noticias').delete().eq("id", id); await loadNoticias(); renderAdminNoticias(); }
+function renderAdminNoticias() { if(!$("adminNoticiasList")) return; $("adminNoticiasList").innerHTML = noticiasData.map(n => `<div class="admin-item"><div><strong>${n.tipo === 'ultima_hora' ? '🚨' : '📝'} ${safe(n.titulo || n.descripcion.substring(0, 40) + '...')}</strong><br><small>${safe(n.fecha)} · Orden: ${n.orden}</small></div><div><button class="btn btn-dark" type="button" onclick="editNoticia('${safe(n.id)}')">✏️</button><button class="btn btn-red" type="button" onclick="deleteNoticia('${safe(n.id)}')">🗑️</button></div></div>`).join("") || '<p class="mini">No hay noticias cargadas.</p>'; }
 
-function clearNoticiaForm() {
-  ["noticiaId", "noticiaIcono", "noticiaTitulo", "noticiaFecha", "noticiaDescripcion"].forEach(id => { $(id).value = ""; });
-  $("noticiaTipo").value = "nota";
-  $("noticiaOrden").value = "0";
-  $("noticiaActivo").checked = true;
+// --- SOLICITUDES Y TRACKING ---
+async function submitRequest(e){ 
+ e.preventDefault(); 
+ const trackingId = 'YBH-' + Math.floor(100000 + Math.random() * 900000);
+ const payload={ tracking_id: trackingId, nombre_cliente:$("clientName").value.trim(), telefono:$("clientPhone").value.trim(), tipo_servicio: $("clientService").value, destino: $("clientDestino").value.trim(), detalles:$("clientDetails").value.trim(), estado:"pendiente", fecha_inicio: new Date().toISOString() }; 
+ const status=$("requestStatus"); status.textContent="Enviando solicitud..."; 
+ const {error}=await db.from('solicitudes').insert(payload); 
+ if(error){ status.textContent="No se pudo enviar. Inténtalo por WhatsApp: +7 904 631 95 65."; return; } 
+ status.textContent="✅ ¡Solicitud enviada!"; $("requestForm").reset(); 
+ $("receiptTrackingId").textContent = trackingId; $("receiptName").textContent = payload.nombre_cliente; $("receiptService").textContent = payload.tipo_servicio; $("receiptDate").textContent = new Date().toLocaleDateString('es-ES', {year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit'});
+ $("receiptModal").classList.add("show");
 }
 
-function editNoticia(id) {
-  const n = noticiasData.find(v => String(v.id) === String(id));
-  if (!n) return;
-  $("noticiaId").value = n.id;
-  $("noticiaTipo").value = n.tipo;
-  $("noticiaIcono").value = n.icono || "";
-  $("noticiaTitulo").value = n.titulo || "";
-  $("noticiaFecha").value = n.fecha || "";
-  $("noticiaDescripcion").value = n.descripcion || "";
-  $("noticiaOrden").value = n.orden || 0;
-  $("noticiaActivo").checked = n.activo;
+async function checkTracking(){
+ const tid = $("trackingInput").value.trim().toUpperCase();
+ if(!tid){ alert("Introduce un número de seguimiento válido."); return; }
+ const {data, error} = await db.from('solicitudes').select('*').eq('tracking_id', tid).single();
+ if(error || !data){ $("trackingResult").style.display = "none"; alert("No se encontró ninguna solicitud con ese número de seguimiento."); return; }
+ $("trackingResult").style.display = "block"; $("trackIdDisplay").textContent = `Trámite: ${data.tracking_id} | ${data.tipo_servicio}`;
+ const steps = ['pendiente', 'en_proceso', 'completado']; const currentStepIndex = steps.indexOf(data.estado);
+ let stepsHtml = '';
+ steps.forEach((step, index) => {
+  let statusClass = index < currentStepIndex ? 'completed' : (index === currentStepIndex ? 'active' : '');
+  const labels = {'pendiente':'Recibido', 'en_proceso':'En Proceso', 'completado':'Completado'};
+  stepsHtml += `<div class="step ${statusClass}"><div class="step-circle">${index < currentStepIndex ? '✓' : index + 1}</div><div class="step-label">${labels[step]}</div></div>`;
+ });
+ $("trackerSteps").innerHTML = stepsHtml;
+ let detailsHtml = `<p><strong>Cliente:</strong> ${safe(data.nombre_cliente)}</p><p><strong>Detalles:</strong> ${safe(data.detalles)}</p>`;
+ if(data.fecha_fin) detailsHtml += `<p class="mini"><strong>Finalizado el:</strong> ${new Date(data.fecha_fin).toLocaleDateString()}</p>`;
+ $("trackDetails").innerHTML = detailsHtml;
+ if(data.pdf_url){ $("trackPdfLink").innerHTML = `<a href="${data.pdf_url}" target="_blank" class="btn btn-gold" style="margin-top:10px"><i class="fa-solid fa-file-pdf"></i> Descargar Comprobante Final / Documento</a>`; } 
+ else { $("trackPdfLink").innerHTML = ''; }
 }
 
-async function saveNoticia() {
-  const id = $("noticiaId").value;
-  const payload = {
-    tipo: $("noticiaTipo").value,
-    icono: $("noticiaIcono").value.trim(),
-    titulo: $("noticiaTitulo").value.trim(),
-    fecha: $("noticiaFecha").value.trim(),
-    descripcion: $("noticiaDescripcion").value.trim(),
-    orden: Number($("noticiaOrden").value) || 0,
-    activo: $("noticiaActivo").checked
-  };
-
-  if (!payload.descripcion) { alert("La descripción o texto es obligatoria."); return; }
-
-  const query = id ? db.from('noticias').update(payload).eq("id", id) : db.from('noticias').insert(payload);
-  const { error } = await query;
-  if (error) { alert("Error: " + error.message); return; }
-  
-  clearNoticiaForm();
-  await loadNoticias();
-  renderAdminNoticias();
+async function loadRequests(){ 
+ const {data,error}=await db.from('solicitudes').select("*").order("created_at",{ascending:false}).limit(100); 
+ if(error){ $("adminRequestsList").innerHTML='<p class="mini">No se pudieron cargar las solicitudes.</p>'; return; } 
+ solicitudesData=data||[]; 
+ $("adminRequestsList").innerHTML=solicitudesData.map(r=>{
+  const statusColor = r.estado==='completado'?'var(--green)':(r.estado==='en_proceso'?'var(--gold)':'var(--muted)');
+  return `<div class="admin-item"><div><strong>${safe(r.tracking_id)}</strong> <span style="color:${statusColor};font-size:11px;font-weight:700">[${r.estado.toUpperCase()}]</span><br><small>${safe(r.nombre_cliente)} · ${safe(r.telefono)}</small><p class="mini">${safe(r.detalles||"").substring(0,80)}...</p></div><div style="display:flex;flex-direction:column;gap:5px"><select onchange="updateRequestStatus('${safe(r.id)}', this.value)" style="background:#253650;color:white;border:1px solid var(--line);border-radius:6px;padding:4px;font-size:11px"><option value="pendiente" ${r.estado==='pendiente'?'selected':''}>Pendiente</option><option value="en_proceso" ${r.estado==='en_proceso'?'selected':''}>En Proceso</option><option value="completado" ${r.estado==='completado'?'selected':''}>Completado</option><option value="cancelado" ${r.estado==='cancelado'?'selected':''}>Cancelado</option></select><label style="font-size:10px;color:var(--muted);cursor:pointer">📎 Adjuntar PDF: <input type="file" accept="application/pdf" onchange="uploadPdfForRequest('${safe(r.id)}', this)" style="font-size:10px"></label>${r.pdf_url ? `<a href="${safe(r.pdf_url)}" target="_blank" class="mini gold" style="margin-top:4px">Ver PDF adjunto</a>` : ''}</div></div>`;
+ }).join("")||'<p class="mini">Todavía no hay solicitudes.</p>'; 
+}
+async function updateRequestStatus(id, newStatus){ const payload = { estado: newStatus }; if(newStatus === 'completado') payload.fecha_fin = new Date().toISOString(); await db.from('solicitudes').update(payload).eq("id",id); await loadRequests(); }
+async function uploadPdfForRequest(id, fileInput){ 
+ const file = fileInput.files[0]; if(!file) return; 
+ if(file.type !== 'application/pdf'){ alert("Solo se permiten archivos PDF."); return; } 
+ const fileName = `comprobante_${id}_${Date.now()}.pdf`; 
+ const { data: uploadData, error: uploadError } = await db.storage.from('documentos').upload(fileName, file, { upsert: true }); 
+ if(uploadError){ alert("Error al subir PDF: " + uploadError.message); return; } 
+ const { data: { publicUrl } } = db.storage.from('documentos').getPublicUrl(fileName); 
+ await db.from('solicitudes').update({ pdf_url: publicUrl }).eq('id', id); 
+ alert("✅ PDF adjuntado correctamente. El cliente podrá descargarlo desde el seguimiento."); 
+ await loadRequests(); 
 }
 
-async function deleteNoticia(id) {
-  if (!confirm("¿Eliminar esta noticia?")) return;
-  await db.from('noticias').delete().eq("id", id);
-  await loadNoticias();
-  renderAdminNoticias();
+// --- TASAS ---
+async function loadTasas(){ const {data}=await db.from('tasas').select("*").eq("activo",true); tasasData=data||[]; renderTasas(); if($("adminModal")&&$("adminModal").classList.contains("show")) renderAdminTasas(); }
+function renderTasas(){ if(!tasasData.length){ $("ratesList").innerHTML='<div class="empty">No hay tasas</div>'; return; } $("ratesList").innerHTML = tasasData.map(t => `<div class="rate"><span>${safe(t.codigo)}</span><strong>${Number(t.valor_cup).toLocaleString("es-ES",{maximumFractionDigits:2})}</strong><span>CUP</span></div>`).join(""); populateCalculatorSelects(); }
+function populateCalculatorSelects(){ const options = tasasData.map(t => `<option value="${safe(t.codigo)}">${safe(t.codigo)}</option>`).join(""); if($("calcFrom")) $("calcFrom").innerHTML = options; if($("calcTo")) $("calcTo").innerHTML = options; }
+function renderAdminTasas(){ if(!$("ratesAdminList")) return; $("ratesAdminList").innerHTML = tasasData.map(t => `<div class="admin-item"><div><strong>${safe(t.moneda)} (${safe(t.codigo)})</strong><br><small>${Number(t.valor_cup).toLocaleString("es-ES")} CUP</small></div><div><button class="btn btn-dark" type="button" onclick="editTasa('${safe(t.id)}')">✏️</button></div></div>`).join(""); }
+function editTasa(id){ const t = tasasData.find(v=>String(v.id)===String(id)); if(!t) return; const nuevoValor = prompt(`Nueva tasa para ${t.moneda} en CUP:`, t.valor_cup); if(nuevoValor === null) return; updateTasa(id, parseFloat(nuevoValor)); }
+async function updateTasa(id, valor){ await db.from('tasas').update({valor_cup: valor}).eq('id', id); alert("✅ Tasa actualizada"); await loadTasas(); renderAdminTasas(); }
+
+// --- RECARGAS ---
+async function loadRecargas(){ const {data}=await db.from('recargas').select("*").eq("activo",true).order("id"); recargasData=data||[]; renderRecargas(); if($("adminModal")&&$("adminModal").classList.contains("show")) renderAdminRecharges(); }
+function renderRecargas(){ const el=$("rechargesList"); if(!recargasData.length){ el.innerHTML='<div class="empty">Próximamente nuevas ofertas.</div>'; return; } el.innerHTML=recargasData.map((x,i)=>`<article class="card offer-card">${x.imagen_url ? `<img src="${safe(x.imagen_url)}" alt="${safe(x.nombre)}">` : ''}<span class="pill">${safe(x.etiqueta||"RECARGA")}</span><h3>${safe(x.nombre)}</h3><div class="price">${money(x.precio,x.moneda||"RUB")}</div><p>${safe(x.descripcion1||"")}</p><p>${safe(x.descripcion2||"")}</p><button class="btn btn-gold" type="button" onclick="requestRecharge(${i})">Solicitar recarga</button></article>`).join(""); }
+function requestRecharge(i){ const item=recargasData[i]; if(!item)return; $("clientService").value="Recarga"; $("clientDetails").value=`Me interesa la recarga: ${item.nombre} (${money(item.precio, item.moneda)})`; $("solicitud").scrollIntoView({behavior:"smooth"}); }
+function clearRechargeForm(){ ["rechargeId","rechargeLabel","rechargeName","rechargePrice","rechargeDesc1","rechargeDesc2","rechargeImagen"].forEach(id=>{if($(id))$(id).value="";}); if($("rechargeCurrency"))$("rechargeCurrency").value="RUB"; if($("rechargeImagenPreview"))$("rechargeImagenPreview").style.display="none"; }
+function editRecharge(id){ const x=recargasData.find(v=>String(v.id)===String(id)); if(!x)return; $("rechargeId").value=x.id; $("rechargeLabel").value=x.etiqueta||""; $("rechargeName").value=x.nombre||""; $("rechargePrice").value=x.precio; $("rechargeCurrency").value=x.moneda||"RUB"; $("rechargeDesc1").value=x.descripcion1||""; $("rechargeDesc2").value=x.descripcion2||""; $("rechargeImagen").value=x.imagen_url||""; if(x.imagen_url&&$("rechargeImagenPreview")){$("rechargeImagenPreview").src=x.imagen_url;$("rechargeImagenPreview").style.display="block";} }
+async function saveRecharge(){ const id=$("rechargeId").value; const payload={etiqueta:$("rechargeLabel").value.trim(),nombre:$("rechargeName").value.trim(),precio:Number($("rechargePrice").value),moneda:$("rechargeCurrency").value,descripcion1:$("rechargeDesc1").value.trim(),descripcion2:$("rechargeDesc2").value.trim(),imagen_url:$("rechargeImagen").value.trim(),activo:true}; if(!payload.nombre||!Number.isFinite(payload.precio)||payload.precio<0){alert("Completa el nombre y un precio válido.");return;} const query=id?db.from('recargas').update(payload).eq("id",id):db.from('recargas').insert(payload); const {error}=await query; if(error){alert("Error: "+error.message);return;} clearRechargeForm(); await loadRecargas(); renderAdminRecharges(); }
+async function deleteRecharge(id){ if(!confirm("¿Eliminar este plan?"))return; await db.from('recargas').delete().eq("id",id); await loadRecargas(); renderAdminRecharges(); }
+function renderAdminRecharges(){ if(!$("adminRechargeList"))return; $("adminRechargeList").innerHTML=recargasData.map(x=>`<div class="admin-item"><div><strong>${safe(x.nombre)}</strong><br><small>${money(x.precio,x.moneda||"RUB")}</small></div><div><button class="btn btn-dark" type="button" onclick="editRecharge('${safe(x.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteRecharge('${safe(x.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay planes cargados.</p>'; }
+
+// --- BOLETOS ---
+async function loadBoletos(){ const {data}=await db.from('boletos').select("*").eq("activo",true).order("fecha_salida",{ascending:true}); boletosData=data||[]; renderBoletos(); if($("adminModal")&&$("adminModal").classList.contains("show")) renderAdminTickets(); }
+function renderBoletos(){ const el=$("ticketsList"); if(!boletosData.length){el.innerHTML='<div class="empty">No hay boletos publicados.</div>';return;} el.innerHTML=boletosData.map((t,i)=>`<article class="card offer-card">${t.imagen_url?`<img src="${safe(t.imagen_url)}" alt="${safe(t.origen)}">`:''}<span class="pill">${safe(t.etiqueta||t.transporte||"BOLETO")}</span><h3><i class="fa-solid fa-${t.transporte==='avion'?'plane':'bus'} gold"></i> ${safe(t.origen)} → ${safe(t.destino)}</h3><p>${safe(t.transporte||"Transporte")}</p><p><strong>Salida:</strong> ${safe(t.fecha_salida||"Por confirmar")}</p><p><strong>Regreso:</strong> ${safe(t.fecha_regreso||"No indicado")}</p><div class="price">${money(t.precio,t.moneda)}</div><p>${safe(t.descripcion||"Consulta condiciones.")}</p><button class="btn btn-gold" type="button" onclick="requestTicket(${i})">Consultar este boleto</button></article>`).join(""); }
+function requestTicket(i){ const t=boletosData[i]; if(!t)return; $("clientService").value="Boleto"; $("clientDestino").value=t.destino; $("clientDetails").value=`Me interesa el boleto: ${t.origen} → ${t.destino} (${safe(t.fecha_salida)})`; $("solicitud").scrollIntoView({behavior:"smooth"}); }
+function clearTicketForm(){ ["ticketId","ticketLabel","ticketOrigin","ticketDestination","ticketDeparture","ticketReturn","ticketPrice","ticketDescription","ticketImagen"].forEach(id=>{if($(id))$(id).value="";}); if($("ticketType"))$("ticketType").value="avion"; if($("ticketCurrency"))$("ticketCurrency").value="RUB"; if($("ticketImagenPreview"))$("ticketImagenPreview").style.display="none"; }
+function editTicket(id){ const t=boletosData.find(v=>String(v.id)===String(id)); if(!t)return; $("ticketId").value=t.id; $("ticketLabel").value=t.etiqueta||""; $("ticketType").value=t.transporte||"avion"; $("ticketOrigin").value=t.origen||""; $("ticketDestination").value=t.destino||""; $("ticketDeparture").value=t.fecha_salida||""; $("ticketReturn").value=t.fecha_regreso||""; $("ticketPrice").value=t.precio; $("ticketCurrency").value=t.moneda||"RUB"; $("ticketDescription").value=t.descripcion||""; $("ticketImagen").value=t.imagen_url||""; if(t.imagen_url&&$("ticketImagenPreview")){$("ticketImagenPreview").src=t.imagen_url;$("ticketImagenPreview").style.display="block";} }
+async function saveTicket(){ const id=$("ticketId").value; const payload={etiqueta:$("ticketLabel").value.trim(),transporte:$("ticketType").value,origen:$("ticketOrigin").value.trim(),destino:$("ticketDestination").value.trim(),fecha_salida:$("ticketDeparture").value||null,fecha_regreso:$("ticketReturn").value||null,precio:Number($("ticketPrice").value),moneda:$("ticketCurrency").value,descripcion:$("ticketDescription").value.trim(),imagen_url:$("ticketImagen").value.trim(),activo:true}; if(!payload.origen||!payload.destino||!Number.isFinite(payload.precio)||payload.precio<0){alert("Completa origen, destino y precio.");return;} const query=id?db.from('boletos').update(payload).eq("id",id):db.from('boletos').insert(payload); const {error}=await query; if(error){alert("Error: "+error.message);return;} clearTicketForm(); await loadBoletos(); renderAdminTickets(); }
+async function deleteTicket(id){ if(!confirm("¿Eliminar este boleto?"))return; await db.from('boletos').delete().eq("id",id); await loadBoletos(); renderAdminTickets(); }
+function renderAdminTickets(){ if(!$("adminTicketList"))return; $("adminTicketList").innerHTML=boletosData.map(t=>`<div class="admin-item"><div><strong>${safe(t.origen)} → ${safe(t.destino)}</strong><br><small>${money(t.precio,t.moneda)} · ${safe(t.fecha_salida||"")}</small></div><div><button class="btn btn-dark" type="button" onclick="editTicket('${safe(t.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteTicket('${safe(t.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay boletos cargados.</p>'; }
+
+// --- REMESAS ---
+async function loadRemesas(){ const {data}=await db.from('remesas').select("*").eq("activo",true).order("id"); remesasData=data||[]; renderRemesas(); if($("adminModal")&&$("adminModal").classList.contains("show")) renderAdminRemesas(); }
+function renderRemesas(){ const el=$("remesasList"); if(!remesasData.length){el.innerHTML='<div class="empty">Próximamente nuevas opciones.</div>';return;} el.innerHTML=remesasData.map((r,i)=>`<article class="card offer-card">${r.imagen_url?`<img src="${safe(r.imagen_url)}" alt="${safe(r.origen)}">`:''}<h3><i class="fa-solid fa-money-bill-transfer gold"></i> ${safe(r.origen)} → ${safe(r.destino)}</h3><p><strong>Envías:</strong> ${money(r.monto_origen,r.moneda_origen)}</p><p><strong>Reciben:</strong> ${money(r.monto_destino,r.moneda_destino)}</p><p>${safe(r.descripcion||"Consulta condiciones.")}</p><button class="btn btn-gold" type="button" onclick="requestRemesa(${i})">Solicitar remesa</button></article>`).join(""); }
+function requestRemesa(i){ const r=remesasData[i]; if(!r)return; $("clientService").value="Remesa"; $("clientDestino").value=r.destino; $("clientDetails").value=`Me interesa la remesa: ${r.origen} → ${r.destino}`; $("solicitud").scrollIntoView({behavior:"smooth"}); }
+function clearRemesaForm(){ ["remesaId","remesaOrigen","remesaDestino","remesaMontoOrigen","remesaMontoDestino","remesaDescripcion","remesaImagen"].forEach(id=>{if($(id))$(id).value="";}); if($("remesaMonedaOrigen"))$("remesaMonedaOrigen").value="RUB"; if($("remesaMonedaDestino"))$("remesaMonedaDestino").value="CUP"; if($("remesaImagenPreview"))$("remesaImagenPreview").style.display="none"; }
+function editRemesa(id){ const r=remesasData.find(v=>String(v.id)===String(id)); if(!r)return; $("remesaId").value=r.id; $("remesaOrigen").value=r.origen||""; $("remesaDestino").value=r.destino||""; $("remesaMontoOrigen").value=r.monto_origen; $("remesaMonedaOrigen").value=r.moneda_origen||"RUB"; $("remesaMontoDestino").value=r.monto_destino; $("remesaMonedaDestino").value=r.moneda_destino||"CUP"; $("remesaDescripcion").value=r.descripcion||""; $("remesaImagen").value=r.imagen_url||""; if(r.imagen_url&&$("remesaImagenPreview")){$("remesaImagenPreview").src=r.imagen_url;$("remesaImagenPreview").style.display="block";} }
+async function saveRemesa(){ const id=$("remesaId").value; const payload={origen:$("remesaOrigen").value.trim(),destino:$("remesaDestino").value.trim(),monto_origen:Number($("remesaMontoOrigen").value),moneda_origen:$("remesaMonedaOrigen").value,monto_destino:Number($("remesaMontoDestino").value),moneda_destino:$("remesaMonedaDestino").value,descripcion:$("remesaDescripcion").value.trim(),imagen_url:$("remesaImagen").value.trim(),activo:true}; if(!payload.origen||!payload.destino||!Number.isFinite(payload.monto_origen)||payload.monto_origen<0){alert("Completa origen, destino y monto.");return;} const query=id?db.from('remesas').update(payload).eq("id",id):db.from('remesas').insert(payload); const {error}=await query; if(error){alert("Error: "+error.message);return;} clearRemesaForm(); await loadRemesas(); renderAdminRemesas(); }
+async function deleteRemesa(id){ if(!confirm("¿Eliminar esta remesa?"))return; await db.from('remesas').delete().eq("id",id); await loadRemesas(); renderAdminRemesas(); }
+function renderAdminRemesas(){ if(!$("adminRemesaList"))return; $("adminRemesaList").innerHTML=remesasData.map(r=>`<div class="admin-item"><div><strong>${safe(r.origen)} → ${safe(r.destino)}</strong><br><small>${money(r.monto_origen,r.moneda_origen)} → ${money(r.monto_destino,r.moneda_destino)}</small></div><div><button class="btn btn-dark" type="button" onclick="editRemesa('${safe(r.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteRemesa('${safe(r.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay remesas cargadas.</p>'; }
+
+// --- DESTINOS ---
+async function loadDestinos(){ const {data}=await db.from('destinos').select("*").eq("activo",true).order("nombre"); destinosData=data||[]; renderDestinos(); if($("adminModal")&&$("adminModal").classList.contains("show")) renderAdminDestinos(); }
+function renderDestinos(){ const el=$("destinosList"); if(!destinosData.length){el.innerHTML='<div class="empty">No hay destinos publicados.</div>';return;} el.innerHTML=destinosData.map(d=>`<article class="card offer-card">${d.imagen_url?`<img src="${safe(d.imagen_url)}" alt="${safe(d.nombre)}">`:''}<span class="pill">${safe(d.categoria||"DESTINO")}</span><h3>${safe(d.nombre)}</h3><p>${safe(d.descripcion||"")}</p></article>`).join(""); }
+function clearDestinoForm(){ ["destinoId","destinoNombre","destinoCategoria","destinoDescripcion","destinoImagen"].forEach(id=>{if($(id))$(id).value="";}); if($("destinoImagenPreview"))$("destinoImagenPreview").style.display="none"; }
+function editDestino(id){ const d=destinosData.find(v=>String(v.id)===String(id)); if(!d)return; $("destinoId").value=d.id; $("destinoNombre").value=d.nombre||""; $("destinoCategoria").value=d.categoria||""; $("destinoDescripcion").value=d.descripcion||""; $("destinoImagen").value=d.imagen_url||""; if(d.imagen_url&&$("destinoImagenPreview")){$("destinoImagenPreview").src=d.imagen_url;$("destinoImagenPreview").style.display="block";} }
+async function saveDestino(){ const id=$("destinoId").value; const payload={nombre:$("destinoNombre").value.trim(),categoria:$("destinoCategoria").value.trim(),descripcion:$("destinoDescripcion").value.trim(),imagen_url:$("destinoImagen").value.trim(),activo:true}; if(!payload.nombre){alert("El nombre es obligatorio.");return;} const query=id?db.from('destinos').update(payload).eq("id",id):db.from('destinos').insert(payload); const {error}=await query; if(error){alert("Error: "+error.message);return;} clearDestinoForm(); await loadDestinos(); renderAdminDestinos(); }
+async function deleteDestino(id){ if(!confirm("¿Eliminar este destino?"))return; await db.from('destinos').delete().eq("id",id); await loadDestinos(); renderAdminDestinos(); }
+function renderAdminDestinos(){ if(!$("adminDestinoList"))return; $("adminDestinoList").innerHTML=destinosData.map(d=>`<div class="admin-item"><div><strong>${safe(d.nombre)}</strong><br><small>${safe(d.categoria||"")}</small></div><div><button class="btn btn-dark" type="button" onclick="editDestino('${safe(d.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteDestino('${safe(d.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay destinos cargados.</p>'; }
+
+// --- SERVICIOS ---
+async function loadServicios(){ const {data}=await db.from('servicios').select("*").eq("activo",true).order("orden"); serviciosData=data||[]; renderServicios(); if($("adminModal")&&$("adminModal").classList.contains("show")) renderAdminServicios(); }
+function renderServicios(){ const el=$("serviciosList"); if(!serviciosData.length){el.innerHTML='<div class="empty">No hay servicios publicados.</div>';return;} el.innerHTML=serviciosData.map(s=>`<article class="card"><div class="service-icon">${safe(s.icono||"⭐")}</div><h3>${safe(s.nombre)}</h3><p>${safe(s.descripcion||"")}</p></article>`).join(""); }
+function clearServicioForm(){ ["servicioId","servicioNombre","servicioDescripcion","servicioIcono"].forEach(id=>{if($(id))$(id).value="";}); if($("servicioOrden"))$("servicioOrden").value="1"; }
+function editServicio(id){ const s=serviciosData.find(v=>String(v.id)===String(id)); if(!s)return; $("servicioId").value=s.id; $("servicioNombre").value=s.nombre||""; $("servicioDescripcion").value=s.descripcion||""; $("servicioIcono").value=s.icono||""; $("servicioOrden").value=s.orden||1; }
+async function saveServicio(){ const id=$("servicioId").value; const payload={nombre:$("servicioNombre").value.trim(),descripcion:$("servicioDescripcion").value.trim(),icono:$("servicioIcono").value.trim(),orden:Number($("servicioOrden").value)||1,activo:true}; if(!payload.nombre){alert("El nombre es obligatorio.");return;} const query=id?db.from('servicios').update(payload).eq("id",id):db.from('servicios').insert(payload); const {error}=await query; if(error){alert("Error: "+error.message);return;} clearServicioForm(); await loadServicios(); renderAdminServicios(); }
+async function deleteServicio(id){ if(!confirm("¿Eliminar este servicio?"))return; await db.from('servicios').delete().eq("id",id); await loadServicios(); renderAdminServicios(); }
+function renderAdminServicios(){ if(!$("adminServicioList"))return; $("adminServicioList").innerHTML=serviciosData.map(s=>`<div class="admin-item"><div><strong>${safe(s.icono||"")} ${safe(s.nombre)}</strong><br><small>${safe(s.descripcion||"").substring(0,60)}...</small></div><div><button class="btn btn-dark" type="button" onclick="editServicio('${safe(s.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteServicio('${safe(s.id)}')">🗑️ Eliminar</button></div></div>`).join("")||'<p class="mini">No hay servicios cargados.</p>'; }
+
+// --- BANNER ---
+async function cargarBanner(){ const { data } = await db.from('ybh_banner').select('*').eq('activo', true).order('orden'); bannerData = data || []; renderBanner(); }
+function renderBanner(){
+ const slides = $("bannerSlides"); const dots = $("bannerDots");
+ if(!slides || !dots) return;
+ if(bannerData.length === 0){ if($("bannerGaleria")) $("bannerGaleria").style.display = "none"; return; }
+ if($("bannerGaleria")) $("bannerGaleria").style.display = "block";
+ slides.innerHTML = bannerData.map((b, i) => `<div class="slide ${i === 0 ? 'active' : ''}" ${b.enlace ? `onclick="window.open('${safe(b.enlace)}','_blank')"` : ''} style="cursor:${b.enlace ? 'pointer' : 'default'}"><img src="${safe(b.imagen_url)}" alt="${safe(b.titulo || '')}">${b.titulo ? `<div class="slide-overlay"><h3>${safe(b.titulo)}</h3></div>` : ''}</div>`).join('');
+ dots.innerHTML = bannerData.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}" onclick="bannerGoTo(${i})"></div>`).join('');
+ bannerIndex = 0; clearInterval(bannerInterval); bannerInterval = setInterval(() => bannerNav(1), 5000);
+}
+function bannerNav(dir){ if(bannerData.length === 0) return; bannerIndex = (bannerIndex + dir + bannerData.length) % bannerData.length; bannerGoTo(bannerIndex); }
+function bannerGoTo(index){ bannerIndex = index; document.querySelectorAll('.banner-galeria .slide').forEach((s, i) => s.classList.toggle('active', i === index)); document.querySelectorAll('.banner-galeria .dot').forEach((d, i) => d.classList.toggle('active', i === index)); clearInterval(bannerInterval); bannerInterval = setInterval(() => bannerNav(1), 5000); }
+function clearBannerForm(){ ["bannerId","bannerTitulo","bannerImagen","bannerEnlace"].forEach(id => { if($(id)) $(id).value = ""; }); if($("bannerOrden")) $("bannerOrden").value = "0"; if($("bannerActivo")) $("bannerActivo").checked = true; if($("bannerImagenPreview")) $("bannerImagenPreview").style.display = "none"; }
+function editBanner(id){ const b = bannerData.find(v => String(v.id) === String(id)); if(!b) return; $("bannerId").value = b.id; $("bannerTitulo").value = b.titulo || ""; $("bannerImagen").value = b.imagen_url || ""; $("bannerEnlace").value = b.enlace || ""; $("bannerOrden").value = b.orden || 0; $("bannerActivo").checked = b.activo !== false; if(b.imagen_url&&$("bannerImagenPreview")){$("bannerImagenPreview").src = b.imagen_url; $("bannerImagenPreview").style.display = "block";} }
+async function saveBanner(){ const id = $("bannerId").value; const payload = { titulo: $("bannerTitulo").value.trim(), imagen_url: $("bannerImagen").value.trim(), enlace: $("bannerEnlace").value.trim(), orden: Number($("bannerOrden").value) || 0, activo: $("bannerActivo").checked }; if(!payload.imagen_url){ alert("La URL de la imagen es obligatoria"); return; } const query = id ? db.from('ybh_banner').update(payload).eq('id', id) : db.from('ybh_banner').insert(payload); const { error } = await query; if(error){ alert("Error: " + error.message); return; } clearBannerForm(); await cargarBanner(); renderAdminBanner(); }
+async function deleteBanner(id){ if(!confirm("¿Eliminar esta imagen del banner?")) return; await db.from('ybh_banner').delete().eq('id', id); await cargarBanner(); renderAdminBanner(); }
+function renderAdminBanner(){ if(!$("adminBannerList")) return; $("adminBannerList").innerHTML = bannerData.map(b => `<div class="admin-item"><div style="display:flex;align-items:center;gap:10px">${b.imagen_url ? `<img src="${safe(b.imagen_url)}" style="width:60px;height:60px;object-fit:cover;border-radius:8px">` : ''}<div><strong>${safe(b.titulo || 'Sin título')}</strong><br><small>Orden: ${b.orden} · ${b.activo ? '✅ Activo' : '❌ Inactivo'}</small></div></div><div><button class="btn btn-dark" type="button" onclick="editBanner('${safe(b.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteBanner('${safe(b.id)}')">🗑️ Eliminar</button></div></div>`).join("") || '<p class="mini">No hay imágenes en el banner.</p>'; }
+
+// --- CALCULADORA ---
+function calculate(){ 
+ const amount=Number($("calcAmount").value); const fromCode=$("calcFrom").value; const toCode=$("calcTo").value; 
+ if(!Number.isFinite(amount)||amount<0){ $("calcResult").textContent="Introduce una cantidad válida."; return; } 
+ const fromRate = tasasData.find(t=>t.codigo===fromCode); const toRate = tasasData.find(t=>t.codigo===toCode); 
+ if(!fromRate||!toRate){ $("calcResult").textContent="Faltan tasas para realizar este cálculo."; return; } 
+ const result=amount*fromRate.valor_cup/toRate.valor_cup; 
+ $("calcResult").textContent=`${amount} ${fromCode} = ${result.toLocaleString("es-ES",{maximumFractionDigits:2})} ${toCode}`; 
 }
 
-function renderAdminNoticias() {
-  $("adminNoticiasList").innerHTML = noticiasData.map(n => `
-    <div class="admin-item">
-      <div>
-        <strong>${n.tipo === 'ultima_hora' ? '🚨' : '📝'} ${safe(n.titulo || n.descripcion.substring(0, 40) + '...')}</strong>
-        <br><small>${safe(n.fecha)} · Orden: ${n.orden}</small>
-      </div>
-      <div>
-        <button class="btn btn-dark" type="button" onclick="editNoticia('${safe(n.id)}')">✏️ Editar</button>
-        <button class="btn btn-red" type="button" onclick="deleteNoticia('${safe(n.id)}')">🗑️ Eliminar</button>
-      </div>
-    </div>
-  `).join("") || '<p class="mini">No hay noticias cargadas.</p>';
-}
-
-// Previsualización de imágenes en admin
-["rechargeImagen","ticketImagen","remesaImagen","destinoImagen","guiaImagen","ofertaImagen","bannerImagen"].forEach(id => {
- const input = $(id);
- const preview = $(id + "Preview");
+// --- PREVISUALIZACIÓN IMÁGENES ---
+["rechargeImagen","ticketImagen","remesaImagen","destinoImagen","bannerImagen","ofertaImagen"].forEach(id => {
+ const input = $(id); const preview = $(id + "Preview");
  if(input && preview){
   input.addEventListener('input', () => {
    const url = input.value.trim();
-   if(url){ preview.src = url; preview.style.display = "block"; }
-   else { preview.style.display = "none"; }
+   if(url){ preview.src = url; preview.style.display = "block"; } else { preview.style.display = "none"; }
   });
  }
 });
+
+async function loadAdminData(){ await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), loadRequests(), cargarBanner(), loadNoticias(), loadVisas(), loadOfertas() ]); renderAdminTasas(); renderAdminRecharges(); renderAdminTickets(); renderAdminRemesas(); renderAdminDestinos(); renderAdminServicios(); renderAdminBanner(); renderAdminNoticias(); renderAdminVisas(); renderAdminOfertas(); }
 
 console.log('🚀 Página cargada, iniciando...');
 loadAll();
