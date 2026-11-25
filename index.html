@@ -151,6 +151,23 @@ section{padding:58px 0}
 .guia-aviso p{color:var(--gold);font-weight:700;margin:0 0 8px 0}
 .guia-aviso p:last-child{color:var(--muted);font-size:13px;margin:0}
 
+/* ALERTAS Y NOTICIAS */
+.alert-container { max-width: 1000px; margin: 30px auto; padding: 0 20px; font-family: 'Segoe UI', Arial, sans-serif; }
+.breaking-news { background: linear-gradient(90deg, #b30000 0%, #800000 100%); color: white; padding: 12px 20px; border-radius: 8px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 10px rgba(179, 0, 0, 0.3); margin-bottom: 25px; }
+.breaking-badge { background: #FFD700; color: #800000; font-weight: 900; font-size: 12px; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
+.pulse-dot { width: 8px; height: 8px; background: #800000; border-radius: 50%; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(128, 0, 0, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(128, 0, 0, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(128, 0, 0, 0); } }
+.breaking-text { font-size: 15px; font-weight: 500; }
+.section-title-alert { text-align: center; color: var(--gold); font-size: 26px; font-weight: 800; margin-bottom: 20px; position: relative; }
+.section-title-alert::after { content: ''; display: block; width: 60px; height: 4px; background: var(--gold); margin: 8px auto 0; border-radius: 2px; }
+.notes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+.note-card { background: var(--panel); border-radius: 10px; padding: 20px; border-left: 5px solid var(--gold); box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s ease; }
+.note-card:hover { transform: translateY(-5px); }
+.note-icon { font-size: 28px; margin-bottom: 10px; }
+.note-title { color: var(--white); font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.note-desc { color: var(--muted); font-size: 14px; line-height: 1.5; margin-bottom: 12px; }
+.note-date { font-size: 12px; color: var(--muted); font-weight: 600; text-transform: uppercase; opacity: 0.7; }
+
 /* FOOTER */
 footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:12px}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
@@ -300,73 +317,19 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  </div>
 </section>
 
-<!-- SECCIÓN: ÚLTIMA HORA Y AVISOS IMPORTANTES (Conectada a GitHub) -->
-<style>
-  .alert-container { max-width: 1000px; margin: 30px auto; padding: 0 20px; font-family: 'Segoe UI', Arial, sans-serif; }
-  .breaking-news { background: linear-gradient(90deg, #b30000 0%, #800000 100%); color: white; padding: 12px 20px; border-radius: 8px; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 10px rgba(179, 0, 0, 0.3); margin-bottom: 25px; }
-  .breaking-badge { background: #FFD700; color: #800000; font-weight: 900; font-size: 12px; padding: 4px 10px; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 6px; }
-  .pulse-dot { width: 8px; height: 8px; background: #800000; border-radius: 50%; animation: pulse 1.5s infinite; }
-  @keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(128, 0, 0, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(128, 0, 0, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(128, 0, 0, 0); } }
-  .breaking-text { font-size: 15px; font-weight: 500; }
-  .section-title { text-align: center; color: #003366; font-size: 26px; font-weight: 800; margin-bottom: 20px; position: relative; }
-  .section-title::after { content: ''; display: block; width: 60px; height: 4px; background: #FFD700; margin: 8px auto 0; border-radius: 2px; }
-  .notes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-  .note-card { background: white; border-radius: 10px; padding: 20px; border-left: 5px solid #FFD700; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.2s ease; }
-  .note-card:hover { transform: translateY(-5px); }
-  .note-icon { font-size: 28px; margin-bottom: 10px; }
-  .note-title { color: #003366; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-  .note-desc { color: #555; font-size: 14px; line-height: 1.5; margin-bottom: 12px; }
-  .note-date { font-size: 12px; color: #999; font-weight: 600; text-transform: uppercase; }
-</style>
-
+<!-- SECCIÓN: ÚLTIMA HORA Y AVISOS IMPORTANTES -->
 <div class="alert-container">
-  <!-- Barra de Última Hora -->
   <div class="breaking-news">
     <div class="breaking-badge"><div class="pulse-dot"></div> ÚLTIMA HORA</div>
     <div class="breaking-text" id="breakingText">Cargando anuncios...</div>
   </div>
 
-  <h2 class="section-title">📢 Avisos y Notas Importantes</h2>
+  <h2 class="section-title-alert">📢 Avisos y Notas Importantes</h2>
 
-  <!-- Cuadrícula de Notas -->
   <div class="notes-grid" id="notesGrid">
-    <!-- Las notas se cargarán aquí automáticamente desde GitHub -->
+    <div class="empty">⏳ Cargando noticias...</div>
   </div>
 </div>
-
-<!-- Script para leer el archivo noticias.json -->
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    fetch('noticias.json')
-      .then(response => response.json())
-      .then(data => {
-        // Actualizar la barra roja de Última Hora
-        if(data.ultimaHora) {
-          document.getElementById('breakingText').innerText = data.ultimaHora;
-        }
-        
-        // Generar las tarjetas de notas
-        const notesContainer = document.getElementById('notesGrid');
-        notesContainer.innerHTML = ''; // Limpiar contenido por defecto
-        
-        data.notas.forEach(nota => {
-          const cardHTML = `
-            <div class="note-card">
-              <div class="note-icon">${nota.icono}</div>
-              <div class="note-title">${nota.titulo}</div>
-              <div class="note-desc">${nota.descripcion}</div>
-              <div class="note-date">📅 Publicado: ${nota.fecha}</div>
-            </div>
-          `;
-          notesContainer.innerHTML += cardHTML;
-        });
-      })
-      .catch(error => {
-        console.error('Error al cargar las notas:', error);
-        document.getElementById('breakingText').innerText = "Bienvenido a Your Bridge Home.";
-      });
-  });
-</script>
   
 <!-- SERVICIOS -->
 <section id="servicios"><div class="container"><div class="section-head"><div class="eyebrow" data-i18n="services_eyebrow">Lo que hacemos</div><h2 data-i18n="services_title">Nuestros <span class="gold">servicios</span></h2><p data-i18n="services_desc">Soluciones para mantenerte conectado y acercarte a tus destinos.</p></div><div class="grid" id="serviciosList"><div class="empty">⏳ <span data-i18n="loading">Cargando...</span></div></div></div></section>
@@ -465,6 +428,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    <button type="button" onclick="showAdminTab('serviciosAdmin',this)">⭐ Servicios</button>
    <button type="button" onclick="showAdminTab('bannerAdmin',this)">🖼️ Banner Galería</button>
    <button type="button" onclick="showAdminTab('requestsAdmin',this)">📋 Solicitudes</button>
+   <button type="button" onclick="showAdminTab('noticiasAdmin',this)">📢 Noticias</button>
   </div>
   
   <div class="admin-panel active" id="ratesAdmin"><h3 data-i18n="rates_admin_title">Tasas de cambio (valor en CUP)</h3><div id="ratesAdminList"></div></div>
@@ -603,6 +567,30 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    <button class="btn btn-dark" type="button" onclick="loadRequests()" data-i18n="refresh_btn">🔄 Actualizar</button>
    <div class="admin-list" id="adminRequestsList"></div>
   </div>
+
+  <div class="admin-panel" id="noticiasAdmin">
+   <h3>📢 Gestionar Última Hora y Notas</h3>
+   <input type="hidden" id="noticiaId">
+   <div class="form-grid">
+    <div class="field">
+     <label>Tipo</label>
+     <select id="noticiaTipo">
+      <option value="nota">📝 Nota Informativa</option>
+      <option value="ultima_hora">🚨 Barra de Última Hora (Urgente)</option>
+     </select>
+    </div>
+    <div class="field"><label>Ícono (Emoji)</label><input id="noticiaIcono" placeholder="Ej: ✈️" maxlength="2"></div>
+    <div class="field"><label>Título</label><input id="noticiaTitulo" placeholder="Título de la nota"></div>
+    <div class="field"><label>Fecha</label><input id="noticiaFecha" placeholder="Ej: 25 Nov 2026"></div>
+    <div class="field full"><label>Descripción / Texto</label><textarea id="noticiaDescripcion" placeholder="Detalles de la nota o texto de última hora"></textarea></div>
+    <div class="field"><label>Orden</label><input id="noticiaOrden" type="number" value="0"></div>
+    <div class="field"><label><input type="checkbox" id="noticiaActivo" checked> Activo</label></div>
+   </div>
+   <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveNoticia()">💾 Guardar</button>
+   <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearNoticiaForm()">➕ Nuevo</button>
+   <div class="admin-list" id="adminNoticiasList" style="margin-top:20px"></div>
+  </div>
+
  </div>
 </div>
 
@@ -613,7 +601,7 @@ const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const $ = id => document.getElementById(id);
 
 let tasasData=[], recargasData=[], boletosData=[], remesasData=[], destinosData=[], serviciosData=[], solicitudesData=[];
-let guiasData=[], ofertasData=[], bannerData=[];
+let guiasData=[], ofertasData=[], bannerData=[], noticiasData=[];
 let currentLang = 'es';
 let bannerIndex = 0;
 let bannerInterval;
@@ -647,7 +635,7 @@ function safe(v){ return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"
 function money(v,c){ return `${Number(v||0).toLocaleString("es-ES",{maximumFractionDigits:2})} ${safe(c||"")}`; }
 
 // CARGA AUTOMÁTICA
-async function loadAll(){ console.log('🚀 Cargando datos...'); await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), cargarBanner() ]); console.log('✅ Carga completa'); }
+async function loadAll(){ console.log('🚀 Cargando datos...'); await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), cargarBanner(), loadNoticias() ]); console.log('✅ Carga completa'); }
 
 // TASAS
 async function loadTasas(){ const {data,error}=await db.from('tasas').select("*").eq("activo",true).order("codigo"); if(error){ console.error('Error tasas:', error); return; } tasasData = data || []; renderTasas(); if($("adminModal").classList.contains("show")) renderAdminTasas(); }
@@ -716,7 +704,7 @@ function calculate(){ const amount=Number($("calcAmount").value); const fromCode
 ["calcAmount","calcFrom","calcTo"].forEach(id=>{ $(id).addEventListener("change",calculate); });
 
 // ADMIN DATA
-async function loadAdminData(){ await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), loadRequests(), cargarBanner() ]); renderAdminTasas(); renderAdminRecharges(); renderAdminTickets(); renderAdminRemesas(); renderAdminDestinos(); renderAdminServicios(); renderAdminBanner(); }
+async function loadAdminData(){ await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), loadRequests(), cargarBanner(), loadNoticias() ]); renderAdminTasas(); renderAdminRecharges(); renderAdminTickets(); renderAdminRemesas(); renderAdminDestinos(); renderAdminServicios(); renderAdminBanner(); renderAdminNoticias(); }
 
 // BANNER GALERÍA
 async function cargarBanner(){ const { data, error } = await db.from('ybh_banner').select('*').eq('activo', true).order('orden'); if(error){ console.error(error); return; } bannerData = data || []; renderBanner(); }
@@ -819,6 +807,111 @@ function renderAdminBanner(){
  `).join("") || '<p class="mini">No hay imágenes en el banner.</p>';
 }
 
+// ==========================================
+// GESTIÓN DE NOTICIAS Y ÚLTIMA HORA (SUPABASE)
+// ==========================================
+async function loadNoticias() {
+  const { data, error } = await db.from('noticias').select('*').eq('activo', true).order('orden', { ascending: true });
+  if (error) { console.error('Error noticias:', error); return; }
+  noticiasData = data || [];
+  renderNoticiasFrontend();
+  if ($("adminModal").classList.contains("show")) renderAdminNoticias();
+}
+
+function renderNoticiasFrontend() {
+  const ultimaHora = noticiasData.find(n => n.tipo === 'ultima_hora');
+  if (ultimaHora && $("breakingText")) {
+    $("breakingText").innerText = (ultimaHora.icono ? ultimaHora.icono + ' ' : '') + ultimaHora.descripcion;
+  } else if ($("breakingText")) {
+    $("breakingText").innerText = "Bienvenido a Your Bridge Home. Consulta nuestras ofertas.";
+  }
+
+  const notas = noticiasData.filter(n => n.tipo === 'nota');
+  const notesContainer = $("notesGrid");
+  if (notesContainer) {
+    notesContainer.innerHTML = '';
+    if (notas.length === 0) {
+      notesContainer.innerHTML = '<div class="empty">No hay avisos importantes en este momento.</div>';
+    } else {
+      notas.forEach(nota => {
+        notesContainer.innerHTML += `
+          <div class="note-card">
+            <div class="note-icon">${nota.icono || '📌'}</div>
+            <div class="note-title">${safe(nota.titulo)}</div>
+            <div class="note-desc">${safe(nota.descripcion)}</div>
+            <div class="note-date">📅 Publicado: ${safe(nota.fecha)}</div>
+          </div>
+        `;
+      });
+    }
+  }
+}
+
+function clearNoticiaForm() {
+  ["noticiaId", "noticiaIcono", "noticiaTitulo", "noticiaFecha", "noticiaDescripcion"].forEach(id => { $(id).value = ""; });
+  $("noticiaTipo").value = "nota";
+  $("noticiaOrden").value = "0";
+  $("noticiaActivo").checked = true;
+}
+
+function editNoticia(id) {
+  const n = noticiasData.find(v => String(v.id) === String(id));
+  if (!n) return;
+  $("noticiaId").value = n.id;
+  $("noticiaTipo").value = n.tipo;
+  $("noticiaIcono").value = n.icono || "";
+  $("noticiaTitulo").value = n.titulo || "";
+  $("noticiaFecha").value = n.fecha || "";
+  $("noticiaDescripcion").value = n.descripcion || "";
+  $("noticiaOrden").value = n.orden || 0;
+  $("noticiaActivo").checked = n.activo;
+}
+
+async function saveNoticia() {
+  const id = $("noticiaId").value;
+  const payload = {
+    tipo: $("noticiaTipo").value,
+    icono: $("noticiaIcono").value.trim(),
+    titulo: $("noticiaTitulo").value.trim(),
+    fecha: $("noticiaFecha").value.trim(),
+    descripcion: $("noticiaDescripcion").value.trim(),
+    orden: Number($("noticiaOrden").value) || 0,
+    activo: $("noticiaActivo").checked
+  };
+
+  if (!payload.descripcion) { alert("La descripción o texto es obligatoria."); return; }
+
+  const query = id ? db.from('noticias').update(payload).eq("id", id) : db.from('noticias').insert(payload);
+  const { error } = await query;
+  if (error) { alert("Error: " + error.message); return; }
+  
+  clearNoticiaForm();
+  await loadNoticias();
+  renderAdminNoticias();
+}
+
+async function deleteNoticia(id) {
+  if (!confirm("¿Eliminar esta noticia?")) return;
+  await db.from('noticias').delete().eq("id", id);
+  await loadNoticias();
+  renderAdminNoticias();
+}
+
+function renderAdminNoticias() {
+  $("adminNoticiasList").innerHTML = noticiasData.map(n => `
+    <div class="admin-item">
+      <div>
+        <strong>${n.tipo === 'ultima_hora' ? '🚨' : '📝'} ${safe(n.titulo || n.descripcion.substring(0, 40) + '...')}</strong>
+        <br><small>${safe(n.fecha)} · Orden: ${n.orden}</small>
+      </div>
+      <div>
+        <button class="btn btn-dark" type="button" onclick="editNoticia('${safe(n.id)}')">✏️ Editar</button>
+        <button class="btn btn-red" type="button" onclick="deleteNoticia('${safe(n.id)}')">🗑️ Eliminar</button>
+      </div>
+    </div>
+  `).join("") || '<p class="mini">No hay noticias cargadas.</p>';
+}
+
 // Previsualización de imágenes en admin
 ["rechargeImagen","ticketImagen","remesaImagen","destinoImagen","guiaImagen","ofertaImagen","bannerImagen"].forEach(id => {
  const input = $(id);
@@ -838,4 +931,3 @@ changeLanguage('es');
 </script>
 </body>
 </html>
-
