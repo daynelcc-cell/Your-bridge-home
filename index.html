@@ -443,6 +443,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    <button type="button" onclick="showAdminTab('destinosAdmin',this)">🌍 Destinos</button>
    <button type="button" onclick="showAdminTab('serviciosAdmin',this)">⭐ Servicios</button>
    <button type="button" onclick="showAdminTab('bannerAdmin',this)">🖼️ Banner</button>
+   <button type="button" onclick="showAdminTab('generatorAdmin',this)">🎨 Generar Imágenes</button>
   </div>
   
   <div class="admin-panel active" id="requestsAdmin">
@@ -597,6 +598,26 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    <button class="btn btn-gold" style="margin-top:12px" type="button" onclick="saveBanner()">💾 Guardar imagen</button>
    <button class="btn btn-dark" style="margin-top:12px" type="button" onclick="clearBannerForm()">➕ Nueva</button>
    <div class="admin-list" id="adminBannerList"></div>
+  </div>
+
+  <!-- NUEVO: GENERADOR DE IMÁGENES -->
+  <div class="admin-panel" id="generatorAdmin">
+   <h3>🎨 Generador de Imágenes con IA</h3>
+   <p class="mini" style="margin-bottom:15px">Crea imágenes promocionales únicas para tus ofertas, banners o destinos. (Servicio gratuito, sin API key).</p>
+   <div class="form-grid">
+    <div class="field full"><label>Descripción de la imagen (Prompt)</label><textarea id="genPrompt" placeholder="Ej: Un paisaje tropical de Cuba con un cartel de 'Oferta Especial', estilo fotorealista, alta calidad, 8k, iluminación cinematográfica"></textarea></div>
+    <div class="field"><label>Formato</label><select id="genFormat"><option value="1200x600">Banner Horizontal (1200x600)</option><option value="800x800">Cuadrado / Redes (800x800)</option><option value="600x400">Tarjeta Vertical (600x400)</option></select></div>
+    <div class="field" style="display:flex;align-items:flex-end"><button class="btn btn-gold" type="button" onclick="generateImage()" style="width:100%">✨ Generar Imagen</button></div>
+   </div>
+   <div id="genResult" style="margin-top:20px;text-align:center;display:none;">
+    <p class="mini">Imagen generada (haz clic derecho para guardar o copia la URL):</p>
+    <img id="genImage" style="max-width:100%;border-radius:12px;border:2px solid var(--gold);margin-top:10px;box-shadow:0 10px 30px #0005;">
+    <div class="field full" style="margin-top:15px;">
+     <label>URL de la imagen generada (para copiar y pegar en otros formularios):</label>
+     <input id="genImageUrl" readonly style="text-align:center;color:var(--gold);font-weight:bold;font-size:12px;">
+     <button class="btn btn-dark" type="button" onclick="copyGenUrl()" style="margin-top:8px;width:100%">📋 Copiar URL al Portapapeles</button>
+    </div>
+   </div>
   </div>
 
  </div>
@@ -835,15 +856,39 @@ function renderBanner(){
  if($("bannerGaleria")) $("bannerGaleria").style.display = "block";
  slides.innerHTML = bannerData.map((b, i) => `<div class="slide ${i === 0 ? 'active' : ''}" ${b.enlace ? `onclick="window.open('${safe(b.enlace)}','_blank')"` : ''} style="cursor:${b.enlace ? 'pointer' : 'default'}"><img src="${safe(b.imagen_url)}" alt="${safe(b.titulo || '')}">${b.titulo ? `<div class="slide-overlay"><h3>${safe(b.titulo)}</h3></div>` : ''}</div>`).join('');
  dots.innerHTML = bannerData.map((_, i) => `<div class="dot ${i === 0 ? 'active' : ''}" onclick="bannerGoTo(${i})"></div>`).join('');
- bannerIndex = 0; clearInterval(bannerInterval); bannerInterval = setInterval(() => bannerNav(1), 5000);
+ bannerIndex = 0; clearInterval(bannerInterval); bannerInterval = setInterval(() => bannerNav(1), 20000); // 20 segundos
 }
 function bannerNav(dir){ if(bannerData.length === 0) return; bannerIndex = (bannerIndex + dir + bannerData.length) % bannerData.length; bannerGoTo(bannerIndex); }
-function bannerGoTo(index){ bannerIndex = index; document.querySelectorAll('.banner-galeria .slide').forEach((s, i) => s.classList.toggle('active', i === index)); document.querySelectorAll('.banner-galeria .dot').forEach((d, i) => d.classList.toggle('active', i === index)); clearInterval(bannerInterval); bannerInterval = setInterval(() => bannerNav(1), 5000); }
+function bannerGoTo(index){ bannerIndex = index; document.querySelectorAll('.banner-galeria .slide').forEach((s, i) => s.classList.toggle('active', i === index)); document.querySelectorAll('.banner-galeria .dot').forEach((d, i) => d.classList.toggle('active', i === index)); clearInterval(bannerInterval); bannerInterval = setInterval(() => bannerNav(1), 20000); }
 function clearBannerForm(){ ["bannerId","bannerTitulo","bannerImagen","bannerEnlace"].forEach(id => { if($(id)) $(id).value = ""; }); if($("bannerOrden")) $("bannerOrden").value = "0"; if($("bannerActivo")) $("bannerActivo").checked = true; if($("bannerImagenPreview")) $("bannerImagenPreview").style.display = "none"; }
 function editBanner(id){ const b = bannerData.find(v => String(v.id) === String(id)); if(!b) return; $("bannerId").value = b.id; $("bannerTitulo").value = b.titulo || ""; $("bannerImagen").value = b.imagen_url || ""; $("bannerEnlace").value = b.enlace || ""; $("bannerOrden").value = b.orden || 0; $("bannerActivo").checked = b.activo !== false; if(b.imagen_url&&$("bannerImagenPreview")){$("bannerImagenPreview").src = b.imagen_url; $("bannerImagenPreview").style.display = "block";} }
 async function saveBanner(){ const id = $("bannerId").value; const payload = { titulo: $("bannerTitulo").value.trim(), imagen_url: $("bannerImagen").value.trim(), enlace: $("bannerEnlace").value.trim(), orden: Number($("bannerOrden").value) || 0, activo: $("bannerActivo").checked }; if(!payload.imagen_url){ alert("La URL de la imagen es obligatoria"); return; } const query = id ? db.from('ybh_banner').update(payload).eq('id', id) : db.from('ybh_banner').insert(payload); const { error } = await query; if(error){ alert("Error: " + error.message); return; } clearBannerForm(); await cargarBanner(); renderAdminBanner(); }
 async function deleteBanner(id){ if(!confirm("¿Eliminar esta imagen del banner?")) return; await db.from('ybh_banner').delete().eq('id', id); await cargarBanner(); renderAdminBanner(); }
 function renderAdminBanner(){ if(!$("adminBannerList")) return; $("adminBannerList").innerHTML = bannerData.map(b => `<div class="admin-item"><div style="display:flex;align-items:center;gap:10px">${b.imagen_url ? `<img src="${safe(b.imagen_url)}" style="width:60px;height:60px;object-fit:cover;border-radius:8px">` : ''}<div><strong>${safe(b.titulo || 'Sin título')}</strong><br><small>Orden: ${b.orden} · ${b.activo ? '✅ Activo' : '❌ Inactivo'}</small></div></div><div><button class="btn btn-dark" type="button" onclick="editBanner('${safe(b.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteBanner('${safe(b.id)}')">🗑️ Eliminar</button></div></div>`).join("") || '<p class="mini">No hay imágenes en el banner.</p>'; }
+
+// --- GENERADOR DE IMÁGENES (NUEVO) ---
+function generateImage() {
+ const prompt = $("genPrompt").value.trim();
+ if(!prompt) { alert("Por favor, escribe una descripción para la imagen."); return; }
+ const format = $("genFormat").value;
+ const [width, height] = format.split('x');
+ const encodedPrompt = encodeURIComponent(prompt + ", high quality, professional, vibrant colors, 8k resolution");
+ const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${width}&height=${height}&nologo=true&seed=${Math.floor(Math.random()*10000)}`;
+ 
+ $("genImage").src = imageUrl;
+ $("genImageUrl").value = imageUrl;
+ $("genResult").style.display = "block";
+}
+
+function copyGenUrl() {
+ const url = $("genImageUrl").value;
+ if(!url) return;
+ navigator.clipboard.writeText(url).then(() => {
+  alert("✅ URL copiada al portapapeles. Ahora puedes pegarla en el campo 'Imagen (URL)' de Ofertas, Banners, Destinos, etc.");
+ }).catch(() => {
+  alert("No se pudo copiar automáticamente. Por favor, selecciona y copia la URL manualmente.");
+ });
+}
 
 // --- CALCULADORA ---
 function calculate(){ 
