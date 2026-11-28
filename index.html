@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0f172a">
-<meta name="description" content="Your Bridge Home - Recargas, remesas, boletos, visas, ofertas y tasas de cambio en tiempo real. Servicio profesional de Daynel Caminero.">
+<meta name="description" content="Your Bridge Home - Recargas, remesas, boletos, visas, ofertas, misiones personalizadas y tasas de cambio en tiempo real. Servicio profesional de Daynel Caminero.">
 <title>YOUR BRIDGE HOME | Tu puente al mundo</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-:root{--bg:#0f172a;--panel:#17243a;--panel2:#1d2c44;--gold:#e8b84d;--gold2:#ffd978;--white:#f8fafc;--muted:#aab6c8;--line:#33445f;--green:#25d366;--red:#ef6464}
+:root{--bg:#0f172a;--panel:#17243a;--panel2:#1d2c44;--gold:#e8b84d;--gold2:#ffd978;--white:#f8fafc;--muted:#aab6c8;--line:#33445f;--green:#25d366;--red:#ef6464;--blue:#4f8cff}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:90px}
 body{background:var(--bg);color:var(--white);font-family:Montserrat,Arial,sans-serif;line-height:1.6;overflow-x:hidden}
@@ -66,6 +66,16 @@ header{position:sticky;top:0;z-index:50;background:#0b1425ed;border-bottom:1px s
 .btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
 .menu-btn{display:none;background:none;border:0;color:white;font-size:23px}
 .lang-select{background:#253650;color:white;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:11px;font-weight:800;cursor:pointer}
+
+/* ===== BARRA RÁPIDA DE ÍCONOS PREMIUM ===== */
+.quick-bar{background:linear-gradient(180deg,#0b1425,#0f172a);border-bottom:1px solid var(--line);padding:16px 0}
+.quick-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.quick-item{display:flex;flex-direction:column;align-items:center;gap:7px;padding:10px 4px;border-radius:16px;transition:.25s}
+.quick-item:hover{background:#e8b84d14;transform:translateY(-3px)}
+.q-icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-size:20px;color:#182235;background:linear-gradient(135deg,#ffe9a8,#e8b84d 55%,#c9942e);box-shadow:0 5px 16px #e8b84d55, inset 0 1px 2px #ffffffaa, inset 0 -2px 4px #00000033;transition:.25s}
+.quick-item:hover .q-icon{box-shadow:0 8px 24px #e8b84d77, inset 0 1px 2px #fff}
+.q-label{font-size:11px;font-weight:800;color:#e5eaf2;letter-spacing:.3px}
+.q-sub{font-size:9px;color:var(--muted);font-weight:600}
 
 .hero{padding:76px 0 55px;background:radial-gradient(ellipse at 80% 10%,#b7892924,transparent 40%),linear-gradient(140deg,#101a2d,#14243a)}
 .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:34px;align-items:center}
@@ -146,6 +156,102 @@ section{padding:58px 0}
 .badge-yes{background:#ef646433;color:#ef6464;padding:3px 8px;border-radius:12px;font-size:11px;font-weight:700}
 .badge-no{background:#25d36633;color:#25d366;padding:3px 8px;border-radius:12px;font-size:11px;font-weight:700}
 
+/* ===== BRIDGE MISSION ===== */
+.mission-section{background:radial-gradient(ellipse at 15% 0%,#b7892922,transparent 45%),linear-gradient(160deg,#0c1626,#12203a);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mission-title{font-size:clamp(30px,5vw,52px);font-weight:900;font-style:italic;line-height:1.1}
+.mission-title em{color:var(--gold);font-style:italic}
+.mission-slogan{font-size:clamp(16px,2.4vw,22px);font-weight:800;margin-top:10px}
+.mission-slogan span{color:var(--gold)}
+.mission-creator{display:grid;grid-template-columns:340px 1fr;gap:22px;background:linear-gradient(145deg,#1a2941,#12203a);border:1px solid #8f713c66;border-radius:22px;padding:24px;box-shadow:0 18px 50px #0006;margin-top:26px}
+.robot-side{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.robot-avatar{width:120px;height:120px;border-radius:50%;display:grid;place-items:center;font-size:52px;color:#bfe0ff;background:radial-gradient(circle at 35% 30%,#3a6ea5,#122a4a 70%);border:2px solid #6db3ff55;box-shadow:0 0 30px #3a86ff44, inset 0 0 25px #0008;animation:robotFloat 4s ease-in-out infinite}
+@keyframes robotFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.robot-badge{background:linear-gradient(135deg,var(--gold),#c9942e);color:#182235;font-weight:900;font-size:13px;padding:5px 16px;border-radius:8px;letter-spacing:2px}
+.robot-speech{background:#123a6e;border:1px solid #4f8cff66;border-radius:16px;padding:14px 16px;font-size:14px;font-weight:700;color:#eaf3ff;position:relative}
+.robot-speech::after{content:'';position:absolute;bottom:-9px;left:30px;border:9px solid transparent;border-top-color:#123a6e;border-bottom:0}
+.robot-speech b{color:var(--gold)}
+.mission-form-side h3{color:var(--gold);font-size:18px;display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.mission-form-side h3 i{background:linear-gradient(135deg,var(--gold),#c9942e);color:#182235;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:15px}
+.mission-example-input{width:100%;background:#0d192b;border:1px solid #40516a;border-radius:12px;color:white;padding:13px;font-size:13px;outline:none}
+.mission-example-input:focus{border-color:var(--gold)}
+.mission-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.mission-row{display:flex;align-items:center;gap:10px}
+.mission-row .m-ico{width:34px;height:34px;border-radius:50%;background:#e8b84d1c;color:var(--gold);display:grid;place-items:center;font-size:14px;flex-shrink:0;border:1px solid #8f713c55}
+.mission-row label{font-size:12px;font-weight:800;color:#d5deeb;white-space:nowrap}
+.mission-row select{flex:1;background:#0d192b;color:white;border:1px solid #40516a;border-radius:9px;padding:10px;font-size:12px;font-weight:700;outline:none;min-width:0}
+.mission-row select:focus{border-color:var(--gold)}
+.btn-create-plan{background:linear-gradient(135deg,#ffd978,#e8b84d 55%,#c9942e);color:#182235;border:0;border-radius:16px;padding:16px 26px;font-weight:900;font-size:15px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 26px #e8b84d55;transition:.25s}
+.btn-create-plan:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 12px 34px #e8b84d77}
+.mission-plan-result{margin-top:22px;display:none}
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.tier-card{border-radius:16px;padding:18px;background:var(--panel);border:1px solid var(--line);position:relative;overflow:hidden;transition:.25s}
+.tier-card:hover{transform:translateY(-4px)}
+.tier-card.premium{border-color:#e8b84d;box-shadow:0 0 24px #e8b84d33}
+.tier-card.rec{border-color:var(--blue);box-shadow:0 0 24px #4f8cff22}
+.tier-card.eco{border-color:var(--green);box-shadow:0 0 24px #25d36622}
+.tier-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.tier-head .t-ico{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:17px;color:#182235}
+.tier-card.premium .t-ico{background:linear-gradient(135deg,#ffe9a8,#e8b84d)}
+.tier-card.rec .t-ico{background:linear-gradient(135deg,#a9c9ff,#4f8cff);color:#fff}
+.tier-card.eco .t-ico{background:linear-gradient(135deg,#8ef0b6,#25d366)}
+.tier-head strong{font-size:14px;display:block}
+.tier-head small{font-size:10px;color:var(--muted)}
+.tier-price{font-size:22px;font-weight:900;color:var(--gold);margin:6px 0 10px}
+.tier-list{list-style:none;display:grid;gap:6px}
+.tier-list li{font-size:11.5px;color:#cfd9e6;display:flex;align-items:center;gap:8px}
+.tier-list li i.fa-check{color:var(--green)}
+.tier-list li i.fa-xmark{color:#5b6b82}
+.tier-list li.no{opacity:.55}
+.mission-cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+
+/* ===== EJEMPLO DE MISIÓN ===== */
+.example-mission{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;background:linear-gradient(145deg,#1a2941,#12203a);border:1px solid #8f713c66;border-radius:22px;padding:24px;box-shadow:0 18px 50px #0006}
+.example-tag{display:inline-block;background:linear-gradient(135deg,var(--gold),#c9942e);color:#182235;font-weight:900;font-size:12px;letter-spacing:2px;padding:6px 16px;border-radius:8px;text-transform:uppercase;margin-bottom:14px}
+.example-quote{font-size:clamp(20px,3vw,28px);font-weight:900;line-height:1.25}
+.example-quote span{color:var(--gold)}
+.example-img{width:100%;height:190px;object-fit:cover;border-radius:14px;margin:16px 0;border:1px solid var(--line);background:#0b1425}
+.check-list{list-style:none;display:grid;gap:9px;margin-top:8px}
+.check-list li{font-size:13px;font-weight:600;color:#e5eaf2;display:flex;align-items:center;gap:10px}
+.check-list li i{color:var(--green);font-size:16px}
+.check-list li .price-tag{margin-left:auto;color:var(--gold);font-weight:900}
+.example-total{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-weight:900;color:var(--gold);font-size:16px;display:flex;justify-content:space-between}
+.tier-mini{display:flex;flex-direction:column;gap:10px;justify-content:center}
+.tier-mini a{display:flex;align-items:center;gap:12px;border-radius:14px;padding:14px 16px;font-weight:800;font-size:13px;border:1px solid var(--line);background:var(--panel);transition:.25s}
+.tier-mini a small{display:block;font-weight:600;font-size:10px;color:var(--muted)}
+.tier-mini a .tm-ico{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:15px;flex-shrink:0}
+.tier-mini a i.fa-chevron-right{margin-left:auto;font-size:11px;opacity:.7}
+.tier-mini a:hover{transform:translateX(4px)}
+.tier-mini .tm-prem{border-color:#e8b84d;background:linear-gradient(135deg,#2a2410,#1a2941)}
+.tier-mini .tm-prem .tm-ico{background:linear-gradient(135deg,#ffe9a8,#e8b84d);color:#182235}
+.tier-mini .tm-rec{border-color:var(--blue);background:linear-gradient(135deg,#101c33,#1a2941)}
+.tier-mini .tm-rec .tm-ico{background:linear-gradient(135deg,#a9c9ff,#4f8cff);color:#fff}
+.tier-mini .tm-eco{border-color:var(--green);background:linear-gradient(135deg,#0f2a1c,#1a2941)}
+.tier-mini .tm-eco .tm-ico{background:linear-gradient(135deg,#8ef0b6,#25d366);color:#082515}
+
+/* ===== FRANJA DE CONFIANZA ===== */
+.trust-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:26px}
+.trust-item{display:flex;align-items:center;gap:11px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 14px;transition:.25s}
+.trust-item:hover{border-color:#8f713c;background:#1d2c44;transform:translateY(-3px)}
+.trust-item .tr-ico{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:17px;color:#182235;background:linear-gradient(135deg,#ffe9a8,#e8b84d 60%,#c9942e);box-shadow:0 4px 14px #e8b84d44;flex-shrink:0}
+.trust-item strong{font-size:11.5px;display:block;line-height:1.3}
+.trust-item small{font-size:9.5px;color:var(--muted)}
+
+/* ===== BANDA DE PIE PREMIUM ===== */
+.footer-band{background:linear-gradient(90deg,#0b1425 0%,#142238 50%,#0b1425 100%);border-top:1px solid #8f713c55;padding:30px 0}
+.footer-band-inner{display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap}
+.fb-left{display:flex;align-items:center;gap:16px}
+.fb-globe{font-size:44px;color:var(--gold);text-shadow:0 0 22px #e8b84d66;animation:spinGlobe 14s linear infinite}
+@keyframes spinGlobe{0%{transform:rotateY(0)}100%{transform:rotateY(360deg)}}
+.fb-title{font-size:clamp(20px,3vw,30px);font-weight:900;font-style:italic;color:var(--gold);letter-spacing:1px}
+.fb-sub{font-size:13px;color:#c0cada;font-style:italic}
+.fb-wa{display:flex;align-items:center;gap:14px;background:linear-gradient(135deg,#1faf52,#25d366);color:#082515;border-radius:16px;padding:14px 20px;font-weight:900;box-shadow:0 8px 24px #25d36644;transition:.25s}
+.fb-wa:hover{transform:translateY(-3px);box-shadow:0 12px 30px #25d36666}
+.fb-wa i{font-size:26px}
+.fb-wa small{display:block;font-size:10px;font-weight:700;opacity:.85}
+.fb-url{width:100%;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.fb-url code{background:#0d192b;border:1px solid var(--line);border-radius:10px;padding:9px 16px;font-size:12px;color:var(--gold);font-weight:700}
+.fb-slogan{font-style:italic;font-weight:800;color:var(--gold);font-size:15px}
+
 footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:12px}
 .footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .floating{position:fixed;right:16px;bottom:16px;z-index:60;background:var(--green);color:#082515;border-radius:50px;padding:13px 18px;font-size:12px;font-weight:900;box-shadow:0 8px 25px #0005;max-width:calc(100% - 32px);box-sizing:border-box}
@@ -182,6 +288,13 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   .no-print { display: none !important; }
 }
 
+@media(max-width:980px){
+ .mission-creator{grid-template-columns:1fr}
+ .robot-side{flex-direction:row;justify-content:flex-start;text-align:left}
+ .example-mission{grid-template-columns:1fr}
+ .trust-strip{grid-template-columns:repeat(3,1fr)}
+ .tier-grid{grid-template-columns:1fr}
+}
 @media(max-width:850px){
  .navlinks{display:none;position:absolute;top:74px;left:0;right:0;background:#0b1425;padding:18px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
  .navlinks.open{display:flex}
@@ -193,6 +306,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  .banner-galeria{height:250px}
  .tracker-steps{flex-direction:column;gap:15px}
  .tracker-steps::before{display:none}
+ .quick-grid{grid-template-columns:repeat(3,1fr)}
+ .mission-fields{grid-template-columns:1fr}
 }
 @media(max-width:600px){
  .container{width:calc(100% - 24px)}
@@ -212,6 +327,9 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  .hero-card .big{font-size:24px}
  .clock-widget{min-width:100px;padding:5px 10px}
  .banner-galeria{height:200px}
+ .trust-strip{grid-template-columns:1fr 1fr}
+ .robot-side{flex-direction:column;text-align:center}
+ .fb-left{flex-direction:column;text-align:center}
 }
 </style>
 </head>
@@ -250,6 +368,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
   <a class="brand" href="#inicio">YOUR BRIDGE HOME<small data-i18n="brand_sub">TU PUENTE AL MUNDO</small></a>
   <nav class="navlinks" id="navlinks">
    <a href="#inicio" data-i18n="nav_home">INICIO</a>
+   <a href="#misiones" style="color:var(--gold);font-weight:900" data-i18n="nav_missions">🎯 MISIONES</a>
    <a href="#ofertas" style="color:var(--red);font-weight:900" data-i18n="nav_offers">🔥 OFERTAS</a>
    <a href="#servicios" data-i18n="nav_services">SERVICIOS</a>
    <a href="#recargas" data-i18n="nav_recharges">RECARGAS</a>
@@ -277,6 +396,18 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  </div>
 </header>
 
+<!-- ===== BARRA RÁPIDA DE ÍCONOS PREMIUM (de la imagen) ===== -->
+<div class="quick-bar">
+ <div class="container quick-grid">
+  <a href="#boletos" class="quick-item"><span class="q-icon"><i class="fa-solid fa-plane"></i></span><span class="q-label" data-i18n="q_viajes">Viajes</span><span class="q-sub" data-i18n="q_viajes_sub">Vuelos y paquetes</span></a>
+  <a href="#remesas" class="quick-item"><span class="q-icon"><i class="fa-solid fa-money-bill-transfer"></i></span><span class="q-label" data-i18n="q_remesas">Remesas</span><span class="q-sub" data-i18n="q_remesas_sub">Rápido y seguro</span></a>
+  <a href="#recargas" class="quick-item"><span class="q-icon"><i class="fa-solid fa-mobile-screen-button"></i></span><span class="q-label" data-i18n="q_recargas">Recargas</span><span class="q-sub" data-i18n="q_recargas_sub">Todas las operadoras</span></a>
+  <a href="#divisiones" class="quick-item"><span class="q-icon"><i class="fa-solid fa-cart-shopping"></i></span><span class="q-label" data-i18n="q_compras">Compras</span><span class="q-sub" data-i18n="q_compras_sub">Online y local</span></a>
+  <a href="#servicios" class="quick-item"><span class="q-icon"><i class="fa-solid fa-briefcase"></i></span><span class="q-label" data-i18n="q_servicios">Servicios</span><span class="q-sub" data-i18n="q_servicios_sub">Trámites y más</span></a>
+  <a href="#misiones" class="quick-item"><span class="q-icon"><i class="fa-solid fa-star"></i></span><span class="q-label" data-i18n="q_misiones">Misiones</span><span class="q-sub" data-i18n="q_misiones_sub">Soluciones completas</span></a>
+ </div>
+</div>
+
 <main>
 <section class="hero" id="inicio">
  <div class="container hero-grid">
@@ -285,7 +416,8 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    <h1 data-i18n="hero_title">Tu puente hacia <span>nuevas oportunidades</span></h1>
    <p data-i18n="hero_desc">Recargas internacionales, envío de remesas, pasajes, gestión de visas y orientación para tus viajes con seguimiento en tiempo real.</p>
    <div class="hero-actions">
-    <a class="btn btn-gold" href="#ofertas" data-i18n="btn_offers">Ver Ofertas Flash <i class="fa-solid fa-fire"></i></a>
+    <a class="btn btn-gold" href="#misiones" data-i18n="btn_mission">Crear Mi Misión <i class="fa-solid fa-bullseye"></i></a>
+    <a class="btn btn-dark" href="#ofertas" data-i18n="btn_offers">Ver Ofertas Flash <i class="fa-solid fa-fire"></i></a>
     <a class="btn btn-dark" href="#seguimiento" data-i18n="btn_track"><i class="fa-solid fa-magnifying-glass"></i> Consultar mi trámite</a>
    </div>
   </div>
@@ -296,6 +428,87 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    <p data-i18n="card_help_desc">Consulta precios, solicita información y encuentra opciones para tus necesidades.</p>
    <p><i class="fa-brands fa-whatsapp gold"></i> +7 904 631 95 65</p>
    <p><strong>Daynel Caminero</strong><br><span class="mini" data-i18n="admin_role">Administrador</span></p>
+  </div>
+ </div>
+</section>
+
+<!-- ===== BRIDGE MISSION (de la imagen) ===== -->
+<section class="mission-section" id="misiones">
+ <div class="container">
+  <div class="mission-title">BRIDGE <em>MISSION</em></div>
+  <div class="mission-slogan" data-i18n="mission_slogan">Tú decides el objetivo. <span>Nosotros construimos el camino.</span></div>
+
+  <div class="mission-creator">
+   <div class="robot-side">
+    <div class="robot-avatar"><i class="fa-solid fa-robot"></i></div>
+    <div class="robot-badge">YBH</div>
+    <div class="robot-speech" data-i18n="robot_speech">Cuéntame <b>qué quieres conseguir</b>...</div>
+   </div>
+   <div class="mission-form-side">
+    <h3><i class="fa-solid fa-bullseye"></i> <span data-i18n="mission_create_title">CREAR MI MISIÓN</span></h3>
+    <input type="text" id="missionGoal" class="mission-example-input" data-i18n-ph="mission_example_ph" placeholder="Ejemplo: Quiero ayudar a mi familia en Cuba...">
+    <div class="mission-fields">
+     <div class="mission-row">
+      <span class="m-ico"><i class="fa-solid fa-globe"></i></span>
+      <label data-i18n="mission_where">¿Dónde estás?</label>
+      <select id="missionCountry">
+       <option>Francia</option><option>España</option><option>Italia</option><option>Alemania</option><option>Reino Unido</option><option>Rusia</option><option>México</option><option>Canadá</option><option>EE.UU.</option><option>Panamá</option><option>Rep. Dominicana</option><option>Chile</option><option>Brasil</option><option>Cuba</option><option>Otro</option>
+      </select>
+     </div>
+     <div class="mission-row">
+      <span class="m-ico"><i class="fa-solid fa-users"></i></span>
+      <label data-i18n="mission_for">¿Para quién?</label>
+      <select id="missionFor">
+       <option value="Yo" data-i18n="mfor_me">Yo</option>
+       <option value="Mi pareja" data-i18n="mfor_partner">Mi pareja</option>
+       <option value="Mi familia" data-i18n="mfor_family">Mi familia</option>
+       <option value="Mis padres" data-i18n="mfor_parents">Mis padres</option>
+       <option value="Mis hijos" data-i18n="mfor_children">Mis hijos</option>
+       <option value="Un amigo" data-i18n="mfor_friend">Un amigo</option>
+      </select>
+     </div>
+     <div class="mission-row">
+      <span class="m-ico"><i class="fa-solid fa-euro-sign"></i></span>
+      <label data-i18n="mission_budget">Presupuesto:</label>
+      <select id="missionBudget">
+       <option value="200">€ 200</option><option value="500" selected>€ 500</option><option value="1000">€ 1 000</option><option value="2000">€ 2 000</option><option value="5000">€ 5 000</option><option value="10000">€ 10 000+</option>
+      </select>
+     </div>
+     <button class="btn-create-plan" type="button" onclick="createMissionPlan()"><i class="fa-solid fa-wand-magic-sparkles"></i> <span data-i18n="btn_create_plan">CREAR MI PLAN</span></button>
+    </div>
+
+    <div class="mission-plan-result" id="missionPlanResult"></div>
+   </div>
+  </div>
+
+  <!-- ===== EJEMPLO DE MISIÓN (de la imagen) ===== -->
+  <div class="example-mission" style="margin-top:26px">
+   <div>
+    <span class="example-tag" data-i18n="example_tag">EJEMPLO DE MISIÓN</span>
+    <div class="example-quote" data-i18n="example_quote">"Viajar a <span>Cuba</span> en diciembre con mi esposa"</div>
+    <img class="example-img" src="https://image.pollinations.ai/prompt/Havana%20Cuba%20El%20Capitolio%20avenue%20with%20classic%20blue%201950s%20car%2C%20palm%20trees%2C%20sunny%20sky%2C%20photorealistic%2C%20cinematic?width=900&height=450&nologo=true" alt="Cuba" onerror="this.style.display='none'">
+    <div style="font-weight:900;color:var(--gold);display:flex;align-items:center;gap:8px"><i class="fa-solid fa-circle-check"></i> <span data-i18n="example_plan">Plan personalizado:</span></div>
+    <ul class="check-list">
+     <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="ex_item1">Vuelos desde 135.000 ₽</span></li>
+     <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="ex_item2">Traslado y alojamiento</span></li>
+     <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="ex_item3">Documentación y visas</span></li>
+     <li><i class="fa-solid fa-circle-check"></i> <span data-i18n="ex_item4">Presupuesto total: 2.350 €</span></li>
+    </ul>
+   </div>
+   <div class="tier-mini">
+    <a href="#misiones" class="tm-prem"><span class="tm-ico"><i class="fa-solid fa-crown"></i></span><span data-i18n="opt_premium">Opción Premium<small data-i18n="opt_premium_sub">Más comodidad</small></span><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="#misiones" class="tm-rec"><span class="tm-ico"><i class="fa-solid fa-star"></i></span><span data-i18n="opt_recommended">Opción Recomendada<small data-i18n="opt_recommended_sub">Mejor equilibrio</small></span><i class="fa-solid fa-chevron-right"></i></a>
+    <a href="#misiones" class="tm-eco"><span class="tm-ico"><i class="fa-solid fa-leaf"></i></span><span data-i18n="opt_economic">Opción Económica<small data-i18n="opt_economic_sub">Ahorras más</small></span><i class="fa-solid fa-chevron-right"></i></a>
+   </div>
+  </div>
+
+  <!-- ===== FRANJA DE CONFIANZA (de la imagen) ===== -->
+  <div class="trust-strip">
+   <div class="trust-item"><span class="tr-ico"><i class="fa-solid fa-shield-halved"></i></span><strong data-i18n="trust1">Seguro y confiable</strong></div>
+   <div class="trust-item"><span class="tr-ico"><i class="fa-solid fa-headset"></i></span><strong data-i18n="trust2">Atención personalizada</strong></div>
+   <div class="trust-item"><span class="tr-ico"><i class="fa-solid fa-earth-americas"></i></span><strong data-i18n="trust3">Cobertura internacional</strong></div>
+   <div class="trust-item"><span class="tr-ico"><i class="fa-solid fa-bolt"></i></span><strong data-i18n="trust4">Respuesta instantánea</strong></div>
+   <div class="trust-item"><span class="tr-ico"><i class="fa-solid fa-handshake"></i></span><strong data-i18n="trust5">Tu satisfacción es nuestra prioridad</strong></div>
   </div>
  </div>
 </section>
@@ -534,6 +747,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
      <div class="field"><label data-i18n="form_phone">Teléfono / WhatsApp</label><input id="clientPhone" required maxlength="40" placeholder="Tu número de contacto"></div>
      <div class="field"><label data-i18n="form_service">Tipo de Servicio</label>
       <select id="clientService">
+       <option data-i18n="opt_mission">Misión (Plan personalizado)</option>
        <option data-i18n="opt_recharge">Recarga</option>
        <option data-i18n="opt_remittance">Remesa</option>
        <option data-i18n="opt_ticket">Boleto</option>
@@ -572,6 +786,29 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
  </div>
 </section>
 </main>
+
+<!-- ===== BANDA DE PIE PREMIUM (de la imagen) ===== -->
+<div class="footer-band">
+ <div class="container">
+  <div class="footer-band-inner">
+   <div class="fb-left">
+    <i class="fa-solid fa-earth-americas fb-globe"></i>
+    <div>
+     <div class="fb-title">YOUR BRIDGE HOME</div>
+     <div class="fb-sub" data-i18n="footer_band_slogan">Mucho más que una agencia... tu aliado en el mundo</div>
+    </div>
+   </div>
+   <a class="fb-wa" href="https://wa.me/79046319565" target="_blank" rel="noopener">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span><small data-i18n="footer_wa_text">Contáctanos por WhatsApp</small><br>+7 904 631 95 65</span>
+   </a>
+  </div>
+  <div class="fb-url">
+   <code><i class="fa-solid fa-globe gold"></i>&nbsp; daynelcc-cell.github.io/Your-bridge-home/</code>
+   <span class="fb-slogan" data-i18n="footer_band_slogan2">¡Tu puente hacia nuevas oportunidades!</span>
+  </div>
+ </div>
+</div>
 
 <footer>
  <div class="container footer-inner">
@@ -847,14 +1084,22 @@ let visasData=[], bannerData=[], noticiasData=[], ofertasData=[];
 let currentLang = 'es';
 let bannerIndex = 0;
 let bannerInterval, breakingInterval;
+let lastMissionPlan = null;
 
 $("year").textContent = new Date().getFullYear();
 
 const translations = {
  es: {
-  brand_sub:"TU PUENTE AL MUNDO", nav_home:"INICIO", nav_offers:"🔥 OFERTAS", nav_services:"SERVICIOS", nav_recharges:"RECARGAS", nav_tickets:"BOLETOS", nav_remittances:"REMESAS", nav_destinations:"DESTINOS", nav_visas:"🛂 VISAS", nav_tracking:"🔍 SEGUIMIENTO", nav_divisions:"DIVISIONES", nav_rates:"TASAS",
+  brand_sub:"TU PUENTE AL MUNDO", nav_home:"INICIO", nav_missions:"🎯 MISIONES", nav_offers:"🔥 OFERTAS", nav_services:"SERVICIOS", nav_recharges:"RECARGAS", nav_tickets:"BOLETOS", nav_remittances:"REMESAS", nav_destinations:"DESTINOS", nav_visas:"🛂 VISAS", nav_tracking:"🔍 SEGUIMIENTO", nav_divisions:"DIVISIONES", nav_rates:"TASAS",
+  q_viajes:"Viajes", q_viajes_sub:"Vuelos y paquetes", q_remesas:"Remesas", q_remesas_sub:"Rápido y seguro", q_recargas:"Recargas", q_recargas_sub:"Todas las operadoras", q_compras:"Compras", q_compras_sub:"Online y local", q_servicios:"Servicios", q_servicios_sub:"Trámites y más", q_misiones:"Misiones", q_misiones_sub:"Soluciones completas",
   hero_eyebrow:"Conectamos oportunidades", hero_title:'Tu puente hacia <span>nuevas oportunidades</span>', hero_desc:"Recargas internacionales, envío de remesas, pasajes, gestión de visas y orientación para tus viajes con seguimiento en tiempo real.",
-  btn_offers:'Ver Ofertas Flash <i class="fa-solid fa-fire"></i>', btn_track:'<i class="fa-solid fa-magnifying-glass"></i> Consultar mi trámite',
+  btn_mission:'Crear Mi Misión <i class="fa-solid fa-bullseye"></i>', btn_offers:'Ver Ofertas Flash <i class="fa-solid fa-fire"></i>', btn_track:'<i class="fa-solid fa-magnifying-glass"></i> Consultar mi trámite',
+  mission_slogan:'Tú decides el objetivo. <span>Nosotros construimos el camino.</span>', robot_speech:'Cuéntame <b>qué quieres conseguir</b>...', mission_create_title:"CREAR MI MISIÓN", mission_example_ph:"Ejemplo: Quiero ayudar a mi familia en Cuba...", mission_where:"¿Dónde estás?", mission_for:"¿Para quién?", mission_budget:"Presupuesto:", btn_create_plan:"CREAR MI PLAN",
+  mfor_me:"Yo", mfor_partner:"Mi pareja", mfor_family:"Mi familia", mfor_parents:"Mis padres", mfor_children:"Mis hijos", mfor_friend:"Un amigo",
+  example_tag:"EJEMPLO DE MISIÓN", example_quote:'"Viajar a <span>Cuba</span> en diciembre con mi esposa"', example_plan:"Plan personalizado:", ex_item1:"Vuelos desde 135.000 ₽", ex_item2:"Traslado y alojamiento", ex_item3:"Documentación y visas", ex_item4:"Presupuesto total: 2.350 €",
+  opt_premium:"Opción Premium", opt_premium_sub:"Más comodidad", opt_recommended:"Opción Recomendada", opt_recommended_sub:"Mejor equilibrio", opt_economic:"Opción Económica", opt_economic_sub:"Ahorras más",
+  trust1:"Seguro y confiable", trust2:"Atención personalizada", trust3:"Cobertura internacional", trust4:"Respuesta instantánea", trust5:"Tu satisfacción es nuestra prioridad",
+  footer_band_slogan:"Mucho más que una agencia... tu aliado en el mundo", footer_wa_text:"Contáctanos por WhatsApp", footer_band_slogan2:"¡Tu puente hacia nuevas oportunidades!",
   pill_attention:"ATENCIÓN PERSONALIZADA", card_help_title:"Estamos para ayudarte", card_help_desc:"Consulta precios, solicita información y encuentra opciones para tus necesidades.", admin_role:"Administrador",
   breaking_badge:"ÚLTIMA HORA", breaking_default:"Bienvenido a Your Bridge Home. Consulta nuestras ofertas.", notes_title:"📢 Avisos y Notas Importantes",
   offers_eyebrow:"⏰ Tiempo limitado", offers_title:'Ofertas <span style="color:var(--red)">Flash</span> y Descuentos', offers_desc:"Aprovecha nuestros porcentajes de descuento exclusivos antes de que se agoten.",
@@ -871,7 +1116,7 @@ const translations = {
   store_eyebrow:"Expansión", store_title:'Tienda en Línea y <span class="gold">Otros Negocios</span>', store_card1_title:"Tienda en Línea", store_card1_desc:"Próximamente: Compra de productos, paquetes de viaje y accesorios directamente desde la web con pasarela de pago segura.", btn_construction:"🚧 En Construcción", store_card2_title:"Negocios Asociados", store_card2_desc:"Descubre hoteles, restaurantes y servicios de transporte con descuentos exclusivos para clientes de Your Bridge Home.", btn_directory:"Ver Directorio",
   form_eyebrow:"Estamos para ayudarte", form_title:'Solicita <span class="gold">información</span>', form_desc:"Completa tus datos y nos pondremos en contacto contigo. Recibirás un comprobante con número de seguimiento.",
   form_name:"Nombre completo", form_phone:"Teléfono / WhatsApp", form_service:"Tipo de Servicio", form_dest:"Destino (País)", form_details:"Detalles de tu solicitud", btn_submit:'<i class="fa-solid fa-paper-plane"></i> Enviar solicitud y generar comprobante',
-  opt_recharge:"Recarga", opt_remittance:"Remesa", opt_ticket:"Boleto", opt_visa:"Visa/Trámite", opt_offer:"Oferta Flash", opt_other:"Otro",
+  opt_mission:"Misión (Plan personalizado)", opt_recharge:"Recarga", opt_remittance:"Remesa", opt_ticket:"Boleto", opt_visa:"Visa/Trámite", opt_offer:"Oferta Flash", opt_other:"Otro",
   contact_title:"Atención personalizada", contact_desc:"Recibe orientación directa para encontrar la opción que mejor se adapte a tus necesidades.", admin_label:"Administrador:", btn_contact:"Contactar directamente",
   info_title:"Información importante", info_desc1:"Los precios y las tasas pueden cambiar según la disponibilidad y las condiciones del servicio.", info_desc2:"Confirma siempre el importe final, las fechas y los requisitos antes de realizar un pago.",
   footer_slogan:"Tu puente al mundo.", visit_text:"Visitas totales", visit_note:"Contador inteligente (excluye visitas del administrador)", float_btn:"ATENCIÓN DIRECTA",
@@ -884,12 +1129,20 @@ const translations = {
   recharge_lbl_label:"Etiqueta", recharge_lbl_name:"Nombre del plan", recharge_lbl_price:"Precio", recharge_lbl_currency:"Moneda", recharge_lbl_desc1:"Descripción 1", recharge_lbl_desc2:"Descripción 2",
   ticket_lbl_type:"Tipo", ticket_lbl_origin:"Origen", ticket_lbl_dest:"Destino", ticket_lbl_dep:"Fecha de salida", ticket_lbl_ret:"Fecha de regreso",
   remesa_lbl_amt_orig:"Monto origen", remesa_lbl_curr_orig:"Moneda origen", remesa_lbl_amt_dest:"Monto destino", remesa_lbl_curr_dest:"Moneda destino",
-  destino_lbl_name:"Nombre", destino_lbl_cat:"Categoría", servicio_lbl_name:"Nombre", servicio_lbl_icon:"Icono (emoji)", banner_lbl_title:"Título", banner_lbl_link:"Enlace al hacer clic"
+  destino_lbl_name:"Nombre", destino_lbl_cat:"Categoría", servicio_lbl_name:"Nombre", servicio_lbl_icon:"Icono (emoji)", banner_lbl_title:"Título", banner_lbl_link:"Enlace al hacer clic",
+  mp_title:"Tu Plan de Misión", mp_send_wa:"Enviar plan por WhatsApp", mp_save:"Guardar y generar comprobante"
  },
  en: {
-  brand_sub:"YOUR BRIDGE TO THE WORLD", nav_home:"HOME", nav_offers:"🔥 OFFERS", nav_services:"SERVICES", nav_recharges:"TOP-UPS", nav_tickets:"TICKETS", nav_remittances:"REMITTANCES", nav_destinations:"DESTINATIONS", nav_visas:"🛂 VISAS", nav_tracking:"🔍 TRACKING", nav_divisions:"DIVISIONS", nav_rates:"RATES",
+  brand_sub:"YOUR BRIDGE TO THE WORLD", nav_home:"HOME", nav_missions:"🎯 MISSIONS", nav_offers:"🔥 OFFERS", nav_services:"SERVICES", nav_recharges:"TOP-UPS", nav_tickets:"TICKETS", nav_remittances:"REMITTANCES", nav_destinations:"DESTINATIONS", nav_visas:"🛂 VISAS", nav_tracking:"🔍 TRACKING", nav_divisions:"DIVISIONS", nav_rates:"RATES",
+  q_viajes:"Travel", q_viajes_sub:"Flights & packages", q_remesas:"Remittances", q_remesas_sub:"Fast & secure", q_recargas:"Top-ups", q_recargas_sub:"All operators", q_compras:"Shopping", q_compras_sub:"Online & local", q_servicios:"Services", q_servicios_sub:"Paperwork & more", q_misiones:"Missions", q_misiones_sub:"Complete solutions",
   hero_eyebrow:"Connecting opportunities", hero_title:'Your bridge to <span>new opportunities</span>', hero_desc:"International top-ups, remittances, tickets, visa management, and travel guidance with real-time tracking.",
-  btn_offers:'View Flash Offers <i class="fa-solid fa-fire"></i>', btn_track:'<i class="fa-solid fa-magnifying-glass"></i> Check my process',
+  btn_mission:'Create My Mission <i class="fa-solid fa-bullseye"></i>', btn_offers:'View Flash Offers <i class="fa-solid fa-fire"></i>', btn_track:'<i class="fa-solid fa-magnifying-glass"></i> Check my process',
+  mission_slogan:'You decide the goal. <span>We build the path.</span>', robot_speech:'Tell me <b>what you want to achieve</b>...', mission_create_title:"CREATE MY MISSION", mission_example_ph:"Example: I want to help my family in Cuba...", mission_where:"Where are you?", mission_for:"For whom?", mission_budget:"Budget:", btn_create_plan:"CREATE MY PLAN",
+  mfor_me:"Me", mfor_partner:"My partner", mfor_family:"My family", mfor_parents:"My parents", mfor_children:"My children", mfor_friend:"A friend",
+  example_tag:"MISSION EXAMPLE", example_quote:'"Travel to <span>Cuba</span> in December with my wife"', example_plan:"Personalized plan:", ex_item1:"Flights from 135,000 ₽", ex_item2:"Transfer and accommodation", ex_item3:"Documentation and visas", ex_item4:"Total budget: €2,350",
+  opt_premium:"Premium Option", opt_premium_sub:"More comfort", opt_recommended:"Recommended Option", opt_recommended_sub:"Best balance", opt_economic:"Economic Option", opt_economic_sub:"Save more",
+  trust1:"Safe & reliable", trust2:"Personalized attention", trust3:"International coverage", trust4:"Instant response", trust5:"Your satisfaction is our priority",
+  footer_band_slogan:"Much more than an agency... your ally in the world", footer_wa_text:"Contact us on WhatsApp", footer_band_slogan2:"Your bridge to new opportunities!",
   pill_attention:"PERSONALIZED ATTENTION", card_help_title:"We are here to help", card_help_desc:"Check prices, request information, and find options for your needs.", admin_role:"Administrator",
   breaking_badge:"BREAKING", breaking_default:"Welcome to Your Bridge Home. Check our offers.", notes_title:"📢 Important Notices",
   offers_eyebrow:"⏰ Limited time", offers_title:'Flash <span style="color:var(--red)">Offers</span> & Discounts', offers_desc:"Take advantage of our exclusive discount percentages before they run out.",
@@ -906,7 +1159,7 @@ const translations = {
   store_eyebrow:"Expansion", store_title:'Online Store and <span class="gold">Other Businesses</span>', store_card1_title:"Online Store", store_card1_desc:"Coming soon: Purchase products, travel packages, and accessories directly from the web with a secure payment gateway.", btn_construction:"🚧 Under Construction", store_card2_title:"Partner Businesses", store_card2_desc:"Discover hotels, restaurants, and transport services with exclusive discounts for Your Bridge Home customers.", btn_directory:"View Directory",
   form_eyebrow:"We are here to help", form_title:'Request <span class="gold">information</span>', form_desc:"Fill in your details and we will contact you. You will receive a receipt with a tracking number.",
   form_name:"Full name", form_phone:"Phone / WhatsApp", form_service:"Service Type", form_dest:"Destination (Country)", form_details:"Details of your request", btn_submit:'<i class="fa-solid fa-paper-plane"></i> Submit request and generate receipt',
-  opt_recharge:"Top-up", opt_remittance:"Remittance", opt_ticket:"Ticket", opt_visa:"Visa/Process", opt_offer:"Flash Offer", opt_other:"Other",
+  opt_mission:"Mission (Personalized plan)", opt_recharge:"Top-up", opt_remittance:"Remittance", opt_ticket:"Ticket", opt_visa:"Visa/Process", opt_offer:"Flash Offer", opt_other:"Other",
   contact_title:"Personalized attention", contact_desc:"Receive direct guidance to find the option that best suits your needs.", admin_label:"Administrator:", btn_contact:"Contact directly",
   info_title:"Important information", info_desc1:"Prices and rates may change depending on service availability and conditions.", info_desc2:"Always confirm the final amount, dates, and requirements before making a payment.",
   footer_slogan:"Your bridge to the world.", visit_text:"Total visits", visit_note:"Smart counter (excludes administrator visits)", float_btn:"DIRECT ATTENTION",
@@ -919,12 +1172,20 @@ const translations = {
   recharge_lbl_label:"Label", recharge_lbl_name:"Plan name", recharge_lbl_price:"Price", recharge_lbl_currency:"Currency", recharge_lbl_desc1:"Description 1", recharge_lbl_desc2:"Description 2",
   ticket_lbl_type:"Type", ticket_lbl_origin:"Origin", ticket_lbl_dest:"Destination", ticket_lbl_dep:"Departure date", ticket_lbl_ret:"Return date",
   remesa_lbl_amt_orig:"Origin amount", remesa_lbl_curr_orig:"Origin currency", remesa_lbl_amt_dest:"Destination amount", remesa_lbl_curr_dest:"Destination currency",
-  destino_lbl_name:"Name", destino_lbl_cat:"Category", servicio_lbl_name:"Name", servicio_lbl_icon:"Icon (emoji)", banner_lbl_title:"Title", banner_lbl_link:"Link on click"
+  destino_lbl_name:"Name", destino_lbl_cat:"Category", servicio_lbl_name:"Name", servicio_lbl_icon:"Icon (emoji)", banner_lbl_title:"Title", banner_lbl_link:"Link on click",
+  mp_title:"Your Mission Plan", mp_send_wa:"Send plan via WhatsApp", mp_save:"Save & generate receipt"
  },
  ru: {
-  brand_sub:"ВАШ МОСТ В МИР", nav_home:"ГЛАВНАЯ", nav_offers:"🔥 ПРЕДЛОЖЕНИЯ", nav_services:"УСЛУГИ", nav_recharges:"ПОПОЛНЕНИЯ", nav_tickets:"БИЛЕТЫ", nav_remittances:"ПЕРЕВОДЫ", nav_destinations:"НАПРАВЛЕНИЯ", nav_visas:"🛂 ВИЗЫ", nav_tracking:"🔍 ОТСЛЕЖИВАНИЕ", nav_divisions:"ОТДЕЛЫ", nav_rates:"КУРСЫ",
+  brand_sub:"ВАШ МОСТ В МИР", nav_home:"ГЛАВНАЯ", nav_missions:"🎯 МИССИИ", nav_offers:"🔥 ПРЕДЛОЖЕНИЯ", nav_services:"УСЛУГИ", nav_recharges:"ПОПОЛНЕНИЯ", nav_tickets:"БИЛЕТЫ", nav_remittances:"ПЕРЕВОДЫ", nav_destinations:"НАПРАВЛЕНИЯ", nav_visas:"🛂 ВИЗЫ", nav_tracking:"🔍 ОТСЛЕЖИВАНИЕ", nav_divisions:"ОТДЕЛЫ", nav_rates:"КУРСЫ",
+  q_viajes:"Путешествия", q_viajes_sub:"Рейсы и пакеты", q_remesas:"Переводы", q_remesas_sub:"Быстро и надёжно", q_recargas:"Пополнения", q_recargas_sub:"Все операторы", q_compras:"Покупки", q_compras_sub:"Онлайн и местные", q_servicios:"Услуги", q_servicios_sub:"Документы и др.", q_misiones:"Миссии", q_misiones_sub:"Полные решения",
   hero_eyebrow:"Соединяя возможности", hero_title:'Ваш мост к <span>новым возможностям</span>', hero_desc:"Международные пополнения, денежные переводы, билеты, управление визами и туристическое сопровождение с отслеживанием в реальном времени.",
-  btn_offers:'Смотреть предложения <i class="fa-solid fa-fire"></i>', btn_track:'<i class="fa-solid fa-magnifying-glass"></i> Проверить мой запрос',
+  btn_mission:'Создать миссию <i class="fa-solid fa-bullseye"></i>', btn_offers:'Смотреть предложения <i class="fa-solid fa-fire"></i>', btn_track:'<i class="fa-solid fa-magnifying-glass"></i> Проверить мой запрос',
+  mission_slogan:'Вы решаете цель. <span>Мы строим путь.</span>', robot_speech:'Расскажите <b>чего вы хотите достичь</b>...', mission_create_title:"СОЗДАТЬ МИССИЮ", mission_example_ph:"Пример: хочу помочь семье на Кубе...", mission_where:"Где вы?", mission_for:"Для кого?", mission_budget:"Бюджет:", btn_create_plan:"СОЗДАТЬ ПЛАН",
+  mfor_me:"Я", mfor_partner:"Мой партнёр", mfor_family:"Моя семья", mfor_parents:"Мои родители", mfor_children:"Мои дети", mfor_friend:"Друг",
+  example_tag:"ПРИМЕР МИССИИ", example_quote:'"Поехать на <span>Кубу</span> в декабре с женой"', example_plan:"Персональный план:", ex_item1:"Рейсы от 135 000 ₽", ex_item2:"Трансфер и проживание", ex_item3:"Документы и визы", ex_item4:"Общий бюджет: 2 350 €",
+  opt_premium:"Премиум", opt_premium_sub:"Максимум комфорта", opt_recommended:"Рекомендуемый", opt_recommended_sub:"Лучший баланс", opt_economic:"Экономный", opt_economic_sub:"Экономьте больше",
+  trust1:"Надёжно и безопасно", trust2:"Персональное внимание", trust3:"Международное покрытие", trust4:"Мгновенный ответ", trust5:"Ваше удовольствие — приоритет",
+  footer_band_slogan:"Больше чем агентство... ваш союзник в мире", footer_wa_text:"Свяжитесь через WhatsApp", footer_band_slogan2:"Ваш мост к новым возможностям!",
   pill_attention:"ИНДИВИДУАЛЬНЫЙ ПОДХОД", card_help_title:"Мы здесь, чтобы помочь", card_help_desc:"Узнайте цены, запросите информацию и найдите варианты для ваших нужд.", admin_role:"Администратор",
   breaking_badge:"СРОЧНО", breaking_default:"Добро пожаловать в Your Bridge Home. Ознакомьтесь с нашими предложениями.", notes_title:"📢 Важные уведомления",
   offers_eyebrow:"⏰ Ограниченное время", offers_title:'<span style="color:var(--red)">Экспресс</span> предложения и скидки', offers_desc:"Воспользуйтесь нашими эксклюзивными процентными скидками, пока они не закончились.",
@@ -941,7 +1202,7 @@ const translations = {
   store_eyebrow:"Расширение", store_title:'Интернет-магазин и <span class="gold">другой бизнес</span>', store_card1_title:"Интернет-магазин", store_card1_desc:"Скоро: Покупка товаров, туристических пакетов и аксессуаров напрямую через веб-сайт с безопасным платежным шлюзом.", btn_construction:"🚧 В разработке", store_card2_title:"Партнерский бизнес", store_card2_desc:"Откройте для себя отели, рестораны и транспортные услуги с эксклюзивными скидками для клиентов Your Bridge Home.", btn_directory:"Смотреть каталог",
   form_eyebrow:"Мы здесь, чтобы помочь", form_title:'Запросить <span class="gold">информацию</span>', form_desc:"Заполните свои данные, и мы свяжемся с вами. Вы получите квитанцию с номером для отслеживания.",
   form_name:"Полное имя", form_phone:"Телефон / WhatsApp", form_service:"Тип услуги", form_dest:"Назначение (Страна)", form_details:"Детали вашего запроса", btn_submit:'<i class="fa-solid fa-paper-plane"></i> Отправить запрос и получить квитанцию',
-  opt_recharge:"Пополнение", opt_remittance:"Перевод", opt_ticket:"Билет", opt_visa:"Виза/Процесс", opt_offer:"Экспресс предложение", opt_other:"Другое",
+  opt_mission:"Миссия (персональный план)", opt_recharge:"Пополнение", opt_remittance:"Перевод", opt_ticket:"Билет", opt_visa:"Виза/Процесс", opt_offer:"Экспресс предложение", opt_other:"Другое",
   contact_title:"Индивидуальный подход", contact_desc:"Получите прямые рекомендации, чтобы найти вариант, который лучше всего соответствует вашим потребностям.", admin_label:"Администратор:", btn_contact:"Связаться напрямую",
   info_title:"Важная информация", info_desc1:"Цены и курсы могут меняться в зависимости от наличия и условий обслуживания.", info_desc2:"Всегда подтверждайте окончательную сумму, даты и требования перед оплатой.",
   footer_slogan:"Ваш мост в мир.", visit_text:"Всего посещений", visit_note:"Умный счетчик (исключает посещения администратора)", float_btn:"ПРЯМАЯ СВЯЗЬ",
@@ -954,7 +1215,8 @@ const translations = {
   recharge_lbl_label:"Метка", recharge_lbl_name:"Название плана", recharge_lbl_price:"Цена", recharge_lbl_currency:"Валюта", recharge_lbl_desc1:"Описание 1", recharge_lbl_desc2:"Описание 2",
   ticket_lbl_type:"Тип", ticket_lbl_origin:"Отправление", ticket_lbl_dest:"Назначение", ticket_lbl_dep:"Дата отправления", ticket_lbl_ret:"Дата возвращения",
   remesa_lbl_amt_orig:"Сумма отправления", remesa_lbl_curr_orig:"Валюта отправления", remesa_lbl_amt_dest:"Сумма получения", remesa_lbl_curr_dest:"Валюта получения",
-  destino_lbl_name:"Название", destino_lbl_cat:"Категория", servicio_lbl_name:"Название", servicio_lbl_icon:"Значок (эмодзи)", banner_lbl_title:"Название", banner_lbl_link:"Ссылка при нажатии"
+  destino_lbl_name:"Название", destino_lbl_cat:"Категория", servicio_lbl_name:"Название", servicio_lbl_icon:"Значок (эмодзи)", banner_lbl_title:"Название", banner_lbl_link:"Ссылка при нажатии",
+  mp_title:"Ваш план миссии", mp_send_wa:"Отправить план в WhatsApp", mp_save:"Сохранить и получить квитанцию"
  }
 };
 
@@ -967,7 +1229,11 @@ function changeLanguage(lang){
    const value = translations[lang][key]; 
    if (value.includes('<')) el.innerHTML = value; else el.textContent = value; 
   } 
- }); 
+ });
+ document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+  const key = el.getAttribute('data-i18n-ph');
+  if (translations[lang] && translations[lang][key]) el.placeholder = translations[lang][key];
+ });
 }
 
 function updateClocks(){ 
@@ -999,6 +1265,85 @@ function safe(v){ return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"
 function money(v,c){ return `${Number(v||0).toLocaleString("es-ES",{maximumFractionDigits:2})} ${safe(c||"")}`; }
 
 async function loadAll(){ await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), cargarBanner(), loadNoticias(), loadVisas(), loadOfertas() ]); }
+
+/* ================= BRIDGE MISSION: GENERADOR DE PLANES ================= */
+function createMissionPlan(){
+ const objetivo = $("missionGoal").value.trim();
+ const pais = $("missionCountry").value;
+ const para = $("missionFor").value;
+ const presupuesto = parseInt($("missionBudget").value) || 500;
+ if(!objetivo){ $("missionGoal").focus(); $("missionGoal").style.borderColor="var(--red)"; setTimeout(()=>{$("missionGoal").style.borderColor="";},1500); return; }
+
+ let destino = "Cuba";
+ if(/cuba|habana/i.test(objetivo)) destino="Cuba";
+ else if(/espa[ñn]a|madrid/i.test(objetivo)) destino="España";
+ else if(/rusia|mosc/i.test(objetivo)) destino="Rusia";
+ else if(/m[eé]xico/i.test(objetivo)) destino="México";
+ else if(/dominican|quisqueya/i.test(objetivo)) destino="Rep. Dominicana";
+
+ const viajeros = /pareja|esposa|esposo|wife/i.test(para) ? 2 : (/familia|padres|hijos|family/i.test(para) ? 3 : 1);
+
+ const eco = Math.round(presupuesto*0.7);
+ const rec = presupuesto;
+ const prem = Math.round(presupuesto*1.4);
+
+ const itemsEco = [["Vuelos económicos (1 escala)",true],["Traslado aeropuerto compartido",true],["Documentación y visas",true],["Alojamiento estándar",true],["Extras y comodidad",false],["Soporte prioritario",false]];
+ const itemsRec = [["Vuelos directos",true],["Traslado privado",true],["Alojamiento cómodo",true],["Documentación y visas",true],["Soporte 24/7",true],["Extras premium",false]];
+ const itemsPrem = [["Vuelos business / directos",true],["Traslado privado VIP",true],["Alojamiento premium 5★",true],["Documentación y visas",true],["Concierge dedicado",true],["Extras y comodidad total",true]];
+
+ lastMissionPlan = { objetivo, pais, para, viajeros, destino, presupuesto, eco, rec, prem };
+
+ const t = translations[currentLang];
+ const tierCard = (cls, ico, title, sub, price, items) => `
+  <div class="tier-card ${cls}">
+   <div class="tier-head"><span class="t-ico"><i class="fa-solid ${ico}"></i></span><div><strong>${title}</strong><small>${sub}</small></div></div>
+   <div class="tier-price">€ ${price.toLocaleString("es-ES")}</div>
+   <ul class="tier-list">${items.map(it=>`<li class="${it[1]?'':'no'}"><i class="fa-solid ${it[1]?'fa-check':'fa-xmark'}"></i> ${it[0]}</li>`).join("")}</ul>
+  </div>`;
+
+ $("missionPlanResult").innerHTML = `
+  <div style="border-top:1px solid var(--line);padding-top:16px">
+   <h3 style="color:var(--gold);display:flex;align-items:center;gap:8px"><i class="fa-solid fa-route"></i> ${t.mp_title} — ${destino} (${viajeros} viajero${viajeros>1?'s':''})</h3>
+   <p class="mini">🎯 "${safe(objetivo)}" · 📍 Desde: ${safe(pais)} · 👥 ${safe(para)}</p>
+   <div class="tier-grid">
+    ${tierCard('premium','fa-crown', t.opt_premium, t.opt_premium_sub, prem, itemsPrem)}
+    ${tierCard('rec','fa-star', t.opt_recommended, t.opt_recommended_sub, rec, itemsRec)}
+    ${tierCard('eco','fa-leaf', t.opt_economic, t.opt_economic_sub, eco, itemsEco)}
+   </div>
+   <div class="mission-cta-row">
+    <button class="btn btn-green" type="button" onclick="sendMissionWhatsApp()"><i class="fa-brands fa-whatsapp"></i> ${t.mp_send_wa}</button>
+    <button class="btn btn-gold" type="button" onclick="saveMissionRequest()"><i class="fa-solid fa-paper-plane"></i> ${t.mp_save}</button>
+   </div>
+  </div>`;
+ $("missionPlanResult").style.display = "block";
+ $("missionPlanResult").scrollIntoView({behavior:"smooth", block:"nearest"});
+}
+
+function sendMissionWhatsApp(){
+ if(!lastMissionPlan) return;
+ const p = lastMissionPlan;
+ const msg = `🎯 *SOLICITUD BRIDGE MISSION*\n\n🗣️ *Objetivo:* ${p.objetivo}\n📍 *Estoy en:* ${p.pais}\n👥 *Para:* ${p.para} (${p.viajeros} viajero(s))\n🌎 *Destino detectado:* ${p.destino}\n💶 *Presupuesto:* € ${p.presupuesto}\n\n🍃 *Económica:* € ${p.eco}\n⭐ *Recomendada:* € ${p.rec}\n👑 *Premium:* € ${p.prem}\n\nQuiero que me ayuden a construir el camino.`;
+ window.open(`https://wa.me/79046319565?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+async function saveMissionRequest(){
+ if(!lastMissionPlan) return;
+ const p = lastMissionPlan;
+ const trackingId = 'YBH-' + Math.floor(100000 + Math.random() * 900000);
+ const detalles = `MISIÓN: ${p.objetivo} | País: ${p.pais} | Para: ${p.para} (${p.viajeros}) | Destino: ${p.destino} | Presupuesto: €${p.presupuesto} | Planes: Eco €${p.eco} / Rec €${p.rec} / Prem €${p.prem}`;
+ const status = $("requestStatus");
+ const {error} = await db.from('solicitudes').insert({ tracking_id: trackingId, nombre_cliente: $("clientName") ? "" : "", telefono: "", tipo_servicio: "Misión", destino: p.destino, detalles, estado: "pendiente", fecha_inicio: new Date().toISOString() });
+ if(error){ alert("No se pudo guardar. Envíalo por WhatsApp: +7 904 631 95 65"); return; }
+ $("clientService").value = "Misión";
+ $("clientDestino").value = p.destino;
+ $("clientDetails").value = detalles;
+ $("receiptTrackingId").textContent = trackingId;
+ $("receiptName").textContent = "Misión " + p.destino;
+ $("receiptService").textContent = "Misión (Plan personalizado)";
+ $("receiptDate").textContent = new Date().toLocaleDateString('es-ES', {year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit'});
+ $("receiptModal").classList.add("show");
+ $("solicitud").scrollIntoView({behavior:"smooth"});
+}
 
 async function loadOfertas(){ const {data}=await db.from('ofertas').select("*").eq("activo",true).order("id"); ofertasData=data||[]; renderOfertas(); if($("adminModal")&&$("adminModal").classList.contains("show")) renderAdminOfertas(); }
 function renderOfertas(){ const el=$("ofertasList"); if(!ofertasData.length){el.innerHTML='<div class="empty">No hay ofertas flash activas en este momento. ¡Vuelve pronto!</div>';return;} el.innerHTML=ofertasData.map((o,i)=>`<article class="card offer-card">${o.imagen_url?`<img src="${safe(o.imagen_url)}" alt="${safe(o.titulo)}">`:''}<div class="discount-badge">-${safe(o.descuento)}</div><span class="pill" style="background:var(--red);color:white">⏰ OFERTA FLASH</span><h3>${safe(o.titulo)}</h3><p>${safe(o.descripcion||"")}</p><p class="mini"><i class="fa-solid fa-clock"></i> Expira: ${safe(o.fecha_fin||"Pronto")}</p><button class="btn btn-gold" type="button" onclick="requestOferta(${i})" style="margin-top:10px;width:100%">Aprovechar Oferta</button></article>`).join(""); }
