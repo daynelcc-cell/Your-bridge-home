@@ -258,6 +258,7 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    <a href="#destinos" data-i18n="nav_destinations">DESTINOS</a>
    <a href="#visas" style="color:var(--gold)" data-i18n="nav_visas">🛂 VISAS</a>
    <a href="#seguimiento" style="color:var(--gold)" data-i18n="nav_tracking">🔍 SEGUIMIENTO</a>
+   <a href="#divisiones" data-i18n="nav_divisions">DIVISIONES</a>
    <a href="#tasas" data-i18n="nav_rates">TASAS</a>
   </nav>
   <div class="nav-actions">
@@ -421,6 +422,55 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
      <div id="trackDetails" style="margin-top:15px;padding-top:15px;border-top:1px solid var(--line)"></div>
      <div id="trackPdfLink" style="margin-top:15px"></div>
     </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- NUEVA SECCIÓN: DIVISIONES ESPECIALIZADAS -->
+<section id="divisiones" style="background:#0b1425">
+ <div class="container">
+  <div class="section-head">
+   <div class="eyebrow">Nuestras Divisiones</div>
+   <h2>Espacios <span class="gold">Especializados</span></h2>
+   <p>Cada categoría tiene su propio espacio y formulario. Las solicitudes se envían directamente a tu WhatsApp.</p>
+  </div>
+  <div class="grid">
+   <div class="card">
+    <div class="service-icon"><i class="fa-solid fa-plane-departure"></i></div>
+    <h3>✈️ BRIDGE TRAVEL</h3>
+    <p>Organizar viajes y presupuestos.</p>
+    <div class="field" style="margin-top:15px">
+     <label>Detalles del viaje</label>
+     <textarea id="travelDetails" placeholder="Origen, destino, fechas, número de personas..." style="min-height:80px"></textarea>
+    </div>
+    <button class="btn btn-green" style="width:100%;margin-top:10px" onclick="sendToWhatsApp('travel')">
+     <i class="fa-brands fa-whatsapp"></i> Enviar a WhatsApp
+    </button>
+   </div>
+   <div class="card">
+    <div class="service-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+    <h3>🛒 BRIDGE MARKET</h3>
+    <p>Solicitar productos y compras internacionales.</p>
+    <div class="field" style="margin-top:15px">
+     <label>Productos deseados</label>
+     <textarea id="marketDetails" placeholder="Lista de productos, enlaces, cantidades..." style="min-height:80px"></textarea>
+    </div>
+    <button class="btn btn-green" style="width:100%;margin-top:10px" onclick="sendToWhatsApp('market')">
+     <i class="fa-brands fa-whatsapp"></i> Enviar a WhatsApp
+    </button>
+   </div>
+   <div class="card">
+    <div class="service-icon"><i class="fa-solid fa-truck-fast"></i></div>
+    <h3>📦 BRIDGE CARGO</h3>
+    <p>Organizar solicitudes de transporte y envíos.</p>
+    <div class="field" style="margin-top:15px">
+     <label>Detalles del envío</label>
+     <textarea id="cargoDetails" placeholder="Tipo de carga, peso aproximado, origen y destino..." style="min-height:80px"></textarea>
+    </div>
+    <button class="btn btn-green" style="width:100%;margin-top:10px" onclick="sendToWhatsApp('cargo')">
+     <i class="fa-brands fa-whatsapp"></i> Enviar a WhatsApp
+    </button>
    </div>
   </div>
  </div>
@@ -758,7 +808,6 @@ footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-s
    <div class="admin-list" id="adminBannerList"></div>
   </div>
 
-  <!-- GENERADOR DE IMÁGENES IA -->
   <div class="admin-panel" id="generatorAdmin">
    <h3>🎨 Generador de Imágenes con IA</h3>
    <p class="mini" style="margin-bottom:15px">Crea imágenes promocionales únicas para tus ofertas, banners o destinos. (Servicio gratuito, sin API key).</p>
@@ -803,7 +852,7 @@ $("year").textContent = new Date().getFullYear();
 
 const translations = {
  es: {
-  brand_sub:"TU PUENTE AL MUNDO", nav_home:"INICIO", nav_offers:"🔥 OFERTAS", nav_services:"SERVICIOS", nav_recharges:"RECARGAS", nav_tickets:"BOLETOS", nav_remittances:"REMESAS", nav_destinations:"DESTINOS", nav_visas:"🛂 VISAS", nav_tracking:"🔍 SEGUIMIENTO", nav_rates:"TASAS",
+  brand_sub:"TU PUENTE AL MUNDO", nav_home:"INICIO", nav_offers:"🔥 OFERTAS", nav_services:"SERVICIOS", nav_recharges:"RECARGAS", nav_tickets:"BOLETOS", nav_remittances:"REMESAS", nav_destinations:"DESTINOS", nav_visas:"🛂 VISAS", nav_tracking:"🔍 SEGUIMIENTO", nav_divisions:"DIVISIONES", nav_rates:"TASAS",
   hero_eyebrow:"Conectamos oportunidades", hero_title:'Tu puente hacia <span>nuevas oportunidades</span>', hero_desc:"Recargas internacionales, envío de remesas, pasajes, gestión de visas y orientación para tus viajes con seguimiento en tiempo real.",
   btn_offers:'Ver Ofertas Flash <i class="fa-solid fa-fire"></i>', btn_track:'<i class="fa-solid fa-magnifying-glass"></i> Consultar mi trámite',
   pill_attention:"ATENCIÓN PERSONALIZADA", card_help_title:"Estamos para ayudarte", card_help_desc:"Consulta precios, solicita información y encuentra opciones para tus necesidades.", admin_role:"Administrador",
@@ -838,7 +887,7 @@ const translations = {
   destino_lbl_name:"Nombre", destino_lbl_cat:"Categoría", servicio_lbl_name:"Nombre", servicio_lbl_icon:"Icono (emoji)", banner_lbl_title:"Título", banner_lbl_link:"Enlace al hacer clic"
  },
  en: {
-  brand_sub:"YOUR BRIDGE TO THE WORLD", nav_home:"HOME", nav_offers:"🔥 OFFERS", nav_services:"SERVICES", nav_recharges:"TOP-UPS", nav_tickets:"TICKETS", nav_remittances:"REMITTANCES", nav_destinations:"DESTINATIONS", nav_visas:"🛂 VISAS", nav_tracking:"🔍 TRACKING", nav_rates:"RATES",
+  brand_sub:"YOUR BRIDGE TO THE WORLD", nav_home:"HOME", nav_offers:"🔥 OFFERS", nav_services:"SERVICES", nav_recharges:"TOP-UPS", nav_tickets:"TICKETS", nav_remittances:"REMITTANCES", nav_destinations:"DESTINATIONS", nav_visas:"🛂 VISAS", nav_tracking:"🔍 TRACKING", nav_divisions:"DIVISIONS", nav_rates:"RATES",
   hero_eyebrow:"Connecting opportunities", hero_title:'Your bridge to <span>new opportunities</span>', hero_desc:"International top-ups, remittances, tickets, visa management, and travel guidance with real-time tracking.",
   btn_offers:'View Flash Offers <i class="fa-solid fa-fire"></i>', btn_track:'<i class="fa-solid fa-magnifying-glass"></i> Check my process',
   pill_attention:"PERSONALIZED ATTENTION", card_help_title:"We are here to help", card_help_desc:"Check prices, request information, and find options for your needs.", admin_role:"Administrator",
@@ -873,7 +922,7 @@ const translations = {
   destino_lbl_name:"Name", destino_lbl_cat:"Category", servicio_lbl_name:"Name", servicio_lbl_icon:"Icon (emoji)", banner_lbl_title:"Title", banner_lbl_link:"Link on click"
  },
  ru: {
-  brand_sub:"ВАШ МОСТ В МИР", nav_home:"ГЛАВНАЯ", nav_offers:"🔥 ПРЕДЛОЖЕНИЯ", nav_services:"УСЛУГИ", nav_recharges:"ПОПОЛНЕНИЯ", nav_tickets:"БИЛЕТЫ", nav_remittances:"ПЕРЕВОДЫ", nav_destinations:"НАПРАВЛЕНИЯ", nav_visas:"🛂 ВИЗЫ", nav_tracking:"🔍 ОТСЛЕЖИВАНИЕ", nav_rates:"КУРСЫ",
+  brand_sub:"ВАШ МОСТ В МИР", nav_home:"ГЛАВНАЯ", nav_offers:"🔥 ПРЕДЛОЖЕНИЯ", nav_services:"УСЛУГИ", nav_recharges:"ПОПОЛНЕНИЯ", nav_tickets:"БИЛЕТЫ", nav_remittances:"ПЕРЕВОДЫ", nav_destinations:"НАПРАВЛЕНИЯ", nav_visas:"🛂 ВИЗЫ", nav_tracking:"🔍 ОТСЛЕЖИВАНИЕ", nav_divisions:"ОТДЕЛЫ", nav_rates:"КУРСЫ",
   hero_eyebrow:"Соединяя возможности", hero_title:'Ваш мост к <span>новым возможностям</span>', hero_desc:"Международные пополнения, денежные переводы, билеты, управление визами и туристическое сопровождение с отслеживанием в реальном времени.",
   btn_offers:'Смотреть предложения <i class="fa-solid fa-fire"></i>', btn_track:'<i class="fa-solid fa-magnifying-glass"></i> Проверить мой запрос',
   pill_attention:"ИНДИВИДУАЛЬНЫЙ ПОДХОД", card_help_title:"Мы здесь, чтобы помочь", card_help_desc:"Узнайте цены, запросите информацию и найдите варианты для ваших нужд.", admin_role:"Администратор",
@@ -1121,7 +1170,6 @@ async function saveBanner(){ const id = $("bannerId").value; const payload = { t
 async function deleteBanner(id){ if(!confirm("¿Eliminar esta imagen del banner?")) return; await db.from('ybh_banner').delete().eq('id', id); await cargarBanner(); renderAdminBanner(); }
 function renderAdminBanner(){ if(!$("adminBannerList")) return; $("adminBannerList").innerHTML = bannerData.map(b => `<div class="admin-item"><div style="display:flex;align-items:center;gap:10px">${b.imagen_url ? `<img src="${safe(b.imagen_url)}" style="width:60px;height:60px;object-fit:cover;border-radius:8px">` : ''}<div><strong>${safe(b.titulo || 'Sin título')}</strong><br><small>Orden: ${b.orden} · ${b.activo ? '✅ Activo' : '❌ Inactivo'}</small></div></div><div><button class="btn btn-dark" type="button" onclick="editBanner('${safe(b.id)}')">✏️ Editar</button><button class="btn btn-red" type="button" onclick="deleteBanner('${safe(b.id)}')">🗑️ Eliminar</button></div></div>`).join("") || '<p class="mini">No hay imágenes en el banner.</p>'; }
 
-// GENERADOR DE IMÁGENES IA
 function generateImage() {
  const prompt = $("genPrompt").value.trim();
  if(!prompt) { alert("Por favor, escribe una descripción para la imagen."); return; }
@@ -1165,6 +1213,26 @@ function calculate(){
 });
 
 async function loadAdminData(){ await Promise.all([ loadTasas(), loadRecargas(), loadBoletos(), loadRemesas(), loadDestinos(), loadServicios(), loadRequests(), cargarBanner(), loadNoticias(), loadVisas(), loadOfertas() ]); renderAdminTasas(); renderAdminRecharges(); renderAdminTickets(); renderAdminRemesas(); renderAdminDestinos(); renderAdminServicios(); renderAdminBanner(); renderAdminNoticias(); renderAdminVisas(); renderAdminOfertas(); }
+
+function sendToWhatsApp(type) {
+  let message = "";
+  let details = "";
+  const phone = "79046319565";
+  
+  if (type === 'travel') {
+    details = $("travelDetails").value.trim();
+    message = `✈️ *SOLICITUD BRIDGE TRAVEL*\n\nHola, me interesa organizar un viaje o solicitar un presupuesto.\n\n📝 *Detalles:*\n${details || "Por favor, contactarme para más detalles."}`;
+  } else if (type === 'market') {
+    details = $("marketDetails").value.trim();
+    message = `🛒 *SOLICITUD BRIDGE MARKET*\n\nHola, quiero solicitar productos o compras internacionales.\n\n📝 *Productos:*\n${details || "Por favor, contactarme para más detalles."}`;
+  } else if (type === 'cargo') {
+    details = $("cargoDetails").value.trim();
+    message = `📦 *SOLICITUD BRIDGE CARGO*\n\nHola, necesito organizar un transporte o envío.\n\n📝 *Detalles de la carga:*\n${details || "Por favor, contactarme para más detalles."}`;
+  }
+  
+  const encodedMessage = encodeURIComponent(message);
+  window.open(`https://wa.me/${phone}?text=${encodedMessage}`, '_blank');
+}
 
 const urlParamsCheck = new URLSearchParams(window.location.search);
 if (!urlParamsCheck.has('admin')) {
